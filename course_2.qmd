@@ -1,0 +1,95 @@
+---
+title: Course 1
+format:
+  revealjs:
+    theme: dark
+---
+
+# Malware send by E-Mail
+
+- open link or download image
+- target on interest of victim
+- consequences
+    - malware (ransomware, keyloggers, ...)
+    - data destruction
+    - spoil personnal data
+    - malware diffusion
+    - use system for malicious tasks (like bitcoins mining)
+
+# Malware send by the web
+
+- can be malicious website, infected website, ...
+- infect system
+
+> NOTE
+> sensibilisation of users to don't visit bad sites make it more difficult
+
+# Phishing
+
+- composed by `password`, `harvesting` and `fishing`
+- claim private informations
+- `spear phishing` for a phishing cibled on a person
+- email that asks to enter private informations (id, passwords, ...)
+- pretext are like system update, package arrived, ... and victim can be menaced
+
+# Spam
+
+- indesirated emails (up to 60% of emails)
+- pop-up
+- ressource consumming
+- $\cdots$
+
+# Ransomware
+
+- is in Trojan Horses family
+- encrypt data from victim
+- ask to pay to unlock
+- can sleep in the system
+- infection are varied, but emails are most of them
+- there are multiple variants
+- other behaviours (DDoS, menaces, cibled extorsions, ...)
+
+# Internet of Things (IoT)
+
+- connected devices
+- easier to hack
+  - default password
+  - security failures
+  - users don't care of it security
+- get control is
+  - a way to go inside local network
+  - device that could be used for illicit activities (DDoS, hacking, bitcoins mining, ...)
+
+$\rightarrow$ make an inventary of all connected devices to the network !!
+
+# Information spoofing and website defacement
+
+- integrity of informations are cibled
+- play on reputation and can have economic damages
+
+# Denial of Service
+
+- system are inaccessible
+- attack simultaneous a system
+- efficacity of firewall is limited...
+- denial of service
+  - reputation
+  - ranson
+  - security risks (also physical) (hospitals, electric centrals, ...)
+
+# Hash functions
+
+- modification of source document give different digest
+- we can't find document from digest
+- we can't find a second document to generate same digest
+- digest length: 160-512 bits
+- very efficient (SHA256, SHA-3, ...)
+- collisions exist but we're unable to find them
+- easy to bruteforce if entropy of input is small (for passwords)
+
+# Random generators
+
+- keys generation
+- must be random, imprevisible and not reproductible (measure of physic phenomens)
+- pseudo-random generators are determinist, generated from an initial sequence (seed) obtained by different method (number of disk access, ...)
+- pseudo-random generators result in pseudo-security
