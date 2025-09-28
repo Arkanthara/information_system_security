@@ -118,16 +118,17 @@ def int64tostr(number: int = 5) -> str:
     string = [chr(int(i, 2)) for i in list_chars]
     return "".join(i for i in string)
 
+import hashlib
+
 def proof_of_work(name: str = "Donnet"):
-    tmp = [format(ord(i), '08b') for i in name]
-    condition = True
     number = 0
-    while condition:
-        digest = sha256(name + int64tostr(number))
-        check = "".join(digest[i] for i in range(len(digest) - 5, len(digest)))
-        print(str(check))
-        if str(check) == "9e8c9":
+    while number <= 2**64 - 1:
+        # Using my sha256 function doesn't work...
+        # digest = sha256(name + int64tostr(number))
+        digest = hashlib.sha256((name + int64tostr(number)).encode('utf-8')).hexdigest()
+        if digest[-5:] == "00000":
             return digest, number
         number += 1
+    print("Not found")
 
 print(proof_of_work())
