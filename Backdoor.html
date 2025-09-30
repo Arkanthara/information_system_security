@@ -139,7 +139,7 @@ Michel Jean Joseph Donnet
 </div>
 </div>
 
-  <p class="date">28-09-2025</p>
+  <p class="date">30-09-2025</p>
 </section><section id="TOC">
 <nav role="doc-toc"> 
 <h2 id="toc-title">Table of content</h2>
@@ -169,7 +169,11 @@ Michel Jean Joseph Donnet
 </ul></li>
 <li><a href="#/example-4" id="/toc-example-4">Example 4</a>
 <ul>
-<li><a href="#/xz-utils-backdoor" id="/toc-xz-utils-backdoor">XZ Utils Backdoor ?</a></li>
+<li><a href="#/xz-utils-backdoor" id="/toc-xz-utils-backdoor">XZ Utils Backdoor</a></li>
+<li><a href="#/social-attack" id="/toc-social-attack">Social attack</a></li>
+<li><a href="#/backdoor" id="/toc-backdoor">Backdoor</a></li>
+<li><a href="#/backdoor-attack-graph" id="/toc-backdoor-attack-graph">Backdoor attack graph</a></li>
+<li><a href="#/backdoor-attack-graph-2" id="/toc-backdoor-attack-graph-2">Backdoor attack graph 2</a></li>
 </ul></li>
 <li><a href="#/questions" id="/toc-questions">Questions</a>
 <ul>
@@ -364,8 +368,34 @@ Michel Jean Joseph Donnet
 
 </section>
 <section id="xz-utils-backdoor" class="slide level2">
-<h2>XZ Utils Backdoor ?</h2>
-</section></section>
+<h2>XZ Utils Backdoor</h2>
+<p>Discovered in 2024 by Andres Freund.</p>
+<p>XZ utils (with liblzma) make the lzma compression and decompression (*.tar.xz files)</p>
+<p>It is often integrated to linux distribution as base package.</p>
+</section>
+<section id="social-attack" class="slide level2">
+<h2>Social attack</h2>
+<p>A developer, Jia Tan, joined the project and make bug fixes, code improvement, pull requests, … He earns trust with his good work and began to receive repository permissions to commit.</p>
+<p>Side by side, he (or they) used fake accounts to make lot of new feature requests and find a lot of bugs, so that the maintainer is overloaded.</p>
+<p>Because of the work, the maintainer needed another maintainer to help him.</p>
+<p>That’s why Jia Tan receive maintainer permissions on the repository (release creation)</p>
+<p>Source: <a href="https://www.akamai.com/blog/security-research/critical-linux-backdoor-xz-utils-discovered-what-to-know">akamai.com</a></p>
+</section>
+<section id="backdoor" class="slide level2">
+<h2>Backdoor</h2>
+<p>Backdoor introduced in a new release, only in source code tarball (compressed deliverable archive)</p>
+<p>This backdoor is very complex.</p>
+<p>It infects ssh daemon, enabling attacker to execute arbitrary code on the remote machine.</p>
+<p>It’s the most intrusion made ever and have a critical score of 10/10 (CVSS)</p>
+</section>
+<section id="backdoor-attack-graph" class="slide level2">
+<h2>Backdoor attack graph</h2>
+
+<img data-src="./XZ_Utils.jpeg" class="r-stretch quarto-figure-center"><p class="caption">Backdoor</p></section>
+<section id="backdoor-attack-graph-2" class="slide level2">
+<h2>Backdoor attack graph 2</h2>
+
+<img data-src="./backdoor-attack.avif" class="r-stretch quarto-figure-center"><p class="caption">Source: https://www.akamai.com/</p></section></section>
 <section>
 <section id="questions" class="title-slide slide level1 center">
 <h1>Questions</h1>

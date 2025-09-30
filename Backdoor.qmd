@@ -12,6 +12,7 @@ format:
     navigation-mode: vertical
     smaller: true
     scrollable: true
+    plugins: [zoom]
     include-in-header:
       - text: |
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -179,7 +180,44 @@ Sources: [Cryptology ePrint Archive](https://eprint.iacr.org/2024/1275), [next](
 
 # Example 4
 
-## XZ Utils Backdoor ?
+## XZ Utils Backdoor
+
+Discovered in 2024 by Andres Freund.
+
+XZ utils (with liblzma) make the lzma compression and decompression (*.tar.xz files)
+
+It is often integrated to linux distribution as base package.
+
+## Social attack
+
+A developer, Jia Tan, joined the project and make bug fixes, code improvement, pull requests, ...
+He earns trust with his good work and began to receive repository permissions to commit.
+
+Side by side, he (or they) used fake accounts to make lot of new feature requests and find a lot of bugs, so that the maintainer is overloaded.
+
+Because of the work, the maintainer needed another maintainer to help him.
+
+That's why Jia Tan receive maintainer permissions on the repository (release creation)
+
+Source: [akamai.com](https://www.akamai.com/blog/security-research/critical-linux-backdoor-xz-utils-discovered-what-to-know)
+
+## Backdoor
+
+Backdoor introduced in a new release, only in source code tarball (compressed deliverable archive)
+
+This backdoor is very complex.
+
+It infects ssh daemon, enabling attacker to execute arbitrary code on the remote machine.
+
+It's the most intrusion made ever and have a critical score of 10/10 (CVSS)
+
+## Backdoor attack graph
+
+![Backdoor](./XZ_Utils.jpeg)
+
+## Backdoor attack graph 2
+
+![Source: https://www.akamai.com/](./backdoor-attack.avif)
 
 # Questions
 
