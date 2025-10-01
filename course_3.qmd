@@ -1,0 +1,41 @@
+---
+title: Course 2
+format:
+  revealjs:
+    theme: dark
+---
+
+# Random generators
+
+Classic way to put backdoor !!
+
+# Cryptographie symétrique
+
+Très rapide (permet le décryptage d'une vidéo en streaming....)
+
+Très sûr
+
+# Cryptographie asymétrique
+
+Moins sûr
+
+Nécessaire pour échanger des clefs symétriques...
+
+# Signature
+
+On signe l'output du HASH avec notre clé secrète
+
+La signature est toujours unique pour un message !!!!! (À la différence d'une signature physique...)
+
+C'est possible d'avoir un module spécifique pour faire la décryption assymétrique (plus coûteuse que la décryption symétrique...)(ou plutôt la génération de clés ???)
+
+Cryptographie assymétrique est 50 fois plus lente !!!
+
+Attention, la clé publique doit être authentifiée !!!
+
+## Ransomware
+
+Crypte toutes les données... Les clés privées sont sur le serveur de l'attaquant
+Laisse seulement les fichiers qui permettent de payer décryptés.
+
+Lors du paiement, les clés privées sont rendues.
