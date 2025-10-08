@@ -1,0 +1,43 @@
+---
+title: Course 4
+format:
+  revealjs:
+    theme: dark
+---
+
+# Kerckhoff's principe
+
+We assume the fact that the attacker know exactly how the algorithm works !!!!
+
+Need to prove that it works (mathematical way)...
+
+# Security classment
+
+- sécurité inconditionnelle (ex: one-time pad)
+  - clé même taille que le message
+  - clé pas réutilisée
+  - ...
+
+- sécurité calculatoire (Attention à l'arrivée des ordinateurs quantiques !!!)(pas possible de hacker avec puissance de calcul supposé de l'attaquant)
+- as hard as / équivalent (équivalent à un problème mathématique réputé difficile !!!)
+
+# Entropie
+
+Mesure la qualité de l'information
+
+$$H(x) = - \sum_i p_i \log_2(p_i) = \sum_i p_i \log_2\left(\frac{1}{p_i}\right)$$
+
+If $p_i = 0$, entropy $H$ is also $0$ 
+
+$$H(X | Y = y) = - \sum_x P(X = x | Y = y) \log_2\left(P(X = x | Y = y)\right)$$
+
+$$H(X | Y) = \sum_y P(Y = y)H(X | Y = y)$$
+
+# Attaques
+
+- ciphertext only
+- known-plaintext
+- chosen-plaintext
+- adaptive chosen-plaintext (même chose que chosen-plaintext, sauf que le choix sur le plaintext dépend des ciphertexts obtenus)
+- chosen-ciphertext
+- adaptive chosen-ciphertext
