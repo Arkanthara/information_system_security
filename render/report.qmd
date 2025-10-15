@@ -83,7 +83,7 @@ Backdoor cover all this attacks !
 - Backup points
 - ...
 
-# Example 1
+# Example
 
 ## Flatmap-stream
 
@@ -96,32 +96,55 @@ After triaging the malware, npm Security responded by removing flatmap-stream an
 Attacker earned confidence and take maintenance of `flatmap-stream`.
 
 $$
-\begin{tikzpicture}[node distance=12mm and 14mm, every node/.style={font=\normalsize}]
+\begin{tikzpicture}[
+    font=\sffamily,
+    node distance=1.6cm and 2cm,
+    align=center,
+    activity/.style={
+        rectangle,
+        rounded corners=3pt,
+        draw,
+        minimum width=4cm,
+        minimum height=1cm
+    },
+    decision/.style={
+        diamond,
+        draw,
+        aspect=2,
+        inner sep=2pt
+    },
+    startstop/.style={
+        ellipse,
+        draw,
+        minimum width=3cm,
+        minimum height=1cm
+    },
+    arrow/.style={
+        -{Stealth[length=3mm, width=2mm]},
+        thick
+    }
+]
 
-  % Nodes
-  \node[startstop] (start) {start};
-  \node[process, below=of start] (env) {\Large\textbf{🔎 Check environment}};
-  \node[process, below=of env] (balance) {\Large\textbf{💳 Check account balance\\(Bitcoin Cash on Copay)}};
-  \node[decision, below=of balance, yshift=-2mm] (dec) {\Large\textbf{Balance\\sufficient?}};
-  \node[process, below left=20mm and 6mm of dec] (collect) {\Large\textbf{🔒 Collect account data / private keys}};
-  \node[process, below=of collect] (send) {\Large\textbf{🌐 Send to server}};
-  \node[startstop, below=of send] (stop1) {stop};
-  \node[process, below right=20mm and 6mm of dec] (noaction) {\Large\textbf{No action needed}};
-  \node[startstop, below=of noaction] (stop2) {stop};
+% Nodes
+\node[startstop] (start) {Start};
+\node[activity, below=of start] (checkenv) {🔎 Check environment};
+\node[activity, below=of checkenv] (checkbal) {💳 Check account balance\\(Bitcoin Cash on Copay)};
+\node[decision, below=of checkbal] (enough) {Balance sufficient?};
+\node[activity, below left=of enough, xshift=-1cm] (noact) {No action needed};
+\node[activity, below right=of enough, xshift=1cm] (collect) {🔒 Collect account data /\\private keys};
+\node[activity, below=of collect] (send) {🌐 Send to server};
+\node[startstop, below=of noact] (stop1) {Stop};
+\node[startstop, below=of send] (stop2) {Stop};
 
-  % Connections
-  \draw[arrow] (start) -- (env);
-  \draw[arrow] (env) -- (balance);
-  \draw[arrow] (balance) -- (dec);
-
-  % Yes branch -> collect -> send -> stop1
-  \draw[arrow] (dec) -- node[midway, left, small] {yes} (collect);
-  \draw[arrow] (collect) -- (send);
-  \draw[arrow] (send) -- (stop1);
-
-  % No branch -> noaction -> stop2
-  \draw[arrow] (dec) -- node[midway, right, small] {no} (noaction);
-  \draw[arrow] (noaction) -- (stop2);
+% Arrows
+\draw[arrow] (start) -- (checkenv);
+\draw[arrow] (checkenv) -- (checkbal);
+\draw[arrow] (checkbal) -- (enough);
+\draw[arrow] (enough) -- node[left] {no} (noact);
+\draw[arrow] (enough) -- node[right] {yes} (collect);
+\draw[arrow] (collect) -- (send);
+\draw[arrow] (noact) -- (stop1);
+\draw[arrow] (send) -- (stop2);
 
 \end{tikzpicture}
 $$
@@ -130,7 +153,7 @@ $$
 
 It's a **social engineering attack** $\Longrightarrow$ Check the code delivered by others !!
 
-# Example 2
+# Example
 
 ## SolarWind attack (2020)
 
@@ -155,7 +178,7 @@ Cons:
 
 - Cost companies 11% of their annual revenue
 
-# Example 3
+# Example
 
 ## MIFARE backdoor
 
@@ -171,7 +194,7 @@ Sources: [Cryptology ePrint Archive](https://eprint.iacr.org/2024/1275), [next](
 - Over than 750 towns of more than 50 land use this system (contactless payment/access control, transport titles, ...)
 - Discovered by **Philippe Teuwen** from **Quarkslab** french compagny
 
-# Example 4
+# Example
 
 ## XZ Utils Backdoor
 

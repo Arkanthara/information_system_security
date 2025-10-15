@@ -10,22 +10,17 @@
 \usepackage{lmodern}     % clean font
 \usepackage{hyperref}    % hyperlinks
 \usepackage{amsmath}
+\usepackage{amssymb}
 \usepackage{fancyhdr}    % headers/footers
 \usepackage{lastpage}    % total pages reference
 \usepackage{array}       % layout tables
 \usepackage{longtable}
 \usepackage{booktabs}
 \usepackage{caption}
+\usepackage{subcaption}
 \usepackage{calc}
 \usepackage{float}
 \usepackage{tikz}
-\usetikzlibrary{shapes.geometric, arrows.meta, positioning}
-
-\tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=red!30]
-\tikzstyle{process} = [rectangle, minimum width=3.5cm, minimum height=1.2cm, text centered, draw=black, fill=blue!20]
-\tikzstyle{decision} = [diamond, aspect=2, minimum width=3.5cm, minimum height=1.2cm, text centered, draw=black, fill=orange!30]
-\tikzstyle{arrow} = [thick, ->, >=Stealth]
-\tikzstyle{small} = [font=\small]
 % \usepackage{fancyvrb}    % fancy verbatim, needed for Shaded
 % \usepackage{framed}      % provides shaded environment
 % \usepackage{xcolor}
@@ -33,6 +28,7 @@
 
 \geometry{margin=1in}
 \setstretch{1.2}
+\usetikzlibrary{positioning, shapes.geometric, arrows.meta}
 
 % ------------------------------
 % VARIABLES
@@ -55,14 +51,14 @@ $endif$
 % ------------------------------
 % Pandoc FIX
 % ------------------------------
+% Fix image size
+\setkeys{Gin}{width=\linewidth,keepaspectratio}
 % Fix Pandoc \tightlist
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 
 % Fix Pandoc \pandocbounded for figures
 \providecommand{\pandocbounded}[1]{#1}
-% Fallback for \linewidth
-\providecommand{\linewidth}{\textwidth}
 
 % ------------------------------
 % HYPERLINKS STYLE
@@ -138,8 +134,20 @@ $endif$
     \vspace{1.2cm}
 
     % --- Illustration (optional) ---
-    $if(illustration)$
-      \includegraphics[width=0.7\linewidth]{$illustration$}\\[1.2cm]
+    $if(illustration1)$
+      $if(illustration2)$
+        % both defined, print side by side
+        \begin{minipage}{0.48\linewidth}
+          \includegraphics[width=\linewidth]{$illustration1$}
+        \end{minipage}
+        \hfill
+        \begin{minipage}{0.48\linewidth}
+          \includegraphics[width=\linewidth]{$illustration2$}
+        \end{minipage}
+      $else$
+        % only illustration1 defined
+        \includegraphics[width=0.7\linewidth]{$illustration1$}\\[1.2cm]
+      $endif$
     $endif$
 
     % --- Author(s) ---
