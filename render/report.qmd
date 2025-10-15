@@ -1,0 +1,219 @@
+---
+title: "Backdoor"
+subtitle: "Information Systems Security"
+courseid: 14X021
+author: "Michel Jean Joseph Donnet"
+# email: "Fitzwilliam.Darcy@blabla.ch"
+# repository: "https://github.com/yourname/your_repository"
+# repositoryName: "Repository Name"
+university: "University of Geneva"
+department: "Department Informatic"
+# logo: ""
+# logofooter: "./images/unige_csd.png"
+# logofootersize: 1.5cm
+toc: true
+format:
+  pdf:
+    pdf-engine: xelatex
+    pdf-engine-opts: ["--shell-escape"]
+    template: template.tex
+    execute: true # Code execution
+    echo: true    # Code printing in document
+---
+
+\newpage
+
+# Theory
+
+## What is a backdoor
+
+Backdoor is a mecanism that facilite access to
+
+- service
+- application
+- $\cdots$
+
+It can be created and used to maintain a software (with correct security measures !), but also for criminal purposes.
+However it's essentialy an entry point and not a kind of attack.
+
+<span class="fa fa-exclamation-triangle" style="color:orange;"></span>
+**All backdoors are entry points for hackers !!!**
+
+Sources [nexa.fr](https://www.nexa.fr/post/backdoor-attack-definition)
+
+## Attack type 
+
+| Attack                    | Target            |
+|-------------------------|-----------------|
+| Spoofing                  | Confidentiality   |
+| Tampering / Falsification | Integrity         |
+| Repudiation               | Non repudiation   |
+| Information disclosure    | Confidentiality   |
+| Denial of service         | Disponibility     |
+| Exclanation of privileges | Authentification  |
+
+<span class="fa fa-exclamation-triangle" style="color:orange;"></span> **Note**
+Backdoor cover all this attacks !
+
+\newpage
+
+## Attack class
+
+:::{.table}
+
+| Attack class      | Example         |
+|-----------------|---------------|
+| Hardware          | Chips with exfiltration, reprogrammed FPGA chips      |
+| Firmware          | Modification of firmware (disk, network device, ...)  |
+| Software          | Trojans, ...     |
+| Supply-chain      | Third party dependencies, software update, ...        |
+| Network / Command & Control | Tunneling to another server, shell reverse, data extraction, ...   |
+| Cryptographic / weak keys algorithm     | Algorithm/key/RNG with vulnerabilities known by creator | 
+| Accounts          | Hardcoded key in code, maintenance account not docummented, ... |
+
+:::
+
+
+## Protection mecanism
+
+- Check code and dependencies
+- Log centralization and analysis
+- Network trafic analysis
+- Communication filtering
+- Backup points
+- ...
+
+# Example 1
+
+## Flatmap-stream
+
+"On the morning of November 26th, npm’s security team was notified of a malicious package that had made its way into event-stream, a popular npm package.
+After triaging the malware, npm Security responded by removing flatmap-stream and event-stream@3.3.6 from the Registry and taking ownership of the event-stream package to prevent further abuse."
+[from npm blog](https://blog.npmjs.org/post/180565383195/details-about-the-event-stream-incident)
+
+## Attack and target
+
+Attacker earned confidence and take maintenance of `flatmap-stream`.
+
+$$
+\begin{tikzpicture}[node distance=12mm and 14mm, every node/.style={font=\normalsize}]
+
+  % Nodes
+  \node[startstop] (start) {start};
+  \node[process, below=of start] (env) {\Large\textbf{🔎 Check environment}};
+  \node[process, below=of env] (balance) {\Large\textbf{💳 Check account balance\\(Bitcoin Cash on Copay)}};
+  \node[decision, below=of balance, yshift=-2mm] (dec) {\Large\textbf{Balance\\sufficient?}};
+  \node[process, below left=20mm and 6mm of dec] (collect) {\Large\textbf{🔒 Collect account data / private keys}};
+  \node[process, below=of collect] (send) {\Large\textbf{🌐 Send to server}};
+  \node[startstop, below=of send] (stop1) {stop};
+  \node[process, below right=20mm and 6mm of dec] (noaction) {\Large\textbf{No action needed}};
+  \node[startstop, below=of noaction] (stop2) {stop};
+
+  % Connections
+  \draw[arrow] (start) -- (env);
+  \draw[arrow] (env) -- (balance);
+  \draw[arrow] (balance) -- (dec);
+
+  % Yes branch -> collect -> send -> stop1
+  \draw[arrow] (dec) -- node[midway, left, small] {yes} (collect);
+  \draw[arrow] (collect) -- (send);
+  \draw[arrow] (send) -- (stop1);
+
+  % No branch -> noaction -> stop2
+  \draw[arrow] (dec) -- node[midway, right, small] {no} (noaction);
+  \draw[arrow] (noaction) -- (stop2);
+
+\end{tikzpicture}
+$$
+
+## Note
+
+It's a **social engineering attack** $\Longrightarrow$ Check the code delivered by others !!
+
+# Example 2
+
+## SolarWind attack (2020)
+
+- Hackers infiltrated SolarWinds (Sep 2019)
+- Spent month to test code injections in Orion, that manage metric performance (admin privileges !!)
+- Backdoor "Sunburst" created in Orion
+- SolarWind began to distribute update Orion with the backdoor (Mars 2020)
+- Hackers wan access to network of victims
+- criminal actions...
+
+Sources: [fortinet](https://www.fortinet.com/fr/resources/cyberglossary/solarwinds-cyber-attack)
+
+## Balance sheet
+
+More than 18´000 clients are impacted
+
+Pros:
+
+- Companies share experience and good practices
+
+Cons:
+
+- Cost companies 11% of their annual revenue
+
+# Example 3
+
+## MIFARE backdoor
+
+- Hardware backdoor on MIFARE contactless cards (cards from 2020)
+- Enable to compromise all user-defined keys with knowledge of the backdoor by accessing the card in a few minutes
+- Another hardware backdoor exist on older cards and is common to several manufacturers
+
+Sources: [Cryptology ePrint Archive](https://eprint.iacr.org/2024/1275), [next](https://next.ink/brief_article/un-chercheur-francais-identifie-une-porte-derobee-dans-les-cartes-sans-contact-mifare/), [datasecuritybreach](https://www.datasecuritybreach.fr/backdoor-mifare/)
+
+## Complementary informations
+
+- Produced by **Shanghai Fudan Microelectronics Group**, one of China's leading chip manufacturers
+- Over than 750 towns of more than 50 land use this system (contactless payment/access control, transport titles, ...)
+- Discovered by **Philippe Teuwen** from **Quarkslab** french compagny
+
+# Example 4
+
+## XZ Utils Backdoor
+
+Discovered in 2024 by Andres Freund.
+
+XZ utils (with liblzma) make the lzma compression and decompression (.tar.xz files)
+
+It is often integrated to linux distribution as base package.
+
+## Social attack
+
+A developer, Jia Tan, joined the project and make bug fixes, code improvement, pull requests, ...
+He earns trust with his good work and began to receive repository permissions to commit.
+
+Side by side, he (or they) used fake accounts to make lot of new feature requests and find a lot of bugs, so that the maintainer is overloaded.
+
+Because of the work, the maintainer needed another maintainer to help him.
+
+That's why Jia Tan receive maintainer permissions on the repository (release creation)
+
+Source: [akamai.com](https://www.akamai.com/blog/security-research/critical-linux-backdoor-xz-utils-discovered-what-to-know)
+
+## Backdoor
+
+Backdoor introduced in a new release, only in source code tarball (compressed deliverable archive)
+
+This backdoor is very complex.
+
+It infects ssh daemon, enabling attacker to execute arbitrary code on the remote machine.
+
+It's the most intrusion made ever and have a critical score of 10/10 (CVSS)
+
+## Backdoor attack graph
+
+![Backdoor](./XZ_Utils.jpg)
+
+## Backdoor attack graph 2
+
+![Source: https://www.akamai.com/](./backdoor-attack.png)
+
+# Questions
+
+- What is a backdoor ?
+- What are the kinds of backdoors ?
+- Give an example of backdoor
