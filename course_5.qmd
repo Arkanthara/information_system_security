@@ -1,0 +1,52 @@
+---
+title: Course 5
+format:
+  revealjs:
+    theme: dark
+---
+
+# Random Oracle
+
+I have this box, I must have different cypher for a given plaintext, else pattern matching etc...
+
+Random oracle is deterministic with previously processed inputs...
+
+Adversary has capability of questions to oracle...
+
+Complexify things to hacker 
+
+# One time pad
+
+System unconditionnaly safe
+
+If same key is reused, by making xor between cyphers give xor between messages !!!
+
+# Steganography
+
+Easily breakable...
+
+# Symetric cryptography
+
+## Stream ciphers
+
+It's bad brother.... Because we go quickly to easy decription case....
+
+A single key generate the keystream
+Then we substitue plaintext by operation with key...
+
+## Caracteristics
+
+- efficient
+- easy
+- less memory needed
+- error propagation limited
+
+INCONVENIENTS:
+
+- randomness quality of keytream
+- reusability of keystream allow an easy cryptanalyse (like one-time-pad)
+
+## Block ciphers
+
+
+
