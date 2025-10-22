@@ -24,65 +24,28 @@ class AES:
         )
         return [int(param[i : i + 8], 2) for i in range(0, len(param), 8)]
 
-    def listbits2hex():
-        pass
+    def int2poly(self, param: int) -> np.ndarray:
+        return np.array(list(format(int(param), "08b"))).astype(int)
 
-    def padding(self, param: str) -> list[str]:
-        list_bits = self.str2bits(param)
-        L = len(list_bits) // 8
-        X = 16 - L % 16
-        pad = "".join(format(0, "08b") for _ in range(int(X - 1)))
-        pad += format(X, "08b")
-        list_bits += pad
-        assert len(list_bits) // 128 == len(list_bits) / 128, (
-            f"After padding, number of bits must be a multiple of 128 ! Current number of bits: {len(list_bits)}"
-        )
-        return [list_bits[i : i + 128] for i in range(0, len(list_bits), 128)]
+    def polymodulo(self, p: np.ndarray) -> np.ndarray:
+        r = np.array([1, 0, 0, 0, 1, 1, 0, 1, 1])
+        while len(p) >= len(r):
+            if p[0] == 1:
+                p[: len(r)] ^= r
+            p = p[1:]
+        assert len(p) == len(r) - 1, f"p must be of length r - 1 ! Current: {len(p)}"
+        return p
+
+    def polymul(self, p1: np.ndarray, p2: np.ndarray) -> np.ndarray:
+        result = np.convolve(p1, p2) % 2
+        return self.polymodulo(result)
 
     def shift(self, M: np.ndarray):
         return np.array([np.roll(M[i], -i) for i in range(M.shape[0])])
 
-    def encrypt_box(self, plaintext: str, encrypt_key: str):
-        assert len(plaintext) == 128, "You must provide a plaintext of 128 bits !"
-        M = np.array(self.bits2listint(plaintext)).reshape(4, 4).T
-        W = self.key_expansion(encrypt_key)
-        print(W.shape)
-        N = len(self.bits2listint(self.str2bits(encrypt_key))) + 6
-        M ^= W[:4]
-        shift = np.array([np.roll(np.arange(4), -i) for i in range(4)]).astype(int)
-        print(f"Shift matrix: {shift}")
-        for i in range(N):
-            M = self.replacement(np.array(Sbox), M)
-            print(M.shape)
-            M = self.shift(M)
-            print(M.shape)
-            if i < N - 1:
-                print("MixColumn")
-                GF = np.array([2, 3, 1, 1])
-                GF = GF[shift]
-                M = self.mixColumn(GF, M)
-            M ^= W[i]
-        return "".join(format(i, "02x") for i in M.T.ravel())
-
-    def int2poly(self, param: int) -> np.ndarray:
-        return np.array(list(format(int(param), "08b"))).astype(int)
-
-    def polymul(self, p1: np.ndarray, p2: np.ndarray) -> int:
-        result = np.convolve(p1, p2) % 2
-        return int("".join(str(b) for b in result), 2)
-
-    def mixColumn(self, GF: np.ndarray, M: np.ndarray) -> np.ndarray:
-        r = int("100011011", 2)
-        print(f"r: {r}")
-        for k in range(M.shape[1]):
-            for j in range(M.shape[0]):
-                result = 0
-                p = self.int2poly(M[j, k])
-                for i in range(GF.shape[0]):
-                    p1 = self.int2poly(GF[j, i])
-                    result ^= self.polymul(p, p1)
-                M[j, k] = result % r
-        return M
+    def replacement(self, SBox: np.ndarray, param: np.ndarray) -> np.ndarray:
+        index = (param % 16) + 16 * (param // 16)
+        return SBox[index.astype(int)]
 
     def constants(self) -> np.ndarray:
         rcon = np.zeros((10, 4))
@@ -103,19 +66,36 @@ class AES:
             rcon[i, 0] = int(table[i], 16)
         return rcon.astype(int)
 
-    def replacement(self, SBox: np.ndarray, param: np.ndarray) -> np.ndarray:
-        index = (param % 16) + 16 * (param // 16)
-        print(f"Param: {param}")
-        print(f"index: {index}")
-        return SBox[index.astype(int)]
+    def padding(self, param: str) -> list[str]:
+        list_bits = self.str2bits(param)
+        L = len(list_bits) // 8
+        X = 16 - L % 16
+        pad = "".join(format(X, "08b") for _ in range(int(X)))
+        list_bits += pad
+        assert len(list_bits) // 128 == len(list_bits) / 128, (
+            f"After padding, number of bits must be a multiple of 128 ! Current number of bits: {len(list_bits)}"
+        )
+        return [list_bits[i : i + 128] for i in range(0, len(list_bits), 128)]
+
+    def mixColumn(self, GF: np.ndarray, M: np.ndarray) -> np.ndarray:
+        mixColumn_result = np.zeros_like(M)
+        for k in range(M.shape[1]):
+            for j in range(M.shape[0]):
+                result = np.zeros(8).astype(int)
+                for i in range(GF.shape[0]):
+                    p1 = self.int2poly(GF[j, i])
+                    p2 = self.int2poly(M[i, k])
+                    result ^= self.polymul(p2, p1)
+                mixColumn_result[j, k] = int("".join(str(b) for b in result), 2)
+        return mixColumn_result
 
     def key_expansion(self, param: str):
         K = self.bits2listint(self.str2bits(param))
-        assert len(K) == 4 or len(K) == 6 or len(K) == 8, (
+        N = len(K) // 4
+        assert N == 4 or N == 6 or N == 8, (
             f"Key must have 4, 6 or 8 32bits words ! Actual: {len(K)}"
         )
         rcon = self.constants()
-        N = len(K)
         if N == 4:
             R = 11
         elif N == 6:
@@ -125,27 +105,53 @@ class AES:
         W = np.zeros((4 * R, 4)).astype(int)
         for i in range(4 * R):
             if i < N:
-                W[i] = K[i]
+                W[i] = K[4 * i : 4 * (i + 1)]
             elif i % N == 0:
                 W[i] = (
                     W[i - N]
                     ^ self.replacement(np.array(Sbox), np.roll(W[i - 1], -1))
-                    ^ rcon[i // N]
+                    ^ rcon[i // N - 1]
                 )
-            elif i % N == 4:
+            elif i % N == 4 and N > 6:
                 W[i] = W[i - N] ^ self.replacement(np.array(Sbox), W[i - 1])
             else:
                 W[i] = W[i - N] ^ W[i - 1]
         return W
 
+    def encrypt_box(self, plaintext: str, encrypt_key: str):
+        assert len(plaintext) == 128, "You must provide a plaintext of 128 bits !"
+        M = np.array(self.bits2listint(plaintext)).reshape(4, 4).T
+        W = self.key_expansion(encrypt_key)
+        N = W.shape[0] // 4
+        M ^= W[:4].T
+        for i in range(1, N):
+            M = self.replacement(np.array(Sbox), M)
+            # Test for shift
+            # assert np.array_equal(
+            #     self.shift(np.array([[0, 1, 2, 3], [0, 1, 2, 3], [0, 1, 2, 3]])),
+            #     np.array([[0, 1, 2, 3], [1, 2, 3, 0], [2, 3, 0, 1]]),
+            # )
+            M = self.shift(M)
+            if i < N - 1:
+                GF = np.array([[2, 3, 1, 1], [1, 2, 3, 1], [1, 1, 2, 3], [3, 1, 1, 2]])
+                M = self.mixColumn(GF, M)
+            M ^= W[4 * i : 4 * (i + 1)].T
+        return "".join(format(i, "02x") for i in M.T.ravel())
+
     def aes(self, plaintext: str, encrypt_key: str):
+        print(f"Plaintext: {plaintext}")
+        print(f"Key: {key}")
         blocks = self.padding(plaintext)
         result = ""
         for block in blocks:
-            result += self.encrypt_box(block, encrypt_key)
+            result += self.encrypt_box(block, encrypt_key) + "\n"
+        return result
 
 
 test = AES()
-test.encrypt_box(test.padding("Blalalaskdjflkasjdflksajflksadjflkjl")[0], "blabla")
 
+print(test.aes("Two One Nine Two", "Thats my Kung Fu"))
+print(test.key_expansion("Thats my Kung Fu"))
+print(test.aes(message, key))
 print(test.aes(message, key2))
+print(test.aes(message, key3))
