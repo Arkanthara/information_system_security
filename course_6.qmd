@@ -1,0 +1,72 @@
+---
+title: Course 6
+format:
+  revealjs:
+    theme: dark
+---
+
+# Stream ciphers synchrones
+
+- keystream dépend seulement de la clé et non du ciphertext
+
+- synchronisation de l'émetteur et du récepteur
+- pas de propagation d'erreur
+- attaques actives: modifier des bits du plaintext et observer le cipher correspondant
+- stream cypher additif (one-time pad) -> keygenerator aléatoire...
+
+# Stream ciphers asynchrones
+
+- dépend de la clé et d'un nombre fixé de ciphertexts précédents
+
+(encryption ciphertexts -> ciphertexts utilisés pour génération de la clé !!)
+
+- auto-syncronisation encryption décryption
+- propagation d'erreur ??
+
+# LSFRs !!!
+
+- très répandues
+- stream ciphers basés sur les LSFRs
+- sécurité insuffisante !
+- ...
+
+# RC4
+
+- Très lent 
+- synchrone
+- combinaisons linéaires et non-linéaires
+- utilisé dans Oracle SQL, MS Windows, SSL, ...
+- cassée dans Wifi protocole à cause de mauvaise utilisation
+- 2 étapes: KSA: permutation initial, crée S-box PRGA: génère keystream de taille arbitraire en s'appuyant sur la S-box.
+
+# Block ciphers
+
+- authentification, fonctions de hachage, génération aléatoire, ...
+- Fonction qui fait correspondre à un bloc de n-bits un autre bloc de la même taille. La fonction est paramétrée par une clé K de k-bits.
+  Afin de permettre une décryption unique, la fonction doit être bijective.
+  Chaque clé définit une bijection différente.
+  La taille d'entrée du bloc sur lequel s'applique l'encryption s'appelle aussi taille nominale de l'algorithme.
+
+## Critères d'évaluation
+
+- taille/entropie de la clé.
+- performances
+- taille du bloc. Block trop petit permet une attaque brute force avec établissement d'un dictionnaire plaintex/ciphertext
+- résistance cryptographique: résistant à ces analyses: cryptanalyse linéaire ou différentielle, meet in the middle, etc...
+  attaque doit être équivalent à une attaque brute force...
+
+## Modes d'opérations
+
+- ECB (Electronic Codebook): plaintexts identiques donnent lieu à des ciphertexts identiques + pas de propagation d'erreur sur les blocs adjacents !
+- CBC (Cipher-block Chaining): plaintexts identiques -> ciphertexts différents si le IV change.
+  patterns sont effacées
+  erreur sur c affecte uniquement la décryption du bloc courant et du suivant...
+- CBF (Cipher feedback mode): utilise previous cyphertext
+- OFB (Output feedback Mode): Pas oublier de changer l'ID sinon attaque comme sur one-time pad !!
+- CTR (Counter Mode): utilisé souvent dans protocoles de transfert de données comme ATM (Asynchronous Transfert Mode) et IPsec (IP security)
+  peut paralléliser encryption et décryption !!! Peut précomputer le keystream -> idéal pour le streaming !!
+  - keystream généré avec compteur aléatoire
+  - travaille en mode synchrone
+  - toujours incrémenter le compteur !
+  - facilement paralléllisable
+  - ...
