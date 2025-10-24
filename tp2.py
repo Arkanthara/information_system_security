@@ -3,20 +3,11 @@ from Sboxes_and_examples import message, key, key2, key3, Sbox, Sbox_inv
 
 
 class AES:
-    def str2bytes(self, param: str) -> bytes:
-        return param.encode("utf-8")
-
-    def bytes2bits(self, param: bytes) -> str:
-        return "".join(format(b, "08b") for b in param)
-
     def str2bits(self, param: str) -> str:
         return "".join(format(b, "08b") for b in param.encode("utf-8"))
 
     def int2bits(self, param: int) -> str:
         return format(param, "08b")
-
-    def bits2int(self, param: str) -> int:
-        return int(param, 2)
 
     def bits2listint(self, param: str) -> list[int]:
         assert len(param) // 8 == len(param) / 8, (
@@ -138,7 +129,7 @@ class AES:
             M ^= W[4 * i : 4 * (i + 1)].T
         return "".join(format(i, "02x") for i in M.T.ravel())
 
-    def aes(self, plaintext: str, encrypt_key: str):
+    def encode(self, plaintext: str, encrypt_key: str):
         print(f"Plaintext: {plaintext}")
         print(f"Key: {key}")
         blocks = self.padding(plaintext)
@@ -150,8 +141,7 @@ class AES:
 
 test = AES()
 
-print(test.aes("Two One Nine Two", "Thats my Kung Fu"))
-print(test.key_expansion("Thats my Kung Fu"))
-print(test.aes(message, key))
-print(test.aes(message, key2))
-print(test.aes(message, key3))
+print(test.encode("Two One Nine Two", "Thats my Kung Fu"))
+print(test.encode(message, key))
+print(test.encode(message, key2))
+print(test.encode(message, key3))
