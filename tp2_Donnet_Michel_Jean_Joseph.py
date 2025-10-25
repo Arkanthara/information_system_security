@@ -310,11 +310,6 @@ class AES:
         M ^= W[:4].T
         for i in range(1, N):
             M = self.replacement(np.array(Sbox), M)
-            # Test for shift
-            # assert np.array_equal(
-            #     self.shift(np.array([[0, 1, 2, 3], [0, 1, 2, 3], [0, 1, 2, 3]])),
-            #     np.array([[0, 1, 2, 3], [1, 2, 3, 0], [2, 3, 0, 1]]),
-            # )
             M = self.shift(M)
             if i < N - 1:
                 GF = np.array([[2, 3, 1, 1], [1, 2, 3, 1], [1, 1, 2, 3], [3, 1, 1, 2]])
@@ -341,17 +336,10 @@ class AES:
         """
         assert len(ciphertext) == 128, "You must provide a ciphertext of 128 bits !"
         M = np.array(self.bits2listint(ciphertext)).reshape(4, 4).T
-        W = self.key_expansion(encrypt_key)[::-1]
+        W = self.key_expansion(encrypt_key)
         N = W.shape[0] // 4
-        M ^= W[:4].T
-        for i in range(1, N):
-            M = self.replacement(np.array(Sbox_inv), M)
-            # Test for shift
-            # assert np.array_equal(
-            #     self.shift(np.array([[0, 1, 2, 3], [0, 1, 2, 3], [0, 1, 2, 3]])),
-            #     np.array([[0, 1, 2, 3], [1, 2, 3, 0], [2, 3, 0, 1]]),
-            # )
-            M = self.shift(M, right=True)
+        for i in range(N - 1, 0, -1):
+            M ^= W[4 * i : 4 * (i + 1)].T
             if i < N - 1:
                 GF = np.array(
                     [
@@ -362,7 +350,9 @@ class AES:
                     ]
                 )
                 M = self.mixColumn(GF, M)
-            M ^= W[4 * i : 4 * (i + 1)].T
+            M = self.shift(M, right=True)
+            M = self.replacement(np.array(Sbox_inv), M)
+        M ^= W[:4].T
         return "".join(chr(i) for i in M.T.ravel())
 
     def encode(self, plaintext: str, encrypt_key: str):
@@ -384,15 +374,15 @@ class AES:
         """
         print("======= ENCRYPTION ========\n")
         print("======== PLAINTEXT ========\n")
-        print(f"Plaintext: {plaintext}\n")
+        print(f"{plaintext}\n")
         print("=========== KEY ===========\n")
-        print(f"Key: {key}\n")
+        print(f"{encrypt_key}\n")
         blocks = self.padding(plaintext)
         result = ""
         for block in blocks:
-            result += self.encrypt_box(block, encrypt_key) + "\n"
+            result += self.encrypt_box(block, encrypt_key)
         print("======= CIPHERTEXT ========\n")
-        print(f"Ciphertext: {result}\n")
+        print(f"{result}\n")
         print("===========================\n\n")
         return result
 
@@ -415,15 +405,20 @@ class AES:
         """
         print("======= DECRYPTION ========\n")
         print("======= CIPHERTEXT ========\n")
-        print(f"Ciphertext: {ciphertext}\n")
+        print(f"{ciphertext}\n")
         print("=========== KEY ===========\n")
-        print(f"Key: {key}\n")
-        blocks = self.padding(ciphertext)
+        print(f"{encrypt_key}\n")
+        list_int = [int(hex, 16) for hex in ciphertext]
+        list_bits = "".join(format(integer, "04b") for integer in list_int)
+        assert len(list_bits) // 128 == len(list_bits) / 128, (
+            f"Ciphertext must be a multiple of 128 ! Current: {len(list_bits)}"
+        )
+        blocks = [list_bits[i : i + 128] for i in range(0, len(list_bits), 128)]
         result = ""
         for block in blocks:
-            result += self.decrypt_box(block, encrypt_key) + "\n"
+            result += self.decrypt_box(block, encrypt_key)
         print("======== PLAINTEXT ========\n")
-        print(f"Plaintext: {result}\n")
+        print(f"{result}\n")
         print("===========================\n\n")
         return result
 
