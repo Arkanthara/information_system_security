@@ -1,0 +1,30 @@
+---
+title: Course 7
+format:
+  revealjs:
+    theme: dark
+---
+
+# Product cypher
+
+- product cipher: Schéma de cryptage combinant une série de transformations
+- feistel cipher: product cipher itératif itérant pendant x round.
+  décryption de la même manière, avec clés dans l'ordre inverse (nombre de clés en général pair et >= 3 !)
+
+# DES
+
+- feistel cypher de 16 rounds avec 16 sous-clés
+- peut être utilisé dans différents modes: ECB, CBC, CFB, OFB
+- Cassé en 24h
+- Triple DES: DES -> DES^-1 -> DES avec K1, K2, K3
+- Marche car DES n'est pas un groupe !!! Sinon, D1 -> D2 -> D3 avec K1, K2, K3 serait équivalent de faire seulement une encryption D4 avec K4
+- Clé failble et mi-faible:
+  - faible: E_k(E_k(x)) = x
+  - mi-faible: 
+
+# AES
+
+- 2x plus rapide que DES
+- $10^{22}$ plus sûr que DES !!
+- En moyenne dans chaque block, la clé est à peu près de 64 bits différents
+- possible de casser AES avec seulement $2^{126} \approx$ facteur 4 par rapport au brute force...
