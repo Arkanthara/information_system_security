@@ -1,6 +1,7 @@
 # Information Systems Security TP3 examples
 
 import hashlib
+import math
 
 
 #----------------------------------------------------------------------------

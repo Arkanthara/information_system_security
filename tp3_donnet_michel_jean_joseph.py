@@ -1,235 +1,199 @@
-from random import randint
-from math import *
-from math import log2, floor
+import numpy as np
+import random
+import hashlib
+from TP3examples import *
 
-# Cette fonction permet de générer un nombre aléatoire entier dans l'intervalle donné
-def generation_nombre_aleatoires(a, b):
-    return randint(a, b)
+def fast_exp(a: int, p: int, n: int) -> int:
+    """
+    Apply fast exponentiation for a^p modulo n
 
-# Cette fonction permet de donner la liste des puissances de 2 d'un nombre
-def puissance_de_deux(p):
+    Parameters
+    ----------
+    a : int
+        Number
+    p : int
+        Power
+    n : int
+        Modulo
 
-    # On initialise une variable locale et un tableau vide
-    expo=1
-    tab_expo=[]
+    Returns
+    -------
+    int
+        Result of fast exponentiation
 
-    while (expo != 0):
-
-        # On prend la partie entière inférieure du log en base 2 de la puissance
-        expo = floor(log2(p))
-
-        # On ajoute ce nombre à notre liste
-        tab_expo.append(expo)
-
-        # On enlève à la puissance le nombre obtenu, permettant ainsi de la réduire
-        p=p-(2**expo)
-
-        # Si la puissance est nulle, on retourne notre tableau de puissances, car il n'y a plus rien à calculer
-        if (p == 0):
-            return tab_expo
-    return tab_expo
-
-def exp_rapide(a, p, n):
-
-    # On commence par prendre la liste des puissances de 2 de la puissance du nombre
-    tab_puissance_deux = puissance_de_deux(p)
-
-    # On prend toutes les puissances de 2 et on calcule leur valeur
-    for i in range(len(tab_puissance_deux)):
-        tab_puissance_deux[i] = 2**tab_puissance_deux[i]
-
-    # On initialise une variable locale et un tableau vide, auquel on ajoute le nombre initial et la puissance 1
-    puissance = 1
-    new_tab = []
-    new_tab.append([puissance, (a**puissance) % n])
-    k = 0
-
-    # Tant que la puissance du nombre est inférieur à la partie entière inférieure de la puissance demandée du nombre, on boucle
-    while (puissance <= floor(p/2)):
-
-        # On crée un nouveau tableau
-        new_tab_2 = []
-
-        # On double la puissance
-        puissance *= 2
-
-        # On ajoute au tableau la puissance
-        new_tab_2.append(puissance)
-
-        # On ajoute à new_tab_2 le dernier élément du tableau, mis au carré et modulo n
-        new_tab_2.append((new_tab[k][1]**2) % n)
-
-        # On ajoute au tableau new_tab_2
-        new_tab.append(new_tab_2)
-
-        # On change l'indice du dernier élément du tableau
-        k += 1
-
-    # On initie le résultat à 1    
+    """
+    binary = np.array(list(format(p, "0b"))).astype(int)[::-1]
+    if binary.shape[0] == 1:
+        return a**p % n
+    power_of_2 = np.zeros_like(binary, dtype=object)
+    power_of_2[0] = a % n
+    for i in range(1, power_of_2.shape[0]):
+        power_of_2[i] = (power_of_2[i - 1] ** 2) % n
     result = 1
 
-    # On parcours le tableau des puissances de 2 obtenus
-    for i in range(len(tab_puissance_deux)):
-
-        # On parcours le tableau créé précédement
-        for j in range(len(new_tab)):
-
-            # Si les valeurs des puissances de 2 correspondent, on multiplie le résultat par la valeur du tableau créé correspondant à l'élément à la puissance de 2
-            # modulo n
-            if (tab_puissance_deux[i] == new_tab[j][0]):
-                result = (result * new_tab[j][1]) % n
-
-    # On retourne le résultat
+    for i in range(power_of_2.shape[0]):
+        if binary[i] == 1:
+            result = (result * power_of_2[i]) % n
     return result
 
-#value = exp_rapide(2**512 + 7, 123456789, 2**1024)
-#print(value)
+def fermat_test(n: int) -> bool:
+    """
+    Check if a number is primary by running Fermat test.
 
+    Parameters
+    ----------
+    n : int
+        Number to check
 
-# Cette fonction permet de vérifier qu'un nombre est premier
-def verif_nb_prem(n):
+    Returns
+    -------
+    bool
+        True if the number is primary
 
-    # On vérifie 20 fois
+    """
     for i in range(20):
-
-        # On génère un nombre alpha compris entre 2 et n - 1 pour un nombre initial n
-        value = generation_nombre_aleatoires(2, n - 1)
-
-        # On met ce nombre à la puissance n - 1 modulo n
-        value_2 = exp_rapide(value, n-1, n)
-
-        # Si le résultat diffère de 1, cela signifie que le nombre n'est pas premier, donc on quitte la fonction en retournant False
-        if (value_2 != 1):
+        alpha = random.randint(2, n - 1)
+        if fast_exp(alpha, n - 1, n) != 1:
             return False
-
-    # Si tout c'est bien passé, cela signifie que le nombre est premier, et on retourne True. (On remarque que cependant, on n'est pas certain que le nombre soit premier...)
     return True
 
-#if (verif_nb_prem(18)):
-#    print(18)
-#else :
-#    print("pas premier")
 
-# Cette fonction permet de générer un nombre premier dans l'intervalle [a; b]
-def gen_nb_prem(a, b):
+def primary_nb_generator(a: int, b: int) -> int:
+    """
+    Generate primary number in range a, b
 
-    # On boucle à l'infini
-    while True :
+    Parameters
+    ----------
+    a : int
+        lower bound
+    b : int
+        upper bound
 
-        # On génère un nombre compris dans l'intervalle demandé
-        p = generation_nombre_aleatoires(a, b)
+    Returns
+    -------
+    int
+        Primary number generated
 
-        # Si le nombre est accepté par la fonction verif_nb_prem(), on le renvoie, sinon, on boucle.
-        if (verif_nb_prem(p) == True):
+    """
+    while True:
+        p = random.randint(a, b)
+        if fermat_test(p):
             return p
 
-#print (gen_nb_prem(2, 100))
 
-# Cette fonction permet de trouver le pgcd de 2 nombres, et l'inverse modulaire de b si pgcd(a, b) = 1
-def Euclide(a, b):
+def Euclide(a: int, b: int) -> list:
+    """
+    Euclide's extended algorithm, used to find decryption exponent d for RSA
 
-    # Si a est plus petit que b, on signale une erreur et on quitte
-    if (a < b):
-        print("Attention, a < b")
-        return None
+    Parameters
+    ----------
+    a : int
+        Number
+    b : int
+        Number
 
-    # Sinon, on suit étape par étape l'algorithme donné dans l'énoncé. La seule différence est qu'on doit introduire des nouvelles variables pour faire des switch
-    # de variables.
-    r_0 = a
-    r_1 = b
-    s_0 = 1
-    s_1 = 0
-    t_0 = 0
-    t_1 = 1
+    Returns
+    -------
+    list
+        A list [pgcd(a, b), inverse of a mod b, inverse of b mod a]
+
+    """
+    assert a >= b, "a must be greater than b !"
+    r_0, r_1 = a, b
+    s_0, s_1 = 1, 0
+    t_0, t_1 = 0, 1
     q_1 = r_0 // r_1
-    while (r_1 != 0):
-        c = r_1
-        r_1 = r_0 - q_1 * r_1
-        r_0 = c
-        d = s_1
-        s_1 = s_0 - q_1 * s_1
-        s_0 = d
-        e = t_1
-        t_1 = t_0 - q_1 * t_1
-        t_0 = e
-        # Ici je m'assure qu'on n'ait pas de divisions par 0 au cas où r_1 devient 0, car lorsque r_1 devient 0, on finit la boucle while...
-        if (r_1 != 0):
+    while r_1 != 0:
+        r_0, r_1 = r_1, r_0 - q_1 * r_1
+        s_0, s_1 = s_1, s_0 - q_1 * s_1
+        t_0, t_1 = t_1, t_0 - q_1 * t_1
+        if r_1 != 0:
             q_1 = r_0 // r_1
-
-    # On retourne les avant-dernières valeurs obtenues dans un tableau
-    tab = []
-    tab.append(r_0)
+    tab = [r_0]
     tab.append(s_0 if s_0 >= 0 else s_0 + b)
     tab.append(t_0 if t_0 >= 0 else t_0 + a)
     return tab
 
-#print(Euclide(120, 7))
 
-# Cette fonction permet de générer des clés de 512 bits environ
-def gen_cle():
+def key_generator(p: int = 0, q: int = 0, e: int = 0) -> list:
+    """
+    Generate public and private key for RSA
 
-    # On commence par générer 2 nombres premiers d'environ 512 bits
-    p = gen_nb_prem(2**511, 2**512)
-    q = gen_nb_prem(2**511, 2**512)
+    Returns
+    -------
+    list
+        modulo, public, private key
 
-    # On calcule ensuite n qui aura environ une taille de 1024 bits
+    """
+    if p == 0:
+        p = primary_nb_generator(2**511, 2**512)
+    if q == 0:
+        q = primary_nb_generator(2**511, 2**512)
+
+    assert fermat_test(p), "p is not primary"
+    assert fermat_test(q), "q is not primary"
     n = p * q
-
-    # On calcule la fonction phi d'Euler pour n
     phi_n = (p - 1) * (q - 1)
 
-    # On initialise un tableau vide qui permettra de stocker le résultat de l'algorithme d'Euclide, ainsi que les valeurs de e et d à 1
-    tab = []
-    e = 1
-    d = 1
+    if e != 0:
+        pgcd, _, d = Euclide(phi_n, e)
+        assert pgcd == 1, "pgcd(phi_n, e) is not equal to 1, so no private key found !"
 
-    # Tant qu'on n'a pas trouvé de nombre e premier avec phi_n, on boucle
-    while (e == 1):
+    else:
+        # Find a primary number e with phi_n
+        while True:
+            e = random.randint(2**511, 2**512)
+            pgcd, _, d = Euclide(phi_n, e)
 
-        # On commence par générer un nombre aléatoire de environ 512 bits
-        e = generation_nombre_aleatoires(2**511, 2**512)
+            # If primary number with phi_n, claim public key
+            if pgcd == 1:
+                break
+    return n, e, d
 
-        # On regarde si ce nombre est premier avec n, c'est à dire si pgcd(phi_n, e) = 1. Pour cela, on exécute l'algorithme d'Euclide.
-        tab = Euclide(phi_n, e)
 
-        # Le résultat du pgcd(phi_n, e) est stocké à la première place dans le tableau, et l'inverse modulaire de e à la dernière place, si le pgcd est 1.
-        # Si le pgcd est égal à 1, on donne à d la valeur de l'inverse modulaire de e. Sinon, on remet e à 1 et on recommence.
-        if (tab[0] == 1):
-            d = tab[2]
-            break
-        else :
-            e = 1
+def get_digest(message: int) -> str:
+    # Ensure upper round is made with the +7
+    size = (message.bit_length() + 7) // 8
+    message_in_bytes = message.to_bytes(size, 'big')
+    return hashlib.sha256(message_in_bytes).hexdigest()
 
-    # On exporte notre tableau contenant p, q, n, e et d, donnant ainsi une paire de clés publique/privé
-    key = []
-    key.append(p)
-    key.append(q)
-    key.append(n)
-    key.append(e)
-    key.append(d)
-    return key
 
-# Cette fonction permet d'encryptrer un message avec une clé donné. On va prendre le message, on le met à la puissance e modulo n, et on renvoie le résultat
-def encryption(message, key):
-    return exp_rapide(message, key[3], key[2])
+def signature(message: int, d: int, n: int) -> int:
+    digest = get_digest(message)
+    return fast_exp(int(digest, base=16), d, n)
 
-# Cette fonction permet de décrypter un message avec une clé donné. On va prendre le cipher, et on le met à la puissance d modulo n, et on renvoie le résultat
-def decryption(cipher, key):
-    return exp_rapide(cipher, key[4], key[2])
+def check_signature(message: int, signature: int, e: int, n: int) -> bool:
+    digest = int(get_digest(message), 16)
+    sign = fast_exp(signature, e, n)
+    if digest == sign:
+        print("Signature verified !")
+        return True
+    return False
 
-# On teste notre fonction. On génère une paire de clé (ce qui peut prendre 20 secondes sur mon ordinateur... Au fait, cela dépend du nombre qu'il génère pour e, car 
-# si il ne génère pas le bon e premier avec phi_n, il devra exécuter plusieurs fois), puis on crée un message qu'on encode
-# et qu'on décode après. On regarde si le message encodé puis décodé est le même message que le message initial.
+if __name__ == "__main__":
+    print("\n=============== RSA ENCRYPTION ===============\n")
 
-key = gen_cle()
+    n, e, d = key_generator(p_A, q_A, e_A)
+    assert d == d_A, "Private key generated is different from the expected key !"
 
-message = 15
-print(message)
+    print(f"Message:                {m_1}\n")
 
-cipher = encryption(message, key)
-print(cipher)
+    cipher = fast_exp(m_1, e, n)
+    assert cipher == 32468932964181322647810913060097066975304467072050643211304428656476623133068329653886195740426516038144100129255895281039142864272296799126753030014464755203797098445143314298922512718785433009136404533290100525054356166805463645892708927694801117827432767298393815743170470207262077229267156532545837844746, "Encrypted message is not correct !"
+    print(f"Ciphertext:             {cipher}\n")
 
-message_2 = decryption(cipher, key)
-print(message_2)
+    recovered_message = fast_exp(cipher, d, n)
+    assert recovered_message == m_1, "Recovered message is different from original message !"
+    print(f"Decrypted ciphertext:   {recovered_message}")
+
+    print("\n=============== RSA SIGNATURE ===============\n")
+    
+    print(f"Message:                {m_2}\n")
+
+    m_2_signed = signature(m_2, d_B, n_B)
+    assert m_2_signed == 139946149260693867607112906574735868062749437621729152371217474062708529251204743665018991444038005832618912915250036414898959900238801293242485481120544999182886616669733899259575955678176133539745600054828147224713714471521374309679085794180533135483883902152178064817185104702608162450188184338147593819800, "Signature is not correct !"
+    print(f"Signature:              {m_2_signed}\n")
+
+    check_signature(m_2, m_2_signed, e_B, n_B)
 
 
