@@ -58,7 +58,7 @@ def fermat_test(n: int) -> bool:
     return True
 
 
-def primary_nb_generator(a: int, b: int) -> int:
+def primary_nb_generator(a: int, b: int, safe_prime: bool = False) -> int:
     """
     Generate primary number in range a, b
 
@@ -68,6 +68,8 @@ def primary_nb_generator(a: int, b: int) -> int:
         lower bound
     b : int
         upper bound
+    safe_prime : bool
+        Generate primary number p with (p - 1) / 2 also primary
 
     Returns
     -------
@@ -78,7 +80,11 @@ def primary_nb_generator(a: int, b: int) -> int:
     while True:
         p = random.randint(a, b)
         if fermat_test(p):
-            return p
+            if safe_prime:
+                if fermat_test((p - 1) / 2):
+                    return p
+            else:
+                return p
 
 
 def Euclide(a: int, b: int) -> list:
@@ -152,22 +158,75 @@ def key_generator(p: int = 0, q: int = 0, e: int = 0) -> list:
 
 
 def get_digest(message: int) -> str:
+    """
+    Return sha256 digest from the given message
+
+    Parameters
+    ----------
+    message : int
+        Message
+
+    Returns
+    -------
+    str
+        sha256 digest
+
+    """
     # Ensure upper round is made with the +7
     size = (message.bit_length() + 7) // 8
     message_in_bytes = message.to_bytes(size, 'big')
     return hashlib.sha256(message_in_bytes).hexdigest()
 
 
-def signature(message: int, d: int, n: int) -> int:
-    digest = get_digest(message)
-    return fast_exp(int(digest, base=16), d, n)
+def signature(message: int, key: int, n: int) -> int:
+    """
+    Sign the give message with the given key (key, n)
 
-def check_signature(message: int, signature: int, e: int, n: int) -> bool:
+    Parameters
+    ----------
+    message : int
+        Message
+    key : int
+        Key used to sign message
+    n : int
+        Modulo corresponding to the given key
+
+    Returns
+    -------
+    int
+        The message signed
+
+    """
+    digest = get_digest(message)
+    return fast_exp(int(digest, base=16), key, n)
+
+def check_signature(message: int, signature: int, key: int, n: int) -> bool:
+    """
+    Check integrity of given message according to signature
+
+    Parameters
+    ----------
+    message : int
+        check integrity of message
+    signature : int
+        signature used to check integrity of message
+    key : int
+        key used to decrypt signature
+    n : int
+        modulo corresponding to the given key
+
+    Returns
+    -------
+    bool
+        True if integrity of message is configured
+
+    """
     digest = int(get_digest(message), 16)
-    sign = fast_exp(signature, e, n)
+    sign = fast_exp(signature, key, n)
     if digest == sign:
         print("Signature verified !")
         return True
+    print("Signature not verified !")
     return False
 
 if __name__ == "__main__":
@@ -187,7 +246,6 @@ if __name__ == "__main__":
     print(f"Decrypted ciphertext:   {recovered_message}")
 
     print("\n=============== RSA SIGNATURE ===============\n")
-    
     print(f"Message:                {m_2}\n")
 
     m_2_signed = signature(m_2, d_B, n_B)
@@ -195,5 +253,43 @@ if __name__ == "__main__":
     print(f"Signature:              {m_2_signed}\n")
 
     check_signature(m_2, m_2_signed, e_B, n_B)
+
+    print("\n\n============= STATION-TO-STATION ============\n")
+
+    print(f"Alice to Bob\n")
+    ax = fast_exp(alpha, x, safe_prime)
+    assert ax == 686072914171234798069517712764277594421530837248520761454562297567737629274501846654087857110320672185192257738624560988240804394506647168646502643636056310, "Secret a^x mod p not correct !"
+    print(f"a^x mod p:  {ax}\n")
+
+    print("Bob to Alice\n")
+    ay = fast_exp(alpha, y, safe_prime)
+    K1 = fast_exp(ax, y, safe_prime)
+    assert ay == 1658758911043428653679670657159403893659858431555423238518923992311175752537434444470667284622227826513095646428663996761247179634768488071743521322105826864, "Secret a^y mod p not correct !"
+    assert K1 == 133319045406894848338625909766918081728670119580456005459847062820377364927299550101232531204505214272971383981615061959224396184823089732799942062031596841, "Session key K is not correct !"
+    SB_key = signature(int(format(ax, '0b') + format(ay, '0b') + format(K1, '0b'), 2), d_B, n_B)
+    assert SB_key == 63637939875901691094764242278906665544983903077054207988218710640087544761228273045150821483357729338737390290548046762350697337909101721771119707350314342587290126983794881205873189463125171775729781807366888186695684820979887485019292913876833243417638388536805972736525678021591270150561199609942649208004, "Signature from Bob on (alpha^x, alpha^y, K) is not correct !"
+    print(f"a^y mod p:  {ay}\n")
+    print(f"Signature:  {SB_key}\n")
+
+    print(f"Alice to Bob\n")
+    K2 = fast_exp(ay, x, safe_prime)
+    assert K2 == 133319045406894848338625909766918081728670119580456005459847062820377364927299550101232531204505214272971383981615061959224396184823089732799942062031596841, "Session key K is not correct !"
+    check_signature(int(format(ax, '0b') + format(ay, '0b') + format(K2, '0b'), 2), SB_key, e_B, n_B)
+    print()
+    SA_key = signature(int(format(ay, '0b') + format(ax, '0b') + format(K2, '0b'), 2), d_A, n_A)
+    assert SA_key == 45467152564432701103620506688535942942709188195272432989568457473601022575230584678514742692432145004914876272400870285574876815019240848540253393082439483176306291410816134069425004279929786767259112836051752427213131534826834152132670963428804617973787768260686245775875564276853832786703782164483812397373, "Signature from Alice on (alpha^y, alpha^x, K) is not correct !"
+    print(f"Signature:  {SA_key}\n")
+
+    print("Bob\n")
+    check_signature(int(format(ay, '0b') + format(ax, '0b') + format(K1, '0b'), 2), SA_key, e_A, n_A)
+    print()
+
+    print("\n---------------- Session key ----------------\n")
+    print(K1)
+    print("\n-------------------- END --------------------\n")
+
+
+
+
 
 
