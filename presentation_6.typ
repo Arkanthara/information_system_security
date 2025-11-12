@@ -70,7 +70,7 @@ Signal send to satellite, and then send from satellite.
 Communication between satellites: laser
 Communication satellite-earth: send data with noise in only direction of the antenna
 
-Jamming: send it's own signal so it replace data !
+Jamming: adding noise. next level of jamming, which is hijacking is to send it's own signal so it replaces original data !
 
 Narrowband: focused on 1 frequency
 Broadband Jamming: just add noise on all frequencies
