@@ -1,0 +1,21 @@
+project: 
+  type: website
+  title: "Information Systems Security"
+  render:
+    - "exam_notes*"
+
+website:
+  navbar:
+    background: primary
+    search: true
+    left:
+      - text: "Français"
+        href: exam_notes_fr.qmd
+      - text: "English"
+        href: exam_notes_en.qmd
+format:
+  html:
+    toc: true
+    number-sections: true
+    theme: darkly
+    embed-resources: false

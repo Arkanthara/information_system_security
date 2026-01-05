@@ -1,0 +1,372 @@
+# Fundamental Security Services
+
+Security services are the objectives aimed at protecting a system.
+
+* **Confidentiality**: Protection against unauthorized disclosure.
+* **Integrity**: Protection against unauthorized modification.
+* **Availability**: Guarantee of access for legitimate users.
+* **Authentication**:
+
+  * *Entity authentication*: Certifying the identity of an actor.
+  * *Data origin authentication*: Certifying the source of data.
+* **Non-repudiation**: Inability to deny a transaction.
+* **Non-duplication**: Protection against illicit copying.
+* **Anonymity**: Preservation of identity or source.
+
+::: {.callout collapse="true"}
+
+#### Original version
+
+* **Confidentiality**: Protection of information from unauthorized disclosure.
+* **Integrity**: Protection against unauthorized modification of information.
+* **Availability**: Ensuring that resources are accessible to legitimate users.
+* **Authentication**:
+
+  * **Entity authentication** *(entity authentication)*: Process allowing one entity to be certain of the identity of a second entity, supported by corroborating evidence (e.g., physical presence, cryptographic, biometric, etc.). The term identification is sometimes also used for this service.
+  * **Data origin authentication** *(data origin authentication)*: Process allowing one entity to be certain that a second entity is the original source of a set of data. By definition, this service also ensures the integrity of the data.
+* **Non-repudiation**: Guarantees that an entity cannot deny being involved in a transaction.
+* **Non-duplication**: Protection against illicit copying.
+* **Anonymity (entity or data origin)**: Preserves the identity of an entity, the source of information, or a transaction.
+
+:::
+
+---
+
+# Summary: Services, Threats, and Protection Mechanisms
+
+| Security Services         | Threats and Attacks (*Italic*)                             | Classic Mechanisms                          | Digital Mechanisms                                            |
+| :------------------------ | :--------------------------------------------------------- | :------------------------------------------ | :------------------------------------------------------------ |
+| **Confidentiality**       | Information leakage, *eavesdropping*, traffic analysis     | Seals, safes, padlocks                      | Encryption, logical authorization                             |
+| **Integrity**             | Modification, *tampering*, illicit creation or destruction | Special ink, holograms                      | One-way functions + encryption                                |
+| **Availability**          | *Denial of Service (DoS)*, viruses, illicit use            | Physical access control, video surveillance | Logical access control, audit, antivirus                      |
+| **Entity Authentication** | Unauthorized access, password theft, protocol flaw         | Presence, voice, ID card, biometrics        | Secret + protocol, network address + userid, smart card + PIN |
+| **Data Authentication**   | Falsification of information or signature                  | Seals, signature, fingerprint               | One-way functions + encryption                                |
+| **Non-repudiation**       | Denying a transaction (*repudiation*), claiming key theft  | Seals, notary signature, registered mail    | One-way functions + encryption + digital signature            |
+| **Non-duplication**       | Duplication, falsification, imitation                      | Special ink, holograms, tagging             | Digital watermarking, cryptographic locking                   |
+| **Anonymity**             | Identification, transaction analysis, tracing              | Voice scramblers, disguise, cash            | *Mixers*, *remailers*, e-money, *deep web*                    |
+
+::: {.callout collapse="true"}
+
+#### Original version
+
+## Threats and Attacks: Summary
+
+| Services                  | Threats                              | Attacks                                                           |
+| :------------------------ | :----------------------------------- | :---------------------------------------------------------------- |
+| **Confidentiality**       | Information leakage                  | Unauthorized eavesdropping, traffic analysis                      |
+| **Integrity**             | Information modification             | Illicit creation, alteration, or destruction                      |
+| **Availability**          | Denial of service, illicit use       | Viruses, repeated access attempts to disable a system             |
+| **Entity Authentication** | Unauthorized access                  | Password theft, authentication protocol flaw                      |
+| **Data Authentication**   | Information falsification            | Signature forgery, protocol flaw                                  |
+| **Non-repudiation**       | Denying involvement in a transaction | Claiming key theft or signature protocol flaw                     |
+| **Non-duplication**       | Duplication                          | Falsification, imitation                                          |
+| **Anonymity**             | Identification                       | Transaction analysis, unauthorized access enabling identification |
+
+## Protection Mechanisms
+
+| Services                  | Classic Mechanisms                                  | Digital Mechanisms                                                           |
+| :------------------------ | :-------------------------------------------------- | :--------------------------------------------------------------------------- |
+| **Confidentiality**       | Seals, safes, padlocks                              | Encryption, logical authorization                                            |
+| **Integrity**             | Special ink, holograms                              | One-way functions + encryption                                               |
+| **Availability**          | Physical access control, video surveillance         | Logical access control, audit, antivirus                                     |
+| **Entity Authentication** | Presence, voice, ID card, biometric recognition     | Secret + authentication protocol, network address + userid, smart card + PIN |
+| **Data Authentication**   | Seals, signature, fingerprint                       | One-way functions + encryption                                               |
+| **Non-repudiation**       | Seals, signature, notary signature, registered mail | One-way functions + encryption + digital signature                           |
+| **Non-duplication**       | Special ink, holograms, tagging                     | Digital watermarking, cryptographic locking                                  |
+| **Anonymity**             | Voice scrambler, disguise, cash                     | Mixers, remailers, e-money, deep web                                         |
+
+:::
+---
+
+# Internet-Related Risks
+
+## Malware Delivered via E-Mail
+
+* Also called **malware**.
+* Emails designed to **trigger an action** (open attachment or click a link).
+* Often **personalized** using **social engineering**.
+* **Main consequences:**
+
+  * Malware installation (*ransomware*, *keyloggers*, etc.).
+  * **Loss or theft of personal data**.
+  * **System hijacking** and **malware propagation**.
+
+::: {.callout collapse="true"}
+
+#### Ultra-summary
+
+* Malware spread by email
+* Prompting clicks or opens
+* Social engineering
+* Data theft, loss, hijacking
+:::
+
+::: {.callout collapse="true"}
+
+#### Original version
+
+## Malware Delivered via E-Mail
+
+* Also called **malware**.
+* Emails designed to **incite the recipient** to **open an attachment** or **follow a link** containing ads, offensive info, risky programs, etc.
+* Often targeted based on victim interests (preliminary social engineering).
+* **Consequences:**
+
+  * Malware installation (*ransomware*, *keyloggers*, etc.) on victim systems (*computer*, *tablet*, *smartphone*, *smartwatch*, etc.).
+  * Data destruction.
+  * Theft of personal information or data.
+  * System hijacking for malicious purposes (e.g., illegal bitcoin mining).
+  * Malware propagation (potentially to other users).
+:::
+
+## Malware Delivered via Web
+
+* Method called ***drive-by download***: **automatic infection when visiting a website**.
+* Sources can be:
+
+  * A **malicious website**
+  * A **compromised legitimate site** (e.g., *cross-site scripting*).
+* **User caution** greatly reduces this propagation method.
+* **Impacts are similar** to email-borne infections.
+* **Script restriction** (*Java/JavaScript*) reduces risk but can **affect browsing**.
+
+::: {.callout collapse="true"}
+
+#### Ultra-summary
+
+* *Drive-by download* = infection without user action
+* Malicious or compromised sites
+* Awareness + restricted scripts = protection
+:::
+
+::: {.callout collapse="true"}
+
+#### Original version
+
+## Malware Delivered via Web
+
+* Often called ***drive-by download***, allows **infecting the system** (*computer*, *tablet*, *smartphone*, *smartwatch*, etc.) **simply by visiting a website**.
+* Sources may be:
+
+  * Malicious site containing malware
+  * Legitimate website previously infected (e.g., *cross-site scripting*). Infection may only affect certain pages.
+* User awareness (avoiding suspicious sites) reduces the effectiveness.
+* Consequences are similar to email infections.
+* Restricted script execution (*Java/JavaScript*) in browsers can limit infection but may constrain navigation.
+:::
+
+## Phishing
+
+* Technique to **collect private information** through **indiscriminate fishing**.
+* ***Phishing*** can be:
+
+  * **General** (broad targeting)
+  * **Targeted** (*spear phishing*) for a specific person or organization.
+* Main vector: **forged email address**, hard to detect.
+* Goal: obtain **sensitive data** (credentials, passwords, personal or banking info).
+* Attacks use **credible or threatening pretexts** to prompt victim cooperation.
+
+::: {.callout collapse="true"}
+
+#### Ultra-summary
+
+* Information theft by deception
+* Forged emails
+* *Spear phishing* = targeted attack
+* Urgent or threatening pretexts
+:::
+
+::: {.callout collapse="true"}
+
+#### Original version
+
+## Phishing
+
+* The word ***phishing*** comes from English ***"password"***, ***"harvesting"***, and ***"fishing"***.
+* Shows the technique’s main goal: **collect as much private info** via indiscriminate fishing.
+* Targeted attacks are called ***spear phishing*** (from *spear fishing*).
+* Transmission vector: email with **forged sender address** requesting private info: emails, social media credentials, passwords, ID numbers, bank accounts, etc.
+* Pretexts vary (system update, service stoppage, delivery withdrawal) and may threaten the user if ignored.
+:::
+
+## Spam
+
+* **Unwanted emails**, often ads, or **unsolicited pop-ups** during web browsing.
+* Represent about **60% of global emails**.
+* Main consequences:
+
+  * **Resource consumption** and time loss.
+  * Some can **transmit malware**.
+* Often target short addresses or come from **sold/exchanged address lists**.
+* **Anti-spam filters** incur **significant costs** for organizations.
+
+::: {.callout collapse="true"}
+
+#### Ultra-summary
+
+* Unwanted emails/ads
+* Risks: time/resource loss, malware
+* Targeting: short addresses or lists
+* Filtering costly for organizations
+:::
+
+::: {.callout collapse="true"}
+
+#### Original version
+
+## Spam
+
+* Includes all **unwanted emails** (often ads) received by people and organizations.
+* Also applies to **pages/pop-up windows** **shown without user consent** during web browsing.
+* Around **60%** of global emails belong to this category.
+* Consequences: resource consumption and wasted time, but some spam can also **transmit malware**.
+* Often target short email addresses or list-based addresses (sold/exchanged).
+* **Anti-spam filtering** incurs high organizational costs.
+:::
+
+## Ransomware
+
+* Trojan-type malware that **encrypts data** to make it inaccessible.
+* Demands a **ransom** (often in bitcoins) to recover files.
+* Can remain **dormant**, triggered by an event or date.
+* Main vector: **malicious emails**.
+* Other effects: **DoS attacks, extortion**.
+
+::: {.callout collapse="true"}
+
+#### Ultra-summary
+
+* Data encrypted by Trojan
+* Ransom to restore access
+* Possible programmed dormancy
+* Infection via malicious emails
+:::
+
+::: {.callout collapse="true"}
+
+#### Original version
+
+## Ransomware
+
+* Trojan malware family.
+* Typically **encrypts victim’s data** to make it completely inaccessible.
+* Then displays a message requesting **ransom payment** (often in **bitcoins**).
+* May stay in **dormant state** triggered by event or date.
+* Infection vectors vary, but **malicious email attachments** often responsible.
+* Variants exist and continue to evolve.
+* Other behaviors: **DoS, targeted extortion, threats**, etc.
+:::
+
+## Attacks on ***Internet of Things (IoT)*** Devices
+
+* Target **connected objects** (cameras, TVs, sensors, alarms, etc.).
+* Devices are **easy to compromise** due to:
+
+  * **Known vulnerabilities**
+  * **Default passwords**
+  * **User unawareness**
+* **Remote control** enables:
+
+  * **Entry point** to the network
+  * **Device abuse** for illicit activities (DDoS, hacking, mining)
+* A **precise inventory** of connected devices is essential.
+
+::: {.callout collapse="true"}
+
+#### Ultra-summary
+
+* Targets connected objects
+* Weak security (vulnerabilities, default passwords)
+* Risk of network access and abuse
+* IoT inventory needed
+:::
+
+::: {.callout collapse="true"}
+
+#### Original version
+
+## Attacks on IoT Devices
+
+* Target connected objects (cameras, TVs, fridges, sensors, alarm systems, etc.).
+* Often **easier to hack** than traditional systems due to:
+
+  * Many vulnerabilities known to attackers
+  * Default passwords
+  * User negligence
+* Remote takeover allows:
+
+  * Entry point to home/corporate network
+  * Device use for illicit activities (hacking, DDoS, bitcoin mining)
+* Maintaining a detailed directory of all connected devices is necessary.
+:::
+
+## Information Spoofing and Website Defacement
+
+* Attacks aiming to **alter information** on websites and social media.
+* Impact: **compromised reputation** and **economic damage**.
+* Websites: secure host system, restrictive configuration, **regular audits**.
+* Social media: strong passwords, **multi-factor authentication**, session closure, cookie deletion.
+
+::: {.callout collapse="true"}
+
+#### Ultra-summary
+
+* Altered info on websites and social media
+* Risks: reputation, economic losses
+* Websites: security + audits
+* Social media: strong passwords, MFA, closed sessions, cookies cleared
+:::
+
+::: {.callout collapse="true"}
+
+#### Original version
+
+## Information Spoofing and Website Defacement
+
+* Target **integrity** of published info on websites and social media.
+* Affects **reputation** and can cause **economic damage**.
+* **Websites**: secure host system, as restrictive configuration as possible, recurring security audits recommended.
+* **Social media**: depends on authentication process:
+
+  * Avoid simple passwords
+  * Prefer strong, possibly multi-factor authentication
+  * Close sessions properly
+  * Clear cookies
+:::
+
+## Denial of Service (DoS / DDoS) Attacks
+
+* Aim to **make IT systems inaccessible**, especially for organizations.
+* **DDoS**: distributed attack using thousands of devices, generating massive traffic.
+* Classic protections (*firewalls*, IDS/IPS sensors) often **insufficient**.
+* Consequences:
+
+  * **Affected reputation**
+  * **Financial losses** (sometimes ransom)
+  * **High risk for critical infrastructure** (hospitals, power plants, Internet backbone)
+
+::: {.callout collapse="true"}
+
+#### Ultra-summary
+
+* DDoS = inaccessible systems via massive attacks
+* Limited protections
+* Risks: reputation, finances, critical infrastructures
+:::
+
+::: {.callout collapse="true"}
+
+#### Original version
+
+## Denial of Service (DoS / DDoS) Attacks
+
+* Aim to **render IT systems inaccessible**, mainly targeting private or governmental organizations.
+* **DDoS** (*Distributed Denial of Service*): multiple devices (**often tens of thousands**) simultaneously target victim system(s).
+* Traffic can reach several hundred Gbps.
+* Traditional protection (*firewalls*, *intrusion detection/prevention sensors*) has limited effectiveness.
+* Service unavailability can cause:
+
+  * **Reputational issues**
+  * Significant **financial losses** (ransom demands)
+  * **High security risks (even physical)** for **critical infrastructures** (hospitals, power plants, Internet backbone).
+:::

@@ -1,0 +1,320 @@
+# Les Services de Sécurité Fondamentaux
+
+Les services de sécurité sont les objectifs que l'on cherche à atteindre pour protéger un système.
+
+* **Confidentialité** : Protection contre la divulgation non autorisée.
+* **Intégrité** : Protection contre la modification non autorisée.
+* **Disponibilité** : Garantie d'accès pour les utilisateurs légitimes.
+* **Authentification** : 
+    * *Entity authentication* (Entité) : Certifier l'identité d'un acteur.
+    * *Data origin authentication* (Origine) : Certifier la source d'une donnée.
+* **Non-répudiation** : Impossibilité de nier une transaction.
+* **Non-Duplication** : Protection contre les copies illicites.
+* **Anonymat** : Préservation de l'identité ou de la source.
+
+::: {.callout collapse="true"}
+#### Version originale
+
+* **Confidentialité** : Protection de l'information d'une divulgation non autorisée.
+* **Intégrité** : Protection contre la modification non autorisée de l'information.
+* **Disponibilité** : S'assurer que les ressources sont accessibles aux utilisateurs légitimes.
+* **Authentification** :
+    * **Authentification d'entités** *(entity authentication)* : procédé permettant à une entité d'être sûre de l'identité d'une seconde entité à l'appui d'une évidence corroborant (p.ex.: présence physique, cryptographique, biométrique, etc.). Le terme identification est parfois utilisé pour désigner également ce service.
+    * **Authentification de l'origine de données** *(data origin authentication)* : procédé permettant à une entité d'être sûre qu'une deuxième entité est la source originale d'un ensemble de données. Par définition, ce service assure également l'intégrité de ces données.
+* **Non-répudiation** : Offre la garantie qu'une entité ne pourra pas nier être impliquée dans une transaction.
+* **Non-Duplication** : Protection contre les copies illicites.
+* **Anonymat (d'entité ou d'origine de données)** : Permet de préserver l'identité d'une entité, de la source d'une information ou d'une transaction.
+
+:::
+
+---
+
+# Synthèse : Services, Menaces et Mécanismes de Protection
+
+| Services de Sécurité | Dangers et Attaques (*Italique*) | Mécanismes Classiques | Mécanismes Digitaux |
+|:---|:---|:---|:---|
+| **Confidentialité** | Fuite d'informations, *eavesdropping* (écoutes), analyse du trafic | Scellés, coffre-forts, cadenas | Cryptage, autorisation logique |
+| **Intégrité** | Modification, *tampering* (altération), création ou destruction illicite | Encre spéciale, hologrammes | Fonctions à sens unique + cryptage |
+| **Disponibilité** | *Denial of Service (DoS)*, virus, usage illicite | Contrôle d'accès physique, surveillance vidéo | Contrôle d'accès logique, audit, anti-virus |
+| **Authentification d'entités** | Accès non autorisés, vol de mot de passe, faille de protocole | Présence, voix, pièce d'identité, biométrie | Secret + protocole, adresse réseau + userid, carte à puce + PIN |
+| **Authentification de données** | Falsification d'informations ou de signature | Sceaux, signature, empreinte digitale | Fonctions à sens unique + cryptage |
+| **Non-répudiation** | Nier une transaction (*repudiation*), prétendre un vol de clé | Sceaux, signature notariale, envoi recommandé | Fonctions à sens unique + cryptage + signature digitale |
+| **Non-duplication** | Duplication, falsification, imitation | Encre spéciale, hologrammes, tatouage | Tatouage digital (*watermarks*), verrouillage cryptographique |
+| **Anonymat** | Identification, analyse de transaction, traçage | Brouilleur de voix, déguisement, argent liquide | *Mixers*, *remailers*, argent électronique, *deep web* |
+
+::: {.callout collapse="true"}
+#### Version originale
+
+## Dangers et Attaques : Synthèse
+
+| Services | Dangers | Attaques |
+| :--- | :--- | :--- |
+| **Confidentialité** | fuite d'informations | écoutes illicites, analyse du trafic |
+| **Intégrité** | modification de l'information | création, altération ou destruction illicite |
+| **Disponibilité** | denial of service, usage illicite | virus, accès répétés visant à inutiliser un système |
+| **Authentification d'entités** | accès non autorisés | Vol de mot de passe, faille dans le protocole d'authentification |
+| **Authentification de données** | falsification d'informations | falsification de signature, faille dans le protocole d'authentification |
+| **Non-répudiation** | nier la participation à une transaction | prétendre un vol de clé ou une faille dans le protocole de signature |
+| **Non-duplication** | duplication | falsification, imitation |
+| **Anonymat** | identification | analyse d'une transaction, accès non autorisés permettant l'identification |
+
+## Mécanismes de Protection
+
+| Services | Mécanismes classiques | Mécanismes digitaux |
+| :--- | :--- | :--- |
+| **Confidentialité** | scellés, coffre-forts, cadenas | cryptage, autorisation logique |
+| **Intégrité** | encre spéciale, hologrammes | fonctions à sens unique + cryptage |
+| **Disponibilité** | contrôle d'accès physique, surveillance vidéo | contrôle d'accès logique, audit, anti-virus |
+| **Auth. d'entités** | présence, voix, pièce d'identité, reconnaissance biométrique | secret + protocole d'authentification, adresse réseau + userid, carte à puce + PIN |
+| **Auth. de données** | sceaux, signature, empreinte digitale | fonctions à sens unique + cryptage |
+| **Non-répudiation** | sceaux, signature, signature notariale, envoi recommandé | fonctions à sens unique + cryptage + signature digitale |
+| **Non-duplication** | encre spéciale, hologrammes, tatouage | tatouage digital (watermarks), verrouillage cryptographique |
+| **Anonymat** | brouilleur de voix, déguisement, argent liquide | mixers, remailers, argent électronique, deep web |
+:::
+
+---
+
+# Risques Liés à Internet
+
+
+
+## Programmes Malveillants Transmis par E-Mail
+
+* Aussi appelés **maliciels** (*malware*).
+* E-mails visant à **provoquer une action** (ouvrir une pièce jointe ou cliquer sur un lien).
+* Attaques souvent **personnalisées** grâce à l’**ingénierie sociale**.
+* **Conséquences principales :**
+    * Installation de malware (*ransomware*, *keyloggers*, etc.).
+    * **Perte ou vol de données** personnelles.
+    * **Détournement du système** et **propagation** du malware.
+
+::: {.callout collapse="true"}
+#### Ultra-synthèse
+- Malware diffusé par e-mail
+- Incitation à cliquer ou ouvrir
+- Ingénierie sociale
+- Vol, perte de données, détournement
+:::
+
+::: {.callout collapse="true"}
+#### Version originale
+## Programmes Malveillants Transmis par E-Mail
+* Aussi appelés **maliciels** ou *malware*.
+* E-mails conçus pour **inciter le destinataire** à **ouvrir une pièce jointe** ou à **suivre un lien** contenant de la publicité non souhaitée, des informations offensives, des programmes à risque, etc.
+* Souvent ciblés sur la base des intérêts de la victime (travail préliminaire d'ingénierie sociale (*social engineering*)).
+* **Conséquences :**
+    * Installation de malware (*ransomware*, *keyloggers*, etc.) dans le système de la victime (*ordinateur*, *tablette*, *smartphone*, *smartwatch*, etc.).
+    * Destruction de données contenues dans l'ordinateur.
+    * Vol d'informations ou de données personnelles.
+    * Détournement du système pour des fins malicieuses (p.ex.: minage illicite de *bitcoins*).
+    * Diffusion de *malware* (éventuellement à d'autres utilisateurs).
+:::
+
+
+## Programmes Malveillants Transmis sur le Web
+
+* Méthode appelée ***drive-by download*** : **infection automatique lors de la visite d’un site web**.
+* L’origine peut être :
+    * un **site malveillant** ;
+    * un **site légitime compromis** (p. ex. *cross-site scripting*).
+* La **prudence des utilisateurs** limite fortement ce mode de propagation.
+* Les **impacts sont similaires** aux infections par e-mail.
+* La **restriction des scripts** (*java/javascript*) réduit les risques mais peut **affecter la navigation**.
+
+::: {.callout collapse="true"}
+#### Ultra-synthèse
+- *Drive-by download* = infection sans action de l’utilisateur
+- Sites malveillants ou compromis
+- Sensibilisation + scripts restreints = protection
+:::
+
+::: {.callout collapse="true"}
+#### Version originale
+## Programmes Malveillants Transmis sur le Web
+* Cette technique, souvent appelée ***drive-by download***, permet d’**infecter le système** (*ordinateur*, *tablette*, *smartphone*, *smartwatch*, etc.) **sur lequel s’exécute un client web lors de la simple visite d’un site**.
+* Il peut s’agir soit :
+    * d’un site malicieux qui contient le *malware*.
+    * d’un site web légitime qui aurait été infecté au préalable (par exemple, moyennant une technique appelée *cross-site scripting*). L’infection pouvant affecter seulement certaines pages...
+* La sensibilisation des utilisateurs (ne pas visiter des sites douteux) diminue l’efficacité de cette technique dans la transmission de *malware*.
+* Les conséquences sont semblables à celle des transmissions par e-mail.
+* L’exécution restreinte des scripts (*java/javascript*) dans le navigateur peut limiter la portée de l’infection mais risque de contraindre la navigation dans certains sites.
+:::
+
+
+## Hameçonnage (Phishing)
+
+* Technique visant à **collecter des informations privées** par des méthodes de **pêche indiscriminée**.
+* Le ***phishing*** peut être :
+    * **général** (ciblage large) ;
+    * **ciblé** (*spear phishing*) lorsqu’une personne ou organisation précise est visée.
+* Le vecteur principal est un **e-mail à adresse falsifiée**, difficilement détectable.
+* L’objectif est d’obtenir des **données sensibles** (identifiants, mots de passe, informations personnelles ou bancaires).
+* Les attaques reposent sur des **prétextes crédibles ou menaçants** pour pousser la victime à coopérer.
+
+::: {.callout collapse="true"}
+#### Ultra-synthèse
+- Vol d’informations par tromperie
+- E-mails falsifiés
+- *Spear phishing* = attaque ciblée
+- Prétextes urgents ou menaçants
+:::
+
+::: {.callout collapse="true"}
+#### Version originale
+## Hameçonnage (Phishing)
+* Le mot ***phishing*** se compose des mots anglais ***"password"*** (mot de passe), ***"harvesting"*** (moisson) et ***"fishing"*** (pêche).
+* Cette composition de mots illustre le but principal de cette technique qui consiste à **récolter un maximum d’informations privées** des utilisateurs via des mécanismes de "pêche indiscriminée".
+* Lorsque la pêche aux informations est ciblée vers une personne ou organisation spécifique, la technique est dénommée ***spear phishing*** (qui provient de *spear fishing* ou pêche au harpon).
+* Le vecteur de transmission consiste normalement dans un e-mail avec une **adresse d’expédition falsifiée** (mais souvent indétectable...) qui demande à la victime de fournir des informations privées : adresses e-mail, identifiants (*twitter*, *facebook*, etc.), mots de passe, numéros d’identité, numéros de comptes bancaires, etc.
+* Les prétextes utilisés sont variés (mise à jour du système informatique, arrêt du service, retrait d’un envoi, etc.) et vont jusqu’à menacer l’utilisateur en cas de refus.
+:::
+
+## Pourriels (Spam)
+
+* E-mails **indésirables**, souvent publicitaires, ou **pop-ups** non sollicités lors de la navigation web.
+* Représentent environ **60% des e-mails mondiaux**.
+* Conséquences principales :
+    * **Consommation de ressources** et perte de temps.
+    * Certains peuvent **transmettre des malware**.
+* Ciblent souvent les adresses courtes ou proviennent de **listes d’adresses vendues/échangées**.
+* Les **filtres anti-spam** entraînent des **coûts importants** pour les organisations.
+
+::: {.callout collapse="true"}
+#### Ultra-synthèse
+- E-mails/publicités indésirables
+- Risques : perte de temps, ressources, malware
+- Ciblage : adresses courtes ou listes
+- Filtrage coûteux pour entreprises
+:::
+
+::: {.callout collapse="true"}
+#### Version originale
+## Pourriels (Spam)
+* Englobe tous les **e-mails indésirables** (souvent publicitaires) reçus par les personnes et les organisations.
+* Terme utilisé également pour désigner les **pages**/***fenêtres pop-up*** **affichées sans le consentement de l’utilisateur** lors de la navigation web.
+* On estime que **60%** des e-mails qui circulent dans le monde appartiennent à cette catégorie.
+* Les conséquences sont souvent limitées à la consommation de ressources de calcul et stockage ainsi qu’au gaspillage de temps associé à la lecture et traitement de ces messages mais...
+* ... **certains e-mails spam** peuvent également constituer des **vecteurs de transmission de malware**.
+* Ils ont tendance à cibler plus particulièrement les adresses e-mail courtes (p.ex: abc@gmail.com) mais fonctionnent également sur la base des listes (souvent échangées / vendues) contenant tous types d’adresses.
+* Les opérations de **filtrage anti-spam** entraînent des coûts considérables pour les organisations.
+:::
+
+## Rançongiciels (Ransomware)
+
+* Malware type **Cheval de Troie** qui **chiffre les données** pour les rendre inaccessibles.
+* Exige une **rançon** (souvent en bitcoins) pour récupérer les fichiers.
+* Peut rester **dormant**, déclenché par un événement ou une date.
+* Principal vecteur : **e-mails malveillants**.
+* Autres effets possibles : **attaques par déni de service, extorsion**.
+
+::: {.callout collapse="true"}
+#### Ultra-synthèse
+- Chiffrement des données par Cheval de Troie
+- Rançon pour restaurer accès
+- Dormance programmée possible
+- Infection via e-mails malveillants
+:::
+
+::: {.callout collapse="true"}
+#### Version originale
+## Rançongiciels (Ransomware)
+* Cette famille spécifique de malware appartient à la catégorie appelée **Chevaux de Troie** (Trojan Horses).
+* Leur comportement plus habituel consiste à **chiffrer les données de la victime** (locaux et distants) **afin de les rendre totalement inaccessibles**.
+* Un message apparait ensuite pour demander le paiement d’une rançon (souvent en **bitcoins** ou une autre monnaie virtuelle) permettant potentiellement de récupérer l’accès aux fichiers chiffrés.
+* Ils peuvent rester en ***état dormant*** dans le système infecté et être déclenchés par un événement spécifique ou à une date donnée (attaques synchronisées).
+* Leurs vecteurs d’infection sont variés mais les **e-mails contenant des pièces jointes malicieuses** sont souvent mis en cause lors des infections primaires.
+* Des nombreuses variantes existent et continuent à se développer.
+* On observe parfois d’autres comportements associés à ces *malware* : **dénis de service**, **extorsions ciblées**, **menaces**, etc.
+:::
+
+## Attaques sur les Dispositifs ***Internet of Things (IoT)***
+
+* Attaques visant les **objets connectés** (caméras, TV, capteurs, alarmes, etc.).
+* Ces dispositifs sont **faciles à compromettre** à cause de :
+    * **failles connues**,
+    * **mots de passe par défaut**,
+    * **manque de sensibilisation** des utilisateurs.
+* La **prise de contrôle à distance** permet :
+    * un **point d’entrée** vers le réseau,
+    * l’**utilisation de l’appareil** pour des activités illicites (DDoS, hacking, minage).
+* Un **inventaire précis** des dispositifs connectés est indispensable.
+
+::: {.callout collapse="true"}
+#### Ultra-synthèse
+- Cible les objets connectés
+- Sécurité faible (failles, mots de passe par défaut)
+- Risque d’accès au réseau et d’abus
+- Inventaire des IoT nécessaire
+:::
+
+::: {.callout collapse="true"}
+#### Version originale
+## Attaques sur les Dispositifs ***Internet of Things (IoT)***
+* Ciblent les **objets connectés** de toute sorte (caméras, TVs, frigos, capteurs et interrupteurs domotiques, installations d’alarme, etc.).
+* Ils sont souvent **plus faciles à pirater** que les systèmes traditionnels par cause de :
+    * nombreuses failles de sécurité souvent connues des attaquants.
+    * mots de passe par défaut.
+    * négligence de la part des utilisateurs qui ignorent les risques qui leurs sont propres.
+* La **prise de contrôle à distance** de ces appareils par une entité malveillante implique :
+    * Une porte d’entrée au réseau domestique/corporatif.
+    * Un dispositif pouvant être utilisé pour des activités illicites (hacking, attaques DDoS, minage de bitcoins, etc.).
+* L’établissement d’un répertoire précis de tous les dispositifs de ce type connectés au réseau est nécessaire!
+:::
+
+## Modification Illicite des Informations Publiées (*Information Spoofing and Website Defacement*)
+
+* Attaques visant à **altérer les informations** sur sites web et réseaux sociaux.
+* Impact : **réputation compromise** et **dommages économiques**.
+* Sites web : sécurisation du système hôte, configuration restrictive, **audits réguliers**.
+* Réseaux sociaux : mots de passe forts, **authentification multi-facteur**, fermeture des sessions, suppression des *cookies*.
+
+::: {.callout collapse="true"}
+#### Ultra-synthèse
+- Altération des infos sur sites et réseaux sociaux
+- Risques : réputation et pertes économiques
+- Sites : sécurisation + audits
+- Réseaux sociaux : mots de passe forts, MFA, sessions fermées, cookies supprimés
+:::
+
+::: {.callout collapse="true"}
+#### Version originale
+## Modification Illicite des Informations Publiées (*Information Spoofing and Website Defacement*)
+* Attaques visant **l’intégrité** de l’information publiée dans les sites web, les réseaux sociaux, etc.
+* Elles portent atteinte à la **réputation** et peuvent provoquer d’importants **dommages économiques** pour les sociétés ayant une présence Internet.
+* Dans le cas des **sites web**, la **sécurisation du système hôte** est essentielle ainsi qu’une **configuration aussi restrictive que possible**. Des audits des sécurité récurrents sont vivement recommandés.
+* La **protection des informations affichées dans les réseaux sociaux** dépend directement du processus d’authentification permettant d’accéder au profil à risque :
+    * Éviter les mots de passe trop simples.
+    * Privilégier l’authentification forte, si possible *multi-facteur*.
+    * Fermer proprement les sessions.
+    * Effacer les *cookies*.
+:::
+
+## Attaques **Dénis de Service** (*Denial of Service* / *DDoS*)
+
+* Vise à **rendre inaccessibles des systèmes informatiques**, surtout pour les organisations.
+* **DDoS** : attaque distribuée par des milliers de dispositifs, générant un trafic massif.
+* Protections classiques (*firewalls*, sondes IDS (Intrusion Detection System) / IPS (Intrusion Prevention System)) souvent **insuffisantes**.
+* Conséquences :
+    * **Réputation affectée**
+    * **Pertes financières** (parfois rançons)
+    * **Risques élevés** pour les infrastructures critiques (hôpitaux, centrales, Internet backbone)
+
+::: {.callout collapse="true"}
+#### Ultra-synthèse
+- DDoS = systèmes inaccessibles via attaques massives
+- Protections limitées
+- Risques : réputation, finances, infrastructures critiques
+:::
+
+::: {.callout collapse="true"}
+#### Version originale
+## Attaques **Dénis de Service** (*Denial of Service* / *DDoS*)
+* Attaques destinées à **rendre inaccessibles des systèmes informatiques** de toute sorte visant surtout les organisations privées ou étatiques.
+* Le terme **DDoS** (*Distributed Denial of Service*) désigne une famille d’attaques dans laquelle des multiples (**souvent des dizaines de milliers) de dispositifs ciblent simultanément le(s) système(s) victime(s)**.
+* Le trafique généré atteint plusieurs centaines de gigabits / seconde.
+* L’efficacité des mécanismes de protection traditionnels (*firewalls*, *sondes* de *prévention* et de *détection d’intrusion*, etc.) est limitée.
+* L’indisponibilité d’un service peut engendrer :
+    * des problèmes **réputationnels**.
+    * d’importantes **pertes financières** (des **demandes de rançon** peuvent être exigées pour les désactiver).
+    * des **hauts risques de sécurité (même physique!)** lorsque des **infrastructures critiques** (hôpitaux, centrales électriques, *backbone* de l’Internet, etc.) sont ciblées.
+:::
