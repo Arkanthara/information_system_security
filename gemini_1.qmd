@@ -1,0 +1,522 @@
+---
+title: "Information Systems Security"
+subtitle: "Master's Course - ISS2526"
+author: "Eduardo Solana"
+date: "2025-12-09"
+format:
+  html:
+    toc: true
+    number-sections: true
+    theme: darkly
+    embed-resources: false
+#   pdf:
+#     toc: true
+#     number-sections: true
+#     geometry:
+#       - top=20mm
+#       - left=20mm
+#       - right=20mm
+#       - bottom=20mm
+---
+
+<!-- # Tentative Agenda
+
+## Basic Concepts
+* Security Services
+* Internet related Risks
+* Classification of Cryptosystems and Attacks
+* Entropy
+* Random Oracle Model
+* Probabilistic vs. Deterministic Algorithms
+* Computational Security vs. Perfect Secrecy
+
+## Basic Tools
+* (Pseudo-)Random Generation
+* Hash Functions
+* MACs
+* Crypto Algorithms:
+    * Stream and Block
+    * Symmetric / Asymmetric
+* Certificates
+
+## Access Control and Transaction Security
+* Authentication Protocols
+* Key Establishment Protocols
+* Key and Password Management and Assurance
+
+## Framework
+* Security Policies (BIP, BIBA, Chinese Wall, MLS, etc.)
+* OS Security
+* PKI
+* Virtualization and Trusted Computing
+* Topology: Perimeter/Perimeter-less Security
+* Network Security Protocols
+* Cloud Security
+
+## Topics to be covered (eventually...)
+* Homomorphic Encryption
+* Side Channel Attacks
+* ... -->
+
+# Services de Sécurité
+
+* **Confidentialité** : Protection de l'information d'une divulgation non autorisée.
+* **Intégrité** : Protection contre la modification non autorisée de l'information.
+* **Disponibilité** : S'assurer que les ressources sont accessibles aux utilisateurs légitimes.
+* **Authentification** :
+    * **Authentification d'entités** *(entity authentication)* : procédé permettant à une entité d'être sûre de l'identité d'une seconde entité à l'appui d'une évidence corroborant (p.ex.: présence physique, cryptographique, biométrique, etc.). Le terme identification est parfois utilisé pour désigner également ce service.
+    * **Authentification de l'origine de données** *(data origin authentication)* : procédé permettant à une entité d'être sûre qu'une deuxième entité est la source originale d'un ensemble de données. Par définition, ce service assure également l'intégrité de ces données.
+* **Non-répudiation** : Offre la garantie qu'une entité ne pourra pas nier être impliquée dans une transaction.
+* **Non-Duplication** : Protection contre les copies illicites.
+* **Anonymat (d'entité ou d'origine de données)** : Permet de préserver l'identité d'une entité, de la source d'une information ou d'une transaction.
+
+## Dangers et Attaques : Synthèse
+
+| Services | Dangers | Attaques |
+| :--- | :--- | :--- |
+| **Confidentialité** | fuite d'informations | écoutes illicites, analyse du trafic |
+| **Intégrité** | modification de l'information | création, altération ou destruction illicite |
+| **Disponibilité** | denial of service, usage illicite | virus, accès répétés visant à inutiliser un système |
+| **Authentification d'entités** | accès non autorisés | Vol de mot de passe, faille dans le protocole d'authentification |
+| **Authentification de données** | falsification d'informations | falsification de signature, faille dans le protocole d'authentification |
+| **Non-répudiation** | nier la participation à une transaction | prétendre un vol de clé ou une faille dans le protocole de signature |
+| **Non-duplication** | duplication | falsification, imitation |
+| **Anonymat** | identification | analyse d'une transaction, accès non autorisés permettant l'identification |
+
+## Mécanismes de Protection
+
+| Services | Mécanismes classiques | Mécanismes digitaux |
+| :--- | :--- | :--- |
+| **Confidentialité** | scellés, coffre-forts, cadenas | cryptage, autorisation logique |
+| **Intégrité** | encre spéciale, hologrammes | fonctions à sens unique + cryptage |
+| **Disponibilité** | contrôle d'accès physique, surveillance vidéo | contrôle d'accès logique, audit, anti-virus |
+| **Auth. d'entités** | présence, voix, pièce d'identité, reconnaissance biométrique | secret + protocole d'authentification, adresse réseau + userid, carte à puce + PIN |
+| **Auth. de données** | sceaux, signature, empreinte digitale | fonctions à sens unique + cryptage |
+| **Non-répudiation** | sceaux, signature, signature notariale, envoi recommandé | fonctions à sens unique + cryptage + signature digitale |
+| **Non-duplication** | encre spéciale, hologrammes, tatouage | tatouage digital (watermarks), verrouillage cryptographique |
+| **Anonymat** | brouilleur de voix, déguisement, argent liquide | mixers, remailers, argent électronique, deep web |
+
+# Risques Liés à Internet
+
+* Programmes malveillants transmis par e-mail (*e-mail malware*)
+* Programmes malveillants transmis sur le web (*web malware*)
+* Hameçonnage (Phishing)
+* Pourriels (spam)
+* Rançongiciels (ransomware)
+* Attaques sur les dispositifs "Internet des Objets" (Internet of Things / IoT related attacks)
+* Modification illicite des informations publiées (information spoofing and website defacement)
+* Attaques dénis de service (denial of service ou DDoS)
+
+::: {.callout-caution}
+Liste Non Exhaustive!
+
+Excellente source d'information pour le sujet: Centre National pour la Cybersécurité (NCSC): [https://www.ncsc.admin.ch/ncsc/fr/home.html](https://www.ncsc.admin.ch/ncsc/fr/home.html)
+:::
+
+## Programmes Malveillants Transmis par E-Mail
+* Aussi appelés **maliciels** ou *malware*.
+* E-mails conçus pour **inciter le destinataire** à **ouvrir une pièce jointe** ou à **suivre un lien** contenant de la publicité non souhaitée, des informations offensives, des programmes à risque, etc.
+* Souvent ciblés sur la base des intérêts de la victime (travail préliminaire d'ingénierie sociale (*social engineering*)).
+* **Conséquences :**
+    * Installation de malware (*ransomware*, *keyloggers*, etc.) dans le système de la victime (*ordinateur*, *tablette*, *smartphone*, *smartwatch*, etc.).
+    * Destruction de données contenues dans l'ordinateur.
+    * Vol d'informations ou de données personnelles.
+    * Détournement du système pour des fins malicieuses (p.ex.: minage illicite de *bitcoins*).
+    * Diffusion de *malware* (éventuellement à d'autres utilisateurs).
+
+## Programmes Malveillants Transmis sur le Web
+* Cette technique, souvent appelée ***drive-by download***, permet d’**infecter le système** (*ordinateur*, *tablette*, *smartphone*, *smartwatch*, etc.) **sur lequel s’exécute un client web lors de la simple visite d’un site**.
+* Il peut s’agir soit :
+    * d’un site malicieux qui contient le *malware*.
+    * d’un site web légitime qui aurait été infecté au préalable (par exemple, moyennant une technique appelée *cross-site scripting*). L’infection pouvant affecter seulement certaines pages...
+* La sensibilisation des utilisateurs (ne pas visiter des sites douteux) diminue l’efficacité de cette technique dans la transmission de *malware*.
+* Les conséquences sont semblables à celle des transmissions par e-mail.
+* L’exécution restreinte des scripts (*java/javascript*) dans le navigateur peut limiter la portée de l’infection mais risque de contraindre la navigation dans certains sites.
+
+## Hameçonnage (Phishing)
+* Le mot ***phishing*** se compose des mots anglais ***"password"*** (mot de passe), ***"harvesting"*** (moisson) et ***"fishing"*** (pêche).
+* Cette composition de mots illustre le but principal de cette technique qui consiste à **récolter un maximum d’informations privées** des utilisateurs via des mécanismes de "pêche indiscriminée".
+* Lorsque la pêche aux informations est ciblée vers une personne ou organisation spécifique, la technique est dénommée ***spear phishing*** (qui provient de *spear fishing* ou pêche au harpon).
+* Le vecteur de transmission consiste normalement dans un e-mail avec une **adresse d’expédition falsifiée** (mais souvent indétectable...) qui demande à la victime de fournir des informations privées : adresses e-mail, identifiants (*twitter*, *facebook*, etc.), mots de passe, numéros d’identité, numéros de comptes bancaires, etc.
+* Les prétextes utilisés sont variés (mise à jour du système informatique, arrêt du service, retrait d’un envoi, etc.) et vont jusqu’à menacer l’utilisateur en cas de refus.
+
+## Pourriels (Spam)
+* Englobe tous les **e-mails indésirables** (souvent publicitaires) reçus par les personnes et les organisations.
+* Terme utilisé également pour désigner les **pages**/***fenêtres pop-up*** **affichées sans le consentement de l’utilisateur** lors de la navigation web.
+* On estime que **60%** des e-mails qui circulent dans le monde appartiennent à cette catégorie.
+* Les conséquences sont souvent limitées à la consommation de ressources de calcul et stockage ainsi qu’au gaspillage de temps associé à la lecture et traitement de ces messages mais...
+* ... **certains e-mails spam** peuvent également constituer des **vecteurs de transmission de malware**.
+* Ils ont tendance à cibler plus particulièrement les adresses e-mail courtes (p.ex: abc@gmail.com) mais fonctionnent également sur la base des listes (souvent échangées / vendues) contenant tous types d’adresses.
+* Les opérations de **filtrage anti-spam** entraînent des coûts considérables pour les organisations.
+
+## Rançongiciels (Ransomware)
+* Cette famille spécifique de malware appartient à la catégorie appelée **Chevaux de Troie** (Trojan Horses).
+* Leur comportement plus habituel consiste à **chiffrer les données de la victime** (locaux et distants) **afin de les rendre totalement inaccessibles**.
+* Un message apparait ensuite pour demander le paiement d’une rançon (souvent en **bitcoins** ou une autre monnaie virtuelle) permettant potentiellement de récupérer l’accès aux fichiers chiffrés.
+* Ils peuvent rester en ***état dormant*** dans le système infecté et être déclenchés par un événement spécifique ou à une date donnée (attaques synchronisées).
+* Leurs vecteurs d’infection sont variés mais les **e-mails contenant des pièces jointes malicieuses** sont souvent mis en cause lors des infections primaires.
+* Des nombreuses variantes existent et continuent à se développer.
+* On observe parfois d’autres comportements associés à ces *malware* : **dénis de service**, **extorsions ciblées**, **menaces**, etc.
+
+## Attaques sur les Dispositifs ***Internet of Things (IoT)***
+* Ciblent les **objets connectés** de toute sorte (caméras, TVs, frigos, capteurs et interrupteurs domotiques, installations d’alarme, etc.).
+* Ils sont souvent **plus faciles à pirater** que les systèmes traditionnels par cause de :
+    * nombreuses failles de sécurité souvent connues des attaquants.
+    * mots de passe par défaut.
+    * négligence de la part des utilisateurs qui ignorent les risques qui leurs sont propres.
+* La **prise de contrôle à distance** de ces appareils par une entité malveillante implique :
+    * Une porte d’entrée au réseau domestique/corporatif.
+    * Un dispositif pouvant être utilisé pour des activités illicites (hacking, attaques DDoS, minage de bitcoins, etc.).
+* L’établissement d’un répertoire précis de tous les dispositifs de ce type connectés au réseau est nécessaire!
+
+## Modification Illicite des Informations Publiées (*Information Spoofing and Website Defacement*)
+* Attaques visant **l’intégrité** de l’information publiée dans les sites web, les réseaux sociaux, etc.
+* Elles portent atteinte à la **réputation** et peuvent provoquer d’importants **dommages économiques** pour les sociétés ayant une présence Internet.
+* Dans le cas des **sites web**, la **sécurisation du système hôte** est essentielle ainsi qu’une **configuration aussi restrictive que possible**. Des audits des sécurité récurrents sont vivement recommandés.
+* La **protection des informations affichées dans les réseaux sociaux** dépend directement du processus d’authentification permettant d’accéder au profil à risque :
+    * Éviter les mots de passe trop simples.
+    * Privilégier l’authentification forte, si possible *multi-facteur*.
+    * Fermer proprement les sessions.
+    * Effacer les *cookies*.
+
+## Attaques **Dénis de Service** (*Denial of Service* / *DDoS*)
+* Attaques destinées à **rendre inaccessibles des systèmes informatiques** de toute sorte visant surtout les organisations privées ou étatiques.
+* Le terme **DDoS** (*Distributed Denial of Service*) désigne une famille d’attaques dans laquelle des multiples (**souvent des dizaines de milliers) de dispositifs ciblent simultanément le(s) système(s) victime(s)**.
+* Le trafique généré atteint plusieurs centaines de gigabits / seconde.
+* L’efficacité des mécanismes de protection traditionnels (*firewalls*, *sondes* de *prévention* et de *détection d’intrusion*, etc.) est limitée.
+* L’indisponibilité d’un service peut engendrer :
+    * des problèmes **réputationnels**.
+    * d’importantes **pertes financières** (des **demandes de rançon** peuvent être exigées pour les désactiver).
+    * des **hauts risques de sécurité (même physique!)** lorsque des **infrastructures critiques** (hôpitaux, centrales électriques, *backbone* de l’Internet, etc.) sont ciblées.
+
+---
+
+# Méthodes Digitales de Sécurité
+
+**Problème :** Protéger des informations digitales
+* dans un environnement distribué
+* globalement accessible
+* sans frontière matérielle
+
+**Solution :**
+* Cryptographie
+    * Symétrique
+    * Asymétrique
+* \+ fonctions à sens unique
+* \+ générateurs (pseudo) aléatoires
+
+## Fonctions de Hachage Cryptographiques
+* Fonctions faciles à calculer dans un sens mais virtuellement impossibles à calculer dans le sens contraire.
+* Toute modification (même insignifiante) du document source se traduit par un **digest** fondamentalement différent.
+* Il est virtuellement impossible de retrouver le document source à l’aide seulement du digest (**one-way**).
+* Il est virtuellement impossible de retrouver un deuxième document source produisant le même digest (**collision-free**).
+* Longueur habituelle des digests : 160 à 512 bits.
+* Les algorithmes à sens unique sont très performants.
+* Exemples : SHA-1, SHA-256, SHA-3, etc.
+
+## Générateurs (Pseudo) Aléatoires
+* La génération de nombre aléatoire est un processus très important pouvant compromettre la sécurité d’un bon nombre de systèmes de cryptage.
+* Applications : génération de clés de session, vecteurs d’initialisation (DES - CBC mode), secrets pour signatures (ElGamal), etc.
+* Un **générateur aléatoire** (random generator) est un dispositif capable de générer des nombres de façon aléatoire, **imprévisible** et non reproductible. (e.g. basé sur phénomènes physiques: source radioactive ou quantique).
+* Les **générateurs pseudo-aléatoires** sont des procédés déterministes développés à partir d’une séquence aléatoire initiale (**seed**) (e.g. frappe utilisateur, accès disque).
+* *Citation :* R. Pitkin dans [Kau95]: "The use of pseudo-random processes to generate secret quantities can result in pseudo-security"
+
+## Cryptographie Symétrique
+* Aussi appelée cryptographie conventionnelle ou à clés secrètes (I av. JC, Julius Cesar).
+* **Idée :** Sur la base d’une seule clé secrète, réaliser une transformation capable respectivement de rendre illisible et de restituer une pièce d’information.
+* **Schéma :** Plaintext $\to$ Cryptage (Clé) $\to$ Ciphertext $\to$ Décryptage (Clé) $\to$ Plaintext.
+* **Caractéristiques :**
+    * Algorithmes : AES, DES, IDEA, RC4, RC5, etc.
+    * Services : Confidentialité, Authentification, Intégrité.
+    * Pas de support direct pour signatures digitales (car clé connue des deux).
+    * Nécessite un canal confidentiel pour échanger la clé.
+    * Idéal pour la protection de documents personnels ou groupes fermés.
+
+## Cryptographie Asymétrique
+* Aussi appelée cryptographie publique ou à clés publiques (1976, W. Diffie & M. Hellman).
+* **Idée :** Utiliser deux clés différentes - une **secrète** et une **publique** - respectivement pour les opérations de cryptage et décryptage.
+* Chaque utilisateur dispose d’un **porte-clés** (keyring).
+* **Confidentialité :**
+    * Expéditeur crypte avec la **clé publique du destinataire**.
+    * Destinataire décrypte avec sa **clé privée**.
+* **Signature Digitale :**
+    * Expéditeur signe avec sa **clé privée**.
+    * Destinataire vérifie avec la **clé publique de l’expéditeur**.
+    * *Note :* On signe généralement le **digest** du document (hash) pour des raisons de performance.
+* **Caractéristiques :**
+    * Algorithmes : RSA (le plus utilisé), Rabin, ElGamal.
+    * Services : Confidentialité, Authentification, Intégrité, Signature Digitale & Non-Refus.
+    * Lenteur : jusqu’à 50 fois plus lent que la crypto symétrique.
+    * Distribution des clés simplifiée (pas de canal confidentiel nécessaire, mais besoin d'authentification/certification de la clé publique).
+
+## Crypto asymétrique + Crypto symétrique
+* **Idée :** Utiliser la cryptographie publique uniquement pour échanger des clés symétriques (Clés de session).
+* A génère une clé aléatoire $K_s$ et la transmet à B en l’encryptant avec la clé publique de B.
+* A & B communiquent ensuite en utilisant $K_s$ (symétrique).
+
+## Cryptographie Asymétrique: Fonctionnement (RSA)
+* Soit $n := pq$ avec $p$ et $q$ deux nombres premiers grands (> 1024 bits).
+* Soit $\phi(n) = (p-1)(q-1)$.
+* Soit $e$ et $d$ tels que $ed \equiv 1 \pmod{\phi(n)}$.
+* Théorème d’Euler : $a^{\phi(n)} \equiv 1 \pmod n$.
+* **Encryption :** $C = P^e \pmod n$. **Clé publique :** $(n,e)$.
+* **Décryption :** $P = C^d \pmod n$. **Clé privée :** $(d)$.
+* *Preuve :* $(P^e)^d \equiv P^{ed} \equiv P^{1 + k\phi(n)} \equiv (P \pmod n) (P^{\phi(n)} \pmod n)^k \equiv P \pmod n$.
+
+## Comparaison Symétrique vs Asymétrique
+
+| Critère | Symétrique | Asymétrique |
+| :--- | :--- | :--- |
+| **Vitesse** | Rapide (x100) | Lent |
+| **Clés** | Courtes (128 bits) | Longues (1024+ bits) |
+| **Gestion des clés** | Difficile ($n(n-1)/2$ clés pour $n$ utilisateurs) | Simplifiée (2$n$ clés) |
+| **Echange de clés** | Canal confidentiel requis | Canal authentifié requis |
+| **Services** | Confidentialité, Auth., Intégrité | + Signature, Non-Répudiation |
+
+**Recommandations :**
+* Protection documents personnels / groupes proches : **Symétrique**.
+* Canaux confidentiels entre inconnus / distants : **Asymétrique**.
+* Transactions distantes / Logiciels : **Hybride** (Asym pour la clé, Sym pour les données).
+
+# Dissection d’une Attaque : Ransomware
+
+## Définition et Impact
+* "Ransomware Everywhere" est la menace la plus visible en 2021.
+* Exemple : Colonial Pipeline (Mai 2021).
+* Vue intégrale : Prévision, Remédiation, Réaction, Patching, Backups offline !, Formation.
+
+## Schéma Technique
+* **Infection** : Phishing, Drive-by download.
+* **Exécution** : Chiffrement des fichiers.
+* **Paiement** : Bitcoins / Crypto-monnaies.
+* **Occultation** : TOR Networks.
+
+## Cryptolocker
+* Utilise un schéma hybride.
+* Génère un IV et une clé AES locale.
+* Chiffre le fichier avec AES.
+* Chiffre la clé AES avec la clé publique RSA de l'attaquant.
+* Envoie la clé chiffrée à l'attaquant.
+* Les clés privées de déchiffrement restent chez l'attaquant.
+
+# Cryptography Basic Notions
+
+## Kerckhoffs' principle (1883)
+1.  The system must be practically, if not mathematically, indecipherable.
+2.  It should not require secrecy, and it should not be a problem if it falls into enemy hands.
+3.  Key must be communicable/memorable without notes.
+4.  Applicable to telegraph.
+5.  Portable.
+6.  Easy to use.
+* **Core idea:** No security through obscurity. The system should be mathematically proven.
+
+## Classification des systèmes de cryptage
+1.  **Sécurité inconditionnelle (Perfect Secrecy)** :
+    * Basée sur la théorie de l'information (Shannon 1949).
+    * La probabilité de trouver le plaintext $x$ après observation du ciphertext $y$ est identique à la probabilité a priori.
+    * Condition : Clé de même taille que le message, jamais réutilisée.
+    * Exemple : **One-time Pad**.
+2.  **As hard as / Provable security** :
+    * Cryptanalyse prouvée équivalente à un problème mathématique difficile (Factorisation, Logarithme discret).
+    * Ex: Rabin, RSA (cas générique).
+3.  **Sécurité calculatoire (Computational Security)** :
+    * Effort nécessaire pour casser le système dépasse les ressources d'un adversaire hypothétique.
+    * Ex: AES, DES, IDEA.
+
+## Entropie
+* Mesure de la quantité d'information "effective".
+* Entropie de Shannon $H(X) = - \sum p_i \log_2 p_i$.
+* Propriétés : $0 \le H(X) \le \log n$.
+* Langage naturel (anglais) : entropie de 1.3 bits par lettre (redondance de 6.7 bits sur 8).
+
+## Attaques sur les systèmes de cryptage
+* **Ciphertext-only** : Adversaire a seulement le ciphertext.
+* **Known-plaintext** : Adversaire a des couples plaintext/ciphertext.
+* **Chosen-plaintext** : Adversaire peut choisir le plaintext et voir le ciphertext (et essaye de trouver le plaintext pour d'autres messages).
+* **Adaptive chosen-plaintext** : Choix adaptatif.
+* **Chosen-ciphertext** : Adversaire choisit le ciphertext et obtient le plaintext (vise à trouver la clé).
+
+## Random Oracles & Semantic Security
+* **Random Oracle** : Entité abstraite répondant avec des réponses parfaitement aléatoires (mais déterministes pour les mêmes entrées). Modèle idéal pour prouver la sécurité.
+* **Indistinguishable Ciphertexts (IND-CPA)** : Un adversaire ne peut pas distinguer entre deux ciphertexts correspondant à deux plaintexts choisis par lui-même (probabilité $\approx 1/2$).
+* **Probabilistic Encryption** : Ajouter de l'aléatoire au plaintext pour que le même message donne des ciphertexts différents (évite les attaques par dictionnaire sur les clés publiques). Exemple : **OAEP** (Optimal Asymmetric Encryption Padding).
+
+## Systèmes Historiques
+* **Caesar Cipher** : Substitution mono-alphabétique ($x+k \pmod{26}$).
+* **Vigenère** : Substitution polyalphabétique.
+* **One-Time Pad (Vernam)** :
+    * $E_k(x_i) = x_i \oplus k_i$.
+    * Inconditionnellement sûr si la clé est aléatoire et unique.
+    * Problème : Gestion des clés (taille clé = taille message).
+    * Si réutilisation de clé : $y_a \oplus y_b = x_a \oplus x_b$ (Vulnérable!).
+
+## Stéganographie
+* Cacher un message à l'intérieur d'un autre (canal subliminal).
+* Exemple : Least Significant Bits (LSB) dans une image.
+
+# Symmetric Cryptography
+
+## Stream Ciphers
+* Cryptage bit par bit (ou byte par byte).
+* Composé de : Génération de keystream + Substitution (souvent XOR).
+* **Synchrones** : Keystream dépend uniquement de la clé.
+    * Nécessite synchro émetteur/récepteur. Pas de propagation d'erreur.
+* **Asynchrones (Auto-synchronisés)** : Keystream dépend de la clé et des ciphertexts précédents.
+    * Auto-synchronisation possible. Propagation d'erreur limitée.
+* **LFSR (Linear Feedback Shift Register)** : Générateur courant, facile en hardware, mais linéarité = faiblesse.
+* **RC4** : Stream cipher logiciel très rapide. Utilisé dans WEP (cassé), SSL. Basé sur permutation d'états.
+
+## Block Ciphers
+* Transforme un bloc de n-bits en un autre bloc de n-bits.
+* Critères : Taille/Entropie clé, Taille bloc, Résistance cryptanalyse.
+* **Modes d'Opération** :
+    * **ECB (Electronic Codebook)** : Bloc -> Bloc. Déterministe (mauvais pour images/patterns). Pas de propagation.
+    * **CBC (Cipher-block Chaining)** : $C_i = E_k(P_i \oplus C_{i-1})$. IV aléatoire nécessaire.
+    * **CFB (Cipher Feedback)** : Fonctionne comme stream cipher asynchrone.
+    * **OFB (Output Feedback)** : Fonctionne comme stream cipher synchrone. Keystream généré indépendamment.
+    * **CTR (Counter Mode)** : Encrypte un compteur. Parallélisable, accès aléatoire. Très utilisé (IPSec, ATM).
+
+## Algorithmes de Bloc
+* **Feistel Ciphers** : Structure itérative divisant le bloc en deux (L, R). Ex: DES.
+* **DES (Data Encryption Standard)** :
+    * Bloc 64 bits, Clé 56 bits. 16 étapes.
+    * Obsolète (clé trop courte, cassable par brute force).
+    * **3DES (Triple-DES)** : Applique DES 3 fois ($E_{k1} \to D_{k2} \to E_{k1}$). Clé 112 bits. Sûr mais lent.
+* **AES (Advanced Encryption Standard)** :
+    * Rijndael. Standard depuis 2001.
+    * Bloc 128 bits. Clés 128, 192, 256 bits.
+    * Pas un Feistel. Opérations dans $GF(2^8)$.
+    * Rapide et supposé très sûr (sauf attaques Side Channel ou théoriques complexes).
+
+## Cryptanalyse
+* **Différentielle** : Analyse la propagation des différences (XOR) dans les rondes. (Chosen-plaintext).
+* **Linéaire** : Approximations linéaires des S-boxes. (Known-plaintext).
+* **Meet-in-the-Middle** : Pour les doubles encryptions ($E_{k2}(E_{k1}(x))$). Réduit la complexité de $2^{2n}$ à $2^{n+1}$.
+
+# Public Key Cryptography
+
+## Fondements Mathématiques
+* **Fonction Phi d’Euler $\phi(n)$** : Nombre d'entiers positifs $< n$ premiers avec $n$. Si $n=pq$, $\phi(n)=(p-1)(q-1)$.
+* **Théorème d’Euler** : $a^{\phi(n)} \equiv 1 \pmod n$.
+* **Inverse modulaire** : $x$ tel que $ax \equiv 1 \pmod n$. Calculable via Euclide Étendu ou $a^{\phi(n)-1}$.
+* **Fast Exponentiation** : Calcul de $x^y \pmod n$ en complexité logarithmique.
+* **Restes Chinois (CRT)** : Résolution de systèmes de congruences.
+
+## Problèmes de Base
+* **Factorisation (FACTP)** : $n \to p,q$. (Base de RSA).
+* **Logarithme Discret (DLP)** : Trouver $x$ tel que $\alpha^x \equiv \beta \pmod p$. (Base de ElGamal, Diffie-Hellman).
+* **Racine Carrée (SQROOTP)** : Trouver $x$ tel que $x^2 \equiv a \pmod n$. (Base de Rabin, équivalent à la factorisation).
+* **Diffie-Hellman Problem (DHP)** : Trouver $\alpha^{ab}$ connaissant $\alpha^a$ et $\alpha^b$.
+
+## Algorithmes Asymétriques
+* **RSA (Rivest-Shamir-Adleman)** :
+    * Sécurité basée sur la factorisation.
+    * Clé pub $(n,e)$, Clé priv $d$.
+    * Encryption : $C = M^e \pmod n$.
+    * Attaques : Low exponent attacks (si pas de padding), Factorisation (NFS).
+* **ElGamal** :
+    * Basé sur DLP.
+    * Encryption non déterministe (utilise un aléatoire $k$).
+    * Ciphertext deux fois plus long que le message.
+* **Rabin** :
+    * $C = M^2 \pmod n$.
+    * Prouvé équivalent à la factorisation.
+    * Problème de décryptage : 4 racines possibles.
+* **Courbes Elliptiques (ECC)** :
+    * Équation $y^2 = x^3 + ax + b$.
+    * Opération de groupe (addition de points).
+    * **ECDLP** : Très difficile. Permet des clés beaucoup plus courtes pour une sécurité équivalente (256 bits ECC $\approx$ 3072 bits RSA).
+
+# Hash Functions & MACs
+
+## Fonctions de Hachage
+* **MDC (Manipulation Detection Code)** : Sans clé. Intégrité.
+* Propriétés :
+    * **Preimage resistance (One-way)** : Difficile de trouver $x$ tel que $h(x)=y$.
+    * **2nd-preimage resistance** : Difficile de trouver $x' \ne x$ tel que $h(x')=h(x)$.
+    * **Collision resistance** : Difficile de trouver n'importe quel couple $(x, x')$ tel que $h(x)=h(x')$.
+* **Birthday Paradox** : Pour un hash de $n$ bits, collision probable après $2^{n/2}$ essais.
+* **Algorithmes** :
+    * MD5 (128 bits) : Cassé.
+    * SHA-1 (160 bits) : Cassé (collisions trouvées).
+    * SHA-2 (256, 512 bits) : Standard actuel.
+    * SHA-3 (Keccak) : Nouveau standard.
+
+## MAC (Message Authentication Code)
+* Fonction de hachage à clé.
+* Propriété : Résistance calculatoire (impossible de forger un couple $(x, MAC(x))$ sans la clé).
+* **HMAC** : Construction standard utilisant une fonction de hachage existante (SHA-256 par ex.) : $HMAC(K, m) = H((K \oplus opad) || H((K \oplus ipad) || m))$.
+
+## Applications
+* Intégrité des fichiers.
+* Signature digitale (on signe le hash).
+* Stockage de mots de passe (avec *salt* pour contrer les dictionnaires).
+* **Blockchain** : Chaîne de blocs liée par hash. Proof of Work (trouver un nonce tel que le hash commence par des zéros).
+
+# Digital Signatures
+
+## Concepts
+* **Avec appendice** : Message + Signature (le plus courant, ex: RSA, DSA).
+* **Avec reconstitution** : Le message est inclus dans la signature (ex: RSA, Rabin spécifiques).
+* **Propriétés** : Authenticité, Intégrité, Non-répudiation.
+
+## Algorithmes
+* **RSA Signature** : $S = H(m)^d \pmod n$. Vérification avec $e$. Attention aux attaques multiplicatives (Blinding).
+* **ElGamal Signature** : Basé sur DLP. Génère un couple $(r, s)$. Aléatoire $k$ unique par signature impératif !
+* **DSA (Digital Signature Algorithm)** : Standard NIST, variante d'ElGamal.
+* **ECDSA** : DSA sur courbes elliptiques (utilisé par Bitcoin).
+
+# Authentication
+
+## Types
+* **Data Origin Authentication** : via MAC ou Signature.
+* **Entity Authentication** : Prouver son identité en temps réel.
+* **Weak Authentication** : Passwords (fixe, variable, OTP). Vulnérable au replay, écoute.
+* **Strong Authentication** : Challenge-Response. Prouver la connaissance d'un secret sans le révéler.
+
+## Zero Knowledge Proofs (ZKIP)
+* Prouver qu'on connaît un secret sans rien révéler de ce secret.
+* Propriétés : Consistance, Significativité, Zero-Knowledge.
+* Exemple : Caverne d'Ali Baba, Fiat-Shamir (racines carrées modulo $n$), Isomorphisme de graphes.
+
+## Attaques
+* **Replay** : Réutiliser un message capturé. (Protection : Nonce, Timestamp).
+* **Man-in-the-Middle** : Interception et relai.
+* **Reflection** : Renvoyer le challenge à l'expéditeur.
+
+# Key Establishment Protocols (KEP)
+
+## Key Transport vs Key Agreement
+* **Key Transport (KTP)** : Une entité génère la clé et l'envoie (sécurisée). Ex: RSA Key Transport.
+* **Key Agreement (KAP)** : Les entités calculent la clé ensemble. Ex: Diffie-Hellman.
+
+## Propriétés
+* **Implicit Key Authentication** : Seul le destinataire légitime peut avoir la clé.
+* **Key Confirmation** : Preuve que l'autre a la clé.
+* **Perfect Forward Secrecy (PFS)** : Si la clé long terme est volée, les sessions passées restent sûres. (DH éphémère le permet).
+
+## Protocoles
+* **Diffie-Hellman (DH)** : $K = g^{xy}$. Vulnérable au Man-in-the-Middle si non authentifié.
+* **Station-to-Station (STS)** : DH authentifié par signatures.
+* **Kerberos** : KTP symétrique avec TTP (KDC). Utilise des Tickets. Authentification mutuelle. Problème d'horloge synchro.
+* **SSL/TLS** :
+    * Hybride. Handshake (Asym) + Record (Sym + MAC).
+    * Authentification serveur (certificat X.509).
+    * Négociation des algorithmes (Cipher Suite).
+    * Master Secret dérivé de pré-master secret et aléatoires.
+
+# PKI (Public Key Infrastructure)
+
+## Composants
+* **CA (Certification Authority)** : Signe les certificats (Lien Identité <-> Clé Publique).
+* **RA (Registration Authority)** : Vérifie l'identité (face-à-face).
+* **Repository** : Annuaire (LDAP).
+* **CRL (Certificate Revocation List)** : Liste des certificats révoqués.
+
+## Modèles de Confiance
+* **Hiérarchique** : Racine de confiance (Root CA).
+* **Web of Trust (PGP)** : Certification par les pairs.
+* **Certification Croisée** : Entre deux PKI distinctes.
+
+## Certificat X.509
+* Contient : Sujet, Clé Publique, Issuer, Validité, Algo Signature, Signature de la CA.
