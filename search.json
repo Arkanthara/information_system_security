@@ -1,0 +1,268 @@
+[
+  {
+    "objectID": "exam_notes_fr.html",
+    "href": "exam_notes_fr.html",
+    "title": "1 Les Services de Sécurité Fondamentaux",
+    "section": "",
+    "text": "Les services de sécurité sont les objectifs que l’on cherche à atteindre pour protéger un système.\n\nConfidentialité : Protection contre la divulgation non autorisée.\nIntégrité : Protection contre la modification non autorisée.\nDisponibilité : Garantie d’accès pour les utilisateurs légitimes.\nAuthentification :\n\nEntity authentication (Entité) : Certifier l’identité d’un acteur.\nData origin authentication (Origine) : Certifier la source d’une donnée.\n\nNon-répudiation : Impossibilité de nier une transaction.\nNon-Duplication : Protection contre les copies illicites.\nAnonymat : Préservation de l’identité ou de la source.\n\n\n\n\n\n\n\nNoneVersion originale\n\n\n\n\n\n\nConfidentialité : Protection de l’information d’une divulgation non autorisée.\nIntégrité : Protection contre la modification non autorisée de l’information.\nDisponibilité : S’assurer que les ressources sont accessibles aux utilisateurs légitimes.\nAuthentification :\n\nAuthentification d’entités (entity authentication) : procédé permettant à une entité d’être sûre de l’identité d’une seconde entité à l’appui d’une évidence corroborant (p.ex.: présence physique, cryptographique, biométrique, etc.). Le terme identification est parfois utilisé pour désigner également ce service.\nAuthentification de l’origine de données (data origin authentication) : procédé permettant à une entité d’être sûre qu’une deuxième entité est la source originale d’un ensemble de données. Par définition, ce service assure également l’intégrité de ces données.\n\nNon-répudiation : Offre la garantie qu’une entité ne pourra pas nier être impliquée dans une transaction.\nNon-Duplication : Protection contre les copies illicites.\nAnonymat (d’entité ou d’origine de données) : Permet de préserver l’identité d’une entité, de la source d’une information ou d’une transaction."
+  },
+  {
+    "objectID": "exam_notes_fr.html#dangers-et-attaques-synthèse",
+    "href": "exam_notes_fr.html#dangers-et-attaques-synthèse",
+    "title": "1 Les Services de Sécurité Fondamentaux",
+    "section": "2.1 Dangers et Attaques : Synthèse",
+    "text": "2.1 Dangers et Attaques : Synthèse\n\n\n\n\n\n\n\n\nServices\nDangers\nAttaques\n\n\n\n\nConfidentialité\nfuite d’informations\nécoutes illicites, analyse du trafic\n\n\nIntégrité\nmodification de l’information\ncréation, altération ou destruction illicite\n\n\nDisponibilité\ndenial of service, usage illicite\nvirus, accès répétés visant à inutiliser un système\n\n\nAuthentification d’entités\naccès non autorisés\nVol de mot de passe, faille dans le protocole d’authentification\n\n\nAuthentification de données\nfalsification d’informations\nfalsification de signature, faille dans le protocole d’authentification\n\n\nNon-répudiation\nnier la participation à une transaction\nprétendre un vol de clé ou une faille dans le protocole de signature\n\n\nNon-duplication\nduplication\nfalsification, imitation\n\n\nAnonymat\nidentification\nanalyse d’une transaction, accès non autorisés permettant l’identification"
+  },
+  {
+    "objectID": "exam_notes_fr.html#mécanismes-de-protection",
+    "href": "exam_notes_fr.html#mécanismes-de-protection",
+    "title": "1 Les Services de Sécurité Fondamentaux",
+    "section": "2.2 Mécanismes de Protection",
+    "text": "2.2 Mécanismes de Protection\n\n\n\n\n\n\n\n\nServices\nMécanismes classiques\nMécanismes digitaux\n\n\n\n\nConfidentialité\nscellés, coffre-forts, cadenas\ncryptage, autorisation logique\n\n\nIntégrité\nencre spéciale, hologrammes\nfonctions à sens unique + cryptage\n\n\nDisponibilité\ncontrôle d’accès physique, surveillance vidéo\ncontrôle d’accès logique, audit, anti-virus\n\n\nAuth. d’entités\nprésence, voix, pièce d’identité, reconnaissance biométrique\nsecret + protocole d’authentification, adresse réseau + userid, carte à puce + PIN\n\n\nAuth. de données\nsceaux, signature, empreinte digitale\nfonctions à sens unique + cryptage\n\n\nNon-répudiation\nsceaux, signature, signature notariale, envoi recommandé\nfonctions à sens unique + cryptage + signature digitale\n\n\nNon-duplication\nencre spéciale, hologrammes, tatouage\ntatouage digital (watermarks), verrouillage cryptographique\n\n\nAnonymat\nbrouilleur de voix, déguisement, argent liquide\nmixers, remailers, argent électronique, deep web"
+  },
+  {
+    "objectID": "exam_notes_fr.html#programmes-malveillants-transmis-par-e-mail",
+    "href": "exam_notes_fr.html#programmes-malveillants-transmis-par-e-mail",
+    "title": "1 Les Services de Sécurité Fondamentaux",
+    "section": "3.1 Programmes Malveillants Transmis par E-Mail",
+    "text": "3.1 Programmes Malveillants Transmis par E-Mail\n\nAussi appelés maliciels (malware).\nE-mails visant à provoquer une action (ouvrir une pièce jointe ou cliquer sur un lien).\nAttaques souvent personnalisées grâce à l’ingénierie sociale.\nConséquences principales :\n\nInstallation de malware (ransomware, keyloggers, etc.).\nPerte ou vol de données personnelles.\nDétournement du système et propagation du malware.\n\n\n\n\n\n\n\n\nNoneUltra-synthèse\n\n\n\n\n\n\nMalware diffusé par e-mail\nIncitation à cliquer ou ouvrir\nIngénierie sociale\nVol, perte de données, détournement\n\n\n\n\n\n\n\n\n\n\nNoneVersion originale\n\n\n\n\n\n3.2 Programmes Malveillants Transmis par E-Mail\n\nAussi appelés maliciels ou malware.\nE-mails conçus pour inciter le destinataire à ouvrir une pièce jointe ou à suivre un lien contenant de la publicité non souhaitée, des informations offensives, des programmes à risque, etc.\nSouvent ciblés sur la base des intérêts de la victime (travail préliminaire d’ingénierie sociale (social engineering)).\nConséquences :\n\nInstallation de malware (ransomware, keyloggers, etc.) dans le système de la victime (ordinateur, tablette, smartphone, smartwatch, etc.).\nDestruction de données contenues dans l’ordinateur.\nVol d’informations ou de données personnelles.\nDétournement du système pour des fins malicieuses (p.ex.: minage illicite de bitcoins).\nDiffusion de malware (éventuellement à d’autres utilisateurs)."
+  },
+  {
+    "objectID": "exam_notes_fr.html#programmes-malveillants-transmis-par-e-mail-1",
+    "href": "exam_notes_fr.html#programmes-malveillants-transmis-par-e-mail-1",
+    "title": "1 Les Services de Sécurité Fondamentaux",
+    "section": "3.2 Programmes Malveillants Transmis par E-Mail",
+    "text": "3.2 Programmes Malveillants Transmis par E-Mail\n\nAussi appelés maliciels ou malware.\nE-mails conçus pour inciter le destinataire à ouvrir une pièce jointe ou à suivre un lien contenant de la publicité non souhaitée, des informations offensives, des programmes à risque, etc.\nSouvent ciblés sur la base des intérêts de la victime (travail préliminaire d’ingénierie sociale (social engineering)).\nConséquences :\n\nInstallation de malware (ransomware, keyloggers, etc.) dans le système de la victime (ordinateur, tablette, smartphone, smartwatch, etc.).\nDestruction de données contenues dans l’ordinateur.\nVol d’informations ou de données personnelles.\nDétournement du système pour des fins malicieuses (p.ex.: minage illicite de bitcoins).\nDiffusion de malware (éventuellement à d’autres utilisateurs)."
+  },
+  {
+    "objectID": "exam_notes_fr.html#programmes-malveillants-transmis-sur-le-web",
+    "href": "exam_notes_fr.html#programmes-malveillants-transmis-sur-le-web",
+    "title": "1 Les Services de Sécurité Fondamentaux",
+    "section": "3.3 Programmes Malveillants Transmis sur le Web",
+    "text": "3.3 Programmes Malveillants Transmis sur le Web\n\nMéthode appelée drive-by download : infection automatique lors de la visite d’un site web.\nL’origine peut être :\n\nun site malveillant ;\nun site légitime compromis (p. ex. cross-site scripting).\n\nLa prudence des utilisateurs limite fortement ce mode de propagation.\nLes impacts sont similaires aux infections par e-mail.\nLa restriction des scripts (java/javascript) réduit les risques mais peut affecter la navigation.\n\n\n\n\n\n\n\nNoneUltra-synthèse\n\n\n\n\n\n\nDrive-by download = infection sans action de l’utilisateur\nSites malveillants ou compromis\nSensibilisation + scripts restreints = protection\n\n\n\n\n\n\n\n\n\n\nNoneVersion originale\n\n\n\n\n\n3.4 Programmes Malveillants Transmis sur le Web\n\nCette technique, souvent appelée drive-by download, permet d’infecter le système (ordinateur, tablette, smartphone, smartwatch, etc.) sur lequel s’exécute un client web lors de la simple visite d’un site.\nIl peut s’agir soit :\n\nd’un site malicieux qui contient le malware.\nd’un site web légitime qui aurait été infecté au préalable (par exemple, moyennant une technique appelée cross-site scripting). L’infection pouvant affecter seulement certaines pages…\n\nLa sensibilisation des utilisateurs (ne pas visiter des sites douteux) diminue l’efficacité de cette technique dans la transmission de malware.\nLes conséquences sont semblables à celle des transmissions par e-mail.\nL’exécution restreinte des scripts (java/javascript) dans le navigateur peut limiter la portée de l’infection mais risque de contraindre la navigation dans certains sites."
+  },
+  {
+    "objectID": "exam_notes_fr.html#programmes-malveillants-transmis-sur-le-web-1",
+    "href": "exam_notes_fr.html#programmes-malveillants-transmis-sur-le-web-1",
+    "title": "1 Les Services de Sécurité Fondamentaux",
+    "section": "3.4 Programmes Malveillants Transmis sur le Web",
+    "text": "3.4 Programmes Malveillants Transmis sur le Web\n\nCette technique, souvent appelée drive-by download, permet d’infecter le système (ordinateur, tablette, smartphone, smartwatch, etc.) sur lequel s’exécute un client web lors de la simple visite d’un site.\nIl peut s’agir soit :\n\nd’un site malicieux qui contient le malware.\nd’un site web légitime qui aurait été infecté au préalable (par exemple, moyennant une technique appelée cross-site scripting). L’infection pouvant affecter seulement certaines pages…\n\nLa sensibilisation des utilisateurs (ne pas visiter des sites douteux) diminue l’efficacité de cette technique dans la transmission de malware.\nLes conséquences sont semblables à celle des transmissions par e-mail.\nL’exécution restreinte des scripts (java/javascript) dans le navigateur peut limiter la portée de l’infection mais risque de contraindre la navigation dans certains sites."
+  },
+  {
+    "objectID": "exam_notes_fr.html#hameçonnage-phishing",
+    "href": "exam_notes_fr.html#hameçonnage-phishing",
+    "title": "1 Les Services de Sécurité Fondamentaux",
+    "section": "3.5 Hameçonnage (Phishing)",
+    "text": "3.5 Hameçonnage (Phishing)\n\nTechnique visant à collecter des informations privées par des méthodes de pêche indiscriminée.\nLe phishing peut être :\n\ngénéral (ciblage large) ;\nciblé (spear phishing) lorsqu’une personne ou organisation précise est visée.\n\nLe vecteur principal est un e-mail à adresse falsifiée, difficilement détectable.\nL’objectif est d’obtenir des données sensibles (identifiants, mots de passe, informations personnelles ou bancaires).\nLes attaques reposent sur des prétextes crédibles ou menaçants pour pousser la victime à coopérer.\n\n\n\n\n\n\n\nNoneUltra-synthèse\n\n\n\n\n\n\nVol d’informations par tromperie\nE-mails falsifiés\nSpear phishing = attaque ciblée\nPrétextes urgents ou menaçants\n\n\n\n\n\n\n\n\n\n\nNoneVersion originale\n\n\n\n\n\n3.6 Hameçonnage (Phishing)\n\nLe mot phishing se compose des mots anglais “password” (mot de passe), “harvesting” (moisson) et “fishing” (pêche).\nCette composition de mots illustre le but principal de cette technique qui consiste à récolter un maximum d’informations privées des utilisateurs via des mécanismes de “pêche indiscriminée”.\nLorsque la pêche aux informations est ciblée vers une personne ou organisation spécifique, la technique est dénommée spear phishing (qui provient de spear fishing ou pêche au harpon).\nLe vecteur de transmission consiste normalement dans un e-mail avec une adresse d’expédition falsifiée (mais souvent indétectable…) qui demande à la victime de fournir des informations privées : adresses e-mail, identifiants (twitter, facebook, etc.), mots de passe, numéros d’identité, numéros de comptes bancaires, etc.\nLes prétextes utilisés sont variés (mise à jour du système informatique, arrêt du service, retrait d’un envoi, etc.) et vont jusqu’à menacer l’utilisateur en cas de refus."
+  },
+  {
+    "objectID": "exam_notes_fr.html#hameçonnage-phishing-1",
+    "href": "exam_notes_fr.html#hameçonnage-phishing-1",
+    "title": "1 Les Services de Sécurité Fondamentaux",
+    "section": "3.6 Hameçonnage (Phishing)",
+    "text": "3.6 Hameçonnage (Phishing)\n\nLe mot phishing se compose des mots anglais “password” (mot de passe), “harvesting” (moisson) et “fishing” (pêche).\nCette composition de mots illustre le but principal de cette technique qui consiste à récolter un maximum d’informations privées des utilisateurs via des mécanismes de “pêche indiscriminée”.\nLorsque la pêche aux informations est ciblée vers une personne ou organisation spécifique, la technique est dénommée spear phishing (qui provient de spear fishing ou pêche au harpon).\nLe vecteur de transmission consiste normalement dans un e-mail avec une adresse d’expédition falsifiée (mais souvent indétectable…) qui demande à la victime de fournir des informations privées : adresses e-mail, identifiants (twitter, facebook, etc.), mots de passe, numéros d’identité, numéros de comptes bancaires, etc.\nLes prétextes utilisés sont variés (mise à jour du système informatique, arrêt du service, retrait d’un envoi, etc.) et vont jusqu’à menacer l’utilisateur en cas de refus."
+  },
+  {
+    "objectID": "exam_notes_fr.html#pourriels-spam",
+    "href": "exam_notes_fr.html#pourriels-spam",
+    "title": "1 Les Services de Sécurité Fondamentaux",
+    "section": "3.7 Pourriels (Spam)",
+    "text": "3.7 Pourriels (Spam)\n\nE-mails indésirables, souvent publicitaires, ou pop-ups non sollicités lors de la navigation web.\nReprésentent environ 60% des e-mails mondiaux.\nConséquences principales :\n\nConsommation de ressources et perte de temps.\nCertains peuvent transmettre des malware.\n\nCiblent souvent les adresses courtes ou proviennent de listes d’adresses vendues/échangées.\nLes filtres anti-spam entraînent des coûts importants pour les organisations.\n\n\n\n\n\n\n\nNoneUltra-synthèse\n\n\n\n\n\n\nE-mails/publicités indésirables\nRisques : perte de temps, ressources, malware\nCiblage : adresses courtes ou listes\nFiltrage coûteux pour entreprises\n\n\n\n\n\n\n\n\n\n\nNoneVersion originale\n\n\n\n\n\n3.8 Pourriels (Spam)\n\nEnglobe tous les e-mails indésirables (souvent publicitaires) reçus par les personnes et les organisations.\nTerme utilisé également pour désigner les pages/fenêtres pop-up affichées sans le consentement de l’utilisateur lors de la navigation web.\nOn estime que 60% des e-mails qui circulent dans le monde appartiennent à cette catégorie.\nLes conséquences sont souvent limitées à la consommation de ressources de calcul et stockage ainsi qu’au gaspillage de temps associé à la lecture et traitement de ces messages mais…\n… certains e-mails spam peuvent également constituer des vecteurs de transmission de malware.\nIls ont tendance à cibler plus particulièrement les adresses e-mail courtes (p.ex: abc@gmail.com) mais fonctionnent également sur la base des listes (souvent échangées / vendues) contenant tous types d’adresses.\nLes opérations de filtrage anti-spam entraînent des coûts considérables pour les organisations."
+  },
+  {
+    "objectID": "exam_notes_fr.html#pourriels-spam-1",
+    "href": "exam_notes_fr.html#pourriels-spam-1",
+    "title": "1 Les Services de Sécurité Fondamentaux",
+    "section": "3.8 Pourriels (Spam)",
+    "text": "3.8 Pourriels (Spam)\n\nEnglobe tous les e-mails indésirables (souvent publicitaires) reçus par les personnes et les organisations.\nTerme utilisé également pour désigner les pages/fenêtres pop-up affichées sans le consentement de l’utilisateur lors de la navigation web.\nOn estime que 60% des e-mails qui circulent dans le monde appartiennent à cette catégorie.\nLes conséquences sont souvent limitées à la consommation de ressources de calcul et stockage ainsi qu’au gaspillage de temps associé à la lecture et traitement de ces messages mais…\n… certains e-mails spam peuvent également constituer des vecteurs de transmission de malware.\nIls ont tendance à cibler plus particulièrement les adresses e-mail courtes (p.ex: abc@gmail.com) mais fonctionnent également sur la base des listes (souvent échangées / vendues) contenant tous types d’adresses.\nLes opérations de filtrage anti-spam entraînent des coûts considérables pour les organisations."
+  },
+  {
+    "objectID": "exam_notes_fr.html#rançongiciels-ransomware",
+    "href": "exam_notes_fr.html#rançongiciels-ransomware",
+    "title": "1 Les Services de Sécurité Fondamentaux",
+    "section": "3.9 Rançongiciels (Ransomware)",
+    "text": "3.9 Rançongiciels (Ransomware)\n\nMalware type Cheval de Troie qui chiffre les données pour les rendre inaccessibles.\nExige une rançon (souvent en bitcoins) pour récupérer les fichiers.\nPeut rester dormant, déclenché par un événement ou une date.\nPrincipal vecteur : e-mails malveillants.\nAutres effets possibles : attaques par déni de service, extorsion.\n\n\n\n\n\n\n\nNoneUltra-synthèse\n\n\n\n\n\n\nChiffrement des données par Cheval de Troie\nRançon pour restaurer accès\nDormance programmée possible\nInfection via e-mails malveillants\n\n\n\n\n\n\n\n\n\n\nNoneVersion originale\n\n\n\n\n\n3.10 Rançongiciels (Ransomware)\n\nCette famille spécifique de malware appartient à la catégorie appelée Chevaux de Troie (Trojan Horses).\nLeur comportement plus habituel consiste à chiffrer les données de la victime (locaux et distants) afin de les rendre totalement inaccessibles.\nUn message apparait ensuite pour demander le paiement d’une rançon (souvent en bitcoins ou une autre monnaie virtuelle) permettant potentiellement de récupérer l’accès aux fichiers chiffrés.\nIls peuvent rester en état dormant dans le système infecté et être déclenchés par un événement spécifique ou à une date donnée (attaques synchronisées).\nLeurs vecteurs d’infection sont variés mais les e-mails contenant des pièces jointes malicieuses sont souvent mis en cause lors des infections primaires.\nDes nombreuses variantes existent et continuent à se développer.\nOn observe parfois d’autres comportements associés à ces malware : dénis de service, extorsions ciblées, menaces, etc."
+  },
+  {
+    "objectID": "exam_notes_fr.html#rançongiciels-ransomware-1",
+    "href": "exam_notes_fr.html#rançongiciels-ransomware-1",
+    "title": "1 Les Services de Sécurité Fondamentaux",
+    "section": "3.10 Rançongiciels (Ransomware)",
+    "text": "3.10 Rançongiciels (Ransomware)\n\nCette famille spécifique de malware appartient à la catégorie appelée Chevaux de Troie (Trojan Horses).\nLeur comportement plus habituel consiste à chiffrer les données de la victime (locaux et distants) afin de les rendre totalement inaccessibles.\nUn message apparait ensuite pour demander le paiement d’une rançon (souvent en bitcoins ou une autre monnaie virtuelle) permettant potentiellement de récupérer l’accès aux fichiers chiffrés.\nIls peuvent rester en état dormant dans le système infecté et être déclenchés par un événement spécifique ou à une date donnée (attaques synchronisées).\nLeurs vecteurs d’infection sont variés mais les e-mails contenant des pièces jointes malicieuses sont souvent mis en cause lors des infections primaires.\nDes nombreuses variantes existent et continuent à se développer.\nOn observe parfois d’autres comportements associés à ces malware : dénis de service, extorsions ciblées, menaces, etc."
+  },
+  {
+    "objectID": "exam_notes_fr.html#attaques-sur-les-dispositifs-internet-of-things-iot",
+    "href": "exam_notes_fr.html#attaques-sur-les-dispositifs-internet-of-things-iot",
+    "title": "1 Les Services de Sécurité Fondamentaux",
+    "section": "3.11 Attaques sur les Dispositifs Internet of Things (IoT)",
+    "text": "3.11 Attaques sur les Dispositifs Internet of Things (IoT)\n\nAttaques visant les objets connectés (caméras, TV, capteurs, alarmes, etc.).\nCes dispositifs sont faciles à compromettre à cause de :\n\nfailles connues,\nmots de passe par défaut,\nmanque de sensibilisation des utilisateurs.\n\nLa prise de contrôle à distance permet :\n\nun point d’entrée vers le réseau,\nl’utilisation de l’appareil pour des activités illicites (DDoS, hacking, minage).\n\nUn inventaire précis des dispositifs connectés est indispensable.\n\n\n\n\n\n\n\nNoneUltra-synthèse\n\n\n\n\n\n\nCible les objets connectés\nSécurité faible (failles, mots de passe par défaut)\nRisque d’accès au réseau et d’abus\nInventaire des IoT nécessaire\n\n\n\n\n\n\n\n\n\n\nNoneVersion originale\n\n\n\n\n\n3.12 Attaques sur les Dispositifs Internet of Things (IoT)\n\nCiblent les objets connectés de toute sorte (caméras, TVs, frigos, capteurs et interrupteurs domotiques, installations d’alarme, etc.).\nIls sont souvent plus faciles à pirater que les systèmes traditionnels par cause de :\n\nnombreuses failles de sécurité souvent connues des attaquants.\nmots de passe par défaut.\nnégligence de la part des utilisateurs qui ignorent les risques qui leurs sont propres.\n\nLa prise de contrôle à distance de ces appareils par une entité malveillante implique :\n\nUne porte d’entrée au réseau domestique/corporatif.\nUn dispositif pouvant être utilisé pour des activités illicites (hacking, attaques DDoS, minage de bitcoins, etc.).\n\nL’établissement d’un répertoire précis de tous les dispositifs de ce type connectés au réseau est nécessaire!"
+  },
+  {
+    "objectID": "exam_notes_fr.html#attaques-sur-les-dispositifs-internet-of-things-iot-1",
+    "href": "exam_notes_fr.html#attaques-sur-les-dispositifs-internet-of-things-iot-1",
+    "title": "1 Les Services de Sécurité Fondamentaux",
+    "section": "3.12 Attaques sur les Dispositifs Internet of Things (IoT)",
+    "text": "3.12 Attaques sur les Dispositifs Internet of Things (IoT)\n\nCiblent les objets connectés de toute sorte (caméras, TVs, frigos, capteurs et interrupteurs domotiques, installations d’alarme, etc.).\nIls sont souvent plus faciles à pirater que les systèmes traditionnels par cause de :\n\nnombreuses failles de sécurité souvent connues des attaquants.\nmots de passe par défaut.\nnégligence de la part des utilisateurs qui ignorent les risques qui leurs sont propres.\n\nLa prise de contrôle à distance de ces appareils par une entité malveillante implique :\n\nUne porte d’entrée au réseau domestique/corporatif.\nUn dispositif pouvant être utilisé pour des activités illicites (hacking, attaques DDoS, minage de bitcoins, etc.).\n\nL’établissement d’un répertoire précis de tous les dispositifs de ce type connectés au réseau est nécessaire!"
+  },
+  {
+    "objectID": "exam_notes_fr.html#modification-illicite-des-informations-publiées-information-spoofing-and-website-defacement",
+    "href": "exam_notes_fr.html#modification-illicite-des-informations-publiées-information-spoofing-and-website-defacement",
+    "title": "1 Les Services de Sécurité Fondamentaux",
+    "section": "3.13 Modification Illicite des Informations Publiées (Information Spoofing and Website Defacement)",
+    "text": "3.13 Modification Illicite des Informations Publiées (Information Spoofing and Website Defacement)\n\nAttaques visant à altérer les informations sur sites web et réseaux sociaux.\nImpact : réputation compromise et dommages économiques.\nSites web : sécurisation du système hôte, configuration restrictive, audits réguliers.\nRéseaux sociaux : mots de passe forts, authentification multi-facteur, fermeture des sessions, suppression des cookies.\n\n\n\n\n\n\n\nNoneUltra-synthèse\n\n\n\n\n\n\nAltération des infos sur sites et réseaux sociaux\nRisques : réputation et pertes économiques\nSites : sécurisation + audits\nRéseaux sociaux : mots de passe forts, MFA, sessions fermées, cookies supprimés\n\n\n\n\n\n\n\n\n\n\nNoneVersion originale\n\n\n\n\n\n3.14 Modification Illicite des Informations Publiées (Information Spoofing and Website Defacement)\n\nAttaques visant l’intégrité de l’information publiée dans les sites web, les réseaux sociaux, etc.\nElles portent atteinte à la réputation et peuvent provoquer d’importants dommages économiques pour les sociétés ayant une présence Internet.\nDans le cas des sites web, la sécurisation du système hôte est essentielle ainsi qu’une configuration aussi restrictive que possible. Des audits des sécurité récurrents sont vivement recommandés.\nLa protection des informations affichées dans les réseaux sociaux dépend directement du processus d’authentification permettant d’accéder au profil à risque :\n\nÉviter les mots de passe trop simples.\nPrivilégier l’authentification forte, si possible multi-facteur.\nFermer proprement les sessions.\nEffacer les cookies."
+  },
+  {
+    "objectID": "exam_notes_fr.html#modification-illicite-des-informations-publiées-information-spoofing-and-website-defacement-1",
+    "href": "exam_notes_fr.html#modification-illicite-des-informations-publiées-information-spoofing-and-website-defacement-1",
+    "title": "1 Les Services de Sécurité Fondamentaux",
+    "section": "3.14 Modification Illicite des Informations Publiées (Information Spoofing and Website Defacement)",
+    "text": "3.14 Modification Illicite des Informations Publiées (Information Spoofing and Website Defacement)\n\nAttaques visant l’intégrité de l’information publiée dans les sites web, les réseaux sociaux, etc.\nElles portent atteinte à la réputation et peuvent provoquer d’importants dommages économiques pour les sociétés ayant une présence Internet.\nDans le cas des sites web, la sécurisation du système hôte est essentielle ainsi qu’une configuration aussi restrictive que possible. Des audits des sécurité récurrents sont vivement recommandés.\nLa protection des informations affichées dans les réseaux sociaux dépend directement du processus d’authentification permettant d’accéder au profil à risque :\n\nÉviter les mots de passe trop simples.\nPrivilégier l’authentification forte, si possible multi-facteur.\nFermer proprement les sessions.\nEffacer les cookies."
+  },
+  {
+    "objectID": "exam_notes_fr.html#attaques-dénis-de-service-denial-of-service-ddos",
+    "href": "exam_notes_fr.html#attaques-dénis-de-service-denial-of-service-ddos",
+    "title": "1 Les Services de Sécurité Fondamentaux",
+    "section": "3.15 Attaques Dénis de Service (Denial of Service / DDoS)",
+    "text": "3.15 Attaques Dénis de Service (Denial of Service / DDoS)\n\nVise à rendre inaccessibles des systèmes informatiques, surtout pour les organisations.\nDDoS : attaque distribuée par des milliers de dispositifs, générant un trafic massif.\nProtections classiques (firewalls, sondes IDS (Intrusion Detection System) / IPS (Intrusion Prevention System)) souvent insuffisantes.\nConséquences :\n\nRéputation affectée\nPertes financières (parfois rançons)\nRisques élevés pour les infrastructures critiques (hôpitaux, centrales, Internet backbone)\n\n\n\n\n\n\n\n\nNoneUltra-synthèse\n\n\n\n\n\n\nDDoS = systèmes inaccessibles via attaques massives\nProtections limitées\nRisques : réputation, finances, infrastructures critiques\n\n\n\n\n\n\n\n\n\n\nNoneVersion originale\n\n\n\n\n\n3.16 Attaques Dénis de Service (Denial of Service / DDoS)\n\nAttaques destinées à rendre inaccessibles des systèmes informatiques de toute sorte visant surtout les organisations privées ou étatiques.\nLe terme DDoS (Distributed Denial of Service) désigne une famille d’attaques dans laquelle des multiples (souvent des dizaines de milliers) de dispositifs ciblent simultanément le(s) système(s) victime(s).\nLe trafique généré atteint plusieurs centaines de gigabits / seconde.\nL’efficacité des mécanismes de protection traditionnels (firewalls, sondes de prévention et de détection d’intrusion, etc.) est limitée.\nL’indisponibilité d’un service peut engendrer :\n\ndes problèmes réputationnels.\nd’importantes pertes financières (des demandes de rançon peuvent être exigées pour les désactiver).\ndes hauts risques de sécurité (même physique!) lorsque des infrastructures critiques (hôpitaux, centrales électriques, backbone de l’Internet, etc.) sont ciblées."
+  },
+  {
+    "objectID": "exam_notes_fr.html#attaques-dénis-de-service-denial-of-service-ddos-1",
+    "href": "exam_notes_fr.html#attaques-dénis-de-service-denial-of-service-ddos-1",
+    "title": "1 Les Services de Sécurité Fondamentaux",
+    "section": "3.16 Attaques Dénis de Service (Denial of Service / DDoS)",
+    "text": "3.16 Attaques Dénis de Service (Denial of Service / DDoS)\n\nAttaques destinées à rendre inaccessibles des systèmes informatiques de toute sorte visant surtout les organisations privées ou étatiques.\nLe terme DDoS (Distributed Denial of Service) désigne une famille d’attaques dans laquelle des multiples (souvent des dizaines de milliers) de dispositifs ciblent simultanément le(s) système(s) victime(s).\nLe trafique généré atteint plusieurs centaines de gigabits / seconde.\nL’efficacité des mécanismes de protection traditionnels (firewalls, sondes de prévention et de détection d’intrusion, etc.) est limitée.\nL’indisponibilité d’un service peut engendrer :\n\ndes problèmes réputationnels.\nd’importantes pertes financières (des demandes de rançon peuvent être exigées pour les désactiver).\ndes hauts risques de sécurité (même physique!) lorsque des infrastructures critiques (hôpitaux, centrales électriques, backbone de l’Internet, etc.) sont ciblées."
+  },
+  {
+    "objectID": "exam_notes_en.html",
+    "href": "exam_notes_en.html",
+    "title": "1 Fundamental Security Services",
+    "section": "",
+    "text": "Security services are the objectives aimed at protecting a system.\n\nConfidentiality: Protection against unauthorized disclosure.\nIntegrity: Protection against unauthorized modification.\nAvailability: Guarantee of access for legitimate users.\nAuthentication:\n\nEntity authentication: Certifying the identity of an actor.\nData origin authentication: Certifying the source of data.\n\nNon-repudiation: Inability to deny a transaction.\nNon-duplication: Protection against illicit copying.\nAnonymity: Preservation of identity or source.\n\n\n\n\n\n\n\nNoneOriginal version\n\n\n\n\n\n\nConfidentiality: Protection of information from unauthorized disclosure.\nIntegrity: Protection against unauthorized modification of information.\nAvailability: Ensuring that resources are accessible to legitimate users.\nAuthentication:\n\nEntity authentication (entity authentication): Process allowing one entity to be certain of the identity of a second entity, supported by corroborating evidence (e.g., physical presence, cryptographic, biometric, etc.). The term identification is sometimes also used for this service.\nData origin authentication (data origin authentication): Process allowing one entity to be certain that a second entity is the original source of a set of data. By definition, this service also ensures the integrity of the data.\n\nNon-repudiation: Guarantees that an entity cannot deny being involved in a transaction.\nNon-duplication: Protection against illicit copying.\nAnonymity (entity or data origin): Preserves the identity of an entity, the source of information, or a transaction."
+  },
+  {
+    "objectID": "exam_notes_en.html#threats-and-attacks-summary",
+    "href": "exam_notes_en.html#threats-and-attacks-summary",
+    "title": "1 Fundamental Security Services",
+    "section": "2.1 Threats and Attacks: Summary",
+    "text": "2.1 Threats and Attacks: Summary\n\n\n\n\n\n\n\n\nServices\nThreats\nAttacks\n\n\n\n\nConfidentiality\nInformation leakage\nUnauthorized eavesdropping, traffic analysis\n\n\nIntegrity\nInformation modification\nIllicit creation, alteration, or destruction\n\n\nAvailability\nDenial of service, illicit use\nViruses, repeated access attempts to disable a system\n\n\nEntity Authentication\nUnauthorized access\nPassword theft, authentication protocol flaw\n\n\nData Authentication\nInformation falsification\nSignature forgery, protocol flaw\n\n\nNon-repudiation\nDenying involvement in a transaction\nClaiming key theft or signature protocol flaw\n\n\nNon-duplication\nDuplication\nFalsification, imitation\n\n\nAnonymity\nIdentification\nTransaction analysis, unauthorized access enabling identification"
+  },
+  {
+    "objectID": "exam_notes_en.html#protection-mechanisms",
+    "href": "exam_notes_en.html#protection-mechanisms",
+    "title": "1 Fundamental Security Services",
+    "section": "2.2 Protection Mechanisms",
+    "text": "2.2 Protection Mechanisms\n\n\n\n\n\n\n\n\nServices\nClassic Mechanisms\nDigital Mechanisms\n\n\n\n\nConfidentiality\nSeals, safes, padlocks\nEncryption, logical authorization\n\n\nIntegrity\nSpecial ink, holograms\nOne-way functions + encryption\n\n\nAvailability\nPhysical access control, video surveillance\nLogical access control, audit, antivirus\n\n\nEntity Authentication\nPresence, voice, ID card, biometric recognition\nSecret + authentication protocol, network address + userid, smart card + PIN\n\n\nData Authentication\nSeals, signature, fingerprint\nOne-way functions + encryption\n\n\nNon-repudiation\nSeals, signature, notary signature, registered mail\nOne-way functions + encryption + digital signature\n\n\nNon-duplication\nSpecial ink, holograms, tagging\nDigital watermarking, cryptographic locking\n\n\nAnonymity\nVoice scrambler, disguise, cash\nMixers, remailers, e-money, deep web"
+  },
+  {
+    "objectID": "exam_notes_en.html#malware-delivered-via-e-mail",
+    "href": "exam_notes_en.html#malware-delivered-via-e-mail",
+    "title": "1 Fundamental Security Services",
+    "section": "3.1 Malware Delivered via E-Mail",
+    "text": "3.1 Malware Delivered via E-Mail\n\nAlso called malware.\nEmails designed to trigger an action (open attachment or click a link).\nOften personalized using social engineering.\nMain consequences:\n\nMalware installation (ransomware, keyloggers, etc.).\nLoss or theft of personal data.\nSystem hijacking and malware propagation.\n\n\n\n\n\n\n\n\nNoneUltra-summary\n\n\n\n\n\n\nMalware spread by email\nPrompting clicks or opens\nSocial engineering\nData theft, loss, hijacking\n\n\n\n\n\n\n\n\n\n\nNoneOriginal version\n\n\n\n\n\n3.2 Malware Delivered via E-Mail\n\nAlso called malware.\nEmails designed to incite the recipient to open an attachment or follow a link containing ads, offensive info, risky programs, etc.\nOften targeted based on victim interests (preliminary social engineering).\nConsequences:\n\nMalware installation (ransomware, keyloggers, etc.) on victim systems (computer, tablet, smartphone, smartwatch, etc.).\nData destruction.\nTheft of personal information or data.\nSystem hijacking for malicious purposes (e.g., illegal bitcoin mining).\nMalware propagation (potentially to other users)."
+  },
+  {
+    "objectID": "exam_notes_en.html#malware-delivered-via-e-mail-1",
+    "href": "exam_notes_en.html#malware-delivered-via-e-mail-1",
+    "title": "1 Fundamental Security Services",
+    "section": "3.2 Malware Delivered via E-Mail",
+    "text": "3.2 Malware Delivered via E-Mail\n\nAlso called malware.\nEmails designed to incite the recipient to open an attachment or follow a link containing ads, offensive info, risky programs, etc.\nOften targeted based on victim interests (preliminary social engineering).\nConsequences:\n\nMalware installation (ransomware, keyloggers, etc.) on victim systems (computer, tablet, smartphone, smartwatch, etc.).\nData destruction.\nTheft of personal information or data.\nSystem hijacking for malicious purposes (e.g., illegal bitcoin mining).\nMalware propagation (potentially to other users)."
+  },
+  {
+    "objectID": "exam_notes_en.html#malware-delivered-via-web",
+    "href": "exam_notes_en.html#malware-delivered-via-web",
+    "title": "1 Fundamental Security Services",
+    "section": "3.3 Malware Delivered via Web",
+    "text": "3.3 Malware Delivered via Web\n\nMethod called drive-by download: automatic infection when visiting a website.\nSources can be:\n\nA malicious website\nA compromised legitimate site (e.g., cross-site scripting).\n\nUser caution greatly reduces this propagation method.\nImpacts are similar to email-borne infections.\nScript restriction (Java/JavaScript) reduces risk but can affect browsing.\n\n\n\n\n\n\n\nNoneUltra-summary\n\n\n\n\n\n\nDrive-by download = infection without user action\nMalicious or compromised sites\nAwareness + restricted scripts = protection\n\n\n\n\n\n\n\n\n\n\nNoneOriginal version\n\n\n\n\n\n3.4 Malware Delivered via Web\n\nOften called drive-by download, allows infecting the system (computer, tablet, smartphone, smartwatch, etc.) simply by visiting a website.\nSources may be:\n\nMalicious site containing malware\nLegitimate website previously infected (e.g., cross-site scripting). Infection may only affect certain pages.\n\nUser awareness (avoiding suspicious sites) reduces the effectiveness.\nConsequences are similar to email infections.\nRestricted script execution (Java/JavaScript) in browsers can limit infection but may constrain navigation."
+  },
+  {
+    "objectID": "exam_notes_en.html#malware-delivered-via-web-1",
+    "href": "exam_notes_en.html#malware-delivered-via-web-1",
+    "title": "1 Fundamental Security Services",
+    "section": "3.4 Malware Delivered via Web",
+    "text": "3.4 Malware Delivered via Web\n\nOften called drive-by download, allows infecting the system (computer, tablet, smartphone, smartwatch, etc.) simply by visiting a website.\nSources may be:\n\nMalicious site containing malware\nLegitimate website previously infected (e.g., cross-site scripting). Infection may only affect certain pages.\n\nUser awareness (avoiding suspicious sites) reduces the effectiveness.\nConsequences are similar to email infections.\nRestricted script execution (Java/JavaScript) in browsers can limit infection but may constrain navigation."
+  },
+  {
+    "objectID": "exam_notes_en.html#phishing",
+    "href": "exam_notes_en.html#phishing",
+    "title": "1 Fundamental Security Services",
+    "section": "3.5 Phishing",
+    "text": "3.5 Phishing\n\nTechnique to collect private information through indiscriminate fishing.\nPhishing can be:\n\nGeneral (broad targeting)\nTargeted (spear phishing) for a specific person or organization.\n\nMain vector: forged email address, hard to detect.\nGoal: obtain sensitive data (credentials, passwords, personal or banking info).\nAttacks use credible or threatening pretexts to prompt victim cooperation.\n\n\n\n\n\n\n\nNoneUltra-summary\n\n\n\n\n\n\nInformation theft by deception\nForged emails\nSpear phishing = targeted attack\nUrgent or threatening pretexts\n\n\n\n\n\n\n\n\n\n\nNoneOriginal version\n\n\n\n\n\n3.6 Phishing\n\nThe word phishing comes from English “password”, “harvesting”, and “fishing”.\nShows the technique’s main goal: collect as much private info via indiscriminate fishing.\nTargeted attacks are called spear phishing (from spear fishing).\nTransmission vector: email with forged sender address requesting private info: emails, social media credentials, passwords, ID numbers, bank accounts, etc.\nPretexts vary (system update, service stoppage, delivery withdrawal) and may threaten the user if ignored."
+  },
+  {
+    "objectID": "exam_notes_en.html#phishing-1",
+    "href": "exam_notes_en.html#phishing-1",
+    "title": "1 Fundamental Security Services",
+    "section": "3.6 Phishing",
+    "text": "3.6 Phishing\n\nThe word phishing comes from English “password”, “harvesting”, and “fishing”.\nShows the technique’s main goal: collect as much private info via indiscriminate fishing.\nTargeted attacks are called spear phishing (from spear fishing).\nTransmission vector: email with forged sender address requesting private info: emails, social media credentials, passwords, ID numbers, bank accounts, etc.\nPretexts vary (system update, service stoppage, delivery withdrawal) and may threaten the user if ignored."
+  },
+  {
+    "objectID": "exam_notes_en.html#spam",
+    "href": "exam_notes_en.html#spam",
+    "title": "1 Fundamental Security Services",
+    "section": "3.7 Spam",
+    "text": "3.7 Spam\n\nUnwanted emails, often ads, or unsolicited pop-ups during web browsing.\nRepresent about 60% of global emails.\nMain consequences:\n\nResource consumption and time loss.\nSome can transmit malware.\n\nOften target short addresses or come from sold/exchanged address lists.\nAnti-spam filters incur significant costs for organizations.\n\n\n\n\n\n\n\nNoneUltra-summary\n\n\n\n\n\n\nUnwanted emails/ads\nRisks: time/resource loss, malware\nTargeting: short addresses or lists\nFiltering costly for organizations\n\n\n\n\n\n\n\n\n\n\nNoneOriginal version\n\n\n\n\n\n3.8 Spam\n\nIncludes all unwanted emails (often ads) received by people and organizations.\nAlso applies to pages/pop-up windows shown without user consent during web browsing.\nAround 60% of global emails belong to this category.\nConsequences: resource consumption and wasted time, but some spam can also transmit malware.\nOften target short email addresses or list-based addresses (sold/exchanged).\nAnti-spam filtering incurs high organizational costs."
+  },
+  {
+    "objectID": "exam_notes_en.html#spam-1",
+    "href": "exam_notes_en.html#spam-1",
+    "title": "1 Fundamental Security Services",
+    "section": "3.8 Spam",
+    "text": "3.8 Spam\n\nIncludes all unwanted emails (often ads) received by people and organizations.\nAlso applies to pages/pop-up windows shown without user consent during web browsing.\nAround 60% of global emails belong to this category.\nConsequences: resource consumption and wasted time, but some spam can also transmit malware.\nOften target short email addresses or list-based addresses (sold/exchanged).\nAnti-spam filtering incurs high organizational costs."
+  },
+  {
+    "objectID": "exam_notes_en.html#ransomware",
+    "href": "exam_notes_en.html#ransomware",
+    "title": "1 Fundamental Security Services",
+    "section": "3.9 Ransomware",
+    "text": "3.9 Ransomware\n\nTrojan-type malware that encrypts data to make it inaccessible.\nDemands a ransom (often in bitcoins) to recover files.\nCan remain dormant, triggered by an event or date.\nMain vector: malicious emails.\nOther effects: DoS attacks, extortion.\n\n\n\n\n\n\n\nNoneUltra-summary\n\n\n\n\n\n\nData encrypted by Trojan\nRansom to restore access\nPossible programmed dormancy\nInfection via malicious emails\n\n\n\n\n\n\n\n\n\n\nNoneOriginal version\n\n\n\n\n\n3.10 Ransomware\n\nTrojan malware family.\nTypically encrypts victim’s data to make it completely inaccessible.\nThen displays a message requesting ransom payment (often in bitcoins).\nMay stay in dormant state triggered by event or date.\nInfection vectors vary, but malicious email attachments often responsible.\nVariants exist and continue to evolve.\nOther behaviors: DoS, targeted extortion, threats, etc."
+  },
+  {
+    "objectID": "exam_notes_en.html#ransomware-1",
+    "href": "exam_notes_en.html#ransomware-1",
+    "title": "1 Fundamental Security Services",
+    "section": "3.10 Ransomware",
+    "text": "3.10 Ransomware\n\nTrojan malware family.\nTypically encrypts victim’s data to make it completely inaccessible.\nThen displays a message requesting ransom payment (often in bitcoins).\nMay stay in dormant state triggered by event or date.\nInfection vectors vary, but malicious email attachments often responsible.\nVariants exist and continue to evolve.\nOther behaviors: DoS, targeted extortion, threats, etc."
+  },
+  {
+    "objectID": "exam_notes_en.html#attacks-on-internet-of-things-iot-devices",
+    "href": "exam_notes_en.html#attacks-on-internet-of-things-iot-devices",
+    "title": "1 Fundamental Security Services",
+    "section": "3.11 Attacks on Internet of Things (IoT) Devices",
+    "text": "3.11 Attacks on Internet of Things (IoT) Devices\n\nTarget connected objects (cameras, TVs, sensors, alarms, etc.).\nDevices are easy to compromise due to:\n\nKnown vulnerabilities\nDefault passwords\nUser unawareness\n\nRemote control enables:\n\nEntry point to the network\nDevice abuse for illicit activities (DDoS, hacking, mining)\n\nA precise inventory of connected devices is essential.\n\n\n\n\n\n\n\nNoneUltra-summary\n\n\n\n\n\n\nTargets connected objects\nWeak security (vulnerabilities, default passwords)\nRisk of network access and abuse\nIoT inventory needed\n\n\n\n\n\n\n\n\n\n\nNoneOriginal version\n\n\n\n\n\n3.12 Attacks on IoT Devices\n\nTarget connected objects (cameras, TVs, fridges, sensors, alarm systems, etc.).\nOften easier to hack than traditional systems due to:\n\nMany vulnerabilities known to attackers\nDefault passwords\nUser negligence\n\nRemote takeover allows:\n\nEntry point to home/corporate network\nDevice use for illicit activities (hacking, DDoS, bitcoin mining)\n\nMaintaining a detailed directory of all connected devices is necessary."
+  },
+  {
+    "objectID": "exam_notes_en.html#attacks-on-iot-devices",
+    "href": "exam_notes_en.html#attacks-on-iot-devices",
+    "title": "1 Fundamental Security Services",
+    "section": "3.12 Attacks on IoT Devices",
+    "text": "3.12 Attacks on IoT Devices\n\nTarget connected objects (cameras, TVs, fridges, sensors, alarm systems, etc.).\nOften easier to hack than traditional systems due to:\n\nMany vulnerabilities known to attackers\nDefault passwords\nUser negligence\n\nRemote takeover allows:\n\nEntry point to home/corporate network\nDevice use for illicit activities (hacking, DDoS, bitcoin mining)\n\nMaintaining a detailed directory of all connected devices is necessary."
+  },
+  {
+    "objectID": "exam_notes_en.html#information-spoofing-and-website-defacement",
+    "href": "exam_notes_en.html#information-spoofing-and-website-defacement",
+    "title": "1 Fundamental Security Services",
+    "section": "3.13 Information Spoofing and Website Defacement",
+    "text": "3.13 Information Spoofing and Website Defacement\n\nAttacks aiming to alter information on websites and social media.\nImpact: compromised reputation and economic damage.\nWebsites: secure host system, restrictive configuration, regular audits.\nSocial media: strong passwords, multi-factor authentication, session closure, cookie deletion.\n\n\n\n\n\n\n\nNoneUltra-summary\n\n\n\n\n\n\nAltered info on websites and social media\nRisks: reputation, economic losses\nWebsites: security + audits\nSocial media: strong passwords, MFA, closed sessions, cookies cleared\n\n\n\n\n\n\n\n\n\n\nNoneOriginal version\n\n\n\n\n\n3.14 Information Spoofing and Website Defacement\n\nTarget integrity of published info on websites and social media.\nAffects reputation and can cause economic damage.\nWebsites: secure host system, as restrictive configuration as possible, recurring security audits recommended.\nSocial media: depends on authentication process:\n\nAvoid simple passwords\nPrefer strong, possibly multi-factor authentication\nClose sessions properly\nClear cookies"
+  },
+  {
+    "objectID": "exam_notes_en.html#information-spoofing-and-website-defacement-1",
+    "href": "exam_notes_en.html#information-spoofing-and-website-defacement-1",
+    "title": "1 Fundamental Security Services",
+    "section": "3.14 Information Spoofing and Website Defacement",
+    "text": "3.14 Information Spoofing and Website Defacement\n\nTarget integrity of published info on websites and social media.\nAffects reputation and can cause economic damage.\nWebsites: secure host system, as restrictive configuration as possible, recurring security audits recommended.\nSocial media: depends on authentication process:\n\nAvoid simple passwords\nPrefer strong, possibly multi-factor authentication\nClose sessions properly\nClear cookies"
+  },
+  {
+    "objectID": "exam_notes_en.html#denial-of-service-dos-ddos-attacks",
+    "href": "exam_notes_en.html#denial-of-service-dos-ddos-attacks",
+    "title": "1 Fundamental Security Services",
+    "section": "3.15 Denial of Service (DoS / DDoS) Attacks",
+    "text": "3.15 Denial of Service (DoS / DDoS) Attacks\n\nAim to make IT systems inaccessible, especially for organizations.\nDDoS: distributed attack using thousands of devices, generating massive traffic.\nClassic protections (firewalls, IDS/IPS sensors) often insufficient.\nConsequences:\n\nAffected reputation\nFinancial losses (sometimes ransom)\nHigh risk for critical infrastructure (hospitals, power plants, Internet backbone)\n\n\n\n\n\n\n\n\nNoneUltra-summary\n\n\n\n\n\n\nDDoS = inaccessible systems via massive attacks\nLimited protections\nRisks: reputation, finances, critical infrastructures\n\n\n\n\n\n\n\n\n\n\nNoneOriginal version\n\n\n\n\n\n3.16 Denial of Service (DoS / DDoS) Attacks\n\nAim to render IT systems inaccessible, mainly targeting private or governmental organizations.\nDDoS (Distributed Denial of Service): multiple devices (often tens of thousands) simultaneously target victim system(s).\nTraffic can reach several hundred Gbps.\nTraditional protection (firewalls, intrusion detection/prevention sensors) has limited effectiveness.\nService unavailability can cause:\n\nReputational issues\nSignificant financial losses (ransom demands)\nHigh security risks (even physical) for critical infrastructures (hospitals, power plants, Internet backbone)."
+  },
+  {
+    "objectID": "exam_notes_en.html#denial-of-service-dos-ddos-attacks-1",
+    "href": "exam_notes_en.html#denial-of-service-dos-ddos-attacks-1",
+    "title": "1 Fundamental Security Services",
+    "section": "3.16 Denial of Service (DoS / DDoS) Attacks",
+    "text": "3.16 Denial of Service (DoS / DDoS) Attacks\n\nAim to render IT systems inaccessible, mainly targeting private or governmental organizations.\nDDoS (Distributed Denial of Service): multiple devices (often tens of thousands) simultaneously target victim system(s).\nTraffic can reach several hundred Gbps.\nTraditional protection (firewalls, intrusion detection/prevention sensors) has limited effectiveness.\nService unavailability can cause:\n\nReputational issues\nSignificant financial losses (ransom demands)\nHigh security risks (even physical) for critical infrastructures (hospitals, power plants, Internet backbone)."
+  }
+]

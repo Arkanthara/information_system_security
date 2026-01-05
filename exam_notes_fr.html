@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>exam_notes_fr – Information Systems Security</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b758ccaa5987ceb1b75504551e579abf.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-8edd27badbef8a2287523540a24e8a68.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Information Systems Security</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="./exam_notes_fr.html" aria-current="page"> 
+<span class="menu-text">Français</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./exam_notes_en.html"> 
+<span class="menu-text">English</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#les-services-de-sécurité-fondamentaux" id="toc-les-services-de-sécurité-fondamentaux" class="nav-link active" data-scroll-target="#les-services-de-sécurité-fondamentaux"><span class="header-section-number">1</span> Les Services de Sécurité Fondamentaux</a></li>
+  <li><a href="#synthèse-services-menaces-et-mécanismes-de-protection" id="toc-synthèse-services-menaces-et-mécanismes-de-protection" class="nav-link" data-scroll-target="#synthèse-services-menaces-et-mécanismes-de-protection"><span class="header-section-number">2</span> Synthèse : Services, Menaces et Mécanismes de Protection</a></li>
+  <li><a href="#risques-liés-à-internet" id="toc-risques-liés-à-internet" class="nav-link" data-scroll-target="#risques-liés-à-internet"><span class="header-section-number">3</span> Risques Liés à Internet</a>
+  <ul class="collapse">
+  <li><a href="#programmes-malveillants-transmis-par-e-mail" id="toc-programmes-malveillants-transmis-par-e-mail" class="nav-link" data-scroll-target="#programmes-malveillants-transmis-par-e-mail"><span class="header-section-number">3.1</span> Programmes Malveillants Transmis par E-Mail</a></li>
+  <li><a href="#programmes-malveillants-transmis-sur-le-web" id="toc-programmes-malveillants-transmis-sur-le-web" class="nav-link" data-scroll-target="#programmes-malveillants-transmis-sur-le-web"><span class="header-section-number">3.3</span> Programmes Malveillants Transmis sur le Web</a></li>
+  <li><a href="#hameçonnage-phishing" id="toc-hameçonnage-phishing" class="nav-link" data-scroll-target="#hameçonnage-phishing"><span class="header-section-number">3.5</span> Hameçonnage (Phishing)</a></li>
+  <li><a href="#pourriels-spam" id="toc-pourriels-spam" class="nav-link" data-scroll-target="#pourriels-spam"><span class="header-section-number">3.7</span> Pourriels (Spam)</a></li>
+  <li><a href="#rançongiciels-ransomware" id="toc-rançongiciels-ransomware" class="nav-link" data-scroll-target="#rançongiciels-ransomware"><span class="header-section-number">3.9</span> Rançongiciels (Ransomware)</a></li>
+  <li><a href="#attaques-sur-les-dispositifs-internet-of-things-iot" id="toc-attaques-sur-les-dispositifs-internet-of-things-iot" class="nav-link" data-scroll-target="#attaques-sur-les-dispositifs-internet-of-things-iot"><span class="header-section-number">3.11</span> Attaques sur les Dispositifs <strong><em>Internet of Things (IoT)</em></strong></a></li>
+  <li><a href="#modification-illicite-des-informations-publiées-information-spoofing-and-website-defacement" id="toc-modification-illicite-des-informations-publiées-information-spoofing-and-website-defacement" class="nav-link" data-scroll-target="#modification-illicite-des-informations-publiées-information-spoofing-and-website-defacement"><span class="header-section-number">3.13</span> Modification Illicite des Informations Publiées (<em>Information Spoofing and Website Defacement</em>)</a></li>
+  <li><a href="#attaques-dénis-de-service-denial-of-service-ddos" id="toc-attaques-dénis-de-service-denial-of-service-ddos" class="nav-link" data-scroll-target="#attaques-dénis-de-service-denial-of-service-ddos"><span class="header-section-number">3.15</span> Attaques <strong>Dénis de Service</strong> (<em>Denial of Service</em> / <em>DDoS</em>)</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+
+
+
+
+<section id="les-services-de-sécurité-fondamentaux" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Les Services de Sécurité Fondamentaux</h1>
+<p>Les services de sécurité sont les objectifs que l’on cherche à atteindre pour protéger un système.</p>
+<ul>
+<li><strong>Confidentialité</strong> : Protection contre la divulgation non autorisée.</li>
+<li><strong>Intégrité</strong> : Protection contre la modification non autorisée.</li>
+<li><strong>Disponibilité</strong> : Garantie d’accès pour les utilisateurs légitimes.</li>
+<li><strong>Authentification</strong> :
+<ul>
+<li><em>Entity authentication</em> (Entité) : Certifier l’identité d’un acteur.</li>
+<li><em>Data origin authentication</em> (Origine) : Certifier la source d’une donnée.</li>
+</ul></li>
+<li><strong>Non-répudiation</strong> : Impossibilité de nier une transaction.</li>
+<li><strong>Non-Duplication</strong> : Protection contre les copies illicites.</li>
+<li><strong>Anonymat</strong> : Préservation de l’identité ou de la source.</li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Version originale
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Confidentialité</strong> : Protection de l’information d’une divulgation non autorisée.</li>
+<li><strong>Intégrité</strong> : Protection contre la modification non autorisée de l’information.</li>
+<li><strong>Disponibilité</strong> : S’assurer que les ressources sont accessibles aux utilisateurs légitimes.</li>
+<li><strong>Authentification</strong> :
+<ul>
+<li><strong>Authentification d’entités</strong> <em>(entity authentication)</em> : procédé permettant à une entité d’être sûre de l’identité d’une seconde entité à l’appui d’une évidence corroborant (p.ex.: présence physique, cryptographique, biométrique, etc.). Le terme identification est parfois utilisé pour désigner également ce service.</li>
+<li><strong>Authentification de l’origine de données</strong> <em>(data origin authentication)</em> : procédé permettant à une entité d’être sûre qu’une deuxième entité est la source originale d’un ensemble de données. Par définition, ce service assure également l’intégrité de ces données.</li>
+</ul></li>
+<li><strong>Non-répudiation</strong> : Offre la garantie qu’une entité ne pourra pas nier être impliquée dans une transaction.</li>
+<li><strong>Non-Duplication</strong> : Protection contre les copies illicites.</li>
+<li><strong>Anonymat (d’entité ou d’origine de données)</strong> : Permet de préserver l’identité d’une entité, de la source d’une information ou d’une transaction.</li>
+</ul>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="synthèse-services-menaces-et-mécanismes-de-protection" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Synthèse : Services, Menaces et Mécanismes de Protection</h1>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Services de Sécurité</th>
+<th style="text-align: left;">Dangers et Attaques (<em>Italique</em>)</th>
+<th style="text-align: left;">Mécanismes Classiques</th>
+<th style="text-align: left;">Mécanismes Digitaux</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Confidentialité</strong></td>
+<td style="text-align: left;">Fuite d’informations, <em>eavesdropping</em> (écoutes), analyse du trafic</td>
+<td style="text-align: left;">Scellés, coffre-forts, cadenas</td>
+<td style="text-align: left;">Cryptage, autorisation logique</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Intégrité</strong></td>
+<td style="text-align: left;">Modification, <em>tampering</em> (altération), création ou destruction illicite</td>
+<td style="text-align: left;">Encre spéciale, hologrammes</td>
+<td style="text-align: left;">Fonctions à sens unique + cryptage</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Disponibilité</strong></td>
+<td style="text-align: left;"><em>Denial of Service (DoS)</em>, virus, usage illicite</td>
+<td style="text-align: left;">Contrôle d’accès physique, surveillance vidéo</td>
+<td style="text-align: left;">Contrôle d’accès logique, audit, anti-virus</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Authentification d’entités</strong></td>
+<td style="text-align: left;">Accès non autorisés, vol de mot de passe, faille de protocole</td>
+<td style="text-align: left;">Présence, voix, pièce d’identité, biométrie</td>
+<td style="text-align: left;">Secret + protocole, adresse réseau + userid, carte à puce + PIN</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Authentification de données</strong></td>
+<td style="text-align: left;">Falsification d’informations ou de signature</td>
+<td style="text-align: left;">Sceaux, signature, empreinte digitale</td>
+<td style="text-align: left;">Fonctions à sens unique + cryptage</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Non-répudiation</strong></td>
+<td style="text-align: left;">Nier une transaction (<em>repudiation</em>), prétendre un vol de clé</td>
+<td style="text-align: left;">Sceaux, signature notariale, envoi recommandé</td>
+<td style="text-align: left;">Fonctions à sens unique + cryptage + signature digitale</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Non-duplication</strong></td>
+<td style="text-align: left;">Duplication, falsification, imitation</td>
+<td style="text-align: left;">Encre spéciale, hologrammes, tatouage</td>
+<td style="text-align: left;">Tatouage digital (<em>watermarks</em>), verrouillage cryptographique</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Anonymat</strong></td>
+<td style="text-align: left;">Identification, analyse de transaction, traçage</td>
+<td style="text-align: left;">Brouilleur de voix, déguisement, argent liquide</td>
+<td style="text-align: left;"><em>Mixers</em>, <em>remailers</em>, argent électronique, <em>deep web</em></td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Version originale
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<section id="dangers-et-attaques-synthèse" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="dangers-et-attaques-synthèse"><span class="header-section-number">2.1</span> Dangers et Attaques : Synthèse</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Services</th>
+<th style="text-align: left;">Dangers</th>
+<th style="text-align: left;">Attaques</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Confidentialité</strong></td>
+<td style="text-align: left;">fuite d’informations</td>
+<td style="text-align: left;">écoutes illicites, analyse du trafic</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Intégrité</strong></td>
+<td style="text-align: left;">modification de l’information</td>
+<td style="text-align: left;">création, altération ou destruction illicite</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Disponibilité</strong></td>
+<td style="text-align: left;">denial of service, usage illicite</td>
+<td style="text-align: left;">virus, accès répétés visant à inutiliser un système</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Authentification d’entités</strong></td>
+<td style="text-align: left;">accès non autorisés</td>
+<td style="text-align: left;">Vol de mot de passe, faille dans le protocole d’authentification</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Authentification de données</strong></td>
+<td style="text-align: left;">falsification d’informations</td>
+<td style="text-align: left;">falsification de signature, faille dans le protocole d’authentification</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Non-répudiation</strong></td>
+<td style="text-align: left;">nier la participation à une transaction</td>
+<td style="text-align: left;">prétendre un vol de clé ou une faille dans le protocole de signature</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Non-duplication</strong></td>
+<td style="text-align: left;">duplication</td>
+<td style="text-align: left;">falsification, imitation</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Anonymat</strong></td>
+<td style="text-align: left;">identification</td>
+<td style="text-align: left;">analyse d’une transaction, accès non autorisés permettant l’identification</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="mécanismes-de-protection" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="mécanismes-de-protection"><span class="header-section-number">2.2</span> Mécanismes de Protection</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Services</th>
+<th style="text-align: left;">Mécanismes classiques</th>
+<th style="text-align: left;">Mécanismes digitaux</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Confidentialité</strong></td>
+<td style="text-align: left;">scellés, coffre-forts, cadenas</td>
+<td style="text-align: left;">cryptage, autorisation logique</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Intégrité</strong></td>
+<td style="text-align: left;">encre spéciale, hologrammes</td>
+<td style="text-align: left;">fonctions à sens unique + cryptage</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Disponibilité</strong></td>
+<td style="text-align: left;">contrôle d’accès physique, surveillance vidéo</td>
+<td style="text-align: left;">contrôle d’accès logique, audit, anti-virus</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Auth. d’entités</strong></td>
+<td style="text-align: left;">présence, voix, pièce d’identité, reconnaissance biométrique</td>
+<td style="text-align: left;">secret + protocole d’authentification, adresse réseau + userid, carte à puce + PIN</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Auth. de données</strong></td>
+<td style="text-align: left;">sceaux, signature, empreinte digitale</td>
+<td style="text-align: left;">fonctions à sens unique + cryptage</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Non-répudiation</strong></td>
+<td style="text-align: left;">sceaux, signature, signature notariale, envoi recommandé</td>
+<td style="text-align: left;">fonctions à sens unique + cryptage + signature digitale</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Non-duplication</strong></td>
+<td style="text-align: left;">encre spéciale, hologrammes, tatouage</td>
+<td style="text-align: left;">tatouage digital (watermarks), verrouillage cryptographique</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Anonymat</strong></td>
+<td style="text-align: left;">brouilleur de voix, déguisement, argent liquide</td>
+<td style="text-align: left;">mixers, remailers, argent électronique, deep web</td>
+</tr>
+</tbody>
+</table>
+</section>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="risques-liés-à-internet" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Risques Liés à Internet</h1>
+<section id="programmes-malveillants-transmis-par-e-mail" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="programmes-malveillants-transmis-par-e-mail"><span class="header-section-number">3.1</span> Programmes Malveillants Transmis par E-Mail</h2>
+<ul>
+<li>Aussi appelés <strong>maliciels</strong> (<em>malware</em>).</li>
+<li>E-mails visant à <strong>provoquer une action</strong> (ouvrir une pièce jointe ou cliquer sur un lien).</li>
+<li>Attaques souvent <strong>personnalisées</strong> grâce à l’<strong>ingénierie sociale</strong>.</li>
+<li><strong>Conséquences principales :</strong>
+<ul>
+<li>Installation de malware (<em>ransomware</em>, <em>keyloggers</em>, etc.).</li>
+<li><strong>Perte ou vol de données</strong> personnelles.</li>
+<li><strong>Détournement du système</strong> et <strong>propagation</strong> du malware.</li>
+</ul></li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Ultra-synthèse
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>Malware diffusé par e-mail</li>
+<li>Incitation à cliquer ou ouvrir</li>
+<li>Ingénierie sociale</li>
+<li>Vol, perte de données, détournement</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Version originale
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<section id="programmes-malveillants-transmis-par-e-mail-1" class="level2 callout-body-container callout-body" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="programmes-malveillants-transmis-par-e-mail-1"><span class="header-section-number">3.2</span> Programmes Malveillants Transmis par E-Mail</h2>
+<ul>
+<li>Aussi appelés <strong>maliciels</strong> ou <em>malware</em>.</li>
+<li>E-mails conçus pour <strong>inciter le destinataire</strong> à <strong>ouvrir une pièce jointe</strong> ou à <strong>suivre un lien</strong> contenant de la publicité non souhaitée, des informations offensives, des programmes à risque, etc.</li>
+<li>Souvent ciblés sur la base des intérêts de la victime (travail préliminaire d’ingénierie sociale (<em>social engineering</em>)).</li>
+<li><strong>Conséquences :</strong>
+<ul>
+<li>Installation de malware (<em>ransomware</em>, <em>keyloggers</em>, etc.) dans le système de la victime (<em>ordinateur</em>, <em>tablette</em>, <em>smartphone</em>, <em>smartwatch</em>, etc.).</li>
+<li>Destruction de données contenues dans l’ordinateur.</li>
+<li>Vol d’informations ou de données personnelles.</li>
+<li>Détournement du système pour des fins malicieuses (p.ex.: minage illicite de <em>bitcoins</em>).</li>
+<li>Diffusion de <em>malware</em> (éventuellement à d’autres utilisateurs).</li>
+</ul></li>
+</ul>
+</section>
+</div>
+</div>
+</section>
+<section id="programmes-malveillants-transmis-sur-le-web" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="programmes-malveillants-transmis-sur-le-web"><span class="header-section-number">3.3</span> Programmes Malveillants Transmis sur le Web</h2>
+<ul>
+<li>Méthode appelée <strong><em>drive-by download</em></strong> : <strong>infection automatique lors de la visite d’un site web</strong>.</li>
+<li>L’origine peut être :
+<ul>
+<li>un <strong>site malveillant</strong> ;</li>
+<li>un <strong>site légitime compromis</strong> (p.&nbsp;ex. <em>cross-site scripting</em>).</li>
+</ul></li>
+<li>La <strong>prudence des utilisateurs</strong> limite fortement ce mode de propagation.</li>
+<li>Les <strong>impacts sont similaires</strong> aux infections par e-mail.</li>
+<li>La <strong>restriction des scripts</strong> (<em>java/javascript</em>) réduit les risques mais peut <strong>affecter la navigation</strong>.</li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Ultra-synthèse
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><em>Drive-by download</em> = infection sans action de l’utilisateur</li>
+<li>Sites malveillants ou compromis</li>
+<li>Sensibilisation + scripts restreints = protection</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Version originale
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<section id="programmes-malveillants-transmis-sur-le-web-1" class="level2 callout-body-container callout-body" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="programmes-malveillants-transmis-sur-le-web-1"><span class="header-section-number">3.4</span> Programmes Malveillants Transmis sur le Web</h2>
+<ul>
+<li>Cette technique, souvent appelée <strong><em>drive-by download</em></strong>, permet d’<strong>infecter le système</strong> (<em>ordinateur</em>, <em>tablette</em>, <em>smartphone</em>, <em>smartwatch</em>, etc.) <strong>sur lequel s’exécute un client web lors de la simple visite d’un site</strong>.</li>
+<li>Il peut s’agir soit :
+<ul>
+<li>d’un site malicieux qui contient le <em>malware</em>.</li>
+<li>d’un site web légitime qui aurait été infecté au préalable (par exemple, moyennant une technique appelée <em>cross-site scripting</em>). L’infection pouvant affecter seulement certaines pages…</li>
+</ul></li>
+<li>La sensibilisation des utilisateurs (ne pas visiter des sites douteux) diminue l’efficacité de cette technique dans la transmission de <em>malware</em>.</li>
+<li>Les conséquences sont semblables à celle des transmissions par e-mail.</li>
+<li>L’exécution restreinte des scripts (<em>java/javascript</em>) dans le navigateur peut limiter la portée de l’infection mais risque de contraindre la navigation dans certains sites.</li>
+</ul>
+</section>
+</div>
+</div>
+</section>
+<section id="hameçonnage-phishing" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="hameçonnage-phishing"><span class="header-section-number">3.5</span> Hameçonnage (Phishing)</h2>
+<ul>
+<li>Technique visant à <strong>collecter des informations privées</strong> par des méthodes de <strong>pêche indiscriminée</strong>.</li>
+<li>Le <strong><em>phishing</em></strong> peut être :
+<ul>
+<li><strong>général</strong> (ciblage large) ;</li>
+<li><strong>ciblé</strong> (<em>spear phishing</em>) lorsqu’une personne ou organisation précise est visée.</li>
+</ul></li>
+<li>Le vecteur principal est un <strong>e-mail à adresse falsifiée</strong>, difficilement détectable.</li>
+<li>L’objectif est d’obtenir des <strong>données sensibles</strong> (identifiants, mots de passe, informations personnelles ou bancaires).</li>
+<li>Les attaques reposent sur des <strong>prétextes crédibles ou menaçants</strong> pour pousser la victime à coopérer.</li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Ultra-synthèse
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>Vol d’informations par tromperie</li>
+<li>E-mails falsifiés</li>
+<li><em>Spear phishing</em> = attaque ciblée</li>
+<li>Prétextes urgents ou menaçants</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Version originale
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<section id="hameçonnage-phishing-1" class="level2 callout-body-container callout-body" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="hameçonnage-phishing-1"><span class="header-section-number">3.6</span> Hameçonnage (Phishing)</h2>
+<ul>
+<li>Le mot <strong><em>phishing</em></strong> se compose des mots anglais <strong><em>“password”</em></strong> (mot de passe), <strong><em>“harvesting”</em></strong> (moisson) et <strong><em>“fishing”</em></strong> (pêche).</li>
+<li>Cette composition de mots illustre le but principal de cette technique qui consiste à <strong>récolter un maximum d’informations privées</strong> des utilisateurs via des mécanismes de “pêche indiscriminée”.</li>
+<li>Lorsque la pêche aux informations est ciblée vers une personne ou organisation spécifique, la technique est dénommée <strong><em>spear phishing</em></strong> (qui provient de <em>spear fishing</em> ou pêche au harpon).</li>
+<li>Le vecteur de transmission consiste normalement dans un e-mail avec une <strong>adresse d’expédition falsifiée</strong> (mais souvent indétectable…) qui demande à la victime de fournir des informations privées : adresses e-mail, identifiants (<em>twitter</em>, <em>facebook</em>, etc.), mots de passe, numéros d’identité, numéros de comptes bancaires, etc.</li>
+<li>Les prétextes utilisés sont variés (mise à jour du système informatique, arrêt du service, retrait d’un envoi, etc.) et vont jusqu’à menacer l’utilisateur en cas de refus.</li>
+</ul>
+</section>
+</div>
+</div>
+</section>
+<section id="pourriels-spam" class="level2" data-number="3.7">
+<h2 data-number="3.7" class="anchored" data-anchor-id="pourriels-spam"><span class="header-section-number">3.7</span> Pourriels (Spam)</h2>
+<ul>
+<li>E-mails <strong>indésirables</strong>, souvent publicitaires, ou <strong>pop-ups</strong> non sollicités lors de la navigation web.</li>
+<li>Représentent environ <strong>60% des e-mails mondiaux</strong>.</li>
+<li>Conséquences principales :
+<ul>
+<li><strong>Consommation de ressources</strong> et perte de temps.</li>
+<li>Certains peuvent <strong>transmettre des malware</strong>.</li>
+</ul></li>
+<li>Ciblent souvent les adresses courtes ou proviennent de <strong>listes d’adresses vendues/échangées</strong>.</li>
+<li>Les <strong>filtres anti-spam</strong> entraînent des <strong>coûts importants</strong> pour les organisations.</li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Ultra-synthèse
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>E-mails/publicités indésirables</li>
+<li>Risques : perte de temps, ressources, malware</li>
+<li>Ciblage : adresses courtes ou listes</li>
+<li>Filtrage coûteux pour entreprises</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Version originale
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<section id="pourriels-spam-1" class="level2 callout-body-container callout-body" data-number="3.8">
+<h2 data-number="3.8" class="anchored" data-anchor-id="pourriels-spam-1"><span class="header-section-number">3.8</span> Pourriels (Spam)</h2>
+<ul>
+<li>Englobe tous les <strong>e-mails indésirables</strong> (souvent publicitaires) reçus par les personnes et les organisations.</li>
+<li>Terme utilisé également pour désigner les <strong>pages</strong>/<strong><em>fenêtres pop-up</em></strong> <strong>affichées sans le consentement de l’utilisateur</strong> lors de la navigation web.</li>
+<li>On estime que <strong>60%</strong> des e-mails qui circulent dans le monde appartiennent à cette catégorie.</li>
+<li>Les conséquences sont souvent limitées à la consommation de ressources de calcul et stockage ainsi qu’au gaspillage de temps associé à la lecture et traitement de ces messages mais…</li>
+<li>… <strong>certains e-mails spam</strong> peuvent également constituer des <strong>vecteurs de transmission de malware</strong>.</li>
+<li>Ils ont tendance à cibler plus particulièrement les adresses e-mail courtes (p.ex: abc@gmail.com) mais fonctionnent également sur la base des listes (souvent échangées / vendues) contenant tous types d’adresses.</li>
+<li>Les opérations de <strong>filtrage anti-spam</strong> entraînent des coûts considérables pour les organisations.</li>
+</ul>
+</section>
+</div>
+</div>
+</section>
+<section id="rançongiciels-ransomware" class="level2" data-number="3.9">
+<h2 data-number="3.9" class="anchored" data-anchor-id="rançongiciels-ransomware"><span class="header-section-number">3.9</span> Rançongiciels (Ransomware)</h2>
+<ul>
+<li>Malware type <strong>Cheval de Troie</strong> qui <strong>chiffre les données</strong> pour les rendre inaccessibles.</li>
+<li>Exige une <strong>rançon</strong> (souvent en bitcoins) pour récupérer les fichiers.</li>
+<li>Peut rester <strong>dormant</strong>, déclenché par un événement ou une date.</li>
+<li>Principal vecteur : <strong>e-mails malveillants</strong>.</li>
+<li>Autres effets possibles : <strong>attaques par déni de service, extorsion</strong>.</li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Ultra-synthèse
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>Chiffrement des données par Cheval de Troie</li>
+<li>Rançon pour restaurer accès</li>
+<li>Dormance programmée possible</li>
+<li>Infection via e-mails malveillants</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Version originale
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<section id="rançongiciels-ransomware-1" class="level2 callout-body-container callout-body" data-number="3.10">
+<h2 data-number="3.10" class="anchored" data-anchor-id="rançongiciels-ransomware-1"><span class="header-section-number">3.10</span> Rançongiciels (Ransomware)</h2>
+<ul>
+<li>Cette famille spécifique de malware appartient à la catégorie appelée <strong>Chevaux de Troie</strong> (Trojan Horses).</li>
+<li>Leur comportement plus habituel consiste à <strong>chiffrer les données de la victime</strong> (locaux et distants) <strong>afin de les rendre totalement inaccessibles</strong>.</li>
+<li>Un message apparait ensuite pour demander le paiement d’une rançon (souvent en <strong>bitcoins</strong> ou une autre monnaie virtuelle) permettant potentiellement de récupérer l’accès aux fichiers chiffrés.</li>
+<li>Ils peuvent rester en <strong><em>état dormant</em></strong> dans le système infecté et être déclenchés par un événement spécifique ou à une date donnée (attaques synchronisées).</li>
+<li>Leurs vecteurs d’infection sont variés mais les <strong>e-mails contenant des pièces jointes malicieuses</strong> sont souvent mis en cause lors des infections primaires.</li>
+<li>Des nombreuses variantes existent et continuent à se développer.</li>
+<li>On observe parfois d’autres comportements associés à ces <em>malware</em> : <strong>dénis de service</strong>, <strong>extorsions ciblées</strong>, <strong>menaces</strong>, etc.</li>
+</ul>
+</section>
+</div>
+</div>
+</section>
+<section id="attaques-sur-les-dispositifs-internet-of-things-iot" class="level2" data-number="3.11">
+<h2 data-number="3.11" class="anchored" data-anchor-id="attaques-sur-les-dispositifs-internet-of-things-iot"><span class="header-section-number">3.11</span> Attaques sur les Dispositifs <strong><em>Internet of Things (IoT)</em></strong></h2>
+<ul>
+<li>Attaques visant les <strong>objets connectés</strong> (caméras, TV, capteurs, alarmes, etc.).</li>
+<li>Ces dispositifs sont <strong>faciles à compromettre</strong> à cause de :
+<ul>
+<li><strong>failles connues</strong>,</li>
+<li><strong>mots de passe par défaut</strong>,</li>
+<li><strong>manque de sensibilisation</strong> des utilisateurs.</li>
+</ul></li>
+<li>La <strong>prise de contrôle à distance</strong> permet :
+<ul>
+<li>un <strong>point d’entrée</strong> vers le réseau,</li>
+<li>l’<strong>utilisation de l’appareil</strong> pour des activités illicites (DDoS, hacking, minage).</li>
+</ul></li>
+<li>Un <strong>inventaire précis</strong> des dispositifs connectés est indispensable.</li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Ultra-synthèse
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>Cible les objets connectés</li>
+<li>Sécurité faible (failles, mots de passe par défaut)</li>
+<li>Risque d’accès au réseau et d’abus</li>
+<li>Inventaire des IoT nécessaire</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Version originale
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<section id="attaques-sur-les-dispositifs-internet-of-things-iot-1" class="level2 callout-body-container callout-body" data-number="3.12">
+<h2 data-number="3.12" class="anchored" data-anchor-id="attaques-sur-les-dispositifs-internet-of-things-iot-1"><span class="header-section-number">3.12</span> Attaques sur les Dispositifs <strong><em>Internet of Things (IoT)</em></strong></h2>
+<ul>
+<li>Ciblent les <strong>objets connectés</strong> de toute sorte (caméras, TVs, frigos, capteurs et interrupteurs domotiques, installations d’alarme, etc.).</li>
+<li>Ils sont souvent <strong>plus faciles à pirater</strong> que les systèmes traditionnels par cause de :
+<ul>
+<li>nombreuses failles de sécurité souvent connues des attaquants.</li>
+<li>mots de passe par défaut.</li>
+<li>négligence de la part des utilisateurs qui ignorent les risques qui leurs sont propres.</li>
+</ul></li>
+<li>La <strong>prise de contrôle à distance</strong> de ces appareils par une entité malveillante implique :
+<ul>
+<li>Une porte d’entrée au réseau domestique/corporatif.</li>
+<li>Un dispositif pouvant être utilisé pour des activités illicites (hacking, attaques DDoS, minage de bitcoins, etc.).</li>
+</ul></li>
+<li>L’établissement d’un répertoire précis de tous les dispositifs de ce type connectés au réseau est nécessaire!</li>
+</ul>
+</section>
+</div>
+</div>
+</section>
+<section id="modification-illicite-des-informations-publiées-information-spoofing-and-website-defacement" class="level2" data-number="3.13">
+<h2 data-number="3.13" class="anchored" data-anchor-id="modification-illicite-des-informations-publiées-information-spoofing-and-website-defacement"><span class="header-section-number">3.13</span> Modification Illicite des Informations Publiées (<em>Information Spoofing and Website Defacement</em>)</h2>
+<ul>
+<li>Attaques visant à <strong>altérer les informations</strong> sur sites web et réseaux sociaux.</li>
+<li>Impact : <strong>réputation compromise</strong> et <strong>dommages économiques</strong>.</li>
+<li>Sites web : sécurisation du système hôte, configuration restrictive, <strong>audits réguliers</strong>.</li>
+<li>Réseaux sociaux : mots de passe forts, <strong>authentification multi-facteur</strong>, fermeture des sessions, suppression des <em>cookies</em>.</li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Ultra-synthèse
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-15" class="callout-15-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>Altération des infos sur sites et réseaux sociaux</li>
+<li>Risques : réputation et pertes économiques</li>
+<li>Sites : sécurisation + audits</li>
+<li>Réseaux sociaux : mots de passe forts, MFA, sessions fermées, cookies supprimés</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Version originale
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-16" class="callout-16-contents callout-collapse collapse">
+<section id="modification-illicite-des-informations-publiées-information-spoofing-and-website-defacement-1" class="level2 callout-body-container callout-body" data-number="3.14">
+<h2 data-number="3.14" class="anchored" data-anchor-id="modification-illicite-des-informations-publiées-information-spoofing-and-website-defacement-1"><span class="header-section-number">3.14</span> Modification Illicite des Informations Publiées (<em>Information Spoofing and Website Defacement</em>)</h2>
+<ul>
+<li>Attaques visant <strong>l’intégrité</strong> de l’information publiée dans les sites web, les réseaux sociaux, etc.</li>
+<li>Elles portent atteinte à la <strong>réputation</strong> et peuvent provoquer d’importants <strong>dommages économiques</strong> pour les sociétés ayant une présence Internet.</li>
+<li>Dans le cas des <strong>sites web</strong>, la <strong>sécurisation du système hôte</strong> est essentielle ainsi qu’une <strong>configuration aussi restrictive que possible</strong>. Des audits des sécurité récurrents sont vivement recommandés.</li>
+<li>La <strong>protection des informations affichées dans les réseaux sociaux</strong> dépend directement du processus d’authentification permettant d’accéder au profil à risque :
+<ul>
+<li>Éviter les mots de passe trop simples.</li>
+<li>Privilégier l’authentification forte, si possible <em>multi-facteur</em>.</li>
+<li>Fermer proprement les sessions.</li>
+<li>Effacer les <em>cookies</em>.</li>
+</ul></li>
+</ul>
+</section>
+</div>
+</div>
+</section>
+<section id="attaques-dénis-de-service-denial-of-service-ddos" class="level2" data-number="3.15">
+<h2 data-number="3.15" class="anchored" data-anchor-id="attaques-dénis-de-service-denial-of-service-ddos"><span class="header-section-number">3.15</span> Attaques <strong>Dénis de Service</strong> (<em>Denial of Service</em> / <em>DDoS</em>)</h2>
+<ul>
+<li>Vise à <strong>rendre inaccessibles des systèmes informatiques</strong>, surtout pour les organisations.</li>
+<li><strong>DDoS</strong> : attaque distribuée par des milliers de dispositifs, générant un trafic massif.</li>
+<li>Protections classiques (<em>firewalls</em>, sondes IDS (Intrusion Detection System) / IPS (Intrusion Prevention System)) souvent <strong>insuffisantes</strong>.</li>
+<li>Conséquences :
+<ul>
+<li><strong>Réputation affectée</strong></li>
+<li><strong>Pertes financières</strong> (parfois rançons)</li>
+<li><strong>Risques élevés</strong> pour les infrastructures critiques (hôpitaux, centrales, Internet backbone)</li>
+</ul></li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Ultra-synthèse
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-17" class="callout-17-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>DDoS = systèmes inaccessibles via attaques massives</li>
+<li>Protections limitées</li>
+<li>Risques : réputation, finances, infrastructures critiques</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Version originale
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-18" class="callout-18-contents callout-collapse collapse">
+<section id="attaques-dénis-de-service-denial-of-service-ddos-1" class="level2 callout-body-container callout-body" data-number="3.16">
+<h2 data-number="3.16" class="anchored" data-anchor-id="attaques-dénis-de-service-denial-of-service-ddos-1"><span class="header-section-number">3.16</span> Attaques <strong>Dénis de Service</strong> (<em>Denial of Service</em> / <em>DDoS</em>)</h2>
+<ul>
+<li>Attaques destinées à <strong>rendre inaccessibles des systèmes informatiques</strong> de toute sorte visant surtout les organisations privées ou étatiques.</li>
+<li>Le terme <strong>DDoS</strong> (<em>Distributed Denial of Service</em>) désigne une famille d’attaques dans laquelle des multiples (<strong>souvent des dizaines de milliers) de dispositifs ciblent simultanément le(s) système(s) victime(s)</strong>.</li>
+<li>Le trafique généré atteint plusieurs centaines de gigabits / seconde.</li>
+<li>L’efficacité des mécanismes de protection traditionnels (<em>firewalls</em>, <em>sondes</em> de <em>prévention</em> et de <em>détection d’intrusion</em>, etc.) est limitée.</li>
+<li>L’indisponibilité d’un service peut engendrer :
+<ul>
+<li>des problèmes <strong>réputationnels</strong>.</li>
+<li>d’importantes <strong>pertes financières</strong> (des <strong>demandes de rançon</strong> peuvent être exigées pour les désactiver).</li>
+<li>des <strong>hauts risques de sécurité (même physique!)</strong> lorsque des <strong>infrastructures critiques</strong> (hôpitaux, centrales électriques, <em>backbone</em> de l’Internet, etc.) sont ciblées.</li>
+</ul></li>
+</ul>
+</section>
+</div>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
