@@ -812,3 +812,516 @@ Security services are the objectives aimed at protecting a system.
 | Transactions between two distant users, Software protection (multicast distribution)         | **Asymmetric crypto for symmetric key protection** + **Symmetric crypto for data protection**              | **Speed**, Only the symmetric key needs to be re-encrypted for each correspondent, Encrypted copy of software can be made public |
 | Protection of network segments                                                                | **Symmetric crypto**                                                                                        | **Speed**, Stable environment → easy confidential key exchange between sysadmins                                                   |
 :::
+
+# Dissection of an Attack: Ransomware
+
+### Definition and Impact
+* **Definition**: Malicious software that encrypts data and demands a ransom for its restoration.
+* **Limitations of the classic definition**:
+  - Does not cover the impact on **critical infrastructure** (e.g., Colonial Pipeline, May 2021)
+  - Underestimates the **systemic scope** of attacks
+* **Alarming statistics**:
+  - Billions of annual attacks
+  - Considered the **most dangerous cyber threat** in 2021 ("Ransomware Everywhere")
+
+::: {.callout collapse="true"}
+#### Ultra-summary
+- **Malware**: Encrypts data → demands ransom
+- **Impact**: Critical infrastructure (e.g., Colonial Pipeline)
+- **Threat #1** in cybersecurity (2021)
+- **Targets**: Individuals + businesses + states
+:::
+
+::: {.callout collapse="true"}
+#### Original version
+"Ransomware (from English **ransomware**), ransom software, extortion software, is malicious software that holds personal data hostage. To do this, ransomware **encrypts personal data** then asks their owner to send money in exchange for the **decryption key**" (Wikipedia September 21, 2021).
+
+- **Incomplete definition** because **ransomware** affects a **vast spectrum of IT infrastructure**
+
+- For example, in May 2021, a **ransomware attack** against the **Colonial Pipeline** company caused a **fuel supply disruption** for a large part of the US coast
+
+- With a **total number of attacks** counted in **billions per year**, "**Ransomware Everywhere**" is globally considered the **most direct, visible and dangerous threat** for users and companies in 2021!
+:::
+
+---
+
+## Ransomware Attack Lifecycle
+
+### Prevention and Response
+| Phase | Measures |
+|-------|---------|
+| **Prevention** | - Regular patching<br>- Detection solutions (Firewalls, WAFs, IDS/IPS)<br>- Anti-malware scans (emails, files) |
+| **Protection** | - **Offline backups** (essential!)<br>- Strict security policies<br>- User training |
+| **Response** | - **Do not pay** (official recommendation)<br>- Forensic analysis<br>- Restoration from backups |
+
+### Technical Dissection
+1. **Infection**:
+   - Vectors: Phishing, exploits, vulnerable RDP
+   - Propagation: Lateral (network) or vertical (system)
+
+2. **Execution**:
+   - Encryption of targeted files
+   - Deletion of shadow copies
+   - Persistence (registry, scheduled tasks)
+
+3. **Extortion**:
+   - Display of ransom demand
+   - Payment in cryptocurrencies (Bitcoin, Monero)
+   - Payment deadlines with penalties
+
+4. **Obfuscation**:
+   - Code obfuscation
+   - Communication via TOR/Deep Web
+   - Log erasure
+
+::: {.callout collapse="true"}
+#### Ultra-summary
+**Attack cycle**:
+
+1. Infection (phishing/exploits)
+2. Execution (encryption + persistence)
+3. Extortion (ransom in crypto)
+4. Obfuscation (TOR + trace erasure)
+
+**Countermeasures**:
+
+    ✅ Offline backups
+    ✅ Patching + detection
+    ✅ Training
+    ❌ Do not pay
+:::
+
+---
+
+## Cryptolocker: Technical Analysis
+
+### Attack Scheme
+
+```{mermaid}
+graph TD
+    A[Initial infection] --> B[File encryption]
+    B --> C[Private key storage on C2 servers]
+    C --> D[Ransom demand]
+    D --> E{Payment ?}
+    E -->|Yes| F[Decryption key sent via TOR]
+    E -->|No| G[Permanent data loss]
+```
+
+### Preferred Targets
+* **Critical extensions** (extract):
+  - Documents: `.docx`, `.xlsx`, `.pdf`, `.pptx`
+  - Databases: `.mdb`, `.sql`, `.sqlite`
+  - Media: `.jpg`, `.png`, `.mp4`, `.avi`
+  - Development: `.java`, `.cpp`, `.py`, `.php`
+  - Financial: `.qbw`, `.qbb`, `.wallet`
+
+* **Behavior**:
+  - **Selective** encryption (recent/modified files)
+  - **Double extortion**: Encryption + threat of leakage
+  - **RaaS** (Ransomware-as-a-Service): Economic model
+
+::: {.callout collapse="true"}
+#### Ultra-summary
+**Mechanism**:
+- Private key stored on C2 servers
+- Payment → key via TOR
+- Targets: 100+ extensions (docs, DB, media)
+
+**Recent evolutions**:
+- Double extortion (encryption + leakage)
+- RaaS (ransomware rental)
+:::
+
+::: {.callout collapse="true"}
+#### Original version
+## Ransomware: Complete View
+
+*(Source: 2017 State of Cybersecurity, F-Secure Inc.)*
+
+## Ransomware: Complete View
+
+#### Prevention, Remediation and Response
+- **Patching**
+- **Active and passive detection** (Firewalls, WAFs, IDS, IPS, email malware scan, etc.)
+- **Offline backups** !
+- **Security Policy** - Rules for proper email usage
+- **Training** !
+- **To pay or not to pay**...
+
+#### Technical Dissection of the Attack
+- **Infection and propagation**
+- **Execution**
+- **Payment** (Crypto-currencies / Bitcoin)
+- **Obfuscation** (Obfuscation, TOR Networks/Deep Web)
+
+### Generic Scheme of a Cryptolocker Ransomware
+
+- **Decryption private keys** are stored on the **attacker's** servers
+- They are sent to the **victim** after **bitcoin payment**
+- The **trace** is shredded using **TOR networks**
+
+## Ransomware Cryptolocker: Targets
+
+**Targeted file extensions**:
+.jin, .xls, .xlsx, .pdf, .doc, .docx, .ppt, .pptx, .txt, .dwg, .bak, .bkf, .pst, .dbx, .zip, .rar, .mdb,
+.asp, .aspx, .html, .htm, .dbf, .3dm, .3ds, .3fr, .jar, .3g2, .xml, .png, .tif, .3gp, .java, .jpe, .jpeg,
+.jpg, .jsp, .php, .3pr, .7z, .ab4, .accdb, .accde, .accdr, .accdt, .ach, .kbx, .acr, .act, .adb, .ads,
+.agdl, .ai, .ait, .al, .apj, .arw, .asf, .asm, .asx, .avi, .awg, .back, .backup, .backupdb, .pbl,
+.bank, .bay, .bdb, .bgt, .bik, .bkp, .blend, .bpw, .c, .cdf, .cdr, .cdr3, .cdr4, .cdr5, .cdr6, .cdrw,
+.cdx, .ce1, .ce2, .cer, .cfp, .cgm, .cib, .class, .cls, .cmt, .cpi, .cpp, .cr2, .craw, .crt, .crw, .phtml,
+.php5, .cs, .csh, .csl, .tib, .csv, .dac, .db, .db3, .dbjournal, .dc2, .dcr, .dcs, .ddd, .ddoc, .ddrw,
+.dds, .der, .des, .design, .dgc, .djvu, .dng, .dot, .docm, .dotm, .dotx, .drf, .drw, .dtd, .dxb, .dxf,
+.dxg, .eml, .eps, .erbsql, .erf, .exf, .fdb, .ffd, .fff, .fh, .fmb, .fhd, .fla, .flac, .flv, .fpx, .fxg, .gray,
+.grey, .gry, .h, .hbk, .hpp, .ibank, .ibd, .ibz, .idx, .iif, .iiq, .incpas, .indd, .kc2, .kdbx, .kdc, .key,
+.kpdx, .lua, .m, .m4v, .max, .mdc, .mdf, .mef, .mfw, .mmw, .moneywell, .mos, .mov, .mp3,
+.mp4, .mpg, .mrw, .msg, .myd, .nd, .ndd, .nef, .nk2, .nop, .nrw, .ns2, .ns3, .ns4, .nsd, .nsf, .nsg,
+.nsh, .nwb, .nx2, .nxl, .nyf, .oab, .obj, .odb, .odc, .odf, .odg, .odm, .odp, .ods, .odt, .oil, .orf,
+.ost, .otg, .oth, .otp, .ots, .ott, .p12, .p7b, .p7c, .pab, .pages, .pas, .pat, .pcd, .pct, .pdb, .pdd,
+.pef, .pem, .pfx, .pl, .plc, .pot, .potm, .potx, .ppam, .pps, .ppsm, .ppsx, .pptm, .prf, .ps,
+.psafe3, .psd, .pspimage, .ptx, .py, .qba, .qbb, .qbm, .qbr, .qbw, .qbx, .qby, .r3d, .raf, .rat,
+.raw, .rdb, .rm, .rtf, .rw2, .rwl, .rwz, .s3db, .sas7bdat, .say, .sd0, .sda, .sdf, .sldm, .sldx, .sql,
+.sqlite, .sqlite3, .sqlitedb, .sr2, .srf, .srt, .srw, .st4, .st5, .st6, .st7, .st8, .std, .sti, .stw, .stx, .svg,
+.swf, .sxc, .sxd, .sxg, .sxi, .sxi, .sxm, .sxw, .tex, .tga, .thm, .tlg, .vob, .war, .wallet, .wav, .wb2,
+.wmv, .wpd, .wps, .x11, .x3f, .xis, .xla, .xlam, .xlk, .xlm, .xlr, .xlsb, .xlsm, .xlt, .xltm, .xltx, .xlw,
+.ycbcra, .yuv
+
+*Source: Intel Security Advanced Threat Research - http://www.intelsecurity.com*
+:::
+
+# Basic Cryptography Concepts
+
+* Introduction to the **fundamental concepts** of cryptography.
+* Presents **security principles**, **system types**, and **attack models**.
+* Includes **historical systems** and complementary techniques.
+
+## Kerckhoffs' Principle
+
+* Fundamental principle: **security relies solely on the key**, not on the secrecy of the algorithm.
+* The system must remain **secure even if the algorithm is public**.
+* The key must be **easily modifiable** and the system **simple to use**.
+* Explicit rejection of **security through obscurity**.
+
+::: {.callout collapse="true"}
+#### Ultra-summary
+- Security based on the key
+- Public algorithm
+- No security through obscurity
+:::
+
+::: {.callout collapse="true"}
+#### Original version
+## Kerckhoffs' Principle
+
+**Auguste Kerckhoffs** published in **1883** two articles defining **six principles** for military ciphers:
+
+1. The system must be **practically, if not mathematically, undecipherable**.
+2. It must **not require confidentiality** and remain secure even if it falls into enemy hands.
+3. The **key** must be able to be **memorized, transmitted and modified easily**, without written notes.
+4. The system must be **compatible with telegraphic communications**.
+5. It must be **portable** and usable by **a single person**.
+6. It must be **simple to use**, without complex procedures or excessive constraints.
+
+Kerckhoffs stated as early as the **19th century** that security must be **mathematically demonstrable** and that **there is no security through obscurity**.
+:::
+
+## Classification of Encryption Systems
+
+### Unconditional Security
+
+(*unconditional security* / *perfect secrecy*)
+
+* Security **independent of computing power**.
+* **Ciphertext** provides no information about the **plaintext**.
+* Conditions: **key ≥ message**, **never reused**.
+* Mostly **theoretical** use.
+* **Example**: *one-time pad*.
+
+### As hard as / equivalent / provable security
+
+* Cryptanalysis **as difficult** as a **hard mathematical problem**.
+* **RSA** and **Rabin** proven equivalent to factorization.
+  * Demonstrated by **reduction** (*reduction proof*).
+* Central but **controversial** concept.
+
+### Computational Security
+
+(*computational security* / *practical security*)
+
+* Security based on **unrealistic cost of attacks**.
+* Most used category in practice.
+* **Examples**: **AES**, **DES**, **IDEA**, **RC4**.
+
+::: {.callout collapse="true"}
+
+#### Ultra-summary
+
+* **Unconditional**: perfect, theoretical (*one-time pad*).
+* **Provable security**: equivalence to hard mathematical problem.
+* **Computational**: secure in practice.
+:::
+
+::: {.callout collapse="true"}
+
+#### Original version
+
+* **Unconditional security** (*unconditional security also called **perfect secrecy***):
+
+  * The security of the encryption system **is not compromised by the computing power** intended for cryptanalysis.
+  * This category relies on **information theory** published by **Shannon in 1949**.
+  * More precisely, an encryption system is **unconditionally secure** if the probability of encountering a **plaintext x** after observing the **corresponding ciphertext y** is identical to the a priori probability of encountering plaintext x.
+  * In other words, having **plaintext/ciphertext pairs (x,y)** provides **no help for cryptanalysis**.
+  * A necessary condition for a system to be unconditionally secure is that the **key be at least the same size as the message** and, above all, that it **not be reused** to encrypt different messages.
+  * This condition makes these systems **poorly suited to usual cryptographic needs** and reduces their domain of interest to a **theoretical framework**.
+  * The classic example is the **one-time pad** invented in **1917** by **J. Mauborgne** and **G. Vernam**.
+  * Theoretical foundations of unconditionally secure systems + other examples in **[Sti06]**.
+
+* **As hard as / equivalent / provable security**
+
+  * When it can be proven that cryptanalyzing the algorithm is **as difficult as solving a reputedly hard mathematical problem**.
+  * For example **factorization of large numbers**, calculation of **square roots modulo a composite**, calculation of **discrete logarithms in a finite group**, etc.
+  * The **Rabin** and **RSA** algorithms (generic case^1) are "proven" **equivalent to factorization**.
+  * Such a proof is called a "reduction" (**reduction proof**).
+  * The notion of **provable security** is at the origin of an **important controversy** in the cryptographic world.
+
+* **Computational security** (*computational security also called **practical security***)
+
+  * An encryption system is in this category if the **computational effort needed to "break" it** using the best possible techniques is **beyond** (with a reasonable margin) the computing resources of a hypothetical adversary.
+  * The vast majority of symmetric encryption systems (**AES, DES, IDEA, RC4**, etc.) are in this category.
+:::
+
+## Entropy
+
+* **Entropy** (Shannon, 1948) measures the **effective amount of information** contained in a message.
+* **Conditional entropy** measures the uncertainty that remains about the **plaintext** after observing the **ciphertext**.
+
+### Properties
+
+* $0 \le H(X) \le \log n$
+* $H(X) = 0$ → no uncertainty
+* $H(X) = \log n$ → all outcomes equally probable
+
+### Interpretation
+
+* Approximates the **number of bits needed** to encode $X$.
+* **Redundancy** = difference between effective encoding and entropy.
+
+### Conditional Entropy
+
+* $H(X \mid Y = y) = - \sum_{x} P(X=x \mid Y=y) \log P(X=x \mid Y=y)$
+* $H(X \mid Y) = \sum_y P(Y=y) H(X \mid Y=y)$
+* Measures the remaining uncertainty about the **plaintext** after observing the **ciphertext**.
+
+---
+
+::: {.callout collapse="true"}
+
+#### Ultra-summary
+
+* **Entropy**: amount of information in a message.
+* **Conditional entropy**: uncertainty about plaintext after ciphertext.
+* **Redundancy**: difference between effective encoding and entropy.
+:::
+
+::: {.callout collapse="true"}
+
+#### Original version
+
+* An essential definition in cryptography is the **effective** amount of information contained in a message.
+* For example, days of the week (*Monday*, ..., *Sunday*) can intuitively be encoded as character strings of length ($\le \text{len}(\text{``Wednesday''})$), i.e., $(8 \times 8 = 64)$ bits. However, the effective amount of information of the variable *day of the week* can be optimally encoded on **3 bits** (since $(2^3 = 8)$ is sufficient to represent the 7 possible variations).
+* **Entropy** (Shannon, 1948) is the mathematical formalization of this definition.
+
+### Formal Definition
+
+Let $X$ be a random variable with a finite set of possible values ${x_1, x_2, \dots, x_n}$, such that $P(X=x_i) = p_i$, with $0 \le p_i \le 1$ and $\sum p_i = 1$.
+The entropy of $X$, denoted $H(X)$, is defined by
+
+$H(X) = - \sum_{i=1}^{n} p_i \log p_i = \sum_{i=1}^{n} p_i \log \left(\frac{1}{p_i}\right)$
+
+By convention: $p_i \log p_i = 0$ if $p_i = 0$. All logarithms are in **base 2**.
+
+### Interpretation
+
+* Approximation of the number of bits needed to encode the elements of $X$.
+* **Redundancy** is the difference between the effective encoding and entropy.
+
+### Properties
+
+1. $0 \le H(X) \le \log n$
+2. $H(X) = 0 \iff \exists i : p_i = 1, p_j = 0 \ \forall j \ne i$
+3. $H(X) = \log n \iff p_i = 1/n \ \forall i$
+
+### Conditional Entropy
+
+* $H(X \mid Y = y) = - \sum_{x} P(X=x \mid Y=y) \log P(X=x \mid Y=y)$,
+* $H(X \mid Y) = \sum_y P(Y=y) H(X \mid Y=y)$
+
+*Measures the uncertainty about $X$ (plaintext) after having observed $Y$ (ciphertext).*
+:::
+
+## Attacks on Encryption Systems
+
+* **Ciphertext-only**: Adversary has only the **ciphertext**.
+* **Known-plaintext**: Adversary has **plaintext/ciphertext pairs**.
+* **Chosen-plaintext**: Adversary **chooses** the **plaintext** and see the ciphertext (and tries to find the plaintext for other messages).
+* **Adaptive chosen-plaintext**: **depends on** the **received** ciphertexts.
+* **Chosen-ciphertext**: Adversary **chooses** the **ciphertext** and obtains the plaintext (aims to find the key).
+* **Adaptive Chosen-ciphertext**: **Chosen-ciphertext** depends on the received plaintexts.
+
+## Oracles and Security Models
+
+### Random Oracles and Security Models
+
+* **Random Oracle**: A theoretical "perfect" function that returns a uniform and random value for each new input, but remains deterministic for an input already seen.
+* **ROM (Random Oracle Model)**: Mathematical proof framework using this ideal oracle as a substitute for hash functions.
+* **Standard Model**: Framework where security relies solely on the adversary's computing power against real algorithms.
+* **Limit**: A security proof in ROM does not guarantee absolute security in the real world (with SHA-256, etc.).
+
+::: {.callout collapse="true"}
+#### Original version
+A **random oracle** is an abstract entity accessible to legitimate parties and adversaries.
+
+* **Behavior**: It responds to input queries $x$ with perfectly random responses $Orc(x)$. 
+* **Determinism**: The only exception lies in previously processed inputs ($x_1, x_2, \dots, x_n$). If $x_1' = x_1$, then $Orc(x_1') = Orc(x_1)$.
+* **Modeling**: It is modeled by a function $Orc : X \to Y$ where $\forall x \in X, \Pr(Orc(x) = y) = \frac{1}{|Y|}$.
+* **Utility**: It behaves like an **"ideal" cryptographic hash function**, a valuable tool for proving security in the **Random Oracle Model**. 
+* **Comparison**: The **standard model** limits adversaries by computational factors. A protocol secure in the random oracle model can become vulnerable if used with a "real" hash function (SHA-1, SHA-256).
+:::
+
+---
+
+### Encryption, Decryption and Signature Oracles
+
+* **Function**: Entities that perform operations (encrypt/sign) for the adversary using secret keys without ever revealing them.
+* **Symmetric cryptography**: The oracle provides $E_k(x)$ or $D_k(y)$.
+* **Asymmetric cryptography**: The oracle is crucial for private operations (decryption/signature), as public operations are already freely accessible.
+
+::: {.callout collapse="true"}
+#### Original version: Operational Oracles
+An **encryption/decryption/signature oracle** is an abstract entity offering an "on-demand" service.
+
+* **Key access**: It uses the **same keys as the legitimate owners** (symmetric and asymmetric systems) without disclosing them.
+* **Symmetric primitives**: For a primitive $E$ and a key $k$, it returns $y = E_k(x)$ or the corresponding plaintext $x$.
+* **Public key systems**: The oracle is only needed for operations with the **private key** ($priv_k$).
+    * **Decryption**: returns $x$ such that $E'_{pubk}(x) = y$.
+    * **Signature**: For a system $S$, it returns $y = S_{privk}(x)$.
+* **Attacks**: The attack models using **chosen plaintext** (CPA) and **chosen ciphertext** (CCA) rely on making these oracles available to the adversary.
+:::
+
+---
+
+### Indistinguishability and Semantic Security (IND-CPA)
+
+* **Property**: An adversary must not be able to distinguish the ciphertexts of two different plaintext messages.
+* **IND-CPA (Indistinguishability under Chosen Plaintext Attack)**: If the adversary guesses the correct message only with a probability of $1/2 + \epsilon$, the system is considered secure.
+* **Semantic Security**: Equivalent to IND-CPA, it ensures that no useful information leaks from the ciphertext.
+
+::: {.callout collapse="true"}
+#### Original version: Semantic Security
+**Ciphertext indistinguishability** guarantees the inability to distinguish the ciphertexts of given plaintexts.
+
+* **Experiment (IND-CPA Security Game)**:
+    1. The adversary chooses two messages $M_0$ and $M_1$.
+    2. The oracle chooses a random index $i \in \{0,1\}$ and returns $c_i = E_k(M_i)$.
+    3. The adversary can perform other calculations or oracle calls.
+* **IND-CPA Definition**: The system is secure if the adversary's advantage is **negligible** ($Prob = 1/2 + \epsilon$ with $\epsilon$ small).
+* **Note**: In public key, the encryption oracle is useless because the adversary already possesses the public key. IND-CPA provides **semantic security**.
+:::
+
+---
+
+### Probabilistic Encryption and OAEP
+
+* **Problem**: Deterministic encryption allows **dictionary attacks** (comparison of known ciphertexts).
+* **Solution**: Add randomness to the message before encryption so that $E(M)$ is different each time.
+* **OAEP (Optimal Asymmetric Encryption Padding)**: Standard used with RSA. It combines the message $P$ with a random number $R$ via hash functions $h$ and XOR operations ($\oplus$).
+
+::: {.callout collapse="true"}
+#### Original version: Determinism vs. Probabilism
+**Deterministic** behavior (same inputs = same outputs) creates vulnerabilities.
+
+* **Example**: If Alice sends "Yes" or "No", the adversary can compute $C_{yes} = E_{pub}(``Yes")$ and compare. They can create a **codebook** (dictionary) to identify messages without breaking the key.
+* **Probabilistic encryption**: Adds randomness. The goal is semantic security for the public key.
+* **OAEP**: Used in **RSA-PKCS1**. The text $P$ is combined with randomness $R$:
+    * $M_1 := P \oplus h(R)$
+    * $M_2 := R \oplus h(M_1)$
+    * Encryption applies to $M_1$ and $M_2$. During decryption, we recover $R = M_2 \oplus h(M_1)$, then $P = h(R) \oplus M_1$.
+:::
+
+::: {.callout collapse="true"}
+#### Ultra-summary
+- **Random Oracle**: "Ideal" hash function (theoretical model).
+- **CPA/CCA Oracles**: Simulate access to the secret key to test resistance.
+- **IND-CPA**: Inability to distinguish two ciphertexts (Semantic Security).
+- **Probabilistic Encryption**: Essential to counter codebooks (dictionary attacks).
+- **OAEP**: Padding method adding the necessary randomness to RSA.
+:::
+
+## History of Cryptography and Unconditional Security
+
+### Historical Encryption Systems
+
+Cryptography was for a long time limited to the sole pursuit of **confidentiality**. Historical systems are based on two fundamental principles: **substitution** and **transposition**.
+
+* **Caesar Cipher** (mono-alphabetic substitution): Fixed letter shift. Very vulnerable to **frequency analysis**.
+* **Vigenère Cipher** (polyalphabetic substitution): Uses a key to vary the shift. More complex, but breakable by identifying the key length.
+* **Transposition Cipher**: Reorganization of the original text characters according to a permutation defined by a key.
+
+::: {.callout collapse="true"}
+#### Original version: Historical Cryptography
+For centuries **confidentiality** was the only application of cryptography...
+
+* **1st century BC, Caesar Cipher**: **Mono-alphabetic substitution encryption** $e_k(x) = (x + k) \pmod{26}$, $d_k(y) = (y - k) \pmod{26}$ where $x, y, k \in \mathbb{Z}_{26}$.
+    * Example: $E_1(\text{'hello'}) = \text{'ifmmp'}$.
+    * **Cryptanalysis**: easy, based on **character frequency**.
+* **16th century, Vigenère**: **Polyalphabetic substitution encryption** $e_k(x_1, \dots, x_n) = (x_1 + k_1, \dots, x_m + k_m, x_{m+1} + k_1, \dots) \pmod{26}$.
+    * **Cryptanalysis**: find the **key length $m$** by identifying repeated ciphertext portions and analyzing separate blocks as in the Caesar Cipher.
+* **Transposition Ciphers** (Porta, 1563): The key defines a **permutation** on the plaintext.
+* These techniques are still the basis of modern encryption systems (ex: **Enigma**, qualified by W. Churchill as the secret weapon that won the war).
+:::
+
+### The One-Time Pad (OTP)
+
+The **One-Time Pad** (OTP), or **Vernam cipher**, is the only system proven to be **unconditionally secure** (perfect secrecy).
+
+* **Principle**: The message is combined with a key of the same length via the XOR operation ($\oplus$).
+* **Unconditional Security**: Observation of the encrypted message provides no information about the plaintext message. Even an adversary with infinite computing power cannot break it.
+* **Shannon's Constraints**: The key must be **as long as the message**, purely **random**, and **used only once**.
+* **Key Reuse**: If a key is reused for two messages, an attacker can eliminate the key by XOR ($y_a \oplus y_b = x_a \oplus x_b$) and recover the plaintext messages.
+
+::: {.callout collapse="true"}
+#### Original version: The One-Time Pad
+Let $n \ge 1$ and the spaces $P, C, K$ such that $P, C, K = (\mathbb{Z}_2)^n$. The encryption and decryption operations of a **one-time pad** (Vernam Cipher) are:
+$E_k(x_i) = x_i \oplus k_i$ and $D_k(y_i) = y_i \oplus k_i$ for $1 \le i \le n$.
+
+* **Unconditional security**: If $k_i$ are random and independent, observation of ciphertexts does not help cryptanalysis. The **entropy** of $X$ does not decrease: $H(X|C) = H(X)$.
+* **Shannon's Theorem**: Necessary condition: $H(K) \ge H(X)$. The length of the **random key** must be at least as large as that of the plaintext.
+* **Key reuse**: $y_a \oplus y_b = x_a \oplus x_b$. With low-entropy messages, the plaintexts and the key ($k = y_a \oplus x_a$) can be recovered.
+* Vulnerable to the **Known Plaintext** attack (if the key is reused).
+* Major problem: The **distribution and management** of large keys. Revived by **quantum cryptography** proposing confidential channels for unlimited-length key distribution.
+:::
+
+### Steganography
+
+In contrast to cryptography, which makes the message unreadable, **steganography** conceals the very existence of the message.
+
+* **Method**: Use a "subliminal channel" (an innocent medium like an image or a banal text).
+* **Modern technique**: Insertion of data into the **least significant bits** (LSB) of multimedia files, allowing the hiding of large volumes of data without visible alteration.
+
+::: {.callout collapse="true"}
+#### Original version: Steganography
+**Steganography** hides a message inside another. Constituent elements:
+
+1. A different **physical or logical channel** (subliminal channel).
+2. A **secret mechanism** to identify this channel.
+
+* **Classic examples**: First letters of words in a text, invisible ink.
+* **Modern example**: Use the **least significant bits** of the frames of a Photo CD.
+* For a 2048x3072 image (RGB 24 bits), hiding a message using 1 bit allows storing **2.3 Mb** without deteriorating quality.
+:::
+
+::: {.callout collapse="true"}
+#### Ultra-summary
+- **History**: Substitution (Caesar/Vigenère) and Transposition (permutation).
+- **One-Time Pad**: Absolute security if the key is random, unique, and as long as the message ($H(K) \ge H(X)$).
+- **Steganography**: Hiding the existence of the message (ex: LSB technique in images).
+:::
