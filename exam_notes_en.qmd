@@ -370,3 +370,445 @@ Security services are the objectives aimed at protecting a system.
   * Significant **financial losses** (ransom demands)
   * **High security risks (even physical)** for **critical infrastructures** (hospitals, power plants, Internet backbone).
 :::
+
+# Digital Security Methods
+
+**Problem:** Protecting digital information
+
+* in a distributed environment
+* globally accessible
+* without physical boundaries
+
+**Solution:**
+
+* Cryptography
+    * Symmetric
+    * Asymmetric
+    * $+$ One-way functions
+    * $+$ (Pseudo) random generators
+
+::: {.callout collapse="true"}
+#### Ultra-summary
+- **Problem:** Security in a distributed/global environment.
+- **Solutions:**
+  - Crypto (symmetric/asymmetric).
+  - One-way functions (hashing).
+  - Random generators (physical/pseudo).
+:::
+
+::: {.callout collapse="true"}
+#### Original version
+
+**Problem:** Protecting digital information
+
+* in a distributed environment
+* globally accessible
+* without physical boundaries
+
+**Solution:**
+
+* Cryptography
+    * Symmetric
+    * Asymmetric
+    * $+$ One-way functions
+    * $+$ (Pseudo) random generators
+:::
+
+---
+
+## Cryptographic Hash Functions
+
+* **Functions easy to compute in one direction but virtually impossible to reverse**.
+* Any modification of the source document radically changes the **digest** (avalanche effect).
+* **Key properties**:
+  - **One-way**: impossible to retrieve the input from the hash.
+  - **Collision-free**: impossible to find two inputs with the same hash.
+* Digest size: 160 to 512 bits.
+* Algorithms (very **performant**): SHA-1, SHA-256, SHA-3.
+
+::: {.callout collapse="true"}
+#### Ultra-summary
+- **One-way + collision-free**.
+- Size: 160-512 bits.
+- Algos: SHA-1/256/3.
+- Usage: integrity, signatures.
+:::
+
+::: {.callout collapse="true"}
+#### Original version
+
+* **Functions easy to compute in one direction but virtually impossible to compute in the reverse direction**.
+* Any modification (even insignificant) of the source document results in a fundamentally different **digest**.
+* It is virtually impossible to retrieve the source document using only the digest (**one-way**).
+* It is virtually impossible to find a second source document producing the same digest (**collision-free**).
+* Usual digest length: 160 to 512 bits.
+* One-way algorithms are very performant.
+* Examples: SHA-1, SHA-256, SHA-3, etc.
+:::
+
+---
+
+## (Pseudo) Random Generators
+
+* **Characteristics**
+    * **random**
+    * **unpredictable**
+    * **non-reproducible**
+* **Critical** for security (keys, IV, secrets).
+* **Types**:
+  - **True random**: based on physical phenomena (radioactivity, quantum).
+  - **Pseudo-random**: deterministic (based on a *seed*: initial random sequence).
+* **Risk**: "Pseudo-security" if the *seed* is predictable (Pitkin quote).
+* Applications: session keys, IV (DES-CBC), signatures (ElGamal).
+
+::: {.callout collapse="true"}
+#### Ultra-summary
+- **True random**: physical (quantum).
+- **Pseudo-random**: deterministic (*seed*).
+- **Risk**: predictable *seed* = vulnerability.
+- Uses: keys, IV, signatures.
+:::
+
+::: {.callout collapse="true"}
+#### Original version
+
+* Random number generation is a very important process that can compromise the security of many encryption systems.
+* Applications: session key generation, initialization vectors (DES - CBC mode), secrets for signatures (ElGamal), etc.
+* A **random generator** is a device capable of generating numbers in a **random**, **unpredictable** and **non-reproducible** way. (e.g. based on physical phenomena: radioactive or quantum source).
+* **Pseudo-random generators** are deterministic processes developed from an initial random sequence (**seed**) (e.g. user keystrokes, disk access).
+* *Quote:* R. Pitkin in [Kau95]: "The use of pseudo-random processes to generate secret quantities can result in pseudo-security"
+:::
+
+---
+
+## Symmetric Cryptography
+
+* **History**: Used since Julius Caesar (1st century BC).
+* **Principle**: A single key for encryption/decryption.
+* **Scheme**: Plaintext → Encryption (Key) → Ciphertext → Decryption (Key) → Plaintext.
+* **Characteristics**:
+  - Algorithms: AES, DES, IDEA, RC4.
+  - Services: Confidentiality, Authentication, Integrity.
+  - **Limit**: No signatures (shared key).
+  - **Problem**: Secure key exchange required.
+
+::: {.callout collapse="true"}
+#### Ultra-summary
+- **1 key** to encrypt/decrypt.
+- **Fast** (AES, DES).
+- **Problem**: key exchange.
+- Uses: personal documents, closed groups.
+:::
+
+::: {.callout collapse="true"}
+#### Original version
+
+* Also called conventional cryptography or secret key cryptography (1st century BC, Julius Caesar).
+* **Idea:** Based on a single secret key, perform a transformation capable of respectively making information unreadable and restoring it.
+* **Scheme:** Plaintext $\to$ Encryption (Key) $\to$ Ciphertext $\to$ Decryption (Key) $\to$ Plaintext.
+* **Characteristics:**
+    * Algorithms: AES, DES, IDEA, RC4, RC5, etc. (some are free and openly available)
+    * Services: Confidentiality, Authentication, Integrity.
+    * No direct support for digital signatures (because key known by both).
+    * Requires a confidential channel to exchange the key.
+    * Ideal for protection of personal documents or closed groups.
+:::
+
+---
+
+## Asymmetric Cryptography
+
+* Also called **public cryptography** (1976, Diffie & Hellman).
+* **Principle**
+    - Key pair (public/private) for encryption and signatures.
+* **Two main uses**:
+  1. **Confidentiality**:
+     - Encryption: recipient's public key
+     - Decryption: recipient's private key
+  2. **Digital signature**:
+     - Signature: sender's private key
+     - Verification: sender's public key
+     - *Optimization*: Generally sign the **hash** of the document
+     - **Fundamental properties**:
+       - **Integrity**: Any modification invalidates the signature
+       - **Non-collision**: Impossible to have 2 documents with the same signature
+       - **Non-repudiation**: Only the holder of the private key can sign
+
+* **Technical aspects**:
+  - **Algorithms**: RSA, ElGamal
+  - **Services**: Integrity, Authentication, Non-Repudiation
+  - **Performance**: much slower than symmetric (100x slower)
+  - **Advantage**: No need for a confidential channel for key exchange
+
+::: {.callout collapse="true"}
+#### Ultra-summary
+- **2 keys**: public (encrypt/verify) + private (decrypt/sign)
+- **2 uses**:
+  - Confidentiality: encrypt for a recipient
+  - Signature: prove authenticity
+- **Signatures**:
+  - Integrity + non-repudiation
+- **Algorithms**: RSA/ElGamal
+- **Advantage**: No need for secure channel to exchange keys
+- **Disadvantage**: Slow
+:::
+
+::: {.callout collapse="true"}
+#### Original version
+## Asymmetric Cryptography
+* Also called public cryptography or public key cryptography (1976, W. Diffie & M. Hellman).
+* **Idea:** Use two different keys - one **secret** and one **public** - respectively for encryption and decryption operations.
+* Each user has a **keyring**.
+
+**Confidentiality:**
+* Sender encrypts with the **recipient's public key**.
+* Recipient decrypts with their **private key**.
+* Only the recipient's key is used!
+
+**Digital Signature:**
+* Sender signs with their **private key**.
+* Recipient verifies with the **sender's public key**.
+* Only the sender's key is used!
+* *Note:* Generally sign the **digest** of the document (hash) for performance reasons.
+
+**Signature characteristics:**
+* The signature changes if the document changes, while the private key remains the same.
+* If the document or signature is modified, verification fails (**integrity guaranteed**).
+* It is virtually impossible, even for the holder of the private key, to generate a second document producing the same signature (one-way function **without collisions**).
+* Only the holder of the private key can generate a signature verifiable using the corresponding public key (**non-repudiation**).
+* **Algorithms**: RSA, ElGamal.
+* **Services**: Integrity, Authentication, Non-Repudiation.
+* **Slowness**: Up to 50 times slower than symmetric cryptography.
+* **Advantage**: No need for a confidential channel to exchange keys (unlike symmetric).
+:::
+
+
+---
+
+## Asymmetric + Symmetric Cryptography (Hybrid)
+
+* **Principle**: Use asymmetric to exchange a symmetric key (session key).
+* **Steps**:
+  1. A generates a random symmetric key $K_s$.
+  2. A encrypts $K_s$ with B's public key.
+  3. A and B then communicate using $K_s$ (symmetric).
+
+::: {.callout collapse="true"}
+#### Ultra-summary
+- **Asymmetric**: exchange of symmetric key.
+- **Symmetric**: data encryption.
+- **Advantage**: combines security + performance.
+:::
+
+::: {.callout collapse="true"}
+#### Original version
+
+* **Idea:** Use public cryptography only to exchange symmetric keys (Session keys).
+* A generates a random key $K_s$ and transmits it to B by encrypting it with B's public key.
+* A & B then communicate using $K_s$ (symmetric).
+:::
+
+---
+
+## Asymmetric Cryptography: Operation (RSA)
+
+### Key Construction
+1. **Choice of prime numbers**:
+   - $p$ and $q$: two large prime numbers (> 1024 bits)
+   - $n = pq$: RSA modulus (size = 2048+ bits)
+
+2. **Calculation of Euler's totient function**:
+   - $\phi(n) = (p-1)(q-1)$
+   - *Property*: For any $a$ coprime with $n$, $a^{\phi(n)} \equiv 1 \pmod{n}$
+
+3. **Selection of exponents**:
+   - $e$: integer coprime with $\phi(n)$ (public exponent)
+   - $d$: modular inverse of $e$ (private exponent), such that $ed \equiv 1 \pmod{\phi(n)}$
+
+### Encryption/decryption process
+* **Public key**: $(n,e)$
+* **Private key**: $(d)$
+* **Encryption**: $C = P^e \pmod{n}$
+* **Decryption**: $P = C^d \pmod{n}$
+
+### Mathematical proof
+1. **Fundamental congruence**:
+   - $ed = 1 + k\phi(n)$ (by definition of $d$)
+
+2. **Application of Euler's theorem**:
+   - $P^{\phi(n)} \equiv 1 \pmod{n}$ (if $P$ coprime with $n$)
+
+3. **Demonstration**:
+
+   \begin{align*}
+   (P^e)^d &\equiv P^{ed} \pmod{n} \\
+   &\equiv P^{1 + k\phi(n)} \pmod{n} \\
+   &\equiv P \cdot (P^{\phi(n)})^k \pmod{n} \\
+   &\equiv P \cdot 1^k \pmod{n} \\
+   &\equiv P \pmod{n}
+   \end{align*}
+
+### System security
+* **Hard problem**: Factorization of $n$ into $p$ and $q$
+* **Recommended size**:
+  - $n$: 2048 bits (minimum for current security)
+  - $p$ and $q$: 1024+ bits each
+* **Known vulnerabilities**:
+  - Side-channel attacks (timing, power analysis)
+  - Inappropriate parameter choices ($e$ too small, $p$ and $q$ too close)
+
+::: {.callout collapse="true"}
+#### Ultra-summary
+- **Keys**:
+  - Public: $(n,e)$ where $n = pq$
+  - Private: $(d)$ with $ed \equiv 1 \pmod{\phi(n)}$
+- **Operations**:
+  - Encryption: $P^e \mod n$
+  - Decryption: $C^d \mod n$
+- **Security**: Factorization of $n$ difficult
+- **Size**: 2048+ bits for $n$
+:::
+
+::: {.callout collapse="true"}
+#### Original version
+## Asymmetric Cryptography: Operation (RSA)
+* Let $n := pq$ with $p$ and $q$ two large prime numbers (> 1024 bits).
+* Let $\phi(n) = (p-1)(q-1)$.
+* Let $e$ and $d$ such that $ed \equiv 1 \pmod{\phi(n)}$.
+* By definition of congruences: $ed = 1 + k\phi(n)$
+* Euler's theorem: $a^{\phi(n)} \equiv 1 \pmod n$.
+* **Encryption:** $C = P^e \pmod n$. **Public key:** $(n,e)$.
+* **Decryption:** $P = C^d \pmod n$. **Private key:** $(d)$.
+* *Proof:* $(P^e)^d \equiv P^{ed} \equiv P^{1 + k\phi(n)} \equiv (P \pmod n) (P^{\phi(n)} \pmod n)^k \equiv P \pmod n$.
+:::
+
+
+---
+
+## Asymmetric Cryptography: Conclusions
+
+* **Dominant algorithms**: RSA (most used), Rabin, ElGamal
+* **Complete services**:
+  - Confidentiality
+  - Authentication
+  - Integrity
+  - Digital signature & Non-repudiation
+  - Non-duplication
+
+* **Performance**:
+  - 50x slower than symmetric
+  - **Optimal solution**: Combination of asymmetric (key exchange) + symmetric (encryption)
+
+* **Key management**:
+  - **Advantage**: Public key exchange without confidential channel
+  - **Risk**: Need to verify authenticity of public keys
+    - Authenticated acquisition channel **or**
+    - Certification by trusted third party
+
+::: {.callout collapse="true"}
+#### Ultra-summary
+- **Algos**: RSA (dominant), Rabin, ElGamal
+- **Services**: Confidentiality + Authentication + Integrity + Signatures
+- **Slowness**: 50x vs symmetric → **hybrid recommended**
+- **Keys**: Simple public exchange but **authentication crucial**
+:::
+
+::: {.callout collapse="true"}
+#### Original version
+## Asymmetric Cryptography: Conclusions
+
+* There are a few asymmetric encryption systems (**Rabin**, **ElGamal**, etc.) but the most used is **RSA**.
+
+* **Supported services**: **Confidentiality**, **Authentication**, **Integrity**, **Digital Signature & Non-Repudiation**, (**Non-Duplication**).
+
+* Operations related to **asymmetric cryptography** are up to **50 times (!) slower** than those of **symmetric cryptography**.
+  A **combination of the two methods** is often desirable.
+
+* **Key distribution** is simplified by the fact that only **public keys** need to be exchanged between participants (no need for an alternative confidential channel) but…
+
+* … it is necessary to **verify that the public key actually belongs to the recipient**:
+  * Either the **acquisition channel** of the public key is protected against any modification (**authenticated**)
+  * Or the key is **certified accurate by a third party**
+:::
+
+---
+
+## Symmetric vs Asymmetric Comparison
+
+### Comparative advantages
+
+* **Symmetric**:
+  - **Performance**: 100x faster
+  - **Implementation**: Easy in hardware
+  - **Keys**: Short (128 bits = 16 memorable characters)
+
+* **Asymmetric**:
+  - **Key exchange**: Authenticated channel sufficient (no need for confidentiality)
+  - **Management**: 1 key pair for n correspondents (vs n keys in symmetric)
+
+### Common issues
+
+* **Weak link**: Key management by users
+* **Security basis**: Empirical rather than theoretical
+* **Legal constraints**: Usage and export restrictions
+
+### Usage recommendations
+
+| **Use case**                          | **Recommended solution**                          | **Justification**                                                                 |
+|--------------------------------------|--------------------------------------------------|----------------------------------------------------------------------------------|
+| Personal documents                    | Symmetric                                        | Speed + memorable keys                                                          |
+| Groups of close users                 | Symmetric                                        | Speed + easy confidential exchange                                              |
+| Distant/unknown users                 | Asymmetric                                       | No need for confidential channel                                                 |
+| Remote transactions                  | Hybrid (Asymmetric + Symmetric)                 | Asymmetric for key exchange, symmetric for data                                 |
+| Software protection (distribution)   | Hybrid                                           | Unique symmetric key per version, encrypted with asymmetric                    |
+| Network segments                     | Symmetric                                        | Speed + controlled environment (easy key exchange between administrators)        |
+
+::: {.callout collapse="true"}
+#### Ultra-summary
+**Symmetric**:
+
+    ✅ Fast (100x)
+    ✅ Short keys (128 bits)
+    ❌ Confidential key exchange required
+
+**Asymmetric**:
+
+    ✅ Simplified key exchange
+    ✅ 1 key pair for n correspondents
+    ❌ Slow (50x)
+    ❌ Long keys (1024+ bits)
+
+**Hybrid**: Best of both worlds
+**Common problems**: Key management, empirical basis, legal restrictions
+:::
+
+::: {.callout collapse="true"}
+#### Original version
+## Symmetric vs. Asymmetric Cryptography
+
+* There are **hundreds of symmetric and asymmetric algorithms** capable of providing a sufficient level of **confidentiality**.
+
+* **Symmetric solutions** offer the following advantages:
+  * **Speed** (up to **100 times faster** than asymmetric solutions)
+  * **Ease of hardware implementation**
+  * **Reduced key length**: **128 bits** (= 16 characters ⇒ memorable!) instead of **1024 bits** for asymmetric equivalents.
+
+* **Asymmetric solutions** have as main arguments:
+  * **Simplified key exchange**: keys must be exchanged through an **authenticated but non-confidential channel**
+  * **Simplified key management**: a single **public/private key pair** is sufficient for a user to receive confidential messages from **n users** (instead of **n different keys** in the symmetric case).
+
+* **Problems common to both techniques**:
+  * **Key management by the user** remains the **weakest link**
+  * Security (normally) based on **empirical arguments** rather than **theoretical** ones
+  * **Legal restrictions** on usage and export
+
+## Symmetric vs. Asymmetric Cryptography (II)
+
+| **Activity**                                                                                   | **Recommendation**                                                                                           | **Remarks**                                                                                                                              |
+| --------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| Protection of personal documents                                                             | **Symmetric crypto**                                                                                        | **Speed**, easily memorable keys                                                                                                  |
+| Protection of documents in a group of close users                                            | **Symmetric crypto**                                                                                        | **Speed**, ease of exchanging confidential keys                                                                                   |
+| Establishment of confidential channels between distant users (unknown)                       | **Asymmetric crypto**                                                                                       | No need to have a confidential channel: **authenticity suffices**                                                                         |
+| Transactions between two distant users, Software protection (multicast distribution)         | **Asymmetric crypto for symmetric key protection** + **Symmetric crypto for data protection**              | **Speed**, Only the symmetric key needs to be re-encrypted for each correspondent, Encrypted copy of software can be made public |
+| Protection of network segments                                                                | **Symmetric crypto**                                                                                        | **Speed**, Stable environment → easy confidential key exchange between sysadmins                                                   |
+:::

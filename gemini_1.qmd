@@ -189,6 +189,17 @@ Excellente source d'information pour le sujet: Centre National pour la Cyberséc
     * d’importantes **pertes financières** (des **demandes de rançon** peuvent être exigées pour les désactiver).
     * des **hauts risques de sécurité (même physique!)** lorsque des **infrastructures critiques** (hôpitaux, centrales électriques, *backbone* de l’Internet, etc.) sont ciblées.
 
+::: {.callout-note appearance="minimal" collapse="true"}
+
+#### Gynana
+
+Using callouts is an effective way to highlight content that your reader give special consideration or attention.
+
+# blabla
+* he
+
+:::
+
 ---
 
 # Méthodes Digitales de Sécurité

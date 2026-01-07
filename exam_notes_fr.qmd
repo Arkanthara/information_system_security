@@ -318,3 +318,445 @@ Les services de sécurité sont les objectifs que l'on cherche à atteindre pour
     * d’importantes **pertes financières** (des **demandes de rançon** peuvent être exigées pour les désactiver).
     * des **hauts risques de sécurité (même physique!)** lorsque des **infrastructures critiques** (hôpitaux, centrales électriques, *backbone* de l’Internet, etc.) sont ciblées.
 :::
+
+# Méthodes Digitales de Sécurité
+
+**Problème :** Protéger des informations digitales
+
+* dans un environnement distribué
+* globalement accessible
+* sans frontière matérielle
+
+**Solution :**
+
+* Cryptographie
+    * Symétrique
+    * Asymétrique
+    * $+$ fonctions à sens unique
+    * $+$ générateurs (pseudo) aléatoires
+
+::: {.callout collapse="true"}
+#### Ultra-synthèse
+- **Problème** : Sécurité dans un environnement distribué/global.
+- **Solutions** :
+  - Crypto (symétrique/asymétrique).
+  - Fonctions à sens unique (hachage).
+  - Générateurs aléatoires (physiques/pseudo).
+:::
+
+::: {.callout collapse="true"}
+#### Version originale
+
+**Problème :** Protéger des informations digitales
+
+* dans un environnement distribué
+* globalement accessible
+* sans frontière matérielle
+
+**Solution :**
+
+* Cryptographie
+    * Symétrique
+    * Asymétrique
+    * $+$ fonctions à sens unique
+    * $+$ générateurs (pseudo) aléatoires
+:::
+
+---
+
+## Fonctions de Hachage Cryptographiques
+
+* **Fonctions faciles à calculer dans un sens mais virtuellement impossibles à inverser**.
+* Toute modification du document source change radicalement le **digest** (effet avalanche).
+* **Propriétés clés** :
+  - **One-way** : impossible de retrouver l'entrée depuis le hash.
+  - **Collision-free** : impossible de trouver deux entrées avec le même hash.
+* Taille des digests : 160 à 512 bits.
+* Algorithmes (très **performants**) : SHA-1, SHA-256, SHA-3.
+
+::: {.callout collapse="true"}
+#### Ultra-synthèse
+- **One-way + collision-free**.
+- Taille : 160-512 bits.
+- Algos : SHA-1/256/3.
+- Usage : intégrité, signatures.
+:::
+
+::: {.callout collapse="true"}
+#### Version originale
+
+* **Fonctions faciles à calculer dans un sens mais virtuellement impossibles à calculer dans le sens contraire**.
+* Toute modification (même insignifiante) du document source se traduit par un **digest** fondamentalement différent.
+* Il est virtuellement impossible de retrouver le document source à l’aide seulement du digest (**one-way**).
+* Il est virtuellement impossible de retrouver un deuxième document source produisant le même digest (**collision-free**).
+* Longueur habituelle des digests : 160 à 512 bits.
+* Les algorithmes à sens unique sont très performants.
+* Exemples : SHA-1, SHA-256, SHA-3, etc.
+:::
+
+---
+
+## Générateurs (Pseudo) Aléatoires
+
+* **Caractéristiques**
+    * **aléatoire**
+    * **imprévisible**
+    * **non reproductible** 
+* **Critique** pour la sécurité (clés, IV, secrets).
+* **Types** :
+  - **Vrais aléatoires** : basés sur phénomènes physiques (radioactivité, quantique).
+  - **Pseudo-aléatoires** : déterministes (basés sur un *seed*: séquence aléatoire initiale).
+* **Risque** : "Pseudo-sécurité" si le *seed* est prévisible (citation de Pitkin).
+* Applications : clés de session, IV (DES-CBC), signatures (ElGamal).
+
+::: {.callout collapse="true"}
+#### Ultra-synthèse
+- **Vrais aléatoires** : physiques (quantique).
+- **Pseudo-aléatoires** : déterministes (*seed*).
+- **Risque** : *seed* prévisible = faille.
+- Usages : clés, IV, signatures.
+:::
+
+::: {.callout collapse="true"}
+#### Version originale
+
+* La génération de nombre aléatoire est un processus très important pouvant compromettre la sécurité d’un bon nombre de systèmes de cryptage.
+* Applications : génération de clés de session, vecteurs d’initialisation (DES - CBC mode), secrets pour signatures (ElGamal), etc.
+* Un **générateur aléatoire** (random generator) est un dispositif capable de générer des nombres de façon **aléatoire**, **imprévisible** et **non reproductible**. (e.g. basé sur phénomènes physiques: source radioactive ou quantique).
+* Les **générateurs pseudo-aléatoires** sont des procédés déterministes développés à partir d’une séquence aléatoire initiale (**seed**) (e.g. frappe utilisateur, accès disque).
+* *Citation :* R. Pitkin dans [Kau95]: "The use of pseudo-random processes to generate secret quantities can result in pseudo-security"
+:::
+
+---
+
+## Cryptographie Symétrique
+
+* **Historique** : Utilisée depuis Jules César (Iᵉʳ av. J.-C.).
+* **Principe** : Une seule clé pour chiffrer/déchiffrer.
+* **Schéma** : Plaintext → Cryptage (Clé) → Ciphertext → Décryptage (Clé) → Plaintext.
+* **Caractéristiques** :
+  - Algorithmes : AES, DES, IDEA, RC4.
+  - Services : Confidentialité, Authentification, Intégrité.
+  - **Limite** : Pas de signatures (clé partagée).
+  - **Problème** : Échange de clé sécurisé requis.
+
+::: {.callout collapse="true"}
+#### Ultra-synthèse
+- **1 clé** pour chiffrer/déchiffrer.
+- **Rapide** (AES, DES).
+- **Problème** : échange de clé.
+- Usages : documents personnels, groupes fermés.
+:::
+
+::: {.callout collapse="true"}
+#### Version originale
+
+* Aussi appelée cryptographie conventionnelle ou à clés secrètes (I av. JC, Julius Cesar).
+* **Idée :** Sur la base d’une seule clé secrète, réaliser une transformation capable respectivement de rendre illisible et de restituer une pièce d’information.
+* **Schéma :** Plaintext $\to$ Cryptage (Clé) $\to$ Ciphertext $\to$ Décryptage (Clé) $\to$ Plaintext.
+* **Caractéristiques :**
+    * Algorithmes : AES, DES, IDEA, RC4, RC5, etc. (certains sont gratuits et de libre accès)
+    * Services : Confidentialité, Authentification, Intégrité.
+    * Pas de support direct pour signatures digitales (car clé connue des deux).
+    * Nécessite un canal confidentiel pour échanger la clé.
+    * Idéal pour la protection de documents personnels ou groupes fermés.
+:::
+
+---
+
+## Cryptographie Asymétrique
+
+* Aussi appelée **cryptographie publique** (1976, Diffie & Hellman).
+* **Principe**
+    - Paire de clés (publique/privée) pour chiffrement et signatures.
+* **Deux usages principaux** :
+  1. **Confidentialité** :
+     - Chiffrement : clé publique du destinataire
+     - Déchiffrement : clé privée du destinataire
+  2. **Signature numérique** :
+     - Signature : clé privée de l'expéditeur
+     - Vérification : clé publique de l'expéditeur
+     - *Optimisation* : On signe généralement le **hash** du document
+     - **Propriétés fondamentales** :
+       - **Intégrité** : Toute modification invalide la signature
+       - **Non-collision** : Impossible d'avoir 2 documents avec la même signature
+       - **Non-répudiation** : Seul le détenteur de la clé privée peut signer
+
+* **Aspects techniques** :
+  - **Algorithmes** : RSA, ElGamal
+  - **Services** : Intégrité, Authentification, Non-Répudiation
+  - **Performance** : beaucoup plus lent que le symétrique (100x plus lent)
+  - **Avantage** : Pas besoin de canal confidentiel pour l'échange de clés
+
+::: {.callout collapse="true"}
+#### Ultra-synthèse
+- **2 clés** : publique (chiffrer/vérifier) + privée (déchiffrer/signer)
+- **2 usages** :
+  - Confidentialité : chiffrer pour un destinataire
+  - Signature : prouver l'authenticité
+- **Signatures** :
+  - Intégrité + non-répudiation
+- **Algorithmes** : RSA/ElGamal
+- **Avantage** : Pas besoin de canal sécurisé pour échanger les clés
+- **Désavantage** : Lente
+:::
+
+::: {.callout collapse="true"}
+#### Version originale
+## Cryptographie Asymétrique
+* Aussi appelée cryptographie publique ou à clés publiques (1976, W. Diffie & M. Hellman).
+* **Idée :** Utiliser deux clés différentes - une **secrète** et une **publique** - respectivement pour les opérations de cryptage et décryptage.
+* Chaque utilisateur dispose d’un **porte-clés** (keyring).
+
+**Confidentialité :**
+* Expéditeur crypte avec la **clé publique du destinataire**.
+* Destinataire décrypte avec sa **clé privée**.
+* Uniquement clé du destinataire utilisée !
+
+**Signature Digitale :**
+* Expéditeur signe avec sa **clé privée**.
+* Destinataire vérifie avec la **clé publique de l’expéditeur**.
+* Uniquement clé de l'expéditeur utilisée !
+* *Note :* On signe généralement le **digest** du document (hash) pour des raisons de performance.
+
+**Caractéristiques des signatures :**
+* La signature change si le document change, alors que la clé privée reste la même.
+* En cas de modification du document ou de la signature, la vérification échoue (**intégrité garantie**).
+* Il est virtuellement impossible, même pour le détenteur de la clé privée, de générer un second document produisant la même signature (fonction à sens unique **sans collisions**).
+* Seul le détenteur de la clé privée peut générer une signature vérifiable à l’aide de la clé publique correspondante (**non-répudiation**).
+* **Algorithmes** : RSA, ElGamal.
+* **Services** : Intégrité, Authentification, Non-Répudiation.
+* **Lenteur** : Jusqu’à 50 fois plus lent que la cryptographie symétrique.
+* **Avantage** : Pas besoin de canal confidentiel pour échanger les clés (contrairement au symétrique).
+:::
+
+
+---
+
+## Crypto Asymétrique + Symétrique (Hybride)
+
+* **Principe** : Utiliser l'asymétrique pour échanger une clé symétrique (clé de session).
+* **Étapes** :
+  1. A génère une clé symétrique aléatoire $K_s$.
+  2. A chiffre $K_s$ avec la clé publique de B.
+  3. A et B communiquent ensuite avec $K_s$ (symétrique).
+
+::: {.callout collapse="true"}
+#### Ultra-synthèse
+- **Asymétrique** : échange de clé symétrique.
+- **Symétrique** : chiffrement des données.
+- **Avantage** : combine sécurité + performance.
+:::
+
+::: {.callout collapse="true"}
+#### Version originale
+
+* **Idée :** Utiliser la cryptographie publique uniquement pour échanger des clés symétriques (Clés de session).
+* A génère une clé aléatoire $K_s$ et la transmet à B en l’encryptant avec la clé publique de B.
+* A & B communiquent ensuite en utilisant $K_s$ (symétrique).
+:::
+
+---
+
+## Cryptographie Asymétrique : Fonctionnement (RSA)
+
+### Construction des clés
+1. **Choix des nombres premiers** :
+   - $p$ et $q$ : deux grands nombres premiers (> 1024 bits)
+   - $n = pq$ : module RSA (taille = 2048+ bits)
+
+2. **Calcul de l'indicatrice d'Euler** :
+   - $\phi(n) = (p-1)(q-1)$
+   - *Propriété* : Pour tout $a$ premier avec $n$, $a^{\phi(n)} \equiv 1 \pmod{n}$
+
+3. **Sélection des exposants** :
+   - $e$ : entier premier avec $\phi(n)$ (exposant public)
+   - $d$ : inverse modulaire de $e$ (exposant privé), tel que $ed \equiv 1 \pmod{\phi(n)}$
+
+### Processus de chiffrement/déchiffrement
+* **Clé publique** : $(n,e)$
+* **Clé privée** : $(d)$
+* **Chiffrement** : $C = P^e \pmod{n}$
+* **Déchiffrement** : $P = C^d \pmod{n}$
+
+### Preuve mathématique
+1. **Congruence fondamentale** :
+   - $ed = 1 + k\phi(n)$ (par définition de $d$)
+
+2. **Application du théorème d'Euler** :
+   - $P^{\phi(n)} \equiv 1 \pmod{n}$ (si $P$ premier avec $n$)
+
+3. **Démonstration** :
+
+   \begin{align*}
+   (P^e)^d &\equiv P^{ed} \pmod{n} \\
+   &\equiv P^{1 + k\phi(n)} \pmod{n} \\
+   &\equiv P \cdot (P^{\phi(n)})^k \pmod{n} \\
+   &\equiv P \cdot 1^k \pmod{n} \\
+   &\equiv P \pmod{n}
+   \end{align*}
+
+### Sécurité du système
+* **Problème difficile** : Factorisation de $n$ en $p$ et $q$
+* **Taille recommandée** :
+  - $n$ : 2048 bits (minimum pour sécurité actuelle)
+  - $p$ et $q$ : 1024+ bits chacun
+* **Vulnérabilités connues** :
+  - Attaques par canal auxiliaire (timing, power analysis)
+  - Choix inapproprié des paramètres ($e$ trop petit, $p$ et $q$ trop proches)
+
+::: {.callout collapse="true"}
+#### Ultra-synthèse
+- **Clés** :
+  - Publique : $(n,e)$ où $n = pq$
+  - Privée : $(d)$ avec $ed \equiv 1 \pmod{\phi(n)}$
+- **Opérations** :
+  - Chiffrement : $P^e \mod n$
+  - Déchiffrement : $C^d \mod n$
+- **Sécurité** : Factorisation de $n$ difficile
+- **Taille** : 2048+ bits pour $n$
+:::
+
+::: {.callout collapse="true"}
+#### Version originale
+## Cryptographie Asymétrique: Fonctionnement (RSA)
+* Soit $n := pq$ avec $p$ et $q$ deux nombres premiers grands (> 1024 bits).
+* Soit $\phi(n) = (p-1)(q-1)$.
+* Soit $e$ et $d$ tels que $ed \equiv 1 \pmod{\phi(n)}$.
+* Par définition des congruences: $ed = 1 + k\phi(n)$
+* Théorème d’Euler : $a^{\phi(n)} \equiv 1 \pmod n$.
+* **Encryption :** $C = P^e \pmod n$. **Clé publique :** $(n,e)$.
+* **Décryption :** $P = C^d \pmod n$. **Clé privée :** $(d)$.
+* *Preuve :* $(P^e)^d \equiv P^{ed} \equiv P^{1 + k\phi(n)} \equiv (P \pmod n) (P^{\phi(n)} \pmod n)^k \equiv P \pmod n$.
+:::
+
+
+---
+
+## Cryptographie Asymétrique : Conclusions
+
+* **Algorithmes dominants** : RSA (le plus utilisé), Rabin, ElGamal
+* **Services complets** :
+  - Confidentialité
+  - Authentification
+  - Intégrité
+  - Signature digitale & Non-répudiation
+  - Non-duplication
+
+* **Performances** :
+  - 50x plus lent que le symétrique
+  - **Solution optimale** : Combinaison asymétrique (échange de clés) + symétrique (chiffrement)
+
+* **Gestion des clés** :
+  - **Avantage** : Échange de clés publiques sans canal confidentiel
+  - **Risque** : Nécessité de vérifier l'authenticité des clés publiques
+    - Canal d'acquisition authentifié **ou**
+    - Certification par tiers de confiance
+
+::: {.callout collapse="true"}
+#### Ultra-synthèse
+- **Algos** : RSA (dominant), Rabin, ElGamal
+- **Services** : Confidentialité + Authentification + Intégrité + Signatures
+- **Lenteur** : 50x vs symétrique → **hybride recommandé**
+- **Clés** : Échange public simple mais **authentification cruciale**
+:::
+
+::: {.callout collapse="true"}
+#### Version originale
+## Cryptographie Asymétrique : Conclusions
+
+* Il existe quelques systèmes de cryptage asymétrique (**Rabin**, **ElGamal**, etc.) mais le plus utilisé est **RSA**.
+
+* **Services supportés** : **Confidentialité**, **Authentification**, **Intégrité**, **Signature Digitale & Non-Refus**, (**Non Duplication**).
+
+* Les opérations liées à la **cryptographie asymétrique** sont jusqu’à **50 fois (!) plus lentes** que celles de la **cryptographie symétrique**.
+  Une **combinaison des deux méthodes** est souvent souhaitable.
+
+* La **distribution des clés** est simplifiée par le fait que seules des **clés publiques** doivent être échangées entre les intervenants (pas besoin d’un canal confidentiel alternatif) mais…
+
+* … il est nécessaire de **vérifier que la clé publique appartient réellement au destinataire** :
+  * Soit le **canal d’acquisition** de la clé publique est protégé contre toute modification (**authentifié**)
+  * Soit la clé est **certifiée exacte par un tiers**
+:::
+
+---
+
+## Comparaison Symétrique vs Asymétrique
+
+### Avantages comparés
+
+* **Symétrique** :
+  - **Performance** : 100x plus rapide
+  - **Implémentation** : Facile en hardware
+  - **Clés** : Courtes (128 bits = 16 caractères mémorisables)
+
+* **Asymétrique** :
+  - **Échange de clés** : Canal authentifié suffisant (pas besoin de confidentialité)
+  - **Gestion** : 1 paire de clés pour n correspondants (vs n clés en symétrique)
+
+### Problématiques communes
+
+* **Maillon faible** : Gestion des clés par les utilisateurs
+* **Base de sécurité** : Empirique plutôt que théorique
+* **Contraintes légales** : Restrictions d'usage et d'exportation
+
+### Recommandations d'usage
+
+| **Cas d'usage**                          | **Solution recommandée**                          | **Justification**                                                                 |
+|------------------------------------------|---------------------------------------------------|-----------------------------------------------------------------------------------|
+| Documents personnels                     | Symétrique                                        | Vitesse + clés mémorisables                                                      |
+| Groupes d'utilisateurs proches           | Symétrique                                        | Vitesse + échange confidentiel facile                                            |
+| Utilisateurs distants/inconnus           | Asymétrique                                       | Pas besoin de canal confidentiel                                                 |
+| Transactions distantes                   | Hybride (Asymétrique + Symétrique)                | Asymétrique pour l'échange de clé, symétrique pour les données                   |
+| Protection logicielle (distribution)     | Hybride                                           | Clé symétrique unique par version, encryptée avec asymétrique                    |
+| Segments réseaux                         | Symétrique                                        | Vitesse + environnement contrôlé (échange de clés facile entre administrateurs)  |
+
+::: {.callout collapse="true"}
+#### Ultra-synthèse
+**Symétrique** :
+
+    ✅ Rapide (100x)
+    ✅ Clés courtes (128 bits)  
+    ❌ Échange de clés confidentiel requis
+
+**Asymétrique** :
+
+    ✅ Échange de clés simplifié
+    ✅ 1 paire de clés pour n correspondants
+    ❌ Lent (50x)
+    ❌ Clés longues (1024+ bits)
+
+**Hybride** : Meilleur des deux mondes
+**Problèmes communs** : Gestion des clés, base empirique, restrictions légales
+:::
+
+::: {.callout collapse="true"}
+#### Version originale
+## Cryptographie Symétrique vs. Asymétrique
+
+* Il existe des **centaines d’algorithmes symétriques et asymétriques** capables de fournir un niveau de **confidentialité suffisant**.
+
+* Les **solutions symétriques** offrent les avantages suivants :
+  * **Rapidité** (jusqu’à **100 fois plus rapide** que les solutions asymétriques)
+  * **Facilité d’implantation en hardware**
+  * **Longueur de clé réduite** : **128 bits** (= 16 caractères ⇒ mémorisable !) au lieu de **1024 bits** pour des équivalents asymétriques.
+
+* Les **solutions asymétriques** ont comme arguments principaux :
+  * **Échange de clés simplifié** : les clés doivent être échangées par un **canal authentifié mais non-confidentiel**
+  * **Gestion de clés simplifiée** : une seule **paire de clés publique/privée** suffit à un utilisateur pour recevoir des messages confidentiels de **n utilisateurs** (au lieu de **n clés différentes** dans le cas symétrique).
+
+* **Problèmes propres aux deux techniques** :
+  * La **gestion de clés par l’utilisateur** reste le **maillon le plus faible**
+  * Sécurité (normalement) basée sur des **arguments empiriques** plutôt que **théoriques**
+  * **Restrictions légales** d’usage et d’exportation
+
+## Cryptographie Symétrique vs. Asymétrique (II)
+
+| **Activité**                                                                                   | **Recommandation**                                                                                           | **Remarques**                                                                                                                              |
+| ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| Protection de documents personnels                                                             | **Crypto symétrique**                                                                                        | **Vitesse**, clés facilement mémorisables                                                                                                  |
+| Protection de documents dans un groupe d’utilisateurs proches                                  | **Crypto symétrique**                                                                                        | **Vitesse**, facilité d’échange des clés confidentielles                                                                                   |
+| Établissement de canaux confidentiels entre utilisateurs distants (inconnus)                   | **Crypto asymétrique**                                                                                       | Pas besoin d’avoir un canal confidentiel : **authenticité suffit**                                                                         |
+| Transactions entre deux utilisateurs distants, Protection de logiciel (distribution multicast) | **Crypto asymétrique pour protection de clé symétrique** + **Crypto symétrique pour protection des données** | **Vitesse**, Seule la clé symétrique doit être ré-encryptée pour chaque correspondant, Copie cryptée du logiciel peut être rendue publique |
+| Protection des segments réseaux                                                                | **Crypto symétrique**                                                                                        | **Vitesse**, Environnement stable → échange confidentiel des clés facile entre sysadmins                                                   |
+:::

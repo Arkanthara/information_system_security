@@ -16,6 +16,6 @@ website:
 format:
   html:
     toc: true
-    number-sections: true
+    number-sections: false
     theme: darkly
     embed-resources: false
