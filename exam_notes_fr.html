@@ -68,6 +68,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -175,6 +178,50 @@ window.Quarto = {
   <li><a href="#avantages-comparés" id="toc-avantages-comparés" class="nav-link" data-scroll-target="#avantages-comparés">Avantages comparés</a></li>
   <li><a href="#problématiques-communes" id="toc-problématiques-communes" class="nav-link" data-scroll-target="#problématiques-communes">Problématiques communes</a></li>
   <li><a href="#recommandations-dusage" id="toc-recommandations-dusage" class="nav-link" data-scroll-target="#recommandations-dusage">Recommandations d’usage</a></li>
+  </ul></li>
+  <li><a href="#dissection-dune-attaque-ransomware" id="toc-dissection-dune-attaque-ransomware" class="nav-link" data-scroll-target="#dissection-dune-attaque-ransomware">Dissection d’une Attaque : Ransomware</a>
+  <ul class="collapse">
+  <li><a href="#définition-et-impact" id="toc-définition-et-impact" class="nav-link" data-scroll-target="#définition-et-impact">Définition et Impact</a></li>
+  </ul></li>
+  <li><a href="#cycle-de-vie-dune-attaque-ransomware" id="toc-cycle-de-vie-dune-attaque-ransomware" class="nav-link" data-scroll-target="#cycle-de-vie-dune-attaque-ransomware">Cycle de Vie d’une Attaque Ransomware</a>
+  <ul class="collapse">
+  <li><a href="#prévention-et-réponse" id="toc-prévention-et-réponse" class="nav-link" data-scroll-target="#prévention-et-réponse">Prévention et Réponse</a></li>
+  <li><a href="#dissection-technique" id="toc-dissection-technique" class="nav-link" data-scroll-target="#dissection-technique">Dissection Technique</a></li>
+  </ul></li>
+  <li><a href="#cryptolocker-analyse-technique" id="toc-cryptolocker-analyse-technique" class="nav-link" data-scroll-target="#cryptolocker-analyse-technique">Cryptolocker : Analyse Technique</a>
+  <ul class="collapse">
+  <li><a href="#schéma-dattaque" id="toc-schéma-dattaque" class="nav-link" data-scroll-target="#schéma-dattaque">Schéma d’Attaque</a></li>
+  <li><a href="#cibles-privilégiées" id="toc-cibles-privilégiées" class="nav-link" data-scroll-target="#cibles-privilégiées">Cibles Privilégiées</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#notions-de-base-en-cryptographie" id="toc-notions-de-base-en-cryptographie" class="nav-link" data-scroll-target="#notions-de-base-en-cryptographie">Notions de base en cryptographie</a>
+  <ul class="collapse">
+  <li><a href="#principe-de-kerckhoffs" id="toc-principe-de-kerckhoffs" class="nav-link" data-scroll-target="#principe-de-kerckhoffs">Principe de Kerckhoffs</a></li>
+  <li><a href="#classification-des-systèmes-de-cryptage" id="toc-classification-des-systèmes-de-cryptage" class="nav-link" data-scroll-target="#classification-des-systèmes-de-cryptage">Classification des systèmes de cryptage</a>
+  <ul class="collapse">
+  <li><a href="#sécurité-inconditionnelle" id="toc-sécurité-inconditionnelle" class="nav-link" data-scroll-target="#sécurité-inconditionnelle">Sécurité inconditionnelle</a></li>
+  <li><a href="#as-hard-as-équivalent-provable-security" id="toc-as-hard-as-équivalent-provable-security" class="nav-link" data-scroll-target="#as-hard-as-équivalent-provable-security">As hard as / équivalent / provable security</a></li>
+  <li><a href="#sécurité-calculatoire" id="toc-sécurité-calculatoire" class="nav-link" data-scroll-target="#sécurité-calculatoire">Sécurité calculatoire</a></li>
+  </ul></li>
+  <li><a href="#entropie" id="toc-entropie" class="nav-link" data-scroll-target="#entropie">Entropie</a>
+  <ul class="collapse">
+  <li><a href="#propriétés" id="toc-propriétés" class="nav-link" data-scroll-target="#propriétés">Propriétés</a></li>
+  <li><a href="#interprétation" id="toc-interprétation" class="nav-link" data-scroll-target="#interprétation">Interprétation</a></li>
+  <li><a href="#entropie-conditionnelle" id="toc-entropie-conditionnelle" class="nav-link" data-scroll-target="#entropie-conditionnelle">Entropie conditionnelle</a></li>
+  </ul></li>
+  <li><a href="#attaques-sur-les-systèmes-de-cryptage" id="toc-attaques-sur-les-systèmes-de-cryptage" class="nav-link" data-scroll-target="#attaques-sur-les-systèmes-de-cryptage">Attaques sur les systèmes de cryptage</a></li>
+  <li><a href="#oracles-et-modèles-de-sécurité" id="toc-oracles-et-modèles-de-sécurité" class="nav-link" data-scroll-target="#oracles-et-modèles-de-sécurité">Oracles et Modèles de Sécurité</a>
+  <ul class="collapse">
+  <li><a href="#oracles-aléatoires-et-modèles-de-sécurité" id="toc-oracles-aléatoires-et-modèles-de-sécurité" class="nav-link" data-scroll-target="#oracles-aléatoires-et-modèles-de-sécurité">Oracles Aléatoires et Modèles de Sécurité</a></li>
+  <li><a href="#oracles-de-chiffrement-déchiffrement-et-signature" id="toc-oracles-de-chiffrement-déchiffrement-et-signature" class="nav-link" data-scroll-target="#oracles-de-chiffrement-déchiffrement-et-signature">Oracles de Chiffrement, Déchiffrement et Signature</a></li>
+  <li><a href="#indiscernabilité-et-sécurité-sémantique-ind-cpa" id="toc-indiscernabilité-et-sécurité-sémantique-ind-cpa" class="nav-link" data-scroll-target="#indiscernabilité-et-sécurité-sémantique-ind-cpa">Indiscernabilité et Sécurité Sémantique (IND-CPA)</a></li>
+  <li><a href="#le-chiffrement-probabiliste-et-loaep" id="toc-le-chiffrement-probabiliste-et-loaep" class="nav-link" data-scroll-target="#le-chiffrement-probabiliste-et-loaep">Le Chiffrement Probabiliste et l’OAEP</a></li>
+  </ul></li>
+  <li><a href="#histoire-de-la-cryptographie-et-sécurité-inconditionnelle" id="toc-histoire-de-la-cryptographie-et-sécurité-inconditionnelle" class="nav-link" data-scroll-target="#histoire-de-la-cryptographie-et-sécurité-inconditionnelle">Histoire de la Cryptographie et Sécurité Inconditionnelle</a>
+  <ul class="collapse">
+  <li><a href="#systèmes-de-cryptage-historiques" id="toc-systèmes-de-cryptage-historiques" class="nav-link" data-scroll-target="#systèmes-de-cryptage-historiques">Systèmes de Cryptage Historiques</a></li>
+  <li><a href="#le-one-time-pad-masque-jetable" id="toc-le-one-time-pad-masque-jetable" class="nav-link" data-scroll-target="#le-one-time-pad-masque-jetable">Le One-Time Pad (Masque Jetable)</a></li>
+  <li><a href="#stéganographie" id="toc-stéganographie" class="nav-link" data-scroll-target="#stéganographie">Stéganographie</a></li>
   </ul></li>
   </ul></li>
   </ul>
@@ -1714,6 +1761,828 @@ window.Quarto = {
 </tbody>
 </table>
 </section>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="dissection-dune-attaque-ransomware" class="level2">
+<h2 class="anchored" data-anchor-id="dissection-dune-attaque-ransomware">Dissection d’une Attaque : Ransomware</h2>
+<section id="définition-et-impact" class="level3">
+<h3 class="anchored" data-anchor-id="définition-et-impact">Définition et Impact</h3>
+<ul>
+<li><strong>Définition</strong> : Logiciel malveillant qui chiffre les données et exige une rançon pour leur restitution.</li>
+<li><strong>Limites de la définition classique</strong> :
+<ul>
+<li>Ne couvre pas l’impact sur <strong>l’infrastructure critique</strong> (ex : Colonial Pipeline, mai 2021)</li>
+<li>Sous-estime la <strong>portée systémique</strong> des attaques</li>
+</ul></li>
+<li><strong>Statistiques alarmantes</strong> :
+<ul>
+<li>Milliards d’attaques annuelles</li>
+<li>Considéré comme la <strong>menace cyber la plus dangereuse</strong> en 2021 (“Ransomware Everywhere”)</li>
+</ul></li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-37-contents" aria-controls="callout-37" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Ultra-synthèse
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-37" class="callout-37-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Malware</strong> : Chiffre les données → demande rançon</li>
+<li><strong>Impact</strong> : Infrastructure critique (ex : Colonial Pipeline)</li>
+<li><strong>Menace n°1</strong> en cybersécurité (2021)</li>
+<li><strong>Cibles</strong> : Particuliers + entreprises + États</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-38-contents" aria-controls="callout-38" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Version originale
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-38" class="callout-38-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>“Un rançongiciel (de l’anglais <strong>ransomware</strong>), logiciel rançonneur, logiciel de rançon ou logiciel d’extorsion, est un logiciel malveillant qui prend en otage des données personnelles. Pour ce faire, un rançongiciel <strong>chiffre des données personnelles</strong> puis demande à leur propriétaire d’envoyer de l’argent en échange de la <strong>clé de déchiffrement</strong>” (Wikipedia 21 septembre 2021).</p>
+<ul>
+<li><p><strong>Définition incomplète</strong> car les <strong>ransomwares</strong> portent sur un <strong>vaste spectre de l’infrastructure informatique</strong></p></li>
+<li><p>À titre d’exemple, en mai 2021, une <strong>attaque ransomware</strong> dirigée contre la société <strong>Colonial Pipeline</strong> a provoqué une <strong>coupure d’approvisionnement</strong> de combustible d’une grande partie de la côte des États-Unis</p></li>
+<li><p>Avec un nombre d’<strong>attaques global</strong> chiffré en <strong>milliards par année</strong>, “<strong>Ransomware Everywhere</strong>” est globalement considérée comme la <strong>menace la plus directe, visible et dangereuse</strong> pour utilisateurs et entreprises en 2021 !</p></li>
+</ul>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="cycle-de-vie-dune-attaque-ransomware" class="level2">
+<h2 class="anchored" data-anchor-id="cycle-de-vie-dune-attaque-ransomware">Cycle de Vie d’une Attaque Ransomware</h2>
+<section id="prévention-et-réponse" class="level3">
+<h3 class="anchored" data-anchor-id="prévention-et-réponse">Prévention et Réponse</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 43%">
+<col style="width: 56%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Phase</th>
+<th>Mesures</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Prévention</strong></td>
+<td>- Patching régulier<br>- Solutions de détection (Firewalls, WAFs, IDS/IPS)<br>- Scans anti-malware (e-mails, fichiers)</td>
+</tr>
+<tr class="even">
+<td><strong>Protection</strong></td>
+<td>- <strong>Backups offline</strong> (essentiel !)<br>- Politiques de sécurité strictes<br>- Formation des utilisateurs</td>
+</tr>
+<tr class="odd">
+<td><strong>Réponse</strong></td>
+<td>- <strong>Ne pas payer</strong> (recommandation officielle)<br>- Analyse forensique<br>- Restauration depuis backups</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dissection-technique" class="level3">
+<h3 class="anchored" data-anchor-id="dissection-technique">Dissection Technique</h3>
+<ol type="1">
+<li><strong>Infection</strong> :
+<ul>
+<li>Vecteurs : Phishing, exploits, RDP vulnérable</li>
+<li>Propagation : Latérale (réseau) ou verticale (système)</li>
+</ul></li>
+<li><strong>Exécution</strong> :
+<ul>
+<li>Chiffrement des fichiers ciblés</li>
+<li>Suppression des shadow copies</li>
+<li>Persistance (registre, tâches planifiées)</li>
+</ul></li>
+<li><strong>Extorsion</strong> :
+<ul>
+<li>Affichage de la demande de rançon</li>
+<li>Paiement en cryptomonnaies (Bitcoin, Monero)</li>
+<li>Délais de paiement avec majoration</li>
+</ul></li>
+<li><strong>Occultation</strong> :
+<ul>
+<li>Obfuscation du code</li>
+<li>Communication via TOR/Deep Web</li>
+<li>Effacement des logs</li>
+</ul></li>
+</ol>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-39-contents" aria-controls="callout-39" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Ultra-synthèse
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-39" class="callout-39-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Cycle d’attaque</strong> :</p>
+<ol type="1">
+<li>Infection (phishing/exploits)</li>
+<li>Exécution (chiffrement + persistance)</li>
+<li>Extorsion (rançon en crypto)</li>
+<li>Occultation (TOR + effacement traces)</li>
+</ol>
+<p><strong>Contre-mesures</strong> :</p>
+<pre><code>✅ Backups offline
+✅ Patching + détection
+✅ Formation
+❌ Ne pas payer</code></pre>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="cryptolocker-analyse-technique" class="level2">
+<h2 class="anchored" data-anchor-id="cryptolocker-analyse-technique">Cryptolocker : Analyse Technique</h2>
+<section id="schéma-dattaque" class="level3">
+<h3 class="anchored" data-anchor-id="schéma-dattaque">Schéma d’Attaque</h3>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">graph TD
+    A[Infection initiale] --&gt; B[Chiffrement des fichiers]
+    B --&gt; C[Stockage clé privée sur serveurs C2]
+    C --&gt; D[Demande de rançon]
+    D --&gt; E{Paiement ?}
+    E --&gt;|Oui| F[Envoi clé de déchiffrement via TOR]
+    E --&gt;|Non| G[Perte définitive des données]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="cibles-privilégiées" class="level3">
+<h3 class="anchored">Cibles Privilégiées</h3>
+<ul>
+<li><strong>Extensions critiques</strong> (extrait) :
+<ul>
+<li>Documents : <code>.docx</code>, <code>.xlsx</code>, <code>.pdf</code>, <code>.pptx</code></li>
+<li>Bases de données : <code>.mdb</code>, <code>.sql</code>, <code>.sqlite</code></li>
+<li>Médias : <code>.jpg</code>, <code>.png</code>, <code>.mp4</code>, <code>.avi</code></li>
+<li>Développement : <code>.java</code>, <code>.cpp</code>, <code>.py</code>, <code>.php</code></li>
+<li>Financier : <code>.qbw</code>, <code>.qbb</code>, <code>.wallet</code></li>
+</ul></li>
+<li><strong>Comportement</strong> :
+<ul>
+<li>Chiffrement <strong>sélectif</strong> (fichiers récents/modifiés)</li>
+<li><strong>Double extorsion</strong> : Chiffrement + menace de fuite</li>
+<li><strong>RaaS</strong> (Ransomware-as-a-Service) : Modèle économique</li>
+</ul></li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-40-contents" aria-controls="callout-40" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Ultra-synthèse
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-40" class="callout-40-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Mécanisme</strong> : - Clé privée stockée sur serveurs C2 - Paiement → clé via TOR - Cibles : 100+ extensions (docs, DB, médias)</p>
+<p><strong>Évolutions récentes</strong> : - Double extorsion (chiffrement + fuite) - RaaS (location de ransomware)</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-41-contents" aria-controls="callout-41" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Version originale
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-41" class="callout-41-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<section id="ransomware-vue-intégrale" class="level2">
+<h2 class="anchored" data-anchor-id="ransomware-vue-intégrale">Ransomware : Vue Intégrale</h2>
+<p><em>(Source : 2017 State of Cybersecurity, F-Secure Inc.)</em></p>
+</section>
+<section id="ransomware-vue-intégrale-1" class="level2">
+<h2 class="anchored" data-anchor-id="ransomware-vue-intégrale-1">Ransomware : Vue Intégrale</h2>
+<section id="prévision-remédiation-et-réaction" class="level4">
+<h4 class="anchored" data-anchor-id="prévision-remédiation-et-réaction">Prévision, Remédiation et Réaction</h4>
+<ul>
+<li><strong>Patching</strong></li>
+<li><strong>Détection active et passive</strong> (Firewalls, WAFs, IDS, IPS, e-mail malware scan, etc.)</li>
+<li><strong>Backups offline</strong> !</li>
+<li><strong>Politique de Sécurité</strong> - Règles de bon usage de la messagerie</li>
+<li><strong>Formation</strong> !</li>
+<li><strong>Payer ou pas payer</strong>…</li>
+</ul>
+</section>
+<section id="dissection-technique-de-lattaque" class="level4">
+<h4 class="anchored" data-anchor-id="dissection-technique-de-lattaque">Dissection Technique de l’Attaque</h4>
+<ul>
+<li><strong>Infection et propagation</strong></li>
+<li><strong>Exécution</strong></li>
+<li><strong>Paiement</strong> (Crypto-currencies / Bitcoin)</li>
+<li><strong>Occultation</strong> (Obfuscation, TOR Networks/Deep Web)</li>
+</ul>
+</section>
+<section id="schéma-générique-dun-ransomware-cryptolocker" class="level3">
+<h3 class="anchored" data-anchor-id="schéma-générique-dun-ransomware-cryptolocker">Schéma Générique d’un Ransomware Cryptolocker</h3>
+<ul>
+<li>Les <strong>clés privées de déchiffrement</strong> sont stockées dans les serveurs de l’<strong>attaquant</strong></li>
+<li>Elles sont envoyées à la <strong>victime</strong> après <strong>paiement en bitcoins</strong></li>
+<li>La <strong>trace</strong> est broyée à l’aide des <strong>réseaux TOR</strong></li>
+</ul>
+</section>
+</section>
+<section id="ransomware-cryptolocker-cibles" class="level2">
+<h2 class="anchored" data-anchor-id="ransomware-cryptolocker-cibles">Ransomware Cryptolocker : Cibles</h2>
+<p><strong>Extensions de fichiers ciblées</strong> : .jin, .xls, .xlsx, .pdf, .doc, .docx, .ppt, .pptx, .txt, .dwg, .bak, .bkf, .pst, .dbx, .zip, .rar, .mdb, .asp, .aspx, .html, .htm, .dbf, .3dm, .3ds, .3fr, .jar, .3g2, .xml, .png, .tif, .3gp, .java, .jpe, .jpeg, .jpg, .jsp, .php, .3pr, .7z, .ab4, .accdb, .accde, .accdr, .accdt, .ach, .kbx, .acr, .act, .adb, .ads, .agdl, .ai, .ait, .al, .apj, .arw, .asf, .asm, .asx, .avi, .awg, .back, .backup, .backupdb, .pbl, .bank, .bay, .bdb, .bgt, .bik, .bkp, .blend, .bpw, .c, .cdf, .cdr, .cdr3, .cdr4, .cdr5, .cdr6, .cdrw, .cdx, .ce1, .ce2, .cer, .cfp, .cgm, .cib, .class, .cls, .cmt, .cpi, .cpp, .cr2, .craw, .crt, .crw, .phtml, .php5, .cs, .csh, .csl, .tib, .csv, .dac, .db, .db3, .dbjournal, .dc2, .dcr, .dcs, .ddd, .ddoc, .ddrw, .dds, .der, .des, .design, .dgc, .djvu, .dng, .dot, .docm, .dotm, .dotx, .drf, .drw, .dtd, .dxb, .dxf, .dxg, .eml, .eps, .erbsql, .erf, .exf, .fdb, .ffd, .fff, .fh, .fmb, .fhd, .fla, .flac, .flv, .fpx, .fxg, .gray, .grey, .gry, .h, .hbk, .hpp, .ibank, .ibd, .ibz, .idx, .iif, .iiq, .incpas, .indd, .kc2, .kdbx, .kdc, .key, .kpdx, .lua, .m, .m4v, .max, .mdc, .mdf, .mef, .mfw, .mmw, .moneywell, .mos, .mov, .mp3, .mp4, .mpg, .mrw, .msg, .myd, .nd, .ndd, .nef, .nk2, .nop, .nrw, .ns2, .ns3, .ns4, .nsd, .nsf, .nsg, .nsh, .nwb, .nx2, .nxl, .nyf, .oab, .obj, .odb, .odc, .odf, .odg, .odm, .odp, .ods, .odt, .oil, .orf, .ost, .otg, .oth, .otp, .ots, .ott, .p12, .p7b, .p7c, .pab, .pages, .pas, .pat, .pcd, .pct, .pdb, .pdd, .pef, .pem, .pfx, .pl, .plc, .pot, .potm, .potx, .ppam, .pps, .ppsm, .ppsx, .pptm, .prf, .ps, .psafe3, .psd, .pspimage, .ptx, .py, .qba, .qbb, .qbm, .qbr, .qbw, .qbx, .qby, .r3d, .raf, .rat, .raw, .rdb, .rm, .rtf, .rw2, .rwl, .rwz, .s3db, .sas7bdat, .say, .sd0, .sda, .sdf, .sldm, .sldx, .sql, .sqlite, .sqlite3, .sqlitedb, .sr2, .srf, .srt, .srw, .st4, .st5, .st6, .st7, .st8, .std, .sti, .stw, .stx, .svg, .swf, .sxc, .sxd, .sxg, .sxi, .sxi, .sxm, .sxw, .tex, .tga, .thm, .tlg, .vob, .war, .wallet, .wav, .wb2, .wmv, .wpd, .wps, .x11, .x3f, .xis, .xla, .xlam, .xlk, .xlm, .xlr, .xlsb, .xlsm, .xlt, .xltm, .xltx, .xlw, .ycbcra, .yuv</p>
+<p><em>Source : Intel Security Advanced Threat Research - http://www.intelsecurity.com</em></p>
+</section>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="notions-de-base-en-cryptographie" class="level1">
+<h1>Notions de base en cryptographie</h1>
+<ul>
+<li>Introduction aux <strong>concepts fondamentaux</strong> de la cryptographie.</li>
+<li>Présente les <strong>principes de sécurité</strong>, les <strong>types de systèmes</strong>, et les <strong>modèles d’attaque</strong>.</li>
+<li>Inclut des <strong>systèmes historiques</strong> et des techniques complémentaires.</li>
+</ul>
+<section id="principe-de-kerckhoffs" class="level2">
+<h2 class="anchored" data-anchor-id="principe-de-kerckhoffs">Principe de Kerckhoffs</h2>
+<ul>
+<li>Principe fondamental : la <strong>sécurité repose uniquement sur la clé</strong>, pas sur le secret de l’algorithme.</li>
+<li>Le système doit rester <strong>sûr même si l’algorithme est public</strong>.</li>
+<li>La clé doit être <strong>facilement modifiable</strong> et le système <strong>simple à utiliser</strong>.</li>
+<li>Rejet explicite de la <strong>sécurité par l’obscurité</strong>.</li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-42-contents" aria-controls="callout-42" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Ultra-synthèse
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-42" class="callout-42-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>Sécurité basée sur la clé</li>
+<li>Algorithme public</li>
+<li>Pas de sécurité par l’obscurité</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-43-contents" aria-controls="callout-43" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Version originale
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-43" class="callout-43-contents callout-collapse collapse">
+<section id="principe-de-kerckhoffs-1" class="level2 callout-body-container callout-body">
+<h2 class="anchored" data-anchor-id="principe-de-kerckhoffs-1">Principe de Kerckhoffs</h2>
+<p><strong>Auguste Kerckhoffs</strong> publie en <strong>1883</strong> deux articles définissant <strong>six principes</strong> pour les chiffrements militaires :</p>
+<ol type="1">
+<li>Le système doit être <strong>pratiquement, voire mathématiquement indéchiffrable</strong>.</li>
+<li>Il ne doit <strong>pas nécessiter de confidentialité</strong> et rester sûr même s’il tombe aux mains de l’ennemi.</li>
+<li>La <strong>clé</strong> doit pouvoir être <strong>mémorisée, transmise et modifiée facilement</strong>, sans notes écrites.</li>
+<li>Le système doit être <strong>compatible avec les communications télégraphiques</strong>.</li>
+<li>Il doit être <strong>portable</strong> et utilisable par <strong>une seule personne</strong>.</li>
+<li>Il doit être <strong>simple à utiliser</strong>, sans procédures complexes ni contraintes excessives.</li>
+</ol>
+<p>Kerckhoffs affirme dès le <strong>XIXe siècle</strong> que la sécurité doit être <strong>mathématiquement démontrable</strong> et qu’il <strong>n’existe pas de sécurité par l’obscurité</strong>.</p>
+</section>
+</div>
+</div>
+</section>
+<section id="classification-des-systèmes-de-cryptage" class="level2">
+<h2 class="anchored" data-anchor-id="classification-des-systèmes-de-cryptage">Classification des systèmes de cryptage</h2>
+<section id="sécurité-inconditionnelle" class="level3">
+<h3 class="anchored" data-anchor-id="sécurité-inconditionnelle">Sécurité inconditionnelle</h3>
+<p>(<em>unconditional security</em> / <em>perfect secrecy</em>)</p>
+<ul>
+<li>Sécurité <strong>indépendante de la puissance de calcul</strong>.</li>
+<li><strong>Ciphertext</strong> n’apporte aucune info sur le <strong>plaintext</strong>.</li>
+<li>Conditions : <strong>clé ≥ message</strong>, <strong>jamais réutilisée</strong>.</li>
+<li>Usage surtout <strong>théorique</strong>.</li>
+<li><strong>Exemple</strong> : <em>one-time pad</em>.</li>
+</ul>
+</section>
+<section id="as-hard-as-équivalent-provable-security" class="level3">
+<h3 class="anchored" data-anchor-id="as-hard-as-équivalent-provable-security">As hard as / équivalent / provable security</h3>
+<ul>
+<li>Cryptanalyse <strong>aussi difficile</strong> qu’un <strong>problème mathématique difficile</strong>.</li>
+<li><strong>RSA</strong> et <strong>Rabin</strong> prouvés équivalent à la factorisation.
+<ul>
+<li>Démontrée par <strong>réduction</strong> (<em>reduction proof</em>).</li>
+</ul></li>
+<li>Concept central mais <strong>controversé</strong>.</li>
+</ul>
+</section>
+<section id="sécurité-calculatoire" class="level3">
+<h3 class="anchored" data-anchor-id="sécurité-calculatoire">Sécurité calculatoire</h3>
+<p>(<em>computational security</em> / <em>practical security</em>)</p>
+<ul>
+<li>Sécurité basée sur le <strong>coût irréaliste des attaques</strong>.</li>
+<li>Catégorie la plus utilisée en pratique.</li>
+<li><strong>Exemples</strong> : <strong>AES</strong>, <strong>DES</strong>, <strong>IDEA</strong>, <strong>RC4</strong>.</li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-44-contents" aria-controls="callout-44" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Ultra-synthèse
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-44" class="callout-44-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Inconditionnelle</strong> : parfaite, théorique (<em>one-time pad</em>).</li>
+<li><strong>Provable security</strong> : équivalence à problème mathématique difficile.</li>
+<li><strong>Calculatoire</strong> : sûre en pratique.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-45-contents" aria-controls="callout-45" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Version originale
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-45" class="callout-45-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><p><strong>Sécurité inconditionnelle</strong> (<em>unconditional security aussi appelée <strong>perfect secrecy</strong></em>) :</p>
+<ul>
+<li>La sécurité du système de cryptage <strong>n’est pas compromise par la puissance de calcul</strong> destinée à la cryptanalyse.</li>
+<li>Cette catégorie s’appuie sur la <strong>théorie de l’information</strong> publiée par <strong>Shannon en 1949</strong>.</li>
+<li>Plus précisément, un système de cryptage est <strong>inconditionnellement sûr</strong> si la probabilité de rencontrer un <strong>plaintext x</strong> après l’observation du <strong>ciphertext correspondant y</strong> est identique à la probabilité à priori de rencontrer le plaintext x.</li>
+<li>En d’autres termes, le fait de disposer de couples <strong>plaintext/ciphertext (x,y)</strong> ne constitue <strong>aucune aide pour la cryptanalyse</strong>.</li>
+<li>Une condition nécessaire pour qu’un système soit inconditionnellement sûr est que la <strong>clé soit au moins de la même taille que le message</strong> et, surtout, qu’elle <strong>ne soit pas réutilisée</strong> pour encrypter des messages différents.</li>
+<li>Cette condition rend ces systèmes <strong>peu adaptés aux besoins cryptographiques habituels</strong> et réduit leur domaine d’intérêt à un <strong>cadre théorique</strong>.</li>
+<li>L’exemple classique est le <strong>one-time pad</strong> inventé en <strong>1917</strong> par <strong>J. Mauborgne</strong> and <strong>G. Vernam</strong>.</li>
+<li>Fondements théoriques des systèmes inconditionnellement sûrs + d’autres exemples dans <strong>[Sti06]</strong>.</li>
+</ul></li>
+<li><p><strong>As hard as / équivalent / provable security</strong></p>
+<ul>
+<li>Lorsqu’on peut prouver que la cryptanalyse de l’algorithme est <strong>aussi difficile que de résoudre un problème mathématique réputé difficile</strong>.</li>
+<li>Par exemple la <strong>factorisation de grands nombres</strong>, le calcul de <strong>racines carrées modulo un “composite”</strong>, le calcul de <strong>logarithmes discrets dans un groupe fini</strong>, etc.</li>
+<li>L’algorithme de <strong>Rabin</strong> et <strong>RSA</strong> (cas générique^1 ) sont “prouvés” <strong>équivalents à la factorisation</strong>.</li>
+<li>Une telle preuve s’appelle de “réduction” (<strong>reduction proof</strong>).</li>
+<li>La notion de <strong>provable security</strong> est à l’origine d’une <strong>importante controverse</strong> dans le monde cryptographique.</li>
+</ul></li>
+<li><p><strong>Sécurité calculatoire</strong> (<em>computational security aussi appelé <strong>practical security</strong></em>)</p>
+<ul>
+<li>Un système de cryptage est dans cette catégorie si l’<strong>effort calculatoire nécessaire à le “casser”</strong> en utilisant les meilleures techniques possibles est <strong>au delà</strong> (avec une marge raisonnable) des ressources de calcul d’un adversaire hypothétique.</li>
+<li>La grande majorité de systèmes de cryptage symétriques (<strong>AES, DES, IDEA, RC4</strong>, etc.) sont dans cette catégorie.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="entropie" class="level2">
+<h2 class="anchored" data-anchor-id="entropie">Entropie</h2>
+<ul>
+<li>L’<strong>entropie</strong> (Shannon, 1948) mesure la <strong>quantité d’information effective</strong> contenue dans un message.</li>
+<li>L’<strong>entropie conditionnelle</strong> mesure l’incertitude qui reste sur le <strong>plaintext</strong> après observation du <strong>ciphertext</strong>.</li>
+</ul>
+<section id="propriétés" class="level3">
+<h3 class="anchored" data-anchor-id="propriétés">Propriétés</h3>
+<ul>
+<li><span class="math inline">\(0 \le H(X) \le \log n\)</span></li>
+<li><span class="math inline">\(H(X) = 0\)</span> → aucune incertitude</li>
+<li><span class="math inline">\(H(X) = \log n\)</span> → tous les résultats équiprobables</li>
+</ul>
+</section>
+<section id="interprétation" class="level3">
+<h3 class="anchored" data-anchor-id="interprétation">Interprétation</h3>
+<ul>
+<li>Approxime le <strong>nombre de bits nécessaires</strong> pour encoder <span class="math inline">\(X\)</span>.</li>
+<li>La <strong>redondance</strong> = différence entre codage effectif et entropie.</li>
+</ul>
+</section>
+<section id="entropie-conditionnelle" class="level3">
+<h3 class="anchored" data-anchor-id="entropie-conditionnelle">Entropie conditionnelle</h3>
+<ul>
+<li><span class="math inline">\(H(X \mid Y = y) = - \sum_{x} P(X=x \mid Y=y) \log P(X=x \mid Y=y)\)</span></li>
+<li><span class="math inline">\(H(X \mid Y) = \sum_y P(Y=y) H(X \mid Y=y)\)</span></li>
+<li>Mesure l’incertitude restante sur le <strong>plaintext</strong> après observation du <strong>ciphertext</strong>.</li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-46-contents" aria-controls="callout-46" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Ultra-synthèse
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-46" class="callout-46-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Entropie</strong> : quantité d’information d’un message.</li>
+<li><strong>Entropie conditionnelle</strong> : incertitude sur le plaintext après le ciphertext.</li>
+<li><strong>Redondance</strong> : différence entre codage effectif et entropie.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-47-contents" aria-controls="callout-47" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Version originale
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-47" class="callout-47-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>Une définition essentielle en cryptographie est la quantité d’information <strong>effective</strong> contenue dans un message.</li>
+<li>Par exemple, les jours de la semaine (<em>lundi</em>, …, <em>dimanche</em>) peuvent intuitivement être encodés comme des chaînes de caractères de longueur (<span class="math inline">\(\le \text{len}(\text{``mercredi''})\)</span>), soit <span class="math inline">\((8 \times 8 = 64)\)</span> bits. Cependant, la quantité d’information effective de la variable <em>jour de la semaine</em> peut être encodée de manière optimale sur <strong>3 bits</strong> (car <span class="math inline">\((2^3 = 8)\)</span> est suffisant pour représenter les 7 variations possibles).</li>
+<li>L’<strong>entropie</strong> (Shannon, 1948) est la formalisation mathématique de cette définition.</li>
+</ul>
+<section id="définition-formelle" class="level3">
+<h3 class="anchored" data-anchor-id="définition-formelle">Définition formelle</h3>
+<p>Soit <span class="math inline">\(X\)</span> une variable aléatoire avec un ensemble fini de valeurs possibles <span class="math inline">\({x_1, x_2, \dots, x_n}\)</span>, telles que <span class="math inline">\(P(X=x_i) = p_i\)</span>, avec <span class="math inline">\(0 \le p_i \le 1\)</span> et <span class="math inline">\(\sum p_i = 1\)</span>. L’entropie de <span class="math inline">\(X\)</span>, notée <span class="math inline">\(H(X)\)</span>, est définie par</p>
+<p><span class="math inline">\(H(X) = - \sum_{i=1}^{n} p_i \log p_i = \sum_{i=1}^{n} p_i \log \left(\frac{1}{p_i}\right)\)</span></p>
+<p>Par convention : <span class="math inline">\(p_i \log p_i = 0\)</span> si <span class="math inline">\(p_i = 0\)</span>. Tous les logarithmes sont en <strong>base 2</strong>.</p>
+</section>
+<section id="interprétation-1" class="level3">
+<h3 class="anchored" data-anchor-id="interprétation-1">Interprétation</h3>
+<ul>
+<li>Approximation du nombre de bits nécessaires pour encoder les éléments de <span class="math inline">\(X\)</span>.</li>
+<li>La <strong>redondance</strong> est la différence entre le codage effectif et l’entropie.</li>
+</ul>
+</section>
+<section id="propriétés-1" class="level3">
+<h3 class="anchored" data-anchor-id="propriétés-1">Propriétés</h3>
+<ol type="1">
+<li><span class="math inline">\(0 \le H(X) \le \log n\)</span></li>
+<li><span class="math inline">\(H(X) = 0 \iff \exists i : p_i = 1, p_j = 0 \ \forall j \ne i\)</span></li>
+<li><span class="math inline">\(H(X) = \log n \iff p_i = 1/n \ \forall i\)</span></li>
+</ol>
+</section>
+<section id="entropie-conditionnelle-1" class="level3">
+<h3 class="anchored" data-anchor-id="entropie-conditionnelle-1">Entropie conditionnelle</h3>
+<ul>
+<li><span class="math inline">\(H(X \mid Y = y) = - \sum_{x} P(X=x \mid Y=y) \log P(X=x \mid Y=y)\)</span>,</li>
+<li><span class="math inline">\(H(X \mid Y) = \sum_y P(Y=y) H(X \mid Y=y)\)</span></li>
+</ul>
+<p><em>Mesure l’incertitude sur <span class="math inline">\(X\)</span> (plaintext) après avoir observé <span class="math inline">\(Y\)</span> (ciphertext).</em></p>
+</section>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="attaques-sur-les-systèmes-de-cryptage" class="level2">
+<h2 class="anchored" data-anchor-id="attaques-sur-les-systèmes-de-cryptage">Attaques sur les systèmes de cryptage</h2>
+<ul>
+<li><strong>Ciphertext-only</strong> : Adversaire a seulement le ciphertext.</li>
+<li><strong>Known-plaintext</strong> : Adversaire a des couples plaintext/ciphertext.</li>
+<li><strong>Chosen-plaintext</strong> : Adversaire peut choisir le plaintext et voir le ciphertext (et essaye de trouver le plaintext pour d’autres messages).</li>
+<li><strong>Adaptive chosen-plaintext</strong> : dépend des ciphertexts reçus.</li>
+<li><strong>Chosen-ciphertext</strong> : Adversaire choisit le ciphertext et obtient le plaintext (vise à trouver la clé).</li>
+<li><strong>Adaptive Chosen-ciphertext</strong> : <strong>Chosen-ciphertext</strong> dépend des plaintexts reçus</li>
+</ul>
+</section>
+<section id="oracles-et-modèles-de-sécurité" class="level2">
+<h2 class="anchored" data-anchor-id="oracles-et-modèles-de-sécurité">Oracles et Modèles de Sécurité</h2>
+<section id="oracles-aléatoires-et-modèles-de-sécurité" class="level3">
+<h3 class="anchored" data-anchor-id="oracles-aléatoires-et-modèles-de-sécurité">Oracles Aléatoires et Modèles de Sécurité</h3>
+<ul>
+<li><strong>Oracle Aléatoire (Random Oracle)</strong> : Une fonction théorique “parfaite” qui renvoie une valeur uniforme et aléatoire pour chaque nouvelle entrée, mais reste déterministe pour une entrée déjà vue.</li>
+<li><strong>ROM (Random Oracle Model - Modèle de l’Oracle Aléatoire)</strong> : Cadre de preuve mathématique utilisant cet oracle idéal comme substitut aux fonctions de hachage.</li>
+<li><strong>Modèle Standard</strong> : Cadre où la sécurité repose uniquement sur la puissance de calcul de l’adversaire face à des algorithmes réels.</li>
+<li><strong>Limite</strong> : Une preuve de sécurité en ROM ne garantit pas la sécurité absolue dans le monde réel (avec SHA-256, etc.).</li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-48-contents" aria-controls="callout-48" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Version originale
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-48" class="callout-48-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Un <strong>oracle aléatoire</strong> est une entité abstraite accessible aux parties légitimes et aux adversaires.</p>
+<ul>
+<li><strong>Comportement</strong> : Il répond aux requêtes d’entrée <span class="math inline">\(x\)</span> par des réponses parfaitement aléatoires <span class="math inline">\(Orc(x)\)</span>.</li>
+<li><strong>Déterminisme</strong> : La seule exception réside dans les entrées précédemment traitées (<span class="math inline">\(x_1, x_2, \dots, x_n\)</span>). Si <span class="math inline">\(x_1' = x_1\)</span>, alors <span class="math inline">\(Orc(x_1') = Orc(x_1)\)</span>.</li>
+<li><strong>Modélisation</strong> : On le modélise par une fonction <span class="math inline">\(Orc : X \to Y\)</span> où <span class="math inline">\(\forall x \in X, \Pr(Orc(x) = y) = \frac{1}{|Y|}\)</span>.</li>
+<li><strong>Utilité</strong> : Il se comporte comme une <strong>fonction de hachage cryptographique « idéale »</strong>, outil précieux pour prouver la sécurité dans le <strong>Modèle d’Oracle Aléatoire</strong>.</li>
+<li><strong>Comparaison</strong> : Le <strong>modèle standard</strong> limite les adversaires par des facteurs computationnels. Un protocole sûr dans le modèle d’oracle aléatoire peut devenir vulnérable s’il est utilisé avec une fonction de hachage « réelle » (SHA-1, SHA-256).</li>
+</ul>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="oracles-de-chiffrement-déchiffrement-et-signature" class="level3">
+<h3 class="anchored" data-anchor-id="oracles-de-chiffrement-déchiffrement-et-signature">Oracles de Chiffrement, Déchiffrement et Signature</h3>
+<ul>
+<li><strong>Fonction</strong> : Entités qui exécutent des opérations (chiffrer/signer) pour l’adversaire en utilisant des clés secrètes sans jamais les révéler.</li>
+<li><strong>Cryptographie symétrique</strong> : L’oracle fournit <span class="math inline">\(E_k(x)\)</span> ou <span class="math inline">\(D_k(y)\)</span>.</li>
+<li><strong>Cryptographie asymétrique</strong> : L’oracle est crucial pour les opérations privées (déchiffrement/signature), car les opérations publiques sont déjà libres d’accès.</li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-49-contents" aria-controls="callout-49" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Version originale : Oracles Opérationnels
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-49" class="callout-49-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Un <strong>oracle de chiffrement/déchiffrement/signature</strong> est une entité abstraite offrant un service « à la demande ».</p>
+<ul>
+<li><strong>Accès aux clés</strong> : Il utilise les <strong>mêmes clés que les propriétaires légitimes</strong> (systèmes symétriques et asymétriques) sans les divulguer.</li>
+<li><strong>Primitives symétriques</strong> : Pour une primitive <span class="math inline">\(E\)</span> et une clé <span class="math inline">\(k\)</span>, il renvoie <span class="math inline">\(y = E_k(x)\)</span> ou le clair <span class="math inline">\(x\)</span> correspondant.</li>
+<li><strong>Systèmes à clé publique</strong> : L’oracle n’est nécessaire que pour les opérations à <strong>clé privée</strong> (<span class="math inline">\(priv_k\)</span>).
+<ul>
+<li><strong>Déchiffrement</strong> : renvoie <span class="math inline">\(x\)</span> tel que <span class="math inline">\(E'_{pubk}(x) = y\)</span>.</li>
+<li><strong>Signature</strong> : Pour un système <span class="math inline">\(S\)</span>, il renvoie <span class="math inline">\(y = S_{privk}(x)\)</span>.</li>
+</ul></li>
+<li><strong>Attaques</strong> : Les modèles d’attaques par <strong>texte clair choisi</strong> (CPA) et par <strong>texte chiffré choisi</strong> (CCA) reposent sur la mise à disposition de ces oracles pour l’adversaire.</li>
+</ul>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="indiscernabilité-et-sécurité-sémantique-ind-cpa" class="level3">
+<h3 class="anchored" data-anchor-id="indiscernabilité-et-sécurité-sémantique-ind-cpa">Indiscernabilité et Sécurité Sémantique (IND-CPA)</h3>
+<ul>
+<li><strong>Propriété</strong> : Un adversaire ne doit pas pouvoir distinguer les chiffrés de deux messages clairs différents.</li>
+<li><strong>IND-CPA (Indistinguishability under Chosen Plaintext Attack - Indiscernabilité sous attaque à texte clair choisi)</strong> : Si l’adversaire ne devine le bon message qu’avec une probabilité de <span class="math inline">\(1/2 + \epsilon\)</span>, le système est considéré comme sûr.</li>
+<li><strong>Sécurité Sémantique</strong> : Équivalente à l’IND-CPA, elle assure qu’aucune information utile ne fuite du chiffré.</li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-50-contents" aria-controls="callout-50" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Version originale : Sécurité Sémantique
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-50" class="callout-50-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>L’indiscernabilité des textes chiffrés</strong> garantit l’incapacité de distinguer les chiffrés de messages clairs donnés.</p>
+<ul>
+<li><strong>Expérience (Jeu de sécurité IND-CPA)</strong> :
+<ol type="1">
+<li>L’adversaire choisit deux messages <span class="math inline">\(M_0\)</span> et <span class="math inline">\(M_1\)</span>.</li>
+<li>L’oracle choisit un indice aléatoire <span class="math inline">\(i \in \{0,1\}\)</span> et renvoie <span class="math inline">\(c_i = E_k(M_i)\)</span>.</li>
+<li>L’adversaire peut effectuer d’autres calculs ou appels oracles.</li>
+</ol></li>
+<li><strong>Définition IND-CPA</strong> : Le système est sûr si l’avantage de l’adversaire est <strong>négligeable</strong> (<span class="math inline">\(Prob = 1/2 + \epsilon\)</span> avec <span class="math inline">\(\epsilon\)</span> petit).</li>
+<li><strong>Note</strong> : En clé publique, l’oracle de chiffrement est inutile car l’adversaire possède déjà la clé publique. L’IND-CPA offre la <strong>sécurité sémantique</strong>.</li>
+</ul>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="le-chiffrement-probabiliste-et-loaep" class="level3">
+<h3 class="anchored" data-anchor-id="le-chiffrement-probabiliste-et-loaep">Le Chiffrement Probabiliste et l’OAEP</h3>
+<ul>
+<li><strong>Problème</strong> : Le chiffrement déterministe permet les <strong>attaques par dictionnaire</strong> (comparaison de chiffrés connus).</li>
+<li><strong>Solution</strong> : Ajouter de l’aléa au message avant chiffrement pour que <span class="math inline">\(E(M)\)</span> soit différent à chaque exécution.</li>
+<li><strong>OAEP (Optimal Asymmetric Encryption Padding - Remplissage asymétrique optimal)</strong> : Standard utilisé avec RSA. Il combine le message <span class="math inline">\(P\)</span> avec un nombre aléatoire <span class="math inline">\(R\)</span> via des fonctions de hachage <span class="math inline">\(h\)</span> et des XOR (<span class="math inline">\(\oplus\)</span>).</li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-51-contents" aria-controls="callout-51" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Version originale : Déterminisme vs Probabilisme
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-51" class="callout-51-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Le comportement <strong>déterministe</strong> (mêmes entrées = mêmes sorties) crée des failles.</p>
+<ul>
+<li><strong>Exemple</strong> : Si Alice envoie “Oui” ou “Non”, l’adversaire peut calculer <span class="math inline">\(C_{yes} = E_{pub}(``Oui")\)</span> et comparer. Il peut créer un <strong>livre de codes</strong> (dictionnaire) pour identifier les messages sans casser la clé.</li>
+<li><strong>Chiffrement probabiliste</strong> : Ajoute un caractère aléatoire. L’objectif est la sécurité sémantique pour la clé publique.</li>
+<li><strong>OAEP</strong> : Utilisé dans <strong>RSA-PKCS1</strong>. Le texte <span class="math inline">\(P\)</span> est combiné avec un aléa <span class="math inline">\(R\)</span> :
+<ul>
+<li><span class="math inline">\(M_1 := P \oplus h(R)\)</span></li>
+<li><span class="math inline">\(M_2 := R \oplus h(M_1)\)</span></li>
+<li>Le chiffrement porte sur <span class="math inline">\(M_1\)</span> et <span class="math inline">\(M_2\)</span>. Au déchiffrement, on retrouve <span class="math inline">\(R = M_2 \oplus h(M_1)\)</span>, puis <span class="math inline">\(P = h(R) \oplus M_1\)</span>.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-52-contents" aria-controls="callout-52" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Ultra-synthèse
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-52" class="callout-52-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Oracle Aléatoire</strong> : Fonction de hachage “idéale” (modèle théorique).</li>
+<li><strong>Oracles CPA/CCA</strong> : Simulent un accès à la clé secrète pour tester la résistance.</li>
+<li><strong>IND-CPA</strong> : Impossibilité de distinguer deux chiffrés (Sécurité Sémantique).</li>
+<li><strong>Chiffrement Probabiliste</strong> : Indispensable pour contrer les livres de codes (attaques par dictionnaire).</li>
+<li><strong>OAEP</strong> : Méthode de padding (remplissage) ajoutant l’aléa nécessaire au RSA.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="histoire-de-la-cryptographie-et-sécurité-inconditionnelle" class="level2">
+<h2 class="anchored" data-anchor-id="histoire-de-la-cryptographie-et-sécurité-inconditionnelle">Histoire de la Cryptographie et Sécurité Inconditionnelle</h2>
+<section id="systèmes-de-cryptage-historiques" class="level3">
+<h3 class="anchored" data-anchor-id="systèmes-de-cryptage-historiques">Systèmes de Cryptage Historiques</h3>
+<p>La cryptographie a longtemps été limitée à la seule recherche de la <strong>confidentialité</strong>. Les systèmes historiques reposent sur deux principes fondamentaux : la <strong>substitution</strong> et la <strong>transposition</strong>.</p>
+<ul>
+<li><strong>Chiffre de César</strong> (substitution mono-alphabétique) : Décalage fixe des lettres. Très vulnérable à l’<strong>analyse de fréquences</strong>.</li>
+<li><strong>Chiffre de Vigenère</strong> (substitution polyalphabétique) : Utilisation d’une clé pour varier le décalage. Plus complexe, mais cassable en identifiant la longueur de la clé.</li>
+<li><strong>Chiffre de Transposition</strong> : Réorganisation des caractères du texte original selon une permutation définie par une clé.</li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-53-contents" aria-controls="callout-53" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Version originale : Cryptographie Historique
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-53" class="callout-53-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Pendant des siècles la <strong>confidentialité</strong> a été la seule application de la cryptographie…</p>
+<ul>
+<li><strong>I av. JC, Caesar Cipher</strong> : <strong>Cryptage à substitution mono-alphabétique</strong> <span class="math inline">\(e_k(x) = (x + k) \pmod{26}\)</span>, <span class="math inline">\(d_k(y) = (y - k) \pmod{26}\)</span> où <span class="math inline">\(x, y, k \in \mathbb{Z}_{26}\)</span>.
+<ul>
+<li>Exemple: <span class="math inline">\(E_1(\text{'bonjour'}) = \text{'cpokpws'}\)</span>.</li>
+<li><strong>Cryptanalyse</strong> : facile, basée sur la <strong>fréquence des caractères</strong>.</li>
+</ul></li>
+<li><strong>XVI siècle, Vigenère</strong> : <strong>Cryptage à substitution polyalphabétique</strong> <span class="math inline">\(e_k(x_1, \dots, x_n) = (x_1 + k_1, \dots, x_m + k_m, x_{m+1} + k_1, \dots) \pmod{26}\)</span>.
+<ul>
+<li><strong>Cryptanalyse</strong> : trouver la <strong>taille <span class="math inline">\(m\)</span> de la clé</strong> en identifiant les portions de ciphertext répétées et analyser les blocs séparés comme dans le Caesar Cipher.</li>
+</ul></li>
+<li><strong>Transposition Ciphers</strong> (Porta, 1563) : La clé définit une <strong>permutation</strong> sur le plaintext.</li>
+<li>Ces techniques sont toujours à la base des systèmes de cryptage actuels (ex: <strong>Enigma</strong>, qualifiée par W. Churchill d’arme secrète ayant gagné la guerre).</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="le-one-time-pad-masque-jetable" class="level3">
+<h3 class="anchored" data-anchor-id="le-one-time-pad-masque-jetable">Le One-Time Pad (Masque Jetable)</h3>
+<p>Le <strong>One-Time Pad</strong> (OTP), ou <strong>chiffre de Vernam</strong>, est le seul système prouvé <strong>inconditionnellement sûr</strong> (sécurité parfaite).</p>
+<ul>
+<li><strong>Principe</strong> : Le message est combiné à une clé de même longueur via l’opération XOR (<span class="math inline">\(\oplus\)</span>).</li>
+<li><strong>Sécurité Inconditionnelle</strong> : L’observation du message chiffré n’apporte aucune information sur le message clair. Même un adversaire avec une puissance de calcul infinie ne peut pas le briser.</li>
+<li><strong>Contraintes de Shannon</strong> : La clé doit être <strong>aussi longue que le message</strong>, purement <strong>aléatoire</strong>, et <strong>utilisée une seule fois</strong>.</li>
+<li><strong>Réutilisation de la clé</strong> : Si une clé est réutilisée pour deux messages, un attaquant peut éliminer la clé par XOR (<span class="math inline">\(y_a \oplus y_b = x_a \oplus x_b\)</span>) et retrouver les messages clairs.</li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-54-contents" aria-controls="callout-54" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Version originale : Le One-Time Pad
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-54" class="callout-54-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Soit <span class="math inline">\(n \ge 1\)</span> et les espaces <span class="math inline">\(P, C, K\)</span> tels que <span class="math inline">\(P, C, K = (\mathbb{Z}_2)^n\)</span>. Les opérations d’encryption et decryption d’un <strong>one-time pad</strong> (Vernam Cipher) sont : <span class="math inline">\(E_k(x_i) = x_i \oplus k_i\)</span> et <span class="math inline">\(D_k(y_i) = y_i \oplus k_i\)</span> pour <span class="math inline">\(1 \le i \le n\)</span>.</p>
+<ul>
+<li><strong>Sécurité inconditionnelle</strong> : Si <span class="math inline">\(k_i\)</span> sont aléatoires et indépendants, l’observation des ciphertexts n’aide pas la cryptanalyse. L’<strong>entropie</strong> de <span class="math inline">\(X\)</span> ne diminue pas : <span class="math inline">\(H(X|C) = H(X)\)</span>.</li>
+<li><strong>Théorème de Shannon</strong> : Condition nécessaire : <span class="math inline">\(H(K) \ge H(X)\)</span>. La longueur de la <strong>clé aléatoire</strong> doit être au moins aussi grande que celle du plaintext.</li>
+<li><strong>Réutilisation de clé</strong> : <span class="math inline">\(y_a \oplus y_b = x_a \oplus x_b\)</span>. Avec des messages de faible entropie, on retrouve les clairs et la clé (<span class="math inline">\(k = y_a \oplus x_a\)</span>).</li>
+<li>Vulnérable à l’attaque <strong>Known Plaintext</strong> (si la clé est réutilisée).</li>
+<li>Problème majeur : La <strong>distribution et gestion des clés</strong> de grande taille. Relancé par la <strong>cryptographie quantique</strong> proposant des canaux confidentiels de distribution de clés de longueur illimitées.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="stéganographie" class="level3">
+<h3 class="anchored" data-anchor-id="stéganographie">Stéganographie</h3>
+<p>À l’inverse de la cryptographie qui rend le message illisible, la <strong>stéganographie</strong> dissimule l’existence même du message.</p>
+<ul>
+<li><strong>Méthode</strong> : Utiliser un “canal subliminal” (un support innocent comme une image ou un texte banal).</li>
+<li><strong>Technique moderne</strong> : Insertion de données dans les <strong>bits les moins significatifs</strong> (LSB - <em>Least Significant Bits</em>) de fichiers multimédias, permettant de cacher de gros volumes de données sans altération visible.</li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-55-contents" aria-controls="callout-55" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Version originale : Stéganographie
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-55" class="callout-55-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>La <strong>stéganographie</strong> cache un message à l’intérieur d’un autre. Éléments constituants :</p>
+<ol type="1">
+<li>Un <strong>canal physique ou logique</strong> différent (canal subliminal).</li>
+<li>Un <strong>mécanisme secret</strong> pour identifier ce canal.</li>
+</ol>
+<ul>
+<li><strong>Exemples classiques</strong> : Premières lettres des mots d’un texte, encre invisible.</li>
+<li><strong>Exemple moderne</strong> : Utiliser les <strong>least significant bits</strong> (bits les moins significatifs) des frames d’un CD Photo.</li>
+<li>Pour une image 2048x3072 (RGB 24 bits), cacher un message sur 1 bit permet de stocker <strong>2.3 Mb</strong> sans détériorer la qualité.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-56-contents" aria-controls="callout-56" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Ultra-synthèse
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-56" class="callout-56-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Historique</strong> : Substitution (César/Vigenère) et Transposition (permutation).</li>
+<li><strong>One-Time Pad</strong> : Sécurité absolue si la clé est aléatoire, unique et aussi longue que le message (<span class="math inline">\(H(K) \ge H(X)\)</span>).</li>
+<li><strong>Stéganographie</strong> : Cacher l’existence du message (ex: technique des LSB dans les images).</li>
+</ul>
 </div>
 </div>
 </div>
