@@ -69,6 +69,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -113,18 +142,40 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#les-services-de-sécurité-fondamentaux" id="toc-les-services-de-sécurité-fondamentaux" class="nav-link active" data-scroll-target="#les-services-de-sécurité-fondamentaux"><span class="header-section-number">1</span> Les Services de Sécurité Fondamentaux</a></li>
-  <li><a href="#synthèse-services-menaces-et-mécanismes-de-protection" id="toc-synthèse-services-menaces-et-mécanismes-de-protection" class="nav-link" data-scroll-target="#synthèse-services-menaces-et-mécanismes-de-protection"><span class="header-section-number">2</span> Synthèse : Services, Menaces et Mécanismes de Protection</a></li>
-  <li><a href="#risques-liés-à-internet" id="toc-risques-liés-à-internet" class="nav-link" data-scroll-target="#risques-liés-à-internet"><span class="header-section-number">3</span> Risques Liés à Internet</a>
+  <li><a href="#les-services-de-sécurité-fondamentaux" id="toc-les-services-de-sécurité-fondamentaux" class="nav-link active" data-scroll-target="#les-services-de-sécurité-fondamentaux">Les Services de Sécurité Fondamentaux</a></li>
+  <li><a href="#synthèse-services-menaces-et-mécanismes-de-protection" id="toc-synthèse-services-menaces-et-mécanismes-de-protection" class="nav-link" data-scroll-target="#synthèse-services-menaces-et-mécanismes-de-protection">Synthèse : Services, Menaces et Mécanismes de Protection</a></li>
+  <li><a href="#risques-liés-à-internet" id="toc-risques-liés-à-internet" class="nav-link" data-scroll-target="#risques-liés-à-internet">Risques Liés à Internet</a>
   <ul class="collapse">
-  <li><a href="#programmes-malveillants-transmis-par-e-mail" id="toc-programmes-malveillants-transmis-par-e-mail" class="nav-link" data-scroll-target="#programmes-malveillants-transmis-par-e-mail"><span class="header-section-number">3.1</span> Programmes Malveillants Transmis par E-Mail</a></li>
-  <li><a href="#programmes-malveillants-transmis-sur-le-web" id="toc-programmes-malveillants-transmis-sur-le-web" class="nav-link" data-scroll-target="#programmes-malveillants-transmis-sur-le-web"><span class="header-section-number">3.3</span> Programmes Malveillants Transmis sur le Web</a></li>
-  <li><a href="#hameçonnage-phishing" id="toc-hameçonnage-phishing" class="nav-link" data-scroll-target="#hameçonnage-phishing"><span class="header-section-number">3.5</span> Hameçonnage (Phishing)</a></li>
-  <li><a href="#pourriels-spam" id="toc-pourriels-spam" class="nav-link" data-scroll-target="#pourriels-spam"><span class="header-section-number">3.7</span> Pourriels (Spam)</a></li>
-  <li><a href="#rançongiciels-ransomware" id="toc-rançongiciels-ransomware" class="nav-link" data-scroll-target="#rançongiciels-ransomware"><span class="header-section-number">3.9</span> Rançongiciels (Ransomware)</a></li>
-  <li><a href="#attaques-sur-les-dispositifs-internet-of-things-iot" id="toc-attaques-sur-les-dispositifs-internet-of-things-iot" class="nav-link" data-scroll-target="#attaques-sur-les-dispositifs-internet-of-things-iot"><span class="header-section-number">3.11</span> Attaques sur les Dispositifs <strong><em>Internet of Things (IoT)</em></strong></a></li>
-  <li><a href="#modification-illicite-des-informations-publiées-information-spoofing-and-website-defacement" id="toc-modification-illicite-des-informations-publiées-information-spoofing-and-website-defacement" class="nav-link" data-scroll-target="#modification-illicite-des-informations-publiées-information-spoofing-and-website-defacement"><span class="header-section-number">3.13</span> Modification Illicite des Informations Publiées (<em>Information Spoofing and Website Defacement</em>)</a></li>
-  <li><a href="#attaques-dénis-de-service-denial-of-service-ddos" id="toc-attaques-dénis-de-service-denial-of-service-ddos" class="nav-link" data-scroll-target="#attaques-dénis-de-service-denial-of-service-ddos"><span class="header-section-number">3.15</span> Attaques <strong>Dénis de Service</strong> (<em>Denial of Service</em> / <em>DDoS</em>)</a></li>
+  <li><a href="#programmes-malveillants-transmis-par-e-mail" id="toc-programmes-malveillants-transmis-par-e-mail" class="nav-link" data-scroll-target="#programmes-malveillants-transmis-par-e-mail">Programmes Malveillants Transmis par E-Mail</a></li>
+  <li><a href="#programmes-malveillants-transmis-sur-le-web" id="toc-programmes-malveillants-transmis-sur-le-web" class="nav-link" data-scroll-target="#programmes-malveillants-transmis-sur-le-web">Programmes Malveillants Transmis sur le Web</a></li>
+  <li><a href="#hameçonnage-phishing" id="toc-hameçonnage-phishing" class="nav-link" data-scroll-target="#hameçonnage-phishing">Hameçonnage (Phishing)</a></li>
+  <li><a href="#pourriels-spam" id="toc-pourriels-spam" class="nav-link" data-scroll-target="#pourriels-spam">Pourriels (Spam)</a></li>
+  <li><a href="#rançongiciels-ransomware" id="toc-rançongiciels-ransomware" class="nav-link" data-scroll-target="#rançongiciels-ransomware">Rançongiciels (Ransomware)</a></li>
+  <li><a href="#attaques-sur-les-dispositifs-internet-of-things-iot" id="toc-attaques-sur-les-dispositifs-internet-of-things-iot" class="nav-link" data-scroll-target="#attaques-sur-les-dispositifs-internet-of-things-iot">Attaques sur les Dispositifs <strong><em>Internet of Things (IoT)</em></strong></a></li>
+  <li><a href="#modification-illicite-des-informations-publiées-information-spoofing-and-website-defacement" id="toc-modification-illicite-des-informations-publiées-information-spoofing-and-website-defacement" class="nav-link" data-scroll-target="#modification-illicite-des-informations-publiées-information-spoofing-and-website-defacement">Modification Illicite des Informations Publiées (<em>Information Spoofing and Website Defacement</em>)</a></li>
+  <li><a href="#attaques-dénis-de-service-denial-of-service-ddos" id="toc-attaques-dénis-de-service-denial-of-service-ddos" class="nav-link" data-scroll-target="#attaques-dénis-de-service-denial-of-service-ddos">Attaques <strong>Dénis de Service</strong> (<em>Denial of Service</em> / <em>DDoS</em>)</a></li>
+  </ul></li>
+  <li><a href="#méthodes-digitales-de-sécurité" id="toc-méthodes-digitales-de-sécurité" class="nav-link" data-scroll-target="#méthodes-digitales-de-sécurité">Méthodes Digitales de Sécurité</a>
+  <ul class="collapse">
+  <li><a href="#fonctions-de-hachage-cryptographiques" id="toc-fonctions-de-hachage-cryptographiques" class="nav-link" data-scroll-target="#fonctions-de-hachage-cryptographiques">Fonctions de Hachage Cryptographiques</a></li>
+  <li><a href="#générateurs-pseudo-aléatoires" id="toc-générateurs-pseudo-aléatoires" class="nav-link" data-scroll-target="#générateurs-pseudo-aléatoires">Générateurs (Pseudo) Aléatoires</a></li>
+  <li><a href="#cryptographie-symétrique" id="toc-cryptographie-symétrique" class="nav-link" data-scroll-target="#cryptographie-symétrique">Cryptographie Symétrique</a></li>
+  <li><a href="#cryptographie-asymétrique" id="toc-cryptographie-asymétrique" class="nav-link" data-scroll-target="#cryptographie-asymétrique">Cryptographie Asymétrique</a></li>
+  <li><a href="#crypto-asymétrique-symétrique-hybride" id="toc-crypto-asymétrique-symétrique-hybride" class="nav-link" data-scroll-target="#crypto-asymétrique-symétrique-hybride">Crypto Asymétrique + Symétrique (Hybride)</a></li>
+  <li><a href="#cryptographie-asymétrique-fonctionnement-rsa" id="toc-cryptographie-asymétrique-fonctionnement-rsa" class="nav-link" data-scroll-target="#cryptographie-asymétrique-fonctionnement-rsa">Cryptographie Asymétrique : Fonctionnement (RSA)</a>
+  <ul class="collapse">
+  <li><a href="#construction-des-clés" id="toc-construction-des-clés" class="nav-link" data-scroll-target="#construction-des-clés">Construction des clés</a></li>
+  <li><a href="#processus-de-chiffrementdéchiffrement" id="toc-processus-de-chiffrementdéchiffrement" class="nav-link" data-scroll-target="#processus-de-chiffrementdéchiffrement">Processus de chiffrement/déchiffrement</a></li>
+  <li><a href="#preuve-mathématique" id="toc-preuve-mathématique" class="nav-link" data-scroll-target="#preuve-mathématique">Preuve mathématique</a></li>
+  <li><a href="#sécurité-du-système" id="toc-sécurité-du-système" class="nav-link" data-scroll-target="#sécurité-du-système">Sécurité du système</a></li>
+  </ul></li>
+  <li><a href="#cryptographie-asymétrique-conclusions" id="toc-cryptographie-asymétrique-conclusions" class="nav-link" data-scroll-target="#cryptographie-asymétrique-conclusions">Cryptographie Asymétrique : Conclusions</a></li>
+  <li><a href="#comparaison-symétrique-vs-asymétrique" id="toc-comparaison-symétrique-vs-asymétrique" class="nav-link" data-scroll-target="#comparaison-symétrique-vs-asymétrique">Comparaison Symétrique vs Asymétrique</a>
+  <ul class="collapse">
+  <li><a href="#avantages-comparés" id="toc-avantages-comparés" class="nav-link" data-scroll-target="#avantages-comparés">Avantages comparés</a></li>
+  <li><a href="#problématiques-communes" id="toc-problématiques-communes" class="nav-link" data-scroll-target="#problématiques-communes">Problématiques communes</a></li>
+  <li><a href="#recommandations-dusage" id="toc-recommandations-dusage" class="nav-link" data-scroll-target="#recommandations-dusage">Recommandations d’usage</a></li>
+  </ul></li>
   </ul></li>
   </ul>
 </nav>
@@ -135,8 +186,8 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section id="les-services-de-sécurité-fondamentaux" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Les Services de Sécurité Fondamentaux</h1>
+<section id="les-services-de-sécurité-fondamentaux" class="level1">
+<h1>Les Services de Sécurité Fondamentaux</h1>
 <p>Les services de sécurité sont les objectifs que l’on cherche à atteindre pour protéger un système.</p>
 <ul>
 <li><strong>Confidentialité</strong> : Protection contre la divulgation non autorisée.</li>
@@ -181,8 +232,8 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <hr>
 </section>
-<section id="synthèse-services-menaces-et-mécanismes-de-protection" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Synthèse : Services, Menaces et Mécanismes de Protection</h1>
+<section id="synthèse-services-menaces-et-mécanismes-de-protection" class="level1">
+<h1>Synthèse : Services, Menaces et Mécanismes de Protection</h1>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 25%">
@@ -261,8 +312,8 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<section id="dangers-et-attaques-synthèse" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="dangers-et-attaques-synthèse"><span class="header-section-number">2.1</span> Dangers et Attaques : Synthèse</h2>
+<section id="dangers-et-attaques-synthèse" class="level2">
+<h2 class="anchored" data-anchor-id="dangers-et-attaques-synthèse">Dangers et Attaques : Synthèse</h2>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 33%">
@@ -320,8 +371,8 @@ ul.task-list li input[type="checkbox"] {
 </tbody>
 </table>
 </section>
-<section id="mécanismes-de-protection" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="mécanismes-de-protection"><span class="header-section-number">2.2</span> Mécanismes de Protection</h2>
+<section id="mécanismes-de-protection" class="level2">
+<h2 class="anchored" data-anchor-id="mécanismes-de-protection">Mécanismes de Protection</h2>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 33%">
@@ -384,10 +435,10 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <hr>
 </section>
-<section id="risques-liés-à-internet" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Risques Liés à Internet</h1>
-<section id="programmes-malveillants-transmis-par-e-mail" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="programmes-malveillants-transmis-par-e-mail"><span class="header-section-number">3.1</span> Programmes Malveillants Transmis par E-Mail</h2>
+<section id="risques-liés-à-internet" class="level1">
+<h1>Risques Liés à Internet</h1>
+<section id="programmes-malveillants-transmis-par-e-mail" class="level2">
+<h2 class="anchored" data-anchor-id="programmes-malveillants-transmis-par-e-mail">Programmes Malveillants Transmis par E-Mail</h2>
 <ul>
 <li>Aussi appelés <strong>maliciels</strong> (<em>malware</em>).</li>
 <li>E-mails visant à <strong>provoquer une action</strong> (ouvrir une pièce jointe ou cliquer sur un lien).</li>
@@ -431,8 +482,8 @@ ul.task-list li input[type="checkbox"] {
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
-<section id="programmes-malveillants-transmis-par-e-mail-1" class="level2 callout-body-container callout-body" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="programmes-malveillants-transmis-par-e-mail-1"><span class="header-section-number">3.2</span> Programmes Malveillants Transmis par E-Mail</h2>
+<section id="programmes-malveillants-transmis-par-e-mail-1" class="level2 callout-body-container callout-body">
+<h2 class="anchored" data-anchor-id="programmes-malveillants-transmis-par-e-mail-1">Programmes Malveillants Transmis par E-Mail</h2>
 <ul>
 <li>Aussi appelés <strong>maliciels</strong> ou <em>malware</em>.</li>
 <li>E-mails conçus pour <strong>inciter le destinataire</strong> à <strong>ouvrir une pièce jointe</strong> ou à <strong>suivre un lien</strong> contenant de la publicité non souhaitée, des informations offensives, des programmes à risque, etc.</li>
@@ -450,8 +501,8 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </section>
-<section id="programmes-malveillants-transmis-sur-le-web" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="programmes-malveillants-transmis-sur-le-web"><span class="header-section-number">3.3</span> Programmes Malveillants Transmis sur le Web</h2>
+<section id="programmes-malveillants-transmis-sur-le-web" class="level2">
+<h2 class="anchored" data-anchor-id="programmes-malveillants-transmis-sur-le-web">Programmes Malveillants Transmis sur le Web</h2>
 <ul>
 <li>Méthode appelée <strong><em>drive-by download</em></strong> : <strong>infection automatique lors de la visite d’un site web</strong>.</li>
 <li>L’origine peut être :
@@ -494,8 +545,8 @@ ul.task-list li input[type="checkbox"] {
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-6" class="callout-6-contents callout-collapse collapse">
-<section id="programmes-malveillants-transmis-sur-le-web-1" class="level2 callout-body-container callout-body" data-number="3.4">
-<h2 data-number="3.4" class="anchored" data-anchor-id="programmes-malveillants-transmis-sur-le-web-1"><span class="header-section-number">3.4</span> Programmes Malveillants Transmis sur le Web</h2>
+<section id="programmes-malveillants-transmis-sur-le-web-1" class="level2 callout-body-container callout-body">
+<h2 class="anchored" data-anchor-id="programmes-malveillants-transmis-sur-le-web-1">Programmes Malveillants Transmis sur le Web</h2>
 <ul>
 <li>Cette technique, souvent appelée <strong><em>drive-by download</em></strong>, permet d’<strong>infecter le système</strong> (<em>ordinateur</em>, <em>tablette</em>, <em>smartphone</em>, <em>smartwatch</em>, etc.) <strong>sur lequel s’exécute un client web lors de la simple visite d’un site</strong>.</li>
 <li>Il peut s’agir soit :
@@ -511,8 +562,8 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </section>
-<section id="hameçonnage-phishing" class="level2" data-number="3.5">
-<h2 data-number="3.5" class="anchored" data-anchor-id="hameçonnage-phishing"><span class="header-section-number">3.5</span> Hameçonnage (Phishing)</h2>
+<section id="hameçonnage-phishing" class="level2">
+<h2 class="anchored" data-anchor-id="hameçonnage-phishing">Hameçonnage (Phishing)</h2>
 <ul>
 <li>Technique visant à <strong>collecter des informations privées</strong> par des méthodes de <strong>pêche indiscriminée</strong>.</li>
 <li>Le <strong><em>phishing</em></strong> peut être :
@@ -556,8 +607,8 @@ ul.task-list li input[type="checkbox"] {
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-8" class="callout-8-contents callout-collapse collapse">
-<section id="hameçonnage-phishing-1" class="level2 callout-body-container callout-body" data-number="3.6">
-<h2 data-number="3.6" class="anchored" data-anchor-id="hameçonnage-phishing-1"><span class="header-section-number">3.6</span> Hameçonnage (Phishing)</h2>
+<section id="hameçonnage-phishing-1" class="level2 callout-body-container callout-body">
+<h2 class="anchored" data-anchor-id="hameçonnage-phishing-1">Hameçonnage (Phishing)</h2>
 <ul>
 <li>Le mot <strong><em>phishing</em></strong> se compose des mots anglais <strong><em>“password”</em></strong> (mot de passe), <strong><em>“harvesting”</em></strong> (moisson) et <strong><em>“fishing”</em></strong> (pêche).</li>
 <li>Cette composition de mots illustre le but principal de cette technique qui consiste à <strong>récolter un maximum d’informations privées</strong> des utilisateurs via des mécanismes de “pêche indiscriminée”.</li>
@@ -569,8 +620,8 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </section>
-<section id="pourriels-spam" class="level2" data-number="3.7">
-<h2 data-number="3.7" class="anchored" data-anchor-id="pourriels-spam"><span class="header-section-number">3.7</span> Pourriels (Spam)</h2>
+<section id="pourriels-spam" class="level2">
+<h2 class="anchored" data-anchor-id="pourriels-spam">Pourriels (Spam)</h2>
 <ul>
 <li>E-mails <strong>indésirables</strong>, souvent publicitaires, ou <strong>pop-ups</strong> non sollicités lors de la navigation web.</li>
 <li>Représentent environ <strong>60% des e-mails mondiaux</strong>.</li>
@@ -614,8 +665,8 @@ ul.task-list li input[type="checkbox"] {
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-10" class="callout-10-contents callout-collapse collapse">
-<section id="pourriels-spam-1" class="level2 callout-body-container callout-body" data-number="3.8">
-<h2 data-number="3.8" class="anchored" data-anchor-id="pourriels-spam-1"><span class="header-section-number">3.8</span> Pourriels (Spam)</h2>
+<section id="pourriels-spam-1" class="level2 callout-body-container callout-body">
+<h2 class="anchored" data-anchor-id="pourriels-spam-1">Pourriels (Spam)</h2>
 <ul>
 <li>Englobe tous les <strong>e-mails indésirables</strong> (souvent publicitaires) reçus par les personnes et les organisations.</li>
 <li>Terme utilisé également pour désigner les <strong>pages</strong>/<strong><em>fenêtres pop-up</em></strong> <strong>affichées sans le consentement de l’utilisateur</strong> lors de la navigation web.</li>
@@ -629,8 +680,8 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </section>
-<section id="rançongiciels-ransomware" class="level2" data-number="3.9">
-<h2 data-number="3.9" class="anchored" data-anchor-id="rançongiciels-ransomware"><span class="header-section-number">3.9</span> Rançongiciels (Ransomware)</h2>
+<section id="rançongiciels-ransomware" class="level2">
+<h2 class="anchored" data-anchor-id="rançongiciels-ransomware">Rançongiciels (Ransomware)</h2>
 <ul>
 <li>Malware type <strong>Cheval de Troie</strong> qui <strong>chiffre les données</strong> pour les rendre inaccessibles.</li>
 <li>Exige une <strong>rançon</strong> (souvent en bitcoins) pour récupérer les fichiers.</li>
@@ -670,8 +721,8 @@ ul.task-list li input[type="checkbox"] {
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-12" class="callout-12-contents callout-collapse collapse">
-<section id="rançongiciels-ransomware-1" class="level2 callout-body-container callout-body" data-number="3.10">
-<h2 data-number="3.10" class="anchored" data-anchor-id="rançongiciels-ransomware-1"><span class="header-section-number">3.10</span> Rançongiciels (Ransomware)</h2>
+<section id="rançongiciels-ransomware-1" class="level2 callout-body-container callout-body">
+<h2 class="anchored" data-anchor-id="rançongiciels-ransomware-1">Rançongiciels (Ransomware)</h2>
 <ul>
 <li>Cette famille spécifique de malware appartient à la catégorie appelée <strong>Chevaux de Troie</strong> (Trojan Horses).</li>
 <li>Leur comportement plus habituel consiste à <strong>chiffrer les données de la victime</strong> (locaux et distants) <strong>afin de les rendre totalement inaccessibles</strong>.</li>
@@ -685,8 +736,8 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </section>
-<section id="attaques-sur-les-dispositifs-internet-of-things-iot" class="level2" data-number="3.11">
-<h2 data-number="3.11" class="anchored" data-anchor-id="attaques-sur-les-dispositifs-internet-of-things-iot"><span class="header-section-number">3.11</span> Attaques sur les Dispositifs <strong><em>Internet of Things (IoT)</em></strong></h2>
+<section id="attaques-sur-les-dispositifs-internet-of-things-iot" class="level2">
+<h2 class="anchored" data-anchor-id="attaques-sur-les-dispositifs-internet-of-things-iot">Attaques sur les Dispositifs <strong><em>Internet of Things (IoT)</em></strong></h2>
 <ul>
 <li>Attaques visant les <strong>objets connectés</strong> (caméras, TV, capteurs, alarmes, etc.).</li>
 <li>Ces dispositifs sont <strong>faciles à compromettre</strong> à cause de :
@@ -734,8 +785,8 @@ ul.task-list li input[type="checkbox"] {
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-14" class="callout-14-contents callout-collapse collapse">
-<section id="attaques-sur-les-dispositifs-internet-of-things-iot-1" class="level2 callout-body-container callout-body" data-number="3.12">
-<h2 data-number="3.12" class="anchored" data-anchor-id="attaques-sur-les-dispositifs-internet-of-things-iot-1"><span class="header-section-number">3.12</span> Attaques sur les Dispositifs <strong><em>Internet of Things (IoT)</em></strong></h2>
+<section id="attaques-sur-les-dispositifs-internet-of-things-iot-1" class="level2 callout-body-container callout-body">
+<h2 class="anchored" data-anchor-id="attaques-sur-les-dispositifs-internet-of-things-iot-1">Attaques sur les Dispositifs <strong><em>Internet of Things (IoT)</em></strong></h2>
 <ul>
 <li>Ciblent les <strong>objets connectés</strong> de toute sorte (caméras, TVs, frigos, capteurs et interrupteurs domotiques, installations d’alarme, etc.).</li>
 <li>Ils sont souvent <strong>plus faciles à pirater</strong> que les systèmes traditionnels par cause de :
@@ -755,8 +806,8 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </section>
-<section id="modification-illicite-des-informations-publiées-information-spoofing-and-website-defacement" class="level2" data-number="3.13">
-<h2 data-number="3.13" class="anchored" data-anchor-id="modification-illicite-des-informations-publiées-information-spoofing-and-website-defacement"><span class="header-section-number">3.13</span> Modification Illicite des Informations Publiées (<em>Information Spoofing and Website Defacement</em>)</h2>
+<section id="modification-illicite-des-informations-publiées-information-spoofing-and-website-defacement" class="level2">
+<h2 class="anchored" data-anchor-id="modification-illicite-des-informations-publiées-information-spoofing-and-website-defacement">Modification Illicite des Informations Publiées (<em>Information Spoofing and Website Defacement</em>)</h2>
 <ul>
 <li>Attaques visant à <strong>altérer les informations</strong> sur sites web et réseaux sociaux.</li>
 <li>Impact : <strong>réputation compromise</strong> et <strong>dommages économiques</strong>.</li>
@@ -795,8 +846,8 @@ ul.task-list li input[type="checkbox"] {
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-16" class="callout-16-contents callout-collapse collapse">
-<section id="modification-illicite-des-informations-publiées-information-spoofing-and-website-defacement-1" class="level2 callout-body-container callout-body" data-number="3.14">
-<h2 data-number="3.14" class="anchored" data-anchor-id="modification-illicite-des-informations-publiées-information-spoofing-and-website-defacement-1"><span class="header-section-number">3.14</span> Modification Illicite des Informations Publiées (<em>Information Spoofing and Website Defacement</em>)</h2>
+<section id="modification-illicite-des-informations-publiées-information-spoofing-and-website-defacement-1" class="level2 callout-body-container callout-body">
+<h2 class="anchored" data-anchor-id="modification-illicite-des-informations-publiées-information-spoofing-and-website-defacement-1">Modification Illicite des Informations Publiées (<em>Information Spoofing and Website Defacement</em>)</h2>
 <ul>
 <li>Attaques visant <strong>l’intégrité</strong> de l’information publiée dans les sites web, les réseaux sociaux, etc.</li>
 <li>Elles portent atteinte à la <strong>réputation</strong> et peuvent provoquer d’importants <strong>dommages économiques</strong> pour les sociétés ayant une présence Internet.</li>
@@ -813,8 +864,8 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </section>
-<section id="attaques-dénis-de-service-denial-of-service-ddos" class="level2" data-number="3.15">
-<h2 data-number="3.15" class="anchored" data-anchor-id="attaques-dénis-de-service-denial-of-service-ddos"><span class="header-section-number">3.15</span> Attaques <strong>Dénis de Service</strong> (<em>Denial of Service</em> / <em>DDoS</em>)</h2>
+<section id="attaques-dénis-de-service-denial-of-service-ddos" class="level2">
+<h2 class="anchored" data-anchor-id="attaques-dénis-de-service-denial-of-service-ddos">Attaques <strong>Dénis de Service</strong> (<em>Denial of Service</em> / <em>DDoS</em>)</h2>
 <ul>
 <li>Vise à <strong>rendre inaccessibles des systèmes informatiques</strong>, surtout pour les organisations.</li>
 <li><strong>DDoS</strong> : attaque distribuée par des milliers de dispositifs, générant un trafic massif.</li>
@@ -857,8 +908,8 @@ ul.task-list li input[type="checkbox"] {
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-18" class="callout-18-contents callout-collapse collapse">
-<section id="attaques-dénis-de-service-denial-of-service-ddos-1" class="level2 callout-body-container callout-body" data-number="3.16">
-<h2 data-number="3.16" class="anchored" data-anchor-id="attaques-dénis-de-service-denial-of-service-ddos-1"><span class="header-section-number">3.16</span> Attaques <strong>Dénis de Service</strong> (<em>Denial of Service</em> / <em>DDoS</em>)</h2>
+<section id="attaques-dénis-de-service-denial-of-service-ddos-1" class="level2 callout-body-container callout-body">
+<h2 class="anchored" data-anchor-id="attaques-dénis-de-service-denial-of-service-ddos-1">Attaques <strong>Dénis de Service</strong> (<em>Denial of Service</em> / <em>DDoS</em>)</h2>
 <ul>
 <li>Attaques destinées à <strong>rendre inaccessibles des systèmes informatiques</strong> de toute sorte visant surtout les organisations privées ou étatiques.</li>
 <li>Le terme <strong>DDoS</strong> (<em>Distributed Denial of Service</em>) désigne une famille d’attaques dans laquelle des multiples (<strong>souvent des dizaines de milliers) de dispositifs ciblent simultanément le(s) système(s) victime(s)</strong>.</li>
@@ -874,8 +925,801 @@ ul.task-list li input[type="checkbox"] {
 </section>
 </div>
 </div>
+</section>
+</section>
+<section id="méthodes-digitales-de-sécurité" class="level1">
+<h1>Méthodes Digitales de Sécurité</h1>
+<p><strong>Problème :</strong> Protéger des informations digitales</p>
+<ul>
+<li>dans un environnement distribué</li>
+<li>globalement accessible</li>
+<li>sans frontière matérielle</li>
+</ul>
+<p><strong>Solution :</strong></p>
+<ul>
+<li>Cryptographie
+<ul>
+<li>Symétrique</li>
+<li>Asymétrique</li>
+<li><span class="math inline">\(+\)</span> fonctions à sens unique</li>
+<li><span class="math inline">\(+\)</span> générateurs (pseudo) aléatoires</li>
+</ul></li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Ultra-synthèse
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-19" class="callout-19-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Problème</strong> : Sécurité dans un environnement distribué/global.</li>
+<li><strong>Solutions</strong> :
+<ul>
+<li>Crypto (symétrique/asymétrique).</li>
+<li>Fonctions à sens unique (hachage).</li>
+<li>Générateurs aléatoires (physiques/pseudo).</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-20-contents" aria-controls="callout-20" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Version originale
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-20" class="callout-20-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Problème :</strong> Protéger des informations digitales</p>
+<ul>
+<li>dans un environnement distribué</li>
+<li>globalement accessible</li>
+<li>sans frontière matérielle</li>
+</ul>
+<p><strong>Solution :</strong></p>
+<ul>
+<li>Cryptographie
+<ul>
+<li>Symétrique</li>
+<li>Asymétrique</li>
+<li><span class="math inline">\(+\)</span> fonctions à sens unique</li>
+<li><span class="math inline">\(+\)</span> générateurs (pseudo) aléatoires</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<hr>
+<section id="fonctions-de-hachage-cryptographiques" class="level2">
+<h2 class="anchored" data-anchor-id="fonctions-de-hachage-cryptographiques">Fonctions de Hachage Cryptographiques</h2>
+<ul>
+<li><strong>Fonctions faciles à calculer dans un sens mais virtuellement impossibles à inverser</strong>.</li>
+<li>Toute modification du document source change radicalement le <strong>digest</strong> (effet avalanche).</li>
+<li><strong>Propriétés clés</strong> :
+<ul>
+<li><strong>One-way</strong> : impossible de retrouver l’entrée depuis le hash.</li>
+<li><strong>Collision-free</strong> : impossible de trouver deux entrées avec le même hash.</li>
+</ul></li>
+<li>Taille des digests : 160 à 512 bits.</li>
+<li>Algorithmes (très <strong>performants</strong>) : SHA-1, SHA-256, SHA-3.</li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Ultra-synthèse
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-21" class="callout-21-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>One-way + collision-free</strong>.</li>
+<li>Taille : 160-512 bits.</li>
+<li>Algos : SHA-1/256/3.</li>
+<li>Usage : intégrité, signatures.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-22-contents" aria-controls="callout-22" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Version originale
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-22" class="callout-22-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Fonctions faciles à calculer dans un sens mais virtuellement impossibles à calculer dans le sens contraire</strong>.</li>
+<li>Toute modification (même insignifiante) du document source se traduit par un <strong>digest</strong> fondamentalement différent.</li>
+<li>Il est virtuellement impossible de retrouver le document source à l’aide seulement du digest (<strong>one-way</strong>).</li>
+<li>Il est virtuellement impossible de retrouver un deuxième document source produisant le même digest (<strong>collision-free</strong>).</li>
+<li>Longueur habituelle des digests : 160 à 512 bits.</li>
+<li>Les algorithmes à sens unique sont très performants.</li>
+<li>Exemples : SHA-1, SHA-256, SHA-3, etc.</li>
+</ul>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="générateurs-pseudo-aléatoires" class="level2">
+<h2 class="anchored" data-anchor-id="générateurs-pseudo-aléatoires">Générateurs (Pseudo) Aléatoires</h2>
+<ul>
+<li><strong>Caractéristiques</strong>
+<ul>
+<li><strong>aléatoire</strong></li>
+<li><strong>imprévisible</strong></li>
+<li><strong>non reproductible</strong></li>
+</ul></li>
+<li><strong>Critique</strong> pour la sécurité (clés, IV, secrets).</li>
+<li><strong>Types</strong> :
+<ul>
+<li><strong>Vrais aléatoires</strong> : basés sur phénomènes physiques (radioactivité, quantique).</li>
+<li><strong>Pseudo-aléatoires</strong> : déterministes (basés sur un <em>seed</em>: séquence aléatoire initiale).</li>
+</ul></li>
+<li><strong>Risque</strong> : “Pseudo-sécurité” si le <em>seed</em> est prévisible (citation de Pitkin).</li>
+<li>Applications : clés de session, IV (DES-CBC), signatures (ElGamal).</li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-23-contents" aria-controls="callout-23" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Ultra-synthèse
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-23" class="callout-23-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Vrais aléatoires</strong> : physiques (quantique).</li>
+<li><strong>Pseudo-aléatoires</strong> : déterministes (<em>seed</em>).</li>
+<li><strong>Risque</strong> : <em>seed</em> prévisible = faille.</li>
+<li>Usages : clés, IV, signatures.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-24-contents" aria-controls="callout-24" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Version originale
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-24" class="callout-24-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>La génération de nombre aléatoire est un processus très important pouvant compromettre la sécurité d’un bon nombre de systèmes de cryptage.</li>
+<li>Applications : génération de clés de session, vecteurs d’initialisation (DES - CBC mode), secrets pour signatures (ElGamal), etc.</li>
+<li>Un <strong>générateur aléatoire</strong> (random generator) est un dispositif capable de générer des nombres de façon <strong>aléatoire</strong>, <strong>imprévisible</strong> et <strong>non reproductible</strong>. (e.g.&nbsp;basé sur phénomènes physiques: source radioactive ou quantique).</li>
+<li>Les <strong>générateurs pseudo-aléatoires</strong> sont des procédés déterministes développés à partir d’une séquence aléatoire initiale (<strong>seed</strong>) (e.g.&nbsp;frappe utilisateur, accès disque).</li>
+<li><em>Citation :</em> R. Pitkin dans [Kau95]: “The use of pseudo-random processes to generate secret quantities can result in pseudo-security”</li>
+</ul>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="cryptographie-symétrique" class="level2">
+<h2 class="anchored" data-anchor-id="cryptographie-symétrique">Cryptographie Symétrique</h2>
+<ul>
+<li><strong>Historique</strong> : Utilisée depuis Jules César (Iᵉʳ av. J.-C.).</li>
+<li><strong>Principe</strong> : Une seule clé pour chiffrer/déchiffrer.</li>
+<li><strong>Schéma</strong> : Plaintext → Cryptage (Clé) → Ciphertext → Décryptage (Clé) → Plaintext.</li>
+<li><strong>Caractéristiques</strong> :
+<ul>
+<li>Algorithmes : AES, DES, IDEA, RC4.</li>
+<li>Services : Confidentialité, Authentification, Intégrité.</li>
+<li><strong>Limite</strong> : Pas de signatures (clé partagée).</li>
+<li><strong>Problème</strong> : Échange de clé sécurisé requis.</li>
+</ul></li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-25-contents" aria-controls="callout-25" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Ultra-synthèse
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-25" class="callout-25-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>1 clé</strong> pour chiffrer/déchiffrer.</li>
+<li><strong>Rapide</strong> (AES, DES).</li>
+<li><strong>Problème</strong> : échange de clé.</li>
+<li>Usages : documents personnels, groupes fermés.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-26-contents" aria-controls="callout-26" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Version originale
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-26" class="callout-26-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>Aussi appelée cryptographie conventionnelle ou à clés secrètes (I av. JC, Julius Cesar).</li>
+<li><strong>Idée :</strong> Sur la base d’une seule clé secrète, réaliser une transformation capable respectivement de rendre illisible et de restituer une pièce d’information.</li>
+<li><strong>Schéma :</strong> Plaintext <span class="math inline">\(\to\)</span> Cryptage (Clé) <span class="math inline">\(\to\)</span> Ciphertext <span class="math inline">\(\to\)</span> Décryptage (Clé) <span class="math inline">\(\to\)</span> Plaintext.</li>
+<li><strong>Caractéristiques :</strong>
+<ul>
+<li>Algorithmes : AES, DES, IDEA, RC4, RC5, etc. (certains sont gratuits et de libre accès)</li>
+<li>Services : Confidentialité, Authentification, Intégrité.</li>
+<li>Pas de support direct pour signatures digitales (car clé connue des deux).</li>
+<li>Nécessite un canal confidentiel pour échanger la clé.</li>
+<li>Idéal pour la protection de documents personnels ou groupes fermés.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="cryptographie-asymétrique" class="level2">
+<h2 class="anchored" data-anchor-id="cryptographie-asymétrique">Cryptographie Asymétrique</h2>
+<ul>
+<li>Aussi appelée <strong>cryptographie publique</strong> (1976, Diffie &amp; Hellman).</li>
+<li><strong>Principe</strong>
+<ul>
+<li>Paire de clés (publique/privée) pour chiffrement et signatures.</li>
+</ul></li>
+<li><strong>Deux usages principaux</strong> :
+<ol type="1">
+<li><strong>Confidentialité</strong> :
+<ul>
+<li>Chiffrement : clé publique du destinataire</li>
+<li>Déchiffrement : clé privée du destinataire</li>
+</ul></li>
+<li><strong>Signature numérique</strong> :
+<ul>
+<li>Signature : clé privée de l’expéditeur</li>
+<li>Vérification : clé publique de l’expéditeur</li>
+<li><em>Optimisation</em> : On signe généralement le <strong>hash</strong> du document</li>
+<li><strong>Propriétés fondamentales</strong> :
+<ul>
+<li><strong>Intégrité</strong> : Toute modification invalide la signature</li>
+<li><strong>Non-collision</strong> : Impossible d’avoir 2 documents avec la même signature</li>
+<li><strong>Non-répudiation</strong> : Seul le détenteur de la clé privée peut signer</li>
+</ul></li>
+</ul></li>
+</ol></li>
+<li><strong>Aspects techniques</strong> :
+<ul>
+<li><strong>Algorithmes</strong> : RSA, ElGamal</li>
+<li><strong>Services</strong> : Intégrité, Authentification, Non-Répudiation</li>
+<li><strong>Performance</strong> : beaucoup plus lent que le symétrique (100x plus lent)</li>
+<li><strong>Avantage</strong> : Pas besoin de canal confidentiel pour l’échange de clés</li>
+</ul></li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-27-contents" aria-controls="callout-27" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Ultra-synthèse
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-27" class="callout-27-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>2 clés</strong> : publique (chiffrer/vérifier) + privée (déchiffrer/signer)</li>
+<li><strong>2 usages</strong> :
+<ul>
+<li>Confidentialité : chiffrer pour un destinataire</li>
+<li>Signature : prouver l’authenticité</li>
+</ul></li>
+<li><strong>Signatures</strong> :
+<ul>
+<li>Intégrité + non-répudiation</li>
+</ul></li>
+<li><strong>Algorithmes</strong> : RSA/ElGamal</li>
+<li><strong>Avantage</strong> : Pas besoin de canal sécurisé pour échanger les clés</li>
+<li><strong>Désavantage</strong> : Lente</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-28-contents" aria-controls="callout-28" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Version originale
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-28" class="callout-28-contents callout-collapse collapse">
+<section id="cryptographie-asymétrique-1" class="level2 callout-body-container callout-body">
+<h2 class="anchored" data-anchor-id="cryptographie-asymétrique-1">Cryptographie Asymétrique</h2>
+<ul>
+<li>Aussi appelée cryptographie publique ou à clés publiques (1976, W. Diffie &amp; M. Hellman).</li>
+<li><strong>Idée :</strong> Utiliser deux clés différentes - une <strong>secrète</strong> et une <strong>publique</strong> - respectivement pour les opérations de cryptage et décryptage.</li>
+<li>Chaque utilisateur dispose d’un <strong>porte-clés</strong> (keyring).</li>
+</ul>
+<p><strong>Confidentialité :</strong> * Expéditeur crypte avec la <strong>clé publique du destinataire</strong>. * Destinataire décrypte avec sa <strong>clé privée</strong>. * Uniquement clé du destinataire utilisée !</p>
+<p><strong>Signature Digitale :</strong> * Expéditeur signe avec sa <strong>clé privée</strong>. * Destinataire vérifie avec la <strong>clé publique de l’expéditeur</strong>. * Uniquement clé de l’expéditeur utilisée ! * <em>Note :</em> On signe généralement le <strong>digest</strong> du document (hash) pour des raisons de performance.</p>
+<p><strong>Caractéristiques des signatures :</strong> * La signature change si le document change, alors que la clé privée reste la même. * En cas de modification du document ou de la signature, la vérification échoue (<strong>intégrité garantie</strong>). * Il est virtuellement impossible, même pour le détenteur de la clé privée, de générer un second document produisant la même signature (fonction à sens unique <strong>sans collisions</strong>). * Seul le détenteur de la clé privée peut générer une signature vérifiable à l’aide de la clé publique correspondante (<strong>non-répudiation</strong>). * <strong>Algorithmes</strong> : RSA, ElGamal. * <strong>Services</strong> : Intégrité, Authentification, Non-Répudiation. * <strong>Lenteur</strong> : Jusqu’à 50 fois plus lent que la cryptographie symétrique. * <strong>Avantage</strong> : Pas besoin de canal confidentiel pour échanger les clés (contrairement au symétrique).</p>
+</section>
+</div>
+</div>
+<hr>
+</section>
+<section id="crypto-asymétrique-symétrique-hybride" class="level2">
+<h2 class="anchored" data-anchor-id="crypto-asymétrique-symétrique-hybride">Crypto Asymétrique + Symétrique (Hybride)</h2>
+<ul>
+<li><strong>Principe</strong> : Utiliser l’asymétrique pour échanger une clé symétrique (clé de session).</li>
+<li><strong>Étapes</strong> :
+<ol type="1">
+<li>A génère une clé symétrique aléatoire <span class="math inline">\(K_s\)</span>.</li>
+<li>A chiffre <span class="math inline">\(K_s\)</span> avec la clé publique de B.</li>
+<li>A et B communiquent ensuite avec <span class="math inline">\(K_s\)</span> (symétrique).</li>
+</ol></li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-29-contents" aria-controls="callout-29" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Ultra-synthèse
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-29" class="callout-29-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Asymétrique</strong> : échange de clé symétrique.</li>
+<li><strong>Symétrique</strong> : chiffrement des données.</li>
+<li><strong>Avantage</strong> : combine sécurité + performance.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-30-contents" aria-controls="callout-30" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Version originale
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-30" class="callout-30-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Idée :</strong> Utiliser la cryptographie publique uniquement pour échanger des clés symétriques (Clés de session).</li>
+<li>A génère une clé aléatoire <span class="math inline">\(K_s\)</span> et la transmet à B en l’encryptant avec la clé publique de B.</li>
+<li>A &amp; B communiquent ensuite en utilisant <span class="math inline">\(K_s\)</span> (symétrique).</li>
+</ul>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="cryptographie-asymétrique-fonctionnement-rsa" class="level2">
+<h2 class="anchored" data-anchor-id="cryptographie-asymétrique-fonctionnement-rsa">Cryptographie Asymétrique : Fonctionnement (RSA)</h2>
+<section id="construction-des-clés" class="level3">
+<h3 class="anchored" data-anchor-id="construction-des-clés">Construction des clés</h3>
+<ol type="1">
+<li><strong>Choix des nombres premiers</strong> :
+<ul>
+<li><span class="math inline">\(p\)</span> et <span class="math inline">\(q\)</span> : deux grands nombres premiers (&gt; 1024 bits)</li>
+<li><span class="math inline">\(n = pq\)</span> : module RSA (taille = 2048+ bits)</li>
+</ul></li>
+<li><strong>Calcul de l’indicatrice d’Euler</strong> :
+<ul>
+<li><span class="math inline">\(\phi(n) = (p-1)(q-1)\)</span></li>
+<li><em>Propriété</em> : Pour tout <span class="math inline">\(a\)</span> premier avec <span class="math inline">\(n\)</span>, <span class="math inline">\(a^{\phi(n)} \equiv 1 \pmod{n}\)</span></li>
+</ul></li>
+<li><strong>Sélection des exposants</strong> :
+<ul>
+<li><span class="math inline">\(e\)</span> : entier premier avec <span class="math inline">\(\phi(n)\)</span> (exposant public)</li>
+<li><span class="math inline">\(d\)</span> : inverse modulaire de <span class="math inline">\(e\)</span> (exposant privé), tel que <span class="math inline">\(ed \equiv 1 \pmod{\phi(n)}\)</span></li>
+</ul></li>
+</ol>
+</section>
+<section id="processus-de-chiffrementdéchiffrement" class="level3">
+<h3 class="anchored" data-anchor-id="processus-de-chiffrementdéchiffrement">Processus de chiffrement/déchiffrement</h3>
+<ul>
+<li><strong>Clé publique</strong> : <span class="math inline">\((n,e)\)</span></li>
+<li><strong>Clé privée</strong> : <span class="math inline">\((d)\)</span></li>
+<li><strong>Chiffrement</strong> : <span class="math inline">\(C = P^e \pmod{n}\)</span></li>
+<li><strong>Déchiffrement</strong> : <span class="math inline">\(P = C^d \pmod{n}\)</span></li>
+</ul>
+</section>
+<section id="preuve-mathématique" class="level3">
+<h3 class="anchored" data-anchor-id="preuve-mathématique">Preuve mathématique</h3>
+<ol type="1">
+<li><p><strong>Congruence fondamentale</strong> :</p>
+<ul>
+<li><span class="math inline">\(ed = 1 + k\phi(n)\)</span> (par définition de <span class="math inline">\(d\)</span>)</li>
+</ul></li>
+<li><p><strong>Application du théorème d’Euler</strong> :</p>
+<ul>
+<li><span class="math inline">\(P^{\phi(n)} \equiv 1 \pmod{n}\)</span> (si <span class="math inline">\(P\)</span> premier avec <span class="math inline">\(n\)</span>)</li>
+</ul></li>
+<li><p><strong>Démonstration</strong> :</p>
+<p><span class="math display">\[\begin{align*}
+(P^e)^d &amp;\equiv P^{ed} \pmod{n} \\
+&amp;\equiv P^{1 + k\phi(n)} \pmod{n} \\
+&amp;\equiv P \cdot (P^{\phi(n)})^k \pmod{n} \\
+&amp;\equiv P \cdot 1^k \pmod{n} \\
+&amp;\equiv P \pmod{n}
+\end{align*}\]</span></p></li>
+</ol>
+</section>
+<section id="sécurité-du-système" class="level3">
+<h3 class="anchored">Sécurité du système</h3>
+<ul>
+<li><strong>Problème difficile</strong> : Factorisation de <span class="math inline">\(n\)</span> en <span class="math inline">\(p\)</span> et <span class="math inline">\(q\)</span></li>
+<li><strong>Taille recommandée</strong> :
+<ul>
+<li><span class="math inline">\(n\)</span> : 2048 bits (minimum pour sécurité actuelle)</li>
+<li><span class="math inline">\(p\)</span> et <span class="math inline">\(q\)</span> : 1024+ bits chacun</li>
+</ul></li>
+<li><strong>Vulnérabilités connues</strong> :
+<ul>
+<li>Attaques par canal auxiliaire (timing, power analysis)</li>
+<li>Choix inapproprié des paramètres (<span class="math inline">\(e\)</span> trop petit, <span class="math inline">\(p\)</span> et <span class="math inline">\(q\)</span> trop proches)</li>
+</ul></li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-31-contents" aria-controls="callout-31" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Ultra-synthèse
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-31" class="callout-31-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Clés</strong> :
+<ul>
+<li>Publique : <span class="math inline">\((n,e)\)</span> où <span class="math inline">\(n = pq\)</span></li>
+<li>Privée : <span class="math inline">\((d)\)</span> avec <span class="math inline">\(ed \equiv 1 \pmod{\phi(n)}\)</span></li>
+</ul></li>
+<li><strong>Opérations</strong> :
+<ul>
+<li>Chiffrement : <span class="math inline">\(P^e \mod n\)</span></li>
+<li>Déchiffrement : <span class="math inline">\(C^d \mod n\)</span></li>
+</ul></li>
+<li><strong>Sécurité</strong> : Factorisation de <span class="math inline">\(n\)</span> difficile</li>
+<li><strong>Taille</strong> : 2048+ bits pour <span class="math inline">\(n\)</span></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-32-contents" aria-controls="callout-32" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Version originale
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-32" class="callout-32-contents callout-collapse collapse">
+<section id="cryptographie-asymétrique-fonctionnement-rsa-1" class="level2 callout-body-container callout-body">
+<h2 class="anchored" data-anchor-id="cryptographie-asymétrique-fonctionnement-rsa-1">Cryptographie Asymétrique: Fonctionnement (RSA)</h2>
+<ul>
+<li>Soit <span class="math inline">\(n := pq\)</span> avec <span class="math inline">\(p\)</span> et <span class="math inline">\(q\)</span> deux nombres premiers grands (&gt; 1024 bits).</li>
+<li>Soit <span class="math inline">\(\phi(n) = (p-1)(q-1)\)</span>.</li>
+<li>Soit <span class="math inline">\(e\)</span> et <span class="math inline">\(d\)</span> tels que <span class="math inline">\(ed \equiv 1 \pmod{\phi(n)}\)</span>.</li>
+<li>Par définition des congruences: <span class="math inline">\(ed = 1 + k\phi(n)\)</span></li>
+<li>Théorème d’Euler : <span class="math inline">\(a^{\phi(n)} \equiv 1 \pmod n\)</span>.</li>
+<li><strong>Encryption :</strong> <span class="math inline">\(C = P^e \pmod n\)</span>. <strong>Clé publique :</strong> <span class="math inline">\((n,e)\)</span>.</li>
+<li><strong>Décryption :</strong> <span class="math inline">\(P = C^d \pmod n\)</span>. <strong>Clé privée :</strong> <span class="math inline">\((d)\)</span>.</li>
+<li><em>Preuve :</em> <span class="math inline">\((P^e)^d \equiv P^{ed} \equiv P^{1 + k\phi(n)} \equiv (P \pmod n) (P^{\phi(n)} \pmod n)^k \equiv P \pmod n\)</span>.</li>
+</ul>
+</section>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="cryptographie-asymétrique-conclusions" class="level2">
+<h2 class="anchored" data-anchor-id="cryptographie-asymétrique-conclusions">Cryptographie Asymétrique : Conclusions</h2>
+<ul>
+<li><strong>Algorithmes dominants</strong> : RSA (le plus utilisé), Rabin, ElGamal</li>
+<li><strong>Services complets</strong> :
+<ul>
+<li>Confidentialité</li>
+<li>Authentification</li>
+<li>Intégrité</li>
+<li>Signature digitale &amp; Non-répudiation</li>
+<li>Non-duplication</li>
+</ul></li>
+<li><strong>Performances</strong> :
+<ul>
+<li>50x plus lent que le symétrique</li>
+<li><strong>Solution optimale</strong> : Combinaison asymétrique (échange de clés) + symétrique (chiffrement)</li>
+</ul></li>
+<li><strong>Gestion des clés</strong> :
+<ul>
+<li><strong>Avantage</strong> : Échange de clés publiques sans canal confidentiel</li>
+<li><strong>Risque</strong> : Nécessité de vérifier l’authenticité des clés publiques
+<ul>
+<li>Canal d’acquisition authentifié <strong>ou</strong></li>
+<li>Certification par tiers de confiance</li>
+</ul></li>
+</ul></li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-33-contents" aria-controls="callout-33" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Ultra-synthèse
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-33" class="callout-33-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Algos</strong> : RSA (dominant), Rabin, ElGamal</li>
+<li><strong>Services</strong> : Confidentialité + Authentification + Intégrité + Signatures</li>
+<li><strong>Lenteur</strong> : 50x vs symétrique → <strong>hybride recommandé</strong></li>
+<li><strong>Clés</strong> : Échange public simple mais <strong>authentification cruciale</strong></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-34-contents" aria-controls="callout-34" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Version originale
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-34" class="callout-34-contents callout-collapse collapse">
+<section id="cryptographie-asymétrique-conclusions-1" class="level2 callout-body-container callout-body">
+<h2 class="anchored" data-anchor-id="cryptographie-asymétrique-conclusions-1">Cryptographie Asymétrique : Conclusions</h2>
+<ul>
+<li><p>Il existe quelques systèmes de cryptage asymétrique (<strong>Rabin</strong>, <strong>ElGamal</strong>, etc.) mais le plus utilisé est <strong>RSA</strong>.</p></li>
+<li><p><strong>Services supportés</strong> : <strong>Confidentialité</strong>, <strong>Authentification</strong>, <strong>Intégrité</strong>, <strong>Signature Digitale &amp; Non-Refus</strong>, (<strong>Non Duplication</strong>).</p></li>
+<li><p>Les opérations liées à la <strong>cryptographie asymétrique</strong> sont jusqu’à <strong>50 fois (!) plus lentes</strong> que celles de la <strong>cryptographie symétrique</strong>. Une <strong>combinaison des deux méthodes</strong> est souvent souhaitable.</p></li>
+<li><p>La <strong>distribution des clés</strong> est simplifiée par le fait que seules des <strong>clés publiques</strong> doivent être échangées entre les intervenants (pas besoin d’un canal confidentiel alternatif) mais…</p></li>
+<li><p>… il est nécessaire de <strong>vérifier que la clé publique appartient réellement au destinataire</strong> :</p>
+<ul>
+<li>Soit le <strong>canal d’acquisition</strong> de la clé publique est protégé contre toute modification (<strong>authentifié</strong>)</li>
+<li>Soit la clé est <strong>certifiée exacte par un tiers</strong></li>
+</ul></li>
+</ul>
+</section>
+</div>
+</div>
+<hr>
+</section>
+<section id="comparaison-symétrique-vs-asymétrique" class="level2">
+<h2 class="anchored" data-anchor-id="comparaison-symétrique-vs-asymétrique">Comparaison Symétrique vs Asymétrique</h2>
+<section id="avantages-comparés" class="level3">
+<h3 class="anchored" data-anchor-id="avantages-comparés">Avantages comparés</h3>
+<ul>
+<li><strong>Symétrique</strong> :
+<ul>
+<li><strong>Performance</strong> : 100x plus rapide</li>
+<li><strong>Implémentation</strong> : Facile en hardware</li>
+<li><strong>Clés</strong> : Courtes (128 bits = 16 caractères mémorisables)</li>
+</ul></li>
+<li><strong>Asymétrique</strong> :
+<ul>
+<li><strong>Échange de clés</strong> : Canal authentifié suffisant (pas besoin de confidentialité)</li>
+<li><strong>Gestion</strong> : 1 paire de clés pour n correspondants (vs n clés en symétrique)</li>
+</ul></li>
+</ul>
+</section>
+<section id="problématiques-communes" class="level3">
+<h3 class="anchored" data-anchor-id="problématiques-communes">Problématiques communes</h3>
+<ul>
+<li><strong>Maillon faible</strong> : Gestion des clés par les utilisateurs</li>
+<li><strong>Base de sécurité</strong> : Empirique plutôt que théorique</li>
+<li><strong>Contraintes légales</strong> : Restrictions d’usage et d’exportation</li>
+</ul>
+</section>
+<section id="recommandations-dusage" class="level3">
+<h3 class="anchored">Recommandations d’usage</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 23%">
+<col style="width: 28%">
+<col style="width: 47%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Cas d’usage</strong></th>
+<th><strong>Solution recommandée</strong></th>
+<th><strong>Justification</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Documents personnels</td>
+<td>Symétrique</td>
+<td>Vitesse + clés mémorisables</td>
+</tr>
+<tr class="even">
+<td>Groupes d’utilisateurs proches</td>
+<td>Symétrique</td>
+<td>Vitesse + échange confidentiel facile</td>
+</tr>
+<tr class="odd">
+<td>Utilisateurs distants/inconnus</td>
+<td>Asymétrique</td>
+<td>Pas besoin de canal confidentiel</td>
+</tr>
+<tr class="even">
+<td>Transactions distantes</td>
+<td>Hybride (Asymétrique + Symétrique)</td>
+<td>Asymétrique pour l’échange de clé, symétrique pour les données</td>
+</tr>
+<tr class="odd">
+<td>Protection logicielle (distribution)</td>
+<td>Hybride</td>
+<td>Clé symétrique unique par version, encryptée avec asymétrique</td>
+</tr>
+<tr class="even">
+<td>Segments réseaux</td>
+<td>Symétrique</td>
+<td>Vitesse + environnement contrôlé (échange de clés facile entre administrateurs)</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-35-contents" aria-controls="callout-35" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Ultra-synthèse
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-35" class="callout-35-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Symétrique</strong> :</p>
+<pre><code>✅ Rapide (100x)
+✅ Clés courtes (128 bits)  
+❌ Échange de clés confidentiel requis</code></pre>
+<p><strong>Asymétrique</strong> :</p>
+<pre><code>✅ Échange de clés simplifié
+✅ 1 paire de clés pour n correspondants
+❌ Lent (50x)
+❌ Clés longues (1024+ bits)</code></pre>
+<p><strong>Hybride</strong> : Meilleur des deux mondes <strong>Problèmes communs</strong> : Gestion des clés, base empirique, restrictions légales</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-36-contents" aria-controls="callout-36" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Version originale
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-36" class="callout-36-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<section id="cryptographie-symétrique-vs.-asymétrique" class="level2">
+<h2 class="anchored" data-anchor-id="cryptographie-symétrique-vs.-asymétrique">Cryptographie Symétrique vs.&nbsp;Asymétrique</h2>
+<ul>
+<li><p>Il existe des <strong>centaines d’algorithmes symétriques et asymétriques</strong> capables de fournir un niveau de <strong>confidentialité suffisant</strong>.</p></li>
+<li><p>Les <strong>solutions symétriques</strong> offrent les avantages suivants :</p>
+<ul>
+<li><strong>Rapidité</strong> (jusqu’à <strong>100 fois plus rapide</strong> que les solutions asymétriques)</li>
+<li><strong>Facilité d’implantation en hardware</strong></li>
+<li><strong>Longueur de clé réduite</strong> : <strong>128 bits</strong> (= 16 caractères ⇒ mémorisable !) au lieu de <strong>1024 bits</strong> pour des équivalents asymétriques.</li>
+</ul></li>
+<li><p>Les <strong>solutions asymétriques</strong> ont comme arguments principaux :</p>
+<ul>
+<li><strong>Échange de clés simplifié</strong> : les clés doivent être échangées par un <strong>canal authentifié mais non-confidentiel</strong></li>
+<li><strong>Gestion de clés simplifiée</strong> : une seule <strong>paire de clés publique/privée</strong> suffit à un utilisateur pour recevoir des messages confidentiels de <strong>n utilisateurs</strong> (au lieu de <strong>n clés différentes</strong> dans le cas symétrique).</li>
+</ul></li>
+<li><p><strong>Problèmes propres aux deux techniques</strong> :</p>
+<ul>
+<li>La <strong>gestion de clés par l’utilisateur</strong> reste le <strong>maillon le plus faible</strong></li>
+<li>Sécurité (normalement) basée sur des <strong>arguments empiriques</strong> plutôt que <strong>théoriques</strong></li>
+<li><strong>Restrictions légales</strong> d’usage et d’exportation</li>
+</ul></li>
+</ul>
+</section>
+<section id="cryptographie-symétrique-vs.-asymétrique-ii" class="level2">
+<h2 class="anchored" data-anchor-id="cryptographie-symétrique-vs.-asymétrique-ii">Cryptographie Symétrique vs.&nbsp;Asymétrique (II)</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 27%">
+<col style="width: 31%">
+<col style="width: 40%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Activité</strong></th>
+<th><strong>Recommandation</strong></th>
+<th><strong>Remarques</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Protection de documents personnels</td>
+<td><strong>Crypto symétrique</strong></td>
+<td><strong>Vitesse</strong>, clés facilement mémorisables</td>
+</tr>
+<tr class="even">
+<td>Protection de documents dans un groupe d’utilisateurs proches</td>
+<td><strong>Crypto symétrique</strong></td>
+<td><strong>Vitesse</strong>, facilité d’échange des clés confidentielles</td>
+</tr>
+<tr class="odd">
+<td>Établissement de canaux confidentiels entre utilisateurs distants (inconnus)</td>
+<td><strong>Crypto asymétrique</strong></td>
+<td>Pas besoin d’avoir un canal confidentiel : <strong>authenticité suffit</strong></td>
+</tr>
+<tr class="even">
+<td>Transactions entre deux utilisateurs distants, Protection de logiciel (distribution multicast)</td>
+<td><strong>Crypto asymétrique pour protection de clé symétrique</strong> + <strong>Crypto symétrique pour protection des données</strong></td>
+<td><strong>Vitesse</strong>, Seule la clé symétrique doit être ré-encryptée pour chaque correspondant, Copie cryptée du logiciel peut être rendue publique</td>
+</tr>
+<tr class="odd">
+<td>Protection des segments réseaux</td>
+<td><strong>Crypto symétrique</strong></td>
+<td><strong>Vitesse</strong>, Environnement stable → échange confidentiel des clés facile entre sysadmins</td>
+</tr>
+</tbody>
+</table>
+</section>
+</div>
+</div>
+</div>
 
 
+</section>
 </section>
 </section>
 
