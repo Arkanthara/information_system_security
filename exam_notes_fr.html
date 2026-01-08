@@ -246,6 +246,32 @@ window.Quarto = {
   <li><a href="#techniques-de-cryptanalyse-des-block-ciphers" id="toc-techniques-de-cryptanalyse-des-block-ciphers" class="nav-link" data-scroll-target="#techniques-de-cryptanalyse-des-block-ciphers">8. Techniques de Cryptanalyse des Block Ciphers</a></li>
   </ul></li>
   </ul></li>
+  <li><a href="#cryptographie-asymétrique-à-clés-publiques" id="toc-cryptographie-asymétrique-à-clés-publiques" class="nav-link" data-scroll-target="#cryptographie-asymétrique-à-clés-publiques">Cryptographie Asymétrique (à Clés Publiques)</a>
+  <ul class="collapse">
+  <li><a href="#fondements-mathématiques" id="toc-fondements-mathématiques" class="nav-link" data-scroll-target="#fondements-mathématiques">Fondements Mathématiques</a>
+  <ul class="collapse">
+  <li><a href="#théorème-fondamental-de-larithmétique-et-fonction-phi-deuler" id="toc-théorème-fondamental-de-larithmétique-et-fonction-phi-deuler" class="nav-link" data-scroll-target="#théorème-fondamental-de-larithmétique-et-fonction-phi-deuler">Théorème Fondamental de l’Arithmétique et Fonction Phi d’Euler</a></li>
+  <li><a href="#théorèmes-deuler-et-de-fermat" id="toc-théorèmes-deuler-et-de-fermat" class="nav-link" data-scroll-target="#théorèmes-deuler-et-de-fermat">Théorèmes d’Euler et de Fermat</a></li>
+  <li><a href="#groupes-multiplicatifs-et-générateurs" id="toc-groupes-multiplicatifs-et-générateurs" class="nav-link" data-scroll-target="#groupes-multiplicatifs-et-générateurs">Groupes Multiplicatifs et Générateurs</a></li>
+  <li><a href="#fast-exponentiation-exponentiation-rapide" id="toc-fast-exponentiation-exponentiation-rapide" class="nav-link" data-scroll-target="#fast-exponentiation-exponentiation-rapide">Fast Exponentiation (Exponentiation Rapide)</a></li>
+  <li><a href="#théorème-des-restes-chinois-crt" id="toc-théorème-des-restes-chinois-crt" class="nav-link" data-scroll-target="#théorème-des-restes-chinois-crt">Théorème des Restes Chinois (CRT)</a></li>
+  </ul></li>
+  <li><a href="#problèmes-de-base-et-complexité" id="toc-problèmes-de-base-et-complexité" class="nav-link" data-scroll-target="#problèmes-de-base-et-complexité">Problèmes de Base et Complexité</a>
+  <ul class="collapse">
+  <li><a href="#classification-des-problèmes-difficiles" id="toc-classification-des-problèmes-difficiles" class="nav-link" data-scroll-target="#classification-des-problèmes-difficiles">Classification des Problèmes Difficiles</a></li>
+  <li><a href="#techniques-de-factorisation" id="toc-techniques-de-factorisation" class="nav-link" data-scroll-target="#techniques-de-factorisation">Techniques de Factorisation</a></li>
+  </ul></li>
+  <li><a href="#lalgorithme-rsa" id="toc-lalgorithme-rsa" class="nav-link" data-scroll-target="#lalgorithme-rsa">L’Algorithme RSA</a>
+  <ul class="collapse">
+  <li><a href="#fonctionnement-de-rsa-encryptiondecryption" id="toc-fonctionnement-de-rsa-encryptiondecryption" class="nav-link" data-scroll-target="#fonctionnement-de-rsa-encryptiondecryption">Fonctionnement de RSA (Encryption/Decryption)</a></li>
+  <li><a href="#sécurité-de-rsa" id="toc-sécurité-de-rsa" class="nav-link" data-scroll-target="#sécurité-de-rsa">Sécurité de RSA</a></li>
+  <li><a href="#attaques-sur-rsa" id="toc-attaques-sur-rsa" class="nav-link" data-scroll-target="#attaques-sur-rsa">Attaques sur RSA</a></li>
+  </ul></li>
+  <li><a href="#lalgorithme-elgamal" id="toc-lalgorithme-elgamal" class="nav-link" data-scroll-target="#lalgorithme-elgamal">L’Algorithme ElGamal</a>
+  <ul class="collapse">
+  <li><a href="#fonctionnement-delgamal-encryptiondecryption" id="toc-fonctionnement-delgamal-encryptiondecryption" class="nav-link" data-scroll-target="#fonctionnement-delgamal-encryptiondecryption">Fonctionnement d’ElGamal (Encryption/Decryption)</a></li>
+  </ul></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -4653,9 +4679,880 @@ window.Quarto = {
 </div>
 </div>
 </div>
-
-
 </section>
+</section>
+</section>
+</section>
+<section id="cryptographie-asymétrique-à-clés-publiques" class="level1">
+<h1>Cryptographie Asymétrique (à Clés Publiques)</h1>
+<section id="fondements-mathématiques" class="level2">
+<h2 class="anchored" data-anchor-id="fondements-mathématiques">Fondements Mathématiques</h2>
+<section id="théorème-fondamental-de-larithmétique-et-fonction-phi-deuler" class="level3">
+<h3 class="anchored" data-anchor-id="théorème-fondamental-de-larithmétique-et-fonction-phi-deuler">Théorème Fondamental de l’Arithmétique et Fonction Phi d’Euler</h3>
+<p>La cryptographie asymétrique repose sur des fondements mathématiques solides issus de la théorie des nombres. Deux concepts sont essentiels :</p>
+<p><strong>Théorème Fondamental de l’Arithmétique</strong> : Tout nombre entier strictement positif <span class="math inline">\(n\)</span> s’écrit de façon unique (à l’ordre près) comme produit de puissances de nombres premiers :</p>
+<p><span class="math display">\[n = p_1^{e_1} \cdot p_2^{e_2} \cdot p_3^{e_3} \cdots p_m^{e_m}\]</span></p>
+<p><strong>Fonction Phi d’Euler <span class="math inline">\(\phi(n)\)</span></strong> : Nombre d’entiers positifs plus petits que <span class="math inline">\(n\)</span> qui sont premiers avec <span class="math inline">\(n\)</span>.</p>
+<p>Pour calculer <span class="math inline">\(\phi(n)\)</span> :</p>
+<p><span class="math display">\[\phi(n) = \prod_{i=1}^{m} p_i^{e_i} \cdot \left(1 - \frac{1}{p_i}\right)\]</span></p>
+<p><strong>Cas particulier important</strong> : Si <span class="math inline">\(n = p \cdot q\)</span> avec <span class="math inline">\(p\)</span> et <span class="math inline">\(q\)</span> premiers, alors :</p>
+<p><span class="math display">\[\phi(n) = (p-1)(q-1)\]</span></p>
+<div class="callout callout-style-default callout-note callout-titled" title="Texte Original">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-85-contents" aria-controls="callout-85" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Texte Original
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-85" class="callout-85-contents callout-collapse collapse">
+<section id="fondements-mathématiques-1" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="fondements-mathématiques-1">Fondements Mathématiques</h3>
+<p><strong>Théorème Fondamental de l’Arithmétique</strong> : Tout nombre entier strictement positif <span class="math inline">\(n\)</span> s’écrit de façon unique (à l’ordre près) comme un produit de puissances de nombres premiers <span class="math inline">\(p_i\)</span> distincts :</p>
+<p><span class="math display">\[n = p_1^{e_1} \cdot p_2^{e_2} \cdot p_3^{e_3} \cdots p_m^{e_m}\]</span></p>
+<p><strong>Fonction Phi d’Euler</strong> : Soit <span class="math inline">\(n \in \mathbb{Z}^+\)</span>, la <strong>fonction phi d’Euler</strong> <span class="math inline">\(\phi(n)\)</span> est égale au nombre d’entiers positifs plus petits que <span class="math inline">\(n\)</span> qui sont <strong>relativement premiers</strong> à <span class="math inline">\(n\)</span>.</p>
+<p><strong>Calcul de la fonction phi d’Euler</strong> : D’après le théorème fondamental de l’arithmétique, tout nombre entier <span class="math inline">\(n &gt; 1\)</span> s’écrit :</p>
+<p><span class="math display">\[n = \prod_{i=1}^{m} p_i^{e_i}\]</span></p>
+<p>alors <span class="math inline">\(\phi(n)\)</span> se calcule :</p>
+<p><span class="math display">\[\phi(n) = \prod_{i=1}^{m} \left(p_i^{e_i} - p_i^{e_i-1}\right)\]</span></p>
+<p>En particulier, si <span class="math inline">\(n = p \cdot q\)</span> avec <span class="math inline">\(p\)</span> et <span class="math inline">\(q\)</span> premiers, alors :</p>
+<p><span class="math display">\[\phi(n) = (p-1)(q-1)\]</span></p>
+</section>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Révision Rapide">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-86-contents" aria-controls="callout-86" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Révision Rapide
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-86" class="callout-86-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Décomposition unique</strong> : tout entier = produit de nombres premiers</li>
+<li><strong><span class="math inline">\(\phi(n)\)</span></strong> : compte les entiers <span class="math inline">\(&lt; n\)</span> premiers avec <span class="math inline">\(n\)</span></li>
+<li><strong>Clé pour RSA</strong> : si <span class="math inline">\(n = pq\)</span> (premiers) alors <span class="math inline">\(\phi(n) = (p-1)(q-1)\)</span></li>
+</ul>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="théorèmes-deuler-et-de-fermat" class="level3">
+<h3 class="anchored" data-anchor-id="théorèmes-deuler-et-de-fermat">Théorèmes d’Euler et de Fermat</h3>
+<p>Ces théorèmes sont au cœur du fonctionnement de RSA et d’autres algorithmes asymétriques.</p>
+<p><strong>Théorème d’Euler</strong> : Si <span class="math inline">\(n \in \mathbb{Z}^+\)</span> et <span class="math inline">\(a \in \mathbb{Z}\)</span> avec <span class="math inline">\(\text{pgcd}(a,n) = 1\)</span>, alors :</p>
+<p><span class="math display">\[a^{\phi(n)} \equiv 1 \pmod{n}\]</span></p>
+<p><strong>Petit Théorème de Fermat</strong> (cas particulier si <span class="math inline">\(n = p\)</span> premier) : Si <span class="math inline">\(a \in \mathbb{Z}\)</span> et <span class="math inline">\(p\)</span> premier ne divise pas <span class="math inline">\(a\)</span> :</p>
+<p><span class="math display">\[a^{p-1} \equiv 1 \pmod{p}\]</span></p>
+<p><strong>Applications importantes</strong> :</p>
+<ol type="1">
+<li><p><strong>Réduction des exposants</strong> : Si <span class="math inline">\(n\)</span> est produit de premiers distincts et <span class="math inline">\(r \equiv s \pmod{\phi(n)}\)</span>, alors : <span class="math display">\[a^r \equiv a^s \pmod{n}\]</span></p></li>
+<li><p><strong>Calcul des inverses</strong> : <span class="math inline">\(a^{\phi(n)-1}\)</span> est l’inverse de <span class="math inline">\(a\)</span> modulo <span class="math inline">\(n\)</span>. En particulier, si <span class="math inline">\(p\)</span> est premier, <span class="math inline">\(a^{p-2}\)</span> est l’inverse de <span class="math inline">\(a\)</span> modulo <span class="math inline">\(p\)</span>.</p></li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled" title="Texte Original">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-87-contents" aria-controls="callout-87" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Texte Original
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-87" class="callout-87-contents callout-collapse collapse">
+<section id="fondements-mathématiques-ii" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="fondements-mathématiques-ii">Fondements Mathématiques (II)</h3>
+<p><strong>Théorème d’Euler</strong> : Soient <span class="math inline">\(n \in \mathbb{Z}^+\)</span> et <span class="math inline">\(a \in \mathbb{Z}\)</span> avec <span class="math inline">\(\text{pgcd}(a,n) = 1\)</span>, alors on a :</p>
+<p><span class="math display">\[a^{\phi(n)} \equiv 1 \pmod{n}\]</span></p>
+<p><strong>Petit Théorème de Fermat</strong> (cas particulier du théorème d’Euler si <span class="math inline">\(n\)</span> est premier) : Soient <span class="math inline">\(a \in \mathbb{Z}\)</span> et <span class="math inline">\(p\)</span> un nombre premier tel que <span class="math inline">\(p\)</span> ne divise pas <span class="math inline">\(a\)</span>, alors on a :</p>
+<p><span class="math display">\[a^{p-1} \equiv 1 \pmod{p}\]</span></p>
+<p>À noter que puisque <span class="math inline">\(p\)</span> est premier, on a <span class="math inline">\(\phi(p) = p-1\)</span>.</p>
+<p><strong>Réduction des exposants</strong> <span class="math inline">\(\bmod \phi(n)\)</span> : Si <span class="math inline">\(n\)</span> est le produit de premiers distincts et <span class="math inline">\(r, s \in \mathbb{Z}\)</span> t.q. <span class="math inline">\(r \equiv s \pmod{\phi(n)}\)</span> alors <span class="math inline">\(\forall a \in \mathbb{Z}\)</span> :</p>
+<p><span class="math display">\[a^r \equiv a^s \pmod{n}\]</span></p>
+<p><strong>Application du Théorème d’Euler au calcul des inverses</strong> : Suite au théorème d’Euler, on a que :</p>
+<p><span class="math display">\[a \cdot a^{\phi(n)-1} \equiv 1 \pmod{n}\]</span></p>
+<p>ce qui signifie que <span class="math inline">\(a^{\phi(n)-1}\)</span> est l’<strong>inverse de <span class="math inline">\(a\)</span> modulo <span class="math inline">\(n\)</span></strong>. En particulier, <span class="math inline">\(a^{p-2}\)</span> est l’inverse de <span class="math inline">\(a\)</span> modulo <span class="math inline">\(n\)</span> si <span class="math inline">\(p\)</span> est premier.</p>
+</section>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Révision Rapide">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-88-contents" aria-controls="callout-88" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Révision Rapide
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-88" class="callout-88-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Théorème d’Euler</strong> : <span class="math inline">\(a^{\phi(n)} \equiv 1 \pmod{n}\)</span></li>
+<li><strong>Fermat</strong> : cas spécial si <span class="math inline">\(p\)</span> premier : <span class="math inline">\(a^{p-1} \equiv 1 \pmod{p}\)</span></li>
+<li><strong>Inverse modulaire</strong> : <span class="math inline">\(a^{-1} \equiv a^{\phi(n)-1} \pmod{n}\)</span></li>
+<li><strong>Base de RSA</strong> : permet encryption/decryption avec exposants</li>
+</ul>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="groupes-multiplicatifs-et-générateurs" class="level3">
+<h3 class="anchored" data-anchor-id="groupes-multiplicatifs-et-générateurs">Groupes Multiplicatifs et Générateurs</h3>
+<p><strong>Groupe multiplicatif <span class="math inline">\(\mathbb{Z}_n^*\)</span></strong> : Ensemble des éléments de <span class="math inline">\(\mathbb{Z}_n\)</span> premiers avec <span class="math inline">\(n\)</span> :</p>
+<p><span class="math display">\[\mathbb{Z}_n^* = \{a \in \mathbb{Z}_n \mid \text{pgcd}(a,n) = 1\}\]</span></p>
+<p>Si <span class="math inline">\(n\)</span> est premier : <span class="math inline">\(\mathbb{Z}_n^* = \{1, 2, \ldots, n-1\}\)</span></p>
+<p><strong>Ordre d’un élément</strong> : Plus petit entier positif <span class="math inline">\(t\)</span> tel que <span class="math inline">\(a^t \equiv 1 \pmod{n}\)</span></p>
+<p><strong>Générateur</strong> : Un élément <span class="math inline">\(\alpha\)</span> est un générateur de <span class="math inline">\(\mathbb{Z}_n^*\)</span> si son ordre est <span class="math inline">\(\phi(n)\)</span>. On dit alors que <span class="math inline">\(\mathbb{Z}_n^*\)</span> est <strong>cyclique</strong>.</p>
+<p><strong>Propriétés des générateurs</strong> :</p>
+<ol type="1">
+<li><span class="math inline">\(\mathbb{Z}_n^*\)</span> a un générateur ssi <span class="math inline">\(n = 2, 4, p^k\)</span> ou <span class="math inline">\(2p^k\)</span> (avec <span class="math inline">\(p\)</span> premier, <span class="math inline">\(p \neq 2\)</span> et <span class="math inline">\(k \geq 1\)</span>)</li>
+<li>Si <span class="math inline">\(p\)</span> est premier, <span class="math inline">\(\mathbb{Z}_p^*\)</span> a toujours un générateur</li>
+<li>Si <span class="math inline">\(\alpha\)</span> est générateur, tous les éléments s’écrivent : <span class="math inline">\(\mathbb{Z}_n^* = \{\alpha^i \bmod n \mid 0 \leq i &lt; \phi(n)\}\)</span></li>
+<li>Le nombre de générateurs est <span class="math inline">\(\phi(\phi(n))\)</span></li>
+</ol>
+<p><strong>Test de générateur</strong></p>
+<ul>
+<li><span class="math inline">\(\alpha\)</span> est un générateur de <span class="math inline">\(\mathbb{Z}_n^*\)</span> ssi <span class="math inline">\(\forall\)</span> premier <span class="math inline">\(p\)</span> divisant <span class="math inline">\(\phi(n)\)</span>, <span class="math inline">\(\alpha^{\phi(n)/p} \not\equiv 1 \pmod{n}\)</span></li>
+<li>si <span class="math inline">\(n = 2p+1\)</span> est un “safe prime” avec <span class="math inline">\(p\)</span> premier : <span class="math inline">\(\alpha\)</span> est générateur ssi <span class="math inline">\(\alpha^2 \not\equiv 1 \pmod{n}\)</span> et <span class="math inline">\(\alpha^p \not\equiv 1 \pmod{n}\)</span></li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled" title="Texte Original">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-89-contents" aria-controls="callout-89" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Texte Original
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-89" class="callout-89-contents callout-collapse collapse">
+<section id="fondements-mathématiques-iii" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="fondements-mathématiques-iii">Fondements Mathématiques (III)</h3>
+<p><strong>Définition</strong> : Le <strong>groupe multiplicatif de <span class="math inline">\(\mathbb{Z}_n\)</span></strong>, noté <span class="math inline">\(\mathbb{Z}_n^*\)</span> est :</p>
+<p><span class="math display">\[\mathbb{Z}_n^* = \{a \in \mathbb{Z}_n \mid \text{pgcd}(a,n) = 1\}\]</span></p>
+<p>En particulier, si <span class="math inline">\(n\)</span> est premier : <span class="math inline">\(\mathbb{Z}_n^* = \{a \mid 1 \leq a \leq n-1\}\)</span></p>
+<p>Le <strong>nombre d’éléments ou ordre</strong> du groupe multiplicatif <span class="math inline">\(\mathbb{Z}_n^*\)</span> est <span class="math inline">\(\phi(n)\)</span> (par définition de <span class="math inline">\(\phi\)</span>).</p>
+<p><strong>Définition</strong> : Soit <span class="math inline">\(a \in \mathbb{Z}_n\)</span>, l’<strong>ordre de <span class="math inline">\(a\)</span></strong> est le plus petit entier positif <span class="math inline">\(t\)</span> pour lequel :</p>
+<p><span class="math display">\[a^t \equiv 1 \pmod{n}\]</span></p>
+<p><strong>Définition</strong> : Soit <span class="math inline">\(\alpha \in \mathbb{Z}_n^*\)</span>, si l’ordre de <span class="math inline">\(\alpha\)</span> est <span class="math inline">\(\phi(n)\)</span>, alors <span class="math inline">\(\alpha\)</span> est un <strong>générateur de <span class="math inline">\(\mathbb{Z}_n^*\)</span></strong>. Lorsqu’un groupe <span class="math inline">\(\mathbb{Z}_n^*\)</span> a un générateur, on dit qu’il est <strong>cyclique</strong>.</p>
+<p><strong>Propriétés des générateurs</strong> :</p>
+<ul>
+<li><p><span class="math inline">\(\mathbb{Z}_n^*\)</span> a un générateur ssi <span class="math inline">\(n = 2, 4, p^k\)</span> ou <span class="math inline">\(2p^k\)</span>, avec <span class="math inline">\(p\)</span> premier, <span class="math inline">\(p \neq 2\)</span> et <span class="math inline">\(k \geq 1\)</span>. En particulier, si <span class="math inline">\(p\)</span> est premier, <span class="math inline">\(\mathbb{Z}_p^*\)</span> a un générateur.</p></li>
+<li><p>Si <span class="math inline">\(\alpha\)</span> est un générateur de <span class="math inline">\(\mathbb{Z}_n^*\)</span>, alors tous les éléments de <span class="math inline">\(\mathbb{Z}_n^*\)</span> s’écrivent : <span class="math display">\[\mathbb{Z}_n^* = \{\alpha^i \bmod n \mid 0 \leq i \leq \phi(n)-1\}\]</span></p></li>
+<li><p>Le nombre de générateurs de <span class="math inline">\(\mathbb{Z}_n^*\)</span> est <span class="math inline">\(\phi(\phi(n))\)</span>.</p></li>
+<li><p><span class="math inline">\(\alpha\)</span> est un générateur de <span class="math inline">\(\mathbb{Z}_n^*\)</span> ssi pour tout premier <span class="math inline">\(p\)</span> divisant <span class="math inline">\(\phi(n)\)</span>, on a : <span class="math display">\[\alpha^{\phi(n)/p} \not\equiv 1 \pmod{n}\]</span></p></li>
+</ul>
+<p>En particulier si <span class="math inline">\(n\)</span> est un premier de la forme <span class="math inline">\(n = 2p+1\)</span> avec <span class="math inline">\(p\)</span> premier (un tel <span class="math inline">\(n\)</span> est appelé un <strong>safe prime</strong>), <span class="math inline">\(\alpha\)</span> est générateur de <span class="math inline">\(\mathbb{Z}_n^*\)</span> ssi <span class="math inline">\(\alpha^2 \not\equiv 1 \pmod{n}\)</span> et <span class="math inline">\(\alpha^p \not\equiv 1 \pmod{n}\)</span>.</p>
+</section>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Révision Rapide">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-90-contents" aria-controls="callout-90" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Révision Rapide
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-90" class="callout-90-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong><span class="math inline">\(\mathbb{Z}_n^*\)</span></strong> : éléments premiers avec <span class="math inline">\(n\)</span>, cardinal = <span class="math inline">\(\phi(n)\)</span></li>
+<li><strong>Générateur</strong> : élément d’ordre <span class="math inline">\(\phi(n)\)</span> (génère tout le groupe)</li>
+<li><strong>Crucial pour DH et ElGamal</strong> : sécurité basée sur logarithme discret dans groupe cyclique</li>
+<li><strong>Safe prime</strong> : <span class="math inline">\(n = 2p+1\)</span> avec <span class="math inline">\(p\)</span> et <span class="math inline">\(n\)</span> premiers</li>
+</ul>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="fast-exponentiation-exponentiation-rapide" class="level3">
+<h3 class="anchored" data-anchor-id="fast-exponentiation-exponentiation-rapide">Fast Exponentiation (Exponentiation Rapide)</h3>
+<p>Calcul efficace de <span class="math inline">\(a^k \bmod n\)</span> en temps polynomial, essentiel pour tous les algorithmes asymétriques.</p>
+<p><strong>Principe</strong> : Utiliser la représentation binaire de l’exposant <span class="math inline">\(k\)</span>.</p>
+<p><strong>Exemple</strong> : Calcul de <span class="math inline">\(2^{644} \bmod 645\)</span></p>
+<ol type="1">
+<li><p>Représentation binaire : <span class="math inline">\((644)_{10} = (1010000100)_2\)</span></p></li>
+<li><p>Calculer les puissances de 2 successives modulo 645 :</p>
+<ul>
+<li><span class="math inline">\(2^1 \bmod 645\)</span></li>
+<li><span class="math inline">\(2^2 \bmod 645\)</span></li>
+<li><span class="math inline">\(2^4 \bmod 645\)</span></li>
+<li><span class="math inline">\(2^8 \bmod 645\)</span></li>
+<li>…</li>
+<li><span class="math inline">\(2^{512} \bmod 645\)</span></li>
+</ul></li>
+<li><p>Combiner selon les bits à 1 : <span class="math inline">\(2^{644} = 2^{512} \cdot 2^{128} \cdot 2^4\)</span></p></li>
+</ol>
+<p><strong>Complexité</strong> : <span class="math inline">\(O(\log^3 n)\)</span> - très efficace !</p>
+<p><strong>Application</strong> : Calcul de l’inverse avec le théorème d’Euler en temps polynomial.</p>
+<p>Alternative : <strong>Algorithme d’Euclide étendu</strong> pour trouver <span class="math inline">\(x\)</span> tel que <span class="math inline">\(ax \equiv 1 \pmod{n}\)</span> en résolvant <span class="math inline">\(ax - kn = 1 = \text{pgcd}(a,n)\)</span>. Complexité également <span class="math inline">\(O(\log^3 n)\)</span>.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Texte Original">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-91-contents" aria-controls="callout-91" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Texte Original
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-91" class="callout-91-contents callout-collapse collapse">
+<section id="fast-exponentiation" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="fast-exponentiation">Fast Exponentiation</h3>
+<p><strong>Fast exponentiation</strong> : En utilisant la représentation binaire d’un nombre, on peut calculer des puissances très efficacement.</p>
+<p><strong>Exemple</strong> : calcul de <span class="math inline">\(2^{644} \bmod 645\)</span></p>
+<p><span class="math inline">\((644)_{10} = (1010000100)_2\)</span></p>
+<p>Maintenant, on calcule les exposants correspondants aux puissances de 2, soient :</p>
+<p><span class="math display">\[2^1 \bmod 645, \quad 2^2 \bmod 645, \quad 2^4 \bmod 645, \quad \ldots, \quad 2^{512} \bmod 645\]</span></p>
+<p>D’après la représentation binaire, on calcule :</p>
+<p><span class="math display">\[2^{644} = 2^{512+128+4} = 2^{512} \cdot 2^{128} \cdot 2^4 = 160 \cdot 153 \cdot 6 \bmod 645\]</span></p>
+<p><strong>La complexité de cet algorithme</strong> fast exponentiation est <span class="math inline">\(O(\log^3 n)\)</span>.</p>
+<p>En s’appuyant sur le <strong>théorème d’Euler</strong>, le calcul de l’<strong>inverse d’un nombre</strong> dans un tel groupe est donc effectué en temps polynomial.</p>
+<p><strong>L’algorithme d’Euclide étendu</strong> peut être également utilisé pour trouver un <span class="math inline">\(x\)</span> tel que :</p>
+<p><span class="math display">\[ax \equiv 1 \pmod{n}\]</span></p>
+<p>puisque cette congruence s’écrit : <span class="math inline">\(ax - 1 = kn\)</span> et donc :</p>
+<p><span class="math display">\[ax - kn = 1 = \text{pgcd}(a,n)\]</span></p>
+<p>La complexité de cet algorithme est également <span class="math inline">\(O(\log^3 n)\)</span>.</p>
+</section>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Révision Rapide">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-92-contents" aria-controls="callout-92" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Révision Rapide
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-92" class="callout-92-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Idée</strong> : représentation binaire de l’exposant</li>
+<li><strong>Complexité</strong> : <span class="math inline">\(O(\log^3 n)\)</span> - polynomial !</li>
+<li><strong>Essentiel</strong> : rend RSA, ElGamal, DH praticables</li>
+<li><strong>Alternative</strong> : algorithme d’Euclide étendu pour inverses</li>
+</ul>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="théorème-des-restes-chinois-crt" class="level3">
+<h3 class="anchored" data-anchor-id="théorème-des-restes-chinois-crt">Théorème des Restes Chinois (CRT)</h3>
+<p>Le CRT permet de résoudre des systèmes de congruences simultanées, avec des applications importantes en cryptographie.</p>
+<p><strong>Théorème</strong> : Soient <span class="math inline">\(n_1, n_2, \ldots, n_t \in \mathbb{Z}^+\)</span> premiers deux à deux (pgcd<span class="math inline">\((n_i, n_j) = 1\)</span> si <span class="math inline">\(i \neq j\)</span>) et <span class="math inline">\(a_1, a_2, \ldots, a_t \in \mathbb{Z}\)</span>. Alors le système :</p>
+<p><span class="math display">\[\begin{cases}
+x \equiv a_1 \pmod{n_1} \\
+x \equiv a_2 \pmod{n_2} \\
+\vdots \\
+x \equiv a_t \pmod{n_t}
+\end{cases}\]</span></p>
+<p>a une solution unique <span class="math inline">\(x \bmod N\)</span> avec <span class="math inline">\(N := n_1 \cdot n_2 \cdots n_t\)</span>.</p>
+<p><strong>Algorithme de Gauss</strong> (1801) pour calculer <span class="math inline">\(x\)</span> :</p>
+<p><span class="math display">\[x = \sum_{i=1}^{t} a_i N_i M_i \bmod N\]</span></p>
+<p>avec :</p>
+<ul>
+<li><span class="math inline">\(N_i = N/n_i\)</span></li>
+<li><span class="math inline">\(M_i = N_i^{-1} \bmod n_i\)</span> (inverse modulaire)</li>
+</ul>
+<p><strong>Complexité</strong> : <span class="math inline">\(O(\log^3 n)\)</span> - polynomial !</p>
+<p><strong>Applications cryptographiques</strong> :</p>
+<ol type="1">
+<li>Accélération des calculs RSA (utiliser <span class="math inline">\(p\)</span> et <span class="math inline">\(q\)</span> séparément)</li>
+<li>Partage de secret (secret sharing schemes)</li>
+<li>Certaines attaques sur RSA (si exposant petit et messages multiples)</li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled" title="Texte Original">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-93-contents" aria-controls="callout-93" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Texte Original
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-93" class="callout-93-contents callout-collapse collapse">
+<section id="théorème-des-restes-chinois" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="théorème-des-restes-chinois">Théorème des Restes Chinois</h3>
+<p>Le <strong>Théorème des Restes Chinois</strong> (IIIe siècle!) permet de résoudre des systèmes linéaires de congruences simultanées. Il résout des problèmes soulevés dans des anciens puzzles chinois. Il s’agissait, par exemple, de trouver un nombre qui produit un reste de 1 lorsqu’il est divisé par 3, de 2 lorsqu’il est divisé par 5 et de 3 lorsqu’il est divisé par 7… Il fut également utilisé pour calculer le moment exact d’alignement de plusieurs astres ayant des orbites (et donc des périodes) différentes.</p>
+<p><strong>Théorème des Restes Chinois</strong> : Soient <span class="math inline">\(n_1, n_2, \ldots, n_t \in \mathbb{Z}^+\)</span> premiers deux à deux (c.à.d. pgcd<span class="math inline">\((n_i, n_j) = 1\)</span>, <span class="math inline">\(\forall i \neq j\)</span>) et <span class="math inline">\(a_1, a_2, \ldots, a_t \in \mathbb{Z}\)</span>. Alors, le système de congruences :</p>
+<p><span class="math display">\[\begin{cases}
+x \equiv a_1 \pmod{n_1} \\
+x \equiv a_2 \pmod{n_2} \\
+\vdots \\
+x \equiv a_t \pmod{n_t}
+\end{cases}\]</span></p>
+<p>a une solution unique <span class="math inline">\(x \bmod N := n_1 n_2 \cdots n_t\)</span></p>
+<p><strong>Algorithme de Gauss</strong> (1801) pour le calcul de <span class="math inline">\(x\)</span> :</p>
+<p><span class="math display">\[x = \sum_{i=1}^{t} a_i N_i M_i \bmod N\]</span></p>
+<p>avec <span class="math inline">\(N_i = N/n_i\)</span> et <span class="math inline">\(M_i = N_i^{-1} \bmod n_i\)</span>.</p>
+<p>La <strong>complexité</strong> de cet algorithme est <span class="math inline">\(O(\log^3 n)\)</span>.</p>
+<p>Il est donc possible en <strong>temps polynomial</strong> de passer des congruences mod <span class="math inline">\(n_i\)</span> aux congruences mod <span class="math inline">\(N\)</span> !</p>
+</section>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Révision Rapide">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-94-contents" aria-controls="callout-94" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Révision Rapide
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-94" class="callout-94-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Résout</strong> : systèmes de congruences avec moduli premiers entre eux</li>
+<li><strong>Solution unique</strong> : modulo produit des moduli</li>
+<li><strong>Complexité</strong> : <span class="math inline">\(O(\log^3 n)\)</span> (polynomial)</li>
+<li><strong>Usage crypto</strong> : optimisation RSA, attaques si petit exposant</li>
+</ul>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="problèmes-de-base-et-complexité" class="level2">
+<h2 class="anchored" data-anchor-id="problèmes-de-base-et-complexité">Problèmes de Base et Complexité</h2>
+<section id="classification-des-problèmes-difficiles" class="level3">
+<h3 class="anchored" data-anchor-id="classification-des-problèmes-difficiles">Classification des Problèmes Difficiles</h3>
+<p>La sécurité de la cryptographie asymétrique repose sur des problèmes mathématiques réputés difficiles :</p>
+<p><strong>Problèmes génériques</strong> :</p>
+<ol type="1">
+<li><strong>Factorisation (FACTP)</strong> : Étant donné <span class="math inline">\(n\)</span>, trouver sa factorisation en nombres premiers
+<ul>
+<li>Base de <strong>RSA</strong> et <strong>Rabin</strong></li>
+</ul></li>
+<li><strong>Logarithmes discrets (DLP)</strong> : Étant donné <span class="math inline">\(p\)</span> premier, un générateur <span class="math inline">\(\alpha \in \mathbb{Z}_p^*\)</span> et <span class="math inline">\(\beta \in \mathbb{Z}_p^*\)</span>, trouver <span class="math inline">\(x\)</span> tel que : <span class="math display">\[\alpha^x \equiv \beta \pmod{p}\]</span>
+<ul>
+<li>Base de <strong>ElGamal</strong> et <strong>Diffie-Hellman</strong></li>
+</ul></li>
+<li><strong>Racine carrée modulo composite (SQROOTP)</strong> : Étant donné <span class="math inline">\(n\)</span> composite et un résidu quadratique <span class="math inline">\(a\)</span>, trouver <span class="math inline">\(\sqrt{a} \bmod n\)</span>
+<ul>
+<li>Base de <strong>Rabin</strong></li>
+</ul></li>
+</ol>
+<p><strong>Problèmes spécifiques</strong> :</p>
+<ol type="1">
+<li><p><strong>RSA Problem (RSAP)</strong> : Étant donné <span class="math inline">\(n = pq\)</span>, <span class="math inline">\(e\)</span> avec pgcd<span class="math inline">\((e, \phi(n)) = 1\)</span> et <span class="math inline">\(c\)</span>, trouver <span class="math inline">\(m\)</span> tel que <span class="math inline">\(m^e \equiv c \pmod{n}\)</span></p></li>
+<li><p><strong>Diffie-Hellman Problem (DHP)</strong> : Étant donné <span class="math inline">\(p\)</span> premier, <span class="math inline">\(\alpha\)</span> générateur, <span class="math inline">\(\alpha^a \bmod p\)</span> et <span class="math inline">\(\alpha^b \bmod p\)</span>, trouver <span class="math inline">\(\alpha^{ab} \bmod p\)</span></p></li>
+</ol>
+<p><strong>Équivalences prouvées</strong> :</p>
+<ul>
+<li><strong>DHP ⟺ DLP</strong> (équivalent sous certaines conditions)</li>
+<li><strong>RSAP ⟺ FACTP</strong> (prouvé équivalent pour le cas générique)</li>
+<li><strong>SQROOTP ⟺ FACTP</strong></li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled" title="Texte Original">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-95-contents" aria-controls="callout-95" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Texte Original
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-95" class="callout-95-contents callout-collapse collapse">
+<section id="problèmes-de-base" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="problèmes-de-base">Problèmes de Base</h3>
+<p><strong>Problèmes génériques principaux</strong> :</p>
+<ul>
+<li><p><strong>Factorisation (FACTP)</strong> : Étant donné un entier positif <span class="math inline">\(n\)</span>, trouver sa factorisation en nombres premiers.</p></li>
+<li><p><strong>Logarithmes discrets (DLP)</strong> : Étant donné un nombre premier <span class="math inline">\(p\)</span>, un générateur <span class="math inline">\(\alpha \in \mathbb{Z}_p^*\)</span> et un élément <span class="math inline">\(\beta \in \mathbb{Z}_p^*\)</span>, trouver l’entier <span class="math inline">\(x\)</span>, <span class="math inline">\(0 \leq x \leq p-2\)</span>, tel que : <span class="math inline">\(\alpha^x \equiv \beta \pmod{p}\)</span>.</p></li>
+<li><p><strong>Racine carrée dans <span class="math inline">\(\mathbb{Z}_n\)</span> si <span class="math inline">\(n\)</span> est composite (SQROOTP)</strong> : Étant donné un entier composite <span class="math inline">\(n\)</span> et un résidu quadratique <span class="math inline">\(a\)</span>, trouver la racine carrée de <span class="math inline">\(a\)</span> mod <span class="math inline">\(n\)</span>.</p></li>
+</ul>
+<p><strong>Problèmes spécifiques</strong> (propres à un système de cryptage) :</p>
+<ul>
+<li><p><strong>RSA (RSAP)</strong> : Étant donné un entier positif <span class="math inline">\(n = pq\)</span>, un entier positif <span class="math inline">\(e\)</span> avec gcd<span class="math inline">\((e, (p-1)(q-1)) = 1\)</span> et un entier <span class="math inline">\(c\)</span>, trouver un entier <span class="math inline">\(m\)</span> avec <span class="math inline">\(m^e \equiv c \pmod{n}\)</span>.</p></li>
+<li><p><strong>Diffie-Hellman (DHP)</strong> : Étant donné un nombre premier <span class="math inline">\(p\)</span>, un générateur <span class="math inline">\(\alpha \in \mathbb{Z}_p^*\)</span> et les éléments <span class="math inline">\(\alpha^a \bmod p\)</span> et <span class="math inline">\(\alpha^b \bmod p\)</span>, trouver <span class="math inline">\(\alpha^{ab} \bmod p\)</span>.</p></li>
+</ul>
+<p><strong>Résultats prouvés</strong> :</p>
+<ul>
+<li><strong>DHP ⟺ DLP</strong> (Équivalent sous certaines conditions)</li>
+<li><strong>RSAP ⟺ FACTP</strong> (Prouvé équivalent pour le problème générique)</li>
+<li><strong>SQROOTP ⟺ FACTP</strong></li>
+</ul>
+</section>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Révision Rapide">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-96-contents" aria-controls="callout-96" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Révision Rapide
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-96" class="callout-96-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>FACTP</strong> : factoriser <span class="math inline">\(n\)</span> → base de RSA/Rabin</li>
+<li><strong>DLP</strong> : trouver logarithme discret → base ElGamal/DH</li>
+<li><strong>SQROOTP</strong> : racine carrée mod composite → Rabin</li>
+<li><strong>Équivalences</strong> : cassage = résolution du problème de base</li>
+</ul>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="techniques-de-factorisation" class="level3">
+<h3 class="anchored" data-anchor-id="techniques-de-factorisation">Techniques de Factorisation</h3>
+<p>La sécurité de RSA dépend de la difficulté de factoriser de grands nombres.</p>
+<p><strong>Méthodes à temps exponentiel</strong> : <span class="math inline">\(O(\exp(c \cdot \ln(n)))\)</span></p>
+<ul>
+<li>Trial Division (division successive)</li>
+<li>Crible d’Ératosthène (IIe siècle av. J.-C.)</li>
+<li>Méthode de Fermat (~1650)</li>
+<li>Méthode <span class="math inline">\(\rho\)</span> de Pollard (1975)</li>
+<li>Méthode <span class="math inline">\(p-1\)</span> de Pollard (1974)</li>
+</ul>
+<p><strong>Méthodes à temps sous-exponentiel</strong> : <span class="math inline">\(O(\exp(c \cdot (\ln(n))^{1/3}))\)</span></p>
+<ul>
+<li>Continued Fractions (1975)</li>
+<li><strong>Quadratic Sieve (1981)</strong> - très efficace en pratique</li>
+<li><strong>Number Field Sieve - NFS (1990)</strong> - le plus rapide actuellement</li>
+<li>General Number Field Sieve - GNFS (2006)</li>
+</ul>
+<p><strong>Méthodes à temps polynomial</strong> :</p>
+<ul>
+<li><strong>Algorithme de Shor</strong> (1994) : <span class="math inline">\(O(\log^c n)\)</span> sur <strong>ordinateur quantique</strong></li>
+</ul>
+<p><strong>Records actuels (2020)</strong> :</p>
+<ul>
+<li>Plus grand nombre factorisé : <strong>RSA-829</strong> (250 chiffres, 829 bits)</li>
+<li>Temps de calcul : 2700 années-cœur (CPUs Intel Xeon Gold 6130)</li>
+<li>Méthode : General Number Field Sieve</li>
+</ul>
+<p><strong>Implications</strong> :</p>
+<ul>
+<li>Clés RSA &lt; 1024 bits : <strong>vulnérables</strong></li>
+<li>Clés RSA 1024 bits : <strong>limites</strong> (états avec ressources importantes)</li>
+<li>Recommandation : <strong>2048 bits minimum</strong> (3072-4096 pour long terme)</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled" title="Texte Original">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-97-contents" aria-controls="callout-97" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Texte Original
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-97" class="callout-97-contents callout-collapse collapse">
+<section id="classical-factoring-techniques-et-new-developments" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="classical-factoring-techniques-et-new-developments">Classical Factoring Techniques et New Developments</h3>
+<p><strong>Temps exponentiel</strong> : <span class="math inline">\(O(\exp(c \cdot \ln(n)))\)</span></p>
+<ul>
+<li>Trial Division</li>
+<li>Eratosthenes’ Sieve (II B.C.)</li>
+<li>Fermat’s Difference of Squares Method (~1650)</li>
+<li>Square Form Factorization (1971)</li>
+<li>Pollard’s p-1 method (1974)</li>
+<li>Pollard’s Rho Method (1975)</li>
+</ul>
+<p><strong>Temps sous-exponentiel</strong> : <span class="math inline">\(O(\exp(c \cdot (\ln(n))^{1/3}))\)</span></p>
+<ul>
+<li>Continued Fractions (1975)</li>
+<li><strong>Quadratic Sieve (1981)</strong></li>
+<li><strong>Number Field Sieve - NFS (1990)</strong></li>
+<li><strong>General Number Field Sieve - GNFS (2006)</strong></li>
+</ul>
+<p><strong>Temps polynomial</strong> :</p>
+<ul>
+<li><strong>Shor’s Algorithm in a Quantum Computer (1994)</strong> : <span class="math inline">\(O(\log^c n)\)</span></li>
+</ul>
+<p><strong>Développements récents</strong> :</p>
+<ul>
+<li>L’ordinateur NFS spécifique de Bernstein pour factoriser un nombre de 1536 bits prendrait le même temps qu’un calcul 512 bits sur machine conventionnelle</li>
+<li><strong>Plus grande factorisation à ce jour (2020)</strong> : RSA-829 (nombre de 250 chiffres) utilisant NFS</li>
+<li>Temps de calcul total : <strong>2700 années-cœur</strong> (CPUs Intel Xeon Gold 6130 à 2.1GHz)</li>
+</ul>
+<p><strong>Factorisation sur ordinateur quantique</strong> :</p>
+<ul>
+<li>Problèmes significatifs (erreurs, dispersion, etc.)</li>
+<li>2001 : ordinateur 7 qubits (IBM Almaden)</li>
+<li>Faisabilité d’un ordinateur avec millions de qubits… ?</li>
+</ul>
+</section>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Révision Rapide">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-98-contents" aria-controls="callout-98" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Révision Rapide
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-98" class="callout-98-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Sous-exponentiel</strong> : NFS actuellement le plus rapide</li>
+<li><strong>Record 2020</strong> : RSA-829 (829 bits) en 2700 années-cœur</li>
+<li><strong>Recommandation</strong> : clés ≥ 2048 bits pour RSA</li>
+<li><strong>Menace future</strong> : ordinateurs quantiques (Shor)</li>
+</ul>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="lalgorithme-rsa" class="level2">
+<h2 class="anchored" data-anchor-id="lalgorithme-rsa">L’Algorithme RSA</h2>
+<section id="fonctionnement-de-rsa-encryptiondecryption" class="level3">
+<h3 class="anchored" data-anchor-id="fonctionnement-de-rsa-encryptiondecryption">Fonctionnement de RSA (Encryption/Decryption)</h3>
+<p>RSA (Rivest-Shamir-Adleman, 1978) est l’algorithme asymétrique le plus utilisé.</p>
+<p><strong>Génération des clés</strong> :</p>
+<ol type="1">
+<li>Choisir deux nombres premiers <strong>grands</strong> <span class="math inline">\(p\)</span> et <span class="math inline">\(q\)</span> (≥ 1024 bits chacun)</li>
+<li>Calculer <span class="math inline">\(n := p \cdot q\)</span> et <span class="math inline">\(\phi(n) = (p-1)(q-1)\)</span></li>
+<li>Choisir exposant d’encryption <span class="math inline">\(e\)</span> avec :
+<ul>
+<li><span class="math inline">\(1 &lt; e &lt; \phi(n)\)</span></li>
+<li>pgcd<span class="math inline">\((e, \phi(n)) = 1\)</span></li>
+</ul></li>
+<li>Calculer exposant de décryption <span class="math inline">\(d\)</span> tel que : <span class="math display">\[e \cdot d \equiv 1 \pmod{\phi(n)}\]</span> (avec algorithme d’Euclide étendu ou fast exponentiation)</li>
+</ol>
+<p><strong>Clés résultantes</strong> :</p>
+<ul>
+<li>Clé <strong>publique</strong> : <span class="math inline">\((n, e)\)</span></li>
+<li>Clé <strong>privée</strong> : <span class="math inline">\(d\)</span> (garder <span class="math inline">\(p\)</span> et <span class="math inline">\(q\)</span> secrets aussi !)</li>
+</ul>
+<p><strong>Encryption</strong> (par Bob, vers Alice) :</p>
+<ol type="1">
+<li>Obtenir clé publique authentique <span class="math inline">\((n, e)\)</span> d’Alice</li>
+<li>Transformer plaintext en entiers <span class="math inline">\(m_i \in [0, n-1]\)</span></li>
+<li>Calculer ciphertexts : <span class="math inline">\(c_i := m_i^e \bmod n\)</span></li>
+<li>Envoyer les <span class="math inline">\(c_i\)</span> à Alice</li>
+</ol>
+<p><strong>Decryption</strong> (par Alice) :</p>
+<ul>
+<li>Utiliser clé privée <span class="math inline">\(d\)</span> pour calculer : <span class="math display">\[m_i = c_i^d \bmod n\]</span></li>
+</ul>
+<p><strong>Preuve de fonctionnement</strong> :</p>
+<p><span class="math display">\[c^d \equiv (m^e)^d \equiv m^{ed} \pmod{n}\]</span></p>
+<p>Comme <span class="math inline">\(ed \equiv 1 \pmod{\phi(n)}\)</span>, il existe <span class="math inline">\(k\)</span> tel que <span class="math inline">\(ed = 1 + k\phi(n)\)</span>, donc :</p>
+<p><span class="math display">\[c^d \equiv m^{1+k\phi(n)} \equiv m \cdot (m^{\phi(n)})^k \equiv m \cdot 1^k \equiv m \pmod{n}\]</span></p>
+<p>(par le théorème d’Euler)</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Texte Original">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-99-contents" aria-controls="callout-99" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Texte Original
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-99" class="callout-99-contents callout-collapse collapse">
+<section id="procédé-dencryptiondecryption-de-rsa-et-preuve" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="procédé-dencryptiondecryption-de-rsa-et-preuve">Procédé d’Encryption/Decryption de RSA et Preuve</h3>
+<p><strong>Génération des clés</strong> :</p>
+<ul>
+<li>Chaque entité (A) crée une paire de clés (publique et privée) comme suit :
+<ul>
+<li>A choisit la taille du modulus <span class="math inline">\(n\)</span> (p.ex. taille<span class="math inline">\((n) = 1024\)</span> ou taille<span class="math inline">\((n) = 2048\)</span>).</li>
+<li>A génère deux nombres premiers <span class="math inline">\(p\)</span> et <span class="math inline">\(q\)</span> de grande taille <span class="math inline">\((n/2)\)</span>.</li>
+<li>A calcule <span class="math inline">\(n := pq\)</span> et <span class="math inline">\(\phi(n) = (p-1)(q-1)\)</span>.</li>
+<li>A génère l’exposant d’encryption <span class="math inline">\(e\)</span>, avec <span class="math inline">\(1 &lt; e &lt; \phi(n)\)</span> t.q. pgcd<span class="math inline">\((e, \phi(n)) = 1\)</span>.</li>
+<li>A calcule l’exposant de decryption <span class="math inline">\(d\)</span>, t.q. : <span class="math inline">\(ed \equiv 1 \pmod{\phi(n)}\)</span> avec l’algorithme d’Euclide étendu ou avec l’algorithme fast exponentiation.</li>
+</ul></li>
+<li>Le couple <span class="math inline">\((n,e)\)</span> est la clé <strong>publique</strong> de A ; <span class="math inline">\(d\)</span> est la clé <strong>privée</strong> de A.</li>
+</ul>
+<p><strong>Encryption</strong> :</p>
+<ul>
+<li>L’entité B obtient <span class="math inline">\((n,e)\)</span>, la clé publique <strong>authentique</strong> de A.</li>
+<li>B transforme son plaintext en une série d’entiers <span class="math inline">\(m_i\)</span>, t.q. <span class="math inline">\(m_i \in [0, n-1]\)</span> <span class="math inline">\(\forall i\)</span>.</li>
+<li>B calcule le ciphertext <span class="math inline">\(c_i := m_i^e \bmod n\)</span>, <span class="math inline">\(\forall i\)</span> avec l’algorithme fast exponentiation.</li>
+<li>B envoie à A tous les ciphertext <span class="math inline">\(c_i\)</span>.</li>
+</ul>
+<p><strong>Decryption</strong> :</p>
+<ul>
+<li>A utilise sa clé privée pour calculer les plaintexts <span class="math inline">\(m_i = c_i^d \bmod n\)</span>.</li>
+</ul>
+<p><strong>Preuve</strong> : Soit <span class="math inline">\(m\)</span> le plaintext et <span class="math inline">\(c\)</span> le ciphertext avec <span class="math inline">\(c := m^e \bmod n\)</span>, il s’agit de prouver : <span class="math inline">\(m \stackrel{!}{=} c^d \bmod n\)</span></p>
+<p>En substituant <span class="math inline">\(c\)</span> par sa valeur on obtient : <span class="math display">\[c^d \bmod n = m^{ed} \bmod n \quad (*)\]</span></p>
+<p>mais, on sait que : <span class="math display">\[ed \equiv 1 \pmod{\phi(n)}\]</span></p>
+<p>et donc par définition des congruences, il existe un entier <span class="math inline">\(k\)</span> avec : <span class="math display">\[ed - 1 = k\phi(n)\]</span></p>
+<p>en substituant dans (*) : <span class="math display">\[c^d \equiv m^{k\phi(n)+1} \equiv m^{k\phi(n)} \cdot m \pmod{n}\]</span></p>
+<p>Si pgcd<span class="math inline">\((m,n) = 1\)</span>, on a par le <strong>théorème d’Euler</strong> : <span class="math display">\[m^{\phi(n)} \equiv 1 \pmod{n}\]</span></p>
+<p>donc : <span class="math display">\[c^d \equiv (m^{\phi(n)})^k \cdot m \equiv m \pmod{n}\]</span> c.q.f.d. !</p>
+<p>Si pgcd<span class="math inline">\((m,n) \neq 1\)</span>, <span class="math inline">\(m\)</span> est nécessairement multiple de <span class="math inline">\(p\)</span> ou de <span class="math inline">\(q\)</span> (cas très peu probable…), on peut montrer en faisant les calculs mod <span class="math inline">\(p\)</span> et mod <span class="math inline">\(q\)</span> que la congruence reste vraie.</p>
+</section>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Révision Rapide">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-100-contents" aria-controls="callout-100" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Révision Rapide
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-100" class="callout-100-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Clé publique</strong> : <span class="math inline">\((n, e)\)</span> avec <span class="math inline">\(n = pq\)</span></li>
+<li><strong>Clé privée</strong> : <span class="math inline">\(d\)</span> tel que <span class="math inline">\(ed \equiv 1 \pmod{\phi(n)}\)</span></li>
+<li><strong>Chiffrement</strong> : <span class="math inline">\(c = m^e \bmod n\)</span></li>
+<li><strong>Déchiffrement</strong> : <span class="math inline">\(m = c^d \bmod n\)</span></li>
+<li><strong>Sécurité</strong> : basée sur difficulté de factoriser <span class="math inline">\(n\)</span></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">graph LR
+    A[Plaintext m] --&gt;|Encryption: m^e mod n| B[Ciphertext c]
+    B --&gt;|Decryption: c^d mod n| C[Plaintext m]
+    D[Clé publique: n, e] -.-&gt;|utilisée pour| A
+    E[Clé privée: d] -.-&gt;|utilisée pour| B
+    F[p, q premiers secrets] --&gt;|n = pq| D
+    F --&gt;|φn = p-1q-1| E
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="sécurité-de-rsa" class="level3">
+<h3 class="anchored" data-anchor-id="sécurité-de-rsa">Sécurité de RSA</h3>
+<p><strong>Équivalence problème RSA ⟺ Factorisation</strong> :</p>
+<ul>
+<li>Trouver <span class="math inline">\(d\)</span> ⟺ factoriser <span class="math inline">\(n\)</span> (prouvé équivalent)</li>
+<li>Décrypter sans <span class="math inline">\(d\)</span> n’est <strong>pas prouvé</strong> aussi difficile que factoriser, mais…</li>
+<li>Aucune méthode plus rapide que factorisation n’est connue</li>
+</ul>
+<p><strong>Complexité de la factorisation</strong> :</p>
+<ul>
+<li>Méthodes les plus rapides : <span class="math inline">\(O(\exp(c \cdot (\ln(n))^{1/3}))\)</span> (sous-exponentiel)</li>
+<li>Calculatoirement impossible pour <span class="math inline">\(n \geq 1024\)</span> bits</li>
+<li><strong>Recommandation actuelle</strong> : 2048 bits minimum (3072-4096 pour sécurité durable)</li>
+</ul>
+<p><strong>Choix des exposants</strong> :</p>
+<p><strong>Exposant d’encryption <span class="math inline">\(e\)</span></strong> :</p>
+<ul>
+<li>Souvent <strong>petit</strong> pour accélérer : <span class="math inline">\(e = 3, 17, 65537\)</span> (commun)</li>
+<li>Attention : si <span class="math inline">\(e\)</span> trop petit ET <span class="math inline">\(m &lt; n^{1/e}\)</span>, attaque possible (racine <span class="math inline">\(e\)</span>-ième dans <span class="math inline">\(\mathbb{Z}\)</span>)</li>
+<li>Solution : <strong>randomization</strong> (padding) du message</li>
+</ul>
+<p><strong>Exposant de décryption <span class="math inline">\(d\)</span></strong> :</p>
+<ul>
+<li>Doit être <strong>grand</strong> : au moins la moitié de la taille de <span class="math inline">\(n\)</span></li>
+<li>Si <span class="math inline">\(d\)</span> petit : vulnérable à l’attaque de Wiener</li>
+</ul>
+<p><strong>Conséquence performance</strong> :</p>
+<ul>
+<li><strong>Encryption rapide</strong> (<span class="math inline">\(e\)</span> petit)</li>
+<li><strong>Decryption lente</strong> (<span class="math inline">\(d\)</span> grand)</li>
+</ul>
+<p><strong>Recommandations</strong> :</p>
+<ol type="1">
+<li>Séparer clés d’encryption et de signature (politiques différentes)</li>
+<li>Utiliser exposants publics différents pour différents usages</li>
+<li>Toujours appliquer padding (OAEP) avant encryption</li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled" title="Texte Original">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-101-contents" aria-controls="callout-101" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Texte Original
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-101" class="callout-101-contents callout-collapse collapse">
+<section id="rsa-sécurité" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="rsa-sécurité">RSA: Sécurité</h3>
+<p>Le problème <strong>RSAP</strong> consistant à trouver <span class="math inline">\(m\)</span> à partir de <span class="math inline">\(c\)</span> n’est pas prouvé comme étant aussi difficile que la factorisation mais… :</p>
+<ul>
+<li><p>On peut prouver que si on trouve <span class="math inline">\(d\)</span> on peut facilement calculer <span class="math inline">\(p\)</span> et <span class="math inline">\(q\)</span>. Ceci équivaut à dire que <strong>factoriser <span class="math inline">\(n\)</span> et trouver <span class="math inline">\(d\)</span> nécessitent un effort de calcul équivalent</strong>.</p></li>
+<li><p>On sait que les méthodes les plus rapides pour factoriser ont une <strong>complexité sub-exponentielle</strong> <span class="math inline">\(O(\exp(c \cdot (\ln(n))^{1/3}))\)</span>. Le problème reste donc <strong>calculatoirement impossible</strong> pour des modulus <span class="math inline">\(\geq 1048\)</span> bits (2048 bits est un choix fréquent pour une sécurité durable…).</p></li>
+<li><p>Afin d’améliorer la vitesse d’encryption, on a tendance à choisir des <strong>exposants <span class="math inline">\(e\)</span> assez petits</strong> (typiquement : <span class="math inline">\(e := 3\)</span>, <span class="math inline">\(e := 17\)</span> et <span class="math inline">\(e := 19\)</span>). On a cependant prouvé que le calcul d’une <span class="math inline">\(i\)</span>-ème racine (avec <span class="math inline">\(i\)</span> petit) modulo un composite <span class="math inline">\(n\)</span> peut être nettement plus facile que la factorisation de <span class="math inline">\(n\)</span>. Par contre, en 2008 on a prouvé que la résolution générique du problème RSA est équivalent à la factorisation.</p></li>
+<li><p>L’<strong>exposant de decryption <span class="math inline">\(d\)</span> doit impérativement être de grande taille</strong> (au moins la moitié de la taille de <span class="math inline">\(n\)</span>) pour garantir la sécurité du système.</p></li>
+<li><p>Par conséquent, l’<strong>encryption est normalement nettement plus rapide que la decryption</strong> puisque les exposants utilisés sont beaucoup plus petits !</p></li>
+<li><p>Il convient de <strong>différencier les paires de clés d’encryption et de signature</strong> puisqu’elles nécessitent des politiques de stockage, sauvegarde et mise à jour distinctes.</p></li>
+</ul>
+</section>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Révision Rapide">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-102-contents" aria-controls="callout-102" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Révision Rapide
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-102" class="callout-102-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Sécurité</strong> : basée sur difficulté de FACTP (factorisation)</li>
+<li><strong>Taille recommandée</strong> : <span class="math inline">\(n \geq 2048\)</span> bits</li>
+<li><strong><span class="math inline">\(e\)</span> petit</strong> : encryption rapide (3, 17, 65537)</li>
+<li><strong><span class="math inline">\(d\)</span> grand</strong> : au moins <span class="math inline">\(\text{taille}(n)/2\)</span></li>
+<li><strong>Clés séparées</strong> : encryption ≠ signature</li>
+</ul>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="attaques-sur-rsa" class="level3">
+<h3 class="anchored" data-anchor-id="attaques-sur-rsa">Attaques sur RSA</h3>
+<p><strong>1. Attaque sur exposant petit avec même message</strong> :</p>
+<p>Si on envoie le même message <span class="math inline">\(m\)</span> à 3 destinataires avec <span class="math inline">\(e = 3\)</span> : - <span class="math inline">\(c_1 \equiv m^3 \pmod{n_1}\)</span> - <span class="math inline">\(c_2 \equiv m^3 \pmod{n_2}\)</span> - <span class="math inline">\(c_3 \equiv m^3 \pmod{n_3}\)</span></p>
+<p>Le <strong>Théorème des Restes Chinois</strong> donne une solution unique <span class="math inline">\(x \bmod n_1n_2n_3\)</span> telle que : <span class="math display">\[x \equiv c_1 \pmod{n_1}, \quad x \equiv c_2 \pmod{n_2}, \quad x \equiv c_3 \pmod{n_3}\]</span></p>
+<p>Si <span class="math inline">\(m^3 &lt; n_1n_2n_3\)</span> (souvent vrai), alors <span class="math inline">\(x = m^3\)</span> dans <span class="math inline">\(\mathbb{Z}\)</span> et on peut calculer <span class="math inline">\(m\)</span> en prenant simplement la racine cubique entière !</p>
+<p><strong>Protection</strong> : toujours randomizer le message avant encryption (padding OAEP)</p>
+<p><strong>2. Attaque si message petit</strong> :</p>
+<p>Si <span class="math inline">\(m &lt; n^{1/e}\)</span>, alors <span class="math inline">\(m^e &lt; n\)</span>, donc <span class="math inline">\(c = m^e\)</span> (dans <span class="math inline">\(\mathbb{Z}\)</span>, pas modulo). On peut calculer directement la racine <span class="math inline">\(e\)</span>-ième !</p>
+<p><strong>Protection</strong> : padding obligatoire</p>
+<p><strong>3. Propriété multiplicative</strong> :</p>
+<p><span class="math display">\[E(m_1) \cdot E(m_2) \equiv (m_1 \cdot m_2)^e \equiv E(m_1 \cdot m_2) \pmod{n}\]</span></p>
+<p>Permet des attaques de type chosen-ciphertext et blind signatures.</p>
+<p><strong>4. Attaque générale</strong> :</p>
+<p>La méthode la plus efficace reste la <strong>factorisation de <span class="math inline">\(n\)</span></strong> (si paramètres bien choisis et implémentation correcte).</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Texte Original">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-103-contents" aria-controls="callout-103" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Texte Original
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-103" class="callout-103-contents callout-collapse collapse">
+<section id="rsa-attaques" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="rsa-attaques">RSA: Attaques</h3>
+<p>Lors qu’on souhaite encrypter le <strong>même message pour un groupe de correspondants</strong>, il convient d’introduire des variations (<strong>randomization</strong>) avant l’encryption pour éviter l’attaque suivante :</p>
+<p>Admettons qu’on calcule des ciphertexts <span class="math inline">\(c_1, c_2, c_3\)</span> à partir du même plaintext <span class="math inline">\(m\)</span> et du même exposant <span class="math inline">\(e := 3\)</span> adressés à trois entités avec des modulus : <span class="math inline">\(n_1, n_2, n_3\)</span>.</p>
+<p>Le <strong>Théorème des Restes Chinois</strong> nous dit qu’il existe une solution <span class="math inline">\(x \bmod n_1n_2n_3\)</span>, t.q. : <span class="math display">\[x \equiv c_1 \pmod{n_1}, \quad x \equiv c_2 \pmod{n_2}, \quad x \equiv c_3 \pmod{n_3}\]</span></p>
+<p>Mais si <span class="math inline">\(m\)</span> ne change pas pour les trois encryptions, on a que <span class="math inline">\(x = m^3 \bmod n_1n_2n_3\)</span> et, de plus : <span class="math inline">\(m^3 &lt; n_1n_2n_3\)</span>. On peut, donc, trouver <span class="math inline">\(m\)</span> en calculant la <strong>racine cubique entière</strong> de <span class="math inline">\(m^3\)</span>, en sachant que pour ce calcul il existe des algorithmes efficaces !</p>
+<p>Plus généralement, si <span class="math inline">\(m &lt; n^{1/e}\)</span>, on peut appliquer des algorithmes rapides (dans <span class="math inline">\(\mathbb{Z}\)</span>) pour calculer les racines <span class="math inline">\(e\)</span>-ièmes de <span class="math inline">\(m^e\)</span>. Il convient donc d’effectuer des opérations de <strong>“randomization” de <span class="math inline">\(m\)</span> avant d’encrypter</strong> !</p>
+<p><strong>La propriété multiplicative de RSA</strong> : <span class="math inline">\((m_1 m_2)^e \equiv m_1^e \cdot m_2^e \equiv c_1 \cdot c_2 \pmod{n}\)</span></p>
+<p>donne lieu à des <strong>failles dangereuses</strong> (voir signatures aveugles).</p>
+<p>En admettant que les paramètres sont correctement choisis et que l’implantation n’a pas de failles, <strong>la méthode la plus efficace pour “casser” l’algorithme générique RSA reste la factorisation de <span class="math inline">\(n\)</span></strong>.</p>
+</section>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Révision Rapide">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-104-contents" aria-controls="callout-104" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Révision Rapide
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-104" class="callout-104-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Même message, petit <span class="math inline">\(e\)</span></strong> : CRT permet d’extraire <span class="math inline">\(m\)</span> !</li>
+<li><strong>Message trop petit</strong> : <span class="math inline">\(m &lt; n^{1/e}\)</span> → racine directe</li>
+<li><strong>Propriété multiplicative</strong> : <span class="math inline">\(E(m_1) \cdot E(m_2) = E(m_1 m_2)\)</span></li>
+<li><strong>Protection</strong> : toujours padding/randomization (OAEP)</li>
+</ul>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="lalgorithme-elgamal" class="level2">
+<h2 class="anchored" data-anchor-id="lalgorithme-elgamal">L’Algorithme ElGamal</h2>
+<section id="fonctionnement-delgamal-encryptiondecryption" class="level3">
+<h3 class="anchored" data-anchor-id="fonctionnement-delgamal-encryptiondecryption">Fonctionnement d’ElGamal (Encryption/Decryption)</h3>
+<p>ElGamal (1985) est basé sur le problème du logarithme discret (DLP).</p>
+<p><strong>Génération des clés</strong> :</p>
+<ol type="1">
+<li>Générer un nombre premier <strong>grand</strong> <span class="math inline">\(p\)</span> (≥ 1024 bits)</li>
+<li>Choisir un <strong>générateur</strong> <span class="math inline">\(\alpha\)</span> de <span class="math inline">\(\mathbb{Z}_p^*\)</span></li>
+<li>Choisir un nombre aléatoire secret <span class="math inline">\(a\)</span> avec <span class="math inline">\(1 \leq a \leq p-2\)</span></li>
+<li>Calculer <span class="math inline">\(\beta := \alpha^a \bmod p\)</span></li>
+</ol>
+<p><strong>Clés résultantes</strong> : - Clé <strong>publique</strong> : <span class="math inline">\((p, \alpha, \beta)\)</span> - Clé <strong>privée</strong> : <span class="math inline">\(a\)</span></p>
+<p><strong>Encryption</strong> (par Bob, vers Alice) :</p>
+<ol type="1">
+<li>Obtenir clé publique authentique <span class="math inline">\((p, \alpha, \beta)\)</span> d’Alice</li>
+<li>Transformer plaintext en entiers <span class="math inline">\(m_i \in [0, p-1]\)</span></li>
+<li>Pour chaque message <span class="math inline">\(m_i\)</span> :
+<ul>
+<li>Générer un nombre aléatoire <strong>unique</strong> <span class="math inline">\(k\)</span> avec <span class="math inline">\(1 \leq k \leq p-2\)</span></li>
+<li>Calculer :
+<ul>
+<li><span class="math inline">\(\gamma := \alpha^k \bmod p\)</span></li>
+<li><span class="math inline">\(\delta := m_i \cdot \beta^k \bmod p\)</span></li>
+</ul></li>
+<li>Envoyer le ciphertext : <span class="math inline">\(c_i := (\gamma, \delta)\)</span></li>
+</ul></li>
+</ol>
+<p><strong>Decryption</strong> (par Alice) :</p>
+<ol type="1">
+<li><p>Utiliser clé privée <span class="math inline">\(a\)</span> pour calculer : <span class="math display">\[\gamma^{p-1-a} \bmod p\]</span> (noter que <span class="math inline">\(\gamma^{p-1-a} \equiv \gamma^{-a} \equiv (\alpha^k)^{-a} \equiv \alpha^{-ak} \pmod{p}\)</span>)</p></li>
+<li><p>Retrouver plaintext : <span class="math display">\[m_i = \delta \cdot \gamma^{-a} \bmod p\]</span></p></li>
+</ol>
+<p><strong>Preuve de fonctionnement</strong> :</p>
+<p><span class="math display">\[\delta \cdot \gamma^{-a} \equiv m \cdot \beta^k \cdot (\alpha^k)^{-a} \equiv m \cdot (\alpha^a)^k \cdot \alpha^{-ak} \equiv m \pmod{p}\]</span></p>
+<div class="callout callout-style-default callout-note callout-titled" title="Texte Original">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-105-contents" aria-controls="callout-105" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Texte Original
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-105" class="callout-105-contents callout-collapse collapse">
+<section id="procédé-dencryptiondecryption-delgamal" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="procédé-dencryptiondecryption-delgamal">Procédé d’Encryption/Decryption d’ElGamal</h3>
+<p><strong>Génération des clés</strong> : - Chaque entité (A) crée une paire de clés (publique et privée) comme suit : - A génère un nombre premier <span class="math inline">\(p\)</span> de grande taille (len<span class="math inline">\((p) \geq 1024\)</span> bits) et un <strong>générateur</strong> <span class="math inline">\(\alpha\)</span> de <span class="math inline">\(\mathbb{Z}_p^*\)</span>. - A génère un nombre a</p>
+</section>
+</div>
+</div>
+
+
 </section>
 </section>
 </section>
