@@ -3484,27 +3484,21 @@ graph LR
 
 **Choix des exposants** :
 
-**Exposant d'encryption $e$** :
+- **Exposant d'encryption $e$** :
 
-- Souvent **petit** pour accélérer : $e = 3, 17, 65537$ (commun)
-- Attention : si $e$ trop petit ET $m < n^{1/e}$, attaque possible (racine $e$-ième dans $\mathbb{Z}$)
-- Solution : **randomization** (padding) du message
+  - Souvent **petit** pour accélérer : $e = 3, 17, 65537$ (commun)
+  - Attention : si $e$ trop petit ET $m < n^{1/e}$, attaque possible (racine $e$-ième dans $\mathbb{Z}$)
+  - Solution : **randomization** (padding) du message
 
-**Exposant de décryption $d$** :
+- **Exposant de décryption $d$** :
 
-- Doit être **grand** : au moins la moitié de la taille de $n$
-- Si $d$ petit : vulnérable à l'attaque de Wiener
+  - Doit être **grand** : au moins la moitié de la taille de $n$
+  - Si $d$ petit : vulnérable à l'attaque de Wiener
 
 **Conséquence performance** :
 
 - **Encryption rapide** ($e$ petit)
 - **Decryption lente** ($d$ grand)
-
-**Recommandations** :
-
-1. Séparer clés d'encryption et de signature (politiques différentes)
-2. Utiliser exposants publics différents pour différents usages
-3. Toujours appliquer padding (OAEP) avant encryption
 
 ::: {.callout-note collapse=true title="Texte Original"}
 ### RSA: Sécurité
@@ -3520,8 +3514,6 @@ Le problème **RSAP** consistant à trouver $m$ à partir de $c$ n'est pas prouv
 - L'**exposant de decryption $d$ doit impérativement être de grande taille** (au moins la moitié de la taille de $n$) pour garantir la sécurité du système.
 
 - Par conséquent, l'**encryption est normalement nettement plus rapide que la decryption** puisque les exposants utilisés sont beaucoup plus petits !
-
-- Il convient de **différencier les paires de clés d'encryption et de signature** puisqu'elles nécessitent des politiques de stockage, sauvegarde et mise à jour distinctes.
 :::
 
 ::: {.callout-tip collapse=true title="Révision Rapide"}
@@ -3536,9 +3528,10 @@ Le problème **RSAP** consistant à trouver $m$ à partir de $c$ n'est pas prouv
 
 ### Attaques sur RSA
 
-**1. Attaque sur exposant petit avec même message** :
+#### Attaque sur exposant petit avec même message
 
 Si on envoie le même message $m$ à 3 destinataires avec $e = 3$ :
+
 - $c_1 \equiv m^3 \pmod{n_1}$
 - $c_2 \equiv m^3 \pmod{n_2}$
 - $c_3 \equiv m^3 \pmod{n_3}$
@@ -3550,19 +3543,19 @@ Si $m^3 < n_1n_2n_3$ (souvent vrai), alors $x = m^3$ dans $\mathbb{Z}$ et on peu
 
 **Protection** : toujours randomizer le message avant encryption (padding OAEP)
 
-**2. Attaque si message petit** :
+#### Attaque si message petit
 
 Si $m < n^{1/e}$, alors $m^e < n$, donc $c = m^e$ (dans $\mathbb{Z}$, pas modulo). On peut calculer directement la racine $e$-ième !
 
 **Protection** : padding obligatoire
 
-**3. Propriété multiplicative** :
+#### Propriété multiplicative
 
 $$E(m_1) \cdot E(m_2) \equiv (m_1 \cdot m_2)^e \equiv E(m_1 \cdot m_2) \pmod{n}$$
 
 Permet des attaques de type chosen-ciphertext et blind signatures.
 
-**4. Attaque générale** :
+#### Attaque générale
 
 La méthode la plus efficace reste la **factorisation de $n$** (si paramètres bien choisis et implémentation correcte).
 
@@ -3598,50 +3591,387 @@ En admettant que les paramètres sont correctement choisis et que l'implantation
 
 ## L'Algorithme ElGamal
 
-### Fonctionnement d'ElGamal (Encryption/Decryption)
+Système asymétrique (1985) basé sur le **problème du logarithme discret (DLP)**.
 
-ElGamal (1985) est basé sur le problème du logarithme discret (DLP).
+**Clés :**
 
-**Génération des clés** :
+- Choisir premier $p$, générateur $\alpha \in \mathbb{Z}_p^*$, secret $a$
+- Calculer $y = \alpha^a \bmod p$
+- **Publique** : $(p, \alpha, y)$ | **Privée** : $a$
 
-1. Générer un nombre premier **grand** $p$ (≥ 1024 bits)
-2. Choisir un **générateur** $\alpha$ de $\mathbb{Z}_p^*$
-3. Choisir un nombre aléatoire secret $a$ avec $1 \leq a \leq p-2$
-4. Calculer $\beta := \alpha^a \bmod p$
+**Chiffrement :** Pour message $m$, choisir aléatoire $k$ unique
 
-**Clés résultantes** :
-- Clé **publique** : $(p, \alpha, \beta)$
-- Clé **privée** : $a$
+- $\gamma = \alpha^k \bmod p$
+- $\delta = m \cdot y^k \bmod p$
+- Envoyer $(\gamma, \delta)$
 
-**Encryption** (par Bob, vers Alice) :
+**Déchiffrement :** $m = \delta \cdot \gamma^{-a} \bmod p$
 
-1. Obtenir clé publique authentique $(p, \alpha, \beta)$ d'Alice
-2. Transformer plaintext en entiers $m_i \in [0, p-1]$
-3. Pour chaque message $m_i$ :
-   - Générer un nombre aléatoire **unique** $k$ avec $1 \leq k \leq p-2$
-   - Calculer :
-     - $\gamma := \alpha^k \bmod p$
-     - $\delta := m_i \cdot \beta^k \bmod p$
-   - Envoyer le ciphertext : $c_i := (\gamma, \delta)$
+::: {.callout-note collapse="true" title="Texte original du cours"}
+## Procédé d'Encryption/Decryption d'ElGamal
 
-**Decryption** (par Alice) :
+**Génération des clés**
 
-1. Utiliser clé privée $a$ pour calculer :
-   $$\gamma^{p-1-a} \bmod p$$
-   (noter que $\gamma^{p-1-a} \equiv \gamma^{-a} \equiv (\alpha^k)^{-a} \equiv \alpha^{-ak} \pmod{p}$)
+Chaque entité (A) crée une paire de clés (publique et privée) comme suit:
 
-2. Retrouver plaintext :
-   $$m_i = \delta \cdot \gamma^{-a} \bmod p$$
+- A génère un nombre premier $p$ (len($p$) ≥ 1024 bits) et un **générateur $\alpha$** du groupe multiplicatif $\mathbb{Z}_p^*$
+- A génère un nombre aléatoire $a$, t.q. $1 \leq a \leq p-2$ et calcule $y := \alpha^a \bmod p$
+- La **clé publique** de A est $(p, \alpha, y)$, la **clé privée** de A est $a$
 
-**Preuve de fonctionnement** :
+**Encryption**
 
-$$\delta \cdot \gamma^{-a} \equiv m \cdot \beta^k \cdot (\alpha^k)^{-a} \equiv m \cdot (\alpha^a)^k \cdot \alpha^{-ak} \equiv m \pmod{p}$$
+- L'entité B obtient $(p, \alpha, \alpha^a \bmod p)$, la clé publique authentique de A
+- B transforme son plaintext en une série d'entiers $m_i$, t.q. $m_i \in [0, p-1]$ $\forall i$
+- Pour chaque message $m_i$ :
+  - B génère un nombre aléatoire **unique** $k$, t.q. $1 \leq k \leq p-2$
+  - B calcule $\gamma := \alpha^k \bmod p$ et $\delta := m_i \cdot (\alpha^a)^k \bmod p$ et envoie le ciphertext $c := (\gamma, \delta)$
 
-::: {.callout-note collapse=true title="Texte Original"}
-### Procédé d'Encryption/Decryption d'ElGamal
+**Decryption**
 
-**Génération des clés** :
-- Chaque entité (A) crée une paire de clés (publique et privée) comme suit :
-  - A génère un nombre premier $p$ de grande taille (len$(p) \geq 1024$ bits) et un **générateur** $\alpha$ de $\mathbb{Z}_p^*$.
-  - A génère un nombre a
+- A utilise sa clé privée $a$ pour calculer $\gamma^{p-1-a} \bmod p$ (à noter que: $\gamma^{p-1-a} \equiv \gamma^{-a} \equiv \alpha^{-ak} \bmod p$)
+- A retrouve le plaintext en calculant: $\delta \cdot \gamma^{-ak} \bmod p$
+:::
+
+::: {.callout-tip collapse="true"}
+## Révision rapide
+
+**Base** : DLP dans $\mathbb{Z}_p^*$
+
+**Chiffré** : $(\alpha^k, m \cdot y^k)$
+
+**Sécurité** : $k$ doit être unique et grand
+
+**Inconvénient** : double la taille du message
+:::
+
+### Remarques essentielles
+
+- **Preuve** : $\delta \cdot \gamma^{-a} = m \cdot (\alpha^a)^k \cdot (\alpha^k)^{-a} = m \bmod p$
+- **Sécurité** : basée sur DLP (complexité sub-exponentielle proche de la factorisation)
+- **Exposants** : $k$ et $a$ doivent être grands (sinon vulnérable à baby-step giant-step)
+- **Réutilisation interdite** : si $k$ répété, $\delta_1/\delta_2 = m_1/m_2$ révèle les messages
+- **Inconvénient majeur** : expansion ×2 de la taille du chiffré
+- **Généralisation** : fonctionne sur $GF(2^n)$ ou courbes elliptiques
+
+::: {.callout-note collapse="true"}
+## Texte original - Remarques
+
+**Preuve** que le schéma fonctionne : Si $s \equiv k^{-1}(m_h - ar) \bmod (p-1)$, on a que: $m_h \equiv (ar + ks) \bmod (p-1)$ et $v_2 = \alpha^{H(m)} \bmod p$. Si, comme on souhaite montrer $m_h = H(m)$, en réduisant les exposants mod $(p-1)$, on peut réécrire $v_2$: $v_2 \equiv \alpha^{ar+ks} \bmod p$. D'autre part: $v_1 = y^r\alpha^{rs} \equiv \alpha^{ar}\alpha^{ks} \equiv \alpha^{ar+ks} \bmod p$.
+
+Le procédé d'ElGamal se base sur la difficulté de calculer des **logarithmes discrets modulo un nombre premier** (problème DLP) même s'il n'a pas été prouvé qu'il soit strictement équivalent à ce problème.
+
+Les **algorithmes les plus efficaces** connus ont une complexité sub-exponentielle très proche de celle de la factorisation (on utilise souvent les mêmes algorithmes).
+
+Les **exposants choisis** ($k$, $a$) doivent être de grande taille car il existe des algorithmes efficaces pour calculer des logarithmes discrets modulo un nombre premier lorsque l'exposant est petit (baby-step giant-step algorithm).
+
+Un **inconvénient d'ElGamal** est qu'il multiplie par 2 la longueur du ciphertext.
+
+Il est **essentiel** pour la sécurité du procédé que le nombre aléatoire $k$ ne soit pas répété, autrement: soient $(\gamma_1, \delta_1)$ et $(\gamma_2, \delta_2)$ les deux ciphertexts générés, on a que $\delta_1/\delta_2 = m_1/m_2$ et par conséquent, il est trivial de retrouver un plaintext à partir de l'autre.
+
+Le procédé d'ElGamal peut se **généraliser** à d'autres groupes comme $GF(2^n)$ ou les courbes elliptiques.
+:::
+
+::: {.callout-tip collapse="true"}
+## Révision rapide - Remarques
+
+**Équivalence** : basé sur DLP (non prouvé équivalent)
+
+**$k$ unique** : CRITIQUE - sinon $m_1/m_2$ révélé
+
+**Taille clés** : exposants grands nécessaires
+
+**Extensions** : $GF(2^n)$, courbes elliptiques
+:::
+
+---
+
+## Algorithme de Rabin
+
+Système asymétrique **équivalent à la factorisation** (provably secure).
+
+**Clés :**
+
+- Générer deux premiers $p$, $q$ (≥1024 bits total), calculer $n = pq$
+  - **Publique** : $n$
+  - **Privée** : $(p, q)$
+
+**Chiffrement :** $c = m^2 \bmod n$
+
+**Déchiffrement :** 
+
+- Calculer les 4 racines carrées de $c \bmod n$ (via racines mod $p$ et mod $q$)
+- Identifier le bon message par redondance
+
+::: {.callout-note collapse="true" title="Texte original du cours"}
+## Procédé d'Encryption/Decryption de Rabin
+
+**Génération des clés**
+
+Chaque entité (A) crée une paire de clés (publique et privée) comme suit:
+
+- A génère deux nombres premiers aléatoires $p$ et $q$ de grande taille (len($pq$) ≥ 1024)
+- A calcule $n := pq$
+- La **clé publique** de A est $n$, la **clé privée** de A est $(p, q)$
+
+**Encryption**
+
+- L'entité B obtient $n$, la clé publique authentique de A
+- B transforme son plaintext en une série d'entiers $m_i$, t.q. $m_i \in [0, n-1]$ $\forall i$
+- B calcule $c_i = m_i^2 \bmod n$ pour chaque message $m_i$
+- B envoie tous les ciphertext $c_i$ à A
+
+**Decryption**
+
+- A utilise sa clé privée $(p, q)$ pour retrouver les **4 solutions** de l'équation: $c_i = x^2 \bmod n$ en utilisant des **algorithmes efficaces** pour calculer des racines carrées $\bmod p$ et $\bmod q$
+- A détermine soit par une **indication supplémentaire** de B, soit par une **analyse de redondance** lequel des 4 messages $m_1, m_2, m_3, m_4$ est le plaintext original
+:::
+
+::: {.callout-tip collapse="true"}
+## Révision rapide
+
+**Base** : SQROOTP (racine carrée mod composite)
+
+**Avantage** : équivalent prouvé à factorisation
+
+**Problème** : 4 solutions possibles, nécessite redondance
+
+**Vulnérabilité** : attaque chosen-ciphertext révèle facteurs
+:::
+
+### Remarques essentielles
+
+- **Sécurité prouvée** : SQROOTP ⟺ FACTP (seul algorithme avec équivalence prouvée)
+- **Attaque chosen-ciphertext** : si A décrypte $c = m^2 \bmod n$ choisi par adversaire M
+  - M reçoit une racine $m_x$ parmi 4 possibles
+  - Si $m \neq m_x \bmod n$ (prob. 0.5), alors $\gcd(m - m_x, n)$ donne un facteur de $n$
+- **Solution** : exiger redondance suffisante pour identifier solution unique sans ambiguïté
+
+::: {.callout-note collapse="true"}
+## Texte original - Remarques
+
+Le procédé de Rabin est basé sur l'**impossibilité de trouver des racines carrées modulo un composite de factorisation inconnue** (problème SQROOTP).
+
+L'**intérêt principal** de cet algorithme réside dans le fait qu'il a été **prouvé comme étant équivalent à la factorisation** (SQROOTP ⟺ FACTP). Cet algorithme appartient donc à la catégorie **provably secure** pour toute attaque passive.
+
+Les **attaques actives** peuvent, dans certains cas, compromettre la sécurité de l'algorithme. Plus précisément, si on monte l'attaque **chosen ciphertext** suivant:
+
+- L'attaquant M génère un $m$ et envoie à A le ciphertext $c = m^2 \bmod n$.
+- A répond avec une racine $m_x$ parmi les 4 possibles $m_1, m_2, m_3, m_4$.
+- Si $m \neq m_x \bmod n$ (probabilité 0.5), M recommence avec un nouveau $m$.
+- Sinon, A calcule $\gcd(m - m_x, n)$ et obtient ainsi un des deux facteurs de $n$.
+
+Cette attaque pourrait être **évitée** si le procédé exigeait une **redondance suffisante** dans les plaintexts permettant à A d'identifier sans ambiguïté laquelle des solutions possibles est le plaintext original. Dans ce cas, A répondrait toujours $m$ et jetterait les autres solutions n'ayant pas le niveau de redondance préétabli.
+:::
+
+::: {.callout-tip collapse="true"}
+## Révision rapide - Remarques
+
+**Unique** : seul algorithme prouvé équivalent à FACTP
+
+**Attaque** : chosen-ciphertext donne facteurs (prob. 0.5)
+
+**Parade** : redondance obligatoire dans messages
+:::
+
+---
+
+## Comparaison RSA - ElGamal - Rabin
+
+| Critère | RSA | ElGamal | Rabin |
+|---------|-----|---------|-------|
+| **Problème** | RSAP | DLP | SQROOTP |
+| **Sécurité** | Équiv. factorisation (cas générique) | Basée sur DLP | **Prouvée** ⟺ factorisation |
+| **Expansion** | 1:1 | **1:2** | 1:1 |
+| **Déchiffrement** | Déterministe | Déterministe | **4 solutions** |
+| **Signature** | Oui | Oui | Oui (avec précautions) |
+
+---
+
+## Courbes Elliptiques (Idée de base)
+
+### Concept fondamental
+
+Une **courbe elliptique** $E$ est définie par : $y^2 = x^3 + ax + b$ (avec discriminant $4a^3 + 27b^2 \neq 0$).
+
+**Opération clé : Addition de points**
+
+- Géométriquement : tracer une droite entre deux points $P$ et $Q$, trouver le 3ᵉ point d'intersection, puis prendre son symétrique
+- Forme un **groupe commutatif** avec point à l'infini $\mathcal{O}$ comme identité
+- **Multiplication scalaire** : $kP = P + P + ... + P$ ($k$ fois)
+
+**Avantage cryptographique :**
+
+- Le **problème ECDLP** : trouver $k$ tel que $Q = kP$ est très difficile (effort exponentiel)
+- **Clés plus courtes** pour même sécurité qu'en $\mathbb{Z}_p^*$
+
+::: {.callout-note collapse="true"}
+## Texte original - Définition
+
+Une **courbe elliptique** est un ensemble de points $E$ défini par l'équation: $y^2 = x^3 + ax + b$, avec $x, y, a$ et $b$ des nombres rationnels, entiers ou entiers modulo $m$ ($m > 1$). L'ensemble $E$ contient également un "point à l'infini" noté $\mathcal{O}$. Le point $\mathcal{O}$ n'est pas dans la courbe mais il est l'élément identité de $E$.
+
+On choisira pour nos calculs les courbes elliptiques n'ayant pas de racines multiples ou, en d'autres termes, des courbes où le **discriminant** $4a^3 + 27b^2 \neq 0$.
+:::
+
+::: {.callout-tip collapse="true"}
+## Révision rapide - Concept
+
+**Équation** : $y^2 = x^3 + ax + b$
+
+**Structure** : groupe avec $\mathcal{O}$
+
+**Opération** : addition géométrique
+
+**Problème dur** : ECDLP
+:::
+
+### Addition sur courbes elliptiques
+
+Soit $P := (x, y) \in E$, on définit $-P := (x, -y)$ (symétrique par rapport à l'axe des $x$). On a $P + (-P) = \mathcal{O}$.
+
+Pour deux points $P, Q \in E$ avec $Q \neq -P$, on définit $P + Q := R$ où $-R$ est le 3ᵉ point d'intersection entre la courbe et la droite passant par $P$ et $Q$.
+
+Pour le **doublement** : $2P = R$ où $-R$ est le point d'intersection de la courbe avec la tangente à la courbe au point $P$.
+
+::: {.callout-note collapse="true"}
+## Texte original - Addition
+
+Soit $P := (x, y) \in E$, on définit $-P$ comme $-P := (x, -y)$. Graphiquement, $-P$ est le point symétrique de $P$ par rapport à l'axe des $x$. À noter que $P + (-P) = \mathcal{O}$.
+
+Soient deux points $P, Q \in E$, tels que $Q \neq -P$, on définit l'addition $P + Q := R$ où $R \in E$ tel que $-R$ est le 3ᵉ point d'intersection entre la courbe et la droite qui passe par $P$ et $Q$.
+
+L'ensemble $E$ avec $\oplus$ définit un **groupe commutatif** pour l'addition.
+
+Soit $P \in E$, le point $2P = R$, tel que $-R$ est le point d'intersection de la courbe avec la droite tangente à la courbe au point $P$.
+:::
+
+::: {.callout-tip collapse="true"}
+## Révision rapide - Addition
+
+**Inverse** : $-P = (x, -y)$
+
+**Addition** : 3ᵉ point d'intersection + symétrie
+
+**Doublement** : tangente + symétrie
+
+**Propriété** : groupe commutatif
+:::
+
+### ECDLP et avantages cryptographiques
+
+Lorsque la courbe elliptique est définie sur le corps $\mathbb{Z}_p$ avec $p$ premier de grande taille ($y^2 \equiv x^3 + ax + b \bmod p$), le calcul de $k \in \mathbb{Z}_p$ tel que $Q = kP$ avec $(P, Q)$ connus est **très difficile** (effort exponentiel). Ce problème est le **Elliptic Curve Discrete Logarithm Problem (ECDLP)**.
+
+**Avantage principal** : taille des clés beaucoup plus petite pour une sécurité équivalente.
+
+::: {.callout-note collapse="true"}
+## Texte original - ECDLP et avantages
+
+Lorsque la courbe elliptique est définie sur le corps $\mathbb{Z}_p$ avec $p$ un nombre premier de grande taille ($y^2 \equiv x^3 + ax + b \bmod p$), le calcul de $k \in \mathbb{Z}_p$ tel que $Q = kP$ avec $(P, Q)$ connus, est très difficile (nécessite un effort exponentiel). Ce problème est connu comme: **Elliptic Curve Discrete Logarithm Problem (ECDLP)**.
+
+L'**avantage principal** de la cryptographie publique basée sur des courbes elliptiques est que la taille des nombres utilisés (et donc, des clés) est plus petite.
+
+Ceci est dû à la **complexité accrue** des calculs sur $E_p$ (courbe elliptique définie sur le corps $\mathbb{Z}_p$) par rapport aux corps habituels tels que $\mathbb{Z}_p$ ou $GF(2^m)$.
+
+La **représentation d'un plaintext en points** de la courbe reste une opération complexe.
+
+En Octobre 2003, la **US National Security Agency (NSA)** a acheté un brevet de Certicom pour l'utilisation de la cryptographie à courbes elliptiques.
+
+En Septembre 2013 Claus Diem montré que sous certaines conditions le problème ECDLP pouvait être résolu en temps **sub-exponentiel**.
+:::
+
+::: {.callout-tip collapse="true"}
+## Révision rapide - ECDLP
+
+**Problème** : trouver $k$ dans $Q = kP$ (exponentiel)
+
+**Gain** : clés ~6-10× plus courtes
+
+**Limite** : représenter messages en points difficile
+
+**NSA** : adopté en 2003
+:::
+
+### Tableau de comparaison des tailles de clés
+
+| AES (symétrique) | RSA/DH | Courbes Elliptiques | Rapport |
+|---------------------|---------|---------------------|---------|
+| 56 bits | 512 bits | 112 bits | 1:4.6 |
+| 80 bits | 1024 bits | 160 bits | 1:6.4 |
+| 112 bits | 2048 bits | 224 bits | 1:9.1 |
+| 128 bits | 3072 bits | 256 bits | 1:12 |
+| 256 bits | 15360 bits | 512 bits | 1:30 |
+
+::: {.callout-note collapse="true"}
+## Texte original - Tableau
+
+Ce tableau montre les rapports des tailles des clés par rapport à celles de RSA pour une sécurité équivalente.
+
+*(Tableau extrait du document original)*
+:::
+
+---
+
+## ElGamal sur Courbes Elliptiques
+
+### Adaptation directe
+
+Remplacer opérations dans $\mathbb{Z}_p^*$ par opérations sur $E_p$
+
+**Clés :**
+
+- Choisir courbe $E_p$ et point $P_0 \in E_p$ de grand ordre
+- Secret $x$, calculer $P_a = xP_0$
+- **Publique** : $(E_p, P_0, P_a)$ | **Privée** : $x$
+
+**Chiffrement :** Pour message $m_i \in E_p$
+
+- Choisir $k$ aléatoire
+- $\gamma = kP_0$, $\delta = kP_a + m_i$
+- Envoyer $(\gamma, \delta)$
+
+**Déchiffrement :** $m_i = \delta - x\gamma$
+
+::: {.callout-note collapse="true"}
+## Texte original - ElGamal EC
+
+**Génération des clés**
+
+Chaque entité (A) crée une paire de clés (publique et privée) comme suit:
+
+- A choisit une courbe elliptique $E_p$ avec $p$, un nombre premier de grande taille (len($p$) bits) et un point $P_0 \in E_p$.
+- A génère un nombre aléatoire $x$, tel que $1 \leq x \leq p$ et calcule $P_a = xP_0$ (multiplication par un scalaire sur $E_p$, pour laquelle, il existe des algorithmes efficaces).
+- La clé publique de A est $(E_p, P_0, P_a)$, la clé privée de A est $x$.
+
+**Encryption**
+
+L'entité B obtient $(E_p, P_0, P_a)$, la clé publique authentique de A.
+
+- B transforme son plaintext en une série d'entiers $m_i$, tel que $m_i \in E_p$ pour tout $i$.
+- Pour chaque message $m_i$ :
+  - B génère un nombre aléatoire unique $k$, tel que $1 \leq k \leq p$.
+  - B calcule $\gamma := kP_0$ et $\delta := kP_a + m_i$ et envoie le ciphertext $c := (\gamma, \delta)$.
+
+**Decryption**
+
+- A utilise sa clé privée $x$ pour calculer: $x\gamma = xkP_0 = kP_a$.
+- A retrouve le plaintext en calculant: $\delta - kP_a = kP_a + m_i - kP_a = m_i$.
+
+La sécurité du schéma s'appuie sur **ECDLP** !
+
+Il est également nécessaire d'**authentifier** les parties publiques échangées afin d'éviter les attaques man-in-the middle précédemment décrites.
+
+Les propriétés du protocole sont identiques au cas $\mathbb{Z}_p^*$.
+:::
+
+::: {.callout-tip collapse="true"}
+## Révision rapide - ElGamal EC
+
+**Principe** : même qu'ElGamal sur $E_p$
+
+**Opérations** : + et × scalaire sur points
+
+**Sécurité** : ECDLP
+
+**Authentification** : nécessaire contre MitM
+
+**Avantage** : clés courtes
 :::
