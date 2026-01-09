@@ -311,6 +311,19 @@ window.Quarto = {
   </ul></li>
   <li><a href="#randomized-hash-functions-unix-example" id="toc-randomized-hash-functions-unix-example" class="nav-link" data-scroll-target="#randomized-hash-functions-unix-example">Randomized Hash Functions: UNIX Example</a></li>
   </ul></li>
+  <li><a href="#digital-signatures" id="toc-digital-signatures" class="nav-link" data-scroll-target="#digital-signatures">Digital Signatures</a>
+  <ul class="collapse">
+  <li><a href="#introduction-and-definitions" id="toc-introduction-and-definitions" class="nav-link" data-scroll-target="#introduction-and-definitions">Introduction and Definitions</a></li>
+  <li><a href="#formal-framework-signatures-with-appendix" id="toc-formal-framework-signatures-with-appendix" class="nav-link" data-scroll-target="#formal-framework-signatures-with-appendix">Formal Framework: Signatures with Appendix</a></li>
+  <li><a href="#formal-framework-signatures-with-recovery" id="toc-formal-framework-signatures-with-recovery" class="nav-link" data-scroll-target="#formal-framework-signatures-with-recovery">Formal Framework: Signatures with Recovery</a></li>
+  <li><a href="#rsa-signature" id="toc-rsa-signature" class="nav-link" data-scroll-target="#rsa-signature">RSA Signature</a></li>
+  <li><a href="#blind-signatures" id="toc-blind-signatures" class="nav-link" data-scroll-target="#blind-signatures">Blind Signatures</a></li>
+  <li><a href="#rabin-signature" id="toc-rabin-signature" class="nav-link" data-scroll-target="#rabin-signature">Rabin Signature</a></li>
+  <li><a href="#elgamal-signature" id="toc-elgamal-signature" class="nav-link" data-scroll-target="#elgamal-signature">ElGamal Signature</a></li>
+  <li><a href="#signatures-and-cryptocurrencies" id="toc-signatures-and-cryptocurrencies" class="nav-link" data-scroll-target="#signatures-and-cryptocurrencies">Signatures and Cryptocurrencies</a></li>
+  <li><a href="#summary-table-of-schemes" id="toc-summary-table-of-schemes" class="nav-link" data-scroll-target="#summary-table-of-schemes">Summary Table of Schemes</a></li>
+  <li><a href="#types-of-attacks" id="toc-types-of-attacks" class="nav-link" data-scroll-target="#types-of-attacks">Types of Attacks</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -7240,6 +7253,827 @@ pp:1Qhw.oihEtHK6:359:355:PP:/net/spp_telecom/pp:/bin/cs</code></pre>
 <p><strong>UNIX salt</strong>: 12 random bits added to password before hash.</p>
 <p>4096 possible variations.</p>
 <p>Prevents pre-computed codebooks and duplicate detection.</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="digital-signatures" class="level1">
+<h1>Digital Signatures</h1>
+<section id="introduction-and-definitions" class="level2">
+<h2 class="anchored" data-anchor-id="introduction-and-definitions">Introduction and Definitions</h2>
+<p>A <strong>digital signature</strong> is a string of data associating a message with an originating entity, the digital equivalent of a handwritten signature.</p>
+<p><strong>Classification:</strong></p>
+<ul>
+<li><strong>With appendix</strong>: requires the original message for verification (ElGamal, DSS)</li>
+<li><strong>With message recovery</strong>: allows reconstruction of the message (RSA, Rabin)</li>
+</ul>
+<p>Signatures primarily use <strong>asymmetric cryptography</strong> to explicitly identify an entity.</p>
+<p><strong>arbitrated digital signatures</strong>: symmetric technology + Trusted Third Parties (TTP)</p>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-150-contents" aria-controls="callout-150" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Original Text
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-150" class="callout-150-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Digital signature</strong>: string of data allowing to associate a message (in digital form) with an originating entity.</p>
+<p><strong>Digital signature scheme</strong>: generation algorithm + verification algorithm.</p>
+<p><strong>Signature process</strong>: message formatting + signature generation algorithm.</p>
+<p><strong>Verification process</strong>: verification algorithm + (message reconstruction).</p>
+<p><strong>Classification of digital signatures</strong>:</p>
+<ul>
+<li><strong>Digital signatures with appendix</strong> which require the presence of the original message to verify the validity of the signature. These are the most commonly used. Examples: ElGamal, DSS.</li>
+<li><strong>Digital signatures with message recovery</strong> which offer, in addition, the possibility to reconstruct the message from the signature. Examples: RSA, Rabin.</li>
+</ul>
+<p>Digital signatures are mostly based on <strong>asymmetric crypto</strong> because the concept of a shared key is not suitable for the need to identify an entity explicitly.</p>
+<p>Commitments similar to those obtained with a public key signature (such as origin non-repudiation) can however be obtained with symmetric technology and trusted third parties (TTP). These methods are called: <strong>arbitrated digital signatures</strong>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-151-contents" aria-controls="callout-151" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Quick Revision
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-151" class="callout-151-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Digital signature</strong> = string associating message + entity</p>
+<p><strong>Two types</strong></p>
+<ul>
+<li>with appendix (requires original message)</li>
+<li>with recovery (reconstructs the message)</li>
+</ul>
+<p>Based on asymmetric crypto</p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="formal-framework-signatures-with-appendix" class="level2">
+<h2 class="anchored" data-anchor-id="formal-framework-signatures-with-appendix">Formal Framework: Signatures with Appendix</h2>
+<p><strong>Working spaces:</strong></p>
+<ul>
+<li><span class="math inline">\(M\)</span>: message space</li>
+<li><span class="math inline">\(M_h\)</span>: hashed messages where <span class="math inline">\(m_h = H(m)\)</span> with <span class="math inline">\(H\)</span> a hash function</li>
+<li><span class="math inline">\(S\)</span>: space of possible signatures</li>
+</ul>
+<p><strong>Operation:</strong></p>
+<p>Each entity A defines:</p>
+<ul>
+<li><span class="math inline">\(S_A : M_h \rightarrow S\)</span> (signature function, uses private key)</li>
+<li><span class="math inline">\(V_A : M_h \times S \rightarrow \{\text{true}, \text{false}\}\)</span> (verification, uses public key)</li>
+</ul>
+<p>With <span class="math inline">\(V_A(m_h, s) = \text{true}\)</span> if and only if <span class="math inline">\(S_A(m_h) = s\)</span></p>
+<p><strong>Essential properties:</strong></p>
+<ul>
+<li><span class="math inline">\(S_A\)</span> and <span class="math inline">\(V_A\)</span> easy to compute with the correct keys</li>
+<li>Impossible to find a valid <span class="math inline">\((m', s')\)</span> without A’s private key</li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-152-contents" aria-controls="callout-152" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Original Text
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-152" class="callout-152-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We assume that each entity has a private key to sign messages and an authentic copy of the public keys of correspondents.</p>
+<p><strong>Notation:</strong> - M: Message space - <span class="math inline">\(M_h\)</span>: <span class="math inline">\(m_h = H(m)\)</span> with <span class="math inline">\(m \in M\)</span>, <span class="math inline">\(m_h \in M_h\)</span> and <span class="math inline">\(H\)</span> a hash function - S: Space of values that can be obtained by a signature process</p>
+<p><strong>Description:</strong></p>
+<p>Each entity defines an injective function <span class="math inline">\(S_A : M_h \rightarrow S\)</span> (i.e., the signature)</p>
+<p>The function <span class="math inline">\(S_A\)</span> gives rise to a function <span class="math inline">\(V_A\)</span>: <span class="math inline">\(V_A : M_h \times S \rightarrow \{\text{true}, \text{false}\}\)</span> (i.e., the verification)</p>
+<p>such that <span class="math inline">\(\forall m_h \in M_h\)</span>, <span class="math inline">\(s \in S\)</span>, we have: <span class="math inline">\(V_A(m_h, s) = \text{true}\)</span> if <span class="math inline">\(S_A(m_h) = s\)</span> and <span class="math inline">\(V_A(m_h, s) = \text{false}\)</span> otherwise</p>
+<p>The operations <span class="math inline">\(S_A\)</span> require the private key of A while the operations <span class="math inline">\(V_A\)</span> use the public key of A.</p>
+<p><strong>Some simple properties:</strong></p>
+<ul>
+<li>The operations <span class="math inline">\(S_A\)</span> and <span class="math inline">\(V_A\)</span> must be easy to compute (having the corresponding keys)</li>
+<li>It is impossible (computationally) for an entity not having the private key of A to find an <span class="math inline">\(m'\)</span> and an <span class="math inline">\(s'\)</span> with <span class="math inline">\(m' \in M\)</span> and <span class="math inline">\(s' \in S\)</span> such that <span class="math inline">\(V_A(m'_h, s') = \text{true}\)</span> with <span class="math inline">\(m'_h = H(m')\)</span>.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-153-contents" aria-controls="callout-153" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Quick Revision
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-153" class="callout-153-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Signature: <span class="math inline">\(S_A(m_h) = s\)</span> (private key).</p>
+<p>Verification: <span class="math inline">\(V_A(m_h, s)\)</span> (public key).</p>
+<p>Impossible to forge without private key.</p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="formal-framework-signatures-with-recovery" class="level2">
+<h2 class="anchored" data-anchor-id="formal-framework-signatures-with-recovery">Formal Framework: Signatures with Recovery</h2>
+<p><strong>Additional spaces:</strong></p>
+<ul>
+<li><span class="math inline">\(M_S\)</span>: space on which the signature is applied</li>
+<li><span class="math inline">\(R : M \rightarrow M_S\)</span>: redundancy function (injective, invertible, public)</li>
+<li><span class="math inline">\(M_R = \text{Im}(R)\)</span>: image of <span class="math inline">\(R\)</span></li>
+</ul>
+<p><strong>Operation:</strong></p>
+<ul>
+<li>Signature: <span class="math inline">\(S_A : M_S \rightarrow S\)</span> (injective)</li>
+<li>Verification: <span class="math inline">\(V_A : S \rightarrow M_S\)</span> with <span class="math inline">\(V_A \circ S_A = \text{Identity}\)</span></li>
+</ul>
+<p><strong>Generation:</strong></p>
+<ol type="1">
+<li>Compute <span class="math inline">\(m_R = R(m)\)</span> and <span class="math inline">\(s = S_A(m_R)\)</span></li>
+<li>Publish <span class="math inline">\(s\)</span> as A’s signature on <span class="math inline">\(m\)</span></li>
+</ol>
+<p><strong>Verification:</strong></p>
+<ol type="1">
+<li>Compute <span class="math inline">\(m_R = V_A(s)\)</span> with public key</li>
+<li>Verify <span class="math inline">\(m_R \in M_R\)</span> (reject otherwise)</li>
+<li>Reconstruct <span class="math inline">\(m = R^{-1}(m_R)\)</span></li>
+</ol>
+<p><strong>Redundancy function:</strong></p>
+<p>Essential for security. If <span class="math inline">\(M_R = M_S\)</span>, it becomes trivial to forge signatures.</p>
+<p><strong>Example:</strong> <span class="math inline">\(R(m) = m \parallel m\)</span> (concatenation). Forgery probability: <span class="math inline">\((1/2)^n\)</span> for an <span class="math inline">\(n\)</span>-bit message.</p>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-154-contents" aria-controls="callout-154" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Original Text
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-154" class="callout-154-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Notation:</strong> in addition to the previous definitions, we have:</p>
+<p><span class="math inline">\(M_S\)</span>: The space of elements on which a signature can be applied.</p>
+<p><span class="math inline">\(R\)</span>: An injective function: <span class="math inline">\(M \rightarrow M_S\)</span>, called the redundancy function. It must be invertible and public.</p>
+<p><span class="math inline">\(M_R = \text{Im}(R)\)</span></p>
+<p><strong>Description:</strong></p>
+<p>Each entity defines an injective function <span class="math inline">\(S_A : M_S \rightarrow S\)</span> (i.e., the signature)</p>
+<p>The function <span class="math inline">\(S_A\)</span> gives rise to a function <span class="math inline">\(V_A : S \rightarrow M_S\)</span> (i.e., the verification) such that <span class="math inline">\(V_A \circ S_A = \text{Identity}\)</span> on <span class="math inline">\(M_S\)</span></p>
+<p>Note that verification is performed without the private key of A</p>
+<p><strong>Signature generation:</strong> 1. Compute <span class="math inline">\(m_R = R(m)\)</span> and <span class="math inline">\(s = S_A(m_R)\)</span> 2. Make <span class="math inline">\(s\)</span> public as A’s signature on <span class="math inline">\(m\)</span>. This allows other entities to verify the signature and reconstruct <span class="math inline">\(m\)</span>.</p>
+<p><strong>Verification:</strong> 1. Compute <span class="math inline">\(m_R = V_A(s)\)</span> (with A’s public key) 2. Verify that <span class="math inline">\(m_R \in M_R\)</span> (otherwise reject the signature) 3. Reconstruct <span class="math inline">\(m\)</span> by computing: <span class="math inline">\(R^{-1}(m_R)\)</span></p>
+<p><strong>Properties:</strong></p>
+<ul>
+<li>The operations <span class="math inline">\(S_A\)</span> and <span class="math inline">\(V_A\)</span> must be easy to compute (having the corresponding keys)</li>
+<li>It is impossible (computationally) for an entity not having the private key of A to find an <span class="math inline">\(s' \in S\)</span> such that <span class="math inline">\(V_A(s') \in M_R\)</span></li>
+</ul>
+<p><strong>Remarks on the redundancy function:</strong></p>
+<ul>
+<li>The choice of a redundancy function is <strong>essential for the security</strong> of the system.</li>
+<li>If <span class="math inline">\(M_R = M_S\)</span> and <span class="math inline">\(R\)</span> and <span class="math inline">\(S_A\)</span> are bijections respectively from <span class="math inline">\(M\)</span> to <span class="math inline">\(M_R\)</span> and from <span class="math inline">\(M_S\)</span> to <span class="math inline">\(S\)</span>, then <span class="math inline">\(M\)</span> and <span class="math inline">\(S\)</span> have identical size and, consequently, it is trivial to forge messages bearing A’s signature.</li>
+</ul>
+<p><strong>Example of redundancy function:</strong> let <span class="math inline">\(M = \{m : m \in \{0,1\}^n\}\)</span> (n message size) and <span class="math inline">\(M_S = \{t : t \in \{0,1\}^{2n}\}\)</span>. Let <span class="math inline">\(R : M \rightarrow M_S\)</span> such that <span class="math inline">\(R(m) = m \parallel m\)</span> (<span class="math inline">\(\parallel\)</span> being the concatenation of 2 messages). The probability of falling on such a message when trying to forge a message from a signature is: <span class="math inline">\(|M_R| / |M_S| = (1/2)^n\)</span>, which is negligible for large messages.</p>
+<p><strong>Attention!</strong>: A redundancy function suitable for one digital signature scheme may cause vulnerabilities in another different one!</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-155-contents" aria-controls="callout-155" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Quick Revision
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-155" class="callout-155-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>With recovery:</strong> Redundancy function <span class="math inline">\(R(m) = m_R\)</span>.</p>
+<p>Signature <span class="math inline">\(s = S_A(m_R)\)</span>.</p>
+<p>Verification: <span class="math inline">\(m_R = V_A(s)\)</span>, reconstruct <span class="math inline">\(m = R^{-1}(m_R)\)</span>.</p>
+<p>Redundancy crucial for security.</p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="rsa-signature" class="level2">
+<h2 class="anchored" data-anchor-id="rsa-signature">RSA Signature</h2>
+<p><strong>Key generation:</strong></p>
+<ul>
+<li>Choose two large prime numbers <span class="math inline">\(p\)</span> and <span class="math inline">\(q\)</span></li>
+<li>Compute <span class="math inline">\(n = pq\)</span> and <span class="math inline">\(\phi(n) = (p-1)(q-1)\)</span></li>
+<li>Choose <span class="math inline">\(e\)</span> with <span class="math inline">\(\text{gcd}(e, \phi(n)) = 1\)</span></li>
+<li>Compute <span class="math inline">\(d\)</span> such that <span class="math inline">\(ed \equiv 1 \pmod{\phi(n)}\)</span></li>
+<li><strong>Public key</strong>: <span class="math inline">\((n, e)\)</span>; <strong>Private key</strong>: <span class="math inline">\(d\)</span></li>
+</ul>
+<p><strong>Signature:</strong></p>
+<ol type="1">
+<li>Compute <span class="math inline">\(m_R = R(m)\)</span> (redundancy function)</li>
+<li>Compute <span class="math inline">\(s = m_R^d \bmod n\)</span></li>
+<li>Send <span class="math inline">\(s\)</span></li>
+</ol>
+<p><strong>Verification:</strong></p>
+<ol type="1">
+<li>Compute <span class="math inline">\(m'_R = s^e \bmod n\)</span></li>
+<li>Verify <span class="math inline">\(m'_R \in M_R\)</span> (reject otherwise)</li>
+<li>Reconstruct <span class="math inline">\(m = R^{-1}(m'_R)\)</span></li>
+</ol>
+<p><strong>Variant with appendix:</strong></p>
+<ul>
+<li><strong>Signature</strong>: <span class="math inline">\(m_h = H(m)\)</span>, then <span class="math inline">\(s = m_h^d \bmod n\)</span></li>
+<li><strong>Verification</strong>: <span class="math inline">\(m'_h = s^e \bmod n\)</span>, accept if <span class="math inline">\(m'_h = H(m)\)</span></li>
+</ul>
+<p><strong>Characteristics:</strong></p>
+<ul>
+<li>Signature slower than verification (<span class="math inline">\(d\)</span> large, <span class="math inline">\(e\)</span> small)</li>
+<li>Differentiate signature/encryption keys</li>
+<li>Vulnerable to the same attacks as RSA encryption</li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-156-contents" aria-controls="callout-156" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Original Text
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-156" class="callout-156-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Key generation:</strong></p>
+<ul>
+<li>Each entity (A) creates a key pair (public and private) as follows:</li>
+<li>A chooses the size of the modulus <span class="math inline">\(n\)</span> (e.g., size<span class="math inline">\((n) = 1024\)</span> or size<span class="math inline">\((n) = 2048\)</span>).</li>
+<li>A generates two prime numbers <span class="math inline">\(p\)</span> and <span class="math inline">\(q\)</span> of large size <span class="math inline">\((n/2)\)</span>.</li>
+<li>A computes <span class="math inline">\(n := pq\)</span> and <span class="math inline">\(\phi(n) = (p-1)(q-1)\)</span>.</li>
+<li>A generates the verification exponent <span class="math inline">\(e\)</span>, with <span class="math inline">\(1 &lt; e &lt; \phi(n)\)</span> such that <span class="math inline">\(\text{gcd}(e, \phi(n)) = 1\)</span>.</li>
+<li>A computes the signature exponent <span class="math inline">\(d\)</span>, such that: <span class="math inline">\(ed \equiv 1 \pmod{\phi(n)}\)</span> using the extended Euclidean algorithm or fast exponentiation.</li>
+<li>The pair <span class="math inline">\((n,e)\)</span> is A’s public key; <span class="math inline">\(d\)</span> is A’s private key.</li>
+</ul>
+<p><strong>Signature:</strong></p>
+<ul>
+<li>A computes the redundancy function of the message <span class="math inline">\(m\)</span>: <span class="math inline">\(m_R := R(m)\)</span>.</li>
+<li>A computes the signature: <span class="math inline">\(s := m_R^d \bmod n\)</span> and sends <span class="math inline">\(s\)</span> to B.</li>
+</ul>
+<p><strong>Verification:</strong></p>
+<ul>
+<li>Entity B obtains <span class="math inline">\((n,e)\)</span>, the authentic public key of A.</li>
+<li>B computes <span class="math inline">\(m'_R = s^e \bmod n\)</span>, verifies <span class="math inline">\(m'_R \in M_R\)</span> and rejects the signature if <span class="math inline">\(m'_R \notin M_R\)</span></li>
+<li>B retrieves the correctly signed message by A by computing: <span class="math inline">\(m = R^{-1}(m'_R)\)</span>.</li>
+</ul>
+<p><strong>Remarks:</strong></p>
+<p>The proof of operation is identical to that of the encryption process. The order of exponentiation has no influence since: <span class="math display">\[ed \equiv de \equiv 1 \pmod{\phi(n)}\]</span></p>
+<p>The process can also be used to produce <strong>signatures with appendix</strong> with the following modifications:</p>
+<p><strong>Signature:</strong> - A uses a hash function <span class="math inline">\(H\)</span> and computes <span class="math inline">\(m_h := H(m)\)</span>. - A computes the signature of <span class="math inline">\(m_h\)</span>: <span class="math inline">\(s := m_h^d \bmod n\)</span> and sends the pair <span class="math inline">\((m,s)\)</span> to B.</p>
+<p><strong>Verification:</strong> - B computes <span class="math inline">\(m'_h = s^e \bmod n\)</span> and <span class="math inline">\(H(m)\)</span> and verifies the equality <span class="math inline">\(m'_h = H(m)\)</span>. - If the equality is verified, B accepts the signature <span class="math inline">\(s\)</span> of A on the message M.</p>
+<p>The signature computation is <strong>slower</strong> than verification because of the difference in size between the exponent <span class="math inline">\(d\)</span> (size<span class="math inline">\((d) \approx\)</span> size<span class="math inline">\((\phi(n))\)</span>) and <span class="math inline">\(e\)</span>.</p>
+<p>The risks and attacks mentioned in the encryption process also apply to the signature.</p>
+<p>It is advisable to <strong>differentiate the key pairs for encryption and signature</strong> since they require distinct storage, backup and update policies.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-157-contents" aria-controls="callout-157" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Quick Revision
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-157" class="callout-157-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>RSA signature:</strong> <span class="math inline">\(s = m_R^d \bmod n\)</span> (private).</p>
+<p>Verify: <span class="math inline">\(m'_R = s^e \bmod n\)</span> (public).</p>
+<p>With appendix: <span class="math inline">\(s = H(m)^d \bmod n\)</span>.</p>
+<p>Signature slow, verification fast.</p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="blind-signatures" class="level2">
+<h2 class="anchored" data-anchor-id="blind-signatures">Blind Signatures</h2>
+<p><strong>Principle:</strong> A sends information to B for signature. From the response, A can compute B’s signature on a different message that B has never seen.</p>
+<p><strong>Exploitation of the multiplicative property of RSA:</strong></p>
+<p><span class="math display">\[(m_1 m_2)^e \equiv m_1^e m_2^e \equiv c_1 c_2 \pmod{n}\]</span></p>
+<p><strong>Blinding functions:</strong></p>
+<p>Let <span class="math inline">\(k\)</span> be an integer with <span class="math inline">\(\text{gcd}(n,k) = 1\)</span>:</p>
+<ul>
+<li><strong>Blinding</strong>: <span class="math inline">\(f(m) = m \cdot k^e \bmod n\)</span></li>
+<li><strong>Unblinding</strong>: <span class="math inline">\(g(m) = k^{-1} \cdot m \bmod n\)</span></li>
+</ul>
+<p>Result: <span class="math inline">\(g(S_B(f(m))) = g(S_B(mk^e \bmod n)) = g(m^dk \bmod n) = m^d \bmod n = S_B(m)\)</span></p>
+<p><strong>Protocol:</strong></p>
+<ol type="1">
+<li>A → B: <span class="math inline">\(m' = f(m)\)</span> (blinded message)</li>
+<li>A ← B: <span class="math inline">\(s' = S_B(m')\)</span> (signature of blinded message)</li>
+<li>A computes <span class="math inline">\(g(s')\)</span> and obtains <span class="math inline">\(S_B(m)\)</span> (signature of original message)</li>
+</ol>
+<p><strong>Applications:</strong> Anonymous electronic cash, electronic voting systems.</p>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-158-contents" aria-controls="callout-158" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Original Text
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-158" class="callout-158-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Scheme invented by Chaum.</strong></p>
+<p><strong>Idea:</strong> A sends information to B for signature. B returns to A the signed information. From this signature, A can compute B’s signature on another message chosen beforehand by A. This allows A to have a signature of B on a message that B has never seen (hence the name blind signature…).</p>
+<p>In fact it is a vulnerability based on the <strong>multiplicative property of RSA</strong>: <span class="math inline">\((m_1m_2)^e \equiv m_1^e m_2^e \equiv c_1 c_2 \pmod{n}\)</span> which was exploited to make a new signature scheme.</p>
+<p><strong>Algorithm:</strong> Let <span class="math inline">\(S_B\)</span> be the RSA signature of B with <span class="math inline">\((n,e)\)</span> and <span class="math inline">\(d\)</span>, respectively the public and private keys of B. Let <span class="math inline">\(k\)</span> be a fixed integer with <span class="math inline">\(\text{gcd}(n,k) = 1\)</span>:</p>
+<p><span class="math inline">\(f : \mathbb{Z}_n \rightarrow \mathbb{Z}_n\)</span> with <span class="math inline">\(f(m) = m \cdot k^e \bmod n\)</span> (blinding function)</p>
+<p><span class="math inline">\(g : \mathbb{Z}_n \rightarrow \mathbb{Z}_n\)</span> with <span class="math inline">\(g(m) = k^{-1} \cdot m \bmod n\)</span> (unblinding function)</p>
+<p>which gives:</p>
+<p><span class="math display">\[g(S_B(f(m))) = g(S_B(mk^e \bmod n)) = g(m^dk \bmod n) = m^d \bmod n = S_B(m)\]</span></p>
+<p><strong>Protocol:</strong></p>
+<ul>
+<li>A → B: <span class="math inline">\(m' = f(m)\)</span></li>
+<li>A ← B: <span class="math inline">\(s' = S_B(m')\)</span></li>
+<li>A computes <span class="math inline">\(g(s')\)</span> and obtains the desired signature using (*).</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-159-contents" aria-controls="callout-159" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Quick Revision
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-159" class="callout-159-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Blind signature:</strong> Exploits RSA multiplicativity.</p>
+<p>Blinding <span class="math inline">\(f(m) = m \cdot k^e\)</span></p>
+<p>Unblinding <span class="math inline">\(g(m) = k^{-1} \cdot m\)</span>.</p>
+<p>B signs <span class="math inline">\(f(m)\)</span>, A obtains <span class="math inline">\(S_B(m)\)</span> without B seeing <span class="math inline">\(m\)</span>.</p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="rabin-signature" class="level2">
+<h2 class="anchored" data-anchor-id="rabin-signature">Rabin Signature</h2>
+<p><strong>Key generation:</strong></p>
+<ul>
+<li>Generate two large prime numbers <span class="math inline">\(p\)</span> and <span class="math inline">\(q\)</span></li>
+<li>Compute <span class="math inline">\(n = pq\)</span></li>
+<li><strong>Public key</strong>: <span class="math inline">\(n\)</span>; <strong>Private key</strong>: <span class="math inline">\((p, q)\)</span></li>
+</ul>
+<p><strong>Signature:</strong></p>
+<ol type="1">
+<li>Compute <span class="math inline">\(m_R = R(m)\)</span> (redundancy function)</li>
+<li>Compute <span class="math inline">\(s = \sqrt{m_R} \bmod n\)</span> (square root mod <span class="math inline">\(n\)</span>)</li>
+<li>Send <span class="math inline">\(s\)</span> (one of the 4 square roots)</li>
+</ol>
+<p><strong>Verification:</strong></p>
+<ol type="1">
+<li>Compute <span class="math inline">\(m'_R = s^2 \bmod n\)</span></li>
+<li>Verify <span class="math inline">\(m'_R \in M_R\)</span> (reject otherwise)</li>
+<li>Reconstruct <span class="math inline">\(m = R^{-1}(m'_R)\)</span></li>
+</ol>
+<p><strong>Characteristics:</strong></p>
+<ul>
+<li>Based on the SQROOTP problem (square roots mod composite)</li>
+<li><strong>Provably secure</strong>: equivalent to factorization</li>
+<li>Vulnerable to active chosen-ciphertext attacks</li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-160-contents" aria-controls="callout-160" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Original Text
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-160" class="callout-160-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Key generation:</strong></p>
+<ul>
+<li>Each entity (A) creates a key pair (public and private) as follows:</li>
+<li>A generates two random prime numbers <span class="math inline">\(p\)</span> and <span class="math inline">\(q\)</span> of large size (len<span class="math inline">\((pq) \geq 1024\)</span>).</li>
+<li>A computes <span class="math inline">\(n := pq\)</span>.</li>
+<li>The public key of A is <span class="math inline">\(n\)</span>, the private key of A is <span class="math inline">\((p,q)\)</span>.</li>
+</ul>
+<p><strong>Signature:</strong></p>
+<ul>
+<li>A computes the redundancy function of the message <span class="math inline">\(m\)</span>: <span class="math inline">\(m_R := R(m)\)</span>.</li>
+<li>A uses its private key to compute the signature: <span class="math inline">\(s := m_R^{1/2} \bmod n\)</span> using efficient algorithms to compute square roots mod <span class="math inline">\(p\)</span> and mod <span class="math inline">\(q\)</span>.</li>
+<li>A sends <span class="math inline">\(s\)</span> to B (<span class="math inline">\(s\)</span> is one of the 4 obtained square roots).</li>
+</ul>
+<p><strong>Verification:</strong></p>
+<ul>
+<li>Entity B obtains <span class="math inline">\(n\)</span>, the authentic public key of A.</li>
+<li>B computes <span class="math inline">\(m'_R = s^2 \bmod n\)</span>, verifies <span class="math inline">\(m'_R \in M_R\)</span> and rejects the signature if <span class="math inline">\(m'_R \notin M_R\)</span></li>
+<li>B retrieves the correctly signed message by A by computing: <span class="math inline">\(m = R^{-1}(m'_R)\)</span>.</li>
+</ul>
+<p><strong>Remarks:</strong></p>
+<p>The Rabin procedure is based on the <strong>impossibility of finding square roots modulo a composite of unknown factorization</strong> (SQROOTP problem).</p>
+<p>The main interest of this algorithm lies in the fact that it has been <strong>proven to be equivalent to factorization</strong> (SQROOTP ⇔ FACTP). This algorithm therefore belongs to the <strong>provably secure</strong> category for any passive attack.</p>
+<p><strong>Active attacks</strong> can, in some cases, compromise the security of the algorithm. More precisely, if we mount the following chosen ciphertext attack (we ask A to decrypt a chosen ciphertext):</p>
+<ul>
+<li>The attacker M generates an <span class="math inline">\(m\)</span> and sends to A the ciphertext <span class="math inline">\(c = m^2 \bmod n\)</span>.</li>
+<li>A responds with a root <span class="math inline">\(m_x\)</span> among the 4 possible <span class="math inline">\(m_1, m_2, m_3, m_4\)</span>.</li>
+<li>If <span class="math inline">\(m \not\equiv m_x \pmod{n}\)</span> (probability 0.5), M repeats with a new <span class="math inline">\(m\)</span>.</li>
+<li>Otherwise, A computes <span class="math inline">\(\text{gcd}(m - m_x, n)\)</span> and thus obtains one of the two factors of <span class="math inline">\(n\)</span>…</li>
+</ul>
+<p>This attack could be avoided if the procedure required sufficient redundancy in the plaintexts allowing A to identify without ambiguity which of the possible solutions is the original plaintext. In this case, A would always respond with <span class="math inline">\(m\)</span> and discard the other solutions that do not have the predefined level of redundancy.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-161-contents" aria-controls="callout-161" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Quick Revision
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-161" class="callout-161-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Rabin:</strong> <span class="math inline">\(s = \sqrt{m_R} \bmod n\)</span>.</p>
+<p>Verify: <span class="math inline">\(m'_R = s^2 \bmod n\)</span>.</p>
+<p><strong>Provably secure</strong> (equivalent to factorization).</p>
+<p>Vulnerable to active chosen-ciphertext attacks.</p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="elgamal-signature" class="level2">
+<h2 class="anchored" data-anchor-id="elgamal-signature">ElGamal Signature</h2>
+<p><strong>Key generation:</strong></p>
+<ul>
+<li>Generate prime <span class="math inline">\(p\)</span> and generator <span class="math inline">\(\alpha \in \mathbb{Z}_p^*\)</span></li>
+<li>Generate random secret <span class="math inline">\(a\)</span>, compute <span class="math inline">\(y = \alpha^a \bmod p\)</span></li>
+<li><strong>Public key</strong>: <span class="math inline">\((p, \alpha, y)\)</span>; <strong>Private key</strong>: <span class="math inline">\(a\)</span></li>
+</ul>
+<p><strong>Signature:</strong></p>
+<ol type="1">
+<li>Compute <span class="math inline">\(m_h = H(m)\)</span></li>
+<li>Generate random <span class="math inline">\(k\)</span> with <span class="math inline">\(\text{gcd}(k, p-1) = 1\)</span></li>
+<li>Compute <span class="math inline">\(r = \alpha^k \bmod p\)</span></li>
+<li>Compute <span class="math inline">\(s = k^{-1}(m_h - ar) \bmod (p-1)\)</span></li>
+<li>Signature: <span class="math inline">\((r, s)\)</span></li>
+</ol>
+<p><strong>Verification:</strong></p>
+<ol type="1">
+<li>Verify <span class="math inline">\(1 \leq r \leq p-2\)</span> (reject otherwise)</li>
+<li>Compute <span class="math inline">\(v_1 = y^r r^s \bmod p\)</span></li>
+<li>Compute <span class="math inline">\(v_2 = \alpha^{H(m)} \bmod p\)</span></li>
+<li>Accept if <span class="math inline">\(v_1 = v_2\)</span></li>
+</ol>
+<p><strong>Proof:</strong> If <span class="math inline">\(s \equiv k^{-1}(m_h - ar) \pmod{p-1}\)</span>, then <span class="math inline">\(m_h \equiv ar + ks \pmod{p-1}\)</span></p>
+<p>So <span class="math inline">\(v_2 = \alpha^{m_h} \equiv \alpha^{ar+ks} \equiv (\alpha^a)^r (\alpha^k)^s \equiv y^r r^s = v_1 \pmod{p}\)</span></p>
+<p><strong>Characteristics:</strong></p>
+<ul>
+<li>Works only with appendix (hash)</li>
+<li>Base of DSA (Digital Signature Algorithm)</li>
+<li><span class="math inline">\(k\)</span> must be unique for each signature</li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-162-contents" aria-controls="callout-162" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Original Text
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-162" class="callout-162-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Key generation:</strong></p>
+<ul>
+<li>Each entity (A) creates a key pair (public and private) as follows:</li>
+<li>A generates a prime number <span class="math inline">\(p\)</span> (len<span class="math inline">\((p) \geq 1024\)</span> bits) and a generator <span class="math inline">\(\alpha\)</span> of <span class="math inline">\(\mathbb{Z}_p^*\)</span>.</li>
+<li>A generates a random number <span class="math inline">\(a\)</span>, such that <span class="math inline">\(1 \leq a \leq p-2\)</span> and computes <span class="math inline">\(y := \alpha^a \bmod p\)</span>.</li>
+<li>The public key of A is <span class="math inline">\((p, \alpha, y)\)</span>, the private key of A is <span class="math inline">\(a\)</span>.</li>
+</ul>
+<p><strong>Signature:</strong></p>
+<ul>
+<li>A uses a hash function <span class="math inline">\(H\)</span> and computes <span class="math inline">\(m_h := H(m)\)</span>.</li>
+<li>A generates a random number <span class="math inline">\(k\)</span> (<span class="math inline">\(1 \leq k \leq p-2\)</span> and <span class="math inline">\(\text{gcd}(k,p-1) = 1\)</span>) and computes <span class="math inline">\(k^{-1} \bmod (p-1)\)</span></li>
+<li>A computes <span class="math inline">\(r := \alpha^k \bmod p\)</span> and then <span class="math inline">\(s := k^{-1}(m_h - ar) \bmod (p-1)\)</span></li>
+<li>The signature of A on the message <span class="math inline">\(m\)</span> is the pair <span class="math inline">\((r,s)\)</span>.</li>
+</ul>
+<p><strong>Verification:</strong></p>
+<ul>
+<li>Entity B obtains <span class="math inline">\((p, \alpha, \alpha^a \bmod p)\)</span>, the authentic public key of A.</li>
+<li>B verifies that <span class="math inline">\(1 \leq r \leq p-2\)</span>, otherwise rejects the signature.</li>
+<li>B computes <span class="math inline">\(v_1 := y^r r^s \bmod p\)</span>.</li>
+<li>B computes <span class="math inline">\(H(m)\)</span> and <span class="math inline">\(v_2 := \alpha^{H(m)} \bmod p\)</span></li>
+<li>B accepts the signature iff <span class="math inline">\(v_1 = v_2\)</span>.</li>
+</ul>
+<p><strong>Remarks:</strong></p>
+<p><strong>Proof that the scheme works:</strong> If <span class="math inline">\(s \equiv k^{-1}(m_h - ar) \pmod{p-1}\)</span>, we have: <span class="math display">\[m_h \equiv (ar + ks) \pmod{p-1}\]</span> and <span class="math display">\[v_2 = \alpha^{H(m)} \bmod p\]</span></p>
+<p>if, as we wish to show <span class="math inline">\(m_h = H(m)\)</span>, by reducing exponents mod <span class="math inline">\((p-1)\)</span>, we can rewrite <span class="math inline">\(v_2\)</span>: <span class="math display">\[v_2 \equiv \alpha^{ar+ks} \pmod{p}\]</span></p>
+<p>On the other hand: <span class="math display">\[v_1 = y^r r^s \equiv \alpha^{ar} \alpha^{ks} \equiv \alpha^{ar+ks} \pmod{p}\]</span> Q.E.D.</p>
+<p>By construction, the ElGamal scheme works <strong>only with appendix</strong> (result of applying a hash function). The Nyberg-Rueppel scheme introduces a variation allowing message recovery.</p>
+<p>The <strong>Digital Signature Algorithm (DSA)</strong>, approved by the US National Institute of Standards and Technology has become the most commonly used signature standard. It is built on the basis of a direct derivative of the ElGamal scheme with the SHA-1 hash function.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-163-contents" aria-controls="callout-163" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Quick Revision
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-163" class="callout-163-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>ElGamal:</strong> <span class="math inline">\((r,s)\)</span> with <span class="math inline">\(r = \alpha^k \bmod p\)</span>, <span class="math inline">\(s = k^{-1}(m_h - ar) \bmod (p-1)\)</span>.</p>
+<p>Verify: <span class="math inline">\(y^r r^s \stackrel{?}{=} \alpha^{H(m)} \bmod p\)</span>.</p>
+<p>Base of DSA.</p>
+<p><span class="math inline">\(k\)</span> unique crucial.</p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="signatures-and-cryptocurrencies" class="level2">
+<h2 class="anchored" data-anchor-id="signatures-and-cryptocurrencies">Signatures and Cryptocurrencies</h2>
+<p>Cryptocurrencies massively use digital signatures to authenticate transactions.</p>
+<p><strong>Bitcoin and Ethereum:</strong></p>
+<ul>
+<li>Use <strong>ECDSA</strong> (Elliptic Curve Digital Signature Algorithm)</li>
+<li>Derivative of ElGamal on elliptic curves</li>
+<li>Security based on ECDLP</li>
+</ul>
+<p><strong>Transaction process:</strong></p>
+<p>Each spending/transmission requires:</p>
+<ul>
+<li>Signature with the <strong>current holder’s private key</strong></li>
+<li>The holder was the recipient of the previous transaction</li>
+<li>Each transaction forms an authentication chain</li>
+</ul>
+<p><strong>ECDSA advantages:</strong></p>
+<ul>
+<li>Shorter keys for equivalent security</li>
+<li>More efficient computations</li>
+<li>Suitable for blockchain constraints</li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-164-contents" aria-controls="callout-164" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Original Text
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-164" class="callout-164-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Most cryptocurrencies are based on asymmetric cryptography. Bitcoin e.g.&nbsp;uses digital signatures to authenticate its transactions.</p>
+<p>The spending or transmission of bitcoins requires the signature with the private key of the holder (who was in turn the recipient of the previous transaction).</p>
+<p>Bitcoin and Ethereum use the <strong>ECDSA (Elliptic Curve Digital Signature Algorithm)</strong> algorithm derived from the ElGamal signature algorithm on elliptic curves whose security relies on ECDLP.</p>
+<p>[Image: Diagram showing the Bitcoin transaction chain with signatures]</p>
+<p>Source Image: Bitcoin: A Peer-to-Peer Electronic Cash System. Satoshi Nakamoto</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-165-contents" aria-controls="callout-165" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Quick Revision
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-165" class="callout-165-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Cryptocurrencies:</strong> Bitcoin/Ethereum use <strong>ECDSA</strong> (ElGamal on elliptic curves).</p>
+<p>Each transaction signed with holder’s private key.</p>
+<p>Security based on ECDLP.</p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="summary-table-of-schemes" class="level2">
+<h2 class="anchored" data-anchor-id="summary-table-of-schemes">Summary Table of Schemes</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Class</th>
+<th>Scheme</th>
+<th>Message Recovery</th>
+<th>Base Problem</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Classical Signatures</strong></td>
+<td>RSA</td>
+<td>Yes</td>
+<td>RSAP</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>Rabin</td>
+<td>Yes</td>
+<td>SQROOTP</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>ElGamal</td>
+<td>No</td>
+<td>DLP</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>DSS</td>
+<td>No</td>
+<td>DLP</td>
+</tr>
+<tr class="odd">
+<td><strong>One-time Signatures</strong></td>
+<td>Lamport</td>
+<td>No</td>
+<td>depends on OWF</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>Bos-Chaum</td>
+<td>No</td>
+<td>depends on OWF</td>
+</tr>
+<tr class="odd">
+<td><strong>Undeniable Signatures</strong></td>
+<td>Chaum-van Antwerpen</td>
+<td>No</td>
+<td>DLP</td>
+</tr>
+<tr class="even">
+<td><strong>Fail-Stop Signatures</strong></td>
+<td>van Heyst-Pedersen</td>
+<td>No</td>
+<td>DLP</td>
+</tr>
+<tr class="odd">
+<td><strong>Blind Signatures</strong></td>
+<td>Chaum</td>
+<td>Yes</td>
+<td>RSAP</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-166-contents" aria-controls="callout-166" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Original Text
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-166" class="callout-166-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>[Complete table with all above information]</p>
+<p>The operation of One-time, Undeniable and Fail-Stop signature schemes can be consulted in [Men97].</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-167-contents" aria-controls="callout-167" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Quick Revision
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-167" class="callout-167-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Classical signatures:</strong></p>
+<ul>
+<li>RSA/Rabin (recovery)</li>
+<li>ElGamal/DSS (appendix)</li>
+</ul>
+<p><strong>Specialized:</strong></p>
+<ul>
+<li>One-time</li>
+<li>Undeniable</li>
+<li>Fail-stop</li>
+<li>Blind</li>
+</ul>
+<p>Base problems: RSAP, SQROOTP, DLP, depends on OWF.</p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="types-of-attacks" class="level2">
+<h2 class="anchored" data-anchor-id="types-of-attacks">Types of Attacks</h2>
+<p><strong>Criteria for “breaking” a scheme:</strong></p>
+<ul>
+<li><strong>Total Break</strong>: Compute the private key or efficient generation algorithm</li>
+<li><strong>Selective forgery</strong>: Generate signature for fixed message/class</li>
+<li><strong>Existential forgery</strong>: Forge at least one signature (without message control)</li>
+</ul>
+<p><strong>Basic attacks:</strong></p>
+<ul>
+<li><strong>Key-only</strong>: Only the public key is known</li>
+<li><strong>Known-messages</strong>: Access to signatures of known messages</li>
+<li><strong>Chosen-messages</strong>: Attacker chooses messages to be signed</li>
+<li><strong>Adaptive chosen-messages</strong>: Choice depends on previous responses</li>
+</ul>
+<p>These attacks are equivalent to attacks on encryption systems (known/chosen-plaintext/ciphertext) but applied to messages.</p>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-168-contents" aria-controls="callout-168" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Original Text
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-168" class="callout-168-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Criteria for “breaking” a digital signature scheme:</strong></p>
+<ul>
+<li><strong>Total Break</strong>: Compute the signer’s private key or an efficient (polynomial) algorithm to generate signatures.</li>
+<li><strong>Selective forgery</strong>: The adversary is able to generate a valid signature for a fixed message (or class of messages).</li>
+<li><strong>Existential forgery</strong>: The adversary is able to forge a signature for (at least) one message (which they do not control).</li>
+</ul>
+<p><strong>Basic attacks:</strong></p>
+<ul>
+<li><strong>Key-only attacks</strong>: The adversary only has knowledge of the signer’s public key.</li>
+<li><strong>Message-based attacks</strong>: The adversary has access to signatures corresponding to:
+<ul>
+<li>known-messages</li>
+<li>chosen-messages</li>
+<li>adaptive chosen-messages</li>
+</ul></li>
+</ul>
+<p>Equivalent to x-ciphertext attacks but with messages!</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-169-contents" aria-controls="callout-169" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Quick Revision
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-169" class="callout-169-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Breaking signature:</strong></p>
+<ul>
+<li>Total break (private key)</li>
+<li>selective forgery (fixed message)</li>
+<li>existential (one message)</li>
+</ul>
+<p><strong>Attacks:</strong></p>
+<ul>
+<li>key-only</li>
+<li>known/chosen/adaptive-chosen-messages.</li>
+</ul>
 </div>
 </div>
 </div>
