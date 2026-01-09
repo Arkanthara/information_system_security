@@ -246,6 +246,48 @@ window.Quarto = {
   <li><a href="#block-cipher-cryptanalysis-techniques" id="toc-block-cipher-cryptanalysis-techniques" class="nav-link" data-scroll-target="#block-cipher-cryptanalysis-techniques">8. Block Cipher Cryptanalysis Techniques</a></li>
   </ul></li>
   </ul></li>
+  <li><a href="#asymmetric-cryptography-public-key-cryptography" id="toc-asymmetric-cryptography-public-key-cryptography" class="nav-link" data-scroll-target="#asymmetric-cryptography-public-key-cryptography">Asymmetric Cryptography (Public Key Cryptography)</a>
+  <ul class="collapse">
+  <li><a href="#mathematical-foundations" id="toc-mathematical-foundations" class="nav-link" data-scroll-target="#mathematical-foundations">Mathematical Foundations</a>
+  <ul class="collapse">
+  <li><a href="#fundamental-theorem-of-arithmetic-and-eulers-totient-function" id="toc-fundamental-theorem-of-arithmetic-and-eulers-totient-function" class="nav-link" data-scroll-target="#fundamental-theorem-of-arithmetic-and-eulers-totient-function">Fundamental Theorem of Arithmetic and Euler’s Totient Function</a></li>
+  <li><a href="#eulers-theorem-and-fermats-little-theorem" id="toc-eulers-theorem-and-fermats-little-theorem" class="nav-link" data-scroll-target="#eulers-theorem-and-fermats-little-theorem">Euler’s Theorem and Fermat’s Little Theorem</a></li>
+  <li><a href="#multiplicative-groups-and-generators" id="toc-multiplicative-groups-and-generators" class="nav-link" data-scroll-target="#multiplicative-groups-and-generators">Multiplicative Groups and Generators</a></li>
+  <li><a href="#fast-exponentiation" id="toc-fast-exponentiation" class="nav-link" data-scroll-target="#fast-exponentiation">Fast Exponentiation</a></li>
+  <li><a href="#chinese-remainder-theorem-crt" id="toc-chinese-remainder-theorem-crt" class="nav-link" data-scroll-target="#chinese-remainder-theorem-crt">Chinese Remainder Theorem (CRT)</a></li>
+  </ul></li>
+  <li><a href="#basic-problems-and-complexity" id="toc-basic-problems-and-complexity" class="nav-link" data-scroll-target="#basic-problems-and-complexity">Basic Problems and Complexity</a>
+  <ul class="collapse">
+  <li><a href="#classification-of-hard-problems" id="toc-classification-of-hard-problems" class="nav-link" data-scroll-target="#classification-of-hard-problems">Classification of Hard Problems</a></li>
+  <li><a href="#factorization-techniques" id="toc-factorization-techniques" class="nav-link" data-scroll-target="#factorization-techniques">Factorization Techniques</a></li>
+  </ul></li>
+  <li><a href="#the-rsa-algorithm" id="toc-the-rsa-algorithm" class="nav-link" data-scroll-target="#the-rsa-algorithm">The RSA Algorithm</a>
+  <ul class="collapse">
+  <li><a href="#rsa-operation-encryptiondecryption" id="toc-rsa-operation-encryptiondecryption" class="nav-link" data-scroll-target="#rsa-operation-encryptiondecryption">RSA Operation (Encryption/Decryption)</a></li>
+  <li><a href="#rsa-security" id="toc-rsa-security" class="nav-link" data-scroll-target="#rsa-security">RSA Security</a></li>
+  <li><a href="#attacks-on-rsa" id="toc-attacks-on-rsa" class="nav-link" data-scroll-target="#attacks-on-rsa">Attacks on RSA</a></li>
+  </ul></li>
+  <li><a href="#the-elgamal-algorithm" id="toc-the-elgamal-algorithm" class="nav-link" data-scroll-target="#the-elgamal-algorithm">The ElGamal Algorithm</a>
+  <ul class="collapse">
+  <li><a href="#essential-remarks" id="toc-essential-remarks" class="nav-link" data-scroll-target="#essential-remarks">Essential Remarks</a></li>
+  </ul></li>
+  <li><a href="#rabin-algorithm" id="toc-rabin-algorithm" class="nav-link" data-scroll-target="#rabin-algorithm">Rabin Algorithm</a>
+  <ul class="collapse">
+  <li><a href="#essential-remarks-1" id="toc-essential-remarks-1" class="nav-link" data-scroll-target="#essential-remarks-1">Essential Remarks</a></li>
+  </ul></li>
+  <li><a href="#comparison-rsa---elgamal---rabin" id="toc-comparison-rsa---elgamal---rabin" class="nav-link" data-scroll-target="#comparison-rsa---elgamal---rabin">Comparison RSA - ElGamal - Rabin</a></li>
+  <li><a href="#elliptic-curves-basic-idea" id="toc-elliptic-curves-basic-idea" class="nav-link" data-scroll-target="#elliptic-curves-basic-idea">Elliptic Curves (Basic Idea)</a>
+  <ul class="collapse">
+  <li><a href="#fundamental-concept" id="toc-fundamental-concept" class="nav-link" data-scroll-target="#fundamental-concept">Fundamental Concept</a></li>
+  <li><a href="#addition-on-elliptic-curves" id="toc-addition-on-elliptic-curves" class="nav-link" data-scroll-target="#addition-on-elliptic-curves">Addition on Elliptic Curves</a></li>
+  <li><a href="#ecdlp-and-cryptographic-advantages" id="toc-ecdlp-and-cryptographic-advantages" class="nav-link" data-scroll-target="#ecdlp-and-cryptographic-advantages">ECDLP and Cryptographic Advantages</a></li>
+  <li><a href="#key-size-comparison-table" id="toc-key-size-comparison-table" class="nav-link" data-scroll-target="#key-size-comparison-table">Key Size Comparison Table</a></li>
+  </ul></li>
+  <li><a href="#elgamal-on-elliptic-curves" id="toc-elgamal-on-elliptic-curves" class="nav-link" data-scroll-target="#elgamal-on-elliptic-curves">ElGamal on Elliptic Curves</a>
+  <ul class="collapse">
+  <li><a href="#direct-adaptation" id="toc-direct-adaptation" class="nav-link" data-scroll-target="#direct-adaptation">Direct Adaptation</a></li>
+  </ul></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -4653,9 +4695,1427 @@ window.Quarto = {
 </div>
 </div>
 </div>
-
-
 </section>
+</section>
+</section>
+</section>
+<section id="asymmetric-cryptography-public-key-cryptography" class="level1">
+<h1>Asymmetric Cryptography (Public Key Cryptography)</h1>
+<section id="mathematical-foundations" class="level2">
+<h2 class="anchored" data-anchor-id="mathematical-foundations">Mathematical Foundations</h2>
+<section id="fundamental-theorem-of-arithmetic-and-eulers-totient-function" class="level3">
+<h3 class="anchored" data-anchor-id="fundamental-theorem-of-arithmetic-and-eulers-totient-function">Fundamental Theorem of Arithmetic and Euler’s Totient Function</h3>
+<p>Asymmetric cryptography relies on solid mathematical foundations from number theory. Two concepts are essential:</p>
+<p><strong>Fundamental Theorem of Arithmetic</strong>: Every positive integer greater than 1 can be written uniquely (up to order) as a product of prime powers:</p>
+<p><span class="math display">\[n = p_1^{e_1} \cdot p_2^{e_2} \cdot p_3^{e_3} \cdots p_m^{e_m}\]</span></p>
+<p><strong>Euler’s Totient Function <span class="math inline">\(\phi(n)\)</span></strong>: Number of positive integers smaller than <span class="math inline">\(n\)</span> that are coprime with <span class="math inline">\(n\)</span>.</p>
+<p>To compute <span class="math inline">\(\phi(n)\)</span>:</p>
+<p><span class="math display">\[\phi(n) = \prod_{i=1}^{m} p_i^{e_i} \cdot \left(1 - \frac{1}{p_i}\right)\]</span></p>
+<p><strong>Important special case</strong>: If <span class="math inline">\(n = p \cdot q\)</span> with <span class="math inline">\(p\)</span> and <span class="math inline">\(q\)</span> prime, then:</p>
+<p><span class="math display">\[\phi(n) = (p-1)(q-1)\]</span></p>
+<div class="callout callout-style-default callout-note callout-titled" title="Original Text">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-85-contents" aria-controls="callout-85" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Original Text
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-85" class="callout-85-contents callout-collapse collapse">
+<section id="mathematical-foundations-1" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="mathematical-foundations-1">Mathematical Foundations</h3>
+<p><strong>Fundamental Theorem of Arithmetic</strong>: Every positive integer <span class="math inline">\(n\)</span> can be written uniquely (up to order) as a product of powers of distinct prime numbers <span class="math inline">\(p_i\)</span>:</p>
+<p><span class="math display">\[n = p_1^{e_1} \cdot p_2^{e_2} \cdot p_3^{e_3} \cdots p_m^{e_m}\]</span></p>
+<p><strong>Euler’s Totient Function</strong>: Let <span class="math inline">\(n \in \mathbb{Z}^+\)</span>, the <strong>Euler’s totient function</strong> <span class="math inline">\(\phi(n)\)</span> is equal to the number of positive integers smaller than <span class="math inline">\(n\)</span> that are <strong>relatively prime</strong> to <span class="math inline">\(n\)</span>.</p>
+<p><strong>Calculation of Euler’s totient function</strong>: According to the fundamental theorem of arithmetic, every integer <span class="math inline">\(n &gt; 1\)</span> can be written as:</p>
+<p><span class="math display">\[n = \prod_{i=1}^{m} p_i^{e_i}\]</span></p>
+<p>then <span class="math inline">\(\phi(n)\)</span> is calculated as:</p>
+<p><span class="math display">\[\phi(n) = \prod_{i=1}^{m} \left(p_i^{e_i} - p_i^{e_i-1}\right)\]</span></p>
+<p>In particular, if <span class="math inline">\(n = p \cdot q\)</span> with <span class="math inline">\(p\)</span> and <span class="math inline">\(q\)</span> prime, then:</p>
+<p><span class="math display">\[\phi(n) = (p-1)(q-1)\]</span></p>
+</section>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Quick Revision">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-86-contents" aria-controls="callout-86" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Quick Revision
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-86" class="callout-86-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Unique decomposition</strong>: every integer = product of prime numbers</li>
+<li><strong><span class="math inline">\(\phi(n)\)</span></strong>: counts integers <span class="math inline">\(&lt; n\)</span> coprime with <span class="math inline">\(n\)</span></li>
+<li><strong>Key for RSA</strong>: if <span class="math inline">\(n = pq\)</span> (primes) then <span class="math inline">\(\phi(n) = (p-1)(q-1)\)</span></li>
+</ul>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="eulers-theorem-and-fermats-little-theorem" class="level3">
+<h3 class="anchored" data-anchor-id="eulers-theorem-and-fermats-little-theorem">Euler’s Theorem and Fermat’s Little Theorem</h3>
+<p>These theorems are at the heart of RSA and other asymmetric algorithms.</p>
+<p><strong>Euler’s Theorem</strong>: If <span class="math inline">\(n \in \mathbb{Z}^+\)</span> and <span class="math inline">\(a \in \mathbb{Z}\)</span> with <span class="math inline">\(\text{gcd}(a,n) = 1\)</span>, then:</p>
+<p><span class="math display">\[a^{\phi(n)} \equiv 1 \pmod{n}\]</span></p>
+<p><strong>Fermat’s Little Theorem</strong> (special case if <span class="math inline">\(n = p\)</span> prime): If <span class="math inline">\(a \in \mathbb{Z}\)</span> and <span class="math inline">\(p\)</span> prime does not divide <span class="math inline">\(a\)</span>:</p>
+<p><span class="math display">\[a^{p-1} \equiv 1 \pmod{p}\]</span></p>
+<p><strong>Important applications</strong>:</p>
+<ol type="1">
+<li><p><strong>Exponent reduction</strong>: If <span class="math inline">\(n\)</span> is a product of distinct primes and <span class="math inline">\(r \equiv s \pmod{\phi(n)}\)</span>, then: <span class="math display">\[a^r \equiv a^s \pmod{n}\]</span></p></li>
+<li><p><strong>Calculation of inverses</strong>: <span class="math inline">\(a^{\phi(n)-1}\)</span> is the inverse of <span class="math inline">\(a\)</span> modulo <span class="math inline">\(n\)</span>. In particular, if <span class="math inline">\(p\)</span> is prime, <span class="math inline">\(a^{p-2}\)</span> is the inverse of <span class="math inline">\(a\)</span> modulo <span class="math inline">\(p\)</span>.</p></li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled" title="Original Text">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-87-contents" aria-controls="callout-87" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Original Text
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-87" class="callout-87-contents callout-collapse collapse">
+<section id="mathematical-foundations-ii" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="mathematical-foundations-ii">Mathematical Foundations (II)</h3>
+<p><strong>Euler’s Theorem</strong>: Let <span class="math inline">\(n \in \mathbb{Z}^+\)</span> and <span class="math inline">\(a \in \mathbb{Z}\)</span> with <span class="math inline">\(\text{gcd}(a,n) = 1\)</span>, then we have:</p>
+<p><span class="math display">\[a^{\phi(n)} \equiv 1 \pmod{n}\]</span></p>
+<p><strong>Fermat’s Little Theorem</strong> (special case of Euler’s theorem if <span class="math inline">\(n\)</span> is prime): Let <span class="math inline">\(a \in \mathbb{Z}\)</span> and <span class="math inline">\(p\)</span> a prime number such that <span class="math inline">\(p\)</span> does not divide <span class="math inline">\(a\)</span>, then we have:</p>
+<p><span class="math display">\[a^{p-1} \equiv 1 \pmod{p}\]</span></p>
+<p>Note that since <span class="math inline">\(p\)</span> is prime, we have <span class="math inline">\(\phi(p) = p-1\)</span>.</p>
+<p><strong>Exponent reduction</strong> <span class="math inline">\(\bmod \phi(n)\)</span>: If <span class="math inline">\(n\)</span> is the product of distinct primes and <span class="math inline">\(r, s \in \mathbb{Z}\)</span> such that <span class="math inline">\(r \equiv s \pmod{\phi(n)}\)</span> then <span class="math inline">\(\forall a \in \mathbb{Z}\)</span>:</p>
+<p><span class="math display">\[a^r \equiv a^s \pmod{n}\]</span></p>
+<p><strong>Application of Euler’s Theorem to inverse calculation</strong>: From Euler’s theorem, we have that:</p>
+<p><span class="math display">\[a \cdot a^{\phi(n)-1} \equiv 1 \pmod{n}\]</span></p>
+<p>which means that <span class="math inline">\(a^{\phi(n)-1}\)</span> is the <strong>inverse of <span class="math inline">\(a\)</span> modulo <span class="math inline">\(n\)</span></strong>. In particular, <span class="math inline">\(a^{p-2}\)</span> is the inverse of <span class="math inline">\(a\)</span> modulo <span class="math inline">\(n\)</span> if <span class="math inline">\(p\)</span> is prime.</p>
+</section>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Quick Revision">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-88-contents" aria-controls="callout-88" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Quick Revision
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-88" class="callout-88-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Euler’s Theorem</strong>: <span class="math inline">\(a^{\phi(n)} \equiv 1 \pmod{n}\)</span></li>
+<li><strong>Fermat</strong>: special case if <span class="math inline">\(p\)</span> prime: <span class="math inline">\(a^{p-1} \equiv 1 \pmod{p}\)</span></li>
+<li><strong>Modular inverse</strong>: <span class="math inline">\(a^{-1} \equiv a^{\phi(n)-1} \pmod{n}\)</span></li>
+<li><strong>Base of RSA</strong>: enables encryption/decryption with exponents</li>
+</ul>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="multiplicative-groups-and-generators" class="level3">
+<h3 class="anchored" data-anchor-id="multiplicative-groups-and-generators">Multiplicative Groups and Generators</h3>
+<p><strong>Multiplicative group <span class="math inline">\(\mathbb{Z}_n^*\)</span></strong>: Set of elements of <span class="math inline">\(\mathbb{Z}_n\)</span> coprime with <span class="math inline">\(n\)</span>:</p>
+<p><span class="math display">\[\mathbb{Z}_n^* = \{a \in \mathbb{Z}_n \mid \text{gcd}(a,n) = 1\}\]</span></p>
+<p>If <span class="math inline">\(n\)</span> is prime: <span class="math inline">\(\mathbb{Z}_n^* = \{1, 2, \ldots, n-1\}\)</span></p>
+<p><strong>Order of an element</strong>: Smallest positive integer <span class="math inline">\(t\)</span> such that <span class="math inline">\(a^t \equiv 1 \pmod{n}\)</span></p>
+<p><strong>Generator</strong>: An element <span class="math inline">\(\alpha\)</span> is a generator of <span class="math inline">\(\mathbb{Z}_n^*\)</span> if its order is <span class="math inline">\(\phi(n)\)</span>. Then <span class="math inline">\(\mathbb{Z}_n^*\)</span> is said to be <strong>cyclic</strong>.</p>
+<p><strong>Properties of generators</strong>:</p>
+<ol type="1">
+<li><span class="math inline">\(\mathbb{Z}_n^*\)</span> has a generator iff <span class="math inline">\(n = 2, 4, p^k\)</span> or <span class="math inline">\(2p^k\)</span> (with <span class="math inline">\(p\)</span> prime, <span class="math inline">\(p \neq 2\)</span> and <span class="math inline">\(k \geq 1\)</span>)</li>
+<li>If <span class="math inline">\(p\)</span> is prime, <span class="math inline">\(\mathbb{Z}_p^*\)</span> always has a generator</li>
+<li>If <span class="math inline">\(\alpha\)</span> is a generator, all elements can be written as: <span class="math inline">\(\mathbb{Z}_n^* = \{\alpha^i \bmod n \mid 0 \leq i &lt; \phi(n)\}\)</span></li>
+<li>The number of generators is <span class="math inline">\(\phi(\phi(n))\)</span></li>
+</ol>
+<p><strong>Generator test</strong></p>
+<ul>
+<li><span class="math inline">\(\alpha\)</span> is a generator of <span class="math inline">\(\mathbb{Z}_n^*\)</span> iff for every prime <span class="math inline">\(p\)</span> dividing <span class="math inline">\(\phi(n)\)</span>, <span class="math inline">\(\alpha^{\phi(n)/p} \not\equiv 1 \pmod{n}\)</span></li>
+<li>if <span class="math inline">\(n = 2p+1\)</span> is a “safe prime” with <span class="math inline">\(p\)</span> prime: <span class="math inline">\(\alpha\)</span> is a generator iff <span class="math inline">\(\alpha^2 \not\equiv 1 \pmod{n}\)</span> and <span class="math inline">\(\alpha^p \not\equiv 1 \pmod{n}\)</span></li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled" title="Original Text">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-89-contents" aria-controls="callout-89" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Original Text
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-89" class="callout-89-contents callout-collapse collapse">
+<section id="mathematical-foundations-iii" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="mathematical-foundations-iii">Mathematical Foundations (III)</h3>
+<p><strong>Definition</strong>: The <strong>multiplicative group of <span class="math inline">\(\mathbb{Z}_n\)</span></strong>, denoted <span class="math inline">\(\mathbb{Z}_n^*\)</span> is:</p>
+<p><span class="math display">\[\mathbb{Z}_n^* = \{a \in \mathbb{Z}_n \mid \text{gcd}(a,n) = 1\}\]</span></p>
+<p>In particular, if <span class="math inline">\(n\)</span> is prime: <span class="math inline">\(\mathbb{Z}_n^* = \{a \mid 1 \leq a \leq n-1\}\)</span></p>
+<p>The <strong>number of elements or order</strong> of the multiplicative group <span class="math inline">\(\mathbb{Z}_n^*\)</span> is <span class="math inline">\(\phi(n)\)</span> (by definition of <span class="math inline">\(\phi\)</span>).</p>
+<p><strong>Definition</strong>: Let <span class="math inline">\(a \in \mathbb{Z}_n\)</span>, the <strong>order of <span class="math inline">\(a\)</span></strong> is the smallest positive integer <span class="math inline">\(t\)</span> for which:</p>
+<p><span class="math display">\[a^t \equiv 1 \pmod{n}\]</span></p>
+<p><strong>Definition</strong>: Let <span class="math inline">\(\alpha \in \mathbb{Z}_n^*\)</span>, if the order of <span class="math inline">\(\alpha\)</span> is <span class="math inline">\(\phi(n)\)</span>, then <span class="math inline">\(\alpha\)</span> is a <strong>generator of <span class="math inline">\(\mathbb{Z}_n^*\)</span></strong>. When a group <span class="math inline">\(\mathbb{Z}_n^*\)</span> has a generator, it is said to be <strong>cyclic</strong>.</p>
+<p><strong>Properties of generators</strong>:</p>
+<ul>
+<li><p><span class="math inline">\(\mathbb{Z}_n^*\)</span> has a generator iff <span class="math inline">\(n = 2, 4, p^k\)</span> or <span class="math inline">\(2p^k\)</span>, with <span class="math inline">\(p\)</span> prime, <span class="math inline">\(p \neq 2\)</span> and <span class="math inline">\(k \geq 1\)</span>. In particular, if <span class="math inline">\(p\)</span> is prime, <span class="math inline">\(\mathbb{Z}_p^*\)</span> has a generator.</p></li>
+<li><p>If <span class="math inline">\(\alpha\)</span> is a generator of <span class="math inline">\(\mathbb{Z}_n^*\)</span>, then all elements of <span class="math inline">\(\mathbb{Z}_n^*\)</span> can be written as: <span class="math display">\[\mathbb{Z}_n^* = \{\alpha^i \bmod n \mid 0 \leq i \leq \phi(n)-1\}\]</span></p></li>
+<li><p>The number of generators of <span class="math inline">\(\mathbb{Z}_n^*\)</span> is <span class="math inline">\(\phi(\phi(n))\)</span>.</p></li>
+<li><p><span class="math inline">\(\alpha\)</span> is a generator of <span class="math inline">\(\mathbb{Z}_n^*\)</span> iff for every prime <span class="math inline">\(p\)</span> dividing <span class="math inline">\(\phi(n)\)</span>, we have: <span class="math display">\[\alpha^{\phi(n)/p} \not\equiv 1 \pmod{n}\]</span></p></li>
+</ul>
+<p>In particular if <span class="math inline">\(n\)</span> is a prime of the form <span class="math inline">\(n = 2p+1\)</span> with <span class="math inline">\(p\)</span> prime (such <span class="math inline">\(n\)</span> is called a <strong>safe prime</strong>), <span class="math inline">\(\alpha\)</span> is a generator of <span class="math inline">\(\mathbb{Z}_n^*\)</span> iff <span class="math inline">\(\alpha^2 \not\equiv 1 \pmod{n}\)</span> and <span class="math inline">\(\alpha^p \not\equiv 1 \pmod{n}\)</span>.</p>
+</section>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Quick Revision">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-90-contents" aria-controls="callout-90" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Quick Revision
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-90" class="callout-90-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong><span class="math inline">\(\mathbb{Z}_n^*\)</span></strong>: elements coprime with <span class="math inline">\(n\)</span>, cardinality = <span class="math inline">\(\phi(n)\)</span></li>
+<li><strong>Generator</strong>: element of order <span class="math inline">\(\phi(n)\)</span> (generates the entire group)</li>
+<li><strong>Crucial for DH and ElGamal</strong>: security based on discrete logarithm in cyclic group</li>
+<li><strong>Safe prime</strong>: <span class="math inline">\(n = 2p+1\)</span> with <span class="math inline">\(p\)</span> and <span class="math inline">\(n\)</span> prime</li>
+</ul>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="fast-exponentiation" class="level3">
+<h3 class="anchored" data-anchor-id="fast-exponentiation">Fast Exponentiation</h3>
+<p>Efficient computation of <span class="math inline">\(a^k \bmod n\)</span> in polynomial time, essential for all asymmetric algorithms.</p>
+<p><strong>Principle</strong>: Use the binary representation of the exponent <span class="math inline">\(k\)</span>.</p>
+<p><strong>Example</strong>: Computation of <span class="math inline">\(2^{644} \bmod 645\)</span></p>
+<ol type="1">
+<li><p>Binary representation: <span class="math inline">\((644)_{10} = (1010000100)_2\)</span></p></li>
+<li><p>Compute successive powers of 2 modulo 645:</p>
+<ul>
+<li><span class="math inline">\(2^1 \bmod 645\)</span></li>
+<li><span class="math inline">\(2^2 \bmod 645\)</span></li>
+<li><span class="math inline">\(2^4 \bmod 645\)</span></li>
+<li><span class="math inline">\(2^8 \bmod 645\)</span></li>
+<li>…</li>
+<li><span class="math inline">\(2^{512} \bmod 645\)</span></li>
+</ul></li>
+<li><p>Combine according to bits set to 1: <span class="math inline">\(2^{644} = 2^{512} \cdot 2^{128} \cdot 2^4\)</span></p></li>
+</ol>
+<p><strong>Complexity</strong>: <span class="math inline">\(O(\log^3 n)\)</span> - very efficient!</p>
+<p><strong>Application</strong>: Computation of the inverse using Euler’s theorem in polynomial time.</p>
+<p>Alternative: <strong>Extended Euclidean algorithm</strong> to find <span class="math inline">\(x\)</span> such that <span class="math inline">\(ax \equiv 1 \pmod{n}\)</span> by solving <span class="math inline">\(ax - kn = 1 = \text{gcd}(a,n)\)</span>. Complexity also <span class="math inline">\(O(\log^3 n)\)</span>.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Original Text">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-91-contents" aria-controls="callout-91" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Original Text
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-91" class="callout-91-contents callout-collapse collapse">
+<section id="fast-exponentiation-1" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="fast-exponentiation-1">Fast Exponentiation</h3>
+<p><strong>Fast exponentiation</strong>: Using the binary representation of a number, we can compute powers very efficiently.</p>
+<p><strong>Example</strong>: computation of <span class="math inline">\(2^{644} \bmod 645\)</span></p>
+<p><span class="math inline">\((644)_{10} = (1010000100)_2\)</span></p>
+<p>Now, we compute the exponents corresponding to the powers of 2, namely:</p>
+<p><span class="math display">\[2^1 \bmod 645, \quad 2^2 \bmod 645, \quad 2^4 \bmod 645, \quad \ldots, \quad 2^{512} \bmod 645\]</span></p>
+<p>From the binary representation, we compute:</p>
+<p><span class="math display">\[2^{644} = 2^{512+128+4} = 2^{512} \cdot 2^{128} \cdot 2^4 = 160 \cdot 153 \cdot 6 \bmod 645\]</span></p>
+<p><strong>The complexity of this algorithm</strong> fast exponentiation is <span class="math inline">\(O(\log^3 n)\)</span>.</p>
+<p>By relying on <strong>Euler’s theorem</strong>, the computation of the <strong>inverse of a number</strong> in such a group is therefore performed in polynomial time.</p>
+<p><strong>The extended Euclidean algorithm</strong> can also be used to find an <span class="math inline">\(x\)</span> such that:</p>
+<p><span class="math display">\[ax \equiv 1 \pmod{n}\]</span></p>
+<p>since this congruence can be written as: <span class="math inline">\(ax - 1 = kn\)</span> and therefore:</p>
+<p><span class="math display">\[ax - kn = 1 = \text{gcd}(a,n)\]</span></p>
+<p>The complexity of this algorithm is also <span class="math inline">\(O(\log^3 n)\)</span>.</p>
+</section>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Quick Revision">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-92-contents" aria-controls="callout-92" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Quick Revision
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-92" class="callout-92-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Idea</strong>: binary representation of the exponent</li>
+<li><strong>Complexity</strong>: <span class="math inline">\(O(\log^3 n)\)</span> - polynomial!</li>
+<li><strong>Essential</strong>: makes RSA, ElGamal, DH practical</li>
+<li><strong>Alternative</strong>: extended Euclidean algorithm for inverses</li>
+</ul>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="chinese-remainder-theorem-crt" class="level3">
+<h3 class="anchored" data-anchor-id="chinese-remainder-theorem-crt">Chinese Remainder Theorem (CRT)</h3>
+<p>The CRT allows solving systems of simultaneous congruences, with important applications in cryptography.</p>
+<p><strong>Theorem</strong>: Let <span class="math inline">\(n_1, n_2, \ldots, n_t \in \mathbb{Z}^+\)</span> pairwise coprime (gcd<span class="math inline">\((n_i, n_j) = 1\)</span> if <span class="math inline">\(i \neq j\)</span>) and <span class="math inline">\(a_1, a_2, \ldots, a_t \in \mathbb{Z}\)</span>. Then the system:</p>
+<p><span class="math display">\[\begin{cases}
+x \equiv a_1 \pmod{n_1} \\
+x \equiv a_2 \pmod{n_2} \\
+\vdots \\
+x \equiv a_t \pmod{n_t}
+\end{cases}\]</span></p>
+<p>has a unique solution <span class="math inline">\(x \bmod N\)</span> with <span class="math inline">\(N := n_1 \cdot n_2 \cdots n_t\)</span>.</p>
+<p><strong>Gauss’s algorithm</strong> (1801) to compute <span class="math inline">\(x\)</span>:</p>
+<p><span class="math display">\[x = \sum_{i=1}^{t} a_i N_i M_i \bmod N\]</span></p>
+<p>with:</p>
+<ul>
+<li><span class="math inline">\(N_i = N/n_i\)</span></li>
+<li><span class="math inline">\(M_i = N_i^{-1} \bmod n_i\)</span> (modular inverse)</li>
+</ul>
+<p><strong>Complexity</strong>: <span class="math inline">\(O(\log^3 n)\)</span> - polynomial!</p>
+<p><strong>Cryptographic applications</strong>:</p>
+<ol type="1">
+<li>Acceleration of RSA computations (use <span class="math inline">\(p\)</span> and <span class="math inline">\(q\)</span> separately)</li>
+<li>Secret sharing (secret sharing schemes)</li>
+<li>Certain attacks on RSA (if small exponent and multiple messages)</li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled" title="Original Text">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-93-contents" aria-controls="callout-93" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Original Text
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-93" class="callout-93-contents callout-collapse collapse">
+<section id="chinese-remainder-theorem" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="chinese-remainder-theorem">Chinese Remainder Theorem</h3>
+<p>The <strong>Chinese Remainder Theorem</strong> (3rd century!) allows solving linear systems of simultaneous congruences. It solves problems raised in ancient Chinese puzzles. It was, for example, about finding a number that produces a remainder of 1 when divided by 3, of 2 when divided by 5 and of 3 when divided by 7… It was also used to calculate the exact moment of alignment of several celestial bodies having different orbits (and therefore periods).</p>
+<p><strong>Chinese Remainder Theorem</strong>: Let <span class="math inline">\(n_1, n_2, \ldots, n_t \in \mathbb{Z}^+\)</span> be pairwise coprime (i.e., gcd<span class="math inline">\((n_i, n_j) = 1\)</span>, <span class="math inline">\(\forall i \neq j\)</span>) and <span class="math inline">\(a_1, a_2, \ldots, a_t \in \mathbb{Z}\)</span>. Then, the system of congruences:</p>
+<p><span class="math display">\[\begin{cases}
+x \equiv a_1 \pmod{n_1} \\
+x \equiv a_2 \pmod{n_2} \\
+\vdots \\
+x \equiv a_t \pmod{n_t}
+\end{cases}\]</span></p>
+<p>has a unique solution <span class="math inline">\(x \bmod N := n_1 n_2 \cdots n_t\)</span></p>
+<p><strong>Gauss’s algorithm</strong> (1801) for the computation of <span class="math inline">\(x\)</span>:</p>
+<p><span class="math display">\[x = \sum_{i=1}^{t} a_i N_i M_i \bmod N\]</span></p>
+<p>with <span class="math inline">\(N_i = N/n_i\)</span> and <span class="math inline">\(M_i = N_i^{-1} \bmod n_i\)</span>.</p>
+<p>The <strong>complexity</strong> of this algorithm is <span class="math inline">\(O(\log^3 n)\)</span>.</p>
+<p>It is therefore possible in <strong>polynomial time</strong> to go from congruences mod <span class="math inline">\(n_i\)</span> to congruences mod <span class="math inline">\(N\)</span>!</p>
+</section>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Quick Revision">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-94-contents" aria-controls="callout-94" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Quick Revision
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-94" class="callout-94-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Solves</strong>: systems of congruences with pairwise coprime moduli</li>
+<li><strong>Unique solution</strong>: modulo product of moduli</li>
+<li><strong>Complexity</strong>: <span class="math inline">\(O(\log^3 n)\)</span> (polynomial)</li>
+<li><strong>Crypto usage</strong>: RSA optimization, attacks if small exponent</li>
+</ul>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="basic-problems-and-complexity" class="level2">
+<h2 class="anchored" data-anchor-id="basic-problems-and-complexity">Basic Problems and Complexity</h2>
+<section id="classification-of-hard-problems" class="level3">
+<h3 class="anchored" data-anchor-id="classification-of-hard-problems">Classification of Hard Problems</h3>
+<p>The security of asymmetric cryptography relies on mathematical problems reputed to be hard:</p>
+<p><strong>Generic problems</strong>:</p>
+<ol type="1">
+<li><strong>Factorization (FACTP)</strong>: Given <span class="math inline">\(n\)</span>, find its factorization into prime numbers
+<ul>
+<li>Base of <strong>RSA</strong> and <strong>Rabin</strong></li>
+</ul></li>
+<li><strong>Discrete Logarithms (DLP)</strong>: Given prime <span class="math inline">\(p\)</span>, a generator <span class="math inline">\(\alpha \in \mathbb{Z}_p^*\)</span> and <span class="math inline">\(\beta \in \mathbb{Z}_p^*\)</span>, find <span class="math inline">\(x\)</span> such that: <span class="math display">\[\alpha^x \equiv \beta \pmod{p}\]</span>
+<ul>
+<li>Base of <strong>ElGamal</strong> and <strong>Diffie-Hellman</strong></li>
+</ul></li>
+<li><strong>Square Root modulo composite (SQROOTP)</strong>: Given composite <span class="math inline">\(n\)</span> and a quadratic residue <span class="math inline">\(a\)</span>, find <span class="math inline">\(\sqrt{a} \bmod n\)</span>
+<ul>
+<li>Base of <strong>Rabin</strong></li>
+</ul></li>
+</ol>
+<p><strong>Specific problems</strong>:</p>
+<ol type="1">
+<li><p><strong>RSA Problem (RSAP)</strong>: Given <span class="math inline">\(n = pq\)</span>, <span class="math inline">\(e\)</span> with gcd<span class="math inline">\((e, \phi(n)) = 1\)</span> and <span class="math inline">\(c\)</span>, find <span class="math inline">\(m\)</span> such that <span class="math inline">\(m^e \equiv c \pmod{n}\)</span></p></li>
+<li><p><strong>Diffie-Hellman Problem (DHP)</strong>: Given prime <span class="math inline">\(p\)</span>, generator <span class="math inline">\(\alpha\)</span>, <span class="math inline">\(\alpha^a \bmod p\)</span> and <span class="math inline">\(\alpha^b \bmod p\)</span>, find <span class="math inline">\(\alpha^{ab} \bmod p\)</span></p></li>
+</ol>
+<p><strong>Proven equivalences</strong>:</p>
+<ul>
+<li><strong>DHP ⟺ DLP</strong> (equivalent under certain conditions)</li>
+<li><strong>RSAP ⟺ FACTP</strong> (proven equivalent for the generic case)</li>
+<li><strong>SQROOTP ⟺ FACTP</strong></li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled" title="Original Text">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-95-contents" aria-controls="callout-95" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Original Text
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-95" class="callout-95-contents callout-collapse collapse">
+<section id="basic-problems" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="basic-problems">Basic Problems</h3>
+<p><strong>Main generic problems</strong>:</p>
+<ul>
+<li><p><strong>Factorization (FACTP)</strong>: Given a positive integer <span class="math inline">\(n\)</span>, find its factorization into prime numbers.</p></li>
+<li><p><strong>Discrete Logarithms (DLP)</strong>: Given a prime number <span class="math inline">\(p\)</span>, a generator <span class="math inline">\(\alpha \in \mathbb{Z}_p^*\)</span> and an element <span class="math inline">\(\beta \in \mathbb{Z}_p^*\)</span>, find the integer <span class="math inline">\(x\)</span>, <span class="math inline">\(0 \leq x \leq p-2\)</span>, such that: <span class="math inline">\(\alpha^x \equiv \beta \pmod{p}\)</span>.</p></li>
+<li><p><strong>Square Root in <span class="math inline">\(\mathbb{Z}_n\)</span> if <span class="math inline">\(n\)</span> is composite (SQROOTP)</strong>: Given a composite integer <span class="math inline">\(n\)</span> and a quadratic residue <span class="math inline">\(a\)</span>, find the square root of <span class="math inline">\(a\)</span> mod <span class="math inline">\(n\)</span>.</p></li>
+</ul>
+<p><strong>Specific problems</strong> (proper to an encryption system):</p>
+<ul>
+<li><p><strong>RSA (RSAP)</strong>: Given a positive integer <span class="math inline">\(n = pq\)</span>, a positive integer <span class="math inline">\(e\)</span> with gcd<span class="math inline">\((e, (p-1)(q-1)) = 1\)</span> and an integer <span class="math inline">\(c\)</span>, find an integer <span class="math inline">\(m\)</span> with <span class="math inline">\(m^e \equiv c \pmod{n}\)</span>.</p></li>
+<li><p><strong>Diffie-Hellman (DHP)</strong>: Given a prime number <span class="math inline">\(p\)</span>, a generator <span class="math inline">\(\alpha \in \mathbb{Z}_p^*\)</span> and the elements <span class="math inline">\(\alpha^a \bmod p\)</span> and <span class="math inline">\(\alpha^b \bmod p\)</span>, find <span class="math inline">\(\alpha^{ab} \bmod p\)</span>.</p></li>
+</ul>
+<p><strong>Proven results</strong>:</p>
+<ul>
+<li><strong>DHP ⟺ DLP</strong> (Equivalent under certain conditions)</li>
+<li><strong>RSAP ⟺ FACTP</strong> (Proven equivalent for the generic problem)</li>
+<li><strong>SQROOTP ⟺ FACTP</strong></li>
+</ul>
+</section>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Quick Revision">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-96-contents" aria-controls="callout-96" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Quick Revision
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-96" class="callout-96-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>FACTP</strong>: factor <span class="math inline">\(n\)</span> → base of RSA/Rabin</li>
+<li><strong>DLP</strong>: find discrete logarithm → base ElGamal/DH</li>
+<li><strong>SQROOTP</strong>: square root mod composite → Rabin</li>
+<li><strong>Equivalences</strong>: breaking = solving the base problem</li>
+</ul>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="factorization-techniques" class="level3">
+<h3 class="anchored" data-anchor-id="factorization-techniques">Factorization Techniques</h3>
+<p>The security of RSA depends on the difficulty of factoring large numbers.</p>
+<p><strong>Exponential time methods</strong>: <span class="math inline">\(O(\exp(c \cdot \ln(n)))\)</span></p>
+<ul>
+<li>Trial Division (successive division)</li>
+<li>Sieve of Eratosthenes (2nd century BC)</li>
+<li>Fermat’s Method (~1650)</li>
+<li>Pollard’s <span class="math inline">\(\rho\)</span> Method (1975)</li>
+<li>Pollard’s <span class="math inline">\(p-1\)</span> Method (1974)</li>
+</ul>
+<p><strong>Sub-exponential time methods</strong>: <span class="math inline">\(O(\exp(c \cdot (\ln(n))^{1/3}))\)</span></p>
+<ul>
+<li>Continued Fractions (1975)</li>
+<li><strong>Quadratic Sieve (1981)</strong> - very effective in practice</li>
+<li><strong>Number Field Sieve - NFS (1990)</strong> - currently the fastest</li>
+<li>General Number Field Sieve - GNFS (2006)</li>
+</ul>
+<p><strong>Polynomial time methods</strong>:</p>
+<ul>
+<li><strong>Shor’s Algorithm</strong> (1994): <span class="math inline">\(O(\log^c n)\)</span> on <strong>quantum computer</strong></li>
+</ul>
+<p><strong>Current records (2020)</strong>:</p>
+<ul>
+<li>Largest number factored: <strong>RSA-829</strong> (250 digits, 829 bits)</li>
+<li>Computation time: 2700 core-years (Intel Xeon Gold 6130 CPUs)</li>
+<li>Method: General Number Field Sieve</li>
+</ul>
+<p><strong>Implications</strong>:</p>
+<ul>
+<li>RSA keys &lt; 1024 bits: <strong>vulnerable</strong></li>
+<li>RSA keys 1024 bits: <strong>limits</strong> (states with significant resources)</li>
+<li>Recommendation: <strong>2048 bits minimum</strong> (3072-4096 for long term)</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled" title="Original Text">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-97-contents" aria-controls="callout-97" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Original Text
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-97" class="callout-97-contents callout-collapse collapse">
+<section id="classical-factoring-techniques-and-new-developments" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="classical-factoring-techniques-and-new-developments">Classical Factoring Techniques and New Developments</h3>
+<p><strong>Exponential time</strong>: <span class="math inline">\(O(\exp(c \cdot \ln(n)))\)</span></p>
+<ul>
+<li>Trial Division</li>
+<li>Eratosthenes’ Sieve (II B.C.)</li>
+<li>Fermat’s Difference of Squares Method (~1650)</li>
+<li>Square Form Factorization (1971)</li>
+<li>Pollard’s p-1 method (1974)</li>
+<li>Pollard’s Rho Method (1975)</li>
+</ul>
+<p><strong>Sub-exponential time</strong>: <span class="math inline">\(O(\exp(c \cdot (\ln(n))^{1/3}))\)</span></p>
+<ul>
+<li>Continued Fractions (1975)</li>
+<li><strong>Quadratic Sieve (1981)</strong></li>
+<li><strong>Number Field Sieve - NFS (1990)</strong></li>
+<li><strong>General Number Field Sieve - GNFS (2006)</strong></li>
+</ul>
+<p><strong>Polynomial time</strong>:</p>
+<ul>
+<li><strong>Shor’s Algorithm in a Quantum Computer (1994)</strong>: <span class="math inline">\(O(\log^c n)\)</span></li>
+</ul>
+<p><strong>Recent developments</strong>:</p>
+<ul>
+<li>Bernstein’s specific NFS computer to factor a 1536-bit number would take the same time as a 512-bit computation on a conventional machine</li>
+<li><strong>Largest factorization to date (2020)</strong>: RSA-829 (250-digit number) using NFS</li>
+<li>Total computation time: <strong>2700 core-years</strong> (Intel Xeon Gold 6130 CPUs at 2.1GHz)</li>
+</ul>
+<p><strong>Factorization on quantum computer</strong>:</p>
+<ul>
+<li>Significant problems (errors, dispersion, etc.)</li>
+<li>2001: 7-qubit computer (IBM Almaden)</li>
+<li>Feasibility of a computer with millions of qubits… ?</li>
+</ul>
+</section>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Quick Revision">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-98-contents" aria-controls="callout-98" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Quick Revision
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-98" class="callout-98-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Sub-exponential</strong>: NFS currently the fastest</li>
+<li><strong>Record 2020</strong>: RSA-829 (829 bits) in 2700 core-years</li>
+<li><strong>Recommendation</strong>: keys ≥ 2048 bits for RSA</li>
+<li><strong>Future threat</strong>: quantum computers (Shor)</li>
+</ul>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="the-rsa-algorithm" class="level2">
+<h2 class="anchored" data-anchor-id="the-rsa-algorithm">The RSA Algorithm</h2>
+<section id="rsa-operation-encryptiondecryption" class="level3">
+<h3 class="anchored" data-anchor-id="rsa-operation-encryptiondecryption">RSA Operation (Encryption/Decryption)</h3>
+<p>RSA (Rivest-Shamir-Adleman, 1978) is the most used asymmetric algorithm.</p>
+<p><strong>Key generation</strong>:</p>
+<ol type="1">
+<li>Choose two <strong>large</strong> prime numbers <span class="math inline">\(p\)</span> and <span class="math inline">\(q\)</span> (≥ 1024 bits each)</li>
+<li>Compute <span class="math inline">\(n := p \cdot q\)</span> and <span class="math inline">\(\phi(n) = (p-1)(q-1)\)</span></li>
+<li>Choose encryption exponent <span class="math inline">\(e\)</span> with:
+<ul>
+<li><span class="math inline">\(1 &lt; e &lt; \phi(n)\)</span></li>
+<li>gcd<span class="math inline">\((e, \phi(n)) = 1\)</span></li>
+</ul></li>
+<li>Compute decryption exponent <span class="math inline">\(d\)</span> such that: <span class="math display">\[e \cdot d \equiv 1 \pmod{\phi(n)}\]</span> (using extended Euclidean algorithm or fast exponentiation)</li>
+</ol>
+<p><strong>Resulting keys</strong>:</p>
+<ul>
+<li><strong>Public</strong> key: <span class="math inline">\((n, e)\)</span></li>
+<li><strong>Private</strong> key: <span class="math inline">\(d\)</span> (keep <span class="math inline">\(p\)</span> and <span class="math inline">\(q\)</span> secret too!)</li>
+</ul>
+<p><strong>Encryption</strong> (by Bob, to Alice):</p>
+<ol type="1">
+<li>Obtain authentic public key <span class="math inline">\((n, e)\)</span> of Alice</li>
+<li>Transform plaintext into integers <span class="math inline">\(m_i \in [0, n-1]\)</span></li>
+<li>Compute ciphertexts: <span class="math inline">\(c_i := m_i^e \bmod n\)</span></li>
+<li>Send the <span class="math inline">\(c_i\)</span> to Alice</li>
+</ol>
+<p><strong>Decryption</strong> (by Alice):</p>
+<ul>
+<li>Use private key <span class="math inline">\(d\)</span> to compute: <span class="math display">\[m_i = c_i^d \bmod n\]</span></li>
+</ul>
+<p><strong>Proof of operation</strong>:</p>
+<p><span class="math display">\[c^d \equiv (m^e)^d \equiv m^{ed} \pmod{n}\]</span></p>
+<p>Since <span class="math inline">\(ed \equiv 1 \pmod{\phi(n)}\)</span>, there exists <span class="math inline">\(k\)</span> such that <span class="math inline">\(ed = 1 + k\phi(n)\)</span>, therefore:</p>
+<p><span class="math display">\[c^d \equiv m^{1+k\phi(n)} \equiv m \cdot (m^{\phi(n)})^k \equiv m \cdot 1^k \equiv m \pmod{n}\]</span></p>
+<p>(by Euler’s theorem)</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Original Text">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-99-contents" aria-controls="callout-99" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Original Text
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-99" class="callout-99-contents callout-collapse collapse">
+<section id="rsa-encryptiondecryption-procedure-and-proof" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="rsa-encryptiondecryption-procedure-and-proof">RSA Encryption/Decryption Procedure and Proof</h3>
+<p><strong>Key generation</strong>:</p>
+<ul>
+<li>Each entity (A) creates a key pair (public and private) as follows:
+<ul>
+<li>A chooses the size of the modulus <span class="math inline">\(n\)</span> (e.g., size<span class="math inline">\((n) = 1024\)</span> or size<span class="math inline">\((n) = 2048\)</span>).</li>
+<li>A generates two prime numbers <span class="math inline">\(p\)</span> and <span class="math inline">\(q\)</span> of large size <span class="math inline">\((n/2)\)</span>.</li>
+<li>A computes <span class="math inline">\(n := pq\)</span> and <span class="math inline">\(\phi(n) = (p-1)(q-1)\)</span>.</li>
+<li>A generates the encryption exponent <span class="math inline">\(e\)</span>, with <span class="math inline">\(1 &lt; e &lt; \phi(n)\)</span> such that gcd<span class="math inline">\((e, \phi(n)) = 1\)</span>.</li>
+<li>A computes the decryption exponent <span class="math inline">\(d\)</span>, such that: <span class="math inline">\(ed \equiv 1 \pmod{\phi(n)}\)</span> using the extended Euclidean algorithm or fast exponentiation.</li>
+</ul></li>
+<li>The pair <span class="math inline">\((n,e)\)</span> is A’s <strong>public</strong> key; <span class="math inline">\(d\)</span> is A’s <strong>private</strong> key.</li>
+</ul>
+<p><strong>Encryption</strong>:</p>
+<ul>
+<li>Entity B obtains <span class="math inline">\((n,e)\)</span>, the <strong>authentic</strong> public key of A.</li>
+<li>B transforms its plaintext into a series of integers <span class="math inline">\(m_i\)</span>, such that <span class="math inline">\(m_i \in [0, n-1]\)</span> <span class="math inline">\(\forall i\)</span>.</li>
+<li>B computes the ciphertext <span class="math inline">\(c_i := m_i^e \bmod n\)</span>, <span class="math inline">\(\forall i\)</span> using fast exponentiation.</li>
+<li>B sends to A all the ciphertexts <span class="math inline">\(c_i\)</span>.</li>
+</ul>
+<p><strong>Decryption</strong>:</p>
+<ul>
+<li>A uses its private key to compute the plaintexts <span class="math inline">\(m_i = c_i^d \bmod n\)</span>.</li>
+</ul>
+<p><strong>Proof</strong>: Let <span class="math inline">\(m\)</span> be the plaintext and <span class="math inline">\(c\)</span> the ciphertext with <span class="math inline">\(c := m^e \bmod n\)</span>, we need to prove: <span class="math inline">\(m \stackrel{!}{=} c^d \bmod n\)</span></p>
+<p>Substituting <span class="math inline">\(c\)</span> by its value we obtain: <span class="math display">\[c^d \bmod n = m^{ed} \bmod n \quad (*)\]</span></p>
+<p>but, we know that: <span class="math display">\[ed \equiv 1 \pmod{\phi(n)}\]</span></p>
+<p>and therefore by definition of congruences, there exists an integer <span class="math inline">\(k\)</span> with: <span class="math display">\[ed - 1 = k\phi(n)\]</span></p>
+<p>substituting in (*): <span class="math display">\[c^d \equiv m^{k\phi(n)+1} \equiv m^{k\phi(n)} \cdot m \pmod{n}\]</span></p>
+<p>If gcd<span class="math inline">\((m,n) = 1\)</span>, we have by <strong>Euler’s theorem</strong>: <span class="math display">\[m^{\phi(n)} \equiv 1 \pmod{n}\]</span></p>
+<p>therefore: <span class="math display">\[c^d \equiv (m^{\phi(n)})^k \cdot m \equiv m \pmod{n}\]</span> Q.E.D. !</p>
+<p>If gcd<span class="math inline">\((m,n) \neq 1\)</span>, <span class="math inline">\(m\)</span> is necessarily a multiple of <span class="math inline">\(p\)</span> or <span class="math inline">\(q\)</span> (very unlikely case…), we can show by doing the calculations mod <span class="math inline">\(p\)</span> and mod <span class="math inline">\(q\)</span> that the congruence remains true.</p>
+</section>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Quick Revision">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-100-contents" aria-controls="callout-100" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Quick Revision
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-100" class="callout-100-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Public key</strong>: <span class="math inline">\((n, e)\)</span> with <span class="math inline">\(n = pq\)</span></li>
+<li><strong>Private key</strong>: <span class="math inline">\(d\)</span> such that <span class="math inline">\(ed \equiv 1 \pmod{\phi(n)}\)</span></li>
+<li><strong>Encryption</strong>: <span class="math inline">\(c = m^e \bmod n\)</span></li>
+<li><strong>Decryption</strong>: <span class="math inline">\(m = c^d \bmod n\)</span></li>
+<li><strong>Security</strong>: based on difficulty of factoring <span class="math inline">\(n\)</span></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">graph LR
+    A[Plaintext m] --&gt;|Encryption: m^e mod n| B[Ciphertext c]
+    B --&gt;|Decryption: c^d mod n| C[Plaintext m]
+    D[Public key: n, e] -.-&gt;|used for| A
+    E[Private key: d] -.-&gt;|used for| B
+    F[p, q secret primes] --&gt;|n = pq| D
+    F --&gt;|φn = p-1q-1| E
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="rsa-security" class="level3">
+<h3 class="anchored" data-anchor-id="rsa-security">RSA Security</h3>
+<p><strong>Equivalence RSA problem ⟺ Factorization</strong>:</p>
+<ul>
+<li>Finding <span class="math inline">\(d\)</span> ⟺ factoring <span class="math inline">\(n\)</span> (proven equivalent)</li>
+<li>Decrypting without <span class="math inline">\(d\)</span> is <strong>not proven</strong> as hard as factoring, but…</li>
+<li>No method faster than factoring is known</li>
+</ul>
+<p><strong>Factorization complexity</strong>:</p>
+<ul>
+<li>Fastest methods: <span class="math inline">\(O(\exp(c \cdot (\ln(n))^{1/3}))\)</span> (sub-exponential)</li>
+<li>Computationally impossible for <span class="math inline">\(n \geq 1024\)</span> bits</li>
+<li><strong>Current recommendation</strong>: 2048 bits minimum (3072-4096 for long-term security)</li>
+</ul>
+<p><strong>Choice of exponents</strong>:</p>
+<ul>
+<li><p><strong>Encryption exponent <span class="math inline">\(e\)</span></strong>:</p>
+<ul>
+<li>Often <strong>small</strong> for speed: <span class="math inline">\(e = 3, 17, 65537\)</span> (common)</li>
+<li>Caution: if <span class="math inline">\(e\)</span> too small AND <span class="math inline">\(m &lt; n^{1/e}\)</span>, attack possible (<span class="math inline">\(e\)</span>-th root in <span class="math inline">\(\mathbb{Z}\)</span>)</li>
+<li>Solution: <strong>randomization</strong> (padding) of the message</li>
+</ul></li>
+<li><p><strong>Decryption exponent <span class="math inline">\(d\)</span></strong>:</p>
+<ul>
+<li>Must be <strong>large</strong>: at least half the size of <span class="math inline">\(n\)</span></li>
+<li>If <span class="math inline">\(d\)</span> small: vulnerable to Wiener’s attack</li>
+</ul></li>
+</ul>
+<p><strong>Performance consequence</strong>:</p>
+<ul>
+<li><strong>Fast encryption</strong> (<span class="math inline">\(e\)</span> small)</li>
+<li><strong>Slow decryption</strong> (<span class="math inline">\(d\)</span> large)</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled" title="Original Text">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-101-contents" aria-controls="callout-101" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Original Text
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-101" class="callout-101-contents callout-collapse collapse">
+<section id="rsa-security-1" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="rsa-security-1">RSA: Security</h3>
+<p>The <strong>RSAP</strong> problem of finding <span class="math inline">\(m\)</span> from <span class="math inline">\(c\)</span> is not proven to be as hard as factorization but…:</p>
+<ul>
+<li><p>We can prove that if we find <span class="math inline">\(d\)</span> we can easily compute <span class="math inline">\(p\)</span> and <span class="math inline">\(q\)</span>. This is equivalent to saying that <strong>factoring <span class="math inline">\(n\)</span> and finding <span class="math inline">\(d\)</span> require equivalent computational effort</strong>.</p></li>
+<li><p>We know that the fastest methods for factoring have a <strong>sub-exponential complexity</strong> <span class="math inline">\(O(\exp(c \cdot (\ln(n))^{1/3}))\)</span>. The problem therefore remains <strong>computationally impossible</strong> for modulus <span class="math inline">\(\geq 1048\)</span> bits (2048 bits is a frequent choice for long-term security…).</p></li>
+<li><p>To improve encryption speed, we tend to choose <strong>relatively small exponents <span class="math inline">\(e\)</span></strong> (typically: <span class="math inline">\(e := 3\)</span>, <span class="math inline">\(e := 17\)</span> and <span class="math inline">\(e := 19\)</span>). However, it has been proven that computing an <span class="math inline">\(i\)</span>-th root (with small <span class="math inline">\(i\)</span>) modulo a composite <span class="math inline">\(n\)</span> can be significantly easier than factoring <span class="math inline">\(n\)</span>. On the other hand, in 2008 it was proven that the generic RSA problem is equivalent to factorization.</p></li>
+<li><p>The <strong>decryption exponent <span class="math inline">\(d\)</span> must imperatively be large</strong> (at least half the size of <span class="math inline">\(n\)</span>) to guarantee the system’s security.</p></li>
+<li><p>Consequently, <strong>encryption is normally significantly faster than decryption</strong> since the exponents used are much smaller!</p></li>
+</ul>
+</section>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Quick Revision">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-102-contents" aria-controls="callout-102" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Quick Revision
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-102" class="callout-102-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Security</strong>: based on difficulty of FACTP (factorization)</li>
+<li><strong>Recommended size</strong>: <span class="math inline">\(n \geq 2048\)</span> bits</li>
+<li><strong>Small <span class="math inline">\(e\)</span></strong>: fast encryption (3, 17, 65537)</li>
+<li><strong>Large <span class="math inline">\(d\)</span></strong>: at least <span class="math inline">\(\text{size}(n)/2\)</span></li>
+<li><strong>Separate keys</strong>: encryption ≠ signature</li>
+</ul>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="attacks-on-rsa" class="level3">
+<h3 class="anchored" data-anchor-id="attacks-on-rsa">Attacks on RSA</h3>
+<section id="attack-on-small-exponent-with-same-message" class="level4">
+<h4 class="anchored" data-anchor-id="attack-on-small-exponent-with-same-message">Attack on small exponent with same message</h4>
+<p>If the same message <span class="math inline">\(m\)</span> is sent to 3 recipients with <span class="math inline">\(e = 3\)</span>:</p>
+<ul>
+<li><span class="math inline">\(c_1 \equiv m^3 \pmod{n_1}\)</span></li>
+<li><span class="math inline">\(c_2 \equiv m^3 \pmod{n_2}\)</span></li>
+<li><span class="math inline">\(c_3 \equiv m^3 \pmod{n_3}\)</span></li>
+</ul>
+<p>The <strong>Chinese Remainder Theorem</strong> gives a unique solution <span class="math inline">\(x \bmod n_1n_2n_3\)</span> such that: <span class="math display">\[x \equiv c_1 \pmod{n_1}, \quad x \equiv c_2 \pmod{n_2}, \quad x \equiv c_3 \pmod{n_3}\]</span></p>
+<p>If <span class="math inline">\(m^3 &lt; n_1n_2n_3\)</span> (often true), then <span class="math inline">\(x = m^3\)</span> in <span class="math inline">\(\mathbb{Z}\)</span> and we can compute <span class="math inline">\(m\)</span> by simply taking the integer cube root!</p>
+<p><strong>Protection</strong>: always randomize the message before encryption (OAEP padding)</p>
+</section>
+<section id="attack-if-message-small" class="level4">
+<h4 class="anchored" data-anchor-id="attack-if-message-small">Attack if message small</h4>
+<p>If <span class="math inline">\(m &lt; n^{1/e}\)</span>, then <span class="math inline">\(m^e &lt; n\)</span>, so <span class="math inline">\(c = m^e\)</span> (in <span class="math inline">\(\mathbb{Z}\)</span>, not modulo). We can directly compute the <span class="math inline">\(e\)</span>-th root!</p>
+<p><strong>Protection</strong>: padding mandatory</p>
+</section>
+<section id="multiplicative-property" class="level4">
+<h4 class="anchored" data-anchor-id="multiplicative-property">Multiplicative property</h4>
+<p><span class="math display">\[E(m_1) \cdot E(m_2) \equiv (m_1 \cdot m_2)^e \equiv E(m_1 \cdot m_2) \pmod{n}\]</span></p>
+<p>Allows chosen-ciphertext attacks and blind signatures.</p>
+</section>
+<section id="general-attack" class="level4">
+<h4 class="anchored">General attack</h4>
+<p>The most effective method remains <strong>factoring <span class="math inline">\(n\)</span></strong> (if parameters well chosen and implementation correct).</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Original Text">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-103-contents" aria-controls="callout-103" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Original Text
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-103" class="callout-103-contents callout-collapse collapse">
+<section id="rsa-attacks" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="rsa-attacks">RSA: Attacks</h3>
+<p>When we want to encrypt the <strong>same message for a group of correspondents</strong>, it is advisable to introduce variations (<strong>randomization</strong>) before encryption to avoid the following attack:</p>
+<p>Assume we compute ciphertexts <span class="math inline">\(c_1, c_2, c_3\)</span> from the same plaintext <span class="math inline">\(m\)</span> and the same exponent <span class="math inline">\(e := 3\)</span> addressed to three entities with modulus: <span class="math inline">\(n_1, n_2, n_3\)</span>.</p>
+<p>The <strong>Chinese Remainder Theorem</strong> tells us that there exists a solution <span class="math inline">\(x \bmod n_1n_2n_3\)</span>, such that: <span class="math display">\[x \equiv c_1 \pmod{n_1}, \quad x \equiv c_2 \pmod{n_2}, \quad x \equiv c_3 \pmod{n_3}\]</span></p>
+<p>But if <span class="math inline">\(m\)</span> does not change for the three encryptions, we have that <span class="math inline">\(x = m^3 \bmod n_1n_2n_3\)</span> and, moreover: <span class="math inline">\(m^3 &lt; n_1n_2n_3\)</span>. We can, therefore, find <span class="math inline">\(m\)</span> by computing the <strong>integer cube root</strong> of <span class="math inline">\(m^3\)</span>, knowing that for this calculation there exist efficient algorithms!</p>
+<p>More generally, if <span class="math inline">\(m &lt; n^{1/e}\)</span>, we can apply fast algorithms (in <span class="math inline">\(\mathbb{Z}\)</span>) to compute the <span class="math inline">\(e\)</span>-th roots of <span class="math inline">\(m^e\)</span>. It is therefore advisable to perform <strong>“randomization” of <span class="math inline">\(m\)</span> before encrypting</strong>!</p>
+<p><strong>The multiplicative property of RSA</strong>: <span class="math inline">\((m_1 m_2)^e \equiv m_1^e \cdot m_2^e \equiv c_1 \cdot c_2 \pmod{n}\)</span></p>
+<p>gives rise to <strong>dangerous vulnerabilities</strong> (see blind signatures).</p>
+<p>Assuming parameters are correctly chosen and the implementation has no flaws, <strong>the most effective method to “break” the generic RSA algorithm remains factoring <span class="math inline">\(n\)</span></strong>.</p>
+</section>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Quick Revision">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-104-contents" aria-controls="callout-104" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Quick Revision
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-104" class="callout-104-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Same message, small <span class="math inline">\(e\)</span></strong>: CRT allows extracting <span class="math inline">\(m\)</span>!</li>
+<li><strong>Message too small</strong>: <span class="math inline">\(m &lt; n^{1/e}\)</span> → direct root</li>
+<li><strong>Multiplicative property</strong>: <span class="math inline">\(E(m_1) \cdot E(m_2) = E(m_1 m_2)\)</span></li>
+<li><strong>Protection</strong>: always padding/randomization (OAEP)</li>
+</ul>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+</section>
+<section id="the-elgamal-algorithm" class="level2">
+<h2 class="anchored" data-anchor-id="the-elgamal-algorithm">The ElGamal Algorithm</h2>
+<p>Asymmetric system (1985) based on the <strong>discrete logarithm problem (DLP)</strong>.</p>
+<p><strong>Keys:</strong></p>
+<ul>
+<li>Choose prime <span class="math inline">\(p\)</span>, generator <span class="math inline">\(\alpha \in \mathbb{Z}_p^*\)</span>, secret <span class="math inline">\(a\)</span></li>
+<li>Compute <span class="math inline">\(y = \alpha^a \bmod p\)</span></li>
+<li><strong>Public</strong>: <span class="math inline">\((p, \alpha, y)\)</span> | <strong>Private</strong>: <span class="math inline">\(a\)</span></li>
+</ul>
+<p><strong>Encryption:</strong> For message <span class="math inline">\(m\)</span>, choose unique random <span class="math inline">\(k\)</span></p>
+<ul>
+<li><span class="math inline">\(\gamma = \alpha^k \bmod p\)</span></li>
+<li><span class="math inline">\(\delta = m \cdot y^k \bmod p\)</span></li>
+<li>Send <span class="math inline">\((\gamma, \delta)\)</span></li>
+</ul>
+<p><strong>Decryption:</strong> <span class="math inline">\(m = \delta \cdot \gamma^{-a} \bmod p\)</span></p>
+<div class="callout callout-style-default callout-note callout-titled" title="Original Text">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-105-contents" aria-controls="callout-105" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Original Text
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-105" class="callout-105-contents callout-collapse collapse">
+<section id="elgamal-encryptiondecryption-procedure" class="level2 callout-body-container callout-body">
+<h2 class="anchored" data-anchor-id="elgamal-encryptiondecryption-procedure">ElGamal Encryption/Decryption Procedure</h2>
+<p><strong>Key generation</strong></p>
+<p>Each entity (A) creates a key pair (public and private) as follows:</p>
+<ul>
+<li>A generates a prime number <span class="math inline">\(p\)</span> (len(<span class="math inline">\(p\)</span>) ≥ 1024 bits) and a <strong>generator <span class="math inline">\(\alpha\)</span></strong> of the multiplicative group <span class="math inline">\(\mathbb{Z}_p^*\)</span></li>
+<li>A generates a random number <span class="math inline">\(a\)</span>, such that <span class="math inline">\(1 \leq a \leq p-2\)</span> and computes <span class="math inline">\(y := \alpha^a \bmod p\)</span></li>
+<li>The <strong>public key</strong> of A is <span class="math inline">\((p, \alpha, y)\)</span>, the <strong>private key</strong> of A is <span class="math inline">\(a\)</span></li>
+</ul>
+<p><strong>Encryption</strong></p>
+<ul>
+<li>Entity B obtains <span class="math inline">\((p, \alpha, \alpha^a \bmod p)\)</span>, the authentic public key of A</li>
+<li>B transforms its plaintext into a series of integers <span class="math inline">\(m_i\)</span>, such that <span class="math inline">\(m_i \in [0, p-1]\)</span> <span class="math inline">\(\forall i\)</span></li>
+<li>For each message <span class="math inline">\(m_i\)</span>:
+<ul>
+<li>B generates a <strong>unique</strong> random number <span class="math inline">\(k\)</span>, such that <span class="math inline">\(1 \leq k \leq p-2\)</span></li>
+<li>B computes <span class="math inline">\(\gamma := \alpha^k \bmod p\)</span> and <span class="math inline">\(\delta := m_i \cdot (\alpha^a)^k \bmod p\)</span> and sends the ciphertext <span class="math inline">\(c := (\gamma, \delta)\)</span></li>
+</ul></li>
+</ul>
+<p><strong>Decryption</strong></p>
+<ul>
+<li>A uses its private key <span class="math inline">\(a\)</span> to compute <span class="math inline">\(\gamma^{p-1-a} \bmod p\)</span> (note that: <span class="math inline">\(\gamma^{p-1-a} \equiv \gamma^{-a} \equiv \alpha^{-ak} \bmod p\)</span>)</li>
+<li>A retrieves the plaintext by computing: <span class="math inline">\(\delta \cdot \gamma^{-ak} \bmod p\)</span></li>
+</ul>
+</section>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-106-contents" aria-controls="callout-106" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Quick Revision
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-106" class="callout-106-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Base</strong>: DLP in <span class="math inline">\(\mathbb{Z}_p^*\)</span></p>
+<p><strong>Ciphertext</strong>: <span class="math inline">\((\alpha^k, m \cdot y^k)\)</span></p>
+<p><strong>Security</strong>: <span class="math inline">\(k\)</span> must be unique and large</p>
+<p><strong>Disadvantage</strong>: doubles message size</p>
+</div>
+</div>
+</div>
+<section id="essential-remarks" class="level3">
+<h3 class="anchored" data-anchor-id="essential-remarks">Essential Remarks</h3>
+<ul>
+<li><strong>Proof</strong>: <span class="math inline">\(\delta \cdot \gamma^{-a} = m \cdot (\alpha^a)^k \cdot (\alpha^k)^{-a} = m \bmod p\)</span></li>
+<li><strong>Security</strong>: based on DLP (complexity sub-exponential close to factorization)</li>
+<li><strong>Exponents</strong>: <span class="math inline">\(k\)</span> and <span class="math inline">\(a\)</span> must be large (otherwise vulnerable to baby-step giant-step)</li>
+<li><strong>Reuse prohibited</strong>: if <span class="math inline">\(k\)</span> repeated, <span class="math inline">\(\delta_1/\delta_2 = m_1/m_2\)</span> reveals the messages</li>
+<li><strong>Major disadvantage</strong>: ×2 expansion of ciphertext size</li>
+<li><strong>Generalization</strong>: works on <span class="math inline">\(GF(2^n)\)</span> or elliptic curves</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-107-contents" aria-controls="callout-107" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Original Text - Remarks
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-107" class="callout-107-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Proof</strong> that the scheme works: If <span class="math inline">\(s \equiv k^{-1}(m_h - ar) \bmod (p-1)\)</span>, we have that: <span class="math inline">\(m_h \equiv (ar + ks) \bmod (p-1)\)</span> and <span class="math inline">\(v_2 = \alpha^{H(m)} \bmod p\)</span>. If, as we wish to show <span class="math inline">\(m_h = H(m)\)</span>, by reducing exponents mod <span class="math inline">\((p-1)\)</span>, we can rewrite <span class="math inline">\(v_2\)</span>: <span class="math inline">\(v_2 \equiv \alpha^{ar+ks} \bmod p\)</span>. On the other hand: <span class="math inline">\(v_1 = y^r\alpha^{rs} \equiv \alpha^{ar}\alpha^{ks} \equiv \alpha^{ar+ks} \bmod p\)</span>.</p>
+<p>The ElGamal procedure is based on the difficulty of computing <strong>discrete logarithms modulo a prime number</strong> (DLP problem) even though it has not been proven to be strictly equivalent to this problem.</p>
+<p>The <strong>most efficient algorithms</strong> known have a sub-exponential complexity very close to that of factorization (we often use the same algorithms).</p>
+<p>The <strong>chosen exponents</strong> (<span class="math inline">\(k\)</span>, <span class="math inline">\(a\)</span>) must be large because there exist efficient algorithms to compute discrete logarithms modulo a prime number when the exponent is small (baby-step giant-step algorithm).</p>
+<p>A <strong>disadvantage of ElGamal</strong> is that it multiplies the ciphertext length by 2.</p>
+<p>It is <strong>essential</strong> for the security of the procedure that the random number <span class="math inline">\(k\)</span> is not repeated, otherwise: let <span class="math inline">\((\gamma_1, \delta_1)\)</span> and <span class="math inline">\((\gamma_2, \delta_2)\)</span> be the two generated ciphertexts, we have that <span class="math inline">\(\delta_1/\delta_2 = m_1/m_2\)</span> and consequently, it is trivial to recover one plaintext from the other.</p>
+<p>The ElGamal procedure can be <strong>generalized</strong> to other groups like <span class="math inline">\(GF(2^n)\)</span> or elliptic curves.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-108-contents" aria-controls="callout-108" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Quick Revision - Remarks
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-108" class="callout-108-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Equivalence</strong>: based on DLP (not proven equivalent)</p>
+<p><strong><span class="math inline">\(k\)</span> unique</strong>: CRITICAL - otherwise <span class="math inline">\(m_1/m_2\)</span> revealed</p>
+<p><strong>Key size</strong>: large exponents necessary</p>
+<p><strong>Extensions</strong>: <span class="math inline">\(GF(2^n)\)</span>, elliptic curves</p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="rabin-algorithm" class="level2">
+<h2 class="anchored" data-anchor-id="rabin-algorithm">Rabin Algorithm</h2>
+<p>Asymmetric system <strong>equivalent to factorization</strong> (provably secure).</p>
+<p><strong>Keys:</strong></p>
+<ul>
+<li>Generate two primes <span class="math inline">\(p\)</span>, <span class="math inline">\(q\)</span> (≥1024 bits total), compute <span class="math inline">\(n = pq\)</span>
+<ul>
+<li><strong>Public</strong>: <span class="math inline">\(n\)</span></li>
+<li><strong>Private</strong>: <span class="math inline">\((p, q)\)</span></li>
+</ul></li>
+</ul>
+<p><strong>Encryption:</strong> <span class="math inline">\(c = m^2 \bmod n\)</span></p>
+<p><strong>Decryption:</strong></p>
+<ul>
+<li>Compute the 4 square roots of <span class="math inline">\(c \bmod n\)</span> (via roots mod <span class="math inline">\(p\)</span> and mod <span class="math inline">\(q\)</span>)</li>
+<li>Identify the correct message by redundancy</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled" title="Original Text">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-109-contents" aria-controls="callout-109" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Original Text
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-109" class="callout-109-contents callout-collapse collapse">
+<section id="rabin-encryptiondecryption-procedure" class="level2 callout-body-container callout-body">
+<h2 class="anchored" data-anchor-id="rabin-encryptiondecryption-procedure">Rabin Encryption/Decryption Procedure</h2>
+<p><strong>Key generation</strong></p>
+<p>Each entity (A) creates a key pair (public and private) as follows:</p>
+<ul>
+<li>A generates two random prime numbers <span class="math inline">\(p\)</span> and <span class="math inline">\(q\)</span> of large size (len(<span class="math inline">\(pq\)</span>) ≥ 1024)</li>
+<li>A computes <span class="math inline">\(n := pq\)</span></li>
+<li>The <strong>public key</strong> of A is <span class="math inline">\(n\)</span>, the <strong>private key</strong> of A is <span class="math inline">\((p, q)\)</span></li>
+</ul>
+<p><strong>Encryption</strong></p>
+<ul>
+<li>Entity B obtains <span class="math inline">\(n\)</span>, the authentic public key of A</li>
+<li>B transforms its plaintext into a series of integers <span class="math inline">\(m_i\)</span>, such that <span class="math inline">\(m_i \in [0, n-1]\)</span> <span class="math inline">\(\forall i\)</span></li>
+<li>B computes <span class="math inline">\(c_i = m_i^2 \bmod n\)</span> for each message <span class="math inline">\(m_i\)</span></li>
+<li>B sends all the ciphertexts <span class="math inline">\(c_i\)</span> to A</li>
+</ul>
+<p><strong>Decryption</strong></p>
+<ul>
+<li>A uses its private key <span class="math inline">\((p, q)\)</span> to retrieve the <strong>4 solutions</strong> of the equation: <span class="math inline">\(c_i = x^2 \bmod n\)</span> using <strong>efficient algorithms</strong> to compute square roots <span class="math inline">\(\bmod p\)</span> and <span class="math inline">\(\bmod q\)</span></li>
+<li>A determines either by an <strong>additional indication</strong> from B, or by <strong>redundancy analysis</strong> which of the 4 messages <span class="math inline">\(m_1, m_2, m_3, m_4\)</span> is the original plaintext</li>
+</ul>
+</section>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-110-contents" aria-controls="callout-110" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Quick Revision
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-110" class="callout-110-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Base</strong>: SQROOTP (square root mod composite)</p>
+<p><strong>Advantage</strong>: proven equivalent to factorization</p>
+<p><strong>Problem</strong>: 4 possible solutions, requires redundancy</p>
+<p><strong>Vulnerability</strong>: chosen-ciphertext attack reveals factors</p>
+</div>
+</div>
+</div>
+<section id="essential-remarks-1" class="level3">
+<h3 class="anchored" data-anchor-id="essential-remarks-1">Essential Remarks</h3>
+<ul>
+<li><strong>Proven security</strong>: SQROOTP ⟺ FACTP (only algorithm with proven equivalence)</li>
+<li><strong>Chosen-ciphertext attack</strong>: if A decrypts <span class="math inline">\(c = m^2 \bmod n\)</span> chosen by adversary M
+<ul>
+<li>M receives a root <span class="math inline">\(m_x\)</span> among 4 possible</li>
+<li>If <span class="math inline">\(m \neq m_x \bmod n\)</span> (prob. 0.5), then <span class="math inline">\(\gcd(m - m_x, n)\)</span> gives a factor of <span class="math inline">\(n\)</span></li>
+</ul></li>
+<li><strong>Solution</strong>: require sufficient redundancy to identify unique solution without ambiguity</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-111-contents" aria-controls="callout-111" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Original Text - Remarks
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-111" class="callout-111-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The Rabin procedure is based on the <strong>impossibility of finding square roots modulo a composite of unknown factorization</strong> (SQROOTP problem).</p>
+<p>The <strong>main interest</strong> of this algorithm lies in the fact that it has been <strong>proven to be equivalent to factorization</strong> (SQROOTP ⟺ FACTP). This algorithm therefore belongs to the <strong>provably secure</strong> category for any passive attack.</p>
+<p><strong>Active attacks</strong> can, in some cases, compromise the algorithm’s security. More precisely, if we mount the following <strong>chosen ciphertext</strong> attack:</p>
+<ul>
+<li>The attacker M generates an <span class="math inline">\(m\)</span> and sends to A the ciphertext <span class="math inline">\(c = m^2 \bmod n\)</span>.</li>
+<li>A responds with a root <span class="math inline">\(m_x\)</span> among the 4 possible <span class="math inline">\(m_1, m_2, m_3, m_4\)</span>.</li>
+<li>If <span class="math inline">\(m \neq m_x \bmod n\)</span> (probability 0.5), M repeats with a new <span class="math inline">\(m\)</span>.</li>
+<li>Otherwise, A computes <span class="math inline">\(\gcd(m - m_x, n)\)</span> and thus obtains one of the two factors of <span class="math inline">\(n\)</span>.</li>
+</ul>
+<p>This attack could be <strong>avoided</strong> if the procedure required <strong>sufficient redundancy</strong> in the plaintexts allowing A to identify without ambiguity which of the possible solutions is the original plaintext. In this case, A would always respond with <span class="math inline">\(m\)</span> and discard the other solutions that do not have the predefined level of redundancy.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-112-contents" aria-controls="callout-112" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Quick Revision - Remarks
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-112" class="callout-112-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Unique</strong>: only algorithm proven equivalent to FACTP</p>
+<p><strong>Attack</strong>: chosen-ciphertext gives factors (prob. 0.5)</p>
+<p><strong>Countermeasure</strong>: mandatory redundancy in messages</p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="comparison-rsa---elgamal---rabin" class="level2">
+<h2 class="anchored" data-anchor-id="comparison-rsa---elgamal---rabin">Comparison RSA - ElGamal - Rabin</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 30%">
+<col style="width: 16%">
+<col style="width: 30%">
+<col style="width: 23%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Criterion</th>
+<th>RSA</th>
+<th>ElGamal</th>
+<th>Rabin</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Problem</strong></td>
+<td>RSAP</td>
+<td>DLP</td>
+<td>SQROOTP</td>
+</tr>
+<tr class="even">
+<td><strong>Security</strong></td>
+<td>Equiv. factorization (generic case)</td>
+<td>Based on DLP</td>
+<td><strong>Proven</strong> ⟺ factorization</td>
+</tr>
+<tr class="odd">
+<td><strong>Expansion</strong></td>
+<td>1:1</td>
+<td><strong>1:2</strong></td>
+<td>1:1</td>
+</tr>
+<tr class="even">
+<td><strong>Decryption</strong></td>
+<td>Deterministic</td>
+<td>Deterministic</td>
+<td><strong>4 solutions</strong></td>
+</tr>
+<tr class="odd">
+<td><strong>Signature</strong></td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes (with precautions)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="elliptic-curves-basic-idea" class="level2">
+<h2 class="anchored" data-anchor-id="elliptic-curves-basic-idea">Elliptic Curves (Basic Idea)</h2>
+<section id="fundamental-concept" class="level3">
+<h3 class="anchored" data-anchor-id="fundamental-concept">Fundamental Concept</h3>
+<p>An <strong>elliptic curve</strong> <span class="math inline">\(E\)</span> is defined by: <span class="math inline">\(y^2 = x^3 + ax + b\)</span> (with discriminant <span class="math inline">\(4a^3 + 27b^2 \neq 0\)</span>).</p>
+<p><strong>Key operation: Point addition</strong></p>
+<ul>
+<li>Geometrically: draw a line between two points <span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span>, find the 3rd intersection point, then take its symmetric</li>
+<li>Forms a <strong>commutative group</strong> with point at infinity <span class="math inline">\(\mathcal{O}\)</span> as identity</li>
+<li><strong>Scalar multiplication</strong>: <span class="math inline">\(kP = P + P + ... + P\)</span> (<span class="math inline">\(k\)</span> times)</li>
+</ul>
+<p><strong>Cryptographic advantage:</strong></p>
+<ul>
+<li>The <strong>ECDLP problem</strong>: finding <span class="math inline">\(k\)</span> such that <span class="math inline">\(Q = kP\)</span> is very difficult (exponential effort)</li>
+<li><strong>Shorter keys</strong> for same security as in <span class="math inline">\(\mathbb{Z}_p^*\)</span></li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-113-contents" aria-controls="callout-113" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Original Text - Definition
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-113" class="callout-113-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>An <strong>elliptic curve</strong> is a set of points <span class="math inline">\(E\)</span> defined by the equation: <span class="math inline">\(y^2 = x^3 + ax + b\)</span>, with <span class="math inline">\(x, y, a\)</span> and <span class="math inline">\(b\)</span> rational numbers, integers or integers modulo <span class="math inline">\(m\)</span> (<span class="math inline">\(m &gt; 1\)</span>). The set <span class="math inline">\(E\)</span> also contains a “point at infinity” denoted <span class="math inline">\(\mathcal{O}\)</span>. The point <span class="math inline">\(\mathcal{O}\)</span> is not on the curve but it is the identity element of <span class="math inline">\(E\)</span>.</p>
+<p>We will choose for our calculations elliptic curves that do not have multiple roots or, in other words, curves where the <strong>discriminant</strong> <span class="math inline">\(4a^3 + 27b^2 \neq 0\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-114-contents" aria-controls="callout-114" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Quick Revision - Concept
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-114" class="callout-114-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Equation</strong>: <span class="math inline">\(y^2 = x^3 + ax + b\)</span></p>
+<p><strong>Structure</strong>: group with <span class="math inline">\(\mathcal{O}\)</span></p>
+<p><strong>Operation</strong>: geometric addition</p>
+<p><strong>Hard problem</strong>: ECDLP</p>
+</div>
+</div>
+</div>
+</section>
+<section id="addition-on-elliptic-curves" class="level3">
+<h3 class="anchored" data-anchor-id="addition-on-elliptic-curves">Addition on Elliptic Curves</h3>
+<p>Let <span class="math inline">\(P := (x, y) \in E\)</span>, we define <span class="math inline">\(-P := (x, -y)\)</span> (symmetric with respect to the x-axis). We have <span class="math inline">\(P + (-P) = \mathcal{O}\)</span>.</p>
+<p>For two points <span class="math inline">\(P, Q \in E\)</span> with <span class="math inline">\(Q \neq -P\)</span>, we define <span class="math inline">\(P + Q := R\)</span> where <span class="math inline">\(-R\)</span> is the 3rd intersection point between the curve and the line passing through <span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span>.</p>
+<p>For <strong>doubling</strong>: <span class="math inline">\(2P = R\)</span> where <span class="math inline">\(-R\)</span> is the intersection point of the curve with the tangent to the curve at point <span class="math inline">\(P\)</span>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-115-contents" aria-controls="callout-115" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Original Text - Addition
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-115" class="callout-115-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(P := (x, y) \in E\)</span>, we define <span class="math inline">\(-P\)</span> as <span class="math inline">\(-P := (x, -y)\)</span>. Graphically, <span class="math inline">\(-P\)</span> is the symmetric point of <span class="math inline">\(P\)</span> with respect to the x-axis. Note that <span class="math inline">\(P + (-P) = \mathcal{O}\)</span>.</p>
+<p>Let two points <span class="math inline">\(P, Q \in E\)</span>, such that <span class="math inline">\(Q \neq -P\)</span>, we define the addition <span class="math inline">\(P + Q := R\)</span> where <span class="math inline">\(R \in E\)</span> such that <span class="math inline">\(-R\)</span> is the 3rd intersection point between the curve and the line passing through <span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span>.</p>
+<p>The set <span class="math inline">\(E\)</span> with <span class="math inline">\(\oplus\)</span> defines a <strong>commutative group</strong> for addition.</p>
+<p>Let <span class="math inline">\(P \in E\)</span>, the point <span class="math inline">\(2P = R\)</span>, such that <span class="math inline">\(-R\)</span> is the intersection point of the curve with the line tangent to the curve at point <span class="math inline">\(P\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-116-contents" aria-controls="callout-116" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Quick Revision - Addition
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-116" class="callout-116-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Inverse</strong>: <span class="math inline">\(-P = (x, -y)\)</span></p>
+<p><strong>Addition</strong>: 3rd intersection point + symmetry</p>
+<p><strong>Doubling</strong>: tangent + symmetry</p>
+<p><strong>Property</strong>: commutative group</p>
+</div>
+</div>
+</div>
+</section>
+<section id="ecdlp-and-cryptographic-advantages" class="level3">
+<h3 class="anchored" data-anchor-id="ecdlp-and-cryptographic-advantages">ECDLP and Cryptographic Advantages</h3>
+<p>When the elliptic curve is defined over the field <span class="math inline">\(\mathbb{Z}_p\)</span> with <span class="math inline">\(p\)</span> a large prime (<span class="math inline">\(y^2 \equiv x^3 + ax + b \bmod p\)</span>), the computation of <span class="math inline">\(k \in \mathbb{Z}_p\)</span> such that <span class="math inline">\(Q = kP\)</span> with <span class="math inline">\((P, Q)\)</span> known is <strong>very difficult</strong> (exponential effort). This problem is the <strong>Elliptic Curve Discrete Logarithm Problem (ECDLP)</strong>.</p>
+<p><strong>Main advantage</strong>: key sizes much smaller for equivalent security.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-117-contents" aria-controls="callout-117" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Original Text - ECDLP and Advantages
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-117" class="callout-117-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>When the elliptic curve is defined over the field <span class="math inline">\(\mathbb{Z}_p\)</span> with <span class="math inline">\(p\)</span> a large prime number (<span class="math inline">\(y^2 \equiv x^3 + ax + b \bmod p\)</span>), the computation of <span class="math inline">\(k \in \mathbb{Z}_p\)</span> such that <span class="math inline">\(Q = kP\)</span> with <span class="math inline">\((P, Q)\)</span> known, is very difficult (requires exponential effort). This problem is known as: <strong>Elliptic Curve Discrete Logarithm Problem (ECDLP)</strong>.</p>
+<p>The <strong>main advantage</strong> of public cryptography based on elliptic curves is that the size of the numbers used (and therefore, keys) is smaller.</p>
+<p>This is due to the <strong>increased complexity</strong> of computations on <span class="math inline">\(E_p\)</span> (elliptic curve defined over field <span class="math inline">\(\mathbb{Z}_p\)</span>) compared to usual fields such as <span class="math inline">\(\mathbb{Z}_p\)</span> or <span class="math inline">\(GF(2^m)\)</span>.</p>
+<p>The <strong>representation of a plaintext as points</strong> of the curve remains a complex operation.</p>
+<p>In October 2003, the <strong>US National Security Agency (NSA)</strong> purchased a patent from Certicom for the use of elliptic curve cryptography.</p>
+<p>In September 2013 Claus Diem showed that under certain conditions the ECDLP problem could be solved in <strong>sub-exponential time</strong>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-118-contents" aria-controls="callout-118" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Quick Revision - ECDLP
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-118" class="callout-118-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Problem</strong>: finding <span class="math inline">\(k\)</span> in <span class="math inline">\(Q = kP\)</span> (exponential)</p>
+<p><strong>Gain</strong>: keys ~6-10× shorter</p>
+<p><strong>Limit</strong>: representing messages as points difficult</p>
+<p><strong>NSA</strong>: adopted in 2003</p>
+</div>
+</div>
+</div>
+</section>
+<section id="key-size-comparison-table" class="level3">
+<h3 class="anchored" data-anchor-id="key-size-comparison-table">Key Size Comparison Table</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>AES (symmetric)</th>
+<th>RSA/DH</th>
+<th>Elliptic Curves</th>
+<th>Ratio</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>56 bits</td>
+<td>512 bits</td>
+<td>112 bits</td>
+<td>1:4.6</td>
+</tr>
+<tr class="even">
+<td>80 bits</td>
+<td>1024 bits</td>
+<td>160 bits</td>
+<td>1:6.4</td>
+</tr>
+<tr class="odd">
+<td>112 bits</td>
+<td>2048 bits</td>
+<td>224 bits</td>
+<td>1:9.1</td>
+</tr>
+<tr class="even">
+<td>128 bits</td>
+<td>3072 bits</td>
+<td>256 bits</td>
+<td>1:12</td>
+</tr>
+<tr class="odd">
+<td>256 bits</td>
+<td>15360 bits</td>
+<td>512 bits</td>
+<td>1:30</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-119-contents" aria-controls="callout-119" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Original Text - Table
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-119" class="callout-119-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>This table shows the key size ratios compared to RSA for equivalent security.</p>
+<p><em>(Table extracted from original document)</em></p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="elgamal-on-elliptic-curves" class="level2">
+<h2 class="anchored" data-anchor-id="elgamal-on-elliptic-curves">ElGamal on Elliptic Curves</h2>
+<section id="direct-adaptation" class="level3">
+<h3 class="anchored" data-anchor-id="direct-adaptation">Direct Adaptation</h3>
+<p>Replace operations in <span class="math inline">\(\mathbb{Z}_p^*\)</span> with operations on <span class="math inline">\(E_p\)</span></p>
+<p><strong>Keys:</strong></p>
+<ul>
+<li>Choose curve <span class="math inline">\(E_p\)</span> and point <span class="math inline">\(P_0 \in E_p\)</span> of large order</li>
+<li>Secret <span class="math inline">\(x\)</span>, compute <span class="math inline">\(P_a = xP_0\)</span></li>
+<li><strong>Public</strong>: <span class="math inline">\((E_p, P_0, P_a)\)</span> | <strong>Private</strong>: <span class="math inline">\(x\)</span></li>
+</ul>
+<p><strong>Encryption:</strong> For message <span class="math inline">\(m_i \in E_p\)</span></p>
+<ul>
+<li>Choose random <span class="math inline">\(k\)</span></li>
+<li><span class="math inline">\(\gamma = kP_0\)</span>, <span class="math inline">\(\delta = kP_a + m_i\)</span></li>
+<li>Send <span class="math inline">\((\gamma, \delta)\)</span></li>
+</ul>
+<p><strong>Decryption:</strong> <span class="math inline">\(m_i = \delta - x\gamma\)</span></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-120-contents" aria-controls="callout-120" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Original Text - ElGamal EC
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-120" class="callout-120-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Key generation</strong></p>
+<p>Each entity (A) creates a key pair (public and private) as follows:</p>
+<ul>
+<li>A chooses an elliptic curve <span class="math inline">\(E_p\)</span> with <span class="math inline">\(p\)</span>, a large prime number (len(<span class="math inline">\(p\)</span>) bits) and a point <span class="math inline">\(P_0 \in E_p\)</span>.</li>
+<li>A generates a random number <span class="math inline">\(x\)</span>, such that <span class="math inline">\(1 \leq x \leq p\)</span> and computes <span class="math inline">\(P_a = xP_0\)</span> (multiplication by a scalar on <span class="math inline">\(E_p\)</span>, for which efficient algorithms exist).</li>
+<li>The public key of A is <span class="math inline">\((E_p, P_0, P_a)\)</span>, the private key of A is <span class="math inline">\(x\)</span>.</li>
+</ul>
+<p><strong>Encryption</strong></p>
+<p>Entity B obtains <span class="math inline">\((E_p, P_0, P_a)\)</span>, the authentic public key of A.</p>
+<ul>
+<li>B transforms its plaintext into a series of integers <span class="math inline">\(m_i\)</span>, such that <span class="math inline">\(m_i \in E_p\)</span> for all <span class="math inline">\(i\)</span>.</li>
+<li>For each message <span class="math inline">\(m_i\)</span>:
+<ul>
+<li>B generates a <strong>unique</strong> random number <span class="math inline">\(k\)</span>, such that <span class="math inline">\(1 \leq k \leq p\)</span>.</li>
+<li>B computes <span class="math inline">\(\gamma := kP_0\)</span> and <span class="math inline">\(\delta := kP_a + m_i\)</span> and sends the ciphertext <span class="math inline">\(c := (\gamma, \delta)\)</span>.</li>
+</ul></li>
+</ul>
+<p><strong>Decryption</strong></p>
+<ul>
+<li>A uses its private key <span class="math inline">\(x\)</span> to compute: <span class="math inline">\(x\gamma = xkP_0 = kP_a\)</span>.</li>
+<li>A retrieves the plaintext by computing: <span class="math inline">\(\delta - kP_a = kP_a + m_i - kP_a = m_i\)</span>.</li>
+</ul>
+<p>The security of the scheme relies on <strong>ECDLP</strong>!</p>
+<p>It is also necessary to <strong>authenticate</strong> the exchanged public parts to avoid the previously described man-in-the-middle attacks.</p>
+<p>The properties of the protocol are identical to the <span class="math inline">\(\mathbb{Z}_p^*\)</span> case.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-121-contents" aria-controls="callout-121" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Quick Revision - ElGamal EC
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-121" class="callout-121-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Principle</strong>: same as ElGamal on <span class="math inline">\(E_p\)</span></p>
+<p><strong>Operations</strong>: + and scalar multiplication on points</p>
+<p><strong>Security</strong>: ECDLP</p>
+<p><strong>Authentication</strong>: necessary against MitM</p>
+<p><strong>Advantage</strong>: short keys</p>
+</div>
+</div>
+</div>
+
+
 </section>
 </section>
 </section>

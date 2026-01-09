@@ -269,7 +269,23 @@ window.Quarto = {
   </ul></li>
   <li><a href="#lalgorithme-elgamal" id="toc-lalgorithme-elgamal" class="nav-link" data-scroll-target="#lalgorithme-elgamal">L’Algorithme ElGamal</a>
   <ul class="collapse">
-  <li><a href="#fonctionnement-delgamal-encryptiondecryption" id="toc-fonctionnement-delgamal-encryptiondecryption" class="nav-link" data-scroll-target="#fonctionnement-delgamal-encryptiondecryption">Fonctionnement d’ElGamal (Encryption/Decryption)</a></li>
+  <li><a href="#remarques-essentielles" id="toc-remarques-essentielles" class="nav-link" data-scroll-target="#remarques-essentielles">Remarques essentielles</a></li>
+  </ul></li>
+  <li><a href="#algorithme-de-rabin" id="toc-algorithme-de-rabin" class="nav-link" data-scroll-target="#algorithme-de-rabin">Algorithme de Rabin</a>
+  <ul class="collapse">
+  <li><a href="#remarques-essentielles-1" id="toc-remarques-essentielles-1" class="nav-link" data-scroll-target="#remarques-essentielles-1">Remarques essentielles</a></li>
+  </ul></li>
+  <li><a href="#comparaison-rsa---elgamal---rabin" id="toc-comparaison-rsa---elgamal---rabin" class="nav-link" data-scroll-target="#comparaison-rsa---elgamal---rabin">Comparaison RSA - ElGamal - Rabin</a></li>
+  <li><a href="#courbes-elliptiques-idée-de-base" id="toc-courbes-elliptiques-idée-de-base" class="nav-link" data-scroll-target="#courbes-elliptiques-idée-de-base">Courbes Elliptiques (Idée de base)</a>
+  <ul class="collapse">
+  <li><a href="#concept-fondamental" id="toc-concept-fondamental" class="nav-link" data-scroll-target="#concept-fondamental">Concept fondamental</a></li>
+  <li><a href="#addition-sur-courbes-elliptiques" id="toc-addition-sur-courbes-elliptiques" class="nav-link" data-scroll-target="#addition-sur-courbes-elliptiques">Addition sur courbes elliptiques</a></li>
+  <li><a href="#ecdlp-et-avantages-cryptographiques" id="toc-ecdlp-et-avantages-cryptographiques" class="nav-link" data-scroll-target="#ecdlp-et-avantages-cryptographiques">ECDLP et avantages cryptographiques</a></li>
+  <li><a href="#tableau-de-comparaison-des-tailles-de-clés" id="toc-tableau-de-comparaison-des-tailles-de-clés" class="nav-link" data-scroll-target="#tableau-de-comparaison-des-tailles-de-clés">Tableau de comparaison des tailles de clés</a></li>
+  </ul></li>
+  <li><a href="#elgamal-sur-courbes-elliptiques" id="toc-elgamal-sur-courbes-elliptiques" class="nav-link" data-scroll-target="#elgamal-sur-courbes-elliptiques">ElGamal sur Courbes Elliptiques</a>
+  <ul class="collapse">
+  <li><a href="#adaptation-directe" id="toc-adaptation-directe" class="nav-link" data-scroll-target="#adaptation-directe">Adaptation directe</a></li>
   </ul></li>
   </ul></li>
   </ul>
@@ -5365,28 +5381,24 @@ x \equiv a_t \pmod{n_t}
 <li><strong>Recommandation actuelle</strong> : 2048 bits minimum (3072-4096 pour sécurité durable)</li>
 </ul>
 <p><strong>Choix des exposants</strong> :</p>
-<p><strong>Exposant d’encryption <span class="math inline">\(e\)</span></strong> :</p>
+<ul>
+<li><p><strong>Exposant d’encryption <span class="math inline">\(e\)</span></strong> :</p>
 <ul>
 <li>Souvent <strong>petit</strong> pour accélérer : <span class="math inline">\(e = 3, 17, 65537\)</span> (commun)</li>
 <li>Attention : si <span class="math inline">\(e\)</span> trop petit ET <span class="math inline">\(m &lt; n^{1/e}\)</span>, attaque possible (racine <span class="math inline">\(e\)</span>-ième dans <span class="math inline">\(\mathbb{Z}\)</span>)</li>
 <li>Solution : <strong>randomization</strong> (padding) du message</li>
-</ul>
-<p><strong>Exposant de décryption <span class="math inline">\(d\)</span></strong> :</p>
+</ul></li>
+<li><p><strong>Exposant de décryption <span class="math inline">\(d\)</span></strong> :</p>
 <ul>
 <li>Doit être <strong>grand</strong> : au moins la moitié de la taille de <span class="math inline">\(n\)</span></li>
 <li>Si <span class="math inline">\(d\)</span> petit : vulnérable à l’attaque de Wiener</li>
+</ul></li>
 </ul>
 <p><strong>Conséquence performance</strong> :</p>
 <ul>
 <li><strong>Encryption rapide</strong> (<span class="math inline">\(e\)</span> petit)</li>
 <li><strong>Decryption lente</strong> (<span class="math inline">\(d\)</span> grand)</li>
 </ul>
-<p><strong>Recommandations</strong> :</p>
-<ol type="1">
-<li>Séparer clés d’encryption et de signature (politiques différentes)</li>
-<li>Utiliser exposants publics différents pour différents usages</li>
-<li>Toujours appliquer padding (OAEP) avant encryption</li>
-</ol>
 <div class="callout callout-style-default callout-note callout-titled" title="Texte Original">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-101-contents" aria-controls="callout-101" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -5407,7 +5419,6 @@ x \equiv a_t \pmod{n_t}
 <li><p>Afin d’améliorer la vitesse d’encryption, on a tendance à choisir des <strong>exposants <span class="math inline">\(e\)</span> assez petits</strong> (typiquement : <span class="math inline">\(e := 3\)</span>, <span class="math inline">\(e := 17\)</span> et <span class="math inline">\(e := 19\)</span>). On a cependant prouvé que le calcul d’une <span class="math inline">\(i\)</span>-ème racine (avec <span class="math inline">\(i\)</span> petit) modulo un composite <span class="math inline">\(n\)</span> peut être nettement plus facile que la factorisation de <span class="math inline">\(n\)</span>. Par contre, en 2008 on a prouvé que la résolution générique du problème RSA est équivalent à la factorisation.</p></li>
 <li><p>L’<strong>exposant de decryption <span class="math inline">\(d\)</span> doit impérativement être de grande taille</strong> (au moins la moitié de la taille de <span class="math inline">\(n\)</span>) pour garantir la sécurité du système.</p></li>
 <li><p>Par conséquent, l’<strong>encryption est normalement nettement plus rapide que la decryption</strong> puisque les exposants utilisés sont beaucoup plus petits !</p></li>
-<li><p>Il convient de <strong>différencier les paires de clés d’encryption et de signature</strong> puisqu’elles nécessitent des politiques de stockage, sauvegarde et mise à jour distinctes.</p></li>
 </ul>
 </section>
 </div>
@@ -5438,18 +5449,30 @@ x \equiv a_t \pmod{n_t}
 </section>
 <section id="attaques-sur-rsa" class="level3">
 <h3 class="anchored" data-anchor-id="attaques-sur-rsa">Attaques sur RSA</h3>
-<p><strong>1. Attaque sur exposant petit avec même message</strong> :</p>
-<p>Si on envoie le même message <span class="math inline">\(m\)</span> à 3 destinataires avec <span class="math inline">\(e = 3\)</span> : - <span class="math inline">\(c_1 \equiv m^3 \pmod{n_1}\)</span> - <span class="math inline">\(c_2 \equiv m^3 \pmod{n_2}\)</span> - <span class="math inline">\(c_3 \equiv m^3 \pmod{n_3}\)</span></p>
+<section id="attaque-sur-exposant-petit-avec-même-message" class="level4">
+<h4 class="anchored" data-anchor-id="attaque-sur-exposant-petit-avec-même-message">Attaque sur exposant petit avec même message</h4>
+<p>Si on envoie le même message <span class="math inline">\(m\)</span> à 3 destinataires avec <span class="math inline">\(e = 3\)</span> :</p>
+<ul>
+<li><span class="math inline">\(c_1 \equiv m^3 \pmod{n_1}\)</span></li>
+<li><span class="math inline">\(c_2 \equiv m^3 \pmod{n_2}\)</span></li>
+<li><span class="math inline">\(c_3 \equiv m^3 \pmod{n_3}\)</span></li>
+</ul>
 <p>Le <strong>Théorème des Restes Chinois</strong> donne une solution unique <span class="math inline">\(x \bmod n_1n_2n_3\)</span> telle que : <span class="math display">\[x \equiv c_1 \pmod{n_1}, \quad x \equiv c_2 \pmod{n_2}, \quad x \equiv c_3 \pmod{n_3}\]</span></p>
 <p>Si <span class="math inline">\(m^3 &lt; n_1n_2n_3\)</span> (souvent vrai), alors <span class="math inline">\(x = m^3\)</span> dans <span class="math inline">\(\mathbb{Z}\)</span> et on peut calculer <span class="math inline">\(m\)</span> en prenant simplement la racine cubique entière !</p>
 <p><strong>Protection</strong> : toujours randomizer le message avant encryption (padding OAEP)</p>
-<p><strong>2. Attaque si message petit</strong> :</p>
+</section>
+<section id="attaque-si-message-petit" class="level4">
+<h4 class="anchored" data-anchor-id="attaque-si-message-petit">Attaque si message petit</h4>
 <p>Si <span class="math inline">\(m &lt; n^{1/e}\)</span>, alors <span class="math inline">\(m^e &lt; n\)</span>, donc <span class="math inline">\(c = m^e\)</span> (dans <span class="math inline">\(\mathbb{Z}\)</span>, pas modulo). On peut calculer directement la racine <span class="math inline">\(e\)</span>-ième !</p>
 <p><strong>Protection</strong> : padding obligatoire</p>
-<p><strong>3. Propriété multiplicative</strong> :</p>
+</section>
+<section id="propriété-multiplicative" class="level4">
+<h4 class="anchored" data-anchor-id="propriété-multiplicative">Propriété multiplicative</h4>
 <p><span class="math display">\[E(m_1) \cdot E(m_2) \equiv (m_1 \cdot m_2)^e \equiv E(m_1 \cdot m_2) \pmod{n}\]</span></p>
 <p>Permet des attaques de type chosen-ciphertext et blind signatures.</p>
-<p><strong>4. Attaque générale</strong> :</p>
+</section>
+<section id="attaque-générale" class="level4">
+<h4 class="anchored">Attaque générale</h4>
 <p>La méthode la plus efficace reste la <strong>factorisation de <span class="math inline">\(n\)</span></strong> (si paramètres bien choisis et implémentation correcte).</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Texte Original">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-103-contents" aria-controls="callout-103" aria-expanded="false" aria-label="Toggle callout">
@@ -5499,56 +5522,596 @@ x \equiv a_t \pmod{n_t}
 <hr>
 </section>
 </section>
+</section>
 <section id="lalgorithme-elgamal" class="level2">
 <h2 class="anchored" data-anchor-id="lalgorithme-elgamal">L’Algorithme ElGamal</h2>
-<section id="fonctionnement-delgamal-encryptiondecryption" class="level3">
-<h3 class="anchored" data-anchor-id="fonctionnement-delgamal-encryptiondecryption">Fonctionnement d’ElGamal (Encryption/Decryption)</h3>
-<p>ElGamal (1985) est basé sur le problème du logarithme discret (DLP).</p>
-<p><strong>Génération des clés</strong> :</p>
-<ol type="1">
-<li>Générer un nombre premier <strong>grand</strong> <span class="math inline">\(p\)</span> (≥ 1024 bits)</li>
-<li>Choisir un <strong>générateur</strong> <span class="math inline">\(\alpha\)</span> de <span class="math inline">\(\mathbb{Z}_p^*\)</span></li>
-<li>Choisir un nombre aléatoire secret <span class="math inline">\(a\)</span> avec <span class="math inline">\(1 \leq a \leq p-2\)</span></li>
-<li>Calculer <span class="math inline">\(\beta := \alpha^a \bmod p\)</span></li>
-</ol>
-<p><strong>Clés résultantes</strong> : - Clé <strong>publique</strong> : <span class="math inline">\((p, \alpha, \beta)\)</span> - Clé <strong>privée</strong> : <span class="math inline">\(a\)</span></p>
-<p><strong>Encryption</strong> (par Bob, vers Alice) :</p>
-<ol type="1">
-<li>Obtenir clé publique authentique <span class="math inline">\((p, \alpha, \beta)\)</span> d’Alice</li>
-<li>Transformer plaintext en entiers <span class="math inline">\(m_i \in [0, p-1]\)</span></li>
-<li>Pour chaque message <span class="math inline">\(m_i\)</span> :
+<p>Système asymétrique (1985) basé sur le <strong>problème du logarithme discret (DLP)</strong>.</p>
+<p><strong>Clés :</strong></p>
 <ul>
-<li>Générer un nombre aléatoire <strong>unique</strong> <span class="math inline">\(k\)</span> avec <span class="math inline">\(1 \leq k \leq p-2\)</span></li>
-<li>Calculer :
+<li>Choisir premier <span class="math inline">\(p\)</span>, générateur <span class="math inline">\(\alpha \in \mathbb{Z}_p^*\)</span>, secret <span class="math inline">\(a\)</span></li>
+<li>Calculer <span class="math inline">\(y = \alpha^a \bmod p\)</span></li>
+<li><strong>Publique</strong> : <span class="math inline">\((p, \alpha, y)\)</span> | <strong>Privée</strong> : <span class="math inline">\(a\)</span></li>
+</ul>
+<p><strong>Chiffrement :</strong> Pour message <span class="math inline">\(m\)</span>, choisir aléatoire <span class="math inline">\(k\)</span> unique</p>
 <ul>
-<li><span class="math inline">\(\gamma := \alpha^k \bmod p\)</span></li>
-<li><span class="math inline">\(\delta := m_i \cdot \beta^k \bmod p\)</span></li>
-</ul></li>
-<li>Envoyer le ciphertext : <span class="math inline">\(c_i := (\gamma, \delta)\)</span></li>
-</ul></li>
-</ol>
-<p><strong>Decryption</strong> (par Alice) :</p>
-<ol type="1">
-<li><p>Utiliser clé privée <span class="math inline">\(a\)</span> pour calculer : <span class="math display">\[\gamma^{p-1-a} \bmod p\]</span> (noter que <span class="math inline">\(\gamma^{p-1-a} \equiv \gamma^{-a} \equiv (\alpha^k)^{-a} \equiv \alpha^{-ak} \pmod{p}\)</span>)</p></li>
-<li><p>Retrouver plaintext : <span class="math display">\[m_i = \delta \cdot \gamma^{-a} \bmod p\]</span></p></li>
-</ol>
-<p><strong>Preuve de fonctionnement</strong> :</p>
-<p><span class="math display">\[\delta \cdot \gamma^{-a} \equiv m \cdot \beta^k \cdot (\alpha^k)^{-a} \equiv m \cdot (\alpha^a)^k \cdot \alpha^{-ak} \equiv m \pmod{p}\]</span></p>
-<div class="callout callout-style-default callout-note callout-titled" title="Texte Original">
+<li><span class="math inline">\(\gamma = \alpha^k \bmod p\)</span></li>
+<li><span class="math inline">\(\delta = m \cdot y^k \bmod p\)</span></li>
+<li>Envoyer <span class="math inline">\((\gamma, \delta)\)</span></li>
+</ul>
+<p><strong>Déchiffrement :</strong> <span class="math inline">\(m = \delta \cdot \gamma^{-a} \bmod p\)</span></p>
+<div class="callout callout-style-default callout-note callout-titled" title="Texte original du cours">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-105-contents" aria-controls="callout-105" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Texte Original
+<span class="screen-reader-only">Note</span>Texte original du cours
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-105" class="callout-105-contents callout-collapse collapse">
-<section id="procédé-dencryptiondecryption-delgamal" class="level3 callout-body-container callout-body">
-<h3 class="anchored" data-anchor-id="procédé-dencryptiondecryption-delgamal">Procédé d’Encryption/Decryption d’ElGamal</h3>
-<p><strong>Génération des clés</strong> : - Chaque entité (A) crée une paire de clés (publique et privée) comme suit : - A génère un nombre premier <span class="math inline">\(p\)</span> de grande taille (len<span class="math inline">\((p) \geq 1024\)</span> bits) et un <strong>générateur</strong> <span class="math inline">\(\alpha\)</span> de <span class="math inline">\(\mathbb{Z}_p^*\)</span>. - A génère un nombre a</p>
+<section id="procédé-dencryptiondecryption-delgamal" class="level2 callout-body-container callout-body">
+<h2 class="anchored" data-anchor-id="procédé-dencryptiondecryption-delgamal">Procédé d’Encryption/Decryption d’ElGamal</h2>
+<p><strong>Génération des clés</strong></p>
+<p>Chaque entité (A) crée une paire de clés (publique et privée) comme suit:</p>
+<ul>
+<li>A génère un nombre premier <span class="math inline">\(p\)</span> (len(<span class="math inline">\(p\)</span>) ≥ 1024 bits) et un <strong>générateur <span class="math inline">\(\alpha\)</span></strong> du groupe multiplicatif <span class="math inline">\(\mathbb{Z}_p^*\)</span></li>
+<li>A génère un nombre aléatoire <span class="math inline">\(a\)</span>, t.q. <span class="math inline">\(1 \leq a \leq p-2\)</span> et calcule <span class="math inline">\(y := \alpha^a \bmod p\)</span></li>
+<li>La <strong>clé publique</strong> de A est <span class="math inline">\((p, \alpha, y)\)</span>, la <strong>clé privée</strong> de A est <span class="math inline">\(a\)</span></li>
+</ul>
+<p><strong>Encryption</strong></p>
+<ul>
+<li>L’entité B obtient <span class="math inline">\((p, \alpha, \alpha^a \bmod p)\)</span>, la clé publique authentique de A</li>
+<li>B transforme son plaintext en une série d’entiers <span class="math inline">\(m_i\)</span>, t.q. <span class="math inline">\(m_i \in [0, p-1]\)</span> <span class="math inline">\(\forall i\)</span></li>
+<li>Pour chaque message <span class="math inline">\(m_i\)</span> :
+<ul>
+<li>B génère un nombre aléatoire <strong>unique</strong> <span class="math inline">\(k\)</span>, t.q. <span class="math inline">\(1 \leq k \leq p-2\)</span></li>
+<li>B calcule <span class="math inline">\(\gamma := \alpha^k \bmod p\)</span> et <span class="math inline">\(\delta := m_i \cdot (\alpha^a)^k \bmod p\)</span> et envoie le ciphertext <span class="math inline">\(c := (\gamma, \delta)\)</span></li>
+</ul></li>
+</ul>
+<p><strong>Decryption</strong></p>
+<ul>
+<li>A utilise sa clé privée <span class="math inline">\(a\)</span> pour calculer <span class="math inline">\(\gamma^{p-1-a} \bmod p\)</span> (à noter que: <span class="math inline">\(\gamma^{p-1-a} \equiv \gamma^{-a} \equiv \alpha^{-ak} \bmod p\)</span>)</li>
+<li>A retrouve le plaintext en calculant: <span class="math inline">\(\delta \cdot \gamma^{-ak} \bmod p\)</span></li>
+</ul>
 </section>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-106-contents" aria-controls="callout-106" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Révision rapide
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-106" class="callout-106-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Base</strong> : DLP dans <span class="math inline">\(\mathbb{Z}_p^*\)</span></p>
+<p><strong>Chiffré</strong> : <span class="math inline">\((\alpha^k, m \cdot y^k)\)</span></p>
+<p><strong>Sécurité</strong> : <span class="math inline">\(k\)</span> doit être unique et grand</p>
+<p><strong>Inconvénient</strong> : double la taille du message</p>
+</div>
+</div>
+</div>
+<section id="remarques-essentielles" class="level3">
+<h3 class="anchored" data-anchor-id="remarques-essentielles">Remarques essentielles</h3>
+<ul>
+<li><strong>Preuve</strong> : <span class="math inline">\(\delta \cdot \gamma^{-a} = m \cdot (\alpha^a)^k \cdot (\alpha^k)^{-a} = m \bmod p\)</span></li>
+<li><strong>Sécurité</strong> : basée sur DLP (complexité sub-exponentielle proche de la factorisation)</li>
+<li><strong>Exposants</strong> : <span class="math inline">\(k\)</span> et <span class="math inline">\(a\)</span> doivent être grands (sinon vulnérable à baby-step giant-step)</li>
+<li><strong>Réutilisation interdite</strong> : si <span class="math inline">\(k\)</span> répété, <span class="math inline">\(\delta_1/\delta_2 = m_1/m_2\)</span> révèle les messages</li>
+<li><strong>Inconvénient majeur</strong> : expansion ×2 de la taille du chiffré</li>
+<li><strong>Généralisation</strong> : fonctionne sur <span class="math inline">\(GF(2^n)\)</span> ou courbes elliptiques</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-107-contents" aria-controls="callout-107" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Texte original - Remarques
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-107" class="callout-107-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Preuve</strong> que le schéma fonctionne : Si <span class="math inline">\(s \equiv k^{-1}(m_h - ar) \bmod (p-1)\)</span>, on a que: <span class="math inline">\(m_h \equiv (ar + ks) \bmod (p-1)\)</span> et <span class="math inline">\(v_2 = \alpha^{H(m)} \bmod p\)</span>. Si, comme on souhaite montrer <span class="math inline">\(m_h = H(m)\)</span>, en réduisant les exposants mod <span class="math inline">\((p-1)\)</span>, on peut réécrire <span class="math inline">\(v_2\)</span>: <span class="math inline">\(v_2 \equiv \alpha^{ar+ks} \bmod p\)</span>. D’autre part: <span class="math inline">\(v_1 = y^r\alpha^{rs} \equiv \alpha^{ar}\alpha^{ks} \equiv \alpha^{ar+ks} \bmod p\)</span>.</p>
+<p>Le procédé d’ElGamal se base sur la difficulté de calculer des <strong>logarithmes discrets modulo un nombre premier</strong> (problème DLP) même s’il n’a pas été prouvé qu’il soit strictement équivalent à ce problème.</p>
+<p>Les <strong>algorithmes les plus efficaces</strong> connus ont une complexité sub-exponentielle très proche de celle de la factorisation (on utilise souvent les mêmes algorithmes).</p>
+<p>Les <strong>exposants choisis</strong> (<span class="math inline">\(k\)</span>, <span class="math inline">\(a\)</span>) doivent être de grande taille car il existe des algorithmes efficaces pour calculer des logarithmes discrets modulo un nombre premier lorsque l’exposant est petit (baby-step giant-step algorithm).</p>
+<p>Un <strong>inconvénient d’ElGamal</strong> est qu’il multiplie par 2 la longueur du ciphertext.</p>
+<p>Il est <strong>essentiel</strong> pour la sécurité du procédé que le nombre aléatoire <span class="math inline">\(k\)</span> ne soit pas répété, autrement: soient <span class="math inline">\((\gamma_1, \delta_1)\)</span> et <span class="math inline">\((\gamma_2, \delta_2)\)</span> les deux ciphertexts générés, on a que <span class="math inline">\(\delta_1/\delta_2 = m_1/m_2\)</span> et par conséquent, il est trivial de retrouver un plaintext à partir de l’autre.</p>
+<p>Le procédé d’ElGamal peut se <strong>généraliser</strong> à d’autres groupes comme <span class="math inline">\(GF(2^n)\)</span> ou les courbes elliptiques.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-108-contents" aria-controls="callout-108" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Révision rapide - Remarques
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-108" class="callout-108-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Équivalence</strong> : basé sur DLP (non prouvé équivalent)</p>
+<p><strong><span class="math inline">\(k\)</span> unique</strong> : CRITIQUE - sinon <span class="math inline">\(m_1/m_2\)</span> révélé</p>
+<p><strong>Taille clés</strong> : exposants grands nécessaires</p>
+<p><strong>Extensions</strong> : <span class="math inline">\(GF(2^n)\)</span>, courbes elliptiques</p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="algorithme-de-rabin" class="level2">
+<h2 class="anchored" data-anchor-id="algorithme-de-rabin">Algorithme de Rabin</h2>
+<p>Système asymétrique <strong>équivalent à la factorisation</strong> (provably secure).</p>
+<p><strong>Clés :</strong></p>
+<ul>
+<li>Générer deux premiers <span class="math inline">\(p\)</span>, <span class="math inline">\(q\)</span> (≥1024 bits total), calculer <span class="math inline">\(n = pq\)</span>
+<ul>
+<li><strong>Publique</strong> : <span class="math inline">\(n\)</span></li>
+<li><strong>Privée</strong> : <span class="math inline">\((p, q)\)</span></li>
+</ul></li>
+</ul>
+<p><strong>Chiffrement :</strong> <span class="math inline">\(c = m^2 \bmod n\)</span></p>
+<p><strong>Déchiffrement :</strong></p>
+<ul>
+<li>Calculer les 4 racines carrées de <span class="math inline">\(c \bmod n\)</span> (via racines mod <span class="math inline">\(p\)</span> et mod <span class="math inline">\(q\)</span>)</li>
+<li>Identifier le bon message par redondance</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled" title="Texte original du cours">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-109-contents" aria-controls="callout-109" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Texte original du cours
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-109" class="callout-109-contents callout-collapse collapse">
+<section id="procédé-dencryptiondecryption-de-rabin" class="level2 callout-body-container callout-body">
+<h2 class="anchored" data-anchor-id="procédé-dencryptiondecryption-de-rabin">Procédé d’Encryption/Decryption de Rabin</h2>
+<p><strong>Génération des clés</strong></p>
+<p>Chaque entité (A) crée une paire de clés (publique et privée) comme suit:</p>
+<ul>
+<li>A génère deux nombres premiers aléatoires <span class="math inline">\(p\)</span> et <span class="math inline">\(q\)</span> de grande taille (len(<span class="math inline">\(pq\)</span>) ≥ 1024)</li>
+<li>A calcule <span class="math inline">\(n := pq\)</span></li>
+<li>La <strong>clé publique</strong> de A est <span class="math inline">\(n\)</span>, la <strong>clé privée</strong> de A est <span class="math inline">\((p, q)\)</span></li>
+</ul>
+<p><strong>Encryption</strong></p>
+<ul>
+<li>L’entité B obtient <span class="math inline">\(n\)</span>, la clé publique authentique de A</li>
+<li>B transforme son plaintext en une série d’entiers <span class="math inline">\(m_i\)</span>, t.q. <span class="math inline">\(m_i \in [0, n-1]\)</span> <span class="math inline">\(\forall i\)</span></li>
+<li>B calcule <span class="math inline">\(c_i = m_i^2 \bmod n\)</span> pour chaque message <span class="math inline">\(m_i\)</span></li>
+<li>B envoie tous les ciphertext <span class="math inline">\(c_i\)</span> à A</li>
+</ul>
+<p><strong>Decryption</strong></p>
+<ul>
+<li>A utilise sa clé privée <span class="math inline">\((p, q)\)</span> pour retrouver les <strong>4 solutions</strong> de l’équation: <span class="math inline">\(c_i = x^2 \bmod n\)</span> en utilisant des <strong>algorithmes efficaces</strong> pour calculer des racines carrées <span class="math inline">\(\bmod p\)</span> et <span class="math inline">\(\bmod q\)</span></li>
+<li>A détermine soit par une <strong>indication supplémentaire</strong> de B, soit par une <strong>analyse de redondance</strong> lequel des 4 messages <span class="math inline">\(m_1, m_2, m_3, m_4\)</span> est le plaintext original</li>
+</ul>
+</section>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-110-contents" aria-controls="callout-110" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Révision rapide
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-110" class="callout-110-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Base</strong> : SQROOTP (racine carrée mod composite)</p>
+<p><strong>Avantage</strong> : équivalent prouvé à factorisation</p>
+<p><strong>Problème</strong> : 4 solutions possibles, nécessite redondance</p>
+<p><strong>Vulnérabilité</strong> : attaque chosen-ciphertext révèle facteurs</p>
+</div>
+</div>
+</div>
+<section id="remarques-essentielles-1" class="level3">
+<h3 class="anchored" data-anchor-id="remarques-essentielles-1">Remarques essentielles</h3>
+<ul>
+<li><strong>Sécurité prouvée</strong> : SQROOTP ⟺ FACTP (seul algorithme avec équivalence prouvée)</li>
+<li><strong>Attaque chosen-ciphertext</strong> : si A décrypte <span class="math inline">\(c = m^2 \bmod n\)</span> choisi par adversaire M
+<ul>
+<li>M reçoit une racine <span class="math inline">\(m_x\)</span> parmi 4 possibles</li>
+<li>Si <span class="math inline">\(m \neq m_x \bmod n\)</span> (prob. 0.5), alors <span class="math inline">\(\gcd(m - m_x, n)\)</span> donne un facteur de <span class="math inline">\(n\)</span></li>
+</ul></li>
+<li><strong>Solution</strong> : exiger redondance suffisante pour identifier solution unique sans ambiguïté</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-111-contents" aria-controls="callout-111" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Texte original - Remarques
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-111" class="callout-111-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Le procédé de Rabin est basé sur l’<strong>impossibilité de trouver des racines carrées modulo un composite de factorisation inconnue</strong> (problème SQROOTP).</p>
+<p>L’<strong>intérêt principal</strong> de cet algorithme réside dans le fait qu’il a été <strong>prouvé comme étant équivalent à la factorisation</strong> (SQROOTP ⟺ FACTP). Cet algorithme appartient donc à la catégorie <strong>provably secure</strong> pour toute attaque passive.</p>
+<p>Les <strong>attaques actives</strong> peuvent, dans certains cas, compromettre la sécurité de l’algorithme. Plus précisément, si on monte l’attaque <strong>chosen ciphertext</strong> suivant:</p>
+<ul>
+<li>L’attaquant M génère un <span class="math inline">\(m\)</span> et envoie à A le ciphertext <span class="math inline">\(c = m^2 \bmod n\)</span>.</li>
+<li>A répond avec une racine <span class="math inline">\(m_x\)</span> parmi les 4 possibles <span class="math inline">\(m_1, m_2, m_3, m_4\)</span>.</li>
+<li>Si <span class="math inline">\(m \neq m_x \bmod n\)</span> (probabilité 0.5), M recommence avec un nouveau <span class="math inline">\(m\)</span>.</li>
+<li>Sinon, A calcule <span class="math inline">\(\gcd(m - m_x, n)\)</span> et obtient ainsi un des deux facteurs de <span class="math inline">\(n\)</span>.</li>
+</ul>
+<p>Cette attaque pourrait être <strong>évitée</strong> si le procédé exigeait une <strong>redondance suffisante</strong> dans les plaintexts permettant à A d’identifier sans ambiguïté laquelle des solutions possibles est le plaintext original. Dans ce cas, A répondrait toujours <span class="math inline">\(m\)</span> et jetterait les autres solutions n’ayant pas le niveau de redondance préétabli.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-112-contents" aria-controls="callout-112" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Révision rapide - Remarques
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-112" class="callout-112-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Unique</strong> : seul algorithme prouvé équivalent à FACTP</p>
+<p><strong>Attaque</strong> : chosen-ciphertext donne facteurs (prob. 0.5)</p>
+<p><strong>Parade</strong> : redondance obligatoire dans messages</p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="comparaison-rsa---elgamal---rabin" class="level2">
+<h2 class="anchored" data-anchor-id="comparaison-rsa---elgamal---rabin">Comparaison RSA - ElGamal - Rabin</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 30%">
+<col style="width: 16%">
+<col style="width: 30%">
+<col style="width: 23%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Critère</th>
+<th>RSA</th>
+<th>ElGamal</th>
+<th>Rabin</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Problème</strong></td>
+<td>RSAP</td>
+<td>DLP</td>
+<td>SQROOTP</td>
+</tr>
+<tr class="even">
+<td><strong>Sécurité</strong></td>
+<td>Équiv. factorisation (cas générique)</td>
+<td>Basée sur DLP</td>
+<td><strong>Prouvée</strong> ⟺ factorisation</td>
+</tr>
+<tr class="odd">
+<td><strong>Expansion</strong></td>
+<td>1:1</td>
+<td><strong>1:2</strong></td>
+<td>1:1</td>
+</tr>
+<tr class="even">
+<td><strong>Déchiffrement</strong></td>
+<td>Déterministe</td>
+<td>Déterministe</td>
+<td><strong>4 solutions</strong></td>
+</tr>
+<tr class="odd">
+<td><strong>Signature</strong></td>
+<td>Oui</td>
+<td>Oui</td>
+<td>Oui (avec précautions)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="courbes-elliptiques-idée-de-base" class="level2">
+<h2 class="anchored" data-anchor-id="courbes-elliptiques-idée-de-base">Courbes Elliptiques (Idée de base)</h2>
+<section id="concept-fondamental" class="level3">
+<h3 class="anchored" data-anchor-id="concept-fondamental">Concept fondamental</h3>
+<p>Une <strong>courbe elliptique</strong> <span class="math inline">\(E\)</span> est définie par : <span class="math inline">\(y^2 = x^3 + ax + b\)</span> (avec discriminant <span class="math inline">\(4a^3 + 27b^2 \neq 0\)</span>).</p>
+<p><strong>Opération clé : Addition de points</strong></p>
+<ul>
+<li>Géométriquement : tracer une droite entre deux points <span class="math inline">\(P\)</span> et <span class="math inline">\(Q\)</span>, trouver le 3ᵉ point d’intersection, puis prendre son symétrique</li>
+<li>Forme un <strong>groupe commutatif</strong> avec point à l’infini <span class="math inline">\(\mathcal{O}\)</span> comme identité</li>
+<li><strong>Multiplication scalaire</strong> : <span class="math inline">\(kP = P + P + ... + P\)</span> (<span class="math inline">\(k\)</span> fois)</li>
+</ul>
+<p><strong>Avantage cryptographique :</strong></p>
+<ul>
+<li>Le <strong>problème ECDLP</strong> : trouver <span class="math inline">\(k\)</span> tel que <span class="math inline">\(Q = kP\)</span> est très difficile (effort exponentiel)</li>
+<li><strong>Clés plus courtes</strong> pour même sécurité qu’en <span class="math inline">\(\mathbb{Z}_p^*\)</span></li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-113-contents" aria-controls="callout-113" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Texte original - Définition
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-113" class="callout-113-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Une <strong>courbe elliptique</strong> est un ensemble de points <span class="math inline">\(E\)</span> défini par l’équation: <span class="math inline">\(y^2 = x^3 + ax + b\)</span>, avec <span class="math inline">\(x, y, a\)</span> et <span class="math inline">\(b\)</span> des nombres rationnels, entiers ou entiers modulo <span class="math inline">\(m\)</span> (<span class="math inline">\(m &gt; 1\)</span>). L’ensemble <span class="math inline">\(E\)</span> contient également un “point à l’infini” noté <span class="math inline">\(\mathcal{O}\)</span>. Le point <span class="math inline">\(\mathcal{O}\)</span> n’est pas dans la courbe mais il est l’élément identité de <span class="math inline">\(E\)</span>.</p>
+<p>On choisira pour nos calculs les courbes elliptiques n’ayant pas de racines multiples ou, en d’autres termes, des courbes où le <strong>discriminant</strong> <span class="math inline">\(4a^3 + 27b^2 \neq 0\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-114-contents" aria-controls="callout-114" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Révision rapide - Concept
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-114" class="callout-114-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Équation</strong> : <span class="math inline">\(y^2 = x^3 + ax + b\)</span></p>
+<p><strong>Structure</strong> : groupe avec <span class="math inline">\(\mathcal{O}\)</span></p>
+<p><strong>Opération</strong> : addition géométrique</p>
+<p><strong>Problème dur</strong> : ECDLP</p>
+</div>
+</div>
+</div>
+</section>
+<section id="addition-sur-courbes-elliptiques" class="level3">
+<h3 class="anchored" data-anchor-id="addition-sur-courbes-elliptiques">Addition sur courbes elliptiques</h3>
+<p>Soit <span class="math inline">\(P := (x, y) \in E\)</span>, on définit <span class="math inline">\(-P := (x, -y)\)</span> (symétrique par rapport à l’axe des <span class="math inline">\(x\)</span>). On a <span class="math inline">\(P + (-P) = \mathcal{O}\)</span>.</p>
+<p>Pour deux points <span class="math inline">\(P, Q \in E\)</span> avec <span class="math inline">\(Q \neq -P\)</span>, on définit <span class="math inline">\(P + Q := R\)</span> où <span class="math inline">\(-R\)</span> est le 3ᵉ point d’intersection entre la courbe et la droite passant par <span class="math inline">\(P\)</span> et <span class="math inline">\(Q\)</span>.</p>
+<p>Pour le <strong>doublement</strong> : <span class="math inline">\(2P = R\)</span> où <span class="math inline">\(-R\)</span> est le point d’intersection de la courbe avec la tangente à la courbe au point <span class="math inline">\(P\)</span>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-115-contents" aria-controls="callout-115" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Texte original - Addition
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-115" class="callout-115-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Soit <span class="math inline">\(P := (x, y) \in E\)</span>, on définit <span class="math inline">\(-P\)</span> comme <span class="math inline">\(-P := (x, -y)\)</span>. Graphiquement, <span class="math inline">\(-P\)</span> est le point symétrique de <span class="math inline">\(P\)</span> par rapport à l’axe des <span class="math inline">\(x\)</span>. À noter que <span class="math inline">\(P + (-P) = \mathcal{O}\)</span>.</p>
+<p>Soient deux points <span class="math inline">\(P, Q \in E\)</span>, tels que <span class="math inline">\(Q \neq -P\)</span>, on définit l’addition <span class="math inline">\(P + Q := R\)</span> où <span class="math inline">\(R \in E\)</span> tel que <span class="math inline">\(-R\)</span> est le 3ᵉ point d’intersection entre la courbe et la droite qui passe par <span class="math inline">\(P\)</span> et <span class="math inline">\(Q\)</span>.</p>
+<p>L’ensemble <span class="math inline">\(E\)</span> avec <span class="math inline">\(\oplus\)</span> définit un <strong>groupe commutatif</strong> pour l’addition.</p>
+<p>Soit <span class="math inline">\(P \in E\)</span>, le point <span class="math inline">\(2P = R\)</span>, tel que <span class="math inline">\(-R\)</span> est le point d’intersection de la courbe avec la droite tangente à la courbe au point <span class="math inline">\(P\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-116-contents" aria-controls="callout-116" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Révision rapide - Addition
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-116" class="callout-116-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Inverse</strong> : <span class="math inline">\(-P = (x, -y)\)</span></p>
+<p><strong>Addition</strong> : 3ᵉ point d’intersection + symétrie</p>
+<p><strong>Doublement</strong> : tangente + symétrie</p>
+<p><strong>Propriété</strong> : groupe commutatif</p>
+</div>
+</div>
+</div>
+</section>
+<section id="ecdlp-et-avantages-cryptographiques" class="level3">
+<h3 class="anchored" data-anchor-id="ecdlp-et-avantages-cryptographiques">ECDLP et avantages cryptographiques</h3>
+<p>Lorsque la courbe elliptique est définie sur le corps <span class="math inline">\(\mathbb{Z}_p\)</span> avec <span class="math inline">\(p\)</span> premier de grande taille (<span class="math inline">\(y^2 \equiv x^3 + ax + b \bmod p\)</span>), le calcul de <span class="math inline">\(k \in \mathbb{Z}_p\)</span> tel que <span class="math inline">\(Q = kP\)</span> avec <span class="math inline">\((P, Q)\)</span> connus est <strong>très difficile</strong> (effort exponentiel). Ce problème est le <strong>Elliptic Curve Discrete Logarithm Problem (ECDLP)</strong>.</p>
+<p><strong>Avantage principal</strong> : taille des clés beaucoup plus petite pour une sécurité équivalente.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-117-contents" aria-controls="callout-117" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Texte original - ECDLP et avantages
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-117" class="callout-117-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Lorsque la courbe elliptique est définie sur le corps <span class="math inline">\(\mathbb{Z}_p\)</span> avec <span class="math inline">\(p\)</span> un nombre premier de grande taille (<span class="math inline">\(y^2 \equiv x^3 + ax + b \bmod p\)</span>), le calcul de <span class="math inline">\(k \in \mathbb{Z}_p\)</span> tel que <span class="math inline">\(Q = kP\)</span> avec <span class="math inline">\((P, Q)\)</span> connus, est très difficile (nécessite un effort exponentiel). Ce problème est connu comme: <strong>Elliptic Curve Discrete Logarithm Problem (ECDLP)</strong>.</p>
+<p>L’<strong>avantage principal</strong> de la cryptographie publique basée sur des courbes elliptiques est que la taille des nombres utilisés (et donc, des clés) est plus petite.</p>
+<p>Ceci est dû à la <strong>complexité accrue</strong> des calculs sur <span class="math inline">\(E_p\)</span> (courbe elliptique définie sur le corps <span class="math inline">\(\mathbb{Z}_p\)</span>) par rapport aux corps habituels tels que <span class="math inline">\(\mathbb{Z}_p\)</span> ou <span class="math inline">\(GF(2^m)\)</span>.</p>
+<p>La <strong>représentation d’un plaintext en points</strong> de la courbe reste une opération complexe.</p>
+<p>En Octobre 2003, la <strong>US National Security Agency (NSA)</strong> a acheté un brevet de Certicom pour l’utilisation de la cryptographie à courbes elliptiques.</p>
+<p>En Septembre 2013 Claus Diem montré que sous certaines conditions le problème ECDLP pouvait être résolu en temps <strong>sub-exponentiel</strong>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-118-contents" aria-controls="callout-118" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Révision rapide - ECDLP
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-118" class="callout-118-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Problème</strong> : trouver <span class="math inline">\(k\)</span> dans <span class="math inline">\(Q = kP\)</span> (exponentiel)</p>
+<p><strong>Gain</strong> : clés ~6-10× plus courtes</p>
+<p><strong>Limite</strong> : représenter messages en points difficile</p>
+<p><strong>NSA</strong> : adopté en 2003</p>
+</div>
+</div>
+</div>
+</section>
+<section id="tableau-de-comparaison-des-tailles-de-clés" class="level3">
+<h3 class="anchored" data-anchor-id="tableau-de-comparaison-des-tailles-de-clés">Tableau de comparaison des tailles de clés</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>AES (symétrique)</th>
+<th>RSA/DH</th>
+<th>Courbes Elliptiques</th>
+<th>Rapport</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>56 bits</td>
+<td>512 bits</td>
+<td>112 bits</td>
+<td>1:4.6</td>
+</tr>
+<tr class="even">
+<td>80 bits</td>
+<td>1024 bits</td>
+<td>160 bits</td>
+<td>1:6.4</td>
+</tr>
+<tr class="odd">
+<td>112 bits</td>
+<td>2048 bits</td>
+<td>224 bits</td>
+<td>1:9.1</td>
+</tr>
+<tr class="even">
+<td>128 bits</td>
+<td>3072 bits</td>
+<td>256 bits</td>
+<td>1:12</td>
+</tr>
+<tr class="odd">
+<td>256 bits</td>
+<td>15360 bits</td>
+<td>512 bits</td>
+<td>1:30</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-119-contents" aria-controls="callout-119" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Texte original - Tableau
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-119" class="callout-119-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Ce tableau montre les rapports des tailles des clés par rapport à celles de RSA pour une sécurité équivalente.</p>
+<p><em>(Tableau extrait du document original)</em></p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="elgamal-sur-courbes-elliptiques" class="level2">
+<h2 class="anchored" data-anchor-id="elgamal-sur-courbes-elliptiques">ElGamal sur Courbes Elliptiques</h2>
+<section id="adaptation-directe" class="level3">
+<h3 class="anchored" data-anchor-id="adaptation-directe">Adaptation directe</h3>
+<p>Remplacer opérations dans <span class="math inline">\(\mathbb{Z}_p^*\)</span> par opérations sur <span class="math inline">\(E_p\)</span></p>
+<p><strong>Clés :</strong></p>
+<ul>
+<li>Choisir courbe <span class="math inline">\(E_p\)</span> et point <span class="math inline">\(P_0 \in E_p\)</span> de grand ordre</li>
+<li>Secret <span class="math inline">\(x\)</span>, calculer <span class="math inline">\(P_a = xP_0\)</span></li>
+<li><strong>Publique</strong> : <span class="math inline">\((E_p, P_0, P_a)\)</span> | <strong>Privée</strong> : <span class="math inline">\(x\)</span></li>
+</ul>
+<p><strong>Chiffrement :</strong> Pour message <span class="math inline">\(m_i \in E_p\)</span></p>
+<ul>
+<li>Choisir <span class="math inline">\(k\)</span> aléatoire</li>
+<li><span class="math inline">\(\gamma = kP_0\)</span>, <span class="math inline">\(\delta = kP_a + m_i\)</span></li>
+<li>Envoyer <span class="math inline">\((\gamma, \delta)\)</span></li>
+</ul>
+<p><strong>Déchiffrement :</strong> <span class="math inline">\(m_i = \delta - x\gamma\)</span></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-120-contents" aria-controls="callout-120" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Texte original - ElGamal EC
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-120" class="callout-120-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Génération des clés</strong></p>
+<p>Chaque entité (A) crée une paire de clés (publique et privée) comme suit:</p>
+<ul>
+<li>A choisit une courbe elliptique <span class="math inline">\(E_p\)</span> avec <span class="math inline">\(p\)</span>, un nombre premier de grande taille (len(<span class="math inline">\(p\)</span>) bits) et un point <span class="math inline">\(P_0 \in E_p\)</span>.</li>
+<li>A génère un nombre aléatoire <span class="math inline">\(x\)</span>, tel que <span class="math inline">\(1 \leq x \leq p\)</span> et calcule <span class="math inline">\(P_a = xP_0\)</span> (multiplication par un scalaire sur <span class="math inline">\(E_p\)</span>, pour laquelle, il existe des algorithmes efficaces).</li>
+<li>La clé publique de A est <span class="math inline">\((E_p, P_0, P_a)\)</span>, la clé privée de A est <span class="math inline">\(x\)</span>.</li>
+</ul>
+<p><strong>Encryption</strong></p>
+<p>L’entité B obtient <span class="math inline">\((E_p, P_0, P_a)\)</span>, la clé publique authentique de A.</p>
+<ul>
+<li>B transforme son plaintext en une série d’entiers <span class="math inline">\(m_i\)</span>, tel que <span class="math inline">\(m_i \in E_p\)</span> pour tout <span class="math inline">\(i\)</span>.</li>
+<li>Pour chaque message <span class="math inline">\(m_i\)</span> :
+<ul>
+<li>B génère un nombre aléatoire unique <span class="math inline">\(k\)</span>, tel que <span class="math inline">\(1 \leq k \leq p\)</span>.</li>
+<li>B calcule <span class="math inline">\(\gamma := kP_0\)</span> et <span class="math inline">\(\delta := kP_a + m_i\)</span> et envoie le ciphertext <span class="math inline">\(c := (\gamma, \delta)\)</span>.</li>
+</ul></li>
+</ul>
+<p><strong>Decryption</strong></p>
+<ul>
+<li>A utilise sa clé privée <span class="math inline">\(x\)</span> pour calculer: <span class="math inline">\(x\gamma = xkP_0 = kP_a\)</span>.</li>
+<li>A retrouve le plaintext en calculant: <span class="math inline">\(\delta - kP_a = kP_a + m_i - kP_a = m_i\)</span>.</li>
+</ul>
+<p>La sécurité du schéma s’appuie sur <strong>ECDLP</strong> !</p>
+<p>Il est également nécessaire d’<strong>authentifier</strong> les parties publiques échangées afin d’éviter les attaques man-in-the middle précédemment décrites.</p>
+<p>Les propriétés du protocole sont identiques au cas <span class="math inline">\(\mathbb{Z}_p^*\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-121-contents" aria-controls="callout-121" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Révision rapide - ElGamal EC
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-121" class="callout-121-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Principe</strong> : même qu’ElGamal sur <span class="math inline">\(E_p\)</span></p>
+<p><strong>Opérations</strong> : + et × scalaire sur points</p>
+<p><strong>Sécurité</strong> : ECDLP</p>
+<p><strong>Authentification</strong> : nécessaire contre MitM</p>
+<p><strong>Avantage</strong> : clés courtes</p>
+</div>
 </div>
 </div>
 
