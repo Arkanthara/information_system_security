@@ -324,6 +324,39 @@ window.Quarto = {
   <li><a href="#summary-table-of-schemes" id="toc-summary-table-of-schemes" class="nav-link" data-scroll-target="#summary-table-of-schemes">Summary Table of Schemes</a></li>
   <li><a href="#types-of-attacks" id="toc-types-of-attacks" class="nav-link" data-scroll-target="#types-of-attacks">Types of Attacks</a></li>
   </ul></li>
+  <li><a href="#authentication" id="toc-authentication" class="nav-link" data-scroll-target="#authentication">Authentication</a>
+  <ul class="collapse">
+  <li><a href="#authentication-of-data-origin-and-entities" id="toc-authentication-of-data-origin-and-entities" class="nav-link" data-scroll-target="#authentication-of-data-origin-and-entities">Authentication of Data Origin and Entities</a>
+  <ul class="collapse">
+  <li><a href="#authentication-methods" id="toc-authentication-methods" class="nav-link" data-scroll-target="#authentication-methods">Authentication Methods</a></li>
+  <li><a href="#entity-authentication-introduction" id="toc-entity-authentication-introduction" class="nav-link" data-scroll-target="#entity-authentication-introduction">Entity Authentication – Introduction</a></li>
+  </ul></li>
+  <li><a href="#attacks-and-countermeasures" id="toc-attacks-and-countermeasures" class="nav-link" data-scroll-target="#attacks-and-countermeasures">Attacks and Countermeasures</a>
+  <ul class="collapse">
+  <li><a href="#dictionary-attacks" id="toc-dictionary-attacks" class="nav-link" data-scroll-target="#dictionary-attacks">Dictionary Attacks</a></li>
+  <li><a href="#plaintext-equivalence" id="toc-plaintext-equivalence" class="nav-link" data-scroll-target="#plaintext-equivalence">Plaintext Equivalence</a></li>
+  </ul></li>
+  <li><a href="#weak-authentication" id="toc-weak-authentication" class="nav-link" data-scroll-target="#weak-authentication">Weak Authentication</a>
+  <ul class="collapse">
+  <li><a href="#fixed-passwords" id="toc-fixed-passwords" class="nav-link" data-scroll-target="#fixed-passwords">Fixed Passwords</a></li>
+  <li><a href="#variable-passwords" id="toc-variable-passwords" class="nav-link" data-scroll-target="#variable-passwords">Variable Passwords</a></li>
+  </ul></li>
+  <li><a href="#strong-authentication" id="toc-strong-authentication" class="nav-link" data-scroll-target="#strong-authentication">Strong Authentication</a>
+  <ul class="collapse">
+  <li><a href="#symmetric" id="toc-symmetric" class="nav-link" data-scroll-target="#symmetric">Symmetric</a></li>
+  <li><a href="#asymmetric" id="toc-asymmetric" class="nav-link" data-scroll-target="#asymmetric">Asymmetric</a></li>
+  </ul></li>
+  <li><a href="#zero-knowledge-proofs" id="toc-zero-knowledge-proofs" class="nav-link" data-scroll-target="#zero-knowledge-proofs">Zero-Knowledge Proofs</a>
+  <ul class="collapse">
+  <li><a href="#concepts" id="toc-concepts" class="nav-link" data-scroll-target="#concepts">Concepts</a></li>
+  <li><a href="#zkip-intuitive-example-ali-babas-cave" id="toc-zkip-intuitive-example-ali-babas-cave" class="nav-link" data-scroll-target="#zkip-intuitive-example-ali-babas-cave">ZKIP – Intuitive Example (Ali Baba’s Cave)</a></li>
+  <li><a href="#zkip-graph-isomorphism" id="toc-zkip-graph-isomorphism" class="nav-link" data-scroll-target="#zkip-graph-isomorphism">ZKIP – Graph Isomorphism</a></li>
+  <li><a href="#zkip-fiat-shamir-algorithm" id="toc-zkip-fiat-shamir-algorithm" class="nav-link" data-scroll-target="#zkip-fiat-shamir-algorithm">ZKIP – Fiat-Shamir Algorithm</a></li>
+  <li><a href="#zkip-practical-implementations" id="toc-zkip-practical-implementations" class="nav-link" data-scroll-target="#zkip-practical-implementations">ZKIP – Practical Implementations</a></li>
+  <li><a href="#zkip-mafia-attack-and-final-remarks" id="toc-zkip-mafia-attack-and-final-remarks" class="nav-link" data-scroll-target="#zkip-mafia-attack-and-final-remarks">ZKIP – Mafia Attack and Final Remarks</a></li>
+  </ul></li>
+  <li><a href="#summary-attacks-and-protections" id="toc-summary-attacks-and-protections" class="nav-link" data-scroll-target="#summary-attacks-and-protections">Summary – Attacks and Protections</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -8077,6 +8110,1383 @@ pp:1Qhw.oihEtHK6:359:355:PP:/net/spp_telecom/pp:/bin/cs</code></pre>
 </div>
 </div>
 </div>
+<p>Here is the <strong>exact English translation</strong> of your document, preserving all content, structure, formatting, and technical terminology:</p>
+<hr>
+</section>
+</section>
+<section id="authentication" class="level1">
+<h1>Authentication</h1>
+<section id="authentication-of-data-origin-and-entities" class="level2">
+<h2 class="anchored" data-anchor-id="authentication-of-data-origin-and-entities">Authentication of Data Origin and Entities</h2>
+<section id="authentication-methods" class="level3">
+<h3 class="anchored" data-anchor-id="authentication-methods">Authentication Methods</h3>
+<p>Authentication of origin ensures that a message genuinely comes from the claimed sender.</p>
+<p><strong>Symmetric Methods:</strong></p>
+<ul>
+<li><strong>MAC alone</strong>: <code>A → B: X, MACk(X)</code> – B verifies using the shared key <em>k</em></li>
+<li><strong>MDC + encryption</strong>: <code>A → B: X, Ek(MDC(X))</code> or <code>A → B: Ek(X, MDC(X))</code></li>
+</ul>
+<p><strong>Asymmetric Method:</strong></p>
+<ul>
+<li><strong>MDC + signature</strong>: <code>A → B: X, Sigpriv-A(MDC(X))</code> – Also provides non-repudiation</li>
+</ul>
+<p><strong>Limitations:</strong> These simple protocols do not protect against replay attacks or ensure message freshness. Time- or context-aware mechanisms are required.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-170-contents" aria-controls="callout-170" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Original Text
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-170" class="callout-170-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Authentication of Data Origin</strong></p>
+<p><strong>1) MAC with a symmetric key <em>k</em> known to A and B:</strong> <code>A → B: X, MACk(X)</code> If B computes <code>MACk(X)</code> independently and obtains the same value ⇒ the message originates from A.</p>
+<p><strong>2) MDC + symmetric encryption (key <em>k</em> known to A and B):</strong> <code>A → B: X, Ek(MDC(X))</code> B computes <code>MDC(X)</code> then <code>Ek(MDC(X))</code>. If equal ⇒ message comes from A.</p>
+<p><strong>3) As 2) with confidentiality of X:</strong> <code>A → B: Ek(X, MDC(X))</code></p>
+<p><strong>4) MDC + digital signature:</strong> <code>A → B: X, Sigpriv-A(MDC(X))</code> B computes <code>MDC(X)</code> and verifies <code>Sigpriv-A(MDC(X))</code> using an authentic copy of <em>pub-A</em>. If equal ⇒ A is the originator. This solution also provides <strong>non-repudiation of origin</strong>.</p>
+<p>These simple protocols offer no support for <strong>uniqueness</strong> or <strong>freshness (timeliness)</strong> of received messages and are vulnerable to <strong>replay attacks</strong>. They require mechanisms accounting for time or transaction context.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-171-contents" aria-controls="callout-171" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Quick Review
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-171" class="callout-171-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>4 Methods</strong></p>
+<ul>
+<li>MAC alone</li>
+<li>MDC + encryption</li>
+<li>MDC + confidential encryption</li>
+<li>MDC + signature</li>
+</ul>
+<p><strong>Warning:</strong> Vulnerable to replay attacks without temporal mechanisms</p>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">graph LR
+    A[Sender A] --&gt;|X, MAC/Signature| B[Receiver B]
+    B --&gt;|Verifies| C{Authentic?}
+    C --&gt;|Yes| D[Accept]
+    C --&gt;|No| E[Reject]
+
+    style A fill:#e1f5ff
+    style B fill:#e1f5ff
+    style D fill:#d4edda
+    style E fill:#f8d7da
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="entity-authentication-introduction" class="level3">
+<h3 class="anchored" data-anchor-id="entity-authentication-introduction">Entity Authentication – Introduction</h3>
+<section id="objectives-of-a-robust-protocol" class="level4">
+<h4 class="anchored" data-anchor-id="objectives-of-a-robust-protocol">Objectives of a Robust Protocol</h4>
+<p>Entity authentication (or identification) aims to prove an entity’s identity in real time.</p>
+<p><strong>Required Properties:</strong></p>
+<ol type="1">
+<li>If A and B are honest and A authenticates, B must accept A’s identity.</li>
+<li>B cannot reuse A’s information to impersonate A to C.</li>
+<li>Negligible probability that entity C successfully impersonates A.</li>
+<li>Property 3 holds even if C has observed or participated in prior protocol instances.</li>
+</ol>
+<p><strong>Basic Elements:</strong></p>
+<ul>
+<li><strong>Something known</strong>: passwords, PINs, keys</li>
+<li><strong>Something possessed</strong>: smart cards, password generators</li>
+<li><strong>Something inherent</strong>: biometrics (fingerprints, retina, DNA)</li>
+</ul>
+<p><strong>Classification:</strong></p>
+<ul>
+<li><strong>Weak authentication</strong>: Reveals the secret (userid/password)</li>
+<li><strong>Strong authentication</strong>: Proves possession of the secret without revealing it</li>
+<li><strong>Zero-knowledge</strong>: Strong authentication without revealing any information about the secret</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-172-contents" aria-controls="callout-172" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Original Text
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-172" class="callout-172-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Entity Authentication (Entity Identification)</strong></p>
+<p><strong>Objectives of a Robust Identification Protocol:</strong></p>
+<ol type="1">
+<li>If A and B are “honest”: if A can authenticate to B, B must accept A’s identity.</li>
+<li>B cannot reuse information provided by A to identify as A to C.</li>
+<li>The probability that a third party C successfully impersonates A to B is negligible.</li>
+<li>Point 3) remains true even if:
+<ul>
+<li>C has observed a large (polynomial) number of identification protocol instances between A and B</li>
+<li>C has participated (possibly impersonating someone else) in prior protocol executions with A or B</li>
+<li>Multiple protocol instances (possibly initiated by C) may run simultaneously without compromising the identification process</li>
+</ul></li>
+</ol>
+<p><strong>Terminology</strong>: The user (A) is called the <strong>claimant</strong> (the one claiming to be A), and the system (B) is the <strong>verifier</strong>.</p>
+<p><strong>Basic Authentication Elements:</strong></p>
+<ul>
+<li><strong>Something known</strong>: passwords, PINs, private or secret keys, etc.</li>
+<li><strong>Something possessed</strong>: passport, smart card, password generators, etc.</li>
+<li><strong>Something inherent to the individual</strong>: biometric properties like fingerprints, retina, DNA, etc.</li>
+</ul>
+<p><strong>Weak Authentication</strong>: The user presents a pair (userid, password) to the system. The userid is the claimed identity, and the password is the corroborating evidence.</p>
+<p><strong>Strong Authentication</strong>: The secret used to corroborate identity is not explicitly revealed. The user provides proof of possession of the secret.</p>
+<p><strong>Zero-Knowledge Authentication</strong>: Strong authentication protocols that additionally prove identity without revealing any information (not even a hint) about the secret itself. This involves proving an assertion without disclosing any details.</p>
+<p><strong>Weak authentication protocols</strong> satisfy points 1) and 3). <strong>Strong authentication protocols</strong> satisfy (at least partially) points 2) and 4) as well.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-173-contents" aria-controls="callout-173" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Quick Review
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-173" class="callout-173-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>3 Levels</strong>: Weak (reveals secret) &lt; Strong (proof of possession) &lt; Zero-knowledge (no info revealed)</p>
+<p><strong>4 Objectives</strong></p>
+<ul>
+<li>Acceptance if honest</li>
+<li>Non-reusability</li>
+<li>Impersonation resistance</li>
+<li>Observation resistance</li>
+</ul>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+</section>
+<section id="attacks-and-countermeasures" class="level2">
+<h2 class="anchored" data-anchor-id="attacks-and-countermeasures">Attacks and Countermeasures</h2>
+<section id="dictionary-attacks" class="level3">
+<h3 class="anchored" data-anchor-id="dictionary-attacks">Dictionary Attacks</h3>
+<section id="principle-and-countermeasures" class="level4">
+<h4 class="anchored" data-anchor-id="principle-and-countermeasures">Principle and Countermeasures</h4>
+<p>A dictionary attack systematically tests probable passwords against a cryptographic system.</p>
+<p><strong>Attack Methods:</strong></p>
+<ul>
+<li><strong>Offline</strong>: The attacker obtains the hashed password database or captures exchanges</li>
+<li><strong>Online</strong>: Direct attempts against the system (typically rate-limited)</li>
+</ul>
+<p><strong>Vulnerability Example:</strong></p>
+<ul>
+<li><code>A → B: A</code></li>
+<li><code>A ← B: R</code> (random challenge)</li>
+<li><code>A → B: Ep(R)</code></li>
+</ul>
+<p>The pair <code>(R, Ep(R))</code> enables an offline dictionary attack.</p>
+<p><strong>Countermeasures:</strong></p>
+<ul>
+<li>Limit online attempts</li>
+<li>Salting (adding a random element)</li>
+<li>Use slow key derivation functions</li>
+<li>Strong authentication avoiding password transmission</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-174-contents" aria-controls="callout-174" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Original Text
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-174" class="callout-174-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Dictionary Attacks</strong></p>
+<p>A dictionary attack uses a database containing dictionary words from one or more languages (including variants) as input to an encryption or hashing system to obtain secret keys or passwords.</p>
+<p>This attack is highly effective for obtaining poor-quality passwords, even today, with large databases containing word variations and complex mnemonic rules to “crack” higher-entropy passwords.</p>
+<p><strong>A dictionary attack can be mounted:</strong></p>
+<ul>
+<li>By obtaining the system’s password database (encrypted or hashed)</li>
+<li>From one or more authentication exchange instances following a passive attack (network packet observation). For example:
+<ul>
+<li><code>A → B: A</code> (A sends its identity)</li>
+<li><code>A ← B: R</code> (R = random number, challenge)</li>
+<li><code>A → B: Ep(R)</code> (A encrypts R with its password)</li>
+</ul></li>
+</ul>
+<p>The pair <code>(R, Ep(R))</code> enables an <strong>offline</strong> dictionary attack.</p>
+<p>Dictionary attacks are typically less effective <strong>online</strong> because operating systems limit the number of failed authentication attempts.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-175-contents" aria-controls="callout-175" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Quick Review
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-175" class="callout-175-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Offline</strong> (via DB or capture) &gt; <strong>Online</strong> (system-limited)</p>
+<p><strong>Protection</strong>: Salting, attempt limiting, strong authentication</p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="plaintext-equivalence" class="level3">
+<h3 class="anchored" data-anchor-id="plaintext-equivalence">Plaintext Equivalence</h3>
+<section id="concept-and-risks" class="level4">
+<h4 class="anchored" data-anchor-id="concept-and-risks">Concept and Risks</h4>
+<p>A string is <strong>plaintext-equivalent</strong> to a password if it grants the same access as the password itself.</p>
+<p><strong>Vulnerability Example:</strong></p>
+<p>If the system stores <code>H(p)</code> and the protocol is: <code>A → B: H(p)</code></p>
+<p>Then <code>H(p)</code> is plaintext-equivalent to <code>p</code> because the attacker can use it directly.</p>
+<p><strong>Counterexample (Classic UNIX):</strong></p>
+<p>The system stores <code>H(p)</code> but the protocol transmits <code>p</code>. The stored hash is thus not plaintext-equivalent.</p>
+<p><strong>Security Principle:</strong> Server-stored information must be neither plaintext-equivalent to passwords nor exposed to offline dictionary attacks.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-176-contents" aria-controls="callout-176" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Original Text
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-176" class="callout-176-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Plaintext Equivalence</strong></p>
+<p>A data string is <strong>plaintext-equivalent</strong> to a password if it can be used to obtain the same access level as the password.</p>
+<p><strong>Example:</strong> If system B stores a list of all hashed passwords in the following authentication process: <code>A → B: H(p)</code> (A sends B the hash of the password)</p>
+<p>The string <code>H(p)</code> is <strong>plaintext-equivalent</strong> to the password <code>p</code>.</p>
+<p>This is equivalent to saying that applying a hash function for password storage provides no additional security for the system.</p>
+<p><strong>Counterexample:</strong> In the classic UNIX authentication system, the password hash stored in <code>/etc/passwd</code> is <strong>not</strong> plaintext-equivalent to the password because it is <code>p</code> (not <code>H(p)</code>) that is exchanged between client and server.</p>
+<p>This property is essential because password databases are typically protected by logical mechanisms that are often compromised by server OS vulnerabilities.</p>
+<p>If these central databases contain passwords in cleartext or plaintext-equivalent information, the consequences of an attack are devastating.</p>
+<p><strong>The ideal case</strong> is that server-stored information is neither plaintext-equivalent to passwords nor exposed to offline dictionary attacks.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-177-contents" aria-controls="callout-177" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Quick Review
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-177" class="callout-177-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Plaintext-equivalent</strong>: Data usable like the original password</p>
+<p><strong>Danger</strong>: If the system transmits <code>H(p)</code> and stores <code>H(p)</code> → <code>H(p)</code> is plaintext-equivalent</p>
+<p><strong>Good Design</strong>: System transmits <code>p</code>, stores <code>H(p)</code> → not plaintext-equivalent</p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+</section>
+<section id="weak-authentication" class="level2">
+<h2 class="anchored" data-anchor-id="weak-authentication">Weak Authentication</h2>
+<section id="fixed-passwords" class="level3">
+<h3 class="anchored" data-anchor-id="fixed-passwords">Fixed Passwords</h3>
+<section id="storage-and-protection" class="level4">
+<h4 class="anchored" data-anchor-id="storage-and-protection">Storage and Protection</h4>
+<p>Fixed-password systems exhibit significant vulnerabilities.</p>
+<p><strong>Storage Techniques:</strong></p>
+<ul>
+<li><strong>Cleartext</strong>: Protected by OS access control (vulnerable to OS flaws, backups)</li>
+<li><strong>Encrypted or hashed</strong>: Vulnerable to offline attacks (guessing, dictionary, collisions)</li>
+</ul>
+<p><strong>Major Problem:</strong> The password can be replayed after observation on an unprotected network.</p>
+<p><strong>Protection Techniques:</strong></p>
+<ul>
+<li>Strict creation rules (minimum entropy)</li>
+<li>Rate-limiting and attempt restrictions</li>
+<li><strong>Salting</strong>: Adding a random element before hashing</li>
+<li>Restrict password file dissemination</li>
+</ul>
+<p><strong>Typical Password Entropy:</strong> Low (~40 bits for an 8-character random password, much less for common words).</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-178-contents" aria-controls="callout-178" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Original Text
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-178" class="callout-178-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Weak Authentication – Fixed Password</strong></p>
+<p>Weak authentication systems are divided into two main categories:</p>
+<ul>
+<li><strong>Fixed password</strong>: The password does not depend on time or the number of protocol executions. This includes systems where the password is changed by user decision or system security measures.</li>
+<li><strong>Variable password</strong>: Password modification based on time and/or execution count is part of the identification protocol.</li>
+</ul>
+<p><strong>Storage Techniques for Fixed-Password Systems:</strong></p>
+<ul>
+<li><strong>Cleartext password storage</strong> in a file protected by the OS’s access control mechanisms.
+<ul>
+<li>Problems: OS vulnerabilities, “super-user” privileges, backups, etc.</li>
+</ul></li>
+<li><strong>Encrypted or hashed password storage</strong> (possibly making the file publicly accessible, cf.&nbsp;UNIX example).
+<ul>
+<li>Problems: offline attacks, i.e., guessing attacks, brute-force dictionary attacks, collision identification, etc.</li>
+</ul></li>
+</ul>
+<p><strong>Most serious fixed-password problem</strong>: It can be replayed after eavesdropping on an unprotected network.</p>
+<p><strong>Fixed-Password System Protection Techniques:</strong></p>
+<ul>
+<li>Strict rules for password creation, maintenance, and updates, considering the low entropy of user-chosen passwords</li>
+<li>Slowing the identification process and limiting failed attempts to counter “online brute-force attacks”</li>
+<li><strong>Salting</strong> (cf.&nbsp;UNIX example)</li>
+<li>Restrict or avoid dissemination of password files, even when encrypted</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-179-contents" aria-controls="callout-179" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Quick Review
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-179" class="callout-179-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>2 Types</strong>: Fixed password (static) vs.&nbsp;Variable password (changes per instance)</p>
+<p><strong>Storage</strong>: Cleartext (highly vulnerable) vs.&nbsp;Encrypted/Hashed (offline attacks)</p>
+<p><strong>Protections</strong>: Strict rules, attempt limiting, salting, non-dissemination</p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="variable-passwords" class="level3">
+<h3 class="anchored" data-anchor-id="variable-passwords">Variable Passwords</h3>
+<section id="one-time-passwords-and-generators" class="level4">
+<h4 class="anchored" data-anchor-id="one-time-passwords-and-generators">One-Time Passwords and Generators</h4>
+<p>Variable passwords change with each authentication, reducing replay risk.</p>
+<p><strong>Lamport Scheme (S/Key):</strong></p>
+<pre><code>Initialization:
+  A generates secret w, chooses t
+  A → B: wt = Ht(w)
+  B stores: wstored := wt, n := t-1
+
+Identification (t-n)th:
+  A → B: A, n, wn = Hn(w)
+  B tests: H(wn) == wstored
+  If OK: n := n-1, wstored := wn</code></pre>
+<p><strong>Attacks if B is not authenticated:</strong></p>
+<ul>
+<li><strong>Pre-play attack</strong>: C obtains <code>wn</code> before A and replays it</li>
+<li><strong>Small <code>n</code> attack</strong>: C requests an <code>n</code> &lt; current n</li>
+</ul>
+<p><strong>Hardware Generators (SecureID):</strong></p>
+<ul>
+<li>Card generates a code every 30–60 seconds</li>
+<li>Based on a secret key shared with the system</li>
+<li>Vulnerable to pre-play but with limited time window</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-180-contents" aria-controls="callout-180" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Original Text
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-180" class="callout-180-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Weak Authentication: Variable Password</strong></p>
+<p>The two best-known variable-password identification techniques are <strong>one-time passwords</strong> and <strong>hardware random number generators</strong>.</p>
+<p><strong>One-Time Passwords – Lamport Scheme (S/Key):</strong></p>
+<p><strong>Initialization:</strong></p>
+<ul>
+<li>A generates a secret w</li>
+<li>A constant t (~1000, number of identifications) and a OWF H are chosen</li>
+<li><code>A → B: wt = Ht(w)</code> (H applied t times to w)</li>
+<li>B stores: <code>wstored := wt</code>, <code>n := t-1</code></li>
+</ul>
+<p><strong>Messages for the (t-n)th identification:</strong></p>
+<ul>
+<li><code>A → B: A</code> (A’s identity)</li>
+<li><code>A → B: n</code> (current iteration for A)</li>
+<li><code>A → B: wn = Hn(w)</code></li>
+<li>B tests: <code>H(wn) == wstored</code>. If OK ⇒ <code>n := n - 1</code> and <code>wstored := wn</code></li>
+</ul>
+<p><strong>End:</strong> When n == 0, A chooses a new w and restarts…</p>
+<p><strong>Attacks:</strong> <strong>B must be authenticated!</strong> Otherwise, C impersonates B and:</p>
+<ul>
+<li>obtains the current password wn and can replay it (<strong>pre-play attack</strong>)</li>
+<li>provides an n &lt; current n and can thus generate all Hm&gt;n(wn) (<strong>small n attack</strong>)</li>
+</ul>
+<p><strong>Hardware Random Number Generators:</strong></p>
+<ul>
+<li>These are smart cards that periodically (~every 30 or 60 seconds) generate different numbers used to identify (along with a PIN and user identity information) the cardholder.</li>
+<li>Generation is based on a secret key present on the card and known to the system.</li>
+<li>The best-known is <strong>SecureID</strong> by RSA Security.</li>
+<li>It has been adopted by many banks for Internet tele-banking authentication.</li>
+<li>It is also vulnerable to pre-play attacks, but the replay window is limited to the change frequency (30 or 60 seconds).</li>
+</ul>
+<p><strong>Conclusions on Weak Authentication:</strong></p>
+<ul>
+<li>Fixed passwords offer very low security.</li>
+<li>Variable passwords are a significant step toward strong authentication but require additional precautions.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-181-contents" aria-controls="callout-181" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Quick Review
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-181" class="callout-181-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Lamport</strong>: wn+1 = H(wn), authentication via hash chain verification</p>
+<p><strong>Hardware</strong>: Synchronized generator (30–60s), limited pre-play window</p>
+<p><strong>Warning</strong>: Requires B’s authentication to prevent pre-play and small-n attacks</p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+</section>
+<section id="strong-authentication" class="level2">
+<h2 class="anchored" data-anchor-id="strong-authentication">Strong Authentication</h2>
+<section id="symmetric" class="level3">
+<h3 class="anchored" data-anchor-id="symmetric">Symmetric</h3>
+<section id="basic-protocols" class="level4">
+<h4 class="anchored" data-anchor-id="basic-protocols">Basic Protocols</h4>
+<section id="challenge-response" class="level5">
+<h5 class="anchored" data-anchor-id="challenge-response">Challenge-Response</h5>
+<p>Strong authentication uses cryptography to prove secret possession without revealing it.</p>
+<p><strong>Basic Unilateral Authentication:</strong></p>
+<pre><code>A → B: A
+A ← B: R (random challenge)
+A → B: Ek-AB(R)
+B verifies by decrypting</code></pre>
+<p>Session key: <code>K := R</code></p>
+<p><strong>Improvements:</strong></p>
+<ul>
+<li>Add B’s identity: <code>Es(B, ra)</code> for key confirmation</li>
+<li>Add timestamp: <code>Es(B, ta, ra)</code> for freshness (requires synchronized clocks)</li>
+<li>Use MAC instead of encryption: <code>Hk-AB(R)</code> (faster)</li>
+</ul>
+<p><strong>Vulnerabilities:</strong></p>
+<ul>
+<li>Man-in-the-Middle if no mutual authentication</li>
+<li>Chosen-plaintext attacks possible</li>
+<li>Replay if challenges are poorly managed</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-182-contents" aria-controls="callout-182" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Original Text
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-182" class="callout-182-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Strong Authentication: Symmetric Solutions</strong></p>
+<p>Strong authentication protocols use symmetric or asymmetric cryptographic techniques.</p>
+<p><strong>Unilateral Authentication with Shared Symmetric Key:</strong></p>
+<pre><code>A → B: A (A sends its identity)
+A ← B: R (R = random number, challenge)
+A → B: Ek-AB(R) (A encrypts R with the shared key)</code></pre>
+<p>B decrypts <code>Ek-AB(R)</code> and identifies A if it finds R.</p>
+<p><strong>Remarks:</strong></p>
+<ul>
+<li>B must ensure the challenge R is random and not repeated.</li>
+<li>This protocol is a significant improvement over password authentication because varying challenges prevent Eve from replaying protocol parts.</li>
+<li>Eve can attempt an <strong>offline known-plaintext attack</strong> from a (typically small) number of pairs (R, Ek-AB(R)), but most encryption systems are secure in this regard (DES is vulnerable only after 2^47 pairs).</li>
+<li>C can impersonate B and choose challenges R to mount a <strong>chosen-plaintext attack</strong> (DES vulnerability is also 2^47, but other systems are more sensitive to such attacks).</li>
+<li>C could mount an <strong>Active Man-in-the-Middle</strong> attack by impersonating B since B is not authenticated, but must convince A to start the protocol.</li>
+<li>A <strong>MDC</strong>: <code>H(k-AB,R)</code> or a <strong>MAC</strong>: <code>Hk-AB(R)</code> can replace <code>Ek-AB(R)</code> to speed up identification.</li>
+<li>After initial identification, a secure (at least authenticated) channel must be established using cryptographic protection to prevent C from injecting packets while impersonating A.</li>
+</ul>
+<p>Protocols of this type, where one entity must respond based on a challenge from the other, are called <strong>challenge-and-response protocols</strong> and are the most common form of strong authentication.</p>
+<p><strong>Unilateral Authentication with Shared Symmetric Key, 2nd Variant:</strong></p>
+<pre><code>A → B: A, Ek-AB(timestamp)</code></pre>
+<p>Requires synchronized clocks between A and B.</p>
+<p><strong>Advantage:</strong> One fewer message and stateless protocol</p>
+<p><strong>But:</strong></p>
+<ul>
+<li>Clock synchronization is difficult to achieve in practice, and “drifts” can be exploited by an adversary.</li>
+<li>Moreover, if B’s clock is “advanced,” some past identification instances may become valid again.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-183-contents" aria-controls="callout-183" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Quick Review
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-183" class="callout-183-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Challenge-Response</strong>: B sends challenge R, A responds with E_k(R)</p>
+<p><strong>Alternative</strong>: MAC instead of encryption (faster)</p>
+<p><strong>With Timestamp</strong>: One fewer message but requires clock synchronization</p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="mutual-authentication" class="level4">
+<h4 class="anchored" data-anchor-id="mutual-authentication">Mutual Authentication</h4>
+<section id="robust-protocols-and-reflection-attacks" class="level5">
+<h5 class="anchored" data-anchor-id="robust-protocols-and-reflection-attacks">Robust Protocols and Reflection Attacks</h5>
+<p>Bilateral authentication requires precautions against reflection attacks.</p>
+<p><strong>Vulnerable (Naive) Protocol:</strong></p>
+<pre><code>A → B: A, R2
+A ← B: R1, Ek-AB(R2)
+A → B: Ek-AB(R1)</code></pre>
+<p><strong>Reflection Attack:</strong> C can start two instances and use B’s response to its own request to complete authentication.</p>
+<p><strong>Robust Protocol:</strong></p>
+<pre><code>(1) A → B: A, R2
+(2) A ← B: Ek-AB(R1, R2, A)
+(3) A → B: Ek-AB(R2, R1)</code></pre>
+<p><strong>Protections:</strong></p>
+<ul>
+<li>Inclusion of A’s identity in (2) to prevent reflection attacks</li>
+<li>Asymmetry in challenge order (R1,R2) vs.&nbsp;(R2,R1)</li>
+<li>Inclusion of challenges in the encrypted message</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-184-contents" aria-controls="callout-184" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Original Text
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-184" class="callout-184-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Strong Authentication: Symmetric Solutions (Mutual Authentication)</strong></p>
+<p><strong>Bilateral Authentication with Shared Symmetric Key (Intuitive Solution):</strong></p>
+<pre><code>A → B: A, R2
+A ← B: R1, Ek-AB(R2)
+A → B: Ek-AB(R1)</code></pre>
+<p>At first glance, the protocol seems robust, but observe what an adversary C can do by starting two identification processes:</p>
+<pre><code>C → B: A, R2 (C pretends to be A)
+C ← B: R1, Ek-AB(R2) (B responds)</code></pre>
+<p>At this point, C starts a second instance:</p>
+<pre><code>C → B: A, R1
+C ← B: R3, Ek-AB(R1) (C cannot proceed further but...)</code></pre>
+<p>Successfully completes the first identification instance with:</p>
+<pre><code>C → B: Ek-AB(R1) (and it’s done!)</code></pre>
+<p>Because C returns to B the same R it received from B, such attacks are called <strong>reflection attacks</strong>.</p>
+<p>Since the key is shared, C could have achieved the same result (even more discreetly) by executing the second instance with A (pretending to be B).</p>
+<p><strong>Bilateral Authentication with Shared Symmetric Key (Robust Solution):</strong></p>
+<pre><code>(1) A → B: A, R2
+(2) A ← B: Ek-AB(R1, R2, A)
+(3) A → B: Ek-AB(R2, R1)</code></pre>
+<p>The presence of <strong>A</strong> in (2) adds extra security in case obvious reflection attacks are not detected by the protocol. Otherwise, if A initiates authentication with what it believes to be B but is actually C:</p>
+<pre><code>A → C: A, R2 (*)</code></pre>
+<p>Then C starts a new authentication instance with A using the same R2:</p>
+<pre><code>C → A: B, R2</code></pre>
+<p>If A does not see R2 as an obvious reflection, it responds:</p>
+<pre><code>C ← A: Ek-AB(R1, R2) (As in (2) but without the 'A')</code></pre>
+<p>Which C uses to complete its protocol (*). However, if A responds with B inside the packet as recommended in the protocol:</p>
+<pre><code>A → C: Ek-AB(R1, R2, B)</code></pre>
+<p>This can no longer be used by C to continue (*) because it would require A instead of B.</p>
+<p>Note also that including R1 in the encrypted part protects against <strong>chosen plaintext attack</strong> risks from the previous solution.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-185-contents" aria-controls="callout-185" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Quick Review
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-185" class="callout-185-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Reflection Attack</strong>: Use one session’s response to authenticate another</p>
+<p><strong>Protection</strong>: Include identities + asymmetry in challenges (R1,R2) vs.&nbsp;(R2,R1)</p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+</section>
+<section id="asymmetric" class="level3">
+<h3 class="anchored" data-anchor-id="asymmetric">Asymmetric</h3>
+<section id="public-key-protocols" class="level4">
+<h4 class="anchored" data-anchor-id="public-key-protocols">Public-Key Protocols</h4>
+<p>Asymmetry avoids secret sharing but requires precautions against chosen-ciphertext attacks.</p>
+<p><strong>Vulnerable Protocol:</strong></p>
+<pre><code>A → B: A
+A ← B: Epub-A(R)
+A → B: R</code></pre>
+<p><strong>Problem:</strong> B can make A decrypt anything.</p>
+<p><strong>Robust Protocol:</strong></p>
+<pre><code>A → B: A
+A ← B: H(R), B, Epub-A(B, R)
+A → B: R (after verifying H(R) and B)</code></pre>
+<p><strong>Protection:</strong> Structure the encrypted text and prove plaintext knowledge via <code>H(R)</code>.</p>
+<p><strong>Mutual Authentication (Needham-Schroeder):</strong></p>
+<pre><code>(1) A → B: Epub-B(r1, A)
+(2) A ← B: Epub-A(r1, r2)
+(3) A → B: Epub-B(r2)</code></pre>
+<p>The presence of A in (1) prevents chosen-ciphertext attacks.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-186-contents" aria-controls="callout-186" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Original Text
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-186" class="callout-186-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Strong Authentication: Asymmetric Solutions</strong></p>
+<p><strong>Unilateral Authentication with Asymmetric Key (Intuitive Solution…):</strong></p>
+<pre><code>A → B: A
+A ← B: Epub-A(R) (B encrypts with A’s public key)
+A → B: R (A returns R after decryption)</code></pre>
+<p><strong>Remarks:</strong></p>
+<ul>
+<li>B must know A’s authentic key to avoid man-in-the-middle attacks.</li>
+<li>But especially: B can mount <strong>chosen-ciphertext attacks</strong> (i.e., B can make A decrypt anything!).</li>
+</ul>
+<p><strong>Unilateral Authentication with Asymmetric Key (Robust Solution):</strong></p>
+<p>Idea: Structure the text encrypted with pub-A and show that B knows the plaintext:</p>
+<pre><code>A → B: A
+A ← B: H(R), B, Epub-A(B, R) (H(R) proves B knows R)</code></pre>
+<p>A decrypts <code>Epub-A(B, R)</code> and obtains B’ and R’. A aborts the protocol if <code>h(R') ≠ h(R)</code> or <code>B' ≠ B</code>, otherwise:</p>
+<pre><code>A → B: R</code></pre>
+<p>B identifies A if it matches the initial R.</p>
+<p>A dual protocol can be imagined using A’s signature with priv-A (instead of encryption with pub-A), but the same structural precautions apply to prevent A from signing a “malicious” message generated by B.</p>
+<p><strong>Bilateral Authentication with Asymmetric Key. Robust Solution by Needham and Schroeder:</strong></p>
+<pre><code>(1) A → B: Epub-B(r1, A)
+(2) A ← B: Epub-A(r1, r2)
+(3) A → B: Epub-B(r2)</code></pre>
+<p>Note that the presence of A in (1) thwarts chosen-ciphertext attacks.</p>
+<p>The protocol can be strengthened by adding a “witness” <code>H(r1)</code> in (1).</p>
+<p><strong>Final Remarks on Classical Authentication:</strong></p>
+<ul>
+<li>Entity authentication is a highly complex process full of unexpected pitfalls.</li>
+<li>Some protocols, like the one proposed by ISO in 1988 for authentication in distributed directories, have flaws very similar to those highlighted here.</li>
+<li>When identification occurs within a session, it is imperative that all session packets be authenticated (e.g., by establishing a secure channel with session key establishment).</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-187-contents" aria-controls="callout-187" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Quick Review
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-187" class="callout-187-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Vulnerability</strong>: Chosen-ciphertext attacks if no structure</p>
+<p><strong>Protection</strong>: Include H(R), B’s identity in the encrypted message; A verifies before revealing R</p>
+<p><strong>Needham-Schroeder</strong>: 3 messages with identity inclusion to prevent chosen-ciphertext</p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+</section>
+<section id="zero-knowledge-proofs" class="level2">
+<h2 class="anchored" data-anchor-id="zero-knowledge-proofs">Zero-Knowledge Proofs</h2>
+<section id="concepts" class="level3">
+<h3 class="anchored" data-anchor-id="concepts">Concepts</h3>
+<section id="definitions-and-principles" class="level4">
+<h4 class="anchored" data-anchor-id="definitions-and-principles">Definitions and Principles</h4>
+<p>Zero-knowledge proofs allow proving possession of a secret without revealing any information about it.</p>
+<p><strong>Required Properties:</strong></p>
+<ul>
+<li><strong>Completeness</strong>: If A and B are honest, B accepts A’s proof</li>
+<li><strong>Soundness</strong>: If C succeeds in deceiving B, then C holds A’s secret (or equivalent)</li>
+<li><strong>Zero-knowledge</strong>: B learns nothing about A’s secret</li>
+</ul>
+<p><strong>Generic Structure:</strong></p>
+<pre><code>(1) A → B: witness
+(2) A ← B: challenge
+(3) A → B: response</code></pre>
+<p><strong>ZKIP Types:</strong></p>
+<ul>
+<li><strong>Computational ZKIP</strong>: A polynomial-time observer cannot distinguish a real proof from a simulation</li>
+<li><strong>Perfect ZKIP</strong>: No probabilistic difference between real proof and simulation (guaranteed by information theory)</li>
+</ul>
+<p><strong>Principle:</strong></p>
+<ul>
+<li>A commits to a class of questions (1)</li>
+<li>B chooses a question from this class (2)</li>
+<li>A answers using its secret (3)</li>
+<li>Repeat to reduce guessing probability.</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-188-contents" aria-controls="callout-188" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Original Text
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-188" class="callout-188-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Zero-Knowledge Proofs: Definitions</strong></p>
+<p>Problem with “classical” authentication methods: B (or even an observer) can obtain information about A’s secret:</p>
+<ul>
+<li>In weak authentication methods (password-based), the secret is fully revealed.</li>
+<li>In classical challenge-and-response methods, B can obtain [plaintext/ciphertext] pairs useful for cryptanalysis.</li>
+</ul>
+<p><strong>Definition:</strong> An interactive protocol is a <strong>proof of knowledge</strong> if it has the following two characteristics:</p>
+<ul>
+<li><strong>Completeness</strong>: If A and B are “honest,” B accepts the proof provided by A.</li>
+<li><strong>Soundness</strong>: If a “dishonest” entity C can “deceive” B, then C holds A’s secret (or polynomially equivalent information). This is equivalent to requiring secret possession for proof success.</li>
+</ul>
+<p>A proof of knowledge is called a <strong>zero-knowledge interactive proof (ZKIP)</strong> if it additionally has the property that A can convince B of a fact without revealing any information about its secret.</p>
+<p>A protocol is a <strong>computational ZKIP</strong> if an observer capable of probabilistic polynomial-time tests cannot distinguish a genuine proof (where A responds) from a simulated proof (e.g., by a random generator).</p>
+<p>A protocol is a <strong>perfect ZKIP</strong> if there is no probabilistic difference between the real proof and the simulated proof. The absence of information in the proof is guaranteed by Shannon’s information theory, not computational criteria.</p>
+<p><strong>Generic ZKIP Structure:</strong></p>
+<pre><code>(1) A → B: witness
+(2) A ← B: challenge
+(3) A → B: response</code></pre>
+<ul>
+<li><strong>(1)</strong> A chooses a random secret number and sends B proof of possession of this secret. This constitutes a commitment from A and defines a class of questions to which A claims to know the answers.</li>
+<li><strong>(2)</strong> The challenge sent by B randomly selects a question from this class.</li>
+<li><strong>(3)</strong> A responds (using its secret).</li>
+</ul>
+<p>If necessary, the protocol is repeated to minimize the probability of an “impostor” guessing the correct answers by chance.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-189-contents" aria-controls="callout-189" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Quick Review
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-189" class="callout-189-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>3 Properties</strong>: Completeness (accepts if honest), Soundness (requires secret), Zero-knowledge (no info revealed)</p>
+<p><strong>Structure</strong>: Witness → Challenge → Response (repeat n times)</p>
+<p><strong>Perfect ZK</strong>: Indistinguishable from simulation even with infinite resources</p>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">sequenceDiagram
+    participant A as Prover A
+    participant B as Verifier B
+
+    Note over A: Generates witness&lt;br/&gt;with secret s
+    A-&gt;&gt;B: (1) Witness
+    Note over B: Chooses random&lt;br/&gt;challenge
+    B-&gt;&gt;A: (2) Challenge
+    Note over A: Computes response&lt;br/&gt;with secret s
+    A-&gt;&gt;B: (3) Response
+    Note over B: Verifies&lt;br/&gt;Accepts/Rejects
+
+    Note over A,B: Repeat n times for&lt;br/&gt;security 1/2^n
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="zkip-intuitive-example-ali-babas-cave" class="level3">
+<h3 class="anchored" data-anchor-id="zkip-intuitive-example-ali-babas-cave">ZKIP – Intuitive Example (Ali Baba’s Cave)</h3>
+<section id="concept-illustration" class="level4">
+<h4 class="anchored" data-anchor-id="concept-illustration">Concept Illustration</h4>
+<p>This example intuitively illustrates the zero-knowledge principle.</p>
+<p><strong>Scenario:</strong></p>
+<ul>
+<li>A knows the secret passage between y and z in a cave</li>
+<li>B wants to verify this knowledge without learning how to traverse</li>
+</ul>
+<p><strong>Protocol:</strong></p>
+<ol type="1">
+<li>B stands at entrance E</li>
+<li>A chooses to go to y or z (witness)</li>
+<li>B enters and stops at point x</li>
+<li>B asks A to return from the right or left (challenge)</li>
+<li>A uses the secret to comply (if needed)</li>
+</ol>
+<p><strong>Repetition:</strong> n times. If A does not know the secret: success probability = <span class="math inline">\(2^{-n}\)</span></p>
+<p><strong>Properties:</strong></p>
+<ul>
+<li>B confirms A can traverse but learns nothing about how</li>
+<li>B cannot convince a third party B’ (A and B could have agreed on sequences)</li>
+<li>Inspired by the “cut-and-choose” technique</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-190-contents" aria-controls="callout-190" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Original Text
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-190" class="callout-190-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>ZKIP: Intuitive Example</strong></p>
+<p>This example is described in [Qui89] (Quisquater et al., “How to Explain Zero-Knowledge Protocols to Your Children”, Crypto’89). Suppose A knows a passage between y and z (the secret).</p>
+<pre><code>    E
+    |
+    x
+   / \
+  y   z</code></pre>
+<p><strong>(1)</strong> B stands at the cave entrance at point E.</p>
+<p><strong>(2)</strong> A chooses a direction and goes to points y or z (witness choice).</p>
+<p><strong>(3)</strong> Once A is inside the cave, B enters and stops at point x.</p>
+<p><strong>(4)</strong> B asks A to return to point x from the right or left (the challenge).</p>
+<p><strong>(5)</strong> Using the secret to move from y to z (or vice versa) if necessary, A complies with B’s instructions.</p>
+<p><strong>Repeat steps 1 to 5 n times.</strong> If A does not know the secret, it has a <span class="math inline">\(2^{-n}\)</span> probability of successfully deceiving B (guessing “correctly”).</p>
+<p>In this example, B sees that A can traverse the yz passage at will but obtains no information on how to do so, even if the protocol is executed millions of times.</p>
+<p>Moreover, B cannot convince B’ that A knows the secret (as would be the case if A encrypted information using a private key, for example). B’ might suspect A and B of agreeing on the sequences (right/left).</p>
+<p>Such protocols are inspired by the <strong>“cut-and-choose”</strong> technique, where A and B fairly share a pie as follows: - A cuts the pie. - B chooses a piece. - A takes the remaining piece.</p>
+<p>The first ZKIP was published in 1985 by S. Goldwasser [Gol85]. The application of the cut-and-choose paradigm to cryptographic protocols is due to Rabin [Rab78].</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-191-contents" aria-controls="callout-191" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Quick Review
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-191" class="callout-191-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Cave</strong>: A enters randomly (y or z), B asks for exit (left/right)</p>
+<p><strong>Cheating Probability</strong>: <span class="math inline">\(2^{-n}\)</span> after n repetitions</p>
+<p><strong>ZK</strong>: B verifies knowledge but learns no secret, cannot convince third party</p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="zkip-graph-isomorphism" class="level3">
+<h3 class="anchored" data-anchor-id="zkip-graph-isomorphism">ZKIP – Graph Isomorphism</h3>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-192-contents" aria-controls="callout-192" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>ZKIP – Graph Isomorphism
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-192" class="callout-192-contents callout-collapse collapse">
+<section id="formal-protocol" class="level4 callout-body-container callout-body">
+<h4 class="anchored" data-anchor-id="formal-protocol">Formal Protocol</h4>
+<p>Zero-knowledge proofs can be constructed on hard mathematical problems.</p>
+<p><strong>Context:</strong> Two graphs <span class="math inline">\(G_1\)</span> and <span class="math inline">\(G_2\)</span> are isomorphic if there exists a permutation <span class="math inline">\(\pi\)</span> such that for every edge <span class="math inline">\(\{u,v\} \in E_1\)</span>, <span class="math inline">\(\{\pi(u), \pi(v)\} \in E_2\)</span>.</p>
+<p><strong>Property:</strong> Finding the permutation <span class="math inline">\(\pi\)</span> between two ~1000-node graphs is computationally hard (no known polynomial algorithm).</p>
+<p><strong>Protocol:</strong></p>
+<pre><code>Init: A chooses G1 and creates G2 = π(G1) with π secret
+(1) A → B: H (A creates H = φ(G2) randomly)
+(2) A ← B: i ∈ {1,2}
+(3) A → B: ψ such that H = ψ(Gi)
+    If i=2: ψ := φ
+    If i=1: ψ := φ ∘ π
+(4) B verifies H = ψ(Gi)
+(5) Repeat n times</code></pre>
+<p><strong>Perfect Zero-Knowledge Verification:</strong> Protocol transcripts are indistinguishable (probabilistic distribution) from those produced by a simulator.</p>
+</section>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-193-contents" aria-controls="callout-193" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Original Text
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-193" class="callout-193-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>ZKIP: Graph Isomorphism</strong></p>
+<p>Two graphs <span class="math inline">\(G_1 = (V_1,E_1)\)</span> and <span class="math inline">\(G_2=(V_2,E_2)\)</span> are <strong>isomorphic</strong> if there exists a permutation <span class="math inline">\(\pi\)</span> such that <span class="math inline">\(\{u,v\} \in E_1\)</span> if and only if <span class="math inline">\(\{\pi(u), \pi(v)\} \in E_2\)</span>.</p>
+<p><strong>Example:</strong> <span class="math inline">\(G_1 = (V, E_1)\)</span> and <span class="math inline">\(G_2=(V, E_2)\)</span> with <span class="math inline">\(V = \{1,2,3,4\}\)</span>, <span class="math inline">\(E_1= \{12,13,23,24\}\)</span>, and <span class="math inline">\(E_2 = \{12,13,14,34\}\)</span> are isomorphic with the permutation <span class="math inline">\(G_1 \to G_2 : \{4,1,3,2\}\)</span>:</p>
+<pre><code>G1:  1---2    G2:  4---1
+     |\ /|         |\ /|
+     | X |         | X |
+     |/ \|         |/ \|
+     3---4         3---2</code></pre>
+<p>From a graph <span class="math inline">\(G_1\)</span>, one can easily (in polynomial time) find a permutation <span class="math inline">\(\pi\)</span> such that <span class="math inline">\(G_2 = \pi(G_1)\)</span>.</p>
+<p>However, no polynomial-time algorithm is known to determine if two sufficiently large graphs (~1000 nodes) are isomorphic (i.e., find the permutation <span class="math inline">\(\pi\)</span> from <span class="math inline">\(G_1\)</span> and <span class="math inline">\(G_2\)</span>).</p>
+<p><strong>ZKIP Based on Graph Isomorphism:</strong></p>
+<p><strong>(Initialization)</strong> A chooses a sufficiently large graph <span class="math inline">\(G_1\)</span> and invents a permutation <span class="math inline">\(\pi\)</span> (the secret) to compute a second graph <span class="math inline">\(G_2 = \pi(G_1)\)</span>. <span class="math inline">\(G_1\)</span> and <span class="math inline">\(G_2\)</span> are made public.</p>
+<pre><code>(1) A → B: H</code></pre>
+<p>A chooses a random permutation <span class="math inline">\(\phi\)</span> such that <span class="math inline">\(H = \phi(G_2)\)</span> and sends H to B (the witness).</p>
+<pre><code>(2) A ← B: i</code></pre>
+<p>B chooses an integer <span class="math inline">\(i \in \{1,2\}\)</span> and sends it to A (the challenge).</p>
+<pre><code>(3) A → B: ψ</code></pre>
+<p>A computes <span class="math inline">\(\psi\)</span> such that <span class="math inline">\(H = \psi(G_i)\)</span>: - If <span class="math inline">\(i = 2\)</span>: <span class="math inline">\(\psi := \phi\)</span> - If <span class="math inline">\(i = 1\)</span>: <span class="math inline">\(\psi := \phi \circ \pi\)</span></p>
+<p><strong>(4)</strong> B checks if <span class="math inline">\(H = \psi(G_i)\)</span> and accepts the step as correct.</p>
+<p><strong>(5)</strong> Repeat (1) to (4) enough times to minimize “guessing” risks.</p>
+<p><strong>Property Verification:</strong></p>
+<ul>
+<li><strong>Completeness</strong>: The protocol is accepted if A knows the secret (i.e., the permutation <span class="math inline">\(\pi\)</span> between the two graphs).</li>
+<li><strong>Soundness</strong>: If C tries to impersonate A without knowing <span class="math inline">\(\pi\)</span>, it can fix a j and provide a correct permutation <span class="math inline">\(\psi(G_j)\)</span> but cannot find a correct permutation for both graphs. It must guess the challenge provided by B.</li>
+<li><strong>Zero-Knowledge</strong>: A succeeds in convincing B that the two graphs are isomorphic but learns nothing about <span class="math inline">\(\pi\)</span>. B only sees a random graph H isomorphic to <span class="math inline">\(G_1\)</span> and <span class="math inline">\(G_2\)</span> and a permutation between H and <span class="math inline">\(G_1\)</span> or between H and <span class="math inline">\(G_2\)</span>.</li>
+<li><strong>Perfect Zero-Knowledge</strong>: This means B could generate such information alone (using a random generator and polynomial computations). It can be proven that the transcripts provided by the protocol are indistinguishable (from a probabilistic distribution perspective) from those produced by a simulator.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-194-contents" aria-controls="callout-194" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Quick Review
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-194" class="callout-194-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Problem</strong>: Finding permutation between two isomorphic graphs = hard</p>
+<p><strong>Protocol</strong>: A creates random H, B asks for permutation to G1 or G2, A responds</p>
+<p><strong>Perfect ZK</strong>: Transcripts indistinguishable from a simulator</p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="zkip-fiat-shamir-algorithm" class="level3">
+<h3 class="anchored" data-anchor-id="zkip-fiat-shamir-algorithm">ZKIP – Fiat-Shamir Algorithm</h3>
+<section id="practical-protocol" class="level4">
+<h4 class="anchored" data-anchor-id="practical-protocol">Practical Protocol</h4>
+<p>Fiat-Shamir is an efficient and practical ZKIP based on the square root modulo composite problem.</p>
+<p><strong>Initialization:</strong></p>
+<ul>
+<li>Trusted third party T chooses <span class="math inline">\(n = pq\)</span> (keeps p,q secret)</li>
+<li>A chooses secret <span class="math inline">\(s\)</span> with <span class="math inline">\(\gcd(s,n) = 1\)</span></li>
+<li>A computes <span class="math inline">\(v = s^2 \bmod n\)</span> and distributes v (certified public key)</li>
+</ul>
+<p><strong>Protocol:</strong></p>
+<pre><code>(1) A → B: x = r² mod n
+    (A chooses random r, witness)
+
+(2) A ← B: e ∈ {0,1}
+    (B sends challenge)
+
+(3) A → B: y = r·sᵉ mod n
+    (A computes response with secret s)
+
+B rejects if y = 0
+B accepts if y² ≡ x·vᵉ (mod n)</code></pre>
+<p><strong>Repetition:</strong> Multiple times for security <span class="math inline">\(2^{-nk}\)</span></p>
+<p><strong>Properties:</strong></p>
+<ul>
+<li><strong>Soundness</strong>: An impostor can easily answer e=0, but for e=1, it must compute <span class="math inline">\(\sqrt{x} \bmod n\)</span> (hard by SQROOTP)</li>
+<li><strong>Perfect Zero-Knowledge</strong>: The pairs (x,y) can be simulated by B by choosing y randomly and computing <span class="math inline">\(x = y^2\)</span> or <span class="math inline">\(y^2/v\)</span></li>
+<li>B cannot impersonate A because it cannot predict challenges</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-195-contents" aria-controls="callout-195" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Original Text
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-195" class="callout-195-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>ZKIP: Fiat-Shamir Algorithm</strong></p>
+<p><strong>Goal:</strong> Allow A to identify itself by proving knowledge of a secret s (associated with A via authentic public information) to B without revealing any information about s.</p>
+<p>This is a protocol serving as the basis for real and efficient implementations.</p>
+<p><strong>Algorithm:</strong></p>
+<p><strong>(Initialization):</strong></p>
+<ol type="a">
+<li><p>A trusted third party T chooses and publishes an n such that <span class="math inline">\(n = pq\)</span> and keeps p and q secret.</p></li>
+<li><p>A chooses a secret s with <span class="math inline">\(1 \leq s \leq n -1\)</span> and <span class="math inline">\(\gcd(s,n) = 1\)</span>, computes <span class="math inline">\(v = s^2 \bmod n\)</span>, and distributes v as a public key certified by T.</p></li>
+</ol>
+<pre><code>(1) A → B: x = r² mod n</code></pre>
+<p>A chooses a random r and sends a witness <span class="math inline">\(r^2\)</span>.</p>
+<pre><code>(2) A ← B: e ∈ {0,1}</code></pre>
+<p>B sends its challenge.</p>
+<pre><code>(3) A → B: y = r·sᵉ mod n</code></pre>
+<p>A computes the response using the secret s.</p>
+<p>B rejects the proof if <span class="math inline">\(y = 0\)</span> (an impostor could falsify the proof with <span class="math inline">\(r = 0\)</span>) and accepts the proof if <span class="math inline">\(y^2 \equiv x \cdot v^e \pmod{n}\)</span>.</p>
+<p>Steps (1) to (3) are repeated until a sufficient confidence margin is reached.</p>
+<p><strong>Property Verification:</strong></p>
+<ul>
+<li><p><strong>Completeness</strong>: If A knows s, the protocol accepts the identification proof.</p></li>
+<li><p><strong>Soundness</strong>: In the simple case, an impostor could only answer <span class="math inline">\(e = 0\)</span>. Otherwise, it could choose a random r and send <span class="math inline">\(x = r^2/v\)</span> in (1) and respond to the challenge <span class="math inline">\(e = 1\)</span> with a correct answer <span class="math inline">\(y = r\)</span>. For <span class="math inline">\(e = 0\)</span>, it would need to compute the square root of x mod n (n composite with unknown factorization), which is hard by SQROOTP. Proof success thus requires secret possession.</p></li>
+<li><p><strong>Zero-Knowledge</strong>: B cannot obtain any information about s because when <span class="math inline">\(e = 1\)</span>, it is hidden by a random number (blinding factor).</p></li>
+<li><p><strong>Perfect Zero-Knowledge</strong>: The pairs (x,y) obtained from A can also be simulated by B by choosing a random y and computing <span class="math inline">\(x = y^2\)</span> or <span class="math inline">\(y^2/v \bmod n\)</span>. It can be proven that these pairs have an identical probabilistic distribution to those provided by A (who computes them differently!).</p></li>
+</ul>
+<p>Note that, despite this last property, B is unable to impersonate A to B’ because it cannot predict the challenge values e.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-196-contents" aria-controls="callout-196" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Quick Review
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-196" class="callout-196-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Secret</strong>: <span class="math inline">\(s\)</span> such that <span class="math inline">\(v = s^2 \bmod n\)</span> (public key)</p>
+<p><strong>Protocol</strong>: Witness <span class="math inline">\(r^2\)</span>, challenge <span class="math inline">\(e \in \{0,1\}\)</span>, response <span class="math inline">\(y = r \cdot s^e\)</span></p>
+<p><strong>Verification</strong>: <span class="math inline">\(y^2 \equiv x \cdot v^e \pmod{n}\)</span></p>
+<p><strong>Perfect ZK</strong>: Pairs (x,y) simulatable by B</p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="zkip-practical-implementations" class="level3">
+<h3 class="anchored" data-anchor-id="zkip-practical-implementations">ZKIP – Practical Implementations</h3>
+<section id="efficient-protocols" class="level4">
+<h4 class="anchored" data-anchor-id="efficient-protocols">Efficient Protocols</h4>
+<p>Practical implementations improve Fiat-Shamir’s efficiency.</p>
+<p><strong>Feige-Fiat-Shamir (FSS):</strong></p>
+<ul>
+<li>Uses multiple witnesses and challenges (k values) per iteration</li>
+<li>Cheating probability: <span class="math inline">\(2^{-nk}\)</span> for n iterations</li>
+<li>Reduces required exchanges</li>
+</ul>
+<p><strong>Guillou-Quisquater (GQ):</strong></p>
+<ul>
+<li>Based on Fiat-Shamir but with expanded challenge domain</li>
+<li>Reduces guessing probability without increasing exchanges</li>
+<li>Better efficiency/security trade-off</li>
+</ul>
+<p><strong>Schnorr:</strong></p>
+<ul>
+<li>Based on discrete logarithm difficulty (DLP)</li>
+<li>Very large challenge domain</li>
+<li><strong>Identification in just 3 exchanges</strong></li>
+<li>Sometimes sacrifices perfect zero-knowledge for efficiency</li>
+</ul>
+<p><strong>Advantages:</strong> More efficient than RSA, implementable on low-capacity devices (smart cards).</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-197-contents" aria-controls="callout-197" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Original Text
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-197" class="callout-197-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>ZKIP: Common Implementations</strong></p>
+<p><strong>Feige-Fiat-Shamir (FSS):</strong></p>
+<ul>
+<li>Based on the Fiat-Shamir protocol but using multiple witnesses and challenges (sets of k values) per iteration; for n iterations, this gives a probability of <span class="math inline">\(2^{-nk}\)</span> of guessing all responses.</li>
+</ul>
+<p><strong>Guillou-Quisquater (GQ):</strong></p>
+<ul>
+<li>Also based on Fiat-Shamir but increasing the challenge choice, which reduces the guessing probability without increasing the number of transferred instances and protocol steps.</li>
+</ul>
+<p><strong>Schnorr:</strong></p>
+<ul>
+<li>Based on the difficulty of computing discrete logarithms (DLP)</li>
+<li>It also uses a very large challenge domain, allowing identification in <strong>just 3 message exchanges</strong>.</li>
+</ul>
+<p>These protocols are significantly more efficient than RSA and can be implemented on low-computing-capacity devices (smart cards).</p>
+<p>They satisfy completeness and soundness properties, but the zero-knowledge property is sometimes sacrificed (as in Schnorr’s case) to increase efficiency.</p>
+<p>For a detailed description of these protocols, refer to [Men97] or [Sti95].</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-198-contents" aria-controls="callout-198" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Quick Review
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-198" class="callout-198-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>FSS</strong>: Multiple witnesses/challenges → probability <span class="math inline">\(2^{-nk}\)</span></p>
+<p><strong>GQ</strong>: Expanded challenge domain → fewer exchanges</p>
+<p><strong>Schnorr</strong>: DLP + large challenges → <strong>3 exchanges only</strong></p>
+<p><strong>All</strong>: More efficient than RSA, suitable for smart cards</p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="zkip-mafia-attack-and-final-remarks" class="level3">
+<h3 class="anchored" data-anchor-id="zkip-mafia-attack-and-final-remarks">ZKIP – Mafia Attack and Final Remarks</h3>
+<section id="vulnerabilities-and-countermeasures" class="level4">
+<h4 class="anchored" data-anchor-id="vulnerabilities-and-countermeasures">Vulnerabilities and Countermeasures</h4>
+<p>Even robust ZKIP protocols can be vulnerable to sophisticated attacks.</p>
+<p><strong>Mafia Attack (1989, Adi Shamir):</strong></p>
+<p>Scenario: C (attacker) and D (accomplice) collaborate so D impersonates A to B.</p>
+<pre><code>A ↔ C: ZKIP Instance     D ↔ B: ZKIP Instance</code></pre>
+<p>C relays A’s messages to D (accomplice), who uses them to authenticate to B. The attack is transparent to A and B.</p>
+<p><strong>Countermeasures:</strong></p>
+<ul>
+<li><strong>Faraday cages</strong> (blocking radio communications)</li>
+<li><strong>Strong synchronization</strong> to prevent side exchanges</li>
+<li><strong>Distance bounding protocols</strong> limiting response delay</li>
+</ul>
+<p><strong>General Recommendations:</strong></p>
+<ul>
+<li>Choose proven solutions over inventing new ones</li>
+<li>Verify objectives are met</li>
+<li>Analyze practically (reflection attacks, redundancy, etc.)</li>
+<li>Analyze formally (BAN logic, model checking)</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-199-contents" aria-controls="callout-199" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Original Text
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-199" class="callout-199-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>ZKIP: Final Remarks</strong></p>
+<p>ZKIPs offer a very high level of cryptographic security. They allow identifications while minimizing the chances of a hypothetical impostor and, most importantly, protecting the secret information of “honest” users.</p>
+<p>In 1989 (SECURICOM’89), Adi Shamir said about ZKIPs: “I could go to a Mafia-owned store a million times in a row, and they still wouldn’t be able to impersonate me”…</p>
+<p><strong>And yet</strong>: A participates in a ZKIP with C (Mafia); simultaneously, D (C’s accomplice) participates in another ZKIP pretending to be A to B (an “honest” verifier).</p>
+<pre><code>(1) A → C: t1 (witness that C forwards via radio to D)
+(1') D → B: t1
+(2') D ← B: d1 (B sends the challenge to D; D forwards it to C...)
+(2) A ← C: d1 (C resumes the challenge in its dialogue with A)
+(3) A → C: r1 (the response using its secret, which C sends to D)
+(3') D → B: r1 (B accepts r1 and so on!)</code></pre>
+<p><strong>Solutions:</strong></p>
+<ul>
+<li>Conduct identifications in Faraday cages…</li>
+<li>Use strong synchronization algorithms to prevent side exchanges.</li>
+</ul>
+<p><strong>Authentication: Summary – Attacks and Protections</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 24%">
+<col style="width: 39%">
+<col style="width: 36%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Attack</th>
+<th>Description</th>
+<th>Protection</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>replay</td>
+<td>replay a previous identification instance</td>
+<td>zero-knowledge, challenge-and-response, one-time password (beware of pre-play!)</td>
+</tr>
+<tr class="even">
+<td>known/chosen-plaintext</td>
+<td>obtain plaintext/ciphertext pairs</td>
+<td>zero-knowledge</td>
+</tr>
+<tr class="odd">
+<td>chosen-ciphertext</td>
+<td>make A decrypt (or sign) carefully chosen information</td>
+<td>zero-knowledge, ch.&nbsp;&amp; resp. + knowledge witness + structure (redundancy!)</td>
+</tr>
+<tr class="even">
+<td>reflection</td>
+<td>return the same number received</td>
+<td>include target entity in messages, asymmetry in messages</td>
+</tr>
+<tr class="odd">
+<td>interleaving</td>
+<td>use messages from multiple simultaneous protocol instances</td>
+<td>include target entity in messages, introduce cryptographic chaining between messages of the same identification instance</td>
+</tr>
+<tr class="even">
+<td>collusion</td>
+<td>collusion between participants</td>
+<td>Faraday cage, strong synchronization</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-200-contents" aria-controls="callout-200" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Quick Review
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-200" class="callout-200-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Mafia Attack</strong>: Relay messages via accomplice → transparent fraudulent authentication</p>
+<p><strong>Protections</strong>: Faraday cage, strong synchronization, distance bounding</p>
+<p><strong>Attack Table</strong>: replay, chosen-plaintext/ciphertext, reflection, interleaving, collusion</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="summary-attacks-and-protections" class="level2">
+<h2 class="anchored" data-anchor-id="summary-attacks-and-protections">Summary – Attacks and Protections</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 24%">
+<col style="width: 39%">
+<col style="width: 36%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Attack</th>
+<th>Description</th>
+<th>Protection</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>replay</td>
+<td>replay a previous identification instance</td>
+<td>zero-knowledge, challenge-and-response, one-time password (beware of pre-play!)</td>
+</tr>
+<tr class="even">
+<td>known/chosen-plaintext</td>
+<td>obtain plaintext/ciphertext pairs</td>
+<td>zero-knowledge</td>
+</tr>
+<tr class="odd">
+<td>chosen-ciphertext</td>
+<td>make A decrypt (or sign) carefully chosen information</td>
+<td>zero-knowledge, ch.&nbsp;&amp; resp. + knowledge witness + structure (redundancy!)</td>
+</tr>
+<tr class="even">
+<td>reflection</td>
+<td>return the same number received</td>
+<td>include target entity in messages, asymmetry in messages</td>
+</tr>
+<tr class="odd">
+<td>interleaving</td>
+<td>use messages from multiple simultaneous protocol instances</td>
+<td>include target entity in messages, introduce cryptographic chaining between messages of the same identification instance</td>
+</tr>
+<tr class="even">
+<td>collusion</td>
+<td>collusion between participants</td>
+<td>Faraday cage, strong synchronization</td>
+</tr>
+</tbody>
+</table>
 
 
 </section>
