@@ -357,6 +357,35 @@ window.Quarto = {
   </ul></li>
   <li><a href="#récapitulation---attaques-et-protections" id="toc-récapitulation---attaques-et-protections" class="nav-link" data-scroll-target="#récapitulation---attaques-et-protections">Récapitulation - Attaques et Protections</a></li>
   </ul></li>
+  <li><a href="#protocoles-détablissement-de-clés-kep" id="toc-protocoles-détablissement-de-clés-kep" class="nav-link" data-scroll-target="#protocoles-détablissement-de-clés-kep">Protocoles d’Établissement de Clés (KEP)</a>
+  <ul class="collapse">
+  <li><a href="#kep-définition-et-propriétés" id="toc-kep-définition-et-propriétés" class="nav-link" data-scroll-target="#kep-définition-et-propriétés">KEP Définition et Propriétés</a>
+  <ul class="collapse">
+  <li><a href="#définitions-et-classification" id="toc-définitions-et-classification" class="nav-link" data-scroll-target="#définitions-et-classification">Définitions et Classification</a></li>
+  <li><a href="#propriétés-des-kep" id="toc-propriétés-des-kep" class="nav-link" data-scroll-target="#propriétés-des-kep">Propriétés des KEP</a></li>
+  </ul></li>
+  <li><a href="#kap" id="toc-kap" class="nav-link" data-scroll-target="#kap">KAP</a>
+  <ul class="collapse">
+  <li><a href="#symétrique-1" id="toc-symétrique-1" class="nav-link" data-scroll-target="#symétrique-1">Symétrique</a></li>
+  <li><a href="#asymétrique-avec-pré-distribution" id="toc-asymétrique-avec-pré-distribution" class="nav-link" data-scroll-target="#asymétrique-avec-pré-distribution">Asymétrique avec pré-distribution</a></li>
+  <li><a href="#asymétrique-avec-dke" id="toc-asymétrique-avec-dke" class="nav-link" data-scroll-target="#asymétrique-avec-dke">Asymétrique avec DKE</a></li>
+  </ul></li>
+  <li><a href="#attaques-sur-dh-et-pfs" id="toc-attaques-sur-dh-et-pfs" class="nav-link" data-scroll-target="#attaques-sur-dh-et-pfs">Attaques sur DH et PFS</a></li>
+  <li><a href="#ktp" id="toc-ktp" class="nav-link" data-scroll-target="#ktp">KTP</a>
+  <ul class="collapse">
+  <li><a href="#symétrique-2" id="toc-symétrique-2" class="nav-link" data-scroll-target="#symétrique-2">Symétrique</a></li>
+  <li><a href="#asymétrique-1" id="toc-asymétrique-1" class="nav-link" data-scroll-target="#asymétrique-1">Asymétrique</a></li>
+  <li><a href="#mixte" id="toc-mixte" class="nav-link" data-scroll-target="#mixte">Mixte</a></li>
+  <li><a href="#symétrique-avec-key-distribution-center-kdc" id="toc-symétrique-avec-key-distribution-center-kdc" class="nav-link" data-scroll-target="#symétrique-avec-key-distribution-center-kdc">Symétrique avec Key Distribution Center (KDC)</a></li>
+  </ul></li>
+  <li><a href="#ssltls" id="toc-ssltls" class="nav-link" data-scroll-target="#ssltls">SSL/TLS</a>
+  <ul class="collapse">
+  <li><a href="#architecture-ssltls" id="toc-architecture-ssltls" class="nav-link" data-scroll-target="#architecture-ssltls">Architecture SSL/TLS</a></li>
+  <li><a href="#ssl-handshake-protocol" id="toc-ssl-handshake-protocol" class="nav-link" data-scroll-target="#ssl-handshake-protocol">SSL Handshake Protocol</a></li>
+  <li><a href="#génération-des-clés-ssltls" id="toc-génération-des-clés-ssltls" class="nav-link" data-scroll-target="#génération-des-clés-ssltls">Génération des Clés SSL/TLS</a></li>
+  </ul></li>
+  <li><a href="#remarques-finales-sur-les-kep" id="toc-remarques-finales-sur-les-kep" class="nav-link" data-scroll-target="#remarques-finales-sur-les-kep">Remarques Finales sur les KEP</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -9486,6 +9515,1602 @@ B accepte si y² ≡ x·vᵉ (mod n)</code></pre>
 </tr>
 </tbody>
 </table>
+</section>
+</section>
+<section id="protocoles-détablissement-de-clés-kep" class="level1">
+<h1>Protocoles d’Établissement de Clés (KEP)</h1>
+<section id="kep-définition-et-propriétés" class="level2">
+<h2 class="anchored" data-anchor-id="kep-définition-et-propriétés">KEP Définition et Propriétés</h2>
+<section id="définitions-et-classification" class="level3">
+<h3 class="anchored" data-anchor-id="définitions-et-classification">Définitions et Classification</h3>
+<p><strong>Protocole d’établissement de clés (KEP)</strong> : Mécanisme permettant aux entités de partager un secret pour leurs échanges cryptographiques.</p>
+<p><strong>Deux types :</strong></p>
+<ul>
+<li><strong>Key Transport Protocol (KTP)</strong> : Une entité crée et transmet la clé</li>
+<li><strong>Key Agreement Protocol (KAP)</strong> : Les entités dérivent conjointement la clé</li>
+</ul>
+<p><strong>Classification temporelle :</strong></p>
+<ul>
+<li><strong>Pré-distribution</strong> : Clés déterminées à priori</li>
+<li><strong>Dynamic Key Establishment (DKE)</strong> : Clés changeant à chaque exécution</li>
+</ul>
+<table border="1" cellspacing="0" cellpadding="6">
+<tbody><tr>
+<th colspan="3" style="text-align: center;">
+Key Establishment Protocols
+</th>
+</tr>
+<tr>
+<th colspan="2" style="text-align: center;">
+Key Agreement
+</th>
+<th>
+Key Transport
+</th>
+</tr>
+<tr>
+<td>
+symétrique + pré-dist.
+</td>
+<td>
+symétrique + DKE
+</td>
+<td>
+symétrique + DKE
+</td>
+</tr>
+<tr>
+<td>
+asymétrique + pré-dist.
+</td>
+<td>
+asymétrique + DKE
+</td>
+<td>
+asymétrique + DKE
+</td>
+</tr>
+</tbody></table>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-201-contents" aria-controls="callout-201" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Texte original
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-201" class="callout-201-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Un <strong>protocole d’établissement de clés</strong> (key establishment protocol ou <strong>KEP</strong>) est celui qui met à disposition des entités impliquées un <strong>secret partagé</strong> (une clé) qui servira comme base pour des échanges cryptographiques ultérieurs.</p>
+<p>Les deux variantes des KEP sont les <strong>protocoles de transport de clé</strong> (key transport protocol ou <strong>KTP</strong>) et les <strong>protocoles de mise en accord</strong> (key agreement protocol ou <strong>KAP</strong>).</p>
+<ul>
+<li>Un <strong>key transport protocol (KTP)</strong> est un mécanisme permettant à une entité de <strong>créer une clé secrète et de la transférer</strong> à son (ses) correspondant(s).</li>
+<li>Un <strong>key agreement protocol (KAP)</strong> est un mécanisme permettant à deux (ou plusieurs) entités de <strong>dériver une clé</strong> à partir d’informations propres à chaque entité.</li>
+</ul>
+<p><strong>Key pré-distribution schemes</strong> sont ceux où les clés utilisées sont entièrement <strong>déterminées à priori</strong> (p.ex. à partir des calculs initiaux).</p>
+<p><strong>Dynamic key establishment schemes (DKE)</strong> sont ceux où les clés <strong>changent pour chaque exécution</strong> du protocole.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-202-contents" aria-controls="callout-202" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Révision rapide
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-202" class="callout-202-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>KEP</strong> : Protocoles pour établir un secret partagé.</p>
+<ul>
+<li><strong>KTP</strong> : transport de clé</li>
+<li><strong>KAP</strong> : accord mutuel sur la clé</li>
+<li><strong>Pré-distribution</strong> vs <strong>DKE</strong> (dynamique)</li>
+</ul>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="propriétés-des-kep" class="level3">
+<h3 class="anchored" data-anchor-id="propriétés-des-kep">Propriétés des KEP</h3>
+<p><strong>Propriétés d’authentification :</strong></p>
+<ul>
+<li><strong>Implicit key authentication</strong> : Assurance que seul le correspondant peut accéder à la clé (sans preuve de possession)</li>
+<li><strong>Key confirmation</strong> : Assurance que le correspondant possède effectivement la clé</li>
+<li><strong>Explicit key authentication</strong> : Implicit + confirmation</li>
+<li><strong>Authenticated KEP</strong> : KEP fournissant l’authentification de clé</li>
+</ul>
+<p><strong>Propriétés de sécurité temporelle :</strong></p>
+<ul>
+<li><strong>Perfect Forward Secrecy (PFS)</strong> : Compromission des clés long terme ne révèle pas les clés de sessions passées</li>
+<li><strong>Future Secrecy</strong> : Clés futures protégées même si clés long terme compromises (par attaquant passif)</li>
+<li><strong>Deniability/Repudiability</strong> : Impossibilité de prouver la participation à un tiers (comme Zero-Knowledge)</li>
+</ul>
+<p><strong>Types d’attaques :</strong></p>
+<ul>
+<li><strong>Attaque passive</strong> : Enregistrement et analyse des échanges</li>
+<li><strong>Attaque active</strong> : Modification ou injection de messages</li>
+<li><strong>Known-key attack</strong> : Exploitation d’une clé de session compromise pour attaquer les clés futures</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-203-contents" aria-controls="callout-203" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Texte original
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-203" class="callout-203-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Propriétés des protocoles d’établissement de clés :</strong></p>
+<ul>
+<li><p><strong>Implicit key authentication</strong> (ou key authentication) : propriété par laquelle une entité est assurée que seul(s) son (ses) correspondant(s) peut (peuvent) accéder à une clé secrète. Cependant, ceci ne spécifie rien sur le fait de posséder effectivement la clé.</p></li>
+<li><p><strong>Key confirmation</strong> : propriété permettant à une entité d’être sûre que ses correspondants sont en possession des clés de session générées.</p></li>
+<li><p><strong>Explicit key authentication</strong> : = implicit key authentication + key confirmation.</p></li>
+<li><p>Un <strong>authenticated KEP</strong> est un KEP capable de fournir key authentication.</p></li>
+</ul>
+<p><strong>Attaques :</strong></p>
+<ul>
+<li><p>Une <strong>attaque passive</strong> est celle qui essaye de démonter un système cryptographique en se limitant à l’<strong>enregistrement et à l’analyse</strong> des échanges.</p></li>
+<li><p>Une <strong>attaque active</strong> fait intervenir un adversaire qui <strong>modifie ou injecte</strong> des messages.</p></li>
+<li><p>Un protocole est dit vulnérable à un <strong>known-key attack</strong> si lorsqu’une clé de session antérieure est compromise, il devient possible : (a) de compromettre par une attaque passive des clés futures et/ou (b) de monter des attaques actives visant l’usurpation d’identité.</p></li>
+</ul>
+<p><strong>Propriétés modernes :</strong></p>
+<ul>
+<li><p><strong>Perfect Forward Secrecy (PFS)</strong> est une caractéristique qui garantit la <strong>confidentialité des clés de sessions utilisées par le passé</strong> même si les clés long terme (par exemple la clé privée du destinataire) est compromise.</p></li>
+<li><p><strong>Future Secrecy</strong> : Le protocole garantit la <strong>sécurité des échanges ultérieurs</strong> (les clés des sessions futures sont protégées) même si les clés long terme sont compromises par un attaquant passif.</p></li>
+<li><p><strong>Deniability / Repudiability</strong> (répudiabilité) : À l’image des protocoles d’authentification Zéro-Knowledge, permet aux entités de garantir l’authentification des échanges sans apporter des informations qui permettraient de prouver à un tiers leur participation dans l’échange cryptographique.</p></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-204-contents" aria-controls="callout-204" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Révision rapide
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-204" class="callout-204-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Authentification :</strong></p>
+<ul>
+<li><strong>Implicit</strong> : seul le correspondant accède à la clé</li>
+<li><strong>Key confirmation</strong> : preuve de possession</li>
+<li><strong>Explicit</strong> = Implicit + confirmation</li>
+</ul>
+<p><strong>Sécurité :</strong></p>
+<ul>
+<li><strong>PFS</strong> : clés passées protégées si compromission</li>
+<li><strong>Future Secrecy</strong> : clés futures protégées</li>
+<li><strong>Deniability</strong> : participation non prouvable</li>
+</ul>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="kap" class="level2">
+<h2 class="anchored" data-anchor-id="kap">KAP</h2>
+<section id="symétrique-1" class="level3">
+<h3 class="anchored" data-anchor-id="symétrique-1">Symétrique</h3>
+<section id="avec-pré-distribution" class="level4">
+<h4 class="anchored" data-anchor-id="avec-pré-distribution">avec Pré-distribution</h4>
+<p><strong>Cas trivial :</strong></p>
+<p>Pour <span class="math inline">\(n\)</span> utilisateurs avec un Key Distribution Center (KDC) :</p>
+<ol type="1">
+<li>KDC génère <span class="math inline">\(\frac{n(n-1)}{2}\)</span> clés différentes (une par paire d’utilisateurs)</li>
+<li>KDC distribue <span class="math inline">\(n-1\)</span> clés à chaque utilisateur via canal confidentiel</li>
+</ol>
+<p><strong>Avantages :</strong></p>
+<ul>
+<li>Inconditionnellement sûr contre complots d’utilisateurs (sécurité information-théorique)</li>
+</ul>
+<p><strong>Inconvénients :</strong></p>
+<ul>
+<li>Complexité <span class="math inline">\(O(n^2)\)</span> en stockage pour le KDC</li>
+<li>Complexité <span class="math inline">\(O(n)\)</span> en clés par utilisateur</li>
+<li>Non scalable</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-205-contents" aria-controls="callout-205" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Texte original
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-205" class="callout-205-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>KAP Symétrique avec Pré-distribution - Cas Trivial</strong></p>
+<p>Soit un nombre <span class="math inline">\(n\)</span> d’utilisateurs avec un <strong>centre de distribution de clés</strong> (key distribution center ou <strong>KDC</strong>).</p>
+<p>On peut construire un KAP symétrique avec pré-distribution trivial de la façon suivante :</p>
+<ol type="1">
+<li><p>KDC génère <span class="math inline">\(n(n-1)/2\)</span> clés différentes (une clé différente pour chaque couple d’utilisateurs).</p></li>
+<li><p>KDC distribue ensuite par un <strong>canal confidentiel et authentique</strong> les clés en donnant <span class="math inline">\(n-1\)</span> clés à chaque utilisateur.</p></li>
+</ol>
+<p>Si KDC génère les clés de façon vraiment <strong>aléatoire</strong>, ce système est <strong>inconditionnellement sûr contre des complots d’utilisateurs</strong> (même en admettant que <span class="math inline">\(n-2\)</span> utilisateurs complotent, ils ne pourraient pas trouver la clé des deux autres) par construction du protocole.</p>
+<p><strong>Problème de ce protocole :</strong></p>
+<ul>
+<li><span class="math inline">\(O(n^2)\)</span> en <strong>stockage de clés</strong> par le KDC.</li>
+<li><span class="math inline">\(O(n)\)</span> en <strong>clés secrètes échangées</strong> pour chaque entité.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-206-contents" aria-controls="callout-206" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Révision rapide
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-206" class="callout-206-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>KAP symétrique trivial :</strong></p>
+<ul>
+<li><span class="math inline">\(n(n-1)/2\)</span> clés pour <span class="math inline">\(n\)</span> utilisateurs</li>
+<li>Inconditionnellement sûr</li>
+<li>Problème : <span class="math inline">\(O(n^2)\)</span> en stockage</li>
+</ul>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="avec-dynamic-key-establishment-dke" class="level4">
+<h4 class="anchored" data-anchor-id="avec-dynamic-key-establishment-dke">avec Dynamic Key Establishment (DKE)</h4>
+<section id="exemple-simple" class="level5">
+<h5 class="anchored" data-anchor-id="exemple-simple">Exemple Simple</h5>
+<p><strong>Initialisation :</strong> A et B partagent une clé long terme <span class="math inline">\(S\)</span></p>
+<p><strong>Protocole :</strong></p>
+<ol type="1">
+<li><span class="math inline">\(A \rightarrow B: r_a\)</span> (nombre aléatoire)</li>
+<li><span class="math inline">\(A \leftarrow B: r_b\)</span> (nombre aléatoire)</li>
+<li>Clé de session : <span class="math inline">\(K := E_S(r_a \oplus r_b)\)</span></li>
+</ol>
+<p><strong>Propriétés :</strong></p>
+<ul>
+<li>❌ Entity authentication</li>
+<li>✅ Implicit key authentication<br>
+</li>
+<li>❌ Key confirmation</li>
+<li>❌ Perfect Forward Secrecy</li>
+</ul>
+</section>
+<section id="akep2-authenticated-key-exchange-protocol-2" class="level5">
+<h5 class="anchored" data-anchor-id="akep2-authenticated-key-exchange-protocol-2">AKEP2 (Authenticated Key Exchange Protocol 2)</h5>
+<p><strong>Initialisation :</strong> A et B partagent <span class="math inline">\(S\)</span> (pour MAC) et <span class="math inline">\(S'\)</span> (pour clé de session)</p>
+<p><strong>Protocole :</strong></p>
+<ol type="1">
+<li><span class="math inline">\(A \rightarrow B: r_a\)</span></li>
+<li><span class="math inline">\(A \leftarrow B: T = (B,A,r_a,r_b), h_S(T)\)</span></li>
+<li><span class="math inline">\(A \rightarrow B: (A, r_b), h_S(A,r_b)\)</span></li>
+<li>Clé de session : <span class="math inline">\(K := h'_{S'}(r_b)\)</span></li>
+</ol>
+<p><strong>Propriétés :</strong></p>
+<ul>
+<li>✅ Entity authentication (mutuelle)</li>
+<li>✅ Implicit key authentication</li>
+<li>❌ Key confirmation</li>
+<li>❌ Perfect Forward Secrecy</li>
+</ul>
+<p><strong>Note :</strong> Clé dépend uniquement de <span class="math inline">\(B\)</span> et de la clé long terme <span class="math inline">\(S'\)</span> !</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-207-contents" aria-controls="callout-207" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Texte original
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-207" class="callout-207-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>KAP Symétriques avec Dynamic Key Establishment</strong></p>
+<p>Ces méthodes permettent aux entités impliquées de dériver des <strong>clés de courte durée</strong> (typiquement, des clés de session) à partir de <strong>secrets de longue durée</strong> qui, pour ces protocoles, sont des clés symétriques.</p>
+<p><strong>Exemple intuitif :</strong></p>
+<p>(Initialisation): A et B partagent une clé symétrique long terme <span class="math inline">\(S\)</span></p>
+<ol type="1">
+<li><p><span class="math inline">\(A \rightarrow B: r_a\)</span>; A génère un nb. aléatoire et l’envoie à B</p></li>
+<li><p><span class="math inline">\(A \leftarrow B: r_b\)</span>; B fait de même</p></li>
+</ol>
+<p>A et B calculent la clé de session: <span class="math inline">\(K := E_S(r_a \oplus r_b)\)</span></p>
+<p><strong>Propriétés :</strong> - <strong>Entity authentication</strong> : NON : par construction du protocole, les <span class="math inline">\(r_i\)</span> peuvent être envoyés par une entité quelconque. - <strong>Implicit key authentication</strong> : OUI : seules les entités partageant la clé symétrique long terme <span class="math inline">\(S\)</span> peuvent accéder à la clé de session <span class="math inline">\(K\)</span>. - <strong>Key confirmation</strong> : NON : les <span class="math inline">\(r_i\)</span> étant aléatoires, ils peuvent être modifiés par un adversaire et empêcher A et B de se mettre d’accord sur la clé de session <span class="math inline">\(K\)</span>. Ceci ne serait pas détecté par le protocole. - <strong>Perfect Forward Secrecy</strong> : NON : si la clé long terme <span class="math inline">\(S\)</span> est compromise, toutes les clés de session précédentes peuvent être facilement calculées par un adversaire qui aurait enregistré tous les échanges.</p>
+<p><strong>Authenticated Key Exchange Protocol 2 (AKEP2)</strong></p>
+<p>(Init.) : A et B partagent deux clés symétriques long terme <span class="math inline">\(S\)</span> et <span class="math inline">\(S'\)</span>. <span class="math inline">\(S\)</span> est utilisé pour générer des MACs <span class="math inline">\(h_S()\)</span> (afin de garantir l’intégrité et l’authentification d’entités) et <span class="math inline">\(S'\)</span> pour la génération de la clé de session <span class="math inline">\(K\)</span>.</p>
+<ol type="1">
+<li><p><span class="math inline">\(A \rightarrow B: r_a\)</span>; A génère un nb. aléatoire et l’envoie à B</p></li>
+<li><p><span class="math inline">\(A \leftarrow B: T = (B,A,r_a,r_b), h_S(T)\)</span> ; B idem + identités + MAC de tout</p></li>
+<li><p><span class="math inline">\(A \rightarrow B: (A, r_b), h_S(A,r_b)\)</span> ; A vérifie les identités et le <span class="math inline">\(r_a\)</span> fournis par B ; ensuite, il envoie identité + <span class="math inline">\(r_b\)</span> + MAC du tout.</p></li>
+</ol>
+<p>La clé est calculée bilatéralement avec un MAC dédié <span class="math inline">\(h'_{S'}()\)</span> : <span class="math inline">\(K := h'_{S'}(r_b)\)</span>.</p>
+<p><strong>Propriétés :</strong> - <strong>Entity authentication</strong> : OUI mutuelle (fournie par les MACs). - <strong>Implicit key authentication</strong> : OUI. - <strong>Key confirmation</strong> : NON (pas d’évidence que la clé <span class="math inline">\(S'\)</span> est connue du correspondant). - <strong>Perfect forward secrecy</strong> : NON (si la clé <span class="math inline">\(S'\)</span> est compromise, les clés de session <span class="math inline">\(K\)</span> précédentes aussi).</p>
+<p>La clé dépend seulement de B (et de la clé long terme <span class="math inline">\(S'\)</span>) mais le protocole peut être facilement modifié pour que la clé dépende aussi de A et en faire un “vrai” KAP.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-208-contents" aria-controls="callout-208" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Révision rapide
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-208" class="callout-208-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>KAP symétrique DKE :</strong></p>
+<ul>
+<li><strong>Simple</strong> : <span class="math inline">\(K := E_S(r_a \oplus r_b)\)</span> - pas de PFS</li>
+<li><strong>AKEP2</strong> : utilise MACs pour authentification + clé dérivée <span class="math inline">\(K := h'_{S'}(r_b)\)</span></li>
+<li>Pas de PFS si <span class="math inline">\(S'\)</span> compromise</li>
+</ul>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+</section>
+<section id="asymétrique-avec-pré-distribution" class="level3">
+<h3 class="anchored" data-anchor-id="asymétrique-avec-pré-distribution">Asymétrique avec pré-distribution</h3>
+<section id="diffie-hellman" class="level4">
+<h4 class="anchored" data-anchor-id="diffie-hellman">Diffie-Hellman</h4>
+<p><strong>Initialisation :</strong> Premier p et générateur <span class="math inline">\(\alpha \in \mathbb{Z}_p^*\)</span> publics</p>
+<p><strong>Protocole :</strong></p>
+<ol type="1">
+<li><span class="math inline">\(A \rightarrow B: \alpha^x \mod p\)</span> (A choisit <span class="math inline">\(x\)</span> secret)</li>
+<li><span class="math inline">\(A \leftarrow B: \alpha^y \mod p\)</span> (B choisit <span class="math inline">\(y\)</span> secret)</li>
+<li>Clé partagée : <span class="math inline">\(K := \alpha^{xy} \mod p\)</span></li>
+</ol>
+<ul>
+<li>A calcule <span class="math inline">\(K := (\alpha^y)^x \mod p\)</span></li>
+<li>B calcule <span class="math inline">\(K := (\alpha^x)^y \mod p\)</span></li>
+</ul>
+<p><strong>Sécurité :</strong></p>
+<ul>
+<li>Basée sur le problème Diffie-Hellman (DHP) : impossible de calculer <span class="math inline">\(\alpha^{xy}\)</span> à partir de <span class="math inline">\(\alpha^x\)</span> et <span class="math inline">\(\alpha^y\)</span>.</li>
+<li>Résultat prouvé : DHP <span class="math inline">\(\equiv\)</span> DLP.</li>
+</ul>
+<p><strong>Attaque Man-in-the-Middle (MIM) :</strong></p>
+<p>Adversaire C intercepte et remplace :</p>
+<ul>
+<li><span class="math inline">\(\alpha^x\)</span> par <span class="math inline">\(\alpha^{x'}\)</span> vers B</li>
+<li><span class="math inline">\(\alpha^y\)</span> par <span class="math inline">\(\alpha^{y'}\)</span> vers A</li>
+<li>C établit deux clés : <span class="math inline">\(\alpha^{xy'}\)</span> avec A et <span class="math inline">\(\alpha^{x'y}\)</span> avec B</li>
+</ul>
+<p><strong>Propriétés (DH non authentifié) :</strong></p>
+<ul>
+<li>❌ Entity authentication</li>
+<li>❌ Implicit key authentication (vulnérable MIM)</li>
+<li>❌ Key confirmation</li>
+</ul>
+<p><strong>Génération de clés symétriques :</strong></p>
+<p>Les clés DH ne sont pas bit secure.</p>
+<p>Solution : appliquer un MDC (SHA, MD5) à toute la clé <span class="math inline">\(K\)</span> :</p>
+<p><span class="math display">\[K_{sym} := \text{SHA-256}(K)\]</span></p>
+<p>Résultat: KAP avec Dynamic Key Establishment</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-209-contents" aria-controls="callout-209" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Texte original
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-209" class="callout-209-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>KAP Asymétrique avec Pré-Distribution - Diffie-Hellman</strong></p>
+<p>Publié en 1976, il s’agit du <strong>précurseur des protocoles asymétriques</strong>.</p>
+<p>Il permet à deux entités qui ne se sont jamais rencontrées de construire une <strong>clé partagée</strong> en échangeant des messages sur un <strong>canal non confidentiel</strong>.</p>
+<p><strong>Protocole :</strong></p>
+<p>Initialisation : Un nb. premier <span class="math inline">\(p\)</span> est généré et un générateur <span class="math inline">\(\alpha\)</span> de <span class="math inline">\(\mathbb{Z}_p^*\)</span>, t.q. <span class="math inline">\(\alpha \in \mathbb{Z}_{p-1}\)</span>. Les deux nombres sont rendus publiques.</p>
+<ol type="1">
+<li><p><span class="math inline">\(A \rightarrow B: \alpha^x \mod p\)</span> ; A choisit un secret <span class="math inline">\(x \in \mathbb{Z}_{p-1}\)</span> et envoie la partie publique</p></li>
+<li><p><span class="math inline">\(A \leftarrow B: \alpha^y \mod p\)</span> ; B choisit un secret <span class="math inline">\(y \in \mathbb{Z}_{p-1}\)</span> et envoie la partie publique</p></li>
+</ol>
+<p>A calcule la clé secrète : <span class="math inline">\(K := (\alpha^y)^x \mod p\)</span> et B à son tour : <span class="math inline">\(K := (\alpha^x)^y \mod p\)</span></p>
+<p>La <strong>sécurité</strong> de ce schéma réside dans l’impossibilité de trouver <span class="math inline">\(\alpha^{xy} \mod p\)</span> à partir de <span class="math inline">\(\alpha^x \mod p\)</span> et <span class="math inline">\(\alpha^y \mod p\)</span>. (<strong>Diffie-Hellman Problem</strong> : DHP).</p>
+<p><strong>Résultat prouvé</strong> : DHP <span class="math inline">\(\equiv\)</span> DLP.</p>
+<p>Diffie-Hellman est <strong>sûr</strong> (autant que DHP) contre des <strong>attaques passives</strong>. En d’autres mots, un adversaire qui se limite à voir passer des messages ne peut pas trouver la clé <span class="math inline">\(K\)</span>.</p>
+<p>Ceci n’est cependant plus vrai pour des <strong>attaques actives</strong> ; voyons ce que C peut faire en modifiant les messages :</p>
+<p>C échange des clés secrètes avec A et B, respectivement : <span class="math inline">\(\alpha^{xy'} \mod p\)</span> et <span class="math inline">\(\alpha^{x'y} \mod p\)</span> (C contrôle <span class="math inline">\(x'\)</span> et <span class="math inline">\(y'\)</span>). Si C ré-encrypte chaque paquet qu’il reçoit avec la clé publique correspondante, l’attaque se fera de manière transparente pour A et B.</p>
+<p>Cette attaque est appelée <strong>Man in the Middle (MIM)</strong> et s’applique à tous les protocoles asymétriques.</p>
+<p>Elle est due au <strong>manque d’authentification des clés publiques</strong>, i.e.&nbsp;lorsque A “parle” à B, il doit utiliser la clé publique <strong>authentique</strong> de B.</p>
+<p><strong>Caractéristiques de Diffie-Hellman (non authentifié) :</strong></p>
+<ul>
+<li><strong>Entity Authentication</strong> : NON.</li>
+<li><strong>Implicit key authentication</strong> : NON (par l’attaque MIM).</li>
+<li><strong>Key confirmation</strong> : NON (dû au risque de MIM, A ne peut pas être sûr que B possède la clé secrète partagée).</li>
+</ul>
+<p><strong>Génération de clés symétriques à partir d’une clé partagée Diffie-Hellman :</strong></p>
+<p>Les quantités manipulées dans DH (notamment <span class="math inline">\(K\)</span>) sont de taille 512 - 1024 bits (suivant le nb. premier <span class="math inline">\(p\)</span> utilisé).</p>
+<p>Une approche intuitive pour générer des clés symétriques de petite taille (64 - 128 bits) serait de prendre un sous-ensemble de bits de la clé <span class="math inline">\(K\)</span>.</p>
+<p>Malheureusement, on peut prouver que les clés DH ne sont pas <strong>bit secure</strong> ce qui signifie que des sous ensembles de bits (notamment les Least Significant Bits) peuvent être calculés avec un effort non proportionnel à l’effort nécessaire à calculer la clé entière.</p>
+<p>Pour générer des clés de manière sûre il est conseillé d’<strong>appliquer un MDC</strong> (comme SHA ou MD5) à toute la clé (év. enchaîner l’application des MDCs pour obtenir des clés symétriques successives).</p>
+<p>Cette méthode permet d’obtenir un KAP avec Dynamic Key Establishment.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-210-contents" aria-controls="callout-210" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Révision rapide
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-210" class="callout-210-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Diffie-Hellman :</strong></p>
+<ul>
+<li><span class="math inline">\(K := \alpha^{xy} \mod p\)</span> calculée indépendamment par A et B</li>
+<li>Sûr contre attaques passives (DHP <span class="math inline">\(\equiv\)</span> DLP)</li>
+<li>Vulnérable MIM sans authentification</li>
+<li>Générer clés symétriques : <span class="math inline">\(K_{sym} := \text{SHA}(K)\)</span></li>
+</ul>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="asymétrique-avec-dke" class="level3">
+<h3 class="anchored" data-anchor-id="asymétrique-avec-dke">Asymétrique avec DKE</h3>
+<section id="station-to-station-protocol-sts" class="level4">
+<h4 class="anchored" data-anchor-id="station-to-station-protocol-sts">Station to Station Protocol (STS)</h4>
+<p>Diffie-Hellman <strong>authentifié</strong> avec signatures numériques.</p>
+<p><strong>Initialisation :</strong> Nombre premier <span class="math inline">\(p\)</span>, générateur <span class="math inline">\(\alpha\)</span> publics. A et B ont copies authentiques des clés publiques.</p>
+<p><strong>Protocole :</strong></p>
+<ol type="1">
+<li><span class="math inline">\(A \rightarrow B: \alpha^x \mod p\)</span></li>
+<li><span class="math inline">\(A \leftarrow B: \alpha^y \mod p, E_k(S_B(\alpha^x, \alpha^y))\)</span>
+<ul>
+<li>B calcule <span class="math inline">\(k := (\alpha^x)^y \mod p\)</span></li>
+<li>B signe et encrypte les parties publiques</li>
+</ul></li>
+<li><span class="math inline">\(A \rightarrow B: E_k(S_A(\alpha^y, \alpha^x))\)</span>
+<ul>
+<li>A décrypte, vérifie signature de B</li>
+<li>A signe et encrypte en inversant l’ordre</li>
+</ul></li>
+</ol>
+<p><strong>Propriétés :</strong></p>
+<ul>
+<li>✅ Entity authentication (mutuelle, par signatures)</li>
+<li>✅ Implicit key authentication (DHP + signatures empêchent MIM)</li>
+<li>✅ Key confirmation (encryption prouve possession de <span class="math inline">\(k\)</span>)</li>
+<li>✅ Explicit key authentication (authentication + key confirmation)</li>
+<li>✅ <strong>Perfect Forward Secrecy</strong> (clé privée signature compromise ne révèle pas clés session passées)</li>
+</ul>
+<p><strong>Variante efficace :</strong> Remplacer <span class="math inline">\(E_k(S_B(...))\)</span> par <span class="math inline">\((sig, h_k(sig))\)</span> avec MAC au lieu d’encryption symétrique.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-211-contents" aria-controls="callout-211" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Texte original
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-211" class="callout-211-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>KAP Asymétrique avec DKE - Station to Station Protocol</strong></p>
+<p>(Notation) <span class="math inline">\(S_A\)</span> : Signature avec la clé privée de A.</p>
+<p>(Initialisation) : (a) On choisit un nb. premier <span class="math inline">\(p\)</span> et un générateur <span class="math inline">\(\alpha\)</span> de <span class="math inline">\(\mathbb{Z}_p^*\)</span>, t.q. <span class="math inline">\(\alpha \in \mathbb{Z}_{p-1}\)</span>. Les deux nombres sont rendus publiques (et éventuellement associés aux clés publiques des intervenants).</p>
+<ol start="2" type="a">
+<li>Les intervenants ont accès aux copies authentiques des clés publiques des correspondants. Des certificats peuvent être échangés si besoin dans (2) et (3).</li>
+</ol>
+<ol type="1">
+<li><p><span class="math inline">\(A \rightarrow B: \alpha^x \mod p\)</span> ; A génère un secret <span class="math inline">\(x\)</span> et envoie la partie pub.</p></li>
+<li><p><span class="math inline">\(A \leftarrow B: \alpha^y \mod p, E_k(S_B(\alpha^x, \alpha^y))\)</span> ; B génère un secret <span class="math inline">\(y\)</span> et calcule la clé : <span class="math inline">\(k := (\alpha^x)^y \mod p\)</span> + signe et encrypte les p.pub.</p></li>
+<li><p><span class="math inline">\(A \rightarrow B: E_k(S_A(\alpha^y, \alpha^x))\)</span> ; A décrypte en calculant <span class="math inline">\(k := (\alpha^y)^x \mod p\)</span>, teste la signature de B et les parties publiques ; si OK, A signe + encrypte en inversant les parties publiques.</p></li>
+</ol>
+<p>B décrypte et teste la signature de A sur les parties publiques. Si OK =&gt; FIN.</p>
+<p><strong>Caractéristiques :</strong></p>
+<ul>
+<li><strong>Entity Authentication</strong> : OUI mutuelle (fournie par les signatures).</li>
+<li><strong>Implicit key authentication</strong> : OUI, les clés sont protégées par DHP. L’attaque MIM est rendue impossible par les signatures.</li>
+<li><strong>Key confirmation</strong> : OUI, les deux entités prouvent la possession de la clé en encryptant des quantités avec.</li>
+<li><strong>Explicit key authentication</strong> : OUI : implicit key authentication + key confirmation.</li>
+<li><strong>Perfect Forward Secrecy</strong> : OUI. La seule clé à long terme est celle utilisée pour signature/vérification. Si cette clé est compromise, les clés de session antérieures sont protégées par le fait qu’elles ne sont pas explicitement échangées mais plutôt calculées par DH.</li>
+</ul>
+<p>Évidemment, dès que la clé de signature est compromise (vol de clé privée), les propriétés énoncées ne sont plus vérifiées pour les échanges ultérieurs.</p>
+<p>Le protocole fournit en plus l’<strong>anonymat</strong> car l’identité des parties est protégée par <span class="math inline">\(k\)</span>.</p>
+<p><strong>Variante</strong> : Dans (2), calculer <span class="math inline">\(sig := S_B(\alpha^x, \alpha^y)\)</span>, et envoyer : <span class="math inline">\((sig, h_k(sig))\)</span> plutôt que <span class="math inline">\(E_k(S_B(\alpha^x, \alpha^y))\)</span>. Pareil pour (3) en observant les asymétries du protocole.</p>
+<p>Solution plus efficace car elle fait intervenir un <strong>MAC</strong> plutôt qu’un cryptage symétrique.</p>
+<p>Algorithme robuste et efficace choisi comme support de base pour la génération de clés dans <strong>IPv6</strong>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-212-contents" aria-controls="callout-212" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Révision rapide
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-212" class="callout-212-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Station to Station (STS) :</strong></p>
+<ul>
+<li>DH + signatures numériques</li>
+<li>✅ PFS : clés session passées protégées</li>
+<li>✅ Explicit key authentication</li>
+<li>Utilisé dans IPv6</li>
+</ul>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="protocoles-otr-et-signal" class="level4">
+<h4 class="anchored" data-anchor-id="protocoles-otr-et-signal">Protocoles OTR et Signal</h4>
+<section id="off-the-record-otr" class="level5">
+<h5 class="anchored" data-anchor-id="off-the-record-otr">Off-The-Record (OTR)</h5>
+<p>Protocole (2004) pour messagerie instantanée avec <strong>répudiabilité</strong>.</p>
+<p><strong>Technique SIGMA (SIGn-and-MAC) :</strong></p>
+<ul>
+<li>Signatures DH + authentification éphémère via MAC</li>
+<li>Key Derivation Function (KDF) génère deux clés : <span class="math inline">\(K_e\)</span> (encryption AES-CTR) et <span class="math inline">\(K_m\)</span> (MAC)</li>
+<li>Changement de clés à chaque conversation</li>
+<li><strong>Révélation des clés MAC</strong> précédentes pour garantir répudiabilité</li>
+</ul>
+<p><strong>Protocole simplifié :</strong></p>
+<ol type="1">
+<li><span class="math inline">\(A \rightarrow B: \alpha^x \mod p\)</span></li>
+<li><span class="math inline">\(A \leftarrow B: \alpha^y \mod p, S_B(\alpha^x, \alpha^y), \text{MAC}_{K_m}(B)\)</span>
+<ul>
+<li>B calcule <span class="math inline">\(k := (\alpha^x)^y \mod p\)</span></li>
+<li><span class="math inline">\((K_m, K_e) := \text{KDF}(k)\)</span></li>
+</ul></li>
+<li><span class="math inline">\(A \rightarrow B: S_A(\alpha^y, \alpha^x), \text{MAC}_{K_m}(A)\)</span></li>
+</ol>
+<p>Messages chiffrés avec <span class="math inline">\(K_e\)</span>.</p>
+</section>
+<section id="signal-protocol" class="level5">
+<h5 class="anchored" data-anchor-id="signal-protocol">Signal Protocol</h5>
+<p>Évolution d’OTR pour réseaux sociaux (WhatsApp, Facebook Messenger).</p>
+<p><strong>Caractéristiques :</strong></p>
+<ul>
+<li>Clés asymétriques et symétriques éphémères</li>
+<li>DH sur courbes elliptiques</li>
+<li>✅ PFS</li>
+<li>✅ Future Secrecy</li>
+<li>✅ Repudiability</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-213-contents" aria-controls="callout-213" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Texte original
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-213" class="callout-213-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Protocole Off-The-Record (OTR)</strong></p>
+<p>Protocole conçu en 2004 dans le but d’offrir des services d’authentification et de confidentialité dans les échanges des messages (instant messaging) en préservant le caractère “<strong>répudiable</strong>” d’une conversation “off the record”.</p>
+<p>Le protocole satisfait également les propriétés de <strong>PFS</strong> et <strong>Future Secrecy</strong> en cas de compromis des clés long terme.</p>
+<p>Il reprend les mêmes principes que le protocole Station-to-Station en rajoutant aux signatures des paramètres DH une <strong>authentification éphémère via un MAC</strong>. Cette technique double est appelée <strong>SIGMA</strong> (SIGn-and-MAC).</p>
+<p>Il utilise une <strong>fonction de dérivation de clés</strong> (Key Derivation Function ou KDF) pour générer une clé d’encryption (<span class="math inline">\(K_e\)</span>) préservant la confidentialité des messages avec AES CTR-mode et une clé MAC (<span class="math inline">\(K_m\)</span>) garantissant l’authenticité d’origine de ceux-ci.</p>
+<p>Chaque conversation implique un <strong>changement de clés</strong> (nouvel échange de paramètres DH) avec en plus un <strong>échange en clair des clés MAC</strong> (<span class="math inline">\(K_m\)</span>) utilisées dans l’échange précédent pour garantir la répudiabilité !</p>
+<p><strong>Échanges schématiques du protocole OTR :</strong></p>
+<ol type="1">
+<li><p><span class="math inline">\(A \rightarrow B: \alpha^x \mod p\)</span>; A génère un secret <span class="math inline">\(x\)</span> et envoie la partie pub.</p></li>
+<li><p><span class="math inline">\(A \leftarrow B: \alpha^y \mod p, S_B(\alpha^x, \alpha^y), \text{MAC}_{K_m}(B)\)</span></p></li>
+</ol>
+<p>B génère un secret <span class="math inline">\(y\)</span>, calcule la clé de session <span class="math inline">\(k := (\alpha^x)^y \mod p\)</span> et signe les parties publiques DH. Il génère ensuite les clés <span class="math inline">\(K_e\)</span> et <span class="math inline">\(K_m\)</span> via la KDF : <span class="math inline">\((K_m, K_e) := \text{KDF}(k)\)</span></p>
+<ol start="3" type="1">
+<li><span class="math inline">\(A \rightarrow B: S_A(\alpha^y, \alpha^x), \text{MAC}_{K_m}(A)\)</span> : A fait de même</li>
+</ol>
+<p>Les messages sont ensuite chiffrés avec la clé <span class="math inline">\(K_e\)</span></p>
+<p>Il existe de nombreuses évolutions du protocole original OTR ayant permis d’adresser des vulnérabilités et de rendre le protocole plus efficace.</p>
+<p><strong>Le protocole Signal</strong></p>
+<p>Le protocole Signal est une évolution du protocole OTR qui cible la protection des échanges des messages dans les <strong>réseaux sociaux</strong>. Il utilise également des clés asymétriques et symétriques éphémères pour assurer la <strong>PFS</strong>, la <strong>Future Secrecy</strong> et la <strong>repudiability</strong> avec des calculs DH sur des courbes elliptiques.</p>
+<p>Signal est utilisé pour protéger les plateformes de messagerie telles que <strong>Whatsapp</strong> et <strong>Facebook Messenger</strong> entre autres.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-214-contents" aria-controls="callout-214" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Révision rapide
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-214" class="callout-214-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>OTR/Signal :</strong></p>
+<ul>
+<li>SIGMA : signature + MAC</li>
+<li>KDF : génère <span class="math inline">\(K_e\)</span> (chiffrement) et <span class="math inline">\(K_m\)</span> (MAC)</li>
+<li>Révèle anciennes clés MAC → répudiabilité</li>
+<li>✅ PFS, ✅ Future Secrecy</li>
+<li>Utilisé : WhatsApp, Facebook Messenger</li>
+</ul>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="secure-remote-password-srp" class="level4">
+<h4 class="anchored" data-anchor-id="secure-remote-password-srp">Secure Remote Password (SRP)</h4>
+<p>Protocole KAP asymétrique basé sur <strong>mot de passe</strong>, résistant aux attaques dictionnaire.</p>
+<p><strong>Initialisation :</strong></p>
+<ul>
+<li><span class="math inline">\(m := 2p+1\)</span> (safe prime), <span class="math inline">\(\alpha\)</span> générateur de <span class="math inline">\(\mathbb{Z}_p^*\)</span></li>
+<li><span class="math inline">\(P\)</span> : password de A, <span class="math inline">\(x := H(P)\)</span> avec <span class="math inline">\(H\)</span> une CRHF</li>
+<li>B stocke le <strong>vérificateur</strong> : <span class="math inline">\(v := \alpha^x \mod m\)</span> (pas le password!)</li>
+</ul>
+<p><strong>Protocole :</strong></p>
+<ol type="1">
+<li><span class="math inline">\(A \rightarrow B: \gamma := \alpha^r \mod m\)</span> (A génère <span class="math inline">\(r\)</span> secret)</li>
+<li><span class="math inline">\(A \leftarrow B: \delta := (v + \alpha^t) \mod m, u\)</span> (B génère <span class="math inline">\(t, u\)</span> aléatoires)</li>
+<li>A calcule <span class="math inline">\(k := (\delta - v)^{r+ux} \mod m\)</span></li>
+<li>B calcule <span class="math inline">\(k := (\gamma v^u)^t \mod m\)</span></li>
+<li>Key confirmation</li>
+</ol>
+<p><strong>Propriétés :</strong></p>
+<ul>
+<li>✅ Protège passwords des attaques dictionnaire</li>
+<li>✅ <strong>Verifier-based</strong> : B ne stocke pas passwords</li>
+<li>✅ Toutes propriétés KEP</li>
+<li>Inclus dans SSL/TLS, EAP</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-215-contents" aria-controls="callout-215" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Texte original
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-215" class="callout-215-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>KAP Asymétrique avec DKE - Secure Remote Password protocol</strong></p>
+<ol type="a">
+<li>Soit <span class="math inline">\(m\)</span> un safe prime avec <span class="math inline">\(m := 2p+1\)</span> et <span class="math inline">\(p\)</span> premier</li>
+<li>Soit <span class="math inline">\(\alpha\)</span> un générateur de <span class="math inline">\(\mathbb{Z}_p^*\)</span>, t.q. <span class="math inline">\(\alpha \in \mathbb{Z}_{p-1}\)</span></li>
+<li>Soit <span class="math inline">\(P\)</span> le password de A et <span class="math inline">\(x := H(P)\)</span> avec <span class="math inline">\(H\)</span> une CRHF.</li>
+<li>B garde dans sa base des mots de passe le <strong>vérificateur</strong> <span class="math inline">\(v := \alpha^x \mod m\)</span>.</li>
+</ol>
+<ol type="1">
+<li><p><span class="math inline">\(A \rightarrow B: \gamma := \alpha^r \mod m\)</span> ; A génère un nombre aléatoire secret <span class="math inline">\(r\)</span></p></li>
+<li><p><span class="math inline">\(A \leftarrow B: \delta := (v + \alpha^t) \mod m, u\)</span> ; B génère un nombre aléatoire secret <span class="math inline">\(t\)</span> et un deuxième nombre aléatoire <span class="math inline">\(u\)</span></p></li>
+</ol>
+<p>A calcule la clé symétrique : <span class="math inline">\(k := (\delta - v)^{r+ux} \mod m\)</span></p>
+<p>B calcule la clé symétrique : <span class="math inline">\(k := (\gamma v^u)^t \mod m\)</span></p>
+<p>A et B prouvent la connaissance de <span class="math inline">\(k\)</span> (key confirmation) lors d’un échange ultérieur.</p>
+<ul>
+<li>SRP <strong>protège les mots de passe</strong> des attaques dictionnaire.</li>
+<li>B ne stocke pas les passwords mais des <strong>valeurs de vérification</strong> (verifier-based).</li>
+<li>SRP satisfait également <strong>toutes les propriétés propres aux KEP</strong> et est inclus dans des nombreux standards (SSL/TLS, EAP, etc.).</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-216-contents" aria-controls="callout-216" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Révision rapide
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-216" class="callout-216-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>SRP :</strong></p>
+<ul>
+<li>KAP basé mot de passe</li>
+<li>B stocke vérificateur <span class="math inline">\(v := \alpha^x\)</span> (pas password)</li>
+<li>Résiste attaques dictionnaire</li>
+<li>✅ Toutes propriétés KEP</li>
+</ul>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+</section>
+<section id="attaques-sur-dh-et-pfs" class="level2">
+<h2 class="anchored" data-anchor-id="attaques-sur-dh-et-pfs">Attaques sur DH et PFS</h2>
+<p><strong>Attaque Logjam (2015) :</strong></p>
+<p>Attaque active permettant :</p>
+<ol type="1">
+<li><strong>Downgrade</strong> : Man-in-the-Middle force utilisation de groupe DH 512 bits</li>
+<li><strong>Calcul de logarithmes discrets</strong> avec Number Field Sieve :
+<ul>
+<li>Pré-calcul d’une semaine pour un premier <span class="math inline">\(p\)</span> fixé</li>
+<li>Calcul individuel en ~1 minute après pré-calcul</li>
+</ul></li>
+<li><strong>Réutilisation du pré-calcul</strong> : Beaucoup de serveurs utilisent le même <span class="math inline">\(p\)</span></li>
+</ol>
+<p><strong>Conséquence :</strong></p>
+<p>Acteurs avec ressources étatiques peuvent compromettre PFS sur groupes 1024 bits répandus.</p>
+<p><strong>Solutions :</strong></p>
+<ul>
+<li>Utiliser groupes <span class="math inline">\(\geq\)</span> 2048 bits</li>
+<li>Diversifier les premiers <span class="math inline">\(p\)</span> utilisés</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-217-contents" aria-controls="callout-217" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Texte original
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-217" class="callout-217-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Attaques Récentes sur Diffie-Hellman et la PFS</strong></p>
+<p>En 2015 un groupe de chercheurs a publié une série d’attaques sur le protocole TLS/SSL permettant de :</p>
+<ul>
+<li><p>Effectuer un <strong>downgrade</strong> via une attaque active appelée <strong>Logjam</strong> moyennant laquelle un man-in-the-middle réussit à diminuer à <strong>512 bits</strong> la taille du groupe Diffie-Hellman sur lequel s’effectue l’établissement de la clé secrète partagée.</p></li>
+<li><p>Calculer ensuite les <strong>logarithmes discrets</strong> de <span class="math inline">\(\alpha^x \mod p\)</span> et de <span class="math inline">\(\alpha^y \mod p\)</span> avec la technique <strong>Number Field Sieve</strong>.</p></li>
+<li><p>À partir d’un groupe basé sur un nombre premier <span class="math inline">\(p\)</span> fixé, ils effectuent une <strong>phase de pré-calcul</strong> d’une durée approximative d’<strong>une semaine</strong>.</p></li>
+<li><p>Une fois cette phase initiale terminée, les calculs des logarithmes individuels ne prennent qu’<strong>une minute</strong> !</p></li>
+<li><p>Une constatation statistique montre qu’un pourcentage significatif des serveurs se basent sur le <strong>même groupe</strong> (même premier <span class="math inline">\(p\)</span>) ce qui permet d’utiliser la même phase de pré-calcul pour compromettre plusieurs serveurs.</p></li>
+<li><p>Une des conclusions de cette recherche est que des <strong>acteurs majeurs avec des ressources étatiques</strong> seraient capables à ce jour de démonter la PFS lorsque celle-ci est basée sur des groupes (très répandus à ce jour…) de <strong>1024 bits</strong>.</p></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-218-contents" aria-controls="callout-218" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Révision rapide
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-218" class="callout-218-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Logjam (2015) :</strong></p>
+<ul>
+<li>Downgrade → DH 512 bits</li>
+<li>Pré-calcul (1 semaine) + calcul individuel (1 min)</li>
+<li>Réutilisation si même <span class="math inline">\(p\)</span></li>
+<li>⚠️ États peuvent casser PFS sur 1024 bits</li>
+</ul>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="ktp" class="level2">
+<h2 class="anchored" data-anchor-id="ktp">KTP</h2>
+<section id="symétrique-2" class="level3">
+<h3 class="anchored" data-anchor-id="symétrique-2">Symétrique</h3>
+<section id="cas-trivial" class="level4">
+<h4 class="anchored" data-anchor-id="cas-trivial">Cas Trivial</h4>
+<p><strong>Initialisation :</strong> A et B partagent clé long terme <span class="math inline">\(S\)</span></p>
+<p><strong>Protocole :</strong></p>
+<ol type="1">
+<li><span class="math inline">\(A \rightarrow B: E_S(r_a)\)</span></li>
+<li>Clé de session : <span class="math inline">\(K := r_a\)</span></li>
+</ol>
+<p><strong>Propriétés :</strong></p>
+<ul>
+<li>❌ Entity authentication</li>
+<li>✅ Implicit key authentication</li>
+<li>❌ Key confirmation (amélioration : <span class="math inline">\(E_S(B, r_a)\)</span>)</li>
+<li>❌ Perfect Forward Secrecy</li>
+</ul>
+<p><strong>Variante avec timestamp :</strong> <span class="math inline">\(A \rightarrow B: E_S(B, t_a, r_a)\)</span> (nécessite horloges synchronisées)</p>
+</section>
+<section id="shamirs-no-key-protocol" class="level4">
+<h4 class="anchored" data-anchor-id="shamirs-no-key-protocol">Shamir’s No-key Protocol</h4>
+<p>Équivalent de DH en transport de clé.</p>
+<p><strong>Initialisation :</strong> Nombre premier <span class="math inline">\(p\)</span> public, A et B génèrent secrets <span class="math inline">\(a, b \in \mathbb{Z}_{p-1}\)</span> avec <span class="math inline">\(\gcd(a,p-1)=1\)</span> et <span class="math inline">\(\gcd(b,p-1)=1\)</span></p>
+<p><strong>Protocole :</strong></p>
+<ol type="1">
+<li><span class="math inline">\(A \rightarrow B: K^a \mod p\)</span> (A choisit clé <span class="math inline">\(K\)</span> et cache avec <span class="math inline">\(^a\)</span>)</li>
+<li><span class="math inline">\(A \leftarrow B: (K^a)^b \mod p\)</span> (B exponentie avec <span class="math inline">\(b\)</span>)</li>
+<li><span class="math inline">\(A \rightarrow B: (K^{ab})^{a^{-1}} \mod p = K^b \mod p\)</span> (A défait <span class="math inline">\(^a\)</span>)</li>
+<li>B calcule <span class="math inline">\(K\)</span> en exponenti ant avec <span class="math inline">\(b^{-1} \mod (p-1)\)</span></li>
+</ol>
+<p><strong>Problème :</strong> Vulnérable Man-in-the-Middle (comme DH)</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-219-contents" aria-controls="callout-219" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Texte original
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-219" class="callout-219-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Key Transport Protocol Symétrique - Cas trivial</strong></p>
+<p>(Init.) A et B partagent une clé symétrique long terme <span class="math inline">\(S\)</span></p>
+<ol type="1">
+<li><span class="math inline">\(A \rightarrow B: E_S(r_a)\)</span> ; A génère un nb. aléatoire et l’encrypte avec <span class="math inline">\(k\)</span></li>
+</ol>
+<p>La clé de session utilisée par les deux entités est <span class="math inline">\(K := r_a\)</span>.</p>
+<p><strong>Propriétés :</strong></p>
+<ul>
+<li><strong>Entity Authentication</strong> : NON.</li>
+<li><strong>Implicit Key Authentication</strong> : OUI (seul A et B ont accès à la clé).</li>
+<li><strong>Key Confirmation</strong> : NON. B ne peut pas être sûr que A possède la clé car <span class="math inline">\(r_a\)</span> est un nombre aléatoire. En rajoutant de la redondance (p.ex. l’identité de B), B peut obtenir key confirmation unilatérale (et donc, explicit key authentication) :</li>
+</ul>
+<p>(1)’ : <span class="math inline">\(A \rightarrow B: E_s(B, r_a)\)</span></p>
+<ul>
+<li><strong>Perfect Forward Secrecy</strong> : NON.</li>
+</ul>
+<p>Si, de plus, B ne peut pas juger l’actualité (freshness) de (1) à partir du seul <span class="math inline">\(r_a\)</span>, il peut demander à A d’inclure un timestamp à condition d’avoir des horloges synchronisés :</p>
+<p>(1)’’ : <span class="math inline">\(A \rightarrow B: E_s(B, t_a, r_a)\)</span></p>
+<p><strong>KTP Symétrique : Shamir’s No-key Protocol</strong></p>
+<p>Rappel Théorie des nombres : Si <span class="math inline">\(p\)</span> premier et <span class="math inline">\(r \equiv t \mod p-1\)</span> alors <span class="math inline">\(a^r \equiv a^t \mod p\)</span> <span class="math inline">\(\forall a \in \mathbb{Z}\)</span> et donc : <span class="math inline">\(r \cdot r^{-1} \equiv 1 \mod p-1\)</span> implique <span class="math inline">\(a^{r \cdot r^{-1}} \equiv a \mod p\)</span>.</p>
+<p>(Init.) (a) Choisir et publier un nb. premier <span class="math inline">\(p\)</span> pour lequel il est difficile (par DLP) de calculer les logarithmes discrets dans <span class="math inline">\(\mathbb{Z}_p\)</span>.</p>
+<ol start="2" type="a">
+<li><p>A (resp. B) génère un nombre secret <span class="math inline">\(a\)</span> (resp. <span class="math inline">\(b\)</span>), t.q <span class="math inline">\(\{a,b\} \in \mathbb{Z}_{p-1}\)</span> et <span class="math inline">\(\gcd(a,p-1) = 1\)</span> et <span class="math inline">\(\gcd(b,p-1) = 1\)</span> (pour que les inverses existent).</p></li>
+<li><p>Pour la suite, A pré-calcule <span class="math inline">\(a^{-1} \mod p-1\)</span> et B pré-calcule <span class="math inline">\(b^{-1} \mod p-1\)</span></p></li>
+</ol>
+<ol type="1">
+<li><p>: <span class="math inline">\(A \rightarrow B: K^a \mod p\)</span> ; A choisit une clé <span class="math inline">\(K \in \mathbb{Z}_p\)</span> et la cache avec <span class="math inline">\(^a\)</span></p></li>
+<li><p>: <span class="math inline">\(A \leftarrow B: (K^a)^b \mod p\)</span> ; B exponentie à son tour avec <span class="math inline">\(b\)</span></p></li>
+<li><p>: <span class="math inline">\(A \rightarrow B: (K^{ab})^{a^{-1}} \mod p\)</span> ; A défait l’exponentiation avec <span class="math inline">\(a^{-1} \mod p-1\)</span> ; mais la clé reste protégée par <span class="math inline">\(^b\)</span></p></li>
+</ol>
+<p>B n’a plus qu’à calculer <span class="math inline">\(K\)</span> en exponentiant avec <span class="math inline">\(b^{-1} \mod p-1\)</span>.</p>
+<p>Ce protocole est l’équivalent de Diffie-Hellman en Key Transport (dans DH la clé n’est pas transportée mais calculée bilatéralement). Il souffre donc des mêmes problèmes (notamment Man in the Middle) que ce dernier.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-220-contents" aria-controls="callout-220" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Révision rapide
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-220" class="callout-220-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>KTP symétrique :</strong></p>
+<ul>
+<li>Trivial : <span class="math inline">\(K := r_a\)</span> avec <span class="math inline">\(E_S(r_a)\)</span></li>
+<li>Shamir : transport via exponentiations successives</li>
+<li>Pas de PFS</li>
+</ul>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="asymétrique-1" class="level3">
+<h3 class="anchored" data-anchor-id="asymétrique-1">Asymétrique</h3>
+<section id="needham-schroeder" class="level4">
+<h4 class="anchored" data-anchor-id="needham-schroeder">Needham-Schroeder</h4>
+<p><strong>Initialisation :</strong> A et B ont copies authentiques clés publiques mutuelles</p>
+<p><strong>Protocole :</strong></p>
+<ol type="1">
+<li><span class="math inline">\(A \rightarrow B: E_{pub_B}(k_1, A)\)</span></li>
+<li><span class="math inline">\(A \leftarrow B: E_{pub_A}(k_1, k_2)\)</span></li>
+<li><span class="math inline">\(A \rightarrow B: E_{pub_B}(k_2)\)</span></li>
+<li>Clé de session : <span class="math inline">\(K := H(k_1, k_2)\)</span></li>
+</ol>
+<p><strong>Propriétés :</strong></p>
+<ul>
+<li>✅ Entity authentication + implicit key authentication + key confirmation</li>
+<li>❌ Perfect Forward Secrecy (clés entièrement déterminées par quantités échangées)</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-221-contents" aria-controls="callout-221" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Texte original
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-221" class="callout-221-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Key Transport Protocol Asymétrique - Needham-Schroeder Public Key Protocol</strong></p>
+<p>(Notation) : <span class="math inline">\(E_{pub_E}(X)\)</span> signifie encrypter avec la clé publique de l’entité E.</p>
+<p>(Init) : A et B possèdent une copie authentique (év. un certificat) de la clé publique de l’autre.</p>
+<ol type="1">
+<li><p><span class="math inline">\(A \rightarrow B: E_{pub_B}(k_1, A)\)</span> ; A génère un nb. aléatoire <span class="math inline">\(k_1\)</span> + A + Encrypt</p></li>
+<li><p><span class="math inline">\(A \leftarrow B: E_{pub_A}(k_1, k_2)\)</span> ; B idem pour <span class="math inline">\(k_2\)</span> + concat avec <span class="math inline">\(k_1\)</span> + Encrypt</p></li>
+<li><p><span class="math inline">\(A \rightarrow B: E_{pub_B}(k_2)\)</span> ; A vérifie si <span class="math inline">\(k_1\)</span> coïncide, si oui, encrypt <span class="math inline">\(k_2\)</span> ; B vérifie si <span class="math inline">\(k_2\)</span> coïncide avec (2)</p></li>
+</ol>
+<p>La clé est générée à l’aide d’une fonction de hachage cryptographique : <span class="math inline">\(K := H(k_1, k_2)\)</span></p>
+<p><strong>Caractéristiques :</strong></p>
+<ul>
+<li><strong>Entity Authentication</strong> + <strong>implicit key authentication</strong> + <strong>key confirmation</strong> : OUI.</li>
+<li><strong>Perfect forward secrecy</strong> : NON : Les clés sont entièrement déterminées par les quantités échangées.</li>
+</ul>
+<p>Un protocole semblable (seul (3) change) peut être utilisé pour l’authentification d’entités.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-222-contents" aria-controls="callout-222" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Révision rapide
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-222" class="callout-222-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Needham-Schroeder asymétrique :</strong></p>
+<ul>
+<li><span class="math inline">\(K := H(k_1, k_2)\)</span> avec échanges encryptés</li>
+<li>✅ Authentification complète</li>
+<li>❌ Pas de PFS</li>
+</ul>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="mixte" class="level3">
+<h3 class="anchored" data-anchor-id="mixte">Mixte</h3>
+<section id="encrypted-key-exchange-eke" class="level4">
+<h4 class="anchored" data-anchor-id="encrypted-key-exchange-eke">Encrypted Key Exchange (EKE)</h4>
+<p>Protocole <strong>mixte</strong> (symétrique + asymétrique) résistant aux attaques dictionnaire.</p>
+<p><strong>Initialisation :</strong> A et B partagent password <span class="math inline">\(p\)</span></p>
+<p><strong>Protocole :</strong></p>
+<ol type="1">
+<li><span class="math inline">\(A \rightarrow B: A, E_p(pub_A)\)</span> (A génère paire clés, envoie publique encryptée)</li>
+<li><span class="math inline">\(A \leftarrow B: E_p(E_{pub_A}(k))\)</span> (B génère clé session <span class="math inline">\(k\)</span>, double encryption)</li>
+<li><span class="math inline">\(A \rightarrow B: E_k(r_a)\)</span> (Key confirmation)</li>
+<li><span class="math inline">\(A \leftarrow B: E_k(r_a, r_b)\)</span></li>
+<li><span class="math inline">\(A \rightarrow B: E_k(r_b)\)</span></li>
+</ol>
+<p><strong>Avantages :</strong></p>
+<ul>
+<li>Robuste même si password <span class="math inline">\(p\)</span> faible</li>
+<li>Eve ne peut pas deviner sans “casser” aussi l’algorithme asymétrique</li>
+</ul>
+<p><strong>Propriétés :</strong></p>
+<ul>
+<li>✅ Entity authentication + implicit + confirmation</li>
+<li>✅ Perfect Forward Secrecy <strong>si</strong> <span class="math inline">\(pub_A/priv_A\)</span> régénérée à chaque fois</li>
+<li>❌ Pas de PFS si clés longue durée</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-223-contents" aria-controls="callout-223" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Texte original
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-223" class="callout-223-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>KTP mixte : Encrypted Key Exchange (EKE)</strong></p>
+<p>Ce protocole fait intervenir des schémas <strong>symétriques et asymétriques</strong> afin de minimiser le risque de cryptanalyse par attaque dictionnaire inhérents aux systèmes symétriques.</p>
+<p>(Init.) : A et B partagent un secret symétrique <span class="math inline">\(p\)</span> (password).</p>
+<ol type="1">
+<li><p><span class="math inline">\(A \rightarrow B: A, E_p(pub_A)\)</span> ; A génère une paire de clés pub/priv. et envoie la partie publique à B encrypté avec <span class="math inline">\(p\)</span>.</p></li>
+<li><p><span class="math inline">\(A \leftarrow B: E_p(E_{pub_A}(k))\)</span> ; B génère une clé de session <span class="math inline">\(k\)</span> et l’envoie encryptée.</p></li>
+<li><p><span class="math inline">\(A \rightarrow B: E_k(r_a)\)</span> ; A génère un nb. aléatoire et l’envoie encrypté avec <span class="math inline">\(k\)</span>.</p></li>
+<li><p><span class="math inline">\(A \leftarrow B: E_k(r_a, r_b)\)</span> ; B génère <span class="math inline">\(r_b\)</span> et l’envoie avec <span class="math inline">\(r_a\)</span> crypté avec <span class="math inline">\(k\)</span>.</p></li>
+<li><p><span class="math inline">\(A \rightarrow B: E_k(r_b)\)</span> ; Confirmation de la part de A. Si <span class="math inline">\(r_b =\)</span> OK =&gt; FIN.</p></li>
+<li><p>et (2) sont responsables du <strong>key transport</strong> ; (3) à (5) du <strong>key confirmation</strong>.</p></li>
+</ol>
+<p>Ce protocole est <strong>robuste même si le password</strong> <span class="math inline">\(p\)</span> partagé entre A et B est de mauvaise qualité. En effet, Eve ne peut pas essayer de deviner sans “casser” aussi l’algorithme asymétrique.</p>
+<p><strong>Propriétés :</strong></p>
+<ul>
+<li><strong>Entity Authentication</strong> + <strong>implicit key authentication</strong> + <strong>key confirmation</strong> : OUI.</li>
+<li><strong>Perfect forward secrecy</strong> : OUI si la paire <span class="math inline">\(pub_A/priv_A\)</span> est régénérée à chaque instance du protocole. NON si <span class="math inline">\(pub_A/priv_A\)</span> est une clé de longue durée.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-224-contents" aria-controls="callout-224" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Révision rapide
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-224" class="callout-224-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>EKE (mixte) :</strong></p>
+<ul>
+<li>Password + crypto asymétrique</li>
+<li>Robuste même si password faible</li>
+<li>PFS si clés régénérées chaque fois</li>
+</ul>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="symétrique-avec-key-distribution-center-kdc" class="level3">
+<h3 class="anchored" data-anchor-id="symétrique-avec-key-distribution-center-kdc">Symétrique avec Key Distribution Center (KDC)</h3>
+<section id="needham-schroeder-symétrique" class="level4">
+<h4 class="anchored" data-anchor-id="needham-schroeder-symétrique">Needham-Schroeder Symétrique</h4>
+<p>Protocole avec <strong>Key Distribution Center</strong> (KDC).</p>
+<p><strong>Initialisation :</strong> A partage <span class="math inline">\(K_{AT}\)</span> avec T (KDC), B partage <span class="math inline">\(K_{BT}\)</span> avec T</p>
+<p><strong>Protocole :</strong></p>
+<ol type="1">
+<li><span class="math inline">\(A \rightarrow T: A, B, r_a\)</span></li>
+<li><span class="math inline">\(A \leftarrow T: E_{K_{AT}}(r_a, B, k_{AB}, E_{K_{BT}}(k_{AB}, A))\)</span></li>
+<li><span class="math inline">\(A \rightarrow B: E_{K_{BT}}(k_{AB}, A)\)</span></li>
+<li><span class="math inline">\(A \leftarrow B: E_{k_{AB}}(r_b)\)</span></li>
+<li><span class="math inline">\(A \rightarrow B: E_{k_{AB}}(r_b - 1)\)</span></li>
+</ol>
+<p><strong>Propriétés :</strong></p>
+<ul>
+<li>✅ Entity authentication A auprès de B</li>
+<li>❌ Entity authentication B auprès de A (A n’a jamais vu <span class="math inline">\(r_b\)</span>)</li>
+<li>✅ Implicit key authentication</li>
+<li>❌ Key Confirmation (seul <span class="math inline">\(B\)</span> sait que <span class="math inline">\(A\)</span> possède la clé)</li>
+<li>❌ Perfect Forward Secrecy</li>
+</ul>
+<p><strong>Vulnérabilités :</strong></p>
+<ul>
+<li><strong>Replay attacks</strong> : A peut rejouer (3) sans contrôle de B</li>
+<li><strong>Known-key attack</strong> : Si ancienne clé <span class="math inline">\(k\)</span> compromise, adversaire peut la faire accepter par B</li>
+</ul>
+<p><strong>Solutions :</strong></p>
+<ul>
+<li><p><strong>key confirmation et entity authentication mutuelles :</strong></p>
+<p>Remplacer 3. et 4. par :</p>
+<ol start="3" type="1">
+<li><span class="math inline">\(A \rightarrow B: E_{k_{AB}}(r_a'), E_{K_{BT}}(k_{AB}, A)\)</span></li>
+<li><span class="math inline">\(A \leftarrow B: E_{k_{AB}}(r_a'-1, r_b)\)</span></li>
+</ol></li>
+<li><p><strong>Actualité des échanges</strong></p>
+<p>Ajouter timestamp dans 3. : <span class="math inline">\(E_{K_{BT}}(k_{AB}, A, t)\)</span></p></li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-225-contents" aria-controls="callout-225" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Texte original
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-225" class="callout-225-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>KTP symétrique avec Key Distribution Center - Needham-Schroeder Symétrique</strong></p>
+<p>(Notation) : On appelle T, le <strong>Key Distribution Center</strong>.</p>
+<p>(Init.) : A et T partagent la clé symétrique <span class="math inline">\(K_{AT}\)</span>. B et T partagent <span class="math inline">\(K_{BT}\)</span>.</p>
+<ol type="1">
+<li><p><span class="math inline">\(A \rightarrow T: A, B, r_a\)</span> ; A génère un nb. aléatoire <span class="math inline">\(r_a\)</span> et l’envoie à T avec les ident.</p></li>
+<li><p><span class="math inline">\(A \leftarrow T: E_{K_{AT}}(r_a, B, k_{AB}, E_{K_{BT}}(k_{AB}, A))\)</span> ; T génère <span class="math inline">\(k_{AB}\)</span> et l’envoie encryptée.</p></li>
+<li><p><span class="math inline">\(A \rightarrow B: E_{K_{BT}}(k_{AB}, A)\)</span> ; A forwarde le paquet à B.</p></li>
+<li><p><span class="math inline">\(A \leftarrow B: E_{k_{AB}}(r_b)\)</span> ; confirmation de B en utilisant <span class="math inline">\(k_{AB}\)</span> et un nb. aléatoire <span class="math inline">\(r_b\)</span></p></li>
+<li><p><span class="math inline">\(A \rightarrow B: E_{k_{AB}}(r_b - 1)\)</span> ; confirmation de A</p></li>
+</ol>
+<p><strong>Propriétés :</strong></p>
+<ul>
+<li><strong>Entity Authentication</strong> :
+<ul>
+<li>A auprès de B : OUI.</li>
+<li>B auprès de A : NON : A n’a jamais vu <span class="math inline">\(r_b\)</span> (il pourrait s’agir de <span class="math inline">\(E_{k'}(r_b')\)</span>).</li>
+</ul></li>
+<li><strong>Implicit Key Authentication</strong> : OUI (les clés sont toujours protégées par <span class="math inline">\(K_{AT}\)</span> et <span class="math inline">\(K_{BT}\)</span>). Cependant, en cas de known-key attack, ceci n’est plus vérifié pour B.</li>
+<li><strong>Key Confirmation</strong> : Seul B obtient l’assurance que A possède la clé à cause de la faille décrite dans entity authentication.</li>
+<li><strong>Perfect Forward Secrecy</strong> : NON. Si une des deux clés <span class="math inline">\(K_{AT}\)</span> ou <span class="math inline">\(K_{BT}\)</span> est compromise, les clés de session <span class="math inline">\(k\)</span> deviennent immédiatement visibles.</li>
+</ul>
+<p><strong>Solution pour obtenir key confirmation et entity authentication mutuelles :</strong></p>
+<p>Remplacer (3) et (4) par :</p>
+<p>(3’) <span class="math inline">\(A \rightarrow B: E_{k_{AB}}(r_a'), E_{K_{BT}}(k_{AB}, A)\)</span></p>
+<p>(4’) <span class="math inline">\(A \leftarrow B: E_{k_{AB}}(r_a'-1, r_b)\)</span></p>
+<p>Pour autant que les <span class="math inline">\(r_i\)</span> soient soigneusement contrôlés par les intervenants.</p>
+<p>Cependant : attention aux <strong>reflection attacks</strong> !</p>
+<p><strong>Problème :</strong> A peut rejouer (3) autant de fois qu’il le souhaite, sans aucun contrôle de la part de B. Ce problème s’aggrave si une vieille clé <span class="math inline">\(k\)</span> est compromise :</p>
+<p><strong>Vulnérable au known-key attack</strong> : Si une clé de session <span class="math inline">\(k\)</span> déjà utilisée est obtenue par un adversaire C, il peut sans difficulté la faire accepter par B en rejouant (3) et en calculant le challenge envoyé par B dans (5). Dans ce cas, les propriétés entity authentication, implicit key authentication et key confirmation de A auprès de B sont aussi compromises.</p>
+<p><strong>Solution :</strong> Rajouter un <strong>timestamp</strong> dans (3) témoignant de l’actualité des échanges :</p>
+<p>(3’’) <span class="math inline">\(A \rightarrow B: E_{K_{BT}}(k_{AB}, A, t)\)</span> (c’est la solution adoptée par <strong>Kerberos</strong>)</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-226-contents" aria-controls="callout-226" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Révision rapide
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-226" class="callout-226-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Needham-Schroeder symétrique :</strong></p>
+<ul>
+<li>KDC génère et distribue <span class="math inline">\(k_{AB}\)</span></li>
+<li>Vulnérable replay et known-key attacks</li>
+<li>Solution : ajouter timestamp</li>
+<li>Base de Kerberos</li>
+</ul>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="kerberos" class="level4">
+<h4 class="anchored" data-anchor-id="kerberos">Kerberos</h4>
+<p>Protocole d’<strong>authentification et distribution de clés</strong> basé sur Needham-Schroeder avec corrections.</p>
+<p><strong>Architecture :</strong></p>
+<ul>
+<li><strong>Authentication Server (AS)</strong> : Émet tickets pour TGS</li>
+<li><strong>Ticket Granting Server (TGS)</strong> : Émet tickets pour services</li>
+<li><strong>Tickets</strong> : Structures encryptées contenant clés de session</li>
+</ul>
+<p><strong>Protocole simplifié :</strong></p>
+<p><strong>Phase 1 : Demande TGT (Ticket Granting Ticket)</strong></p>
+<ol type="1">
+<li><span class="math inline">\(A \rightarrow AS: A, TGS, r_a\)</span></li>
+<li><span class="math inline">\(A \leftarrow AS: E_{K_A}(k_{AT}, r_a), Ticket_{AT} := E_{K_T}(A, TGS, t_1, t_2, k_{AT})\)</span></li>
+</ol>
+<p><strong>Phase 2 : Demande ticket pour service B</strong></p>
+<ol start="3" type="1">
+<li><span class="math inline">\(A \rightarrow TGS: Authenticator_{AT} := E_{k_{AT}}(A, t), Ticket_{AT}, B, r_a'\)</span></li>
+<li><span class="math inline">\(A \leftarrow TGS: E_{k_{AT}}(k_{AB}, r_a'), Ticket_{AB} := E_{K_B}(A, B, t_1, t_2, k_{AB})\)</span></li>
+</ol>
+<p><strong>Phase 3 : Authentification auprès de B</strong></p>
+<ol start="5" type="1">
+<li><span class="math inline">\(A \rightarrow B: Authenticator_{AB} := E_{k_{AB}}(A, t), Ticket_{AB}, r_a'', [request]\)</span></li>
+<li><span class="math inline">\(A \leftarrow B: E_{k_{AB}}(r_a''), [response]\)</span></li>
+</ol>
+<p><strong>Propriétés :</strong></p>
+<ul>
+<li>✅ Entity authentication (toutes entités)</li>
+<li>✅ Implicit key authentication</li>
+<li>⚠️ Key confirmation partielle (pas entre A et AS)</li>
+<li>❌ Perfect Forward Secrecy</li>
+</ul>
+<p><strong>Vulnérabilités :</strong></p>
+<ul>
+<li><strong>Password guessing attacks</strong> sur <span class="math inline">\(E_{K_A}(k_{AT}, r_a)\)</span> (Solution : pré-authentification)</li>
+<li><strong>Replay attacks</strong> si <span class="math inline">\(r_a\)</span> mal contrôlés</li>
+<li>Nécessite synchronisation d’horloges</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-227-contents" aria-controls="callout-227" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Texte original
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-227" class="callout-227-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>KTP symétrique avec Key Distribution Center - Kerberos</strong></p>
+<p>Kerberos est un protocole permettant l’<strong>authentification d’entités</strong> et la <strong>distribution de clés</strong> à l’intérieur dans un réseau d’utilisateurs.</p>
+<p>À l’origine, Kerberos était conçu comme solution de remplacement pour remédier aux problèmes d’insécurité (authentification faible, transactions en clair, etc.) propres aux environnements UNIX.</p>
+<p>Kerberos fut créé à MIT comme partie intégrante du projet ATHENA.</p>
+<p>Il est basé sur le protocole de Needham-Schroeder symétrique avec notamment la <strong>correction de quelques failles</strong> du protocole et l’inclusion de <strong>timestamps</strong>.</p>
+<p>Les trois premières versions étaient instables. La <strong>version 4</strong> a eu un succès considérable aussi bien dans les environnements industriel qu’académique et reste prédominante. La <strong>version 5</strong>, bien qu’étant plus sûre et mieux structurée, est plus complexe et moins performante, ce qui a ralenti son déploiement.</p>
+<p>Kerberos définit également un mode de collaboration entre domaines appartenant à des autorités administratives distinctes (les <strong>realms</strong>). Ceci permet à des utilisateurs d’un domaine d’utiliser des ressources d’un autre domaine “sans sortir” de l’environnement sécurisé de Kerberos.</p>
+<p>Pour des transactions inter-realm, la cryptographie symétrique constitue un obstacle significatif car nécessite des canaux confidentiels pour la pré-distribution des clés.</p>
+<p><strong>Kerberos Version 5</strong></p>
+<p>(Notation) : - A et B veulent établir une transaction sécurisée ; dans l’environnement Kerberos, il s’agit normalement d’un <strong>client</strong> et d’un <strong>serveur</strong> fournissant des services. - Le KDC de Kerberos est subdivisé en deux entités fonctionnelles : l’<strong>Authentication Server (AS)</strong> et le <strong>Ticket Granting Server (TGS)</strong>. Les deux accèdent à la BdD passwords. - Les <span class="math inline">\(r_a^{(n)}\)</span> sont des nbs. aléatoires, <span class="math inline">\(t\)</span> est un timestamp, <span class="math inline">\(t_1\)</span> et <span class="math inline">\(t_2\)</span> indiquent une fenêtre de validité de temps.</p>
+<p>(Initialisation) : A et B partagent une clé secrète avec AS, soient : <span class="math inline">\(K_A\)</span> et <span class="math inline">\(K_B\)</span> (pour les clients, il s’agit d’une OWF du password). TGS a également une clé secrète <span class="math inline">\(K_T\)</span>.</p>
+<ol type="1">
+<li><p><span class="math inline">\(A \rightarrow AS: A, TGS, r_a\)</span></p></li>
+<li><p><span class="math inline">\(A \leftarrow AS: E_{K_A}(k_{AT}, r_a), Ticket_{AT} := E_{K_T}(A, TGS, t_1, t_2, k_{AT})\)</span> ; AS génère <span class="math inline">\(k_{AT}\)</span></p></li>
+<li><p><span class="math inline">\(A \rightarrow TGS: Authenticator_{AT} := E_{k_{AT}}(A, t), Ticket_{AT}, B, r_a'\)</span></p></li>
+<li><p><span class="math inline">\(A \leftarrow TGS: E_{k_{AT}}(k_{AB}, r_a'), Ticket_{AB} := E_{K_B}(A, B, t_1, t_2, k_{AB})\)</span> ; TGS génère <span class="math inline">\(k_{AB}\)</span></p></li>
+<li><p><span class="math inline">\(A \rightarrow B: Authenticator_{AB} := E_{k_{AB}}(A, t), Ticket_{AB}, r_a'', [request]\)</span></p></li>
+<li><p><span class="math inline">\(A \leftarrow B: E_{k_{AB}}(r_a''), [response]\)</span> ; [request] et [response] év. cryptés avec <span class="math inline">\(k_{AB}\)</span></p></li>
+<li><ul>
+<li><ol start="2" type="1">
+<li>: Demande de ticket pour TGS</li>
+</ol></li>
+</ul></li>
+<li><ul>
+<li><ol start="4" type="1">
+<li>: Demande de ticket pour B</li>
+</ol></li>
+</ul></li>
+<li><ul>
+<li><ol start="6" type="1">
+<li>: Authentification et établissement de clé entre A et B.</li>
+</ol></li>
+</ul></li>
+</ol>
+<p><strong>Caractéristiques de Kerberos</strong></p>
+<p><strong>Propriétés :</strong></p>
+<ul>
+<li><strong>Entity Authentication</strong> : OUI, de toutes les entités impliquées.</li>
+<li><strong>Implicit key authentication</strong> : OUI : toutes les clés générées sont protégées par des clés partagées entre le AS et tous les participants.</li>
+<li><strong>Key confirmation</strong> :
+<ul>
+<li>Entre A et AS : NON : AS n’a pas de preuve que A possède la clé <span class="math inline">\(K_A\)</span>.</li>
+<li>Entre A et TGS : OUI pour <span class="math inline">\(k_{AT}\)</span> (des quantités redondantes encryptées avec <span class="math inline">\(k_{AT}\)</span> sont échangées entre A et TGS) ; NON pour <span class="math inline">\(k_{AB}\)</span> (TGS n’a pas de preuve de la part de A)</li>
+<li>Entre A et B : OUI : échange des quantités redondantes encryptées avec <span class="math inline">\(k_{AB}\)</span>.</li>
+</ul></li>
+<li><strong>Perfect forward secrecy</strong> : NON : Toutes les clés sont explicitement transférées.</li>
+</ul>
+<p><strong>Problèmes :</strong></p>
+<ul>
+<li><p>Les clés initiales (comme <span class="math inline">\(K_A\)</span>) dépendent (directement) des passwords choisis par les utilisateurs. Ceci rend le protocole vulnérable à des vols de password ou à des :</p>
+<ul>
+<li><strong>Password guessing attacks</strong> : <span class="math inline">\(E_{K_A}(k_{AT}, r_a)\)</span> dans (2) aide à casser le password de A. <strong>Solution :</strong> Pré-authentification dans (1) : <span class="math inline">\(E_{K_A}(t)\)</span> avec <span class="math inline">\(t =\)</span> timestamp (optionnelle dans v5).</li>
+</ul></li>
+<li><p>La fenêtre de validité d’un ticket peut conduire à des <strong>replay attacks</strong> si les <span class="math inline">\(r_a^{(n)}\)</span> ne sont pas correctement contrôlés par les intervenants.</p></li>
+<li><p>La <strong>synchronisation d’horloges</strong> est nécessaire ! Ceci n’est pas toujours facile dans des environnements hétérogènes.</p></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-228-contents" aria-controls="callout-228" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Révision rapide
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-228" class="callout-228-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Kerberos :</strong></p>
+<ul>
+<li>AS émet TGT, TGS émet tickets service</li>
+<li>Tickets contiennent clés de session</li>
+<li>Authentification via authenticators</li>
+<li>Vulnérable : password guessing, replay</li>
+<li>Solution : pré-authentification, timestamps</li>
+</ul>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+</section>
+<section id="ssltls" class="level2">
+<h2 class="anchored" data-anchor-id="ssltls">SSL/TLS</h2>
+<p>SSL/TLS: Secure Socket Layer / Transport Layer Security</p>
+<p>Protocole de sécurisation entre couche transport (TCP) et application.</p>
+<p><strong>Services fournis :</strong></p>
+<ul>
+<li>Confidentialité, intégrité, authentification du flot</li>
+<li>Identification serveur (client optionnelle)</li>
+</ul>
+<p><strong>Algorithmes utilisés :</strong></p>
+<ul>
+<li><strong>Cryptographie publique</strong> (RSA, DH, DSA) : échange clés</li>
+<li><strong>MACs</strong> : authentification flot</li>
+<li><strong>Cryptographie symétrique</strong> (DES, AES, IDEA) : encryption flot</li>
+</ul>
+<p><strong>Propriétés :</strong></p>
+<ul>
+<li>✅ Entity authentication (serveur + client optionnel via certificats)</li>
+<li>✅ Implicit key authentication</li>
+<li>✅ Key confirmation</li>
+<li>⚠️ Perfect Forward Secrecy : dépend du protocole d’échange (DH → oui, RSA → non)</li>
+</ul>
+<p><strong>Remarques</strong></p>
+<ul>
+<li>Les clés secrètes TLS sont dérivées par hachage à partir de valeurs aléatoires et du <em>pre_master_secret</em>.</li>
+<li>SSL/TLS est le standard de facto de la sécurité web (HTTPS).</li>
+<li>La confiance repose sur des certificats racine intégrés dans les navigateurs.</li>
+<li>Les failles majeures proviennent de l’aléa, des implémentations et des fonctions de hachage.</li>
+<li>Attaques notables : renégociation (2009), Heartbleed (2014).</li>
+</ul>
+<section id="architecture-ssltls" class="level3">
+<h3 class="anchored" data-anchor-id="architecture-ssltls">Architecture SSL/TLS</h3>
+<p><strong>Trois composants :</strong></p>
+<ol type="1">
+<li><strong>SSL Record Protocol</strong> : Encapsulation au-dessus de TCP (fragmentation + compression + encryption)</li>
+<li><strong>SSL Handshake Protocol</strong> : Authentification + négociation paramètres</li>
+<li><strong>SSL State Machine</strong> : Variables d’état session et connexion</li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-229-contents" aria-controls="callout-229" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Texte original
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-229" class="callout-229-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Secure Socket Layer (SSL) / Transport Level Security (TLS)</strong></p>
+<p>Se situe entre la couche transport (TCP) et les protocoles de la couche application (non seulement HTTP mais également SMTP, FTP, etc. !)</p>
+<p>Il s’agit d’un <strong>Meta Protocole</strong> d’établissement de clés hautement paramétrable permettant des nombreux modes de fonctionnement et des options de négociation.</p>
+<p>Offre des services de <strong>confidentialité</strong>, <strong>intégrité</strong>, <strong>authentification du flot de données</strong>, et <strong>identification du serveur</strong> (et accessoirement du client)</p>
+<p><strong>Utilise les familles d’algorithmes suivants :</strong></p>
+<ul>
+<li><strong>Cryptographie publique</strong> (RSA, Diffie-Hellmann, DSA, etc.) pour l’échange de clés symétriques</li>
+<li><strong>MACs</strong> pour l’authentification du flot de données</li>
+<li><strong>Cryptographie symétrique</strong> (DES, IDEA, AES, etc.) pour l’encryption du flot de données</li>
+</ul>
+<p>L’intervention des <strong>CAs</strong> pour certifier l’association entre entités et clés publiques est vivement recommandée… mais pas indispensable !</p>
+<p><strong>Propriétés :</strong> - <strong>Entity authentication</strong> par certificats (serveur et client optionnelle) - <strong>Implicit Key Authentication</strong> et <strong>Key Confirmation</strong> sont garanties - La <strong>Perfect Forward Secrecy</strong> dépend du protocole choisi pour l’échange de clés.</p>
+<p><strong>SSL/TLS Aperçu</strong></p>
+<p>SSL est une “mini-pile” de protocoles avec des fonctionnalités des couches session, présentation et application.</p>
+<p>SSL est constitué de trois blocs fondamentaux :</p>
+<ul>
+<li><strong>SSL record protocol</strong> permettant l’encapsulation des protocoles de plus haut niveau au-dessus de TCP (fragmentation + compression + encryption)</li>
+<li><strong>SSL handshake protocol</strong> chargé de l’authentification des intervenants et de la négociation des paramètres d’encryption</li>
+<li><strong>SSL state machine</strong>. Contrairement à HTTP, SSL est un protocole <strong>à états</strong> (stateful), il nécessite, donc, un ensemble de variables qui déterminent l’état d’une session et d’une connexion</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="ssl-handshake-protocol" class="level3">
+<h3 class="anchored" data-anchor-id="ssl-handshake-protocol">SSL Handshake Protocol</h3>
+<div class="callout callout-style-simple callout-none no-icon callout-titled" title="Diagram">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-230-contents" aria-controls="callout-230" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Diagram
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-230" class="callout-230-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Phase 1 : Hello</strong></p>
+<ul>
+<li><strong>Client Hello</strong> : Version, random, session ID, algorithmes acceptés</li>
+<li><strong>Server Hello</strong> : Version, random, session ID, algorithmes sélectionnés</li>
+<li><strong>Server Certificate</strong> (optionnel) : Certificat serveur + chemin CA</li>
+<li><strong>Server Key Exchange</strong> (optionnel) : Informations clé publique serveur</li>
+<li><strong>Certificate Request</strong> (optionnel) : Demande certificat client</li>
+</ul>
+<p><strong>Phase 2 : Authentification client et échange de clé</strong></p>
+<ul>
+<li><strong>Client Certificate</strong> (optionnel) : Certificat client + chemin CA</li>
+<li><strong>Client Key Exchange</strong> : Génère <code>pre_master_secret</code>, envoie encrypté avec clé publique serveur</li>
+<li><strong>Certificate Verify</strong> (optionnel) : Vérification explicite certificat client</li>
+</ul>
+<p><strong>Phase 3 : Finalisation</strong></p>
+<ul>
+<li><strong>Finish</strong> (client) : Premier message protégé avec paramètres négociés</li>
+<li><strong>Finish</strong> (serveur) : Idem côté serveur</li>
+</ul>
+<p><strong>Phase 4 : Application</strong></p>
+<ul>
+<li>Données protégées avec clés dérivées</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="génération-des-clés-ssltls" class="level3">
+<h3 class="anchored" data-anchor-id="génération-des-clés-ssltls">Génération des Clés SSL/TLS</h3>
+<p><strong>Dérivation en cascade :</strong></p>
+<p><span class="math display">\[master\_secret = MD5(pre\_master\_secret + SHA('A' + pre\_master\_secret + ClientRandom + ServerRandom))\]</span> <span class="math display">\[+ MD5(pre\_master\_secret + SHA('BB' + ...)) + ...\]</span></p>
+<p><span class="math display">\[key\_block = MD5(master\_secret + SHA('A' + master\_secret + ServerRandom + ClientRandom)) + ...\]</span></p>
+<p><strong>Partition du key_block :</strong></p>
+<ul>
+<li><code>client_write_MAC_secret[hash_size]</code></li>
+<li><code>server_write_MAC_secret[hash_size]</code></li>
+<li><code>client_write_key[key_material]</code></li>
+<li><code>server_write_key[key_material]</code></li>
+<li><code>client_write_IV[IV_size]</code></li>
+<li><code>server_write_IV[IV_size]</code></li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-231-contents" aria-controls="callout-231" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Texte original
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-231" class="callout-231-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>SSL/TLS Handshake Protocol Simplifié</strong></p>
+<p>[Diagramme du handshake avec 4 phases : Hello, Key Exchange, Finish, Application Data]</p>
+<p><strong>SSL/TLS : Generation de clés</strong></p>
+<pre><code>master_secret = 
+ MD5(pre_master_secret + SHA('A' + pre_master_secret +
+ ClientHello.random + ServerHello.random)) +
+ MD5(pre_master_secret + SHA('BB' + pre_master_secret +
+ ClientHello.random + ServerHello.random)) +
+ MD5(pre_master_secret + SHA('CCC' + pre_master_secret +
+ ClientHello.random + ServerHello.random));
+
+key_block =
+ MD5(master_secret + SHA('A' + master_secret +
+ ServerHello.random +
+ ClientHello.random)) +
+ MD5(master_secret + SHA('BB' + master_secret +
+ ServerHello.random +
+ ClientHello.random)) +
+ MD5(master_secret + SHA('CCC' + master_secret +
+ ServerHello.random +
+ ClientHello.random)) + [...];
+ 
+ until enough output has been generated. Then the key_block is
+ partitioned as follows:
+ 
+ client_write_MAC_secret[CipherSpec.hash_size] 
+ server_write_MAC_secret[CipherSpec.hash_size]
+ client_write_key[CipherSpec.key_material]
+ server_write_key[CipherSpec.key_material]
+ client_write_IV[CipherSpec.IV_size] /* non-export ciphers */
+ server_write_IV[CipherSpec.IV_size] /* non-export ciphers */</code></pre>
+<p><strong>SSL/TLS : Remarques Finales</strong></p>
+<ul>
+<li><p>Les clés secrètes sont le résultat de l’application de fonctions de hachage (MD5, SHA) sur les random numbers des enregistrement Hello et le <code>pre_master_secret</code></p></li>
+<li><p>TLS/SSL est devenu le <strong>standard de facto</strong> pour la sécurité sur le web (à la base de <strong>https</strong>)</p></li>
+<li><p>Les clients SSL (Explorer, Firefox, Opera, Chrome, etc.) contiennent “hard-coded” des certificats correspondant à quelques entités de certification racine (Verisign, Thawte, Microsoft, RSA, etc.) permettant de vérifier les certificats présentés par certains serveurs mais SSL est conçu pour s’appuyer sur un <strong>réseau global de certification</strong> pour le moment inexistant.</p></li>
+<li><p>Les <strong>failles de sécurité</strong> les plus courantes de SSL concernent la génération aléatoire des clés ainsi que les défauts d’implantation les plus courants : buffer overflows, sql injection, etc. La faiblesse des fonctions de hachage (MD5, SHA) est aussi un facteur à risque.</p></li>
+<li><p>En Novembre 2009, on a découvert une attaque permettant à un Man in The Middle d’injecter du contenu (chosen plaintext) dans un flot authentique suite à une <strong>renégociation</strong> des paramètres prévue dans le protocole. Il s’agit d’une faille dans le protocole qui a nécessité un patch dans toutes les implantation.</p></li>
+<li><p>La faille <strong>heartbleed</strong> basée sur un buffer overflow a sérieusement troublé la communauté Internet lors de sa découverte en Avril 2014.</p></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-232-contents" aria-controls="callout-232" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Révision rapide
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-232" class="callout-232-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>SSL/TLS :</strong></p>
+<ul>
+<li>Meta-protocole entre TCP et application</li>
+<li>Handshake : négociation + authentification</li>
+<li>Clés dérivées : <code>master_secret</code> → <code>key_block</code></li>
+<li>Standard HTTPS</li>
+<li>Failles : génération aléatoire, heartbleed, renégociation</li>
+</ul>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="remarques-finales-sur-les-kep" class="level2">
+<h2 class="anchored" data-anchor-id="remarques-finales-sur-les-kep">Remarques Finales sur les KEP</h2>
+<p><strong>Avant de choisir un KEP :</strong></p>
+<ol type="1">
+<li><strong>Définir objectifs</strong> : confidentialité, authentification, non-répudiation</li>
+<li><strong>Définir niveau de sécurité</strong> : key confirmation, PFS, future secrecy</li>
+<li><strong>Établir contraintes</strong> : utilisateurs, machines, réseau, attaquants</li>
+</ol>
+<p><strong>Bonnes pratiques :</strong></p>
+<ul>
+<li>✅ Choisir solution prouvée et robuste</li>
+<li>❌ Éviter d’inventer “from scratch”</li>
+<li>✅ Vérifier propriétés satisfaites</li>
+</ul>
+<p><strong>Vérification des protocoles :</strong></p>
+<p>Deux approches complémentaires :</p>
+<ul>
+<li><strong>Analyse pratique</strong> : “Sur papier” et “sur machine”
+<ul>
+<li>Contrôle nombres aléatoires (reflection attacks)</li>
+<li>Redondance quantités encryptées/signées</li>
+<li>Pièges classiques</li>
+</ul></li>
+<li><strong>Analyse formelle</strong> : Logiques dédiées (BAN logic, etc.)</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-233-contents" aria-controls="callout-233" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Texte original
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-233" class="callout-233-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Key Establishment Protocols : Remarques Finales</strong></p>
+<p>Les protocoles d’établissement de clés constituent une <strong>pierre angulaire</strong> de toute solution de sécurité. Avant de choisir (concevoir) un KEP, il est, donc, indispensable de :</p>
+<ul>
+<li><strong>Définir les objectifs</strong> (confidentialité, authentification d’entités/données, non-répudiation, etc.)</li>
+<li><strong>Définir le niveau de sécurité souhaité</strong> en fonction des propriétés étudiées (key confirmation, perfect forward secrecy, etc.)</li>
+<li><strong>Établir une liste des contraintes</strong> liées à l’environnement (utilisateurs, machines, réseau, attaquants potentiels, etc.)</li>
+</ul>
+<p>En fonction de ces critères nous pouvons :</p>
+<ul>
+<li><strong>Choisir une solution prouvée et robuste</strong> (mieux qu’en inventer une from scratch !).</li>
+<li><strong>Vérifier que les objectifs sont atteints</strong> et les propriétés satisfaites.</li>
+</ul>
+<p>La <strong>vérification des protocoles</strong> est un processus complexe et délicat, de plus, les solutions publiées ne sont pas toujours correctes. Deux approches sont possibles (et nécessaires) :</p>
+<ul>
+<li><p><strong>L’analyse pratique</strong>. Analyser les failles du protocole “sur papier” et “sur machine” en tenant compte des pièges classiques : contrôle des nbs. aléatoires pour éviter des reflection attacks, redondance des quantités encryptées/signées, etc.</p></li>
+<li><p><strong>L’analyse formelle</strong> avec des logiques spécialement conçues à cet effet (comme la <strong>logique BAN</strong>)</p></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-234-contents" aria-controls="callout-234" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Révision rapide
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-234" class="callout-234-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>KEP - Bonnes pratiques :</strong></p>
+<ol type="1">
+<li>Définir objectifs et contraintes</li>
+<li>Choisir solution prouvée</li>
+<li>Vérifier propriétés (pratique + formelle)</li>
+<li>Éviter pièges : reflection, redondance, contrôle aléas</li>
+</ol>
+</div>
+</div>
+</div>
 
 
 </section>
