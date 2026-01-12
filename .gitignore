@@ -1,5 +1,5 @@
 *files
-/.quarto/
 **/*.quarto_ipynb
 *_site
 *gitignore
+*.quarto
