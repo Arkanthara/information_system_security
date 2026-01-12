@@ -11,7 +11,7 @@ website:
     search: true
     left:
       - text: Cours
-        file: exam_notes.qmd
+        file: index.qmd
       - text: Exercices
         file: exercices.qmd
       - text: Présentations
