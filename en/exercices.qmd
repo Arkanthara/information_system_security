@@ -1,151 +1,518 @@
-# Arithmétique modulaire - Synthèse pédagogique
+## Series 1: Modular Arithmetic
 
-## 1. Notations et définitions de base
+### 🎯 Key Concepts
 
-**Ensembles fondamentaux :**
-- $\mathbb{N}$ : entiers naturels (0, 1, 2...)
-- $\mathbb{Z}$ : entiers relatifs (..., -2, -1, 0, 1, 2...)
-- $\mathbb{Z}_n$ : entiers modulo n {0, 1, ..., n-1}
-- $\mathbb{R}$ : nombres réels
+**Sets:** $\mathbb{Z}_n = \{0,1,...,n-1\}$, $\mathbb{Z}_n^* = \{a \in \mathbb{Z}_n | \gcd(a,n)=1\}$
 
-**Opérations importantes :**
-- Division euclidienne : $a = q \cdot n + r$ avec $0 \leq r < n$
-- $a \mod n$ : reste r de la division de a par n
-- $\lfloor x \rfloor$ : partie entière de x
+**Congruence:** $a \equiv b \mod n \iff n|(a-b)$
 
-::: {.callout collapse="true"}
-## Exemple : Calculs modulo
+**Invertibility:** $a$ invertible mod $n \iff \gcd(a,n)=1$
 
-**Énoncé :** Calculer $((11 \mod 7) + (17 \mod 7)) \mod 7$
+**Fundamental Theorems:**
 
-**Solution :**
-- $11 \mod 7 = 4$ (car $11 = 1 \times 7 + 4$)
-- $17 \mod 7 = 3$ (car $17 = 2 \times 7 + 3$)
-- $(4 + 3) \mod 7 = 7 \mod 7 = 0$
+- **Bézout:** $ax + by = \gcd(a,b)$
+- **Euler:** $a^{\Phi(n)} \equiv 1 \mod n$ (if $\gcd(a,n)=1$)
+- **Fermat:** $a^p \equiv a \mod p$ ($p$ prime)
 
-Le résultat est donc $0$.
-:::
+**Order:** $\text{ord}_n(a)$ = smallest $x > 0$ such that $a^x \equiv 1 \mod n$
 
-## 2. Congruences et propriétés
+**Generator:** $g$ generates $\mathbb{Z}_n^*$ if $\text{ord}_n(g) = \Phi(n)$
 
-**Définition :** $a \equiv b \mod n$ si $n \mid (a - b)$
-
-**Propriétés :**
-- Réflexive : $a \equiv a \mod n$
-- Symétrique : $a \equiv b \mod n \Rightarrow b \equiv a \mod n$
-- Transitive : $a \equiv b \mod n$ et $b \equiv c \mod n \Rightarrow a \equiv c \mod n$
-
-**Opérations préservant la congruence :**
-Si $a \equiv b \mod n$, alors :
-- $a + c \equiv b + c \mod n$
-- $a - c \equiv b - c \mod n$
-- $a \cdot c \equiv b \cdot c \mod n$
-
-## 3. Inverse multiplicatif et groupe $\mathbb{Z}_n^*$
-
-**Inverse multiplicatif :** $a^{-1} \mod n$ existe si et seulement si $pgcd(a, n) = 1$
-
-**Groupe multiplicatif :** $\mathbb{Z}_n^* = \{a \in \mathbb{Z}_n \mid pgcd(a, n) = 1\}$
-
-**Cas particulier :** Si n est premier, $\mathbb{Z}_n^* = \mathbb{Z}_n \setminus \{0\}$
+**Structures:** Group → Ring → Field (increasing invertibility)
 
 ::: {.callout collapse="true"}
-## Exemple : Groupe multiplicatif modulo 7
+### 💡 Modular calculations
 
-**Énoncé :** Vérifier que $(\mathbb{Z}_7^*, \times)$ est un groupe
+**Q:** $((11 \mod 7) \cdot (17 \mod 7)) \mod 7$
 
-**Solution :**
-- $\mathbb{Z}_7^* = \{1, 2, 3, 4, 5, 6\}$ (car 7 est premier)
-- **Clôture :** Le produit de deux éléments reste dans $\mathbb{Z}_7^*$
-- **Associativité :** La multiplication est associative
-- **Élément neutre :** 1 est l'élément neutre
-- **Inverse :** Chaque élément a un inverse :
-  - $1^{-1} = 1$, $2^{-1} = 4$, $3^{-1} = 5$, $4^{-1} = 2$, $5^{-1} = 3$, $6^{-1} = 6$
-
-Donc $(\mathbb{Z}_7^*, \times)$ est bien un groupe.
+**A:** $4 \cdot 3 = 12 \equiv 5 \mod 7$
 :::
-
-## 4. Théorèmes fondamentaux
-
-**Identité de Bézout :** Si $a, b \in \mathbb{Z}$, alors $\exists x, y \in \mathbb{Z}$ tels que $ax + by = pgcd(a, b)$
-
-**Fonction totient d'Euler :** $\Phi(n) = |\{x \mid 0 < x < n, pgcd(x, n) = 1\}|$
-
-**Théorème d'Euler :** Si $pgcd(a, n) = 1$, alors $a^{\Phi(n)} \equiv 1 \mod n$
-
-**Petit théorème de Fermat :** Si p premier et $p \nmid a$, alors $a^p \equiv a \mod p$
-
-## 5. Racines primitives et ordre
-
-**Ordre d'un élément :** $ord_n(a)$ = plus petit $k > 0$ tel que $a^k \equiv 1 \mod n$
-
-**Racine primitive :** g est une racine primitive modulo n si $\forall a \in \mathbb{Z}_n^*$, $\exists k$ tel que $g^k \equiv a \mod n$
-
-**Propriété :** Si g est une racine primitive, alors $ord_n(g) = \Phi(n)$
 
 ::: {.callout collapse="true"}
-## Exemple : Racine primitive modulo 7
+### 💡 Find the order
 
-**Énoncé :** Trouver une racine primitive modulo 7
+**Q:** Order of 2 mod 7?
 
-**Solution :**
-- $\mathbb{Z}_7^* = \{1, 2, 3, 4, 5, 6\}$, $\Phi(7) = 6$
-- Testons les candidats :
-  - $ord_7(2)$ : $2^1=2$, $2^2=4$, $2^3=1$ → ordre 3 ≠ 6
-  - $ord_7(3)$ : $3^1=3$, $3^2=2$, $3^3=6$, $3^4=4$, $3^5=5$, $3^6=1$ → ordre 6 = Φ(7)
-  
-Donc 3 est une racine primitive modulo 7.
+**A:** $2^1=2$, $2^2=4$, $2^3=8\equiv 1$ → $\text{ord}_7(2)=3$
 :::
 
-## 6. Structures algébriques
+::: {.callout collapse="true"}
+### 💡 Identify a generator
+
+**Q:** Is 3 a generator of $\mathbb{Z}_7^*$?
+
+**A:** $3^1=3, 3^2=2, 3^3=6, 3^4=4, 3^5=5, 3^6=1$ → generates all elements → **YES**
+:::
+
+---
+
+## Series 2: Entropy
+
+### 🎯 Key Concepts
+
+**Entropy:** Measures uncertainty/information of a random variable
+
+$$H(X) = -\sum_{i=1}^n p_i \log_2(p_i) = \sum_{i=1}^n p_i \log_2\left(\frac{1}{p_i}\right)$$
+
+**Properties:**
+
+- $H(X)$ maximal when all probabilities are equal
+- $H(X) = 0$ if only one possible value (probability = 1)
+- For $n$ equiprobable values: $H(X) = \log_2(n)$
+
+**Joint entropy:** $H(X,Y) = -\sum_x \sum_y p(x,y)\log_2(p(x,y))$
+
+**Conditional entropy:** $H(X|Y) = -\sum_y \sum_x p(y)p(x|y)\log_2(p(x|y))$
+
+**In cryptography:** We want $H(\text{Plaintext}|\text{Ciphertext}) \approx H(\text{Plaintext})$
+
+::: {.callout collapse="true"}
+### 💡 Min/Max entropy
+
+**Q:** 256-bit variable, min/max entropies?
+
+**A:**
+
+- **Min:** $H=0$ (single possible value, $p=1$)
+- **Max:** $H=256$ (all values equiprobable, $p=2^{-256}$)
+:::
+
+::: {.callout collapse="true"}
+### 💡 Concatenation entropy
+
+**Q:** $H(X)=64$, generate one value and concatenate it to itself (512 bits). Entropy?
+
+**A:** $H=64$ (no new information, just duplication)
+:::
+
+::: {.callout collapse="true"}
+### 💡 Password entropy
+
+**Q:** Password = random date "MM/DD/YYYY" (365 days, years 0000-2025)
+
+**A:** $365 \times 2026 = 739490$ possibilities → $H = \log_2(739490) \approx 19.5$ bits
+:::
+
+::: {.callout collapse="true"}
+### 💡 Improved generator
+
+**Q:** Generator $G$: $P(0)=0.5+\delta$, $P(1)=0.5-\delta$. Create $A$: take 2 bits from $G$, keep 01→0 or 10→1, discard 00 and 11. Advantage?
+
+**A:**
+
+- $P_A(0) = P_A(1) = 0.5$ (perfectly random!)
+- Cost: need $\frac{2x}{0.5-2\delta^2}$ bits from $G$ for $x$ bits of $A$
+:::
+
+---
+
+## Series 3: Historical Ciphers
+
+### 🎯 Key Concepts
+
+**Caesar Cipher:**
+
+Rotation by $k$ positions: $E_k(x) = (x + k) \mod 26$, $D_k(c) = (c - k) \mod 26$
+
+**Monoalphabetic Substitution:**
+
+Key = permutation of alphabet. Each letter → fixed letter.
+
+**Vigenère Cipher:**
+
+Polyalphabetic substitution: $C_i = (M_i + K_{i \mod |K|}) \mod 26$
+
+```mermaid
+graph LR
+    A[Caesar] -->|generalization| B[Mono Substitution]
+    B -->|repeated key| C[Vigenère]
+    
+    style A fill:#ffe1e1
+    style B fill:#fff4e1
+    style C fill:#e1f5ff
+```
+
+**Breaking:**
+
+- **Caesar:** Brute force (max 25 keys) or frequency analysis
+- **Mono:** Frequency analysis + language structure
+- **Vigenère:** Index of coincidence + frequency analysis
+
+::: {.callout collapse="true"}
+### 💡 Caesar encryption
+
+**Q:** Encrypt "HELLO" with $k=5$
+
+**A:** H→M, E→J, L→Q, L→Q, O→T → **"MJQQT"**
+:::
+
+::: {.callout collapse="true"}
+### 💡 Vigenère encryption
+
+**Q:** Encrypt "BONJOUR" with key "BAC"
+
+**A:**
+
+- B+B=C, O+A=O, N+C=P, J+B=K, O+A=O, U+C=W, R+B=S
+- **"COPKOWS"**
+:::
+
+::: {.callout collapse="true"}
+### 💡 Breaking Vigenère - Key length
+
+**Method:** Index of Coincidence
+
+For length $L$, shift text by $L$ positions and count identical letters:
+
+$$\text{IC}(L) = \frac{\sum_{i=1}^{N-L} [a_i == b_i]}{N-L}$$
+
+Maximum IC indicates key length (or a multiple).
+:::
+
+::: {.callout collapse="true"}
+### 💡 Breaking Vigenère - Find key
+
+**Method:** Frequency analysis per subtext
+
+1. Divide text into $k$ subtexts (positions $1, k+1, 2k+1, ...$)
+2. For each subtext, calculate distance with language frequencies:
+
+$$\text{Dist}_x = \sqrt{\sum_{i=0}^{25} (F_i - M_{(i+x) \mod 26})^2}$$
+
+3. The $x$ minimizing distance is the corresponding key letter
+:::
+
+---
+
+## Series 4: Block Ciphers
+
+### 🎯 Key Concepts
+
+**Encryption Modes:**
 
 ```mermaid
 graph TD
-    A[Structure algébrique] --> B[Groupe]
-    A --> C[Anneau]
-    C --> D[Corps]
+    A[ECB<br/>Simple] --> B[CBC<br/>Chaining]
+    B --> C[CFB<br/>Feedback]
+    C --> D[OFB<br/>Output FB]
     
-    B --> B1[Groupe abélien]
-    
-    B -->|+ propriétés| C
-    C -->|+ commutativité + inverses| D
+    style A fill:#ffe1e1
+    style B fill:#fff4e1
+    style C fill:#e1f5ff
+    style D fill:#e1ffe1
 ```
 
-**Groupe :** Ensemble avec opération associative, élément neutre, inverses
+**ECB (Electronic CodeBook):**
 
-**Anneau :** Groupe abélien pour l'addition, monoïde pour la multiplication, distributivité
+$$C_i = E_K(P_i)$$
 
-**Corps :** Anneau commutatif où tout élément non nul est inversible
+⚠️ Identical blocks → encrypted identically (weak security)
+
+**CBC (Cipher Block Chaining):**
+
+$$C_i = E_K(P_i \oplus C_{i-1}), \quad C_0 = IV$$
+
+**CFB (Cipher FeedBack):**
+
+$$C_i = E_K(C_{i-1}) \oplus P_i, \quad C_0 = IV$$
+
+**OFB (Output FeedBack):**
+
+$$O_i = E_K(O_{i-1}), \quad C_i = O_i \oplus P_i, \quad O_0 = IV$$
+
+**Encryption Function:** Must be **invertible** (bijective)
 
 ::: {.callout collapse="true"}
-## Exemple : Vérification de structures
+### 💡 Linear encryption - Danger
 
-**Énoncé :** $(\mathbb{Z}_8, \times)$ est-il un groupe ?
+**Q:** Linear encryption $E_L(k, m_1 \oplus m_2) = E_L(k,m_1) \oplus E_L(k,m_2)$. With 128 chosen ciphertexts, show we can decrypt without key.
 
-**Solution :**
-- **Clôture :** Oui, le produit modulo 8 donne bien un élément de $\mathbb{Z}_8$
-- **Associativité :** Oui, la multiplication est associative
-- **Élément neutre :** 1 est bien neutre
-- **Inverse :** Problème ! Par exemple, 2 n'a pas d'inverse dans $\mathbb{Z}_8$ car $pgcd(2,8) \neq 1$
+**A:**
 
-Donc $(\mathbb{Z}_8, \times)$ n'est PAS un groupe.
+1. Choose $c_1,...,c_{128}$ where $c_i$ has only bit $i$ at 1
+2. Any ciphertext $c$ writes as XOR of some $c_i$
+3. $c = c_{i_1} \oplus ... \oplus c_{i_n} = E_L(k, m_{i_1} \oplus ... \oplus m_{i_n})$
+4. So $m = m_{i_1} \oplus ... \oplus m_{i_n}$ (known!)
+5. **Conclusion:** Linear encryption = very dangerous
 :::
 
-::: {.callout-note}
-## Révision rapide
+::: {.callout collapse="true"}
+### 💡 Invertible functions
 
-**Notations :** $\mathbb{Z}_n = \{0,...,n-1\}$, $\mathbb{Z}_n^* = \{a \in \mathbb{Z}_n \mid pgcd(a,n)=1\}$
+**Q:** Is $E_i = (B_i \cdot K_i) \mod 16$ usable?
 
-**Congruence :** $a \equiv b \mod n \iff n \mid (a-b)$
-
-**Inverse :** $a^{-1}$ existe ssi $pgcd(a,n)=1$
-
-**Théorèmes :** 
-- Euler : $a^{\Phi(n)} \equiv 1 \mod n$ si $pgcd(a,n)=1$
-- Fermat : $a^p \equiv a \mod p$ (p premier)
-
-**Structures :**
-- Groupe : associativité + neutre + inverses
-- Corps : anneau commutatif + inverses pour ×
-- $\mathbb{Z}_n$ est un corps ssi n premier
+**A:** **NO**. If $K_i=2$, then $B_i=1$ and $B_i=9$ both give $E_i=2 \mod 16$. Non-bijective!
 :::
+
+::: {.callout collapse="true"}
+### 💡 ECB encryption
+
+**Q:** $K=(AB)_{16}$, $m=(A741BA)_{16}$, $E_K(B) = B \oplus K$, encrypt
+
+**A:**
+
+- $C_1 = A7 \oplus AB = 0C$
+- $C_2 = 41 \oplus AB = EA$
+- $C_3 = BA \oplus AB = 11$
+- **Result:** $(0CEA11)_{16}$
+:::
+
+::: {.callout collapse="true"}
+### 💡 CBC encryption
+
+**Q:** $K=(AB)_{16}$, $IV=(AD)_{16}$, $m=(A741BA)_{16}$, $E_K(B) = B \oplus K$
+
+**A:**
+
+- $C_1 = (A7 \oplus AD) \oplus AB = 0A \oplus AB = A1$
+- $C_2 = (41 \oplus A1) \oplus AB = E0 \oplus AB = 4B$
+- $C_3 = (BA \oplus 4B) \oplus AB = F1 \oplus AB = 5A$
+- **Result:** $(A14B5A)_{16}$
+:::
+
+---
+
+## Series 5: RSA, Rabin, ElGamal
+
+### 🎯 Key Concepts
+
+**RSA:**
+
+- **Keys:** $n=pq$, $e$ with $\gcd(e, \Phi(n))=1$, $d = e^{-1} \mod \Phi(n)$
+- **Encryption:** $c = m^e \mod n$
+- **Decryption:** $m = c^d \mod n$
+
+**Fast exponentiation:** Compute $a^{42}$: write $42=32+8+2$ then $a^{42} = a^{32} \cdot a^8 \cdot a^2$
+
+**Rabin:**
+
+- **Keys:** $n=pq$ with $p \equiv q \equiv 3 \mod 4$
+- **Encryption:** $c = m^2 \mod n$
+- **Decryption:** 4 possible solutions via congruence system
+
+**ElGamal:**
+
+- **Keys:** Prime $p$, generator $\alpha$, private key $a$, public key $\alpha^a \mod p$
+- **Encryption:** $(\lambda, \sigma) = (\alpha^k, m \cdot (\alpha^a)^k) \mod p$
+- **Decryption:** $m = \lambda^{-a} \cdot \sigma \mod p$
+
+::: {.callout collapse="true"}
+### 💡 Generate RSA keys
+
+**Q:** $p=11$, $q=17$, create RSA key pair
+
+**A:**
+
+1. $n = 11 \times 17 = 187$
+2. $\Phi(n) = 10 \times 16 = 160$
+3. Choose $e=7$ (coprime with 160)
+4. Find $d$: $7d \equiv 1 \mod 160$ → $d=23$
+5. **Public key:** $(187, 7)$, **Private key:** $(187, 23)$
+:::
+
+::: {.callout collapse="true"}
+### 💡 Fast RSA encryption
+
+**Q:** Encrypt $m=28$ with $(n=247, e=41)$
+
+**A:** Fast exponentiation $28^{41} \mod 247$:
+
+- $28^1=28$, $28^2=43$, $28^4=120$, $28^8=74$, $28^{16}=42$, $28^{32}=35$
+- $41 = 32+8+1$ so $28^{41} = 35 \cdot 74 \cdot 28 = 149 \mod 247$
+:::
+
+::: {.callout collapse="true"}
+### 💡 Break RSA (small numbers)
+
+**Q:** $(n=247, e=41)$, find private key
+
+**A:**
+
+1. Factorize: $247 = 13 \times 19$
+2. $\Phi(n) = 12 \times 18 = 216$
+3. Extended Euclid for $d = e^{-1} \mod 216$ → $d=137$
+4. Verify: $41 \times 137 = 5617 = 26 \times 216 + 1 \equiv 1 \mod 216$ ✓
+:::
+
+::: {.callout collapse="true"}
+### 💡 Rabin
+
+**Q:** $n=253$, encrypt $m=134$
+
+**A:** $c = 134^2 = 17956 \equiv 246 \mod 253$
+
+To decrypt (factorize $n=11 \times 23$):
+
+- $m_p = 246^3 \mod 11 = 9$
+- $m_q = 246^6 \mod 23 = 4$
+- 4 solutions including $m_4 = 134$ ✓
+:::
+
+---
+
+## Series 6: Hash Functions and MACs
+
+### 🎯 Key Concepts
+
+**Cryptographic Properties:**
+
+1. **Preimage resistance:** Hard to find $x$ such that $h(x)=y$
+2. **Second preimage resistance:** Hard to find $x' \neq x$ with $h(x')=h(x)$
+3. **Collision resistance:** Hard to find $x \neq x'$ with $h(x)=h(x')$
+
+⚠️ Collision implies second preimage (but not preimage)
+
+**MAC (Message Authentication Code):**
+
+Guarantees integrity AND authenticity. Often built with CBC: $MAC = E_K(...E_K(E_K(m_1) \oplus m_2)... \oplus m_n)$
+
+::: {.callout collapse="true"}
+### 💡 Bad hash function
+
+**Q:** Is $h_1(x) = x \mod n$ secure?
+
+**A:** **NO** for all 3 properties:
+
+- Preimage: $x=y$ gives $h_1(x)=y$
+- Second preimage: $x'=x+n$ gives collision
+- Collision: same as second preimage
+:::
+
+::: {.callout collapse="true"}
+### 💡 Vulnerable MAC with CBC
+
+**Q:** $t_1=E_K(m_1)$, $t_{i+1}=E_K(m_{i+1} \oplus t_i)$. With $(m_1||m_2, t_1||t_2)$, forge?
+
+**A:** Forged message: $m'=(m_2 \oplus t_1) || (t_2 \oplus m_1)$
+
+Forged MAC: $t' = t_2 || t_1$ (computable without key!)
+:::
+
+::: {.callout collapse="true"}
+### 💡 MAC = last CBC block
+
+**Q:** If $MAC=c_n$ (last CBC block), can we modify the message?
+
+**A:** **YES!** We can modify all blocks $c_1,...,c_{n-1}$ without changing $c_n=MAC$. Decryption will give different message with valid MAC!
+
+**Solution:** Use two different keys (one for encryption, one for MAC)
+:::
+
+---
+
+## Series 7: Authentication and Key Establishment
+
+### 🎯 Key Concepts
+
+**Diffie-Hellman:**
+
+```mermaid
+sequenceDiagram
+    participant Alice
+    participant Bob
+    
+    Note over Alice,Bob: Public: p, α
+    Alice->>Alice: Choose secret x
+    Bob->>Bob: Choose secret y
+    Alice->>Bob: αˣ mod p
+    Bob->>Alice: αʸ mod p
+    Alice->>Alice: K = (αʸ)ˣ mod p
+    Bob->>Bob: K = (αˣ)ʸ mod p
+    Note over Alice,Bob: Shared key: K = αˣʸ mod p
+```
+
+**Man-In-The-Middle attack on DH:** Intercept and replace exchanges
+
+**Security Properties:**
+
+- **Implicit key authentication:** Only A and B can have the key
+- **Key confirmation:** A and B prove they have the key
+- **Explicit key authentication:** Implicit + Confirmation
+- **Perfect Forward Secrecy:** Compromise of long-term keys doesn't reveal past sessions
+- **Future Secrecy:** Compromise doesn't reveal future sessions (passive attacker)
+
+::: {.callout collapse="true"}
+### 💡 Weak authentication protocol
+
+**Q:** A sends $r_1$ to B, B responds $(r_2, K_B^{priv}(r_1))$, A verifies and sends $K_A^{priv}(r_2)$. How can C impersonate A?
+
+**A:**
+
+1. C sends $r_1$ to B
+2. B responds $(r_2, K_B^{priv}(r_1))$
+3. C starts protocol with A, sends $r_2$ as challenge
+4. A responds $(r_3, K_A^{priv}(r_2))$
+5. C sends $K_A^{priv}(r_2)$ to B → **B authenticates C as A!**
+:::
+
+::: {.callout collapse="true"}
+### 💡 Complete Diffie-Hellman
+
+**Q:** $p=17$, $\alpha=3$, Alice $x=7$, Bob $y=11$. Compute shared key.
+
+**A:**
+
+- Alice computes and sends: $3^7 \mod 17 = 11$
+- Bob computes and sends: $3^{11} \mod 17 = 7$
+- Alice computes: $K = 7^7 \mod 17 = 12$
+- Bob computes: $K = 11^{11} \mod 17 = 12$
+- **Shared key:** $K=12$
+:::
+
+::: {.callout collapse="true"}
+### 💡 Man-In-The-Middle on DH
+
+**Q:** Charlie (MitM) with $x'=3$, $y'=5$. How to intercept?
+
+**A:**
+
+**With Alice:**
+
+- Intercepts $\alpha^x=11$, responds $\alpha^{y'}=3^5=5$
+- $K_{AC} = 5^7 = 10 \mod 17$
+
+**With Bob:**
+
+- Intercepts $\alpha^y=7$, responds $\alpha^{x'}=3^3=10$
+- $K_{BC} = 10^{11} = 3 \mod 17$
+
+Charlie has 2 keys and completely controls communication!
+:::
+
+::: {.callout collapse="true"}
+### 💡 Protocol analysis
+
+**Q:** A and B share $S$, exchange $r_a$ and $r_b$, then $K=E_S(r_a \oplus r_b)$. Analyze properties.
+
+**A:**
+
+- ✓ **Implicit key authentication** (only A and B know $S$)
+- ✗ **Key confirmation** (no proof of possession)
+- ✗ **Explicit key authentication** (no confirmation)
+- ✗ **Perfect Forward Secrecy** (attacker with $S$ decrypts everything)
+- ✗ **Future Secrecy** (passive attacker with $S$ computes future keys)
+:::
+
+---
+
+## 📋 Express Cheat Sheet
+
+**Arithmetic:** $a^{\Phi(n)} \equiv 1 \mod n$ | Generator if $\text{ord}(g)=\Phi(n)$
+
+**Entropy:** $H=\log_2(n)$ if equiprobable | Max when uniform
+
+**Caesar:** $E(x)=(x+k) \mod 26$ | Breaking: 26 tries
+
+**Vigenère:** IC for length, frequencies for key
+
+**Blocks:** ECB simple, CBC chained, CFB/OFB feedback | Function must be bijective
+
+**RSA:** $c=m^e$, $m=c^d$ | $ed \equiv 1 \mod \Phi(n)$
+
+**Hash:** Preimage < Second preimage < Collision
+
+**DH:** $K=\alpha^{xy} \mod p$ | Vulnerable to MitM
+
+---
+
+**End of revision guide**
