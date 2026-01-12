@@ -332,15 +332,35 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#arithmétique-modulaire---synthèse-pédagogique" id="toc-arithmétique-modulaire---synthèse-pédagogique" class="nav-link active" data-scroll-target="#arithmétique-modulaire---synthèse-pédagogique">Arithmétique modulaire - Synthèse pédagogique</a>
+  <li><a href="#series-1-modular-arithmetic" id="toc-series-1-modular-arithmetic" class="nav-link active" data-scroll-target="#series-1-modular-arithmetic">Series 1: Modular Arithmetic</a>
   <ul class="collapse">
-  <li><a href="#notations-et-définitions-de-base" id="toc-notations-et-définitions-de-base" class="nav-link" data-scroll-target="#notations-et-définitions-de-base">1. Notations et définitions de base</a></li>
-  <li><a href="#congruences-et-propriétés" id="toc-congruences-et-propriétés" class="nav-link" data-scroll-target="#congruences-et-propriétés">2. Congruences et propriétés</a></li>
-  <li><a href="#inverse-multiplicatif-et-groupe-mathbbz_n" id="toc-inverse-multiplicatif-et-groupe-mathbbz_n" class="nav-link" data-scroll-target="#inverse-multiplicatif-et-groupe-mathbbz_n">3. Inverse multiplicatif et groupe <span class="math inline">\(\mathbb{Z}_n^*\)</span></a></li>
-  <li><a href="#théorèmes-fondamentaux" id="toc-théorèmes-fondamentaux" class="nav-link" data-scroll-target="#théorèmes-fondamentaux">4. Théorèmes fondamentaux</a></li>
-  <li><a href="#racines-primitives-et-ordre" id="toc-racines-primitives-et-ordre" class="nav-link" data-scroll-target="#racines-primitives-et-ordre">5. Racines primitives et ordre</a></li>
-  <li><a href="#structures-algébriques" id="toc-structures-algébriques" class="nav-link" data-scroll-target="#structures-algébriques">6. Structures algébriques</a></li>
+  <li><a href="#key-concepts" id="toc-key-concepts" class="nav-link" data-scroll-target="#key-concepts">🎯 Key Concepts</a></li>
   </ul></li>
+  <li><a href="#series-2-entropy" id="toc-series-2-entropy" class="nav-link" data-scroll-target="#series-2-entropy">Series 2: Entropy</a>
+  <ul class="collapse">
+  <li><a href="#key-concepts-1" id="toc-key-concepts-1" class="nav-link" data-scroll-target="#key-concepts-1">🎯 Key Concepts</a></li>
+  </ul></li>
+  <li><a href="#series-3-historical-ciphers" id="toc-series-3-historical-ciphers" class="nav-link" data-scroll-target="#series-3-historical-ciphers">Series 3: Historical Ciphers</a>
+  <ul class="collapse">
+  <li><a href="#key-concepts-2" id="toc-key-concepts-2" class="nav-link" data-scroll-target="#key-concepts-2">🎯 Key Concepts</a></li>
+  </ul></li>
+  <li><a href="#series-4-block-ciphers" id="toc-series-4-block-ciphers" class="nav-link" data-scroll-target="#series-4-block-ciphers">Series 4: Block Ciphers</a>
+  <ul class="collapse">
+  <li><a href="#key-concepts-3" id="toc-key-concepts-3" class="nav-link" data-scroll-target="#key-concepts-3">🎯 Key Concepts</a></li>
+  </ul></li>
+  <li><a href="#series-5-rsa-rabin-elgamal" id="toc-series-5-rsa-rabin-elgamal" class="nav-link" data-scroll-target="#series-5-rsa-rabin-elgamal">Series 5: RSA, Rabin, ElGamal</a>
+  <ul class="collapse">
+  <li><a href="#key-concepts-4" id="toc-key-concepts-4" class="nav-link" data-scroll-target="#key-concepts-4">🎯 Key Concepts</a></li>
+  </ul></li>
+  <li><a href="#series-6-hash-functions-and-macs" id="toc-series-6-hash-functions-and-macs" class="nav-link" data-scroll-target="#series-6-hash-functions-and-macs">Series 6: Hash Functions and MACs</a>
+  <ul class="collapse">
+  <li><a href="#key-concepts-5" id="toc-key-concepts-5" class="nav-link" data-scroll-target="#key-concepts-5">🎯 Key Concepts</a></li>
+  </ul></li>
+  <li><a href="#series-7-authentication-and-key-establishment" id="toc-series-7-authentication-and-key-establishment" class="nav-link" data-scroll-target="#series-7-authentication-and-key-establishment">Series 7: Authentication and Key Establishment</a>
+  <ul class="collapse">
+  <li><a href="#key-concepts-6" id="toc-key-concepts-6" class="nav-link" data-scroll-target="#key-concepts-6">🎯 Key Concepts</a></li>
+  </ul></li>
+  <li><a href="#express-cheat-sheet" id="toc-express-cheat-sheet" class="nav-link" data-scroll-target="#express-cheat-sheet">📋 Express Cheat Sheet</a></li>
   </ul>
 </nav>
     </div>
@@ -351,144 +371,725 @@ window.Quarto = {
 
 
 
-<section id="arithmétique-modulaire---synthèse-pédagogique" class="level1">
-<h1>Arithmétique modulaire - Synthèse pédagogique</h1>
-<section id="notations-et-définitions-de-base" class="level2">
-<h2 class="anchored" data-anchor-id="notations-et-définitions-de-base">1. Notations et définitions de base</h2>
-<p><strong>Ensembles fondamentaux :</strong> - <span class="math inline">\(\mathbb{N}\)</span> : entiers naturels (0, 1, 2…) - <span class="math inline">\(\mathbb{Z}\)</span> : entiers relatifs (…, -2, -1, 0, 1, 2…) - <span class="math inline">\(\mathbb{Z}_n\)</span> : entiers modulo n {0, 1, …, n-1} - <span class="math inline">\(\mathbb{R}\)</span> : nombres réels</p>
-<p><strong>Opérations importantes :</strong> - Division euclidienne : <span class="math inline">\(a = q \cdot n + r\)</span> avec <span class="math inline">\(0 \leq r &lt; n\)</span> - <span class="math inline">\(a \mod n\)</span> : reste r de la division de a par n - <span class="math inline">\(\lfloor x \rfloor\)</span> : partie entière de x</p>
+<section id="series-1-modular-arithmetic" class="level2">
+<h2 class="anchored" data-anchor-id="series-1-modular-arithmetic">Series 1: Modular Arithmetic</h2>
+<section id="key-concepts" class="level3">
+<h3 class="anchored" data-anchor-id="key-concepts">🎯 Key Concepts</h3>
+<p><strong>Sets:</strong> <span class="math inline">\(\mathbb{Z}_n = \{0,1,...,n-1\}\)</span>, <span class="math inline">\(\mathbb{Z}_n^* = \{a \in \mathbb{Z}_n | \gcd(a,n)=1\}\)</span></p>
+<p><strong>Congruence:</strong> <span class="math inline">\(a \equiv b \mod n \iff n|(a-b)\)</span></p>
+<p><strong>Invertibility:</strong> <span class="math inline">\(a\)</span> invertible mod <span class="math inline">\(n \iff \gcd(a,n)=1\)</span></p>
+<p><strong>Fundamental Theorems:</strong></p>
+<ul>
+<li><strong>Bézout:</strong> <span class="math inline">\(ax + by = \gcd(a,b)\)</span></li>
+<li><strong>Euler:</strong> <span class="math inline">\(a^{\Phi(n)} \equiv 1 \mod n\)</span> (if <span class="math inline">\(\gcd(a,n)=1\)</span>)</li>
+<li><strong>Fermat:</strong> <span class="math inline">\(a^p \equiv a \mod p\)</span> (<span class="math inline">\(p\)</span> prime)</li>
+</ul>
+<p><strong>Order:</strong> <span class="math inline">\(\text{ord}_n(a)\)</span> = smallest <span class="math inline">\(x &gt; 0\)</span> such that <span class="math inline">\(a^x \equiv 1 \mod n\)</span></p>
+<p><strong>Generator:</strong> <span class="math inline">\(g\)</span> generates <span class="math inline">\(\mathbb{Z}_n^*\)</span> if <span class="math inline">\(\text{ord}_n(g) = \Phi(n)\)</span></p>
+<p><strong>Structures:</strong> Group → Ring → Field (increasing invertibility)</p>
 <div class="callout callout-style-simple callout-none no-icon callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">None</span>Exemple : Calculs modulo
+<span class="screen-reader-only">None</span>💡 Modular calculations
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><strong>Énoncé :</strong> Calculer <span class="math inline">\(((11 \mod 7) + (17 \mod 7)) \mod 7\)</span></p>
-<p><strong>Solution :</strong> - <span class="math inline">\(11 \mod 7 = 4\)</span> (car <span class="math inline">\(11 = 1 \times 7 + 4\)</span>) - <span class="math inline">\(17 \mod 7 = 3\)</span> (car <span class="math inline">\(17 = 2 \times 7 + 3\)</span>) - <span class="math inline">\((4 + 3) \mod 7 = 7 \mod 7 = 0\)</span></p>
-<p>Le résultat est donc <span class="math inline">\(0\)</span>.</p>
+<p><strong>Q:</strong> <span class="math inline">\(((11 \mod 7) \cdot (17 \mod 7)) \mod 7\)</span></p>
+<p><strong>A:</strong> <span class="math inline">\(4 \cdot 3 = 12 \equiv 5 \mod 7\)</span></p>
 </div>
 </div>
 </div>
-</section>
-<section id="congruences-et-propriétés" class="level2">
-<h2 class="anchored" data-anchor-id="congruences-et-propriétés">2. Congruences et propriétés</h2>
-<p><strong>Définition :</strong> <span class="math inline">\(a \equiv b \mod n\)</span> si <span class="math inline">\(n \mid (a - b)\)</span></p>
-<p><strong>Propriétés :</strong> - Réflexive : <span class="math inline">\(a \equiv a \mod n\)</span> - Symétrique : <span class="math inline">\(a \equiv b \mod n \Rightarrow b \equiv a \mod n\)</span> - Transitive : <span class="math inline">\(a \equiv b \mod n\)</span> et <span class="math inline">\(b \equiv c \mod n \Rightarrow a \equiv c \mod n\)</span></p>
-<p><strong>Opérations préservant la congruence :</strong> Si <span class="math inline">\(a \equiv b \mod n\)</span>, alors : - <span class="math inline">\(a + c \equiv b + c \mod n\)</span> - <span class="math inline">\(a - c \equiv b - c \mod n\)</span> - <span class="math inline">\(a \cdot c \equiv b \cdot c \mod n\)</span></p>
-</section>
-<section id="inverse-multiplicatif-et-groupe-mathbbz_n" class="level2">
-<h2 class="anchored" data-anchor-id="inverse-multiplicatif-et-groupe-mathbbz_n">3. Inverse multiplicatif et groupe <span class="math inline">\(\mathbb{Z}_n^*\)</span></h2>
-<p><strong>Inverse multiplicatif :</strong> <span class="math inline">\(a^{-1} \mod n\)</span> existe si et seulement si <span class="math inline">\(pgcd(a, n) = 1\)</span></p>
-<p><strong>Groupe multiplicatif :</strong> <span class="math inline">\(\mathbb{Z}_n^* = \{a \in \mathbb{Z}_n \mid pgcd(a, n) = 1\}\)</span></p>
-<p><strong>Cas particulier :</strong> Si n est premier, <span class="math inline">\(\mathbb{Z}_n^* = \mathbb{Z}_n \setminus \{0\}\)</span></p>
 <div class="callout callout-style-simple callout-none no-icon callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">None</span>Exemple : Groupe multiplicatif modulo 7
+<span class="screen-reader-only">None</span>💡 Find the order
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><strong>Énoncé :</strong> Vérifier que <span class="math inline">\((\mathbb{Z}_7^*, \times)\)</span> est un groupe</p>
-<p><strong>Solution :</strong> - <span class="math inline">\(\mathbb{Z}_7^* = \{1, 2, 3, 4, 5, 6\}\)</span> (car 7 est premier) - <strong>Clôture :</strong> Le produit de deux éléments reste dans <span class="math inline">\(\mathbb{Z}_7^*\)</span> - <strong>Associativité :</strong> La multiplication est associative - <strong>Élément neutre :</strong> 1 est l’élément neutre - <strong>Inverse :</strong> Chaque élément a un inverse : - <span class="math inline">\(1^{-1} = 1\)</span>, <span class="math inline">\(2^{-1} = 4\)</span>, <span class="math inline">\(3^{-1} = 5\)</span>, <span class="math inline">\(4^{-1} = 2\)</span>, <span class="math inline">\(5^{-1} = 3\)</span>, <span class="math inline">\(6^{-1} = 6\)</span></p>
-<p>Donc <span class="math inline">\((\mathbb{Z}_7^*, \times)\)</span> est bien un groupe.</p>
+<p><strong>Q:</strong> Order of 2 mod 7?</p>
+<p><strong>A:</strong> <span class="math inline">\(2^1=2\)</span>, <span class="math inline">\(2^2=4\)</span>, <span class="math inline">\(2^3=8\equiv 1\)</span> → <span class="math inline">\(\text{ord}_7(2)=3\)</span></p>
 </div>
 </div>
 </div>
-</section>
-<section id="théorèmes-fondamentaux" class="level2">
-<h2 class="anchored" data-anchor-id="théorèmes-fondamentaux">4. Théorèmes fondamentaux</h2>
-<p><strong>Identité de Bézout :</strong> Si <span class="math inline">\(a, b \in \mathbb{Z}\)</span>, alors <span class="math inline">\(\exists x, y \in \mathbb{Z}\)</span> tels que <span class="math inline">\(ax + by = pgcd(a, b)\)</span></p>
-<p><strong>Fonction totient d’Euler :</strong> <span class="math inline">\(\Phi(n) = |\{x \mid 0 &lt; x &lt; n, pgcd(x, n) = 1\}|\)</span></p>
-<p><strong>Théorème d’Euler :</strong> Si <span class="math inline">\(pgcd(a, n) = 1\)</span>, alors <span class="math inline">\(a^{\Phi(n)} \equiv 1 \mod n\)</span></p>
-<p><strong>Petit théorème de Fermat :</strong> Si p premier et <span class="math inline">\(p \nmid a\)</span>, alors <span class="math inline">\(a^p \equiv a \mod p\)</span></p>
-</section>
-<section id="racines-primitives-et-ordre" class="level2">
-<h2 class="anchored" data-anchor-id="racines-primitives-et-ordre">5. Racines primitives et ordre</h2>
-<p><strong>Ordre d’un élément :</strong> <span class="math inline">\(ord_n(a)\)</span> = plus petit <span class="math inline">\(k &gt; 0\)</span> tel que <span class="math inline">\(a^k \equiv 1 \mod n\)</span></p>
-<p><strong>Racine primitive :</strong> g est une racine primitive modulo n si <span class="math inline">\(\forall a \in \mathbb{Z}_n^*\)</span>, <span class="math inline">\(\exists k\)</span> tel que <span class="math inline">\(g^k \equiv a \mod n\)</span></p>
-<p><strong>Propriété :</strong> Si g est une racine primitive, alors <span class="math inline">\(ord_n(g) = \Phi(n)\)</span></p>
 <div class="callout callout-style-simple callout-none no-icon callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">None</span>Exemple : Racine primitive modulo 7
+<span class="screen-reader-only">None</span>💡 Identify a generator
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><strong>Énoncé :</strong> Trouver une racine primitive modulo 7</p>
-<p><strong>Solution :</strong> - <span class="math inline">\(\mathbb{Z}_7^* = \{1, 2, 3, 4, 5, 6\}\)</span>, <span class="math inline">\(\Phi(7) = 6\)</span> - Testons les candidats : - <span class="math inline">\(ord_7(2)\)</span> : <span class="math inline">\(2^1=2\)</span>, <span class="math inline">\(2^2=4\)</span>, <span class="math inline">\(2^3=1\)</span> → ordre 3 ≠ 6 - <span class="math inline">\(ord_7(3)\)</span> : <span class="math inline">\(3^1=3\)</span>, <span class="math inline">\(3^2=2\)</span>, <span class="math inline">\(3^3=6\)</span>, <span class="math inline">\(3^4=4\)</span>, <span class="math inline">\(3^5=5\)</span>, <span class="math inline">\(3^6=1\)</span> → ordre 6 = Φ(7)</p>
-<p>Donc 3 est une racine primitive modulo 7.</p>
+<p><strong>Q:</strong> Is 3 a generator of <span class="math inline">\(\mathbb{Z}_7^*\)</span>?</p>
+<p><strong>A:</strong> <span class="math inline">\(3^1=3, 3^2=2, 3^3=6, 3^4=4, 3^5=5, 3^6=1\)</span> → generates all elements → <strong>YES</strong></p>
 </div>
 </div>
 </div>
+<hr>
 </section>
-<section id="structures-algébriques" class="level2">
-<h2 class="anchored" data-anchor-id="structures-algébriques">6. Structures algébriques</h2>
-<pre class="mermaid"><code>graph TD
-    A[Structure algébrique] --&gt; B[Groupe]
-    A --&gt; C[Anneau]
-    C --&gt; D[Corps]
-    
-    B --&gt; B1[Groupe abélien]
-    
-    B --&gt;|+ propriétés| C
-    C --&gt;|+ commutativité + inverses| D</code></pre>
-<p><strong>Groupe :</strong> Ensemble avec opération associative, élément neutre, inverses</p>
-<p><strong>Anneau :</strong> Groupe abélien pour l’addition, monoïde pour la multiplication, distributivité</p>
-<p><strong>Corps :</strong> Anneau commutatif où tout élément non nul est inversible</p>
+</section>
+<section id="series-2-entropy" class="level2">
+<h2 class="anchored" data-anchor-id="series-2-entropy">Series 2: Entropy</h2>
+<section id="key-concepts-1" class="level3">
+<h3 class="anchored" data-anchor-id="key-concepts-1">🎯 Key Concepts</h3>
+<p><strong>Entropy:</strong> Measures uncertainty/information of a random variable</p>
+<p><span class="math display">\[H(X) = -\sum_{i=1}^n p_i \log_2(p_i) = \sum_{i=1}^n p_i \log_2\left(\frac{1}{p_i}\right)\]</span></p>
+<p><strong>Properties:</strong></p>
+<ul>
+<li><span class="math inline">\(H(X)\)</span> maximal when all probabilities are equal</li>
+<li><span class="math inline">\(H(X) = 0\)</span> if only one possible value (probability = 1)</li>
+<li>For <span class="math inline">\(n\)</span> equiprobable values: <span class="math inline">\(H(X) = \log_2(n)\)</span></li>
+</ul>
+<p><strong>Joint entropy:</strong> <span class="math inline">\(H(X,Y) = -\sum_x \sum_y p(x,y)\log_2(p(x,y))\)</span></p>
+<p><strong>Conditional entropy:</strong> <span class="math inline">\(H(X|Y) = -\sum_y \sum_x p(y)p(x|y)\log_2(p(x|y))\)</span></p>
+<p><strong>In cryptography:</strong> We want <span class="math inline">\(H(\text{Plaintext}|\text{Ciphertext}) \approx H(\text{Plaintext})\)</span></p>
 <div class="callout callout-style-simple callout-none no-icon callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">None</span>Exemple : Vérification de structures
+<span class="screen-reader-only">None</span>💡 Min/Max entropy
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><strong>Énoncé :</strong> <span class="math inline">\((\mathbb{Z}_8, \times)\)</span> est-il un groupe ?</p>
-<p><strong>Solution :</strong> - <strong>Clôture :</strong> Oui, le produit modulo 8 donne bien un élément de <span class="math inline">\(\mathbb{Z}_8\)</span> - <strong>Associativité :</strong> Oui, la multiplication est associative - <strong>Élément neutre :</strong> 1 est bien neutre - <strong>Inverse :</strong> Problème ! Par exemple, 2 n’a pas d’inverse dans <span class="math inline">\(\mathbb{Z}_8\)</span> car <span class="math inline">\(pgcd(2,8) \neq 1\)</span></p>
-<p>Donc <span class="math inline">\((\mathbb{Z}_8, \times)\)</span> n’est PAS un groupe.</p>
+<p><strong>Q:</strong> 256-bit variable, min/max entropies?</p>
+<p><strong>A:</strong></p>
+<ul>
+<li><strong>Min:</strong> <span class="math inline">\(H=0\)</span> (single possible value, <span class="math inline">\(p=1\)</span>)</li>
+<li><strong>Max:</strong> <span class="math inline">\(H=256\)</span> (all values equiprobable, <span class="math inline">\(p=2^{-256}\)</span>)</li>
+</ul>
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
-<i class="callout-icon"></i>
+<i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Révision rapide
+<span class="screen-reader-only">None</span>💡 Concatenation entropy
 </div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><strong>Notations :</strong> <span class="math inline">\(\mathbb{Z}_n = \{0,...,n-1\}\)</span>, <span class="math inline">\(\mathbb{Z}_n^* = \{a \in \mathbb{Z}_n \mid pgcd(a,n)=1\}\)</span></p>
-<p><strong>Congruence :</strong> <span class="math inline">\(a \equiv b \mod n \iff n \mid (a-b)\)</span></p>
-<p><strong>Inverse :</strong> <span class="math inline">\(a^{-1}\)</span> existe ssi <span class="math inline">\(pgcd(a,n)=1\)</span></p>
-<p><strong>Théorèmes :</strong> - Euler : <span class="math inline">\(a^{\Phi(n)} \equiv 1 \mod n\)</span> si <span class="math inline">\(pgcd(a,n)=1\)</span> - Fermat : <span class="math inline">\(a^p \equiv a \mod p\)</span> (p premier)</p>
-<p><strong>Structures :</strong> - Groupe : associativité + neutre + inverses - Corps : anneau commutatif + inverses pour × - <span class="math inline">\(\mathbb{Z}_n\)</span> est un corps ssi n premier</p>
+<p><strong>Q:</strong> <span class="math inline">\(H(X)=64\)</span>, generate one value and concatenate it to itself (512 bits). Entropy?</p>
+<p><strong>A:</strong> <span class="math inline">\(H=64\)</span> (no new information, just duplication)</p>
 </div>
 </div>
-
-
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>💡 Password entropy
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Q:</strong> Password = random date “MM/DD/YYYY” (365 days, years 0000-2025)</p>
+<p><strong>A:</strong> <span class="math inline">\(365 \times 2026 = 739490\)</span> possibilities → <span class="math inline">\(H = \log_2(739490) \approx 19.5\)</span> bits</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>💡 Improved generator
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Q:</strong> Generator <span class="math inline">\(G\)</span>: <span class="math inline">\(P(0)=0.5+\delta\)</span>, <span class="math inline">\(P(1)=0.5-\delta\)</span>. Create <span class="math inline">\(A\)</span>: take 2 bits from <span class="math inline">\(G\)</span>, keep 01→0 or 10→1, discard 00 and 11. Advantage?</p>
+<p><strong>A:</strong></p>
+<ul>
+<li><span class="math inline">\(P_A(0) = P_A(1) = 0.5\)</span> (perfectly random!)</li>
+<li>Cost: need <span class="math inline">\(\frac{2x}{0.5-2\delta^2}\)</span> bits from <span class="math inline">\(G\)</span> for <span class="math inline">\(x\)</span> bits of <span class="math inline">\(A\)</span></li>
+</ul>
+</div>
+</div>
+</div>
+<hr>
 </section>
+</section>
+<section id="series-3-historical-ciphers" class="level2">
+<h2 class="anchored" data-anchor-id="series-3-historical-ciphers">Series 3: Historical Ciphers</h2>
+<section id="key-concepts-2" class="level3">
+<h3 class="anchored" data-anchor-id="key-concepts-2">🎯 Key Concepts</h3>
+<p><strong>Caesar Cipher:</strong></p>
+<p>Rotation by <span class="math inline">\(k\)</span> positions: <span class="math inline">\(E_k(x) = (x + k) \mod 26\)</span>, <span class="math inline">\(D_k(c) = (c - k) \mod 26\)</span></p>
+<p><strong>Monoalphabetic Substitution:</strong></p>
+<p>Key = permutation of alphabet. Each letter → fixed letter.</p>
+<p><strong>Vigenère Cipher:</strong></p>
+<p>Polyalphabetic substitution: <span class="math inline">\(C_i = (M_i + K_{i \mod |K|}) \mod 26\)</span></p>
+<pre class="mermaid"><code>graph LR
+    A[Caesar] --&gt;|generalization| B[Mono Substitution]
+    B --&gt;|repeated key| C[Vigenère]
+    
+    style A fill:#ffe1e1
+    style B fill:#fff4e1
+    style C fill:#e1f5ff</code></pre>
+<p><strong>Breaking:</strong></p>
+<ul>
+<li><strong>Caesar:</strong> Brute force (max 25 keys) or frequency analysis</li>
+<li><strong>Mono:</strong> Frequency analysis + language structure</li>
+<li><strong>Vigenère:</strong> Index of coincidence + frequency analysis</li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>💡 Caesar encryption
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Q:</strong> Encrypt “HELLO” with <span class="math inline">\(k=5\)</span></p>
+<p><strong>A:</strong> H→M, E→J, L→Q, L→Q, O→T → <strong>“MJQQT”</strong></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>💡 Vigenère encryption
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Q:</strong> Encrypt “BONJOUR” with key “BAC”</p>
+<p><strong>A:</strong></p>
+<ul>
+<li>B+B=C, O+A=O, N+C=P, J+B=K, O+A=O, U+C=W, R+B=S</li>
+<li><strong>“COPKOWS”</strong></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>💡 Breaking Vigenère - Key length
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Method:</strong> Index of Coincidence</p>
+<p>For length <span class="math inline">\(L\)</span>, shift text by <span class="math inline">\(L\)</span> positions and count identical letters:</p>
+<p><span class="math display">\[\text{IC}(L) = \frac{\sum_{i=1}^{N-L} [a_i == b_i]}{N-L}\]</span></p>
+<p>Maximum IC indicates key length (or a multiple).</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>💡 Breaking Vigenère - Find key
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Method:</strong> Frequency analysis per subtext</p>
+<ol type="1">
+<li>Divide text into <span class="math inline">\(k\)</span> subtexts (positions <span class="math inline">\(1, k+1, 2k+1, ...\)</span>)</li>
+<li>For each subtext, calculate distance with language frequencies:</li>
+</ol>
+<p><span class="math display">\[\text{Dist}_x = \sqrt{\sum_{i=0}^{25} (F_i - M_{(i+x) \mod 26})^2}\]</span></p>
+<ol start="3" type="1">
+<li>The <span class="math inline">\(x\)</span> minimizing distance is the corresponding key letter</li>
+</ol>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="series-4-block-ciphers" class="level2">
+<h2 class="anchored" data-anchor-id="series-4-block-ciphers">Series 4: Block Ciphers</h2>
+<section id="key-concepts-3" class="level3">
+<h3 class="anchored" data-anchor-id="key-concepts-3">🎯 Key Concepts</h3>
+<p><strong>Encryption Modes:</strong></p>
+<pre class="mermaid"><code>graph TD
+    A[ECB&lt;br/&gt;Simple] --&gt; B[CBC&lt;br/&gt;Chaining]
+    B --&gt; C[CFB&lt;br/&gt;Feedback]
+    C --&gt; D[OFB&lt;br/&gt;Output FB]
+    
+    style A fill:#ffe1e1
+    style B fill:#fff4e1
+    style C fill:#e1f5ff
+    style D fill:#e1ffe1</code></pre>
+<p><strong>ECB (Electronic CodeBook):</strong></p>
+<p><span class="math display">\[C_i = E_K(P_i)\]</span></p>
+<p>⚠️ Identical blocks → encrypted identically (weak security)</p>
+<p><strong>CBC (Cipher Block Chaining):</strong></p>
+<p><span class="math display">\[C_i = E_K(P_i \oplus C_{i-1}), \quad C_0 = IV\]</span></p>
+<p><strong>CFB (Cipher FeedBack):</strong></p>
+<p><span class="math display">\[C_i = E_K(C_{i-1}) \oplus P_i, \quad C_0 = IV\]</span></p>
+<p><strong>OFB (Output FeedBack):</strong></p>
+<p><span class="math display">\[O_i = E_K(O_{i-1}), \quad C_i = O_i \oplus P_i, \quad O_0 = IV\]</span></p>
+<p><strong>Encryption Function:</strong> Must be <strong>invertible</strong> (bijective)</p>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>💡 Linear encryption - Danger
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Q:</strong> Linear encryption <span class="math inline">\(E_L(k, m_1 \oplus m_2) = E_L(k,m_1) \oplus E_L(k,m_2)\)</span>. With 128 chosen ciphertexts, show we can decrypt without key.</p>
+<p><strong>A:</strong></p>
+<ol type="1">
+<li>Choose <span class="math inline">\(c_1,...,c_{128}\)</span> where <span class="math inline">\(c_i\)</span> has only bit <span class="math inline">\(i\)</span> at 1</li>
+<li>Any ciphertext <span class="math inline">\(c\)</span> writes as XOR of some <span class="math inline">\(c_i\)</span></li>
+<li><span class="math inline">\(c = c_{i_1} \oplus ... \oplus c_{i_n} = E_L(k, m_{i_1} \oplus ... \oplus m_{i_n})\)</span></li>
+<li>So <span class="math inline">\(m = m_{i_1} \oplus ... \oplus m_{i_n}\)</span> (known!)</li>
+<li><strong>Conclusion:</strong> Linear encryption = very dangerous</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>💡 Invertible functions
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Q:</strong> Is <span class="math inline">\(E_i = (B_i \cdot K_i) \mod 16\)</span> usable?</p>
+<p><strong>A:</strong> <strong>NO</strong>. If <span class="math inline">\(K_i=2\)</span>, then <span class="math inline">\(B_i=1\)</span> and <span class="math inline">\(B_i=9\)</span> both give <span class="math inline">\(E_i=2 \mod 16\)</span>. Non-bijective!</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>💡 ECB encryption
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Q:</strong> <span class="math inline">\(K=(AB)_{16}\)</span>, <span class="math inline">\(m=(A741BA)_{16}\)</span>, <span class="math inline">\(E_K(B) = B \oplus K\)</span>, encrypt</p>
+<p><strong>A:</strong></p>
+<ul>
+<li><span class="math inline">\(C_1 = A7 \oplus AB = 0C\)</span></li>
+<li><span class="math inline">\(C_2 = 41 \oplus AB = EA\)</span></li>
+<li><span class="math inline">\(C_3 = BA \oplus AB = 11\)</span></li>
+<li><strong>Result:</strong> <span class="math inline">\((0CEA11)_{16}\)</span></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>💡 CBC encryption
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-15" class="callout-15-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Q:</strong> <span class="math inline">\(K=(AB)_{16}\)</span>, <span class="math inline">\(IV=(AD)_{16}\)</span>, <span class="math inline">\(m=(A741BA)_{16}\)</span>, <span class="math inline">\(E_K(B) = B \oplus K\)</span></p>
+<p><strong>A:</strong></p>
+<ul>
+<li><span class="math inline">\(C_1 = (A7 \oplus AD) \oplus AB = 0A \oplus AB = A1\)</span></li>
+<li><span class="math inline">\(C_2 = (41 \oplus A1) \oplus AB = E0 \oplus AB = 4B\)</span></li>
+<li><span class="math inline">\(C_3 = (BA \oplus 4B) \oplus AB = F1 \oplus AB = 5A\)</span></li>
+<li><strong>Result:</strong> <span class="math inline">\((A14B5A)_{16}\)</span></li>
+</ul>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="series-5-rsa-rabin-elgamal" class="level2">
+<h2 class="anchored" data-anchor-id="series-5-rsa-rabin-elgamal">Series 5: RSA, Rabin, ElGamal</h2>
+<section id="key-concepts-4" class="level3">
+<h3 class="anchored" data-anchor-id="key-concepts-4">🎯 Key Concepts</h3>
+<p><strong>RSA:</strong></p>
+<ul>
+<li><strong>Keys:</strong> <span class="math inline">\(n=pq\)</span>, <span class="math inline">\(e\)</span> with <span class="math inline">\(\gcd(e, \Phi(n))=1\)</span>, <span class="math inline">\(d = e^{-1} \mod \Phi(n)\)</span></li>
+<li><strong>Encryption:</strong> <span class="math inline">\(c = m^e \mod n\)</span></li>
+<li><strong>Decryption:</strong> <span class="math inline">\(m = c^d \mod n\)</span></li>
+</ul>
+<p><strong>Fast exponentiation:</strong> Compute <span class="math inline">\(a^{42}\)</span>: write <span class="math inline">\(42=32+8+2\)</span> then <span class="math inline">\(a^{42} = a^{32} \cdot a^8 \cdot a^2\)</span></p>
+<p><strong>Rabin:</strong></p>
+<ul>
+<li><strong>Keys:</strong> <span class="math inline">\(n=pq\)</span> with <span class="math inline">\(p \equiv q \equiv 3 \mod 4\)</span></li>
+<li><strong>Encryption:</strong> <span class="math inline">\(c = m^2 \mod n\)</span></li>
+<li><strong>Decryption:</strong> 4 possible solutions via congruence system</li>
+</ul>
+<p><strong>ElGamal:</strong></p>
+<ul>
+<li><strong>Keys:</strong> Prime <span class="math inline">\(p\)</span>, generator <span class="math inline">\(\alpha\)</span>, private key <span class="math inline">\(a\)</span>, public key <span class="math inline">\(\alpha^a \mod p\)</span></li>
+<li><strong>Encryption:</strong> <span class="math inline">\((\lambda, \sigma) = (\alpha^k, m \cdot (\alpha^a)^k) \mod p\)</span></li>
+<li><strong>Decryption:</strong> <span class="math inline">\(m = \lambda^{-a} \cdot \sigma \mod p\)</span></li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>💡 Generate RSA keys
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-16" class="callout-16-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Q:</strong> <span class="math inline">\(p=11\)</span>, <span class="math inline">\(q=17\)</span>, create RSA key pair</p>
+<p><strong>A:</strong></p>
+<ol type="1">
+<li><span class="math inline">\(n = 11 \times 17 = 187\)</span></li>
+<li><span class="math inline">\(\Phi(n) = 10 \times 16 = 160\)</span></li>
+<li>Choose <span class="math inline">\(e=7\)</span> (coprime with 160)</li>
+<li>Find <span class="math inline">\(d\)</span>: <span class="math inline">\(7d \equiv 1 \mod 160\)</span> → <span class="math inline">\(d=23\)</span></li>
+<li><strong>Public key:</strong> <span class="math inline">\((187, 7)\)</span>, <strong>Private key:</strong> <span class="math inline">\((187, 23)\)</span></li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>💡 Fast RSA encryption
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-17" class="callout-17-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Q:</strong> Encrypt <span class="math inline">\(m=28\)</span> with <span class="math inline">\((n=247, e=41)\)</span></p>
+<p><strong>A:</strong> Fast exponentiation <span class="math inline">\(28^{41} \mod 247\)</span>:</p>
+<ul>
+<li><span class="math inline">\(28^1=28\)</span>, <span class="math inline">\(28^2=43\)</span>, <span class="math inline">\(28^4=120\)</span>, <span class="math inline">\(28^8=74\)</span>, <span class="math inline">\(28^{16}=42\)</span>, <span class="math inline">\(28^{32}=35\)</span></li>
+<li><span class="math inline">\(41 = 32+8+1\)</span> so <span class="math inline">\(28^{41} = 35 \cdot 74 \cdot 28 = 149 \mod 247\)</span></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>💡 Break RSA (small numbers)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-18" class="callout-18-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Q:</strong> <span class="math inline">\((n=247, e=41)\)</span>, find private key</p>
+<p><strong>A:</strong></p>
+<ol type="1">
+<li>Factorize: <span class="math inline">\(247 = 13 \times 19\)</span></li>
+<li><span class="math inline">\(\Phi(n) = 12 \times 18 = 216\)</span></li>
+<li>Extended Euclid for <span class="math inline">\(d = e^{-1} \mod 216\)</span> → <span class="math inline">\(d=137\)</span></li>
+<li>Verify: <span class="math inline">\(41 \times 137 = 5617 = 26 \times 216 + 1 \equiv 1 \mod 216\)</span> ✓</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>💡 Rabin
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-19" class="callout-19-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Q:</strong> <span class="math inline">\(n=253\)</span>, encrypt <span class="math inline">\(m=134\)</span></p>
+<p><strong>A:</strong> <span class="math inline">\(c = 134^2 = 17956 \equiv 246 \mod 253\)</span></p>
+<p>To decrypt (factorize <span class="math inline">\(n=11 \times 23\)</span>):</p>
+<ul>
+<li><span class="math inline">\(m_p = 246^3 \mod 11 = 9\)</span></li>
+<li><span class="math inline">\(m_q = 246^6 \mod 23 = 4\)</span></li>
+<li>4 solutions including <span class="math inline">\(m_4 = 134\)</span> ✓</li>
+</ul>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="series-6-hash-functions-and-macs" class="level2">
+<h2 class="anchored" data-anchor-id="series-6-hash-functions-and-macs">Series 6: Hash Functions and MACs</h2>
+<section id="key-concepts-5" class="level3">
+<h3 class="anchored" data-anchor-id="key-concepts-5">🎯 Key Concepts</h3>
+<p><strong>Cryptographic Properties:</strong></p>
+<ol type="1">
+<li><strong>Preimage resistance:</strong> Hard to find <span class="math inline">\(x\)</span> such that <span class="math inline">\(h(x)=y\)</span></li>
+<li><strong>Second preimage resistance:</strong> Hard to find <span class="math inline">\(x' \neq x\)</span> with <span class="math inline">\(h(x')=h(x)\)</span></li>
+<li><strong>Collision resistance:</strong> Hard to find <span class="math inline">\(x \neq x'\)</span> with <span class="math inline">\(h(x)=h(x')\)</span></li>
+</ol>
+<p>⚠️ Collision implies second preimage (but not preimage)</p>
+<p><strong>MAC (Message Authentication Code):</strong></p>
+<p>Guarantees integrity AND authenticity. Often built with CBC: <span class="math inline">\(MAC = E_K(...E_K(E_K(m_1) \oplus m_2)... \oplus m_n)\)</span></p>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-20-contents" aria-controls="callout-20" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>💡 Bad hash function
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-20" class="callout-20-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Q:</strong> Is <span class="math inline">\(h_1(x) = x \mod n\)</span> secure?</p>
+<p><strong>A:</strong> <strong>NO</strong> for all 3 properties:</p>
+<ul>
+<li>Preimage: <span class="math inline">\(x=y\)</span> gives <span class="math inline">\(h_1(x)=y\)</span></li>
+<li>Second preimage: <span class="math inline">\(x'=x+n\)</span> gives collision</li>
+<li>Collision: same as second preimage</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>💡 Vulnerable MAC with CBC
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-21" class="callout-21-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Q:</strong> <span class="math inline">\(t_1=E_K(m_1)\)</span>, <span class="math inline">\(t_{i+1}=E_K(m_{i+1} \oplus t_i)\)</span>. With <span class="math inline">\((m_1||m_2, t_1||t_2)\)</span>, forge?</p>
+<p><strong>A:</strong> Forged message: <span class="math inline">\(m'=(m_2 \oplus t_1) || (t_2 \oplus m_1)\)</span></p>
+<p>Forged MAC: <span class="math inline">\(t' = t_2 || t_1\)</span> (computable without key!)</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-22-contents" aria-controls="callout-22" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>💡 MAC = last CBC block
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-22" class="callout-22-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Q:</strong> If <span class="math inline">\(MAC=c_n\)</span> (last CBC block), can we modify the message?</p>
+<p><strong>A:</strong> <strong>YES!</strong> We can modify all blocks <span class="math inline">\(c_1,...,c_{n-1}\)</span> without changing <span class="math inline">\(c_n=MAC\)</span>. Decryption will give different message with valid MAC!</p>
+<p><strong>Solution:</strong> Use two different keys (one for encryption, one for MAC)</p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="series-7-authentication-and-key-establishment" class="level2">
+<h2 class="anchored" data-anchor-id="series-7-authentication-and-key-establishment">Series 7: Authentication and Key Establishment</h2>
+<section id="key-concepts-6" class="level3">
+<h3 class="anchored" data-anchor-id="key-concepts-6">🎯 Key Concepts</h3>
+<p><strong>Diffie-Hellman:</strong></p>
+<pre class="mermaid"><code>sequenceDiagram
+    participant Alice
+    participant Bob
+    
+    Note over Alice,Bob: Public: p, α
+    Alice-&gt;&gt;Alice: Choose secret x
+    Bob-&gt;&gt;Bob: Choose secret y
+    Alice-&gt;&gt;Bob: αˣ mod p
+    Bob-&gt;&gt;Alice: αʸ mod p
+    Alice-&gt;&gt;Alice: K = (αʸ)ˣ mod p
+    Bob-&gt;&gt;Bob: K = (αˣ)ʸ mod p
+    Note over Alice,Bob: Shared key: K = αˣʸ mod p</code></pre>
+<p><strong>Man-In-The-Middle attack on DH:</strong> Intercept and replace exchanges</p>
+<p><strong>Security Properties:</strong></p>
+<ul>
+<li><strong>Implicit key authentication:</strong> Only A and B can have the key</li>
+<li><strong>Key confirmation:</strong> A and B prove they have the key</li>
+<li><strong>Explicit key authentication:</strong> Implicit + Confirmation</li>
+<li><strong>Perfect Forward Secrecy:</strong> Compromise of long-term keys doesn’t reveal past sessions</li>
+<li><strong>Future Secrecy:</strong> Compromise doesn’t reveal future sessions (passive attacker)</li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-23-contents" aria-controls="callout-23" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>💡 Weak authentication protocol
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-23" class="callout-23-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Q:</strong> A sends <span class="math inline">\(r_1\)</span> to B, B responds <span class="math inline">\((r_2, K_B^{priv}(r_1))\)</span>, A verifies and sends <span class="math inline">\(K_A^{priv}(r_2)\)</span>. How can C impersonate A?</p>
+<p><strong>A:</strong></p>
+<ol type="1">
+<li>C sends <span class="math inline">\(r_1\)</span> to B</li>
+<li>B responds <span class="math inline">\((r_2, K_B^{priv}(r_1))\)</span></li>
+<li>C starts protocol with A, sends <span class="math inline">\(r_2\)</span> as challenge</li>
+<li>A responds <span class="math inline">\((r_3, K_A^{priv}(r_2))\)</span></li>
+<li>C sends <span class="math inline">\(K_A^{priv}(r_2)\)</span> to B → <strong>B authenticates C as A!</strong></li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-24-contents" aria-controls="callout-24" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>💡 Complete Diffie-Hellman
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-24" class="callout-24-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Q:</strong> <span class="math inline">\(p=17\)</span>, <span class="math inline">\(\alpha=3\)</span>, Alice <span class="math inline">\(x=7\)</span>, Bob <span class="math inline">\(y=11\)</span>. Compute shared key.</p>
+<p><strong>A:</strong></p>
+<ul>
+<li>Alice computes and sends: <span class="math inline">\(3^7 \mod 17 = 11\)</span></li>
+<li>Bob computes and sends: <span class="math inline">\(3^{11} \mod 17 = 7\)</span></li>
+<li>Alice computes: <span class="math inline">\(K = 7^7 \mod 17 = 12\)</span></li>
+<li>Bob computes: <span class="math inline">\(K = 11^{11} \mod 17 = 12\)</span></li>
+<li><strong>Shared key:</strong> <span class="math inline">\(K=12\)</span></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-25-contents" aria-controls="callout-25" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>💡 Man-In-The-Middle on DH
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-25" class="callout-25-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Q:</strong> Charlie (MitM) with <span class="math inline">\(x'=3\)</span>, <span class="math inline">\(y'=5\)</span>. How to intercept?</p>
+<p><strong>A:</strong></p>
+<p><strong>With Alice:</strong></p>
+<ul>
+<li>Intercepts <span class="math inline">\(\alpha^x=11\)</span>, responds <span class="math inline">\(\alpha^{y'}=3^5=5\)</span></li>
+<li><span class="math inline">\(K_{AC} = 5^7 = 10 \mod 17\)</span></li>
+</ul>
+<p><strong>With Bob:</strong></p>
+<ul>
+<li>Intercepts <span class="math inline">\(\alpha^y=7\)</span>, responds <span class="math inline">\(\alpha^{x'}=3^3=10\)</span></li>
+<li><span class="math inline">\(K_{BC} = 10^{11} = 3 \mod 17\)</span></li>
+</ul>
+<p>Charlie has 2 keys and completely controls communication!</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-26-contents" aria-controls="callout-26" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>💡 Protocol analysis
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-26" class="callout-26-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Q:</strong> A and B share <span class="math inline">\(S\)</span>, exchange <span class="math inline">\(r_a\)</span> and <span class="math inline">\(r_b\)</span>, then <span class="math inline">\(K=E_S(r_a \oplus r_b)\)</span>. Analyze properties.</p>
+<p><strong>A:</strong></p>
+<ul>
+<li>✓ <strong>Implicit key authentication</strong> (only A and B know <span class="math inline">\(S\)</span>)</li>
+<li>✗ <strong>Key confirmation</strong> (no proof of possession)</li>
+<li>✗ <strong>Explicit key authentication</strong> (no confirmation)</li>
+<li>✗ <strong>Perfect Forward Secrecy</strong> (attacker with <span class="math inline">\(S\)</span> decrypts everything)</li>
+<li>✗ <strong>Future Secrecy</strong> (passive attacker with <span class="math inline">\(S\)</span> computes future keys)</li>
+</ul>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="express-cheat-sheet" class="level2">
+<h2 class="anchored" data-anchor-id="express-cheat-sheet">📋 Express Cheat Sheet</h2>
+<p><strong>Arithmetic:</strong> <span class="math inline">\(a^{\Phi(n)} \equiv 1 \mod n\)</span> | Generator if <span class="math inline">\(\text{ord}(g)=\Phi(n)\)</span></p>
+<p><strong>Entropy:</strong> <span class="math inline">\(H=\log_2(n)\)</span> if equiprobable | Max when uniform</p>
+<p><strong>Caesar:</strong> <span class="math inline">\(E(x)=(x+k) \mod 26\)</span> | Breaking: 26 tries</p>
+<p><strong>Vigenère:</strong> IC for length, frequencies for key</p>
+<p><strong>Blocks:</strong> ECB simple, CBC chained, CFB/OFB feedback | Function must be bijective</p>
+<p><strong>RSA:</strong> <span class="math inline">\(c=m^e\)</span>, <span class="math inline">\(m=c^d\)</span> | <span class="math inline">\(ed \equiv 1 \mod \Phi(n)\)</span></p>
+<p><strong>Hash:</strong> Preimage &lt; Second preimage &lt; Collision</p>
+<p><strong>DH:</strong> <span class="math inline">\(K=\alpha^{xy} \mod p\)</span> | Vulnerable to MitM</p>
+<hr>
+<p><strong>End of revision guide</strong></p>
+
+
 </section>
 
 </main> <!-- /main -->
