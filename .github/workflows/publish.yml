@@ -17,9 +17,18 @@ jobs:
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
 
-      - name: Render and Publish
+      - name: Render and Publish english version
         uses: quarto-dev/quarto-actions/publish@v2
         with:
           target: gh-pages
+          path: en
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Render and Publish french version
+        uses: quarto-dev/quarto-actions/publish@v2
+        with:
+          target: gh-pages
+          path: fr
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
