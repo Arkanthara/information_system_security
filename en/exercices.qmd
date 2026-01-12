@@ -122,7 +122,7 @@ Key = permutation of alphabet. Each letter → fixed letter.
 
 Polyalphabetic substitution: $C_i = (M_i + K_{i \mod |K|}) \mod 26$
 
-```mermaid
+```{mermaid}
 graph LR
     A[Caesar] -->|generalization| B[Mono Substitution]
     B -->|repeated key| C[Vigenère]
@@ -190,7 +190,7 @@ $$\text{Dist}_x = \sqrt{\sum_{i=0}^{25} (F_i - M_{(i+x) \mod 26})^2}$$
 
 **Encryption Modes:**
 
-```mermaid
+```{mermaid}
 graph TD
     A[ECB<br/>Simple] --> B[CBC<br/>Chaining]
     B --> C[CFB<br/>Feedback]
@@ -406,7 +406,7 @@ Forged MAC: $t' = t_2 || t_1$ (computable without key!)
 
 **Diffie-Hellman:**
 
-```mermaid
+```{mermaid}
 sequenceDiagram
     participant Alice
     participant Bob
