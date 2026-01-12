@@ -512,7 +512,3 @@ Charlie has 2 keys and completely controls communication!
 **Hash:** Preimage < Second preimage < Collision
 
 **DH:** $K=\alpha^{xy} \mod p$ | Vulnerable to MitM
-
----
-
-**End of revision guide**
