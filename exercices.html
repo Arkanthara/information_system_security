@@ -72,6 +72,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -545,13 +548,24 @@ window.Quarto = {
 <p>Key = permutation of alphabet. Each letter → fixed letter.</p>
 <p><strong>Vigenère Cipher:</strong></p>
 <p>Polyalphabetic substitution: <span class="math inline">\(C_i = (M_i + K_{i \mod |K|}) \mod 26\)</span></p>
-<pre class="mermaid"><code>graph LR
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">graph LR
     A[Caesar] --&gt;|generalization| B[Mono Substitution]
     B --&gt;|repeated key| C[Vigenère]
     
     style A fill:#ffe1e1
     style B fill:#fff4e1
-    style C fill:#e1f5ff</code></pre>
+    style C fill:#e1f5ff
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
 <p><strong>Breaking:</strong></p>
 <ul>
 <li><strong>Caesar:</strong> Brute force (max 25 keys) or frequency analysis</li>
@@ -647,7 +661,12 @@ window.Quarto = {
 <section id="key-concepts-3" class="level3">
 <h3 class="anchored" data-anchor-id="key-concepts-3">🎯 Key Concepts</h3>
 <p><strong>Encryption Modes:</strong></p>
-<pre class="mermaid"><code>graph TD
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">graph TD
     A[ECB&lt;br/&gt;Simple] --&gt; B[CBC&lt;br/&gt;Chaining]
     B --&gt; C[CFB&lt;br/&gt;Feedback]
     C --&gt; D[OFB&lt;br/&gt;Output FB]
@@ -655,7 +674,13 @@ window.Quarto = {
     style A fill:#ffe1e1
     style B fill:#fff4e1
     style C fill:#e1f5ff
-    style D fill:#e1ffe1</code></pre>
+    style D fill:#e1ffe1
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
 <p><strong>ECB (Electronic CodeBook):</strong></p>
 <p><span class="math display">\[C_i = E_K(P_i)\]</span></p>
 <p>⚠️ Identical blocks → encrypted identically (weak security)</p>
@@ -952,7 +977,12 @@ window.Quarto = {
 <section id="key-concepts-6" class="level3">
 <h3 class="anchored" data-anchor-id="key-concepts-6">🎯 Key Concepts</h3>
 <p><strong>Diffie-Hellman:</strong></p>
-<pre class="mermaid"><code>sequenceDiagram
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">sequenceDiagram
     participant Alice
     participant Bob
     
@@ -963,7 +993,13 @@ window.Quarto = {
     Bob-&gt;&gt;Alice: αʸ mod p
     Alice-&gt;&gt;Alice: K = (αʸ)ˣ mod p
     Bob-&gt;&gt;Bob: K = (αˣ)ʸ mod p
-    Note over Alice,Bob: Shared key: K = αˣʸ mod p</code></pre>
+    Note over Alice,Bob: Shared key: K = αˣʸ mod p
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
 <p><strong>Man-In-The-Middle attack on DH:</strong> Intercept and replace exchanges</p>
 <p><strong>Security Properties:</strong></p>
 <ul>
