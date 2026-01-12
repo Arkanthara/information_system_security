@@ -879,6 +879,6 @@
     "href": "exercices.html#express-cheat-sheet",
     "title": "ISS",
     "section": "📋 Express Cheat Sheet",
-    "text": "📋 Express Cheat Sheet\nArithmetic: \\(a^{\\Phi(n)} \\equiv 1 \\mod n\\) | Generator if \\(\\text{ord}(g)=\\Phi(n)\\)\nEntropy: \\(H=\\log_2(n)\\) if equiprobable | Max when uniform\nCaesar: \\(E(x)=(x+k) \\mod 26\\) | Breaking: 26 tries\nVigenère: IC for length, frequencies for key\nBlocks: ECB simple, CBC chained, CFB/OFB feedback | Function must be bijective\nRSA: \\(c=m^e\\), \\(m=c^d\\) | \\(ed \\equiv 1 \\mod \\Phi(n)\\)\nHash: Preimage &lt; Second preimage &lt; Collision\nDH: \\(K=\\alpha^{xy} \\mod p\\) | Vulnerable to MitM\n\nEnd of revision guide"
+    "text": "📋 Express Cheat Sheet\nArithmetic: \\(a^{\\Phi(n)} \\equiv 1 \\mod n\\) | Generator if \\(\\text{ord}(g)=\\Phi(n)\\)\nEntropy: \\(H=\\log_2(n)\\) if equiprobable | Max when uniform\nCaesar: \\(E(x)=(x+k) \\mod 26\\) | Breaking: 26 tries\nVigenère: IC for length, frequencies for key\nBlocks: ECB simple, CBC chained, CFB/OFB feedback | Function must be bijective\nRSA: \\(c=m^e\\), \\(m=c^d\\) | \\(ed \\equiv 1 \\mod \\Phi(n)\\)\nHash: Preimage &lt; Second preimage &lt; Collision\nDH: \\(K=\\alpha^{xy} \\mod p\\) | Vulnerable to MitM"
   }
 ]
