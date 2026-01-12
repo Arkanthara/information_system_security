@@ -1,5 +1,3 @@
-# Sécurité des Systèmes d'Information - Questions d'Examen - Janvier 2026
-
 ## 1. Authentification Biométrique (Reconnaissance Faciale)
 
 ### Question
