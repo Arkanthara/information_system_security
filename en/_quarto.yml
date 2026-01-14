@@ -7,15 +7,6 @@ website:
   navbar:
     # background: primary
     search: true
-    left:
-      - text: Course
-        file: index.qmd
-      - text: Exercises
-        file: exercices.qmd
-      - text: Presentations
-        file: presentations.qmd
-    
-    # Right side for language selector
     right:
       - text: Language
         icon: globe
@@ -24,12 +15,23 @@ website:
             href: index.html
           - text: "French"
             href: fr/index.html
-
-
+  sidebar:
+    style: docked
+    search: true
+    
+    contents:
+      - section: "Course"
+        contents: "ch*.qmd"
+      - text: "Exercises"
+        file: exercices.qmd
+      - text: "Presentations"
+        file: presentations.qmd
 
 format:
   html:
     theme:
       light: flatly
       dark: darkly
+    toc: true
+  pdf:
     toc: true

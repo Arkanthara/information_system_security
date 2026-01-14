@@ -9,14 +9,6 @@ website:
   navbar:
     # background: primary
     search: true
-    left:
-      - text: Cours
-        file: index.qmd
-      - text: Exercices
-        file: exercices.qmd
-      - text: Présentations
-        file: presentations.qmd
-    
     # Right side for language selector
     right:
       - text: Langage
@@ -27,6 +19,17 @@ website:
           - text: "Français"
             href: index.html
 
+  sidebar:
+    style: docked
+    search: true
+    
+    contents:
+      - section: "Cours"
+        contents: "ch*.qmd"
+      - text: "Exercices"
+        file: exercices.qmd
+      - text: "Présentations"
+        file: presentations.qmd
 
 
 format:
@@ -34,4 +37,6 @@ format:
     theme:
       light: flatly
       dark: darkly
+    toc: true
+  pdf:
     toc: true
