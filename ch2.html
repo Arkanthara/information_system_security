@@ -1,0 +1,1443 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>ch2 – ISS</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b758ccaa5987ceb1b75504551e579abf.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-96c1bb8b336142dcc39f931773fab1b9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-9ee82e006983bafa07c9ac29a901142c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-96c1bb8b336142dcc39f931773fab1b9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">ISS</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-language" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="bi bi-globe" role="img">
+</i> 
+ <span class="menu-text">Language</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-language">    
+        <li>
+    <a class="dropdown-item" href="./index.html">
+ <span class="dropdown-text">English</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./fr/index.html">
+ <span class="dropdown-text">French</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch1.html">Course</a></li><li class="breadcrumb-item"><a href="./ch2.html">Basic Cryptography Concepts</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Course</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch2.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Basic Cryptography Concepts</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Symmetric Cryptography</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Asymmetric Cryptography (Public Key Cryptography)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cryptographic Hash Functions and MACs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Digital Signatures</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Authentication</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Key Establishment Protocols (KEP)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch9.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Trusted Third Parties (TTP) and Certification</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./exercices.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercises</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./presentations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Presentations</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#basic-cryptography-concepts" id="toc-basic-cryptography-concepts" class="nav-link active" data-scroll-target="#basic-cryptography-concepts">Basic Cryptography Concepts</a>
+  <ul class="collapse">
+  <li><a href="#kerckhoffs-principle" id="toc-kerckhoffs-principle" class="nav-link" data-scroll-target="#kerckhoffs-principle">Kerckhoffs’ Principle</a></li>
+  <li><a href="#classification-of-encryption-systems" id="toc-classification-of-encryption-systems" class="nav-link" data-scroll-target="#classification-of-encryption-systems">Classification of Encryption Systems</a>
+  <ul class="collapse">
+  <li><a href="#unconditional-security" id="toc-unconditional-security" class="nav-link" data-scroll-target="#unconditional-security">Unconditional Security</a></li>
+  <li><a href="#as-hard-as-equivalent-provable-security" id="toc-as-hard-as-equivalent-provable-security" class="nav-link" data-scroll-target="#as-hard-as-equivalent-provable-security">As hard as / equivalent / provable security</a></li>
+  <li><a href="#computational-security" id="toc-computational-security" class="nav-link" data-scroll-target="#computational-security">Computational Security</a></li>
+  </ul></li>
+  <li><a href="#entropy" id="toc-entropy" class="nav-link" data-scroll-target="#entropy">Entropy</a>
+  <ul class="collapse">
+  <li><a href="#properties" id="toc-properties" class="nav-link" data-scroll-target="#properties">Properties</a></li>
+  <li><a href="#interpretation" id="toc-interpretation" class="nav-link" data-scroll-target="#interpretation">Interpretation</a></li>
+  <li><a href="#conditional-entropy" id="toc-conditional-entropy" class="nav-link" data-scroll-target="#conditional-entropy">Conditional Entropy</a></li>
+  </ul></li>
+  <li><a href="#attacks-on-encryption-systems" id="toc-attacks-on-encryption-systems" class="nav-link" data-scroll-target="#attacks-on-encryption-systems">Attacks on Encryption Systems</a></li>
+  <li><a href="#oracles-and-security-models" id="toc-oracles-and-security-models" class="nav-link" data-scroll-target="#oracles-and-security-models">Oracles and Security Models</a>
+  <ul class="collapse">
+  <li><a href="#random-oracles-and-security-models" id="toc-random-oracles-and-security-models" class="nav-link" data-scroll-target="#random-oracles-and-security-models">Random Oracles and Security Models</a></li>
+  <li><a href="#encryption-decryption-and-signature-oracles" id="toc-encryption-decryption-and-signature-oracles" class="nav-link" data-scroll-target="#encryption-decryption-and-signature-oracles">Encryption, Decryption and Signature Oracles</a></li>
+  <li><a href="#indistinguishability-and-semantic-security-ind-cpa" id="toc-indistinguishability-and-semantic-security-ind-cpa" class="nav-link" data-scroll-target="#indistinguishability-and-semantic-security-ind-cpa">Indistinguishability and Semantic Security (IND-CPA)</a></li>
+  <li><a href="#probabilistic-encryption-and-oaep" id="toc-probabilistic-encryption-and-oaep" class="nav-link" data-scroll-target="#probabilistic-encryption-and-oaep">Probabilistic Encryption and OAEP</a></li>
+  </ul></li>
+  <li><a href="#history-of-cryptography-and-unconditional-security" id="toc-history-of-cryptography-and-unconditional-security" class="nav-link" data-scroll-target="#history-of-cryptography-and-unconditional-security">History of Cryptography and Unconditional Security</a>
+  <ul class="collapse">
+  <li><a href="#historical-encryption-systems" id="toc-historical-encryption-systems" class="nav-link" data-scroll-target="#historical-encryption-systems">Historical Encryption Systems</a></li>
+  <li><a href="#the-one-time-pad-otp" id="toc-the-one-time-pad-otp" class="nav-link" data-scroll-target="#the-one-time-pad-otp">The One-Time Pad (OTP)</a></li>
+  <li><a href="#steganography" id="toc-steganography" class="nav-link" data-scroll-target="#steganography">Steganography</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="ch2.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch1.html">Course</a></li><li class="breadcrumb-item"><a href="./ch2.html">Basic Cryptography Concepts</a></li></ol></nav></header>
+
+
+
+
+
+<section id="basic-cryptography-concepts" class="level1">
+<h1>Basic Cryptography Concepts</h1>
+<ul>
+<li>Introduction to the <strong>fundamental concepts</strong> of cryptography.</li>
+<li>Presents <strong>security principles</strong>, <strong>system types</strong>, and <strong>attack models</strong>.</li>
+<li>Includes <strong>historical systems</strong> and complementary techniques.</li>
+</ul>
+<section id="kerckhoffs-principle" class="level2">
+<h2 class="anchored" data-anchor-id="kerckhoffs-principle">Kerckhoffs’ Principle</h2>
+<ul>
+<li>Fundamental principle: <strong>security relies solely on the key</strong>, not on the secrecy of the algorithm.</li>
+<li>The system must remain <strong>secure even if the algorithm is public</strong>.</li>
+<li>The key must be <strong>easily modifiable</strong> and the system <strong>simple to use</strong>.</li>
+<li>Explicit rejection of <strong>security through obscurity</strong>.</li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Ultra-summary
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>Security based on the key</li>
+<li>Public algorithm</li>
+<li>No security through obscurity</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Original version
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<section id="kerckhoffs-principle-1" class="level2 callout-body-container callout-body">
+<h2 class="anchored" data-anchor-id="kerckhoffs-principle-1">Kerckhoffs’ Principle</h2>
+<p><strong>Auguste Kerckhoffs</strong> published in <strong>1883</strong> two articles defining <strong>six principles</strong> for military ciphers:</p>
+<ol type="1">
+<li>The system must be <strong>practically, if not mathematically, undecipherable</strong>.</li>
+<li>It must <strong>not require confidentiality</strong> and remain secure even if it falls into enemy hands.</li>
+<li>The <strong>key</strong> must be able to be <strong>memorized, transmitted and modified easily</strong>, without written notes.</li>
+<li>The system must be <strong>compatible with telegraphic communications</strong>.</li>
+<li>It must be <strong>portable</strong> and usable by <strong>a single person</strong>.</li>
+<li>It must be <strong>simple to use</strong>, without complex procedures or excessive constraints.</li>
+</ol>
+<p>Kerckhoffs stated as early as the <strong>19th century</strong> that security must be <strong>mathematically demonstrable</strong> and that <strong>there is no security through obscurity</strong>.</p>
+</section>
+</div>
+</div>
+</section>
+<section id="classification-of-encryption-systems" class="level2">
+<h2 class="anchored" data-anchor-id="classification-of-encryption-systems">Classification of Encryption Systems</h2>
+<section id="unconditional-security" class="level3">
+<h3 class="anchored" data-anchor-id="unconditional-security">Unconditional Security</h3>
+<p>(<em>unconditional security</em> / <em>perfect secrecy</em>)</p>
+<ul>
+<li>Security <strong>independent of computing power</strong>.</li>
+<li><strong>Ciphertext</strong> provides no information about the <strong>plaintext</strong>.</li>
+<li>Conditions: <strong>key ≥ message</strong>, <strong>never reused</strong>.</li>
+<li>Mostly <strong>theoretical</strong> use.</li>
+<li><strong>Example</strong>: <em>one-time pad</em>.</li>
+</ul>
+</section>
+<section id="as-hard-as-equivalent-provable-security" class="level3">
+<h3 class="anchored" data-anchor-id="as-hard-as-equivalent-provable-security">As hard as / equivalent / provable security</h3>
+<ul>
+<li>Cryptanalysis <strong>as difficult</strong> as a <strong>hard mathematical problem</strong>.</li>
+<li><strong>RSA</strong> and <strong>Rabin</strong> proven equivalent to factorization.
+<ul>
+<li>Demonstrated by <strong>reduction</strong> (<em>reduction proof</em>).</li>
+</ul></li>
+<li>Central but <strong>controversial</strong> concept.</li>
+</ul>
+</section>
+<section id="computational-security" class="level3">
+<h3 class="anchored" data-anchor-id="computational-security">Computational Security</h3>
+<p>(<em>computational security</em> / <em>practical security</em>)</p>
+<ul>
+<li>Security based on <strong>unrealistic cost of attacks</strong>.</li>
+<li>Most used category in practice.</li>
+<li><strong>Examples</strong>: <strong>AES</strong>, <strong>DES</strong>, <strong>IDEA</strong>, <strong>RC4</strong>.</li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Ultra-summary
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Unconditional</strong>: perfect, theoretical (<em>one-time pad</em>).</li>
+<li><strong>Provable security</strong>: equivalence to hard mathematical problem.</li>
+<li><strong>Computational</strong>: secure in practice.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Original version
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><p><strong>Unconditional security</strong> (<em>unconditional security also called <strong>perfect secrecy</strong></em>):</p>
+<ul>
+<li>The security of the encryption system <strong>is not compromised by the computing power</strong> intended for cryptanalysis.</li>
+<li>This category relies on <strong>information theory</strong> published by <strong>Shannon in 1949</strong>.</li>
+<li>More precisely, an encryption system is <strong>unconditionally secure</strong> if the probability of encountering a <strong>plaintext x</strong> after observing the <strong>corresponding ciphertext y</strong> is identical to the a priori probability of encountering plaintext x.</li>
+<li>In other words, having <strong>plaintext/ciphertext pairs (x,y)</strong> provides <strong>no help for cryptanalysis</strong>.</li>
+<li>A necessary condition for a system to be unconditionally secure is that the <strong>key be at least the same size as the message</strong> and, above all, that it <strong>not be reused</strong> to encrypt different messages.</li>
+<li>This condition makes these systems <strong>poorly suited to usual cryptographic needs</strong> and reduces their domain of interest to a <strong>theoretical framework</strong>.</li>
+<li>The classic example is the <strong>one-time pad</strong> invented in <strong>1917</strong> by <strong>J. Mauborgne</strong> and <strong>G. Vernam</strong>.</li>
+<li>Theoretical foundations of unconditionally secure systems + other examples in <strong>[Sti06]</strong>.</li>
+</ul></li>
+<li><p><strong>As hard as / equivalent / provable security</strong></p>
+<ul>
+<li>When it can be proven that cryptanalyzing the algorithm is <strong>as difficult as solving a reputedly hard mathematical problem</strong>.</li>
+<li>For example <strong>factorization of large numbers</strong>, calculation of <strong>square roots modulo a composite</strong>, calculation of <strong>discrete logarithms in a finite group</strong>, etc.</li>
+<li>The <strong>Rabin</strong> and <strong>RSA</strong> algorithms (generic case^1) are “proven” <strong>equivalent to factorization</strong>.</li>
+<li>Such a proof is called a “reduction” (<strong>reduction proof</strong>).</li>
+<li>The notion of <strong>provable security</strong> is at the origin of an <strong>important controversy</strong> in the cryptographic world.</li>
+</ul></li>
+<li><p><strong>Computational security</strong> (<em>computational security also called <strong>practical security</strong></em>)</p>
+<ul>
+<li>An encryption system is in this category if the <strong>computational effort needed to “break” it</strong> using the best possible techniques is <strong>beyond</strong> (with a reasonable margin) the computing resources of a hypothetical adversary.</li>
+<li>The vast majority of symmetric encryption systems (<strong>AES, DES, IDEA, RC4</strong>, etc.) are in this category.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="entropy" class="level2">
+<h2 class="anchored" data-anchor-id="entropy">Entropy</h2>
+<ul>
+<li><strong>Entropy</strong> (Shannon, 1948) measures the <strong>effective amount of information</strong> contained in a message.</li>
+<li><strong>Conditional entropy</strong> measures the uncertainty that remains about the <strong>plaintext</strong> after observing the <strong>ciphertext</strong>.</li>
+</ul>
+<section id="properties" class="level3">
+<h3 class="anchored" data-anchor-id="properties">Properties</h3>
+<ul>
+<li><span class="math inline">\(0 \le H(X) \le \log n\)</span></li>
+<li><span class="math inline">\(H(X) = 0\)</span> → no uncertainty</li>
+<li><span class="math inline">\(H(X) = \log n\)</span> → all outcomes equally probable</li>
+</ul>
+</section>
+<section id="interpretation" class="level3">
+<h3 class="anchored" data-anchor-id="interpretation">Interpretation</h3>
+<ul>
+<li>Approximates the <strong>number of bits needed</strong> to encode <span class="math inline">\(X\)</span>.</li>
+<li><strong>Redundancy</strong> = difference between effective encoding and entropy.</li>
+</ul>
+</section>
+<section id="conditional-entropy" class="level3">
+<h3 class="anchored" data-anchor-id="conditional-entropy">Conditional Entropy</h3>
+<ul>
+<li><span class="math inline">\(H(X \mid Y = y) = - \sum_{x} P(X=x \mid Y=y) \log P(X=x \mid Y=y)\)</span></li>
+<li><span class="math inline">\(H(X \mid Y) = \sum_y P(Y=y) H(X \mid Y=y)\)</span></li>
+<li>Measures the remaining uncertainty about the <strong>plaintext</strong> after observing the <strong>ciphertext</strong>.</li>
+</ul>
+<hr>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Ultra-summary
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Entropy</strong>: amount of information in a message.</li>
+<li><strong>Conditional entropy</strong>: uncertainty about plaintext after ciphertext.</li>
+<li><strong>Redundancy</strong>: difference between effective encoding and entropy.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Original version
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>An essential definition in cryptography is the <strong>effective</strong> amount of information contained in a message.</li>
+<li>For example, days of the week (<em>Monday</em>, …, <em>Sunday</em>) can intuitively be encoded as character strings of length (<span class="math inline">\(\le \text{len}(\text{``Wednesday''})\)</span>), i.e., <span class="math inline">\((8 \times 8 = 64)\)</span> bits. However, the effective amount of information of the variable <em>day of the week</em> can be optimally encoded on <strong>3 bits</strong> (since <span class="math inline">\((2^3 = 8)\)</span> is sufficient to represent the 7 possible variations).</li>
+<li><strong>Entropy</strong> (Shannon, 1948) is the mathematical formalization of this definition.</li>
+</ul>
+<section id="formal-definition" class="level3">
+<h3 class="anchored" data-anchor-id="formal-definition">Formal Definition</h3>
+<p>Let <span class="math inline">\(X\)</span> be a random variable with a finite set of possible values <span class="math inline">\({x_1, x_2, \dots, x_n}\)</span>, such that <span class="math inline">\(P(X=x_i) = p_i\)</span>, with <span class="math inline">\(0 \le p_i \le 1\)</span> and <span class="math inline">\(\sum p_i = 1\)</span>. The entropy of <span class="math inline">\(X\)</span>, denoted <span class="math inline">\(H(X)\)</span>, is defined by</p>
+<p><span class="math inline">\(H(X) = - \sum_{i=1}^{n} p_i \log p_i = \sum_{i=1}^{n} p_i \log \left(\frac{1}{p_i}\right)\)</span></p>
+<p>By convention: <span class="math inline">\(p_i \log p_i = 0\)</span> if <span class="math inline">\(p_i = 0\)</span>. All logarithms are in <strong>base 2</strong>.</p>
+</section>
+<section id="interpretation-1" class="level3">
+<h3 class="anchored" data-anchor-id="interpretation-1">Interpretation</h3>
+<ul>
+<li>Approximation of the number of bits needed to encode the elements of <span class="math inline">\(X\)</span>.</li>
+<li><strong>Redundancy</strong> is the difference between the effective encoding and entropy.</li>
+</ul>
+</section>
+<section id="properties-1" class="level3">
+<h3 class="anchored" data-anchor-id="properties-1">Properties</h3>
+<ol type="1">
+<li><span class="math inline">\(0 \le H(X) \le \log n\)</span></li>
+<li><span class="math inline">\(H(X) = 0 \iff \exists i : p_i = 1, p_j = 0 \ \forall j \ne i\)</span></li>
+<li><span class="math inline">\(H(X) = \log n \iff p_i = 1/n \ \forall i\)</span></li>
+</ol>
+</section>
+<section id="conditional-entropy-1" class="level3">
+<h3 class="anchored" data-anchor-id="conditional-entropy-1">Conditional Entropy</h3>
+<ul>
+<li><span class="math inline">\(H(X \mid Y = y) = - \sum_{x} P(X=x \mid Y=y) \log P(X=x \mid Y=y)\)</span>,</li>
+<li><span class="math inline">\(H(X \mid Y) = \sum_y P(Y=y) H(X \mid Y=y)\)</span></li>
+</ul>
+<p><em>Measures the uncertainty about <span class="math inline">\(X\)</span> (plaintext) after having observed <span class="math inline">\(Y\)</span> (ciphertext).</em></p>
+</section>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="attacks-on-encryption-systems" class="level2">
+<h2 class="anchored" data-anchor-id="attacks-on-encryption-systems">Attacks on Encryption Systems</h2>
+<ul>
+<li><strong>Ciphertext-only</strong>: Adversary has only the <strong>ciphertext</strong>.</li>
+<li><strong>Known-plaintext</strong>: Adversary has <strong>plaintext/ciphertext pairs</strong>.</li>
+<li><strong>Chosen-plaintext</strong>: Adversary <strong>chooses</strong> the <strong>plaintext</strong> and see the ciphertext (and tries to find the plaintext for other messages).</li>
+<li><strong>Adaptive chosen-plaintext</strong>: <strong>depends on</strong> the <strong>received</strong> ciphertexts.</li>
+<li><strong>Chosen-ciphertext</strong>: Adversary <strong>chooses</strong> the <strong>ciphertext</strong> and obtains the plaintext (aims to find the key).</li>
+<li><strong>Adaptive Chosen-ciphertext</strong>: <strong>Chosen-ciphertext</strong> depends on the received plaintexts.</li>
+</ul>
+</section>
+<section id="oracles-and-security-models" class="level2">
+<h2 class="anchored" data-anchor-id="oracles-and-security-models">Oracles and Security Models</h2>
+<section id="random-oracles-and-security-models" class="level3">
+<h3 class="anchored" data-anchor-id="random-oracles-and-security-models">Random Oracles and Security Models</h3>
+<ul>
+<li><strong>Random Oracle</strong>: A theoretical “perfect” function that returns a uniform and random value for each new input, but remains deterministic for an input already seen.</li>
+<li><strong>ROM (Random Oracle Model)</strong>: Mathematical proof framework using this ideal oracle as a substitute for hash functions.</li>
+<li><strong>Standard Model</strong>: Framework where security relies solely on the adversary’s computing power against real algorithms.</li>
+<li><strong>Limit</strong>: A security proof in ROM does not guarantee absolute security in the real world (with SHA-256, etc.).</li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Original version
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>A <strong>random oracle</strong> is an abstract entity accessible to legitimate parties and adversaries.</p>
+<ul>
+<li><strong>Behavior</strong>: It responds to input queries <span class="math inline">\(x\)</span> with perfectly random responses <span class="math inline">\(Orc(x)\)</span>.</li>
+<li><strong>Determinism</strong>: The only exception lies in previously processed inputs (<span class="math inline">\(x_1, x_2, \dots, x_n\)</span>). If <span class="math inline">\(x_1' = x_1\)</span>, then <span class="math inline">\(Orc(x_1') = Orc(x_1)\)</span>.</li>
+<li><strong>Modeling</strong>: It is modeled by a function <span class="math inline">\(Orc : X \to Y\)</span> where <span class="math inline">\(\forall x \in X, \Pr(Orc(x) = y) = \frac{1}{|Y|}\)</span>.</li>
+<li><strong>Utility</strong>: It behaves like an <strong>“ideal” cryptographic hash function</strong>, a valuable tool for proving security in the <strong>Random Oracle Model</strong>.</li>
+<li><strong>Comparison</strong>: The <strong>standard model</strong> limits adversaries by computational factors. A protocol secure in the random oracle model can become vulnerable if used with a “real” hash function (SHA-1, SHA-256).</li>
+</ul>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="encryption-decryption-and-signature-oracles" class="level3">
+<h3 class="anchored" data-anchor-id="encryption-decryption-and-signature-oracles">Encryption, Decryption and Signature Oracles</h3>
+<ul>
+<li><strong>Function</strong>: Entities that perform operations (encrypt/sign) for the adversary using secret keys without ever revealing them.</li>
+<li><strong>Symmetric cryptography</strong>: The oracle provides <span class="math inline">\(E_k(x)\)</span> or <span class="math inline">\(D_k(y)\)</span>.</li>
+<li><strong>Asymmetric cryptography</strong>: The oracle is crucial for private operations (decryption/signature), as public operations are already freely accessible.</li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Original version: Operational Oracles
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>An <strong>encryption/decryption/signature oracle</strong> is an abstract entity offering an “on-demand” service.</p>
+<ul>
+<li><strong>Key access</strong>: It uses the <strong>same keys as the legitimate owners</strong> (symmetric and asymmetric systems) without disclosing them.</li>
+<li><strong>Symmetric primitives</strong>: For a primitive <span class="math inline">\(E\)</span> and a key <span class="math inline">\(k\)</span>, it returns <span class="math inline">\(y = E_k(x)\)</span> or the corresponding plaintext <span class="math inline">\(x\)</span>.</li>
+<li><strong>Public key systems</strong>: The oracle is only needed for operations with the <strong>private key</strong> (<span class="math inline">\(priv_k\)</span>).
+<ul>
+<li><strong>Decryption</strong>: returns <span class="math inline">\(x\)</span> such that <span class="math inline">\(E'_{pubk}(x) = y\)</span>.</li>
+<li><strong>Signature</strong>: For a system <span class="math inline">\(S\)</span>, it returns <span class="math inline">\(y = S_{privk}(x)\)</span>.</li>
+</ul></li>
+<li><strong>Attacks</strong>: The attack models using <strong>chosen plaintext</strong> (CPA) and <strong>chosen ciphertext</strong> (CCA) rely on making these oracles available to the adversary.</li>
+</ul>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="indistinguishability-and-semantic-security-ind-cpa" class="level3">
+<h3 class="anchored" data-anchor-id="indistinguishability-and-semantic-security-ind-cpa">Indistinguishability and Semantic Security (IND-CPA)</h3>
+<ul>
+<li><strong>Property</strong>: An adversary must not be able to distinguish the ciphertexts of two different plaintext messages.</li>
+<li><strong>IND-CPA (Indistinguishability under Chosen Plaintext Attack)</strong>: If the adversary guesses the correct message only with a probability of <span class="math inline">\(1/2 + \epsilon\)</span>, the system is considered secure.</li>
+<li><strong>Semantic Security</strong>: Equivalent to IND-CPA, it ensures that no useful information leaks from the ciphertext.</li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Original version: Semantic Security
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Ciphertext indistinguishability</strong> guarantees the inability to distinguish the ciphertexts of given plaintexts.</p>
+<ul>
+<li><strong>Experiment (IND-CPA Security Game)</strong>:
+<ol type="1">
+<li>The adversary chooses two messages <span class="math inline">\(M_0\)</span> and <span class="math inline">\(M_1\)</span>.</li>
+<li>The oracle chooses a random index <span class="math inline">\(i \in \{0,1\}\)</span> and returns <span class="math inline">\(c_i = E_k(M_i)\)</span>.</li>
+<li>The adversary can perform other calculations or oracle calls.</li>
+</ol></li>
+<li><strong>IND-CPA Definition</strong>: The system is secure if the adversary’s advantage is <strong>negligible</strong> (<span class="math inline">\(Prob = 1/2 + \epsilon\)</span> with <span class="math inline">\(\epsilon\)</span> small).</li>
+<li><strong>Note</strong>: In public key, the encryption oracle is useless because the adversary already possesses the public key. IND-CPA provides <strong>semantic security</strong>.</li>
+</ul>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="probabilistic-encryption-and-oaep" class="level3">
+<h3 class="anchored" data-anchor-id="probabilistic-encryption-and-oaep">Probabilistic Encryption and OAEP</h3>
+<ul>
+<li><strong>Problem</strong>: Deterministic encryption allows <strong>dictionary attacks</strong> (comparison of known ciphertexts).</li>
+<li><strong>Solution</strong>: Add randomness to the message before encryption so that <span class="math inline">\(E(M)\)</span> is different each time.</li>
+<li><strong>OAEP (Optimal Asymmetric Encryption Padding)</strong>: Standard used with RSA. It combines the message <span class="math inline">\(P\)</span> with a random number <span class="math inline">\(R\)</span> via hash functions <span class="math inline">\(h\)</span> and XOR operations (<span class="math inline">\(\oplus\)</span>).</li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Original version: Determinism vs.&nbsp;Probabilism
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Deterministic</strong> behavior (same inputs = same outputs) creates vulnerabilities.</p>
+<ul>
+<li><strong>Example</strong>: If Alice sends “Yes” or “No”, the adversary can compute <span class="math inline">\(C_{yes} = E_{pub}(``Yes")\)</span> and compare. They can create a <strong>codebook</strong> (dictionary) to identify messages without breaking the key.</li>
+<li><strong>Probabilistic encryption</strong>: Adds randomness. The goal is semantic security for the public key.</li>
+<li><strong>OAEP</strong>: Used in <strong>RSA-PKCS1</strong>. The text <span class="math inline">\(P\)</span> is combined with randomness <span class="math inline">\(R\)</span>:
+<ul>
+<li><span class="math inline">\(M_1 := P \oplus h(R)\)</span></li>
+<li><span class="math inline">\(M_2 := R \oplus h(M_1)\)</span></li>
+<li>Encryption applies to <span class="math inline">\(M_1\)</span> and <span class="math inline">\(M_2\)</span>. During decryption, we recover <span class="math inline">\(R = M_2 \oplus h(M_1)\)</span>, then <span class="math inline">\(P = h(R) \oplus M_1\)</span>.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Ultra-summary
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Random Oracle</strong>: “Ideal” hash function (theoretical model).</li>
+<li><strong>CPA/CCA Oracles</strong>: Simulate access to the secret key to test resistance.</li>
+<li><strong>IND-CPA</strong>: Inability to distinguish two ciphertexts (Semantic Security).</li>
+<li><strong>Probabilistic Encryption</strong>: Essential to counter codebooks (dictionary attacks).</li>
+<li><strong>OAEP</strong>: Padding method adding the necessary randomness to RSA.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="history-of-cryptography-and-unconditional-security" class="level2">
+<h2 class="anchored" data-anchor-id="history-of-cryptography-and-unconditional-security">History of Cryptography and Unconditional Security</h2>
+<section id="historical-encryption-systems" class="level3">
+<h3 class="anchored" data-anchor-id="historical-encryption-systems">Historical Encryption Systems</h3>
+<p>Cryptography was for a long time limited to the sole pursuit of <strong>confidentiality</strong>. Historical systems are based on two fundamental principles: <strong>substitution</strong> and <strong>transposition</strong>.</p>
+<ul>
+<li><strong>Caesar Cipher</strong> (mono-alphabetic substitution): Fixed letter shift. Very vulnerable to <strong>frequency analysis</strong>.</li>
+<li><strong>Vigenère Cipher</strong> (polyalphabetic substitution): Uses a key to vary the shift. More complex, but breakable by identifying the key length.</li>
+<li><strong>Transposition Cipher</strong>: Reorganization of the original text characters according to a permutation defined by a key.</li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Original version: Historical Cryptography
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>For centuries <strong>confidentiality</strong> was the only application of cryptography…</p>
+<ul>
+<li><strong>1st century BC, Caesar Cipher</strong>: <strong>Mono-alphabetic substitution encryption</strong> <span class="math inline">\(e_k(x) = (x + k) \pmod{26}\)</span>, <span class="math inline">\(d_k(y) = (y - k) \pmod{26}\)</span> where <span class="math inline">\(x, y, k \in \mathbb{Z}_{26}\)</span>.
+<ul>
+<li>Example: <span class="math inline">\(E_1(\text{'hello'}) = \text{'ifmmp'}\)</span>.</li>
+<li><strong>Cryptanalysis</strong>: easy, based on <strong>character frequency</strong>.</li>
+</ul></li>
+<li><strong>16th century, Vigenère</strong>: <strong>Polyalphabetic substitution encryption</strong> <span class="math inline">\(e_k(x_1, \dots, x_n) = (x_1 + k_1, \dots, x_m + k_m, x_{m+1} + k_1, \dots) \pmod{26}\)</span>.
+<ul>
+<li><strong>Cryptanalysis</strong>: find the <strong>key length <span class="math inline">\(m\)</span></strong> by identifying repeated ciphertext portions and analyzing separate blocks as in the Caesar Cipher.</li>
+</ul></li>
+<li><strong>Transposition Ciphers</strong> (Porta, 1563): The key defines a <strong>permutation</strong> on the plaintext.</li>
+<li>These techniques are still the basis of modern encryption systems (ex: <strong>Enigma</strong>, qualified by W. Churchill as the secret weapon that won the war).</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="the-one-time-pad-otp" class="level3">
+<h3 class="anchored" data-anchor-id="the-one-time-pad-otp">The One-Time Pad (OTP)</h3>
+<p>The <strong>One-Time Pad</strong> (OTP), or <strong>Vernam cipher</strong>, is the only system proven to be <strong>unconditionally secure</strong> (perfect secrecy).</p>
+<ul>
+<li><strong>Principle</strong>: The message is combined with a key of the same length via the XOR operation (<span class="math inline">\(\oplus\)</span>).</li>
+<li><strong>Unconditional Security</strong>: Observation of the encrypted message provides no information about the plaintext message. Even an adversary with infinite computing power cannot break it.</li>
+<li><strong>Shannon’s Constraints</strong>: The key must be <strong>as long as the message</strong>, purely <strong>random</strong>, and <strong>used only once</strong>.</li>
+<li><strong>Key Reuse</strong>: If a key is reused for two messages, an attacker can eliminate the key by XOR (<span class="math inline">\(y_a \oplus y_b = x_a \oplus x_b\)</span>) and recover the plaintext messages.</li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Original version: The One-Time Pad
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(n \ge 1\)</span> and the spaces <span class="math inline">\(P, C, K\)</span> such that <span class="math inline">\(P, C, K = (\mathbb{Z}_2)^n\)</span>. The encryption and decryption operations of a <strong>one-time pad</strong> (Vernam Cipher) are: <span class="math inline">\(E_k(x_i) = x_i \oplus k_i\)</span> and <span class="math inline">\(D_k(y_i) = y_i \oplus k_i\)</span> for <span class="math inline">\(1 \le i \le n\)</span>.</p>
+<ul>
+<li><strong>Unconditional security</strong>: If <span class="math inline">\(k_i\)</span> are random and independent, observation of ciphertexts does not help cryptanalysis. The <strong>entropy</strong> of <span class="math inline">\(X\)</span> does not decrease: <span class="math inline">\(H(X|C) = H(X)\)</span>.</li>
+<li><strong>Shannon’s Theorem</strong>: Necessary condition: <span class="math inline">\(H(K) \ge H(X)\)</span>. The length of the <strong>random key</strong> must be at least as large as that of the plaintext.</li>
+<li><strong>Key reuse</strong>: <span class="math inline">\(y_a \oplus y_b = x_a \oplus x_b\)</span>. With low-entropy messages, the plaintexts and the key (<span class="math inline">\(k = y_a \oplus x_a\)</span>) can be recovered.</li>
+<li>Vulnerable to the <strong>Known Plaintext</strong> attack (if the key is reused).</li>
+<li>Major problem: The <strong>distribution and management</strong> of large keys. Revived by <strong>quantum cryptography</strong> proposing confidential channels for unlimited-length key distribution.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="steganography" class="level3">
+<h3 class="anchored" data-anchor-id="steganography">Steganography</h3>
+<p>In contrast to cryptography, which makes the message unreadable, <strong>steganography</strong> conceals the very existence of the message.</p>
+<ul>
+<li><strong>Method</strong>: Use a “subliminal channel” (an innocent medium like an image or a banal text).</li>
+<li><strong>Modern technique</strong>: Insertion of data into the <strong>least significant bits</strong> (LSB) of multimedia files, allowing the hiding of large volumes of data without visible alteration.</li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Original version: Steganography
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Steganography</strong> hides a message inside another. Constituent elements:</p>
+<ol type="1">
+<li>A different <strong>physical or logical channel</strong> (subliminal channel).</li>
+<li>A <strong>secret mechanism</strong> to identify this channel.</li>
+</ol>
+<ul>
+<li><strong>Classic examples</strong>: First letters of words in a text, invisible ink.</li>
+<li><strong>Modern example</strong>: Use the <strong>least significant bits</strong> of the frames of a Photo CD.</li>
+<li>For a 2048x3072 image (RGB 24 bits), hiding a message using 1 bit allows storing <strong>2.3 Mb</strong> without deteriorating quality.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Ultra-summary
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-15" class="callout-15-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>History</strong>: Substitution (Caesar/Vigenère) and Transposition (permutation).</li>
+<li><strong>One-Time Pad</strong>: Absolute security if the key is random, unique, and as long as the message (<span class="math inline">\(H(K) \ge H(X)\)</span>).</li>
+<li><strong>Steganography</strong>: Hiding the existence of the message (ex: LSB technique in images).</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

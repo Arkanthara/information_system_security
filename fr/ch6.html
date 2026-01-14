@@ -1,0 +1,1689 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>ch6 – ISS</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b758ccaa5987ceb1b75504551e579abf.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-96c1bb8b336142dcc39f931773fab1b9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-9ee82e006983bafa07c9ac29a901142c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-96c1bb8b336142dcc39f931773fab1b9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">ISS</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-langage" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="bi bi-globe" role="img">
+</i> 
+ <span class="menu-text">Langage</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-langage">    
+        <li>
+    <a class="dropdown-item" href="./../index.html">
+ <span class="dropdown-text">Anglais</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./index.html">
+ <span class="dropdown-text">Français</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch1.html">Cours</a></li><li class="breadcrumb-item"><a href="./ch6.html">Signatures Digitales</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Cours</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Notions de base en cryptographie</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cryptographie symétrique</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cryptographie Asymétrique (à Clés Publiques)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Fonctions de Hachage Cryptographiques et MACs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch6.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Signatures Digitales</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Authentification</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Protocoles d’Établissement de Clés (KEP)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch9.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tiers de Confiance et Certification (Trusted Third Parties - TTP)</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./exercices.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercices</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./presentations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Présentations</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#signatures-digitales" id="toc-signatures-digitales" class="nav-link active" data-scroll-target="#signatures-digitales">Signatures Digitales</a>
+  <ul class="collapse">
+  <li><a href="#introduction-et-définitions" id="toc-introduction-et-définitions" class="nav-link" data-scroll-target="#introduction-et-définitions">Introduction et Définitions</a></li>
+  <li><a href="#cadre-formel-signatures-avec-appendice" id="toc-cadre-formel-signatures-avec-appendice" class="nav-link" data-scroll-target="#cadre-formel-signatures-avec-appendice">Cadre Formel : Signatures avec Appendice</a></li>
+  <li><a href="#cadre-formel-signatures-avec-reconstitution" id="toc-cadre-formel-signatures-avec-reconstitution" class="nav-link" data-scroll-target="#cadre-formel-signatures-avec-reconstitution">Cadre Formel : Signatures avec Reconstitution</a></li>
+  <li><a href="#signature-rsa" id="toc-signature-rsa" class="nav-link" data-scroll-target="#signature-rsa">Signature RSA</a></li>
+  <li><a href="#signatures-aveugles-blind-signatures" id="toc-signatures-aveugles-blind-signatures" class="nav-link" data-scroll-target="#signatures-aveugles-blind-signatures">Signatures Aveugles (Blind Signatures)</a></li>
+  <li><a href="#signature-rabin" id="toc-signature-rabin" class="nav-link" data-scroll-target="#signature-rabin">Signature Rabin</a></li>
+  <li><a href="#signature-elgamal" id="toc-signature-elgamal" class="nav-link" data-scroll-target="#signature-elgamal">Signature ElGamal</a></li>
+  <li><a href="#signatures-et-crypto-monnaies" id="toc-signatures-et-crypto-monnaies" class="nav-link" data-scroll-target="#signatures-et-crypto-monnaies">Signatures et Crypto-monnaies</a></li>
+  <li><a href="#tableau-récapitulatif-des-schémas" id="toc-tableau-récapitulatif-des-schémas" class="nav-link" data-scroll-target="#tableau-récapitulatif-des-schémas">Tableau Récapitulatif des Schémas</a></li>
+  <li><a href="#types-dattaques" id="toc-types-dattaques" class="nav-link" data-scroll-target="#types-dattaques">Types d’Attaques</a></li>
+  </ul></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="ch6.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch1.html">Cours</a></li><li class="breadcrumb-item"><a href="./ch6.html">Signatures Digitales</a></li></ol></nav></header>
+
+
+
+
+
+<section id="signatures-digitales" class="level1">
+<h1>Signatures Digitales</h1>
+<section id="introduction-et-définitions" class="level2">
+<h2 class="anchored" data-anchor-id="introduction-et-définitions">Introduction et Définitions</h2>
+<p>Une <strong>signature digitale</strong> est une chaîne de données associant un message à une entité d’origine, équivalent numérique d’une signature manuscrite.</p>
+<p><strong>Classification :</strong></p>
+<ul>
+<li><strong>Avec appendice</strong> : nécessite le message original pour vérification (ElGamal, DSS)</li>
+<li><strong>Avec reconstitution</strong> : permet de reconstruire le message (RSA, Rabin)</li>
+</ul>
+<p>Les signatures utilisent principalement la <strong>cryptographie asymétrique</strong> pour identifier explicitement une entité.</p>
+<p><strong>arbitrated digital signatures</strong>: technologie symétrique + Thrusted Third Parties (TTP)</p>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Texte original
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Signature digitale</strong> : chaîne de données permettant d’associer un message (sous forme digitale) à une entité d’origine.</p>
+<p><strong>Schéma de signature digitale</strong> : algorithme de génération + algorithme de vérification.</p>
+<p><strong>Procédé de signature</strong> : formatage du message + algorithme de génération de signature.</p>
+<p><strong>Procédé de vérification</strong> : algorithme de vérification + (reconstruction du message).</p>
+<p><strong>Classification des signatures digitales</strong> :</p>
+<ul>
+<li><strong>Signatures digitales avec appendice</strong> qui nécessitent la présence du message original pour vérifier la validité de la signature. Ce sont les plus couramment utilisées. Exemples : ElGamal, DSS.</li>
+<li><strong>Signatures digitales avec reconstitution du message</strong> qui offrent, en plus, la possibilité de reconstruire le message à partir de la signature. Exemples : RSA, Rabin.</li>
+</ul>
+<p>Les signatures digitales sont pour la plupart basées sur la <strong>crypto asymétrique</strong> du fait que la notion clé partagée n’est pas adaptée aux besoins d’identifier une entité de façon explicite.</p>
+<p>Des engagements semblables à ceux obtenus par une signature à clé publique (comme la non-répudiation d’origine) peuvent cependant être obtenus avec la technologie symétrique et des tierces de confiance (Trusted Third Parties ou TTP). Ces méthodes sont nommées : <strong>arbitrated digital signatures</strong>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Révision rapide
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Signature digitale</strong> = chaîne associant message + entité</p>
+<p><strong>Deux types</strong></p>
+<ul>
+<li>avec appendice (nécessite message original)</li>
+<li>avec reconstitution (reconstruit le message)</li>
+</ul>
+<p>Basée sur crypto asymétrique</p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="cadre-formel-signatures-avec-appendice" class="level2">
+<h2 class="anchored" data-anchor-id="cadre-formel-signatures-avec-appendice">Cadre Formel : Signatures avec Appendice</h2>
+<p><strong>Espaces de travail :</strong></p>
+<ul>
+<li><span class="math inline">\(M\)</span> : espace des messages</li>
+<li><span class="math inline">\(M_h\)</span> : messages hashés où <span class="math inline">\(m_h = H(m)\)</span> avec <span class="math inline">\(H\)</span> une fonction de hachage</li>
+<li><span class="math inline">\(S\)</span> : espace des signatures possibles</li>
+</ul>
+<p><strong>Fonctionnement :</strong></p>
+<p>Chaque entité A définit :</p>
+<ul>
+<li><span class="math inline">\(S_A : M_h \rightarrow S\)</span> (application de signature, utilise clé privée)</li>
+<li><span class="math inline">\(V_A : M_h \times S \rightarrow \{\text{vrai}, \text{faux}\}\)</span> (vérification, utilise clé publique)</li>
+</ul>
+<p>Avec <span class="math inline">\(V_A(m_h, s) = \text{vrai}\)</span> si et seulement si <span class="math inline">\(S_A(m_h) = s\)</span></p>
+<p><strong>Propriétés essentielles :</strong></p>
+<ul>
+<li><span class="math inline">\(S_A\)</span> et <span class="math inline">\(V_A\)</span> faciles à calculer avec les bonnes clés</li>
+<li>Impossible de trouver <span class="math inline">\((m', s')\)</span> valide sans la clé privée de A</li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Texte original
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>On admet que chaque entité a une clé privée pour signer des messages et une copie authentique des clés publiques des correspondants.</p>
+<p><strong>Notation :</strong> - M : Espace de messages - <span class="math inline">\(M_h\)</span> : <span class="math inline">\(m_h = H(m)\)</span> avec <span class="math inline">\(m \in M\)</span>, <span class="math inline">\(m_h \in M_h\)</span> et <span class="math inline">\(H\)</span> une hash function - S : Espace des valeurs pouvant être obtenues par un procédé de signature</p>
+<p><strong>Description :</strong></p>
+<p>Chaque entité définit une application injective <span class="math inline">\(S_A : M_h \rightarrow S\)</span> (ie. la signature)</p>
+<p>L’application <span class="math inline">\(S_A\)</span> donne lieu à une application <span class="math inline">\(V_A\)</span> : <span class="math inline">\(V_A : M_h \times S \rightarrow \{\text{vrai}, \text{faux}\}\)</span> (ie. la vérification)</p>
+<p>tel que <span class="math inline">\(\forall m_h \in M_h\)</span>, <span class="math inline">\(s \in S\)</span>, on a : <span class="math inline">\(V_A(m_h, s) = \text{vrai}\)</span> si <span class="math inline">\(S_A(m_h) = s\)</span> et <span class="math inline">\(V_A(m_h, s) = \text{faux}\)</span> sinon</p>
+<p>Les opérations <span class="math inline">\(S_A\)</span> nécessitent la clé privée de A alors que les opérations <span class="math inline">\(V_A\)</span> utilisent la clé publique de A.</p>
+<p><strong>Quelques propriétés simples :</strong></p>
+<ul>
+<li>Les opérations <span class="math inline">\(S_A\)</span> et <span class="math inline">\(V_A\)</span> doivent être faciles à calculer (en ayant les clés corresp.)</li>
+<li>Il est impossible (calculatoirement) pour une entité n’ayant pas la clé privée de A de trouver un <span class="math inline">\(m'\)</span> et un <span class="math inline">\(s'\)</span> avec <span class="math inline">\(m' \in M\)</span> et <span class="math inline">\(s' \in S\)</span> tel que <span class="math inline">\(V_A(m'_h, s') = \text{vrai}\)</span> avec <span class="math inline">\(m'_h = H(m')\)</span>.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Révision rapide
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Signature : <span class="math inline">\(S_A(m_h) = s\)</span> (clé privée).</p>
+<p>Vérification : <span class="math inline">\(V_A(m_h, s)\)</span> (clé publique).</p>
+<p>Impossible de forger sans clé privée.</p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="cadre-formel-signatures-avec-reconstitution" class="level2">
+<h2 class="anchored" data-anchor-id="cadre-formel-signatures-avec-reconstitution">Cadre Formel : Signatures avec Reconstitution</h2>
+<p><strong>Espaces additionnels :</strong></p>
+<ul>
+<li><span class="math inline">\(M_S\)</span> : espace sur lequel s’applique la signature</li>
+<li><span class="math inline">\(R : M \rightarrow M_S\)</span> : fonction de redondance (injective, inversible, publique)</li>
+<li><span class="math inline">\(M_R = \text{Im}(R)\)</span> : image de <span class="math inline">\(R\)</span></li>
+</ul>
+<p><strong>Fonctionnement :</strong></p>
+<ul>
+<li>Signature : <span class="math inline">\(S_A : M_S \rightarrow S\)</span> (injective)</li>
+<li>Vérification : <span class="math inline">\(V_A : S \rightarrow M_S\)</span> avec <span class="math inline">\(V_A \circ S_A = \text{Identité}\)</span></li>
+</ul>
+<p><strong>Génération :</strong></p>
+<ol type="1">
+<li>Calculer <span class="math inline">\(m_R = R(m)\)</span> et <span class="math inline">\(s = S_A(m_R)\)</span></li>
+<li>Publier <span class="math inline">\(s\)</span> comme signature de A sur <span class="math inline">\(m\)</span></li>
+</ol>
+<p><strong>Vérification :</strong></p>
+<ol type="1">
+<li>Calculer <span class="math inline">\(m_R = V_A(s)\)</span> avec clé publique</li>
+<li>Vérifier <span class="math inline">\(m_R \in M_R\)</span> (sinon rejeter)</li>
+<li>Reconstituer <span class="math inline">\(m = R^{-1}(m_R)\)</span></li>
+</ol>
+<p><strong>Fonction de redondance :</strong></p>
+<p>Essentielle pour la sécurité. Si <span class="math inline">\(M_R = M_S\)</span>, il devient trivial de forger des signatures.</p>
+<p><strong>Exemple :</strong> <span class="math inline">\(R(m) = m \parallel m\)</span> (concaténation). Probabilité de forger : <span class="math inline">\((1/2)^n\)</span> pour un message de <span class="math inline">\(n\)</span> bits.</p>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Texte original
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Notation :</strong> en plus des définitions précédentes, on a :</p>
+<p><span class="math inline">\(M_S\)</span> : L’espace des éléments sur lesquels peut s’appliquer une signature.</p>
+<p><span class="math inline">\(R\)</span> : Une application injective : <span class="math inline">\(M \rightarrow M_S\)</span>, appelée fonction de redondance. Elle doit être inversible et publique.</p>
+<p><span class="math inline">\(M_R = \text{Im}(R)\)</span></p>
+<p><strong>Description :</strong></p>
+<p>Chaque entité définit une application injective <span class="math inline">\(S_A : M_S \rightarrow S\)</span> (ie. la signature)</p>
+<p>L’application <span class="math inline">\(S_A\)</span> donne lieu à une application <span class="math inline">\(V_A : S \rightarrow M_S\)</span> (ie. la vérification) tel que <span class="math inline">\(V_A \circ S_A = \text{Identité}\)</span> sur <span class="math inline">\(M_S\)</span></p>
+<p>A noter que la vérification s’effectue sans la clé privée de A</p>
+<p><strong>Génération de signature :</strong> 1. Calculer <span class="math inline">\(m_R = R(m)\)</span> et <span class="math inline">\(s = S_A(m_R)\)</span> 2. Rendre publique <span class="math inline">\(s\)</span> en tant que signature de A sur <span class="math inline">\(m\)</span>. Ceci permet aux autres entités de vérifier la signature et reconstituer <span class="math inline">\(m\)</span>.</p>
+<p><strong>Vérification :</strong> 1. Calculer <span class="math inline">\(m_R = V_A(s)\)</span> (avec la clé publique de A) 2. Vérifier que <span class="math inline">\(m_R \in M_R\)</span> (sinon rejeter la signature) 3. Reconstituer <span class="math inline">\(m\)</span> en calculant : <span class="math inline">\(R^{-1}(m_R)\)</span></p>
+<p><strong>Propriétés :</strong></p>
+<ul>
+<li>Les opérations <span class="math inline">\(S_A\)</span> et <span class="math inline">\(V_A\)</span> doivent être faciles à calculer (en ayant les clés corresp.)</li>
+<li>Il est impossible (calculatoirement) pour une entité n’ayant pas la clé privée de A de trouver un <span class="math inline">\(s' \in S\)</span> tel que <span class="math inline">\(V_A(s') \in M_R\)</span></li>
+</ul>
+<p><strong>Remarques sur la fonction de redondance :</strong></p>
+<ul>
+<li>Le choix d’une fonction de redondance est <strong>essentiel pour la sécurité</strong> du système.</li>
+<li>Si <span class="math inline">\(M_R = M_S\)</span> et <span class="math inline">\(R\)</span> et <span class="math inline">\(S_A\)</span> sont des bijections respectivement de <span class="math inline">\(M\)</span> dans <span class="math inline">\(M_R\)</span> et de <span class="math inline">\(M_S\)</span> dans <span class="math inline">\(S\)</span>, alors <span class="math inline">\(M\)</span> et <span class="math inline">\(S\)</span> ont une taille identique et, par conséquent, il est trivial de forger des messages portant la signature de A.</li>
+</ul>
+<p><strong>Exemple de fonction de redondance :</strong> soit <span class="math inline">\(M = \{m : m \in \{0,1\}^n\}\)</span> (n taille du message) et <span class="math inline">\(M_S = \{t : t \in \{0,1\}^{2n}\}\)</span>. Soit <span class="math inline">\(R : M \rightarrow M_S\)</span> tel que <span class="math inline">\(R(m) = m \parallel m\)</span> (<span class="math inline">\(\parallel\)</span> étant la concaténation de 2 messages). La probabilité de tomber sur un tel message en essayant de forger un message à partir d’une signature est de : <span class="math inline">\(|M_R| / |M_S| = (1/2)^n\)</span>, ce qui est négligeable pour des grands messages.</p>
+<p><strong>Attention !</strong> : Une fonction de redondance adaptée pour un schéma de signature digitale peut provoquer des failles dans un autre différent !</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Révision rapide
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Avec reconstitution :</strong> Fonction redondance <span class="math inline">\(R(m) = m_R\)</span>.</p>
+<p>Signature <span class="math inline">\(s = S_A(m_R)\)</span>.</p>
+<p>Vérification : <span class="math inline">\(m_R = V_A(s)\)</span>, reconstituer <span class="math inline">\(m = R^{-1}(m_R)\)</span>.</p>
+<p>Redondance cruciale pour sécurité.</p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="signature-rsa" class="level2">
+<h2 class="anchored" data-anchor-id="signature-rsa">Signature RSA</h2>
+<p><strong>Génération des clés :</strong></p>
+<ul>
+<li>Choisir deux grands nombres premiers <span class="math inline">\(p\)</span> et <span class="math inline">\(q\)</span></li>
+<li>Calculer <span class="math inline">\(n = pq\)</span> et <span class="math inline">\(\phi(n) = (p-1)(q-1)\)</span></li>
+<li>Choisir <span class="math inline">\(e\)</span> avec <span class="math inline">\(\text{pgcd}(e, \phi(n)) = 1\)</span></li>
+<li>Calculer <span class="math inline">\(d\)</span> tel que <span class="math inline">\(ed \equiv 1 \pmod{\phi(n)}\)</span></li>
+<li><strong>Clé publique</strong> : <span class="math inline">\((n, e)\)</span> ; <strong>Clé privée</strong> : <span class="math inline">\(d\)</span></li>
+</ul>
+<p><strong>Signature :</strong></p>
+<ol type="1">
+<li>Calculer <span class="math inline">\(m_R = R(m)\)</span> (fonction de redondance)</li>
+<li>Calculer <span class="math inline">\(s = m_R^d \bmod n\)</span></li>
+<li>Envoyer <span class="math inline">\(s\)</span></li>
+</ol>
+<p><strong>Vérification :</strong></p>
+<ol type="1">
+<li>Calculer <span class="math inline">\(m'_R = s^e \bmod n\)</span></li>
+<li>Vérifier <span class="math inline">\(m'_R \in M_R\)</span> (rejeter sinon)</li>
+<li>Reconstituer <span class="math inline">\(m = R^{-1}(m'_R)\)</span></li>
+</ol>
+<p><strong>Variante avec appendice :</strong></p>
+<ul>
+<li><strong>Signature</strong> : <span class="math inline">\(m_h = H(m)\)</span>, puis <span class="math inline">\(s = m_h^d \bmod n\)</span></li>
+<li><strong>Vérification</strong> : <span class="math inline">\(m'_h = s^e \bmod n\)</span>, accepter si <span class="math inline">\(m'_h = H(m)\)</span></li>
+</ul>
+<p><strong>Caractéristiques :</strong></p>
+<ul>
+<li>Signature plus lente que vérification (<span class="math inline">\(d\)</span> grand, <span class="math inline">\(e\)</span> petit)</li>
+<li>Différencier clés signature/encryption</li>
+<li>Vulnérable aux mêmes attaques que RSA encryption</li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Texte original
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Génération des clés :</strong></p>
+<ul>
+<li>Chaque entité (A) crée une paire de clés (publique et privée) comme suit :</li>
+<li>A choisit la taille du modulus <span class="math inline">\(n\)</span> (p.ex. taille<span class="math inline">\((n) = 1024\)</span> ou taille<span class="math inline">\((n) = 2048\)</span>).</li>
+<li>A génère deux nombres premiers <span class="math inline">\(p\)</span> et <span class="math inline">\(q\)</span> de grande taille <span class="math inline">\((n/2)\)</span>.</li>
+<li>A calcule <span class="math inline">\(n := pq\)</span> et <span class="math inline">\(\phi(n) = (p-1)(q-1)\)</span>.</li>
+<li>A génère l’exposant de vérification <span class="math inline">\(e\)</span>, avec <span class="math inline">\(1 &lt; e &lt; \phi(n)\)</span> tel que <span class="math inline">\(\text{pgcd}(e, \phi(n)) = 1\)</span>.</li>
+<li>A calcule l’exposant de signature <span class="math inline">\(d\)</span>, tel que : <span class="math inline">\(ed \equiv 1 \pmod{\phi(n)}\)</span> avec l’algorithme d’Euclide étendu ou avec l’algorithme fast exponentiation.</li>
+<li>Le couple <span class="math inline">\((n,e)\)</span> est la clé publique de A ; <span class="math inline">\(d\)</span> est la clé privée de A.</li>
+</ul>
+<p><strong>Signature :</strong></p>
+<ul>
+<li>A calcule la fonction de redondance du message <span class="math inline">\(m\)</span> : <span class="math inline">\(m_R := R(m)\)</span>.</li>
+<li>A calcule la signature : <span class="math inline">\(s := m_R^d \bmod n\)</span> et envoie <span class="math inline">\(s\)</span> à B.</li>
+</ul>
+<p><strong>Vérification :</strong></p>
+<ul>
+<li>L’entité B obtient <span class="math inline">\((n,e)\)</span>, la clé publique authentique de A.</li>
+<li>B calcule <span class="math inline">\(m'_R = s^e \bmod n\)</span>, vérifie <span class="math inline">\(m'_R \in M_R\)</span> et rejette la signature si <span class="math inline">\(m'_R \notin M_R\)</span></li>
+<li>B retrouve le message correctement signé par A en calculant : <span class="math inline">\(m = R^{-1}(m'_R)\)</span>.</li>
+</ul>
+<p><strong>Remarques :</strong></p>
+<p>La preuve de fonctionnement est identique à celle du procédé d’encryption. L’ordre d’exponentiation n’a pas d’influence puisque : <span class="math display">\[ed \equiv de \equiv 1 \pmod{\phi(n)}\]</span></p>
+<p>Le procédé peut également être utilisé pour produire des <strong>signatures avec appendice</strong> avec les modifications suivantes :</p>
+<p><strong>Signature :</strong> - A utilise une fonction de hachage <span class="math inline">\(H\)</span> et calcule <span class="math inline">\(m_h := H(m)\)</span>. - A calcule la signature de <span class="math inline">\(m_h\)</span> : <span class="math inline">\(s := m_h^d \bmod n\)</span> et envoie le couple <span class="math inline">\((m,s)\)</span> à B.</p>
+<p><strong>Vérification :</strong> - B calcule <span class="math inline">\(m'_h = s^e \bmod n\)</span> et <span class="math inline">\(H(m)\)</span> et vérifie l’égalité <span class="math inline">\(m'_h = H(m)\)</span>. - Si l’égalité est vérifiée, B accepte la signature <span class="math inline">\(s\)</span> de A sur le message M.</p>
+<p>Le calcul de signature est <strong>plus lent</strong> que la vérification à cause de différence de taille entre l’exposant <span class="math inline">\(d\)</span> (taille<span class="math inline">\((d) \approx\)</span> taille<span class="math inline">\((\phi(n))\)</span>) et <span class="math inline">\(e\)</span>.</p>
+<p>Les risques et attaques mentionnés dans le procédé d’encryption s’appliquent également pour la signature.</p>
+<p>Il convient de <strong>différencier les paires de clés d’encryption et de signature</strong> puisqu’elles nécessitent des politiques de stockage, sauvegarde et mise à jour distinctes.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Révision rapide
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>RSA signature :</strong> <span class="math inline">\(s = m_R^d \bmod n\)</span> (privée).</p>
+<p>Vérif : <span class="math inline">\(m'_R = s^e \bmod n\)</span> (publique).</p>
+<p>Avec appendice : <span class="math inline">\(s = H(m)^d \bmod n\)</span>.</p>
+<p>Signature lente, vérif rapide.</p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="signatures-aveugles-blind-signatures" class="level2">
+<h2 class="anchored" data-anchor-id="signatures-aveugles-blind-signatures">Signatures Aveugles (Blind Signatures)</h2>
+<p><strong>Principe :</strong> A envoie une information à B pour signature. À partir de la réponse, A peut calculer la signature de B sur un message différent, que B n’a jamais vu.</p>
+<p><strong>Exploitation de la propriété multiplicative RSA :</strong></p>
+<p><span class="math display">\[(m_1 m_2)^e \equiv m_1^e m_2^e \equiv c_1 c_2 \pmod{n}\]</span></p>
+<p><strong>Fonctions de camouflage :</strong></p>
+<p>Soit <span class="math inline">\(k\)</span> un entier avec <span class="math inline">\(\text{pgcd}(n,k) = 1\)</span> :</p>
+<ul>
+<li><strong>Blinding</strong> : <span class="math inline">\(f(m) = m \cdot k^e \bmod n\)</span></li>
+<li><strong>Unblinding</strong> : <span class="math inline">\(g(m) = k^{-1} \cdot m \bmod n\)</span></li>
+</ul>
+<p>Résultat : <span class="math inline">\(g(S_B(f(m))) = g(S_B(mk^e \bmod n)) = g(m^dk \bmod n) = m^d \bmod n = S_B(m)\)</span></p>
+<p><strong>Protocole :</strong></p>
+<ol type="1">
+<li>A → B : <span class="math inline">\(m' = f(m)\)</span> (message camouflé)</li>
+<li>A ← B : <span class="math inline">\(s' = S_B(m')\)</span> (signature du message camouflé)</li>
+<li>A calcule <span class="math inline">\(g(s')\)</span> et obtient <span class="math inline">\(S_B(m)\)</span> (signature du message original)</li>
+</ol>
+<p><strong>Applications :</strong> Argent électronique anonyme, systèmes de vote électronique.</p>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Texte original
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Schéma inventé par Chaum.</strong></p>
+<p><strong>Idée :</strong> A envoie une information à B pour signature. B retourne à A l’information signée. A partir de cette signature, A peut calculer la signature de B sur un autre message choisi à priori par A. Ceci permet à A d’avoir une signature de B sur un message que B n’a jamais vu (d’où le nom de signature aveugle…).</p>
+<p>En fait il s’agit d’une faille basée sur la <strong>propriété multiplicative de RSA</strong> : <span class="math inline">\((m_1m_2)^e \equiv m_1^e m_2^e \equiv c_1 c_2 \pmod{n}\)</span> qui a été exploitée pour en faire un nouveau procédé de signature.</p>
+<p><strong>Algorithme :</strong> Soit <span class="math inline">\(S_B\)</span> la signature de RSA de B avec <span class="math inline">\((n,e)\)</span> et <span class="math inline">\(d\)</span>, resp. les clés publiques et privées de B. Soit <span class="math inline">\(k\)</span> un entier fixé avec <span class="math inline">\(\text{pgcd}(n,k) = 1\)</span> :</p>
+<p><span class="math inline">\(f : \mathbb{Z}_n \rightarrow \mathbb{Z}_n\)</span> avec <span class="math inline">\(f(m) = m \cdot k^e \bmod n\)</span> (blinding function)</p>
+<p><span class="math inline">\(g : \mathbb{Z}_n \rightarrow \mathbb{Z}_n\)</span> avec <span class="math inline">\(g(m) = k^{-1} \cdot m \bmod n\)</span> (unblinding function)</p>
+<p>ce qui donne :</p>
+<p><span class="math display">\[g(S_B(f(m))) = g(S_B(mk^e \bmod n)) = g(m^dk \bmod n) = m^d \bmod n = S_B(m)\]</span></p>
+<p><strong>Protocole :</strong></p>
+<ul>
+<li>A → B : <span class="math inline">\(m' = f(m)\)</span></li>
+<li>A ← B : <span class="math inline">\(s' = S_B(m')\)</span></li>
+<li>A calcule <span class="math inline">\(g(s')\)</span> et obtient la signature souhaitée en utilisant (*).</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Révision rapide
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Blind signature :</strong> Exploite multiplicativité RSA.</p>
+<p>Camouflage <span class="math inline">\(f(m) = m \cdot k^e\)</span></p>
+<p>Décamouflage <span class="math inline">\(g(m) = k^{-1} \cdot m\)</span>.</p>
+<p>B signe <span class="math inline">\(f(m)\)</span>, A obtient <span class="math inline">\(S_B(m)\)</span> sans que B voie <span class="math inline">\(m\)</span>.</p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="signature-rabin" class="level2">
+<h2 class="anchored" data-anchor-id="signature-rabin">Signature Rabin</h2>
+<p><strong>Génération des clés :</strong></p>
+<ul>
+<li>Générer deux grands nombres premiers <span class="math inline">\(p\)</span> et <span class="math inline">\(q\)</span></li>
+<li>Calculer <span class="math inline">\(n = pq\)</span></li>
+<li><strong>Clé publique</strong> : <span class="math inline">\(n\)</span> ; <strong>Clé privée</strong> : <span class="math inline">\((p, q)\)</span></li>
+</ul>
+<p><strong>Signature :</strong></p>
+<ol type="1">
+<li>Calculer <span class="math inline">\(m_R = R(m)\)</span> (fonction de redondance)</li>
+<li>Calculer <span class="math inline">\(s = \sqrt{m_R} \bmod n\)</span> (racine carrée mod <span class="math inline">\(n\)</span>)</li>
+<li>Envoyer <span class="math inline">\(s\)</span> (une des 4 racines carrées)</li>
+</ol>
+<p><strong>Vérification :</strong></p>
+<ol type="1">
+<li>Calculer <span class="math inline">\(m'_R = s^2 \bmod n\)</span></li>
+<li>Vérifier <span class="math inline">\(m'_R \in M_R\)</span> (rejeter sinon)</li>
+<li>Reconstituer <span class="math inline">\(m = R^{-1}(m'_R)\)</span></li>
+</ol>
+<p><strong>Caractéristiques :</strong></p>
+<ul>
+<li>Basé sur le problème SQROOTP (racines carrées mod composite)</li>
+<li><strong>Provably secure</strong> : équivalent à la factorisation</li>
+<li>Vulnérable aux attaques chosen-ciphertext actives</li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Texte original
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Génération des clés :</strong></p>
+<ul>
+<li>Chaque entité (A) crée une paire de clés (publique et privée) comme suit :</li>
+<li>A génère deux nombres premiers aléatoires <span class="math inline">\(p\)</span> et <span class="math inline">\(q\)</span> de grande taille (len<span class="math inline">\((pq) \geq 1024\)</span>).</li>
+<li>A calcule <span class="math inline">\(n := pq\)</span>.</li>
+<li>La clé publique de A est <span class="math inline">\(n\)</span>, la clé privée de A est <span class="math inline">\((p,q)\)</span>.</li>
+</ul>
+<p><strong>Signature :</strong></p>
+<ul>
+<li>A calcule la fonction de redondance du message <span class="math inline">\(m\)</span> : <span class="math inline">\(m_R := R(m)\)</span>.</li>
+<li>A utilise sa clé privée pour calculer la signature : <span class="math inline">\(s := m_R^{1/2} \bmod n\)</span> en utilisant des algorithmes efficaces pour calculer des racines carrées mod <span class="math inline">\(p\)</span> et mod <span class="math inline">\(q\)</span>.</li>
+<li>A envoie <span class="math inline">\(s\)</span> à B (<span class="math inline">\(s\)</span> est une des 4 racines carrées obtenues).</li>
+</ul>
+<p><strong>Vérification :</strong></p>
+<ul>
+<li>L’entité B obtient <span class="math inline">\(n\)</span>, la clé publique authentique de A.</li>
+<li>B calcule <span class="math inline">\(m'_R = s^2 \bmod n\)</span>, vérifie <span class="math inline">\(m'_R \in M_R\)</span> et rejette la signature si <span class="math inline">\(m'_R \notin M_R\)</span></li>
+<li>B retrouve le message correctement signé par A en calculant : <span class="math inline">\(m = R^{-1}(m'_R)\)</span>.</li>
+</ul>
+<p><strong>Remarques :</strong></p>
+<p>Le procédé de Rabin est basé sur l’<strong>impossibilité de trouver des racines carrées modulo un composite de factorisation inconnue</strong> (problème SQROOTP).</p>
+<p>L’intérêt principal de cet algorithme réside dans le fait qu’il a été <strong>prouvé comme étant équivalent à la factorisation</strong> (SQROOTP ⇔ FACTP). Cet algorithme appartient donc à la catégorie <strong>provably secure</strong> pour toute attaque passive.</p>
+<p>Les <strong>attaques actives</strong> peuvent, dans certains cas, compromettre la sécurité de l’algorithme. Plus précisément, si on monte l’attaque chosen ciphertext (on demande à A de décrypter un ciphertext choisi) suivant :</p>
+<ul>
+<li>L’attaquant M génère un <span class="math inline">\(m\)</span> et envoie à A le ciphertext <span class="math inline">\(c = m^2 \bmod n\)</span>.</li>
+<li>A répond avec une racine <span class="math inline">\(m_x\)</span> parmi les 4 possibles <span class="math inline">\(m_1, m_2, m_3, m_4\)</span>.</li>
+<li>Si <span class="math inline">\(m \not\equiv m_x \pmod{n}\)</span> (probabilité 0.5), M recommence avec un nouveau <span class="math inline">\(m\)</span>.</li>
+<li>Sinon, A calcule <span class="math inline">\(\text{pgcd}(m - m_x, n)\)</span> et obtient ainsi un des deux facteurs de <span class="math inline">\(n\)</span>…</li>
+</ul>
+<p>Cette attaque pourrait être évitée si le procédé exigeait une redondance suffisante dans les plaintexts permettant à A d’identifier sans ambiguïté laquelle des solutions possibles est le plaintext original. Dans ce cas, A répondrait toujours <span class="math inline">\(m\)</span> et jetterait les autres solutions n’ayant pas le niveau de redondance préétabli.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Révision rapide
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Rabin :</strong> <span class="math inline">\(s = \sqrt{m_R} \bmod n\)</span>.</p>
+<p>Vérif : <span class="math inline">\(m'_R = s^2 \bmod n\)</span>.</p>
+<p><strong>Provably secure</strong> (équivalent factorisation).</p>
+<p>Vulnérable attaques actives chosen-ciphertext.</p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="signature-elgamal" class="level2">
+<h2 class="anchored" data-anchor-id="signature-elgamal">Signature ElGamal</h2>
+<p><strong>Génération des clés :</strong></p>
+<ul>
+<li>Générer premier <span class="math inline">\(p\)</span> et générateur <span class="math inline">\(\alpha \in \mathbb{Z}_p^*\)</span></li>
+<li>Générer secret <span class="math inline">\(a\)</span> aléatoire, calculer <span class="math inline">\(y = \alpha^a \bmod p\)</span></li>
+<li><strong>Clé publique</strong> : <span class="math inline">\((p, \alpha, y)\)</span> ; <strong>Clé privée</strong> : <span class="math inline">\(a\)</span></li>
+</ul>
+<p><strong>Signature :</strong></p>
+<ol type="1">
+<li>Calculer <span class="math inline">\(m_h = H(m)\)</span></li>
+<li>Générer <span class="math inline">\(k\)</span> aléatoire avec <span class="math inline">\(\text{pgcd}(k, p-1) = 1\)</span></li>
+<li>Calculer <span class="math inline">\(r = \alpha^k \bmod p\)</span></li>
+<li>Calculer <span class="math inline">\(s = k^{-1}(m_h - ar) \bmod (p-1)\)</span></li>
+<li>Signature : <span class="math inline">\((r, s)\)</span></li>
+</ol>
+<p><strong>Vérification :</strong></p>
+<ol type="1">
+<li>Vérifier <span class="math inline">\(1 \leq r \leq p-2\)</span> (rejeter sinon)</li>
+<li>Calculer <span class="math inline">\(v_1 = y^r r^s \bmod p\)</span></li>
+<li>Calculer <span class="math inline">\(v_2 = \alpha^{H(m)} \bmod p\)</span></li>
+<li>Accepter si <span class="math inline">\(v_1 = v_2\)</span></li>
+</ol>
+<p><strong>Preuve :</strong> Si <span class="math inline">\(s \equiv k^{-1}(m_h - ar) \pmod{p-1}\)</span>, alors <span class="math inline">\(m_h \equiv ar + ks \pmod{p-1}\)</span></p>
+<p>Donc <span class="math inline">\(v_2 = \alpha^{m_h} \equiv \alpha^{ar+ks} \equiv (\alpha^a)^r (\alpha^k)^s \equiv y^r r^s = v_1 \pmod{p}\)</span></p>
+<p><strong>Caractéristiques :</strong></p>
+<ul>
+<li>Fonctionne uniquement avec appendice (hash)</li>
+<li>Base du DSA (Digital Signature Algorithm)</li>
+<li><span class="math inline">\(k\)</span> doit être unique pour chaque signature</li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Texte original
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Génération des clés :</strong></p>
+<ul>
+<li>Chaque entité (A) crée une paire de clés (publique et privée) comme suit :</li>
+<li>A génère un nombre premier <span class="math inline">\(p\)</span> (len<span class="math inline">\((p) \geq 1024\)</span> bits) et un générateur <span class="math inline">\(\alpha\)</span> de <span class="math inline">\(\mathbb{Z}_p^*\)</span>.</li>
+<li>A génère un nombre aléatoire <span class="math inline">\(a\)</span>, tel que <span class="math inline">\(1 \leq a \leq p-2\)</span> et calcule <span class="math inline">\(y := \alpha^a \bmod p\)</span>.</li>
+<li>La clé publique de A est <span class="math inline">\((p, \alpha, y)\)</span>, la clé privée de A est <span class="math inline">\(a\)</span>.</li>
+</ul>
+<p><strong>Signature :</strong></p>
+<ul>
+<li>A utilise une fonction de hachage <span class="math inline">\(H\)</span> et calcule <span class="math inline">\(m_h := H(m)\)</span>.</li>
+<li>A génère un nombre aléatoire <span class="math inline">\(k\)</span> (<span class="math inline">\(1 \leq k \leq p-2\)</span> et <span class="math inline">\(\text{pgcd}(k,p-1) = 1\)</span>) et calcule <span class="math inline">\(k^{-1} \bmod (p-1)\)</span></li>
+<li>A calcule <span class="math inline">\(r := \alpha^k \bmod p\)</span> et ensuite <span class="math inline">\(s := k^{-1}(m_h - ar) \bmod (p-1)\)</span></li>
+<li>La signature de A sur le message <span class="math inline">\(m\)</span> est le couple <span class="math inline">\((r,s)\)</span>.</li>
+</ul>
+<p><strong>Vérification :</strong></p>
+<ul>
+<li>L’entité B obtient <span class="math inline">\((p, \alpha, \alpha^a \bmod p)\)</span>, la clé publique authentique de A.</li>
+<li>B vérifie que <span class="math inline">\(1 \leq r \leq p-2\)</span>, sinon rejette la signature.</li>
+<li>B calcule <span class="math inline">\(v_1 := y^r r^s \bmod p\)</span>.</li>
+<li>B calcule <span class="math inline">\(H(m)\)</span> et <span class="math inline">\(v_2 := \alpha^{H(m)} \bmod p\)</span></li>
+<li>B accepte la signature ssi. <span class="math inline">\(v_1 = v_2\)</span>.</li>
+</ul>
+<p><strong>Remarques :</strong></p>
+<p><strong>Preuve que le schéma fonctionne :</strong> Si <span class="math inline">\(s \equiv k^{-1}(m_h - ar) \pmod{p-1}\)</span>, on a que : <span class="math display">\[m_h \equiv (ar + ks) \pmod{p-1}\]</span> et <span class="math display">\[v_2 = \alpha^{H(m)} \bmod p\]</span></p>
+<p>si, comme on souhaite montrer <span class="math inline">\(m_h = H(m)\)</span>, en réduisant les exposants mod <span class="math inline">\((p-1)\)</span>, on peut réécrire <span class="math inline">\(v_2\)</span> : <span class="math display">\[v_2 \equiv \alpha^{ar+ks} \pmod{p}\]</span></p>
+<p>D’autre part : <span class="math display">\[v_1 = y^r r^s \equiv \alpha^{ar} \alpha^{ks} \equiv \alpha^{ar+ks} \pmod{p}\]</span> c.q.f.d.</p>
+<p>Par construction, le schéma d’ElGamal fonctionne <strong>uniquement avec appendice</strong> (résultat de l’application d’une fonction de hachage). Le schéma de Nyberg-Rueppel introduit une variation permettant la reconstitution du message.</p>
+<p>Le <strong>Digital Signature Algorithm (DSA)</strong>, approuvé par le US National Institute of Standards and Technology est devenu le standard de signature le plus couramment utilisé. Il est construit sur la base d’un dérivé direct du schéma d’ElGamal avec la fonction de hachage SHA-1.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Révision rapide
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>ElGamal :</strong> <span class="math inline">\((r,s)\)</span> avec <span class="math inline">\(r = \alpha^k \bmod p\)</span>, <span class="math inline">\(s = k^{-1}(m_h - ar) \bmod (p-1)\)</span>.</p>
+<p>Vérif : <span class="math inline">\(y^r r^s \stackrel{?}{=} \alpha^{H(m)} \bmod p\)</span>.</p>
+<p>Base de DSA.</p>
+<p><span class="math inline">\(k\)</span> unique crucial.</p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="signatures-et-crypto-monnaies" class="level2">
+<h2 class="anchored" data-anchor-id="signatures-et-crypto-monnaies">Signatures et Crypto-monnaies</h2>
+<p>Les crypto-monnaies utilisent massivement les signatures digitales pour authentifier les transactions.</p>
+<p><strong>Bitcoin et Ethereum :</strong></p>
+<ul>
+<li>Utilisent <strong>ECDSA</strong> (Elliptic Curve Digital Signature Algorithm)</li>
+<li>Dérivé d’ElGamal sur courbes elliptiques</li>
+<li>Sécurité basée sur ECDLP</li>
+</ul>
+<p><strong>Processus de transaction :</strong></p>
+<p>Chaque dépense/transmission nécessite :</p>
+<ul>
+<li>Signature avec la <strong>clé privée du détenteur</strong> actuel</li>
+<li>Le détenteur était le destinataire de la transaction précédente</li>
+<li>Chaque transaction forme une chaîne d’authentification</li>
+</ul>
+<p><strong>Avantages ECDSA :</strong></p>
+<ul>
+<li>Clés plus courtes pour sécurité équivalente</li>
+<li>Calculs plus efficaces</li>
+<li>Adapté aux contraintes des blockchains</li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Texte original
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-15" class="callout-15-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>La plupart des crypto-monnaies se basent sur la cryptographie asymétrique. Le bitcoin p.ex. utilise des signatures digitales pour authentifier ses transactions.</p>
+<p>La dépense ou la transmission de bitcoins nécessite la signature avec la clé privée du détenteur (qui était à son tour le destinataire de la transaction précédente).</p>
+<p>Bitcoin et Ethereum utilisent l’algorithme <strong>ECDSA (Elliptic Curve Digital Signature Algorithm)</strong> dérivé de algorithme de signature de ElGamal sur les courbes elliptiques dont la sécurité repose sur ECDLP.</p>
+<p>[Image : Schéma montrant la chaîne de transactions Bitcoin avec signatures]</p>
+<p>Source Image : Bitcoin: A Peer-to-Peer Electronic Cash System. Satoshi Nakamoto</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Révision rapide
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-16" class="callout-16-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Crypto-monnaies :</strong> Bitcoin/Ethereum utilisent <strong>ECDSA</strong> (ElGamal sur courbes elliptiques).</p>
+<p>Chaque transaction signée avec clé privée détenteur.</p>
+<p>Sécurité basée ECDLP.</p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="tableau-récapitulatif-des-schémas" class="level2">
+<h2 class="anchored" data-anchor-id="tableau-récapitulatif-des-schémas">Tableau Récapitulatif des Schémas</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Classe</th>
+<th>Schéma</th>
+<th>Message Recovery</th>
+<th>Problème de base</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Signatures Classiques</strong></td>
+<td>RSA</td>
+<td>Oui</td>
+<td>RSAP</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>Rabin</td>
+<td>Oui</td>
+<td>SQROOTP</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>ElGamal</td>
+<td>Non</td>
+<td>DLP</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>DSS</td>
+<td>Non</td>
+<td>DLP</td>
+</tr>
+<tr class="odd">
+<td><strong>One-time Signatures</strong></td>
+<td>Lamport</td>
+<td>Non</td>
+<td>dépend de la OWF</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>Bos-Chaum</td>
+<td>Non</td>
+<td>dépend de la OWF</td>
+</tr>
+<tr class="odd">
+<td><strong>Undeniable Signatures</strong></td>
+<td>Chaum-van Antwerpen</td>
+<td>Non</td>
+<td>DLP</td>
+</tr>
+<tr class="even">
+<td><strong>Fail-Stop Signatures</strong></td>
+<td>van Heyst-Pedersen</td>
+<td>Non</td>
+<td>DLP</td>
+</tr>
+<tr class="odd">
+<td><strong>Blind Signatures</strong></td>
+<td>Chaum</td>
+<td>Oui</td>
+<td>RSAP</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Texte original
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-17" class="callout-17-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>[Tableau complet avec toutes les informations ci-dessus]</p>
+<p>Le fonctionnement des procédés de signature One-time, Undeniable et Fail-Stop peut être consulté dans [Men97].</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Révision rapide
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-18" class="callout-18-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Signatures classiques :</strong></p>
+<ul>
+<li>RSA/Rabin (recovery)</li>
+<li>ElGamal/DSS (appendice)</li>
+</ul>
+<p><strong>Spécialisées :</strong></p>
+<ul>
+<li>One-time</li>
+<li>Undeniable</li>
+<li>Fail-Stop</li>
+<li>Blind</li>
+</ul>
+<p>Problèmes base : RSAP, SQROOTP, DLP, dépend de la OWF.</p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="types-dattaques" class="level2">
+<h2 class="anchored" data-anchor-id="types-dattaques">Types d’Attaques</h2>
+<p><strong>Critères pour “casser” un schéma :</strong></p>
+<ul>
+<li><strong>Total Break</strong> : Calculer la clé privée ou algorithme efficace de génération</li>
+<li><strong>Falsification sélective</strong> : Générer signature pour message/classe fixé(e)</li>
+<li><strong>Falsification existentielle</strong> : Forger au moins une signature (sans contrôle du message)</li>
+</ul>
+<p><strong>Attaques de base :</strong></p>
+<ul>
+<li><strong>Key-only</strong> : Seule la clé publique est connue</li>
+<li><strong>Known-messages</strong> : Accès à signatures de messages connus</li>
+<li><strong>Chosen-messages</strong> : Attaquant choisit messages à signer</li>
+<li><strong>Adaptive chosen-messages</strong> : Choix dépend des réponses précédentes</li>
+</ul>
+<p>Ces attaques sont équivalentes aux attaques sur systèmes d’encryption (known/chosen-plaintext/ciphertext) mais appliquées aux messages.</p>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Texte original
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-19" class="callout-19-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Critères pour “casser” un schéma de signature digitale :</strong></p>
+<ul>
+<li><strong>Total Break</strong> : Calculer la clé privée du signataire ou un algorithme efficace (polynomial) pour générer des signatures.</li>
+<li><strong>Falsification sélective (selective forgery)</strong> : L’adversaire est capable de générer une signature valide pour un message (ou une classe de messages) fixé.</li>
+<li><strong>Falsification existentielle (existential forgery)</strong> : L’adversaire est capable de forger une signature pour (au moins) un message (dont il n’a pas le contrôle).</li>
+</ul>
+<p><strong>Attaques de base :</strong></p>
+<ul>
+<li><strong>Attaques key-only</strong> : L’adversaire a seulement connaissance de la clé publique du signataire.</li>
+<li><strong>Attaques basées sur les messages</strong> : L’adversaire a accès à des signatures correspondantes à des :
+<ul>
+<li>known-messages</li>
+<li>chosen-messages</li>
+<li>adaptive chosen-messages</li>
+</ul></li>
+</ul>
+<p>Equivalents à des attaques x-ciphertext mais avec des messages !</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-20-contents" aria-controls="callout-20" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Révision rapide
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-20" class="callout-20-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Casser signature :</strong></p>
+<ul>
+<li>Total break (clé privée)</li>
+<li>falsification sélective (message fixé)</li>
+<li>existentielle (un message)</li>
+</ul>
+<p><strong>Attaques :</strong></p>
+<ul>
+<li>key-only</li>
+<li>known/chosen/adaptive-chosen-messages.</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

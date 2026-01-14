@@ -1,0 +1,2692 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>ch1 – ISS</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b758ccaa5987ceb1b75504551e579abf.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-96c1bb8b336142dcc39f931773fab1b9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-9ee82e006983bafa07c9ac29a901142c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-96c1bb8b336142dcc39f931773fab1b9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">ISS</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-language" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="bi bi-globe" role="img">
+</i> 
+ <span class="menu-text">Language</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-language">    
+        <li>
+    <a class="dropdown-item" href="./index.html">
+ <span class="dropdown-text">English</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./fr/index.html">
+ <span class="dropdown-text">French</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch1.html">Course</a></li><li class="breadcrumb-item"><a href="./ch1.html">Introduction</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Course</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch1.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Introduction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Basic Cryptography Concepts</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Symmetric Cryptography</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Asymmetric Cryptography (Public Key Cryptography)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cryptographic Hash Functions and MACs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Digital Signatures</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Authentication</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Key Establishment Protocols (KEP)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch9.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Trusted Third Parties (TTP) and Certification</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./exercices.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercises</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./presentations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Presentations</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
+  <ul class="collapse">
+  <li><a href="#fundamental-security-services" id="toc-fundamental-security-services" class="nav-link" data-scroll-target="#fundamental-security-services">Fundamental Security Services</a></li>
+  <li><a href="#summary-services-threats-and-protection-mechanisms" id="toc-summary-services-threats-and-protection-mechanisms" class="nav-link" data-scroll-target="#summary-services-threats-and-protection-mechanisms">Summary: Services, Threats, and Protection Mechanisms</a></li>
+  <li><a href="#internet-related-risks" id="toc-internet-related-risks" class="nav-link" data-scroll-target="#internet-related-risks">Internet-Related Risks</a>
+  <ul class="collapse">
+  <li><a href="#malware-delivered-via-e-mail" id="toc-malware-delivered-via-e-mail" class="nav-link" data-scroll-target="#malware-delivered-via-e-mail">Malware Delivered via E-Mail</a></li>
+  <li><a href="#malware-delivered-via-web" id="toc-malware-delivered-via-web" class="nav-link" data-scroll-target="#malware-delivered-via-web">Malware Delivered via Web</a></li>
+  <li><a href="#phishing" id="toc-phishing" class="nav-link" data-scroll-target="#phishing">Phishing</a></li>
+  <li><a href="#spam" id="toc-spam" class="nav-link" data-scroll-target="#spam">Spam</a></li>
+  <li><a href="#ransomware" id="toc-ransomware" class="nav-link" data-scroll-target="#ransomware">Ransomware</a></li>
+  <li><a href="#attacks-on-internet-of-things-iot-devices" id="toc-attacks-on-internet-of-things-iot-devices" class="nav-link" data-scroll-target="#attacks-on-internet-of-things-iot-devices">Attacks on <strong><em>Internet of Things (IoT)</em></strong> Devices</a></li>
+  <li><a href="#information-spoofing-and-website-defacement" id="toc-information-spoofing-and-website-defacement" class="nav-link" data-scroll-target="#information-spoofing-and-website-defacement">Information Spoofing and Website Defacement</a></li>
+  <li><a href="#denial-of-service-dos-ddos-attacks" id="toc-denial-of-service-dos-ddos-attacks" class="nav-link" data-scroll-target="#denial-of-service-dos-ddos-attacks">Denial of Service (DoS / DDoS) Attacks</a></li>
+  </ul></li>
+  <li><a href="#digital-security-methods" id="toc-digital-security-methods" class="nav-link" data-scroll-target="#digital-security-methods">Digital Security Methods</a>
+  <ul class="collapse">
+  <li><a href="#cryptographic-hash-functions" id="toc-cryptographic-hash-functions" class="nav-link" data-scroll-target="#cryptographic-hash-functions">Cryptographic Hash Functions</a></li>
+  <li><a href="#pseudo-random-generators" id="toc-pseudo-random-generators" class="nav-link" data-scroll-target="#pseudo-random-generators">(Pseudo) Random Generators</a></li>
+  <li><a href="#symmetric-cryptography" id="toc-symmetric-cryptography" class="nav-link" data-scroll-target="#symmetric-cryptography">Symmetric Cryptography</a></li>
+  <li><a href="#asymmetric-cryptography" id="toc-asymmetric-cryptography" class="nav-link" data-scroll-target="#asymmetric-cryptography">Asymmetric Cryptography</a></li>
+  <li><a href="#asymmetric-symmetric-cryptography-hybrid" id="toc-asymmetric-symmetric-cryptography-hybrid" class="nav-link" data-scroll-target="#asymmetric-symmetric-cryptography-hybrid">Asymmetric + Symmetric Cryptography (Hybrid)</a></li>
+  <li><a href="#asymmetric-cryptography-operation-rsa" id="toc-asymmetric-cryptography-operation-rsa" class="nav-link" data-scroll-target="#asymmetric-cryptography-operation-rsa">Asymmetric Cryptography: Operation (RSA)</a></li>
+  <li><a href="#asymmetric-cryptography-conclusions" id="toc-asymmetric-cryptography-conclusions" class="nav-link" data-scroll-target="#asymmetric-cryptography-conclusions">Asymmetric Cryptography: Conclusions</a></li>
+  <li><a href="#symmetric-vs-asymmetric-comparison" id="toc-symmetric-vs-asymmetric-comparison" class="nav-link" data-scroll-target="#symmetric-vs-asymmetric-comparison">Symmetric vs Asymmetric Comparison</a></li>
+  </ul></li>
+  <li><a href="#dissection-of-an-attack-ransomware" id="toc-dissection-of-an-attack-ransomware" class="nav-link" data-scroll-target="#dissection-of-an-attack-ransomware">Dissection of an Attack: Ransomware</a>
+  <ul class="collapse">
+  <li><a href="#definition-and-impact" id="toc-definition-and-impact" class="nav-link" data-scroll-target="#definition-and-impact">Definition and Impact</a></li>
+  <li><a href="#ransomware-attack-lifecycle" id="toc-ransomware-attack-lifecycle" class="nav-link" data-scroll-target="#ransomware-attack-lifecycle">Ransomware Attack Lifecycle</a></li>
+  <li><a href="#cryptolocker-technical-analysis" id="toc-cryptolocker-technical-analysis" class="nav-link" data-scroll-target="#cryptolocker-technical-analysis">Cryptolocker: Technical Analysis</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="ch1.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch1.html">Course</a></li><li class="breadcrumb-item"><a href="./ch1.html">Introduction</a></li></ol></nav></header>
+
+
+
+
+
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<section id="fundamental-security-services" class="level2">
+<h2 class="anchored" data-anchor-id="fundamental-security-services">Fundamental Security Services</h2>
+<p>Security services are the objectives aimed at protecting a system.</p>
+<ul>
+<li><p><strong>Confidentiality</strong>: Protection against unauthorized disclosure.</p></li>
+<li><p><strong>Integrity</strong>: Protection against unauthorized modification.</p></li>
+<li><p><strong>Availability</strong>: Guarantee of access for legitimate users.</p></li>
+<li><p><strong>Authentication</strong>:</p>
+<ul>
+<li><em>Entity authentication</em>: Certifying the identity of an actor.</li>
+<li><em>Data origin authentication</em>: Certifying the source of data.</li>
+</ul></li>
+<li><p><strong>Non-repudiation</strong>: Inability to deny a transaction.</p></li>
+<li><p><strong>Non-duplication</strong>: Protection against illicit copying.</p></li>
+<li><p><strong>Anonymity</strong>: Preservation of identity or source.</p></li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Original version
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><p><strong>Confidentiality</strong>: Protection of information from unauthorized disclosure.</p></li>
+<li><p><strong>Integrity</strong>: Protection against unauthorized modification of information.</p></li>
+<li><p><strong>Availability</strong>: Ensuring that resources are accessible to legitimate users.</p></li>
+<li><p><strong>Authentication</strong>:</p>
+<ul>
+<li><strong>Entity authentication</strong> <em>(entity authentication)</em>: Process allowing one entity to be certain of the identity of a second entity, supported by corroborating evidence (e.g., physical presence, cryptographic, biometric, etc.). The term identification is sometimes also used for this service.</li>
+<li><strong>Data origin authentication</strong> <em>(data origin authentication)</em>: Process allowing one entity to be certain that a second entity is the original source of a set of data. By definition, this service also ensures the integrity of the data.</li>
+</ul></li>
+<li><p><strong>Non-repudiation</strong>: Guarantees that an entity cannot deny being involved in a transaction.</p></li>
+<li><p><strong>Non-duplication</strong>: Protection against illicit copying.</p></li>
+<li><p><strong>Anonymity (entity or data origin)</strong>: Preserves the identity of an entity, the source of information, or a transaction.</p></li>
+</ul>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="summary-services-threats-and-protection-mechanisms" class="level2">
+<h2 class="anchored" data-anchor-id="summary-services-threats-and-protection-mechanisms">Summary: Services, Threats, and Protection Mechanisms</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 31%">
+<col style="width: 22%">
+<col style="width: 32%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Security Services</th>
+<th style="text-align: left;">Threats and Attacks (<em>Italic</em>)</th>
+<th style="text-align: left;">Classic Mechanisms</th>
+<th style="text-align: left;">Digital Mechanisms</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Confidentiality</strong></td>
+<td style="text-align: left;">Information leakage, <em>eavesdropping</em>, traffic analysis</td>
+<td style="text-align: left;">Seals, safes, padlocks</td>
+<td style="text-align: left;">Encryption, logical authorization</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Integrity</strong></td>
+<td style="text-align: left;">Modification, <em>tampering</em>, illicit creation or destruction</td>
+<td style="text-align: left;">Special ink, holograms</td>
+<td style="text-align: left;">One-way functions + encryption</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Availability</strong></td>
+<td style="text-align: left;"><em>Denial of Service (DoS)</em>, viruses, illicit use</td>
+<td style="text-align: left;">Physical access control, video surveillance</td>
+<td style="text-align: left;">Logical access control, audit, antivirus</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Entity Authentication</strong></td>
+<td style="text-align: left;">Unauthorized access, password theft, protocol flaw</td>
+<td style="text-align: left;">Presence, voice, ID card, biometrics</td>
+<td style="text-align: left;">Secret + protocol, network address + userid, smart card + PIN</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Data Authentication</strong></td>
+<td style="text-align: left;">Falsification of information or signature</td>
+<td style="text-align: left;">Seals, signature, fingerprint</td>
+<td style="text-align: left;">One-way functions + encryption</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Non-repudiation</strong></td>
+<td style="text-align: left;">Denying a transaction (<em>repudiation</em>), claiming key theft</td>
+<td style="text-align: left;">Seals, notary signature, registered mail</td>
+<td style="text-align: left;">One-way functions + encryption + digital signature</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Non-duplication</strong></td>
+<td style="text-align: left;">Duplication, falsification, imitation</td>
+<td style="text-align: left;">Special ink, holograms, tagging</td>
+<td style="text-align: left;">Digital watermarking, cryptographic locking</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Anonymity</strong></td>
+<td style="text-align: left;">Identification, transaction analysis, tracing</td>
+<td style="text-align: left;">Voice scramblers, disguise, cash</td>
+<td style="text-align: left;"><em>Mixers</em>, <em>remailers</em>, e-money, <em>deep web</em></td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Original version
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<section id="threats-and-attacks-summary" class="level3">
+<h3 class="anchored" data-anchor-id="threats-and-attacks-summary">Threats and Attacks: Summary</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 19%">
+<col style="width: 28%">
+<col style="width: 51%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Services</th>
+<th style="text-align: left;">Threats</th>
+<th style="text-align: left;">Attacks</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Confidentiality</strong></td>
+<td style="text-align: left;">Information leakage</td>
+<td style="text-align: left;">Unauthorized eavesdropping, traffic analysis</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Integrity</strong></td>
+<td style="text-align: left;">Information modification</td>
+<td style="text-align: left;">Illicit creation, alteration, or destruction</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Availability</strong></td>
+<td style="text-align: left;">Denial of service, illicit use</td>
+<td style="text-align: left;">Viruses, repeated access attempts to disable a system</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Entity Authentication</strong></td>
+<td style="text-align: left;">Unauthorized access</td>
+<td style="text-align: left;">Password theft, authentication protocol flaw</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Data Authentication</strong></td>
+<td style="text-align: left;">Information falsification</td>
+<td style="text-align: left;">Signature forgery, protocol flaw</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Non-repudiation</strong></td>
+<td style="text-align: left;">Denying involvement in a transaction</td>
+<td style="text-align: left;">Claiming key theft or signature protocol flaw</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Non-duplication</strong></td>
+<td style="text-align: left;">Duplication</td>
+<td style="text-align: left;">Falsification, imitation</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Anonymity</strong></td>
+<td style="text-align: left;">Identification</td>
+<td style="text-align: left;">Transaction analysis, unauthorized access enabling identification</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="protection-mechanisms" class="level3">
+<h3 class="anchored" data-anchor-id="protection-mechanisms">Protection Mechanisms</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 33%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Services</th>
+<th style="text-align: left;">Classic Mechanisms</th>
+<th style="text-align: left;">Digital Mechanisms</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Confidentiality</strong></td>
+<td style="text-align: left;">Seals, safes, padlocks</td>
+<td style="text-align: left;">Encryption, logical authorization</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Integrity</strong></td>
+<td style="text-align: left;">Special ink, holograms</td>
+<td style="text-align: left;">One-way functions + encryption</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Availability</strong></td>
+<td style="text-align: left;">Physical access control, video surveillance</td>
+<td style="text-align: left;">Logical access control, audit, antivirus</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Entity Authentication</strong></td>
+<td style="text-align: left;">Presence, voice, ID card, biometric recognition</td>
+<td style="text-align: left;">Secret + authentication protocol, network address + userid, smart card + PIN</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Data Authentication</strong></td>
+<td style="text-align: left;">Seals, signature, fingerprint</td>
+<td style="text-align: left;">One-way functions + encryption</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Non-repudiation</strong></td>
+<td style="text-align: left;">Seals, signature, notary signature, registered mail</td>
+<td style="text-align: left;">One-way functions + encryption + digital signature</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Non-duplication</strong></td>
+<td style="text-align: left;">Special ink, holograms, tagging</td>
+<td style="text-align: left;">Digital watermarking, cryptographic locking</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Anonymity</strong></td>
+<td style="text-align: left;">Voice scrambler, disguise, cash</td>
+<td style="text-align: left;">Mixers, remailers, e-money, deep web</td>
+</tr>
+</tbody>
+</table>
+</section>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="internet-related-risks" class="level2">
+<h2 class="anchored" data-anchor-id="internet-related-risks">Internet-Related Risks</h2>
+<section id="malware-delivered-via-e-mail" class="level3">
+<h3 class="anchored" data-anchor-id="malware-delivered-via-e-mail">Malware Delivered via E-Mail</h3>
+<ul>
+<li><p>Also called <strong>malware</strong>.</p></li>
+<li><p>Emails designed to <strong>trigger an action</strong> (open attachment or click a link).</p></li>
+<li><p>Often <strong>personalized</strong> using <strong>social engineering</strong>.</p></li>
+<li><p><strong>Main consequences:</strong></p>
+<ul>
+<li>Malware installation (<em>ransomware</em>, <em>keyloggers</em>, etc.).</li>
+<li><strong>Loss or theft of personal data</strong>.</li>
+<li><strong>System hijacking</strong> and <strong>malware propagation</strong>.</li>
+</ul></li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Ultra-summary
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>Malware spread by email</li>
+<li>Prompting clicks or opens</li>
+<li>Social engineering</li>
+<li>Data theft, loss, hijacking</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Original version
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<section id="malware-delivered-via-e-mail-1" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="malware-delivered-via-e-mail-1">Malware Delivered via E-Mail</h3>
+<ul>
+<li><p>Also called <strong>malware</strong>.</p></li>
+<li><p>Emails designed to <strong>incite the recipient</strong> to <strong>open an attachment</strong> or <strong>follow a link</strong> containing ads, offensive info, risky programs, etc.</p></li>
+<li><p>Often targeted based on victim interests (preliminary social engineering).</p></li>
+<li><p><strong>Consequences:</strong></p>
+<ul>
+<li>Malware installation (<em>ransomware</em>, <em>keyloggers</em>, etc.) on victim systems (<em>computer</em>, <em>tablet</em>, <em>smartphone</em>, <em>smartwatch</em>, etc.).</li>
+<li>Data destruction.</li>
+<li>Theft of personal information or data.</li>
+<li>System hijacking for malicious purposes (e.g., illegal bitcoin mining).</li>
+<li>Malware propagation (potentially to other users).</li>
+</ul></li>
+</ul>
+</section>
+</div>
+</div>
+</section>
+<section id="malware-delivered-via-web" class="level3">
+<h3 class="anchored" data-anchor-id="malware-delivered-via-web">Malware Delivered via Web</h3>
+<ul>
+<li><p>Method called <strong><em>drive-by download</em></strong>: <strong>automatic infection when visiting a website</strong>.</p></li>
+<li><p>Sources can be:</p>
+<ul>
+<li>A <strong>malicious website</strong></li>
+<li>A <strong>compromised legitimate site</strong> (e.g., <em>cross-site scripting</em>).</li>
+</ul></li>
+<li><p><strong>User caution</strong> greatly reduces this propagation method.</p></li>
+<li><p><strong>Impacts are similar</strong> to email-borne infections.</p></li>
+<li><p><strong>Script restriction</strong> (<em>Java/JavaScript</em>) reduces risk but can <strong>affect browsing</strong>.</p></li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Ultra-summary
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><em>Drive-by download</em> = infection without user action</li>
+<li>Malicious or compromised sites</li>
+<li>Awareness + restricted scripts = protection</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Original version
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<section id="malware-delivered-via-web-1" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="malware-delivered-via-web-1">Malware Delivered via Web</h3>
+<ul>
+<li><p>Often called <strong><em>drive-by download</em></strong>, allows <strong>infecting the system</strong> (<em>computer</em>, <em>tablet</em>, <em>smartphone</em>, <em>smartwatch</em>, etc.) <strong>simply by visiting a website</strong>.</p></li>
+<li><p>Sources may be:</p>
+<ul>
+<li>Malicious site containing malware</li>
+<li>Legitimate website previously infected (e.g., <em>cross-site scripting</em>). Infection may only affect certain pages.</li>
+</ul></li>
+<li><p>User awareness (avoiding suspicious sites) reduces the effectiveness.</p></li>
+<li><p>Consequences are similar to email infections.</p></li>
+<li><p>Restricted script execution (<em>Java/JavaScript</em>) in browsers can limit infection but may constrain navigation.</p></li>
+</ul>
+</section>
+</div>
+</div>
+</section>
+<section id="phishing" class="level3">
+<h3 class="anchored" data-anchor-id="phishing">Phishing</h3>
+<ul>
+<li><p>Technique to <strong>collect private information</strong> through <strong>indiscriminate fishing</strong>.</p></li>
+<li><p><strong><em>Phishing</em></strong> can be:</p>
+<ul>
+<li><strong>General</strong> (broad targeting)</li>
+<li><strong>Targeted</strong> (<em>spear phishing</em>) for a specific person or organization.</li>
+</ul></li>
+<li><p>Main vector: <strong>forged email address</strong>, hard to detect.</p></li>
+<li><p>Goal: obtain <strong>sensitive data</strong> (credentials, passwords, personal or banking info).</p></li>
+<li><p>Attacks use <strong>credible or threatening pretexts</strong> to prompt victim cooperation.</p></li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Ultra-summary
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>Information theft by deception</li>
+<li>Forged emails</li>
+<li><em>Spear phishing</em> = targeted attack</li>
+<li>Urgent or threatening pretexts</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Original version
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<section id="phishing-1" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="phishing-1">Phishing</h3>
+<ul>
+<li>The word <strong><em>phishing</em></strong> comes from English <strong><em>“password”</em></strong>, <strong><em>“harvesting”</em></strong>, and <strong><em>“fishing”</em></strong>.</li>
+<li>Shows the technique’s main goal: <strong>collect as much private info</strong> via indiscriminate fishing.</li>
+<li>Targeted attacks are called <strong><em>spear phishing</em></strong> (from <em>spear fishing</em>).</li>
+<li>Transmission vector: email with <strong>forged sender address</strong> requesting private info: emails, social media credentials, passwords, ID numbers, bank accounts, etc.</li>
+<li>Pretexts vary (system update, service stoppage, delivery withdrawal) and may threaten the user if ignored.</li>
+</ul>
+</section>
+</div>
+</div>
+</section>
+<section id="spam" class="level3">
+<h3 class="anchored" data-anchor-id="spam">Spam</h3>
+<ul>
+<li><p><strong>Unwanted emails</strong>, often ads, or <strong>unsolicited pop-ups</strong> during web browsing.</p></li>
+<li><p>Represent about <strong>60% of global emails</strong>.</p></li>
+<li><p>Main consequences:</p>
+<ul>
+<li><strong>Resource consumption</strong> and time loss.</li>
+<li>Some can <strong>transmit malware</strong>.</li>
+</ul></li>
+<li><p>Often target short addresses or come from <strong>sold/exchanged address lists</strong>.</p></li>
+<li><p><strong>Anti-spam filters</strong> incur <strong>significant costs</strong> for organizations.</p></li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Ultra-summary
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>Unwanted emails/ads</li>
+<li>Risks: time/resource loss, malware</li>
+<li>Targeting: short addresses or lists</li>
+<li>Filtering costly for organizations</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Original version
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<section id="spam-1" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="spam-1">Spam</h3>
+<ul>
+<li>Includes all <strong>unwanted emails</strong> (often ads) received by people and organizations.</li>
+<li>Also applies to <strong>pages/pop-up windows</strong> <strong>shown without user consent</strong> during web browsing.</li>
+<li>Around <strong>60%</strong> of global emails belong to this category.</li>
+<li>Consequences: resource consumption and wasted time, but some spam can also <strong>transmit malware</strong>.</li>
+<li>Often target short email addresses or list-based addresses (sold/exchanged).</li>
+<li><strong>Anti-spam filtering</strong> incurs high organizational costs.</li>
+</ul>
+</section>
+</div>
+</div>
+</section>
+<section id="ransomware" class="level3">
+<h3 class="anchored" data-anchor-id="ransomware">Ransomware</h3>
+<ul>
+<li>Trojan-type malware that <strong>encrypts data</strong> to make it inaccessible.</li>
+<li>Demands a <strong>ransom</strong> (often in bitcoins) to recover files.</li>
+<li>Can remain <strong>dormant</strong>, triggered by an event or date.</li>
+<li>Main vector: <strong>malicious emails</strong>.</li>
+<li>Other effects: <strong>DoS attacks, extortion</strong>.</li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Ultra-summary
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>Data encrypted by Trojan</li>
+<li>Ransom to restore access</li>
+<li>Possible programmed dormancy</li>
+<li>Infection via malicious emails</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Original version
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<section id="ransomware-1" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="ransomware-1">Ransomware</h3>
+<ul>
+<li>Trojan malware family.</li>
+<li>Typically <strong>encrypts victim’s data</strong> to make it completely inaccessible.</li>
+<li>Then displays a message requesting <strong>ransom payment</strong> (often in <strong>bitcoins</strong>).</li>
+<li>May stay in <strong>dormant state</strong> triggered by event or date.</li>
+<li>Infection vectors vary, but <strong>malicious email attachments</strong> often responsible.</li>
+<li>Variants exist and continue to evolve.</li>
+<li>Other behaviors: <strong>DoS, targeted extortion, threats</strong>, etc.</li>
+</ul>
+</section>
+</div>
+</div>
+</section>
+<section id="attacks-on-internet-of-things-iot-devices" class="level3">
+<h3 class="anchored" data-anchor-id="attacks-on-internet-of-things-iot-devices">Attacks on <strong><em>Internet of Things (IoT)</em></strong> Devices</h3>
+<ul>
+<li><p>Target <strong>connected objects</strong> (cameras, TVs, sensors, alarms, etc.).</p></li>
+<li><p>Devices are <strong>easy to compromise</strong> due to:</p>
+<ul>
+<li><strong>Known vulnerabilities</strong></li>
+<li><strong>Default passwords</strong></li>
+<li><strong>User unawareness</strong></li>
+</ul></li>
+<li><p><strong>Remote control</strong> enables:</p>
+<ul>
+<li><strong>Entry point</strong> to the network</li>
+<li><strong>Device abuse</strong> for illicit activities (DDoS, hacking, mining)</li>
+</ul></li>
+<li><p>A <strong>precise inventory</strong> of connected devices is essential.</p></li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Ultra-summary
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>Targets connected objects</li>
+<li>Weak security (vulnerabilities, default passwords)</li>
+<li>Risk of network access and abuse</li>
+<li>IoT inventory needed</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Original version
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<section id="attacks-on-iot-devices" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="attacks-on-iot-devices">Attacks on IoT Devices</h3>
+<ul>
+<li><p>Target connected objects (cameras, TVs, fridges, sensors, alarm systems, etc.).</p></li>
+<li><p>Often <strong>easier to hack</strong> than traditional systems due to:</p>
+<ul>
+<li>Many vulnerabilities known to attackers</li>
+<li>Default passwords</li>
+<li>User negligence</li>
+</ul></li>
+<li><p>Remote takeover allows:</p>
+<ul>
+<li>Entry point to home/corporate network</li>
+<li>Device use for illicit activities (hacking, DDoS, bitcoin mining)</li>
+</ul></li>
+<li><p>Maintaining a detailed directory of all connected devices is necessary.</p></li>
+</ul>
+</section>
+</div>
+</div>
+</section>
+<section id="information-spoofing-and-website-defacement" class="level3">
+<h3 class="anchored" data-anchor-id="information-spoofing-and-website-defacement">Information Spoofing and Website Defacement</h3>
+<ul>
+<li>Attacks aiming to <strong>alter information</strong> on websites and social media.</li>
+<li>Impact: <strong>compromised reputation</strong> and <strong>economic damage</strong>.</li>
+<li>Websites: secure host system, restrictive configuration, <strong>regular audits</strong>.</li>
+<li>Social media: strong passwords, <strong>multi-factor authentication</strong>, session closure, cookie deletion.</li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Ultra-summary
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-15" class="callout-15-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>Altered info on websites and social media</li>
+<li>Risks: reputation, economic losses</li>
+<li>Websites: security + audits</li>
+<li>Social media: strong passwords, MFA, closed sessions, cookies cleared</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Original version
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-16" class="callout-16-contents callout-collapse collapse">
+<section id="information-spoofing-and-website-defacement-1" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="information-spoofing-and-website-defacement-1">Information Spoofing and Website Defacement</h3>
+<ul>
+<li><p>Target <strong>integrity</strong> of published info on websites and social media.</p></li>
+<li><p>Affects <strong>reputation</strong> and can cause <strong>economic damage</strong>.</p></li>
+<li><p><strong>Websites</strong>: secure host system, as restrictive configuration as possible, recurring security audits recommended.</p></li>
+<li><p><strong>Social media</strong>: depends on authentication process:</p>
+<ul>
+<li>Avoid simple passwords</li>
+<li>Prefer strong, possibly multi-factor authentication</li>
+<li>Close sessions properly</li>
+<li>Clear cookies</li>
+</ul></li>
+</ul>
+</section>
+</div>
+</div>
+</section>
+<section id="denial-of-service-dos-ddos-attacks" class="level3">
+<h3 class="anchored" data-anchor-id="denial-of-service-dos-ddos-attacks">Denial of Service (DoS / DDoS) Attacks</h3>
+<ul>
+<li><p>Aim to <strong>make IT systems inaccessible</strong>, especially for organizations.</p></li>
+<li><p><strong>DDoS</strong>: distributed attack using thousands of devices, generating massive traffic.</p></li>
+<li><p>Classic protections (<em>firewalls</em>, IDS/IPS sensors) often <strong>insufficient</strong>.</p></li>
+<li><p>Consequences:</p>
+<ul>
+<li><strong>Affected reputation</strong></li>
+<li><strong>Financial losses</strong> (sometimes ransom)</li>
+<li><strong>High risk for critical infrastructure</strong> (hospitals, power plants, Internet backbone)</li>
+</ul></li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Ultra-summary
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-17" class="callout-17-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>DDoS = inaccessible systems via massive attacks</li>
+<li>Limited protections</li>
+<li>Risks: reputation, finances, critical infrastructures</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Original version
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-18" class="callout-18-contents callout-collapse collapse">
+<section id="denial-of-service-dos-ddos-attacks-1" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="denial-of-service-dos-ddos-attacks-1">Denial of Service (DoS / DDoS) Attacks</h3>
+<ul>
+<li><p>Aim to <strong>render IT systems inaccessible</strong>, mainly targeting private or governmental organizations.</p></li>
+<li><p><strong>DDoS</strong> (<em>Distributed Denial of Service</em>): multiple devices (<strong>often tens of thousands</strong>) simultaneously target victim system(s).</p></li>
+<li><p>Traffic can reach several hundred Gbps.</p></li>
+<li><p>Traditional protection (<em>firewalls</em>, <em>intrusion detection/prevention sensors</em>) has limited effectiveness.</p></li>
+<li><p>Service unavailability can cause:</p>
+<ul>
+<li><strong>Reputational issues</strong></li>
+<li>Significant <strong>financial losses</strong> (ransom demands)</li>
+<li><strong>High security risks (even physical)</strong> for <strong>critical infrastructures</strong> (hospitals, power plants, Internet backbone).</li>
+</ul></li>
+</ul>
+</section>
+</div>
+</div>
+</section>
+</section>
+<section id="digital-security-methods" class="level2">
+<h2 class="anchored" data-anchor-id="digital-security-methods">Digital Security Methods</h2>
+<p><strong>Problem:</strong> Protecting digital information</p>
+<ul>
+<li>in a distributed environment</li>
+<li>globally accessible</li>
+<li>without physical boundaries</li>
+</ul>
+<p><strong>Solution:</strong></p>
+<ul>
+<li>Cryptography
+<ul>
+<li>Symmetric</li>
+<li>Asymmetric</li>
+<li><span class="math inline">\(+\)</span> One-way functions</li>
+<li><span class="math inline">\(+\)</span> (Pseudo) random generators</li>
+</ul></li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Ultra-summary
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-19" class="callout-19-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Problem:</strong> Security in a distributed/global environment.</li>
+<li><strong>Solutions:</strong>
+<ul>
+<li>Crypto (symmetric/asymmetric).</li>
+<li>One-way functions (hashing).</li>
+<li>Random generators (physical/pseudo).</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-20-contents" aria-controls="callout-20" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Original version
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-20" class="callout-20-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Problem:</strong> Protecting digital information</p>
+<ul>
+<li>in a distributed environment</li>
+<li>globally accessible</li>
+<li>without physical boundaries</li>
+</ul>
+<p><strong>Solution:</strong></p>
+<ul>
+<li>Cryptography
+<ul>
+<li>Symmetric</li>
+<li>Asymmetric</li>
+<li><span class="math inline">\(+\)</span> One-way functions</li>
+<li><span class="math inline">\(+\)</span> (Pseudo) random generators</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<hr>
+<section id="cryptographic-hash-functions" class="level3">
+<h3 class="anchored" data-anchor-id="cryptographic-hash-functions">Cryptographic Hash Functions</h3>
+<ul>
+<li><strong>Functions easy to compute in one direction but virtually impossible to reverse</strong>.</li>
+<li>Any modification of the source document radically changes the <strong>digest</strong> (avalanche effect).</li>
+<li><strong>Key properties</strong>:
+<ul>
+<li><strong>One-way</strong>: impossible to retrieve the input from the hash.</li>
+<li><strong>Collision-free</strong>: impossible to find two inputs with the same hash.</li>
+</ul></li>
+<li>Digest size: 160 to 512 bits.</li>
+<li>Algorithms (very <strong>performant</strong>): SHA-1, SHA-256, SHA-3.</li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Ultra-summary
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-21" class="callout-21-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>One-way + collision-free</strong>.</li>
+<li>Size: 160-512 bits.</li>
+<li>Algos: SHA-1/256/3.</li>
+<li>Usage: integrity, signatures.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-22-contents" aria-controls="callout-22" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Original version
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-22" class="callout-22-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Functions easy to compute in one direction but virtually impossible to compute in the reverse direction</strong>.</li>
+<li>Any modification (even insignificant) of the source document results in a fundamentally different <strong>digest</strong>.</li>
+<li>It is virtually impossible to retrieve the source document using only the digest (<strong>one-way</strong>).</li>
+<li>It is virtually impossible to find a second source document producing the same digest (<strong>collision-free</strong>).</li>
+<li>Usual digest length: 160 to 512 bits.</li>
+<li>One-way algorithms are very performant.</li>
+<li>Examples: SHA-1, SHA-256, SHA-3, etc.</li>
+</ul>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="pseudo-random-generators" class="level3">
+<h3 class="anchored" data-anchor-id="pseudo-random-generators">(Pseudo) Random Generators</h3>
+<ul>
+<li><strong>Characteristics</strong>
+<ul>
+<li><strong>random</strong></li>
+<li><strong>unpredictable</strong></li>
+<li><strong>non-reproducible</strong></li>
+</ul></li>
+<li><strong>Critical</strong> for security (keys, IV, secrets).</li>
+<li><strong>Types</strong>:
+<ul>
+<li><strong>True random</strong>: based on physical phenomena (radioactivity, quantum).</li>
+<li><strong>Pseudo-random</strong>: deterministic (based on a <em>seed</em>: initial random sequence).</li>
+</ul></li>
+<li><strong>Risk</strong>: “Pseudo-security” if the <em>seed</em> is predictable (Pitkin quote).</li>
+<li>Applications: session keys, IV (DES-CBC), signatures (ElGamal).</li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-23-contents" aria-controls="callout-23" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Ultra-summary
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-23" class="callout-23-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>True random</strong>: physical (quantum).</li>
+<li><strong>Pseudo-random</strong>: deterministic (<em>seed</em>).</li>
+<li><strong>Risk</strong>: predictable <em>seed</em> = vulnerability.</li>
+<li>Uses: keys, IV, signatures.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-24-contents" aria-controls="callout-24" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Original version
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-24" class="callout-24-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>Random number generation is a very important process that can compromise the security of many encryption systems.</li>
+<li>Applications: session key generation, initialization vectors (DES - CBC mode), secrets for signatures (ElGamal), etc.</li>
+<li>A <strong>random generator</strong> is a device capable of generating numbers in a <strong>random</strong>, <strong>unpredictable</strong> and <strong>non-reproducible</strong> way. (e.g.&nbsp;based on physical phenomena: radioactive or quantum source).</li>
+<li><strong>Pseudo-random generators</strong> are deterministic processes developed from an initial random sequence (<strong>seed</strong>) (e.g.&nbsp;user keystrokes, disk access).</li>
+<li><em>Quote:</em> R. Pitkin in [Kau95]: “The use of pseudo-random processes to generate secret quantities can result in pseudo-security”</li>
+</ul>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="symmetric-cryptography" class="level3">
+<h3 class="anchored" data-anchor-id="symmetric-cryptography">Symmetric Cryptography</h3>
+<ul>
+<li><strong>History</strong>: Used since Julius Caesar (1st century BC).</li>
+<li><strong>Principle</strong>: A single key for encryption/decryption.</li>
+<li><strong>Scheme</strong>: Plaintext → Encryption (Key) → Ciphertext → Decryption (Key) → Plaintext.</li>
+<li><strong>Characteristics</strong>:
+<ul>
+<li>Algorithms: AES, DES, IDEA, RC4.</li>
+<li>Services: Confidentiality, Authentication, Integrity.</li>
+<li><strong>Limit</strong>: No signatures (shared key).</li>
+<li><strong>Problem</strong>: Secure key exchange required.</li>
+</ul></li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-25-contents" aria-controls="callout-25" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Ultra-summary
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-25" class="callout-25-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>1 key</strong> to encrypt/decrypt.</li>
+<li><strong>Fast</strong> (AES, DES).</li>
+<li><strong>Problem</strong>: key exchange.</li>
+<li>Uses: personal documents, closed groups.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-26-contents" aria-controls="callout-26" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Original version
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-26" class="callout-26-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>Also called conventional cryptography or secret key cryptography (1st century BC, Julius Caesar).</li>
+<li><strong>Idea:</strong> Based on a single secret key, perform a transformation capable of respectively making information unreadable and restoring it.</li>
+<li><strong>Scheme:</strong> Plaintext <span class="math inline">\(\to\)</span> Encryption (Key) <span class="math inline">\(\to\)</span> Ciphertext <span class="math inline">\(\to\)</span> Decryption (Key) <span class="math inline">\(\to\)</span> Plaintext.</li>
+<li><strong>Characteristics:</strong>
+<ul>
+<li>Algorithms: AES, DES, IDEA, RC4, RC5, etc. (some are free and openly available)</li>
+<li>Services: Confidentiality, Authentication, Integrity.</li>
+<li>No direct support for digital signatures (because key known by both).</li>
+<li>Requires a confidential channel to exchange the key.</li>
+<li>Ideal for protection of personal documents or closed groups.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="asymmetric-cryptography" class="level3">
+<h3 class="anchored" data-anchor-id="asymmetric-cryptography">Asymmetric Cryptography</h3>
+<ul>
+<li>Also called <strong>public cryptography</strong> (1976, Diffie &amp; Hellman).</li>
+<li><strong>Principle</strong>
+<ul>
+<li>Key pair (public/private) for encryption and signatures.</li>
+</ul></li>
+<li><strong>Two main uses</strong>:
+<ol type="1">
+<li><strong>Confidentiality</strong>:
+<ul>
+<li>Encryption: recipient’s public key</li>
+<li>Decryption: recipient’s private key</li>
+</ul></li>
+<li><strong>Digital signature</strong>:
+<ul>
+<li>Signature: sender’s private key</li>
+<li>Verification: sender’s public key</li>
+<li><em>Optimization</em>: Generally sign the <strong>hash</strong> of the document</li>
+<li><strong>Fundamental properties</strong>:
+<ul>
+<li><strong>Integrity</strong>: Any modification invalidates the signature</li>
+<li><strong>Non-collision</strong>: Impossible to have 2 documents with the same signature</li>
+<li><strong>Non-repudiation</strong>: Only the holder of the private key can sign</li>
+</ul></li>
+</ul></li>
+</ol></li>
+<li><strong>Technical aspects</strong>:
+<ul>
+<li><strong>Algorithms</strong>: RSA, ElGamal</li>
+<li><strong>Services</strong>: Integrity, Authentication, Non-Repudiation</li>
+<li><strong>Performance</strong>: much slower than symmetric (100x slower)</li>
+<li><strong>Advantage</strong>: No need for a confidential channel for key exchange</li>
+</ul></li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-27-contents" aria-controls="callout-27" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Ultra-summary
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-27" class="callout-27-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>2 keys</strong>: public (encrypt/verify) + private (decrypt/sign)</li>
+<li><strong>2 uses</strong>:
+<ul>
+<li>Confidentiality: encrypt for a recipient</li>
+<li>Signature: prove authenticity</li>
+</ul></li>
+<li><strong>Signatures</strong>:
+<ul>
+<li>Integrity + non-repudiation</li>
+</ul></li>
+<li><strong>Algorithms</strong>: RSA/ElGamal</li>
+<li><strong>Advantage</strong>: No need for secure channel to exchange keys</li>
+<li><strong>Disadvantage</strong>: Slow</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-28-contents" aria-controls="callout-28" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Original version
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-28" class="callout-28-contents callout-collapse collapse">
+<section id="asymmetric-cryptography-1" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="asymmetric-cryptography-1">Asymmetric Cryptography</h3>
+<ul>
+<li>Also called public cryptography or public key cryptography (1976, W. Diffie &amp; M. Hellman).</li>
+<li><strong>Idea:</strong> Use two different keys - one <strong>secret</strong> and one <strong>public</strong> - respectively for encryption and decryption operations.</li>
+<li>Each user has a <strong>keyring</strong>.</li>
+</ul>
+<p><strong>Confidentiality:</strong> * Sender encrypts with the <strong>recipient’s public key</strong>. * Recipient decrypts with their <strong>private key</strong>. * Only the recipient’s key is used!</p>
+<p><strong>Digital Signature:</strong> * Sender signs with their <strong>private key</strong>. * Recipient verifies with the <strong>sender’s public key</strong>. * Only the sender’s key is used! * <em>Note:</em> Generally sign the <strong>digest</strong> of the document (hash) for performance reasons.</p>
+<p><strong>Signature characteristics:</strong> * The signature changes if the document changes, while the private key remains the same. * If the document or signature is modified, verification fails (<strong>integrity guaranteed</strong>). * It is virtually impossible, even for the holder of the private key, to generate a second document producing the same signature (one-way function <strong>without collisions</strong>). * Only the holder of the private key can generate a signature verifiable using the corresponding public key (<strong>non-repudiation</strong>). * <strong>Algorithms</strong>: RSA, ElGamal. * <strong>Services</strong>: Integrity, Authentication, Non-Repudiation. * <strong>Slowness</strong>: Up to 50 times slower than symmetric cryptography. * <strong>Advantage</strong>: No need for a confidential channel to exchange keys (unlike symmetric).</p>
+</section>
+</div>
+</div>
+<hr>
+</section>
+<section id="asymmetric-symmetric-cryptography-hybrid" class="level3">
+<h3 class="anchored" data-anchor-id="asymmetric-symmetric-cryptography-hybrid">Asymmetric + Symmetric Cryptography (Hybrid)</h3>
+<ul>
+<li><strong>Principle</strong>: Use asymmetric to exchange a symmetric key (session key).</li>
+<li><strong>Steps</strong>:
+<ol type="1">
+<li>A generates a random symmetric key <span class="math inline">\(K_s\)</span>.</li>
+<li>A encrypts <span class="math inline">\(K_s\)</span> with B’s public key.</li>
+<li>A and B then communicate using <span class="math inline">\(K_s\)</span> (symmetric).</li>
+</ol></li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-29-contents" aria-controls="callout-29" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Ultra-summary
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-29" class="callout-29-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Asymmetric</strong>: exchange of symmetric key.</li>
+<li><strong>Symmetric</strong>: data encryption.</li>
+<li><strong>Advantage</strong>: combines security + performance.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-30-contents" aria-controls="callout-30" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Original version
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-30" class="callout-30-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Idea:</strong> Use public cryptography only to exchange symmetric keys (Session keys).</li>
+<li>A generates a random key <span class="math inline">\(K_s\)</span> and transmits it to B by encrypting it with B’s public key.</li>
+<li>A &amp; B then communicate using <span class="math inline">\(K_s\)</span> (symmetric).</li>
+</ul>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="asymmetric-cryptography-operation-rsa" class="level3">
+<h3 class="anchored" data-anchor-id="asymmetric-cryptography-operation-rsa">Asymmetric Cryptography: Operation (RSA)</h3>
+<section id="key-construction" class="level4">
+<h4 class="anchored" data-anchor-id="key-construction">Key Construction</h4>
+<ol type="1">
+<li><strong>Choice of prime numbers</strong>:
+<ul>
+<li><span class="math inline">\(p\)</span> and <span class="math inline">\(q\)</span>: two large prime numbers (&gt; 1024 bits)</li>
+<li><span class="math inline">\(n = pq\)</span>: RSA modulus (size = 2048+ bits)</li>
+</ul></li>
+<li><strong>Calculation of Euler’s totient function</strong>:
+<ul>
+<li><span class="math inline">\(\phi(n) = (p-1)(q-1)\)</span></li>
+<li><em>Property</em>: For any <span class="math inline">\(a\)</span> coprime with <span class="math inline">\(n\)</span>, <span class="math inline">\(a^{\phi(n)} \equiv 1 \pmod{n}\)</span></li>
+</ul></li>
+<li><strong>Selection of exponents</strong>:
+<ul>
+<li><span class="math inline">\(e\)</span>: integer coprime with <span class="math inline">\(\phi(n)\)</span> (public exponent)</li>
+<li><span class="math inline">\(d\)</span>: modular inverse of <span class="math inline">\(e\)</span> (private exponent), such that <span class="math inline">\(ed \equiv 1 \pmod{\phi(n)}\)</span></li>
+</ul></li>
+</ol>
+</section>
+<section id="encryptiondecryption-process" class="level4">
+<h4 class="anchored" data-anchor-id="encryptiondecryption-process">Encryption/decryption process</h4>
+<ul>
+<li><strong>Public key</strong>: <span class="math inline">\((n,e)\)</span></li>
+<li><strong>Private key</strong>: <span class="math inline">\((d)\)</span></li>
+<li><strong>Encryption</strong>: <span class="math inline">\(C = P^e \pmod{n}\)</span></li>
+<li><strong>Decryption</strong>: <span class="math inline">\(P = C^d \pmod{n}\)</span></li>
+</ul>
+</section>
+<section id="mathematical-proof" class="level4">
+<h4 class="anchored" data-anchor-id="mathematical-proof">Mathematical proof</h4>
+<ol type="1">
+<li><p><strong>Fundamental congruence</strong>:</p>
+<ul>
+<li><span class="math inline">\(ed = 1 + k\phi(n)\)</span> (by definition of <span class="math inline">\(d\)</span>)</li>
+</ul></li>
+<li><p><strong>Application of Euler’s theorem</strong>:</p>
+<ul>
+<li><span class="math inline">\(P^{\phi(n)} \equiv 1 \pmod{n}\)</span> (if <span class="math inline">\(P\)</span> coprime with <span class="math inline">\(n\)</span>)</li>
+</ul></li>
+<li><p><strong>Demonstration</strong>:</p>
+<p><span class="math display">\[\begin{align*}
+(P^e)^d &amp;\equiv P^{ed} \pmod{n} \\
+&amp;\equiv P^{1 + k\phi(n)} \pmod{n} \\
+&amp;\equiv P \cdot (P^{\phi(n)})^k \pmod{n} \\
+&amp;\equiv P \cdot 1^k \pmod{n} \\
+&amp;\equiv P \pmod{n}
+\end{align*}\]</span></p></li>
+</ol>
+</section>
+<section id="system-security" class="level4">
+<h4 class="anchored">System security</h4>
+<ul>
+<li><strong>Hard problem</strong>: Factorization of <span class="math inline">\(n\)</span> into <span class="math inline">\(p\)</span> and <span class="math inline">\(q\)</span></li>
+<li><strong>Recommended size</strong>:
+<ul>
+<li><span class="math inline">\(n\)</span>: 2048 bits (minimum for current security)</li>
+<li><span class="math inline">\(p\)</span> and <span class="math inline">\(q\)</span>: 1024+ bits each</li>
+</ul></li>
+<li><strong>Known vulnerabilities</strong>:
+<ul>
+<li>Side-channel attacks (timing, power analysis)</li>
+<li>Inappropriate parameter choices (<span class="math inline">\(e\)</span> too small, <span class="math inline">\(p\)</span> and <span class="math inline">\(q\)</span> too close)</li>
+</ul></li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-31-contents" aria-controls="callout-31" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Ultra-summary
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-31" class="callout-31-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Keys</strong>:
+<ul>
+<li>Public: <span class="math inline">\((n,e)\)</span> where <span class="math inline">\(n = pq\)</span></li>
+<li>Private: <span class="math inline">\((d)\)</span> with <span class="math inline">\(ed \equiv 1 \pmod{\phi(n)}\)</span></li>
+</ul></li>
+<li><strong>Operations</strong>:
+<ul>
+<li>Encryption: <span class="math inline">\(P^e \mod n\)</span></li>
+<li>Decryption: <span class="math inline">\(C^d \mod n\)</span></li>
+</ul></li>
+<li><strong>Security</strong>: Factorization of <span class="math inline">\(n\)</span> difficult</li>
+<li><strong>Size</strong>: 2048+ bits for <span class="math inline">\(n\)</span></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-32-contents" aria-controls="callout-32" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Original version
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-32" class="callout-32-contents callout-collapse collapse">
+<section id="asymmetric-cryptography-operation-rsa-1" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="asymmetric-cryptography-operation-rsa-1">Asymmetric Cryptography: Operation (RSA)</h3>
+<ul>
+<li>Let <span class="math inline">\(n := pq\)</span> with <span class="math inline">\(p\)</span> and <span class="math inline">\(q\)</span> two large prime numbers (&gt; 1024 bits).</li>
+<li>Let <span class="math inline">\(\phi(n) = (p-1)(q-1)\)</span>.</li>
+<li>Let <span class="math inline">\(e\)</span> and <span class="math inline">\(d\)</span> such that <span class="math inline">\(ed \equiv 1 \pmod{\phi(n)}\)</span>.</li>
+<li>By definition of congruences: <span class="math inline">\(ed = 1 + k\phi(n)\)</span></li>
+<li>Euler’s theorem: <span class="math inline">\(a^{\phi(n)} \equiv 1 \pmod n\)</span>.</li>
+<li><strong>Encryption:</strong> <span class="math inline">\(C = P^e \pmod n\)</span>. <strong>Public key:</strong> <span class="math inline">\((n,e)\)</span>.</li>
+<li><strong>Decryption:</strong> <span class="math inline">\(P = C^d \pmod n\)</span>. <strong>Private key:</strong> <span class="math inline">\((d)\)</span>.</li>
+<li><em>Proof:</em> <span class="math inline">\((P^e)^d \equiv P^{ed} \equiv P^{1 + k\phi(n)} \equiv (P \pmod n) (P^{\phi(n)} \pmod n)^k \equiv P \pmod n\)</span>.</li>
+</ul>
+</section>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="asymmetric-cryptography-conclusions" class="level3">
+<h3 class="anchored" data-anchor-id="asymmetric-cryptography-conclusions">Asymmetric Cryptography: Conclusions</h3>
+<ul>
+<li><strong>Dominant algorithms</strong>: RSA (most used), Rabin, ElGamal</li>
+<li><strong>Complete services</strong>:
+<ul>
+<li>Confidentiality</li>
+<li>Authentication</li>
+<li>Integrity</li>
+<li>Digital signature &amp; Non-repudiation</li>
+<li>Non-duplication</li>
+</ul></li>
+<li><strong>Performance</strong>:
+<ul>
+<li>50x slower than symmetric</li>
+<li><strong>Optimal solution</strong>: Combination of asymmetric (key exchange) + symmetric (encryption)</li>
+</ul></li>
+<li><strong>Key management</strong>:
+<ul>
+<li><strong>Advantage</strong>: Public key exchange without confidential channel</li>
+<li><strong>Risk</strong>: Need to verify authenticity of public keys
+<ul>
+<li>Authenticated acquisition channel <strong>or</strong></li>
+<li>Certification by trusted third party</li>
+</ul></li>
+</ul></li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-33-contents" aria-controls="callout-33" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Ultra-summary
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-33" class="callout-33-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Algos</strong>: RSA (dominant), Rabin, ElGamal</li>
+<li><strong>Services</strong>: Confidentiality + Authentication + Integrity + Signatures</li>
+<li><strong>Slowness</strong>: 50x vs symmetric → <strong>hybrid recommended</strong></li>
+<li><strong>Keys</strong>: Simple public exchange but <strong>authentication crucial</strong></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-34-contents" aria-controls="callout-34" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Original version
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-34" class="callout-34-contents callout-collapse collapse">
+<section id="asymmetric-cryptography-conclusions-1" class="level3 callout-body-container callout-body">
+<h3 class="anchored" data-anchor-id="asymmetric-cryptography-conclusions-1">Asymmetric Cryptography: Conclusions</h3>
+<ul>
+<li><p>There are a few asymmetric encryption systems (<strong>Rabin</strong>, <strong>ElGamal</strong>, etc.) but the most used is <strong>RSA</strong>.</p></li>
+<li><p><strong>Supported services</strong>: <strong>Confidentiality</strong>, <strong>Authentication</strong>, <strong>Integrity</strong>, <strong>Digital Signature &amp; Non-Repudiation</strong>, (<strong>Non-Duplication</strong>).</p></li>
+<li><p>Operations related to <strong>asymmetric cryptography</strong> are up to <strong>50 times (!) slower</strong> than those of <strong>symmetric cryptography</strong>. A <strong>combination of the two methods</strong> is often desirable.</p></li>
+<li><p><strong>Key distribution</strong> is simplified by the fact that only <strong>public keys</strong> need to be exchanged between participants (no need for an alternative confidential channel) but…</p></li>
+<li><p>… it is necessary to <strong>verify that the public key actually belongs to the recipient</strong>:</p>
+<ul>
+<li>Either the <strong>acquisition channel</strong> of the public key is protected against any modification (<strong>authenticated</strong>)</li>
+<li>Or the key is <strong>certified accurate by a third party</strong></li>
+</ul></li>
+</ul>
+</section>
+</div>
+</div>
+<hr>
+</section>
+<section id="symmetric-vs-asymmetric-comparison" class="level3">
+<h3 class="anchored" data-anchor-id="symmetric-vs-asymmetric-comparison">Symmetric vs Asymmetric Comparison</h3>
+<section id="comparative-advantages" class="level4">
+<h4 class="anchored" data-anchor-id="comparative-advantages">Comparative advantages</h4>
+<ul>
+<li><strong>Symmetric</strong>:
+<ul>
+<li><strong>Performance</strong>: 100x faster</li>
+<li><strong>Implementation</strong>: Easy in hardware</li>
+<li><strong>Keys</strong>: Short (128 bits = 16 memorable characters)</li>
+</ul></li>
+<li><strong>Asymmetric</strong>:
+<ul>
+<li><strong>Key exchange</strong>: Authenticated channel sufficient (no need for confidentiality)</li>
+<li><strong>Management</strong>: 1 key pair for n correspondents (vs n keys in symmetric)</li>
+</ul></li>
+</ul>
+</section>
+<section id="common-issues" class="level4">
+<h4 class="anchored" data-anchor-id="common-issues">Common issues</h4>
+<ul>
+<li><strong>Weak link</strong>: Key management by users</li>
+<li><strong>Security basis</strong>: Empirical rather than theoretical</li>
+<li><strong>Legal constraints</strong>: Usage and export restrictions</li>
+</ul>
+</section>
+<section id="usage-recommendations" class="level4">
+<h4 class="anchored">Usage recommendations</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 22%">
+<col style="width: 29%">
+<col style="width: 48%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Use case</strong></th>
+<th><strong>Recommended solution</strong></th>
+<th><strong>Justification</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Personal documents</td>
+<td>Symmetric</td>
+<td>Speed + memorable keys</td>
+</tr>
+<tr class="even">
+<td>Groups of close users</td>
+<td>Symmetric</td>
+<td>Speed + easy confidential exchange</td>
+</tr>
+<tr class="odd">
+<td>Distant/unknown users</td>
+<td>Asymmetric</td>
+<td>No need for confidential channel</td>
+</tr>
+<tr class="even">
+<td>Remote transactions</td>
+<td>Hybrid (Asymmetric + Symmetric)</td>
+<td>Asymmetric for key exchange, symmetric for data</td>
+</tr>
+<tr class="odd">
+<td>Software protection (distribution)</td>
+<td>Hybrid</td>
+<td>Unique symmetric key per version, encrypted with asymmetric</td>
+</tr>
+<tr class="even">
+<td>Network segments</td>
+<td>Symmetric</td>
+<td>Speed + controlled environment (easy key exchange between administrators)</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-35-contents" aria-controls="callout-35" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Ultra-summary
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-35" class="callout-35-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Symmetric</strong>:</p>
+<pre><code>✅ Fast (100x)
+✅ Short keys (128 bits)
+❌ Confidential key exchange required</code></pre>
+<p><strong>Asymmetric</strong>:</p>
+<pre><code>✅ Simplified key exchange
+✅ 1 key pair for n correspondents
+❌ Slow (50x)
+❌ Long keys (1024+ bits)</code></pre>
+<p><strong>Hybrid</strong>: Best of both worlds <strong>Common problems</strong>: Key management, empirical basis, legal restrictions</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-36-contents" aria-controls="callout-36" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Original version
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-36" class="callout-36-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<section id="symmetric-vs.-asymmetric-cryptography" class="level3">
+<h3 class="anchored" data-anchor-id="symmetric-vs.-asymmetric-cryptography">Symmetric vs.&nbsp;Asymmetric Cryptography</h3>
+<ul>
+<li><p>There are <strong>hundreds of symmetric and asymmetric algorithms</strong> capable of providing a sufficient level of <strong>confidentiality</strong>.</p></li>
+<li><p><strong>Symmetric solutions</strong> offer the following advantages:</p>
+<ul>
+<li><strong>Speed</strong> (up to <strong>100 times faster</strong> than asymmetric solutions)</li>
+<li><strong>Ease of hardware implementation</strong></li>
+<li><strong>Reduced key length</strong>: <strong>128 bits</strong> (= 16 characters ⇒ memorable!) instead of <strong>1024 bits</strong> for asymmetric equivalents.</li>
+</ul></li>
+<li><p><strong>Asymmetric solutions</strong> have as main arguments:</p>
+<ul>
+<li><strong>Simplified key exchange</strong>: keys must be exchanged through an <strong>authenticated but non-confidential channel</strong></li>
+<li><strong>Simplified key management</strong>: a single <strong>public/private key pair</strong> is sufficient for a user to receive confidential messages from <strong>n users</strong> (instead of <strong>n different keys</strong> in the symmetric case).</li>
+</ul></li>
+<li><p><strong>Problems common to both techniques</strong>:</p>
+<ul>
+<li><strong>Key management by the user</strong> remains the <strong>weakest link</strong></li>
+<li>Security (normally) based on <strong>empirical arguments</strong> rather than <strong>theoretical</strong> ones</li>
+<li><strong>Legal restrictions</strong> on usage and export</li>
+</ul></li>
+</ul>
+</section>
+<section id="symmetric-vs.-asymmetric-cryptography-ii" class="level3">
+<h3 class="anchored" data-anchor-id="symmetric-vs.-asymmetric-cryptography-ii">Symmetric vs.&nbsp;Asymmetric Cryptography (II)</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 27%">
+<col style="width: 31%">
+<col style="width: 40%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Activity</strong></th>
+<th><strong>Recommendation</strong></th>
+<th><strong>Remarks</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Protection of personal documents</td>
+<td><strong>Symmetric crypto</strong></td>
+<td><strong>Speed</strong>, easily memorable keys</td>
+</tr>
+<tr class="even">
+<td>Protection of documents in a group of close users</td>
+<td><strong>Symmetric crypto</strong></td>
+<td><strong>Speed</strong>, ease of exchanging confidential keys</td>
+</tr>
+<tr class="odd">
+<td>Establishment of confidential channels between distant users (unknown)</td>
+<td><strong>Asymmetric crypto</strong></td>
+<td>No need to have a confidential channel: <strong>authenticity suffices</strong></td>
+</tr>
+<tr class="even">
+<td>Transactions between two distant users, Software protection (multicast distribution)</td>
+<td><strong>Asymmetric crypto for symmetric key protection</strong> + <strong>Symmetric crypto for data protection</strong></td>
+<td><strong>Speed</strong>, Only the symmetric key needs to be re-encrypted for each correspondent, Encrypted copy of software can be made public</td>
+</tr>
+<tr class="odd">
+<td>Protection of network segments</td>
+<td><strong>Symmetric crypto</strong></td>
+<td><strong>Speed</strong>, Stable environment → easy confidential key exchange between sysadmins</td>
+</tr>
+</tbody>
+</table>
+</section>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="dissection-of-an-attack-ransomware" class="level2">
+<h2 class="anchored" data-anchor-id="dissection-of-an-attack-ransomware">Dissection of an Attack: Ransomware</h2>
+<section id="definition-and-impact" class="level3">
+<h3 class="anchored" data-anchor-id="definition-and-impact">Definition and Impact</h3>
+<ul>
+<li><strong>Definition</strong>: Malicious software that encrypts data and demands a ransom for its restoration.</li>
+<li><strong>Limitations of the classic definition</strong>:
+<ul>
+<li>Does not cover the impact on <strong>critical infrastructure</strong> (e.g., Colonial Pipeline, May 2021)</li>
+<li>Underestimates the <strong>systemic scope</strong> of attacks</li>
+</ul></li>
+<li><strong>Alarming statistics</strong>:
+<ul>
+<li>Billions of annual attacks</li>
+<li>Considered the <strong>most dangerous cyber threat</strong> in 2021 (“Ransomware Everywhere”)</li>
+</ul></li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-37-contents" aria-controls="callout-37" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Ultra-summary
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-37" class="callout-37-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Malware</strong>: Encrypts data → demands ransom</li>
+<li><strong>Impact</strong>: Critical infrastructure (e.g., Colonial Pipeline)</li>
+<li><strong>Threat #1</strong> in cybersecurity (2021)</li>
+<li><strong>Targets</strong>: Individuals + businesses + states</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-38-contents" aria-controls="callout-38" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Original version
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-38" class="callout-38-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>“Ransomware (from English <strong>ransomware</strong>), ransom software, extortion software, is malicious software that holds personal data hostage. To do this, ransomware <strong>encrypts personal data</strong> then asks their owner to send money in exchange for the <strong>decryption key</strong>” (Wikipedia September 21, 2021).</p>
+<ul>
+<li><p><strong>Incomplete definition</strong> because <strong>ransomware</strong> affects a <strong>vast spectrum of IT infrastructure</strong></p></li>
+<li><p>For example, in May 2021, a <strong>ransomware attack</strong> against the <strong>Colonial Pipeline</strong> company caused a <strong>fuel supply disruption</strong> for a large part of the US coast</p></li>
+<li><p>With a <strong>total number of attacks</strong> counted in <strong>billions per year</strong>, “<strong>Ransomware Everywhere</strong>” is globally considered the <strong>most direct, visible and dangerous threat</strong> for users and companies in 2021!</p></li>
+</ul>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="ransomware-attack-lifecycle" class="level3">
+<h3 class="anchored" data-anchor-id="ransomware-attack-lifecycle">Ransomware Attack Lifecycle</h3>
+<section id="prevention-and-response" class="level4">
+<h4 class="anchored" data-anchor-id="prevention-and-response">Prevention and Response</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 43%">
+<col style="width: 56%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Phase</th>
+<th>Measures</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Prevention</strong></td>
+<td>- Regular patching<br>- Detection solutions (Firewalls, WAFs, IDS/IPS)<br>- Anti-malware scans (emails, files)</td>
+</tr>
+<tr class="even">
+<td><strong>Protection</strong></td>
+<td>- <strong>Offline backups</strong> (essential!)<br>- Strict security policies<br>- User training</td>
+</tr>
+<tr class="odd">
+<td><strong>Response</strong></td>
+<td>- <strong>Do not pay</strong> (official recommendation)<br>- Forensic analysis<br>- Restoration from backups</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="technical-dissection" class="level4">
+<h4 class="anchored" data-anchor-id="technical-dissection">Technical Dissection</h4>
+<ol type="1">
+<li><strong>Infection</strong>:
+<ul>
+<li>Vectors: Phishing, exploits, vulnerable RDP</li>
+<li>Propagation: Lateral (network) or vertical (system)</li>
+</ul></li>
+<li><strong>Execution</strong>:
+<ul>
+<li>Encryption of targeted files</li>
+<li>Deletion of shadow copies</li>
+<li>Persistence (registry, scheduled tasks)</li>
+</ul></li>
+<li><strong>Extortion</strong>:
+<ul>
+<li>Display of ransom demand</li>
+<li>Payment in cryptocurrencies (Bitcoin, Monero)</li>
+<li>Payment deadlines with penalties</li>
+</ul></li>
+<li><strong>Obfuscation</strong>:
+<ul>
+<li>Code obfuscation</li>
+<li>Communication via TOR/Deep Web</li>
+<li>Log erasure</li>
+</ul></li>
+</ol>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-39-contents" aria-controls="callout-39" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Ultra-summary
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-39" class="callout-39-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Attack cycle</strong>:</p>
+<ol type="1">
+<li>Infection (phishing/exploits)</li>
+<li>Execution (encryption + persistence)</li>
+<li>Extortion (ransom in crypto)</li>
+<li>Obfuscation (TOR + trace erasure)</li>
+</ol>
+<p><strong>Countermeasures</strong>:</p>
+<pre><code>✅ Offline backups
+✅ Patching + detection
+✅ Training
+❌ Do not pay</code></pre>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="cryptolocker-technical-analysis" class="level3">
+<h3 class="anchored">Cryptolocker: Technical Analysis</h3>
+<section id="attack-scheme" class="level4">
+<h4 class="anchored" data-anchor-id="attack-scheme">Attack Scheme</h4>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">graph TD
+    A[Initial infection] --&gt; B[File encryption]
+    B --&gt; C[Private key storage on C2 servers]
+    C --&gt; D[Ransom demand]
+    D --&gt; E{Payment ?}
+    E --&gt;|Yes| F[Decryption key sent via TOR]
+    E --&gt;|No| G[Permanent data loss]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="preferred-targets" class="level4">
+<h4 class="anchored">Preferred Targets</h4>
+<ul>
+<li><strong>Critical extensions</strong> (extract):
+<ul>
+<li>Documents: <code>.docx</code>, <code>.xlsx</code>, <code>.pdf</code>, <code>.pptx</code></li>
+<li>Databases: <code>.mdb</code>, <code>.sql</code>, <code>.sqlite</code></li>
+<li>Media: <code>.jpg</code>, <code>.png</code>, <code>.mp4</code>, <code>.avi</code></li>
+<li>Development: <code>.java</code>, <code>.cpp</code>, <code>.py</code>, <code>.php</code></li>
+<li>Financial: <code>.qbw</code>, <code>.qbb</code>, <code>.wallet</code></li>
+</ul></li>
+<li><strong>Behavior</strong>:
+<ul>
+<li><strong>Selective</strong> encryption (recent/modified files)</li>
+<li><strong>Double extortion</strong>: Encryption + threat of leakage</li>
+<li><strong>RaaS</strong> (Ransomware-as-a-Service): Economic model</li>
+</ul></li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-40-contents" aria-controls="callout-40" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Ultra-summary
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-40" class="callout-40-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Mechanism</strong>: - Private key stored on C2 servers - Payment → key via TOR - Targets: 100+ extensions (docs, DB, media)</p>
+<p><strong>Recent evolutions</strong>: - Double extortion (encryption + leakage) - RaaS (ransomware rental)</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-41-contents" aria-controls="callout-41" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">None</span>Original version
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-41" class="callout-41-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<section id="ransomware-complete-view" class="level3">
+<h3 class="anchored" data-anchor-id="ransomware-complete-view">Ransomware: Complete View</h3>
+<p><em>(Source: 2017 State of Cybersecurity, F-Secure Inc.)</em></p>
+</section>
+<section id="ransomware-complete-view-1" class="level2">
+<h2 class="anchored" data-anchor-id="ransomware-complete-view-1">Ransomware: Complete View</h2>
+<section id="prevention-remediation-and-response" class="level4">
+<h4 class="anchored" data-anchor-id="prevention-remediation-and-response">Prevention, Remediation and Response</h4>
+<ul>
+<li><strong>Patching</strong></li>
+<li><strong>Active and passive detection</strong> (Firewalls, WAFs, IDS, IPS, email malware scan, etc.)</li>
+<li><strong>Offline backups</strong> !</li>
+<li><strong>Security Policy</strong> - Rules for proper email usage</li>
+<li><strong>Training</strong> !</li>
+<li><strong>To pay or not to pay</strong>…</li>
+</ul>
+</section>
+<section id="technical-dissection-of-the-attack" class="level4">
+<h4 class="anchored" data-anchor-id="technical-dissection-of-the-attack">Technical Dissection of the Attack</h4>
+<ul>
+<li><strong>Infection and propagation</strong></li>
+<li><strong>Execution</strong></li>
+<li><strong>Payment</strong> (Crypto-currencies / Bitcoin)</li>
+<li><strong>Obfuscation</strong> (Obfuscation, TOR Networks/Deep Web)</li>
+</ul>
+</section>
+<section id="generic-scheme-of-a-cryptolocker-ransomware" class="level3">
+<h3 class="anchored" data-anchor-id="generic-scheme-of-a-cryptolocker-ransomware">Generic Scheme of a Cryptolocker Ransomware</h3>
+<ul>
+<li><strong>Decryption private keys</strong> are stored on the <strong>attacker’s</strong> servers</li>
+<li>They are sent to the <strong>victim</strong> after <strong>bitcoin payment</strong></li>
+<li>The <strong>trace</strong> is shredded using <strong>TOR networks</strong></li>
+</ul>
+</section>
+<section id="ransomware-cryptolocker-targets" class="level3">
+<h3 class="anchored" data-anchor-id="ransomware-cryptolocker-targets">Ransomware Cryptolocker: Targets</h3>
+<p><strong>Targeted file extensions</strong>: .jin, .xls, .xlsx, .pdf, .doc, .docx, .ppt, .pptx, .txt, .dwg, .bak, .bkf, .pst, .dbx, .zip, .rar, .mdb, .asp, .aspx, .html, .htm, .dbf, .3dm, .3ds, .3fr, .jar, .3g2, .xml, .png, .tif, .3gp, .java, .jpe, .jpeg, .jpg, .jsp, .php, .3pr, .7z, .ab4, .accdb, .accde, .accdr, .accdt, .ach, .kbx, .acr, .act, .adb, .ads, .agdl, .ai, .ait, .al, .apj, .arw, .asf, .asm, .asx, .avi, .awg, .back, .backup, .backupdb, .pbl, .bank, .bay, .bdb, .bgt, .bik, .bkp, .blend, .bpw, .c, .cdf, .cdr, .cdr3, .cdr4, .cdr5, .cdr6, .cdrw, .cdx, .ce1, .ce2, .cer, .cfp, .cgm, .cib, .class, .cls, .cmt, .cpi, .cpp, .cr2, .craw, .crt, .crw, .phtml, .php5, .cs, .csh, .csl, .tib, .csv, .dac, .db, .db3, .dbjournal, .dc2, .dcr, .dcs, .ddd, .ddoc, .ddrw, .dds, .der, .des, .design, .dgc, .djvu, .dng, .dot, .docm, .dotm, .dotx, .drf, .drw, .dtd, .dxb, .dxf, .dxg, .eml, .eps, .erbsql, .erf, .exf, .fdb, .ffd, .fff, .fh, .fmb, .fhd, .fla, .flac, .flv, .fpx, .fxg, .gray, .grey, .gry, .h, .hbk, .hpp, .ibank, .ibd, .ibz, .idx, .iif, .iiq, .incpas, .indd, .kc2, .kdbx, .kdc, .key, .kpdx, .lua, .m, .m4v, .max, .mdc, .mdf, .mef, .mfw, .mmw, .moneywell, .mos, .mov, .mp3, .mp4, .mpg, .mrw, .msg, .myd, .nd, .ndd, .nef, .nk2, .nop, .nrw, .ns2, .ns3, .ns4, .nsd, .nsf, .nsg, .nsh, .nwb, .nx2, .nxl, .nyf, .oab, .obj, .odb, .odc, .odf, .odg, .odm, .odp, .ods, .odt, .oil, .orf, .ost, .otg, .oth, .otp, .ots, .ott, .p12, .p7b, .p7c, .pab, .pages, .pas, .pat, .pcd, .pct, .pdb, .pdd, .pef, .pem, .pfx, .pl, .plc, .pot, .potm, .potx, .ppam, .pps, .ppsm, .ppsx, .pptm, .prf, .ps, .psafe3, .psd, .pspimage, .ptx, .py, .qba, .qbb, .qbm, .qbr, .qbw, .qbx, .qby, .r3d, .raf, .rat, .raw, .rdb, .rm, .rtf, .rw2, .rwl, .rwz, .s3db, .sas7bdat, .say, .sd0, .sda, .sdf, .sldm, .sldx, .sql, .sqlite, .sqlite3, .sqlitedb, .sr2, .srf, .srt, .srw, .st4, .st5, .st6, .st7, .st8, .std, .sti, .stw, .stx, .svg, .swf, .sxc, .sxd, .sxg, .sxi, .sxi, .sxm, .sxw, .tex, .tga, .thm, .tlg, .vob, .war, .wallet, .wav, .wb2, .wmv, .wpd, .wps, .x11, .x3f, .xis, .xla, .xlam, .xlk, .xlm, .xlr, .xlsb, .xlsm, .xlt, .xltm, .xltx, .xlw, .ycbcra, .yuv</p>
+<p><em>Source: Intel Security Advanced Threat Research - http://www.intelsecurity.com</em></p>
+</section>
+</section>
+</div>
+</div>
+</div>
+
+
+</section>
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

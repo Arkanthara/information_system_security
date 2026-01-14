@@ -1,0 +1,1983 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>ch5 – ISS</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b758ccaa5987ceb1b75504551e579abf.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-96c1bb8b336142dcc39f931773fab1b9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-9ee82e006983bafa07c9ac29a901142c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-96c1bb8b336142dcc39f931773fab1b9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">ISS</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-langage" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="bi bi-globe" role="img">
+</i> 
+ <span class="menu-text">Langage</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-langage">    
+        <li>
+    <a class="dropdown-item" href="./../index.html">
+ <span class="dropdown-text">Anglais</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./index.html">
+ <span class="dropdown-text">Français</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch1.html">Cours</a></li><li class="breadcrumb-item"><a href="./ch5.html">Fonctions de Hachage Cryptographiques et MACs</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Cours</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Notions de base en cryptographie</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cryptographie symétrique</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cryptographie Asymétrique (à Clés Publiques)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch5.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Fonctions de Hachage Cryptographiques et MACs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Signatures Digitales</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Authentification</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Protocoles d’Établissement de Clés (KEP)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch9.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tiers de Confiance et Certification (Trusted Third Parties - TTP)</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./exercices.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercices</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./presentations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Présentations</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#fonctions-de-hachage-cryptographiques-et-macs" id="toc-fonctions-de-hachage-cryptographiques-et-macs" class="nav-link active" data-scroll-target="#fonctions-de-hachage-cryptographiques-et-macs">Fonctions de Hachage Cryptographiques et MACs</a>
+  <ul class="collapse">
+  <li><a href="#fonctions-à-sens-unique-one-way-functions" id="toc-fonctions-à-sens-unique-one-way-functions" class="nav-link" data-scroll-target="#fonctions-à-sens-unique-one-way-functions">Fonctions à Sens Unique (One-Way Functions)</a></li>
+  <li><a href="#hash-functions-définitions" id="toc-hash-functions-définitions" class="nav-link" data-scroll-target="#hash-functions-définitions">Hash Functions : Définitions</a></li>
+  <li><a href="#message-authentication-codes-macs" id="toc-message-authentication-codes-macs" class="nav-link" data-scroll-target="#message-authentication-codes-macs">Message Authentication Codes (MACs)</a></li>
+  <li><a href="#attaques-sur-les-mdcs" id="toc-attaques-sur-les-mdcs" class="nav-link" data-scroll-target="#attaques-sur-les-mdcs">Attaques sur les MDCs</a>
+  <ul class="collapse">
+  <li><a href="#attaque-2nd-preimage-resistance" id="toc-attaque-2nd-preimage-resistance" class="nav-link" data-scroll-target="#attaque-2nd-preimage-resistance">Attaque 2nd-Preimage Resistance</a></li>
+  <li><a href="#attaque-collision-resistance-birthday-paradox" id="toc-attaque-collision-resistance-birthday-paradox" class="nav-link" data-scroll-target="#attaque-collision-resistance-birthday-paradox">Attaque Collision Resistance : Birthday Paradox</a></li>
+  </ul></li>
+  <li><a href="#résistance-calculatoire-récapitulatif" id="toc-résistance-calculatoire-récapitulatif" class="nav-link" data-scroll-target="#résistance-calculatoire-récapitulatif">Résistance Calculatoire : Récapitulatif</a></li>
+  <li><a href="#mdcs-basés-sur-des-systèmes-de-cryptage" id="toc-mdcs-basés-sur-des-systèmes-de-cryptage" class="nav-link" data-scroll-target="#mdcs-basés-sur-des-systèmes-de-cryptage">MDCs Basés sur des Systèmes de Cryptage</a></li>
+  <li><a href="#customized-mdcs" id="toc-customized-mdcs" class="nav-link" data-scroll-target="#customized-mdcs">Customized MDCs</a></li>
+  <li><a href="#macs-basés-sur-des-systèmes-de-cryptage" id="toc-macs-basés-sur-des-systèmes-de-cryptage" class="nav-link" data-scroll-target="#macs-basés-sur-des-systèmes-de-cryptage">MACs Basés sur des Systèmes de Cryptage</a></li>
+  <li><a href="#nested-macs-et-hmacs" id="toc-nested-macs-et-hmacs" class="nav-link" data-scroll-target="#nested-macs-et-hmacs">Nested MACs et HMACs</a></li>
+  <li><a href="#applications-des-hash-functions" id="toc-applications-des-hash-functions" class="nav-link" data-scroll-target="#applications-des-hash-functions">Applications des Hash Functions</a>
+  <ul class="collapse">
+  <li><a href="#intégrité-des-données" id="toc-intégrité-des-données" class="nav-link" data-scroll-target="#intégrité-des-données">Intégrité des Données</a></li>
+  <li><a href="#blockchains-et-proof-of-work" id="toc-blockchains-et-proof-of-work" class="nav-link" data-scroll-target="#blockchains-et-proof-of-work">Blockchains et Proof of Work</a></li>
+  <li><a href="#autres-applications" id="toc-autres-applications" class="nav-link" data-scroll-target="#autres-applications">Autres Applications</a></li>
+  </ul></li>
+  <li><a href="#randomized-hash-functions-exemple-unix" id="toc-randomized-hash-functions-exemple-unix" class="nav-link" data-scroll-target="#randomized-hash-functions-exemple-unix">Randomized Hash Functions : Exemple UNIX</a></li>
+  </ul></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="ch5.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch1.html">Cours</a></li><li class="breadcrumb-item"><a href="./ch5.html">Fonctions de Hachage Cryptographiques et MACs</a></li></ol></nav></header>
+
+
+
+
+
+<section id="fonctions-de-hachage-cryptographiques-et-macs" class="level1">
+<h1>Fonctions de Hachage Cryptographiques et MACs</h1>
+<section id="fonctions-à-sens-unique-one-way-functions" class="level2">
+<h2 class="anchored" data-anchor-id="fonctions-à-sens-unique-one-way-functions">Fonctions à Sens Unique (One-Way Functions)</h2>
+<p>Une fonction <span class="math inline">\(f\)</span> est à sens unique si <span class="math inline">\(f(x) = y\)</span> est facile à calculer, mais trouver <span class="math inline">\(x\)</span> à partir de <span class="math inline">\(y\)</span> est calculatoirement impossible pour la majorité des valeurs.</p>
+<p><strong>Exemples :</strong></p>
+<ul>
+<li>Carrés modulo composite : <span class="math inline">\(f(x) = x^2 \bmod n\)</span> avec <span class="math inline">\(n = pq\)</span></li>
+<li>Construction DES : <span class="math inline">\(y = E_k(x) \oplus x\)</span> avec <span class="math inline">\(k\)</span> fixée et connue</li>
+</ul>
+<p><strong>Note :</strong> OWF ≠ OWHF (les hash functions imposent compression et 2nd-preimage resistance).</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Texte original">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Texte original
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Une <strong>fonction f est dite à sens unique</strong> (one-way function ou <strong>OWF</strong>) si <span class="math inline">\(x \in X\)</span> on peut facilement calculer <span class="math inline">\(f(x) = y\)</span> mais pour la grande majorité des <span class="math inline">\(y \in Y\)</span> il est <strong>calculatoirement impossible</strong> de trouver un <span class="math inline">\(x\)</span> tel que <span class="math inline">\(f(x) = y\)</span>.</p>
+<p><strong>Exemples:</strong></p>
+<ul>
+<li>calcul des carrées modulo un composite: <span class="math inline">\(f(x) = x^2 \bmod n\)</span> avec <span class="math inline">\(n = pq\)</span> (p et q inconnus) est une <strong>one-way function</strong> car l’inverse est difficile (voir le problème de base <strong>SQROOTP</strong>).</li>
+<li>on peut construire une one-way function sur la base de DES ou de n’importe quel autre système de cryptage à blocs <span class="math inline">\(E\)</span> comme suit: <span class="math inline">\(y = f(x) = E_k(x) \oplus x\)</span>, <span class="math inline">\(\forall x\)</span>, avec <span class="math inline">\(k\)</span> une clé fixée et connue. On peut considérer que <span class="math inline">\(E_k(x) \oplus x\)</span> a un comportement (pseudo) aléatoire par construction de <span class="math inline">\(E\)</span>. Le calcul de l’inverse revient à trouver un <span class="math inline">\(x\)</span> tel que: <span class="math inline">\(x = E_k^{-1}(x \oplus y)\)</span>, ce qui est considéré difficile avec les propriétés de <span class="math inline">\(E\)</span>. A noter que <span class="math inline">\(f(x) = E_k(x)\)</span> ne suffirait pas pour en faire une OWF car, en connaissant la clé, DES est réversible.</li>
+</ul>
+<p><strong>OWF ≠ OWHF</strong>: A noter qu’une OWHF en tant que hash function impose des restrictions supplémentaires sur les domaines sources et image ainsi que sur la 2nd-preimage resistance qui ne sont pas forcement respectés par des OWFs.</p>
+<p><strong>Exemple</strong>: <span class="math inline">\(f(x) = x^2 \bmod n\)</span> avec <span class="math inline">\(n = pq\)</span> (p et q inconnus) n’est pas une OWHF car étant donné <span class="math inline">\(x\)</span>, <span class="math inline">\(-x\)</span> est une collision triviale.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Révision rapide">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Révision rapide
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>OWF</strong> : facile dans un sens (<span class="math inline">\(f(x) \to y\)</span>), impossible dans l’autre (<span class="math inline">\(y \to x\)</span>).</p>
+<p>Exemples : carrés modulaires, <span class="math inline">\(E_k(x) \oplus x\)</span>.</p>
+<p>OWF ≠ OWHF (hash functions = plus de contraintes).</p>
+</div>
+</div>
+</div>
+</section>
+<section id="hash-functions-définitions" class="level2">
+<h2 class="anchored" data-anchor-id="hash-functions-définitions">Hash Functions : Définitions</h2>
+<p>Une hash function <span class="math inline">\(h\)</span> possède deux propriétés essentielles :</p>
+<ul>
+<li><strong>Compression</strong> : transforme des données de longueur arbitraire en sortie de longueur fixe</li>
+<li><strong>Facilité de calcul</strong> : <span class="math inline">\(h(x)\)</span> est rapide à calculer</li>
+</ul>
+<p><strong>Classification :</strong></p>
+<ul>
+<li><strong>Unkeyed</strong> (sans clé) : MDC (Manipulation Detection Code)</li>
+<li><strong>Keyed</strong> (avec clé) : MAC (Message Authentication Code)</li>
+</ul>
+<p><strong>Propriétés de sécurité :</strong></p>
+<ol type="1">
+<li><strong>Preimage resistance</strong> : étant donné <span class="math inline">\(y\)</span>, impossible de trouver <span class="math inline">\(x\)</span> tel que <span class="math inline">\(h(x) = y\)</span></li>
+<li><strong>2nd-preimage resistance</strong> (weak collision) : étant donné <span class="math inline">\(x\)</span>, impossible de trouver <span class="math inline">\(x' \neq x\)</span> tel que <span class="math inline">\(h(x) = h(x')\)</span></li>
+<li><strong>Collision resistance</strong> (strong collision) : impossible de trouver <span class="math inline">\(x \neq x'\)</span> quelconques avec <span class="math inline">\(h(x) = h(x')\)</span></li>
+</ol>
+<p><strong>Terminologie :</strong></p>
+<ul>
+<li><strong>OWHF</strong> (weak one-way) : satisfait (1) et (2)</li>
+<li><strong>CRHF</strong> (strong one-way) : satisfait (2) et (3)</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled" title="Texte original">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Texte original
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Une <strong>fonction de hachage</strong> (hash function) est une fonction <span class="math inline">\(h\)</span> ayant les propriétés suivantes:</p>
+<ul>
+<li><strong>compression</strong>: la fonction <span class="math inline">\(h\)</span> fait correspondre à un ensemble <span class="math inline">\(X\)</span> composée par des chaînes de bits de longueur finie mais arbitraire, un ensemble <span class="math inline">\(Y\)</span> composé par des chaînes de bits de longueur finie et fixée (et normalement inférieur à la taille de <span class="math inline">\(X\)</span>) avec <span class="math inline">\(h(x) = y\)</span>, et <span class="math inline">\(x \in X\)</span>, <span class="math inline">\(y \in Y\)</span>.</li>
+<li><strong>facile à calculer</strong>: partant de <span class="math inline">\(h\)</span> et <span class="math inline">\(x \in X\)</span>, <span class="math inline">\(h(x)\)</span> est facile à calculer.</li>
+</ul>
+<p>Une hash function est dite <strong>“à clé”</strong> (keyed hash function) si une clé intervient dans le calcul de la fonction (<span class="math inline">\(h_k(x) = y\)</span>); sinon on l’appelle <strong>“sans clé”</strong> (unkeyed hash function).</p>
+<p>Les hash functions ont des nombreuses applications informatiques dont l’archivage structuré facilitant la recherche. Coté sécurité nous allons étudier deux catégories principales:</p>
+<ul>
+<li><strong>codes détecteurs d’altérations</strong> (manipulation detection codes (<strong>MDC</strong>) or message integrity codes (<strong>MIC</strong>)): ce sont des unkeyed functions permettant de fournir un service d’intégrité sous certaines conditions. Le résultat d’une telle fonction est appelée <strong>MDC-value</strong> ou, simplement, <strong>digest</strong>.</li>
+<li><strong>codes d’authentification de message</strong> (message authentication codes ou <strong>MAC</strong>) qui sont des keyed functions permettant d’authentifier la source du message et d’assurer son intégrité sans utiliser des mécanismes (cryptage) additionnels.</li>
+</ul>
+<p><strong>Quelques propriétés de base des hash functions:</strong></p>
+<ul>
+<li><strong>1) preimage resistance</strong>: étant donné un <span class="math inline">\(y \in Y\)</span>, il est calculatoirement impossible de trouver une pré-image <span class="math inline">\(x \in X\)</span> satisfaisant <span class="math inline">\(h(x) = y\)</span>.</li>
+<li><strong>2) 2nd-preimage resistance</strong>: étant donné un <span class="math inline">\(x \in X\)</span> et son image <span class="math inline">\(y \in Y\)</span>, avec <span class="math inline">\(h(x) = y\)</span>, il est calculatoirement impossible de trouver un <span class="math inline">\(x' \neq x\)</span> tel que <span class="math inline">\(h(x) = h(x')\)</span>. Aussi appelée <strong>weak collision resistance</strong>.</li>
+<li><strong>3) collision résistance</strong>: il est calculatoirement impossible de trouver deux pré-images <span class="math inline">\(x, x' \in X\)</span> distinctes pour lesquels <span class="math inline">\(h(x) = h(x')\)</span> (pas de restriction sur le choix des valeurs). Aussi appelée <strong>strong collision resistance</strong>.</li>
+</ul>
+<p>Une <strong>fonction de hachage à sens unique</strong> (one way hash function ou <strong>OWHF</strong>) est un MDC satisfaisant 1) et 2). Aussi appelée: <strong>weak one-way hash function</strong>.</p>
+<p>Une <strong>fonction de hachage résistante aux collisions</strong> (collision resistant hash function ou <strong>CRHF</strong>) est un MDC satisfaisant le propriétés 2) et 3). (A noter que 3) ⇒ 2)). Aussi appelée: <strong>strong one-way hash function</strong>.</p>
+<p><strong>OWF ≠ OWHF</strong>: A noter qu’une OWHF en tant que hash function impose des restrictions supplémentaires sur les domaines sources et image ainsi que sur la 2nd-preimage resistance qui ne sont pas forcement respectés par des OWFs.</p>
+<p><strong>Exemple</strong>: <span class="math inline">\(f(x) = x^2 \bmod n\)</span> avec <span class="math inline">\(n = pq\)</span> (p et q inconnus) n’est pas une OWHF car étant donné <span class="math inline">\(x\)</span>, <span class="math inline">\(-x\)</span> est une collision triviale.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Révision rapide">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Révision rapide
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Hash function</strong> : compression + calcul facile</p>
+<p><strong>MDC</strong> (sans clé) pour intégrité</p>
+<p><strong>MAC</strong> (avec clé) pour authentification</p>
+<p><strong>Propriétés</strong></p>
+<ol type="1">
+<li>preimage resistance</li>
+<li>2nd-preimage resistance</li>
+<li>collision resistance</li>
+</ol>
+<p><strong>OWHF</strong> = (1)+(2)</p>
+<p><strong>CRHF</strong> = (2)+(3).</p>
+</div>
+</div>
+</div>
+</section>
+<section id="message-authentication-codes-macs" class="level2">
+<h2 class="anchored" data-anchor-id="message-authentication-codes-macs">Message Authentication Codes (MACs)</h2>
+<p>Un MAC est une famille de fonctions <span class="math inline">\(h_k\)</span> paramétrées par une clé secrète <span class="math inline">\(k\)</span> :</p>
+<p><strong>Propriétés :</strong></p>
+<ol type="1">
+<li><strong>Compression</strong> : entrée arbitraire → sortie fixe</li>
+<li><strong>Facile à calculer</strong> : avec <span class="math inline">\(k\)</span> connue, <span class="math inline">\(h_k(x)\)</span> est rapide</li>
+<li><strong>Computation-resistance</strong> : sans <span class="math inline">\(k\)</span>, impossible de calculer des paires <span class="math inline">\((x, h_k(x))\)</span> valides</li>
+</ol>
+<p><strong>Implications :</strong></p>
+<ul>
+<li>Key non-recovery : impossible de retrouver <span class="math inline">\(k\)</span> à partir de paires <span class="math inline">\((x_i, h_k(x_i))\)</span></li>
+<li>Preimage et collision resistance pour quiconque ne possède pas <span class="math inline">\(k\)</span></li>
+</ul>
+<p><strong>Usage :</strong> Authentification d’origine + intégrité des messages sans révéler de secret directement.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Texte original">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Texte original
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Un <strong>Message Authentication Code</strong> (<strong>MAC</strong>) est une famille de fonctions <span class="math inline">\(h_k\)</span> paramétrisées par une clé secrète <span class="math inline">\(k\)</span> ayant les propriétés suivantes:</p>
+<ul>
+<li><strong>1) compression</strong>: comme pour les fonctions de hash génériques mais appliqué à <span class="math inline">\(h_k\)</span>.</li>
+<li><strong>2) facile à calculer</strong>: à partir d’une fonction <span class="math inline">\(h_k\)</span>, et d’une clé connue <span class="math inline">\(k\)</span>, on peut facilement calculer <span class="math inline">\(h_k(x)\)</span>. Le résultat est appelée un <strong>MAC-value</strong> ou, simplement, un <strong>MAC</strong>.</li>
+<li><strong>3) résistance calculatoire</strong> (computation-resistance): sans connaissance de la clé symétrique <span class="math inline">\(k\)</span>, il est (calculatoirement) impossible de calculer des paires <span class="math inline">\((x, h_k(x))\)</span> à partir de 0 ou plusieurs paires connus <span class="math inline">\((x_i, h_k(x_i))\)</span> pour tout <span class="math inline">\(x \neq x_i\)</span>.</li>
+</ul>
+<p>La propriété 3) implique que les paires <span class="math inline">\((x_i, h_k(x_i))\)</span> ne peuvent non plus servir à calculer la clé <span class="math inline">\(k\)</span> (<strong>key non-recovery</strong>). Cependant la propriété key non-recovery n’implique pas computation-resistance car des attaques chosen/known-plaintext pourraient mener à des paires <span class="math inline">\((x, h_k(x))\)</span> falsifiées.</p>
+<p>L’impossibilité de calculer des paires <span class="math inline">\((x, h_k(x))\)</span> se traduit également en preimage et collision resistance (cf.&nbsp;transparent précédent) pour toute entité ne possédant pas la clé <span class="math inline">\(k\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Révision rapide">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Révision rapide
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>MAC</strong> = hash avec clé <span class="math inline">\(k\)</span></p>
+<p>Sans <span class="math inline">\(k\)</span> : impossible de forger <span class="math inline">\((x, h_k(x))\)</span> ou retrouver <span class="math inline">\(k\)</span></p>
+<p>Garantit authentification d’origine + intégrité.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="attaques-sur-les-mdcs" class="level2">
+<h2 class="anchored" data-anchor-id="attaques-sur-les-mdcs">Attaques sur les MDCs</h2>
+<section id="attaque-2nd-preimage-resistance" class="level3">
+<h3 class="anchored" data-anchor-id="attaque-2nd-preimage-resistance">Attaque 2nd-Preimage Resistance</h3>
+<p><strong>Problème :</strong> Étant donné <span class="math inline">\(h(x) = y\)</span>, trouver <span class="math inline">\(x'\)</span> tel que <span class="math inline">\(h(x') = h(x)\)</span>.</p>
+<p><strong>Analyse probabiliste :</strong></p>
+<p>Pour un digest de <span class="math inline">\(m\)</span> bits (<span class="math inline">\(n = 2^m\)</span> sorties possibles), la probabilité d’avoir au moins une collision après <span class="math inline">\(k\)</span> essais est :</p>
+<p><span class="math display">\[P(\text{collision}) \approx 1 - (1-1/n)^k \approx k/n\]</span></p>
+<p>Pour <span class="math inline">\(P = 0.5\)</span> : <span class="math inline">\(k = n/2 = 2^{m-1}\)</span></p>
+<p><strong>Conclusion :</strong> Pour un digest de <span class="math inline">\(m\)</span> bits, il faut environ <span class="math inline">\(2^{m-1}\)</span> essais pour trouver une 2nd-preimage avec probabilité 0.5.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Texte original">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Texte original
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Problème</strong>: étant donné <span class="math inline">\(h(x) = y\)</span>, trouver <span class="math inline">\(x'\)</span> tel que <span class="math inline">\(h(x')=h(x)\)</span>.</p>
+<p><strong>Exemple pratique</strong>: on a un texte avec un digest associé portant une signature digitale; on veut créer un faux texte portant la même signature (sans avoir le contrôle sur le texte original). Quelles sont nos chances d’un point de vue probabiliste?</p>
+<p>Soit une hash function <span class="math inline">\(h\)</span> avec <span class="math inline">\(n\)</span> sorties possibles et une valeur donnée <span class="math inline">\(h(x)\)</span>. Si <span class="math inline">\(h\)</span> est appliquée à <span class="math inline">\(k\)</span> valeurs aléatoires, quelle doit être la valeur de <span class="math inline">\(k\)</span> pour que la probabilité d’avoir au moins un <span class="math inline">\(y\)</span> tel que <span class="math inline">\(h(x) = h(y)\)</span> soit 0.5?</p>
+<p>Pour la première valeur de <span class="math inline">\(y\)</span>, la probabilité que <span class="math inline">\(h(x) = h(y)\)</span> est <span class="math inline">\(1/n\)</span>. Inversement, la probabilité que <span class="math inline">\(h(x) \neq h(y)\)</span> est <span class="math inline">\(1-1/n\)</span>. Pour <span class="math inline">\(k\)</span> valeurs, la probabilité de n’avoir aucune collision est de: <span class="math inline">\((1-1/n)^k\)</span>, soit:</p>
+<p><span class="math display">\[\left(1 - \frac{1}{n}\right)^k = 1 - \frac{k}{n} + \frac{1}{2!}\left(\frac{k}{n}\right)^2 - \frac{1}{3!}\left(\frac{k}{n}\right)^3 + \ldots\]</span></p>
+<p>ce qui pour <span class="math inline">\(n\)</span> très grand peut être approché par <span class="math inline">\(1 - k/n\)</span>. Par conséquent, la probabilité complémentaire d’avoir au moins une collision est d’environ <span class="math inline">\(k/n\)</span>; c’est qui nous donne <span class="math inline">\(k = n/2\)</span> pour une probabilité de 0.5.</p>
+<p><strong>Conclusion</strong>: pour un digest de <span class="math inline">\(m\)</span> bits, le nombre d’essais nécessaires à trouver un <span class="math inline">\(y\)</span> tel que <span class="math inline">\(h(x) = h(y)\)</span> avec une probabilité de 0.5 est <span class="math inline">\(2^{m-1}\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Révision rapide">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Révision rapide
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Pour casser 2nd-preimage resistance avec digest de <span class="math inline">\(m\)</span> bits : <span class="math inline">\(2^{m-1}\)</span> essais (prob 0.5).</p>
+</div>
+</div>
+</div>
+</section>
+<section id="attaque-collision-resistance-birthday-paradox" class="level3">
+<h3 class="anchored" data-anchor-id="attaque-collision-resistance-birthday-paradox">Attaque Collision Resistance : Birthday Paradox</h3>
+<p><strong>Problème :</strong> Trouver deux valeurs distinctes <span class="math inline">\(x, x'\)</span> telles que <span class="math inline">\(h(x) = h(x')\)</span>.</p>
+<p><strong>Paradoxe d’anniversaire :</strong> Dans un groupe de 23 personnes, probabilité &gt; 0.5 d’avoir deux anniversaires identiques.</p>
+<p><strong>Résultat mathématique :</strong></p>
+<p>Pour <span class="math inline">\(n\)</span> sorties possibles, la probabilité de collision après <span class="math inline">\(k\)</span> calculs :</p>
+<p><span class="math display">\[P(\text{au moins 1 collision}) = 1 - e^{-k(k-1)/(2n)}\]</span></p>
+<p>Pour <span class="math inline">\(P \geq 0.5\)</span> : <span class="math inline">\(k \approx 1.17\sqrt{n}\)</span></p>
+<p><strong>Conséquence cryptographique :</strong> Pour un digest de <span class="math inline">\(m\)</span> bits (<span class="math inline">\(n = 2^m\)</span> sorties), il faut environ <span class="math inline">\(2^{m/2}\)</span> calculs pour trouver une collision avec probabilité &gt; 0.5.</p>
+<p><strong>Exemple pratique :</strong> Modification d’un contrat en 237 variations pour trouver une version frauduleuse ayant le même digest que la version légitime.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Texte original">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Texte original
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Problème</strong>: trouver deux valeurs <span class="math inline">\(x, x'\)</span> distincts tel que <span class="math inline">\(h(x) = h(x')\)</span>.</p>
+<p><strong>Exemple pratique</strong>: On doit faire signer un texte à quelqu’un et on veut appliquer cette signature à un texte falsifié (on contrôle le texte original). Quelles sont nos chances de trouver deux textes originaux satisfaisant ce critère?</p>
+<p>Le <strong>birthday paradox</strong> est un problème probabiliste classique qui montre que dans une réunion de 23 personnes seulement, on a déjà une chance sur deux d’avoir deux personnes ayant leur anniversaire le même jour.</p>
+<p>Soit <span class="math inline">\(y_1, y_2,..., y_n\)</span> toutes les sorties possibles d’une hash function. Combien des <span class="math inline">\(h(x_i)\)</span>: <span class="math inline">\(h(x_1), h(x_2),...,h(x_k)\)</span> devons nous calculer pour avoir une probabilité de collision égale ou supérieure à 0.5 ?</p>
+<p>Le premier choix pour <span class="math inline">\(h(x_1)\)</span> est arbitraire (prob = 1), le deuxième <span class="math inline">\(h(x_2) \neq h(x_1)\)</span> a une probabilité de <span class="math inline">\(1 - 1/n\)</span>, le troisième de <span class="math inline">\(1 - 2/n\)</span>, etc. Ce qui nous donne une probabilité de ne pas avoir des collisions égale à:</p>
+<p><span class="math display">\[P_{\text{no collision}} = \prod_{i=1}^{k-1}\left(1 - \frac{i}{n}\right)\]</span></p>
+<p>On prouve facilement (développement en série de <span class="math inline">\(e^{-x}\)</span>) que pour <span class="math inline">\(0 \leq x \leq 1\)</span>: <span class="math inline">\(1-x \leq e^{-x}\)</span> et donc:</p>
+<p><span class="math display">\[P_{\text{no coll}} \leq \prod_{i=1}^{k-1}\left(1 - \frac{i}{n}\right) \leq \prod_{i=1}^{k-1} e^{-i/n} = e^{-k(k-1)/(2n)}\]</span></p>
+<p>La probabilité d’avoir au moins une collision est <span class="math inline">\(P_{\text{au-moins1}} = 1 - P_{\text{no-coll}}\)</span>. Pour connaître la valeur de <span class="math inline">\(k\)</span> pour laquelle <span class="math inline">\(P_{\text{au-moins1}}\)</span> est plus grand que 0.5, il suffit de calculer:</p>
+<p><span class="math display">\[\frac{1}{2} \leq 1 - e^{-k(k-1)/(2n)}\]</span></p>
+<p>Si <span class="math inline">\(k\)</span> est grand, on remplace <span class="math inline">\(k(k-1)\)</span> par <span class="math inline">\(k^2\)</span> et on obtient après des calculs simples:</p>
+<p><span class="math display">\[k \geq \sqrt{2\ln(2) \cdot n} \approx 1.17\sqrt{n}\]</span></p>
+<p>En prenant <span class="math inline">\(n = 365\)</span> pour l’anniversaire, on obtient <span class="math inline">\(k = 22.3\)</span>, ce qui confirme l’énoncé du problème.</p>
+<p><strong>Conséquence pour les hash functions</strong>: Soit une hash function avec <span class="math inline">\(2^m\)</span> sorties possibles. Si <span class="math inline">\(h\)</span> est appliqué à <span class="math inline">\(k = 2^{m/2}\)</span> entrées on a une probabilité supérieur à 0.5 d’obtenir <span class="math inline">\(h(x_i) = h(x_j)\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Révision rapide">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Révision rapide
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Birthday paradox</strong> : pour casser collision resistance avec digest de <span class="math inline">\(m\)</span> bits : <span class="math inline">\(2^{m/2}\)</span> essais (prob &gt; 0.5).</p>
+<p>Exemple : 23 personnes suffisent pour anniversaires identiques.</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="résistance-calculatoire-récapitulatif" class="level2">
+<h2 class="anchored" data-anchor-id="résistance-calculatoire-récapitulatif">Résistance Calculatoire : Récapitulatif</h2>
+<p>Pour une hash function avec digest de <span class="math inline">\(n\)</span> bits et clé MAC de <span class="math inline">\(t\)</span> bits :</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Type</th>
+<th>Propriété</th>
+<th>Difficulté</th>
+<th>Taille conseillée</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>OWHF</strong></td>
+<td>Preimage</td>
+<td><span class="math inline">\(2^n\)</span></td>
+<td><span class="math inline">\(n \geq 128\)</span> bits</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>2nd-preimage</td>
+<td><span class="math inline">\(2^{n-1}\)</span></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><strong>CRHF</strong></td>
+<td>Collision</td>
+<td><span class="math inline">\(2^{n/2}\)</span></td>
+<td><span class="math inline">\(n \geq 256\)</span> bits</td>
+</tr>
+<tr class="even">
+<td><strong>MAC</strong></td>
+<td>Key recovery</td>
+<td><span class="math inline">\(2^t\)</span></td>
+<td><span class="math inline">\(t \geq 256\)</span> bits</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>Computation</td>
+<td><span class="math inline">\(\min(2^t, 2^n)\)</span></td>
+<td><span class="math inline">\(n \geq 128\)</span> bits</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Implications pratiques :</strong></p>
+<ul>
+<li>Pour intégrité seule (OWHF) : 128 bits suffisent</li>
+<li>Pour résistance aux collisions (CRHF) : minimum 256 bits</li>
+<li>MACs : clé de 256 bits, digest de 128 bits minimum</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled" title="Texte original">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Texte original
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(n\)</span>: taille du MDC-value ou du MAC-value résultant de l’application de la hash function</p>
+<p><span class="math inline">\(t\)</span>: taille de la clé du MAC</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 17%">
+<col style="width: 15%">
+<col style="width: 22%">
+<col style="width: 16%">
+<col style="width: 28%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Type de Hash Fct.</th>
+<th>Caractéristique</th>
+<th>Difficulté Calculatoire</th>
+<th>But de l’attaque</th>
+<th>Taille conseillée du digest/clé</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>OWHF</strong></td>
+<td>preimage resistance</td>
+<td><span class="math inline">\(2^n\)</span></td>
+<td>trouver une préimage</td>
+<td><span class="math inline">\(n \geq 128\)</span> bits</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>2nd-preimage résistance</td>
+<td><span class="math inline">\(2^{n-1}\)</span></td>
+<td>trouver <span class="math inline">\(x'\)</span> avec <span class="math inline">\(h(x') = h(x)\)</span></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><strong>CRHF</strong></td>
+<td>collision resistance</td>
+<td><span class="math inline">\(2^{n/2}\)</span></td>
+<td>trouver une collision</td>
+<td><span class="math inline">\(n \geq 256\)</span> bits</td>
+</tr>
+<tr class="even">
+<td><strong>MAC</strong></td>
+<td>key non-recovery</td>
+<td><span class="math inline">\(2^t\)</span></td>
+<td>trouver la clé</td>
+<td><span class="math inline">\(n \geq 128\)</span></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>computation resistance</td>
+<td><span class="math inline">\(\min(2^t,2^n)\)</span></td>
+<td>produire un <span class="math inline">\((x, h_k(x))\)</span></td>
+<td><span class="math inline">\(t \geq 256\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Révision rapide">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Révision rapide
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Efforts</strong> : preimage <span class="math inline">\(2^n\)</span>, 2nd-preimage <span class="math inline">\(2^{n-1}\)</span>, collision <span class="math inline">\(2^{n/2}\)</span>.</p>
+<p><strong>Tailles</strong> : OWHF ≥128 bits, CRHF ≥256 bits, MAC clé ≥256 bits.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="mdcs-basés-sur-des-systèmes-de-cryptage" class="level2">
+<h2 class="anchored" data-anchor-id="mdcs-basés-sur-des-systèmes-de-cryptage">MDCs Basés sur des Systèmes de Cryptage</h2>
+<p><strong>Principe :</strong> Utiliser un algorithme de cryptage symétrique (DES, AES) pour construire un MDC.</p>
+<p><strong>Défis à résoudre :</strong></p>
+<ul>
+<li>Casser la réversibilité des algorithmes symétriques</li>
+<li>Augmenter la largeur nominale (DES = 64 bits insuffisant pour CRHF)</li>
+</ul>
+<p><strong>Fonctionnement :</strong></p>
+<ul>
+<li>Traitement séquentiel des blocs</li>
+<li>Opérations de chaînage avec XOR</li>
+<li>Combinaison de <span class="math inline">\(n\)</span> boîtes pour digests de taille <span class="math inline">\(n \times\)</span> largeur nominale</li>
+</ul>
+<p><strong>Modèles classiques :</strong></p>
+<ol type="1">
+<li><strong>Matyas-Meyer-Oseas</strong> : <span class="math inline">\(H_i = E_{m_i}(H_{i-1}) \oplus H_{i-1}\)</span></li>
+<li><strong>Davies-Meyer</strong> : <span class="math inline">\(H_i = E_{m_i}(H_{i-1}) \oplus m_i\)</span></li>
+<li><strong>Miyaguchi-Preneel</strong> : <span class="math inline">\(H_i = E_{m_i}(H_{i-1}) \oplus H_{i-1} \oplus m_i\)</span></li>
+</ol>
+<p><strong>Exemples pratiques :</strong></p>
+<ul>
+<li><strong>MDC-2</strong> : utilise 2 boîtes DES → digest 128 bits</li>
+<li><strong>MDC-4</strong> : utilise 4 boîtes DES → digest 128 bits</li>
+</ul>
+<p><strong>Limitation :</strong> Sécurité fortement dépendante de l’algorithme sous-jacent.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Texte original">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Texte original
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Idée</strong>: utiliser un système de cryptage symétrique connu pour construire un MDC.</p>
+<p><strong>Problèmes à résoudre</strong>:</p>
+<ul>
+<li>il faut “casser” la réversibilité des algorithmes symétriques pour en faire des OWHF ou des CRHF.</li>
+<li>La “largeur nominale” de certains systèmes de cryptage (eg. DES) est de 64 bits, ce qui n’est pas suffisant pour construire des CRHF.</li>
+</ul>
+<p><strong>Principe de fonctionnement</strong>:</p>
+<ul>
+<li>les blocs de texte sont séquentiellement traités par la “boîte” de cryptage.</li>
+<li>la compression se base sur des opérations de chaînage avec les blocs résultant des itérations précédentes et des fonctions logiques (fondamentalement XOR). Ceci rend également le procédé irréversible.</li>
+<li>Si nécessaire, <span class="math inline">\(n\)</span> boîtes de cryptage seront combinées pour obtenir des longueurs de digests <span class="math inline">\(n\)</span> fois supérieures à la largeur nominale des boîtes utilisées.</li>
+</ul>
+<p><strong>Attention</strong>: la sécurité de ces algorithmes est fortement dépendante des propriétés des boîtes de cryptage sous-jacents.</p>
+<p><strong>Exemples</strong>:</p>
+<ul>
+<li>Les modèles de <strong>Matyas-Meyer-Oseas</strong>, <strong>Davies-Meyer</strong> et <strong>Miyaguchi-Preneel</strong>.</li>
+<li><strong>MDC-2</strong> et <strong>MDC-4</strong> utilisant respectivement 2 et 4 boîtes DES. Digest = 128 bits.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Révision rapide">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Révision rapide
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>MDCs à partir de crypto symétrique : casser réversibilité + chaînage XOR.</p>
+<p>Modèles : Matyas-Meyer-Oseas, Davies-Meyer, Miyaguchi-Preneel.</p>
+<p>MDC-2/4 avec DES → 128 bits.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="customized-mdcs" class="level2">
+<h2 class="anchored" data-anchor-id="customized-mdcs">Customized MDCs</h2>
+<p>Fonctions conçues spécifiquement pour la génération de digests, optimisées pour vitesse et sécurité.</p>
+<p><strong>Éléments de construction :</strong></p>
+<ul>
+<li>Padding + ajout de la longueur du message</li>
+<li>Constantes prédéfinies pour augmenter la dispersion</li>
+<li>Rounds successifs avec opérations logiques et rotations</li>
+<li>Chaînage des sorties entre rounds</li>
+<li>Chaque bit du digest dépend de chaque bit d’entrée</li>
+</ul>
+<p><strong>Algorithmes principaux :</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Algorithme</th>
+<th>Année</th>
+<th>Digest</th>
+<th>Statut</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>MD5</strong></td>
+<td>1992</td>
+<td>128 bits</td>
+<td>❌ Cassé</td>
+</tr>
+<tr class="even">
+<td><strong>SHA-0</strong></td>
+<td>1993</td>
+<td>160 bits</td>
+<td>❌ Collisions en <span class="math inline">\(2^{39}\)</span></td>
+</tr>
+<tr class="odd">
+<td><strong>SHA-1</strong></td>
+<td>1995</td>
+<td>160 bits</td>
+<td>⚠️ Collisions en <span class="math inline">\(2^{63}\)</span></td>
+</tr>
+<tr class="even">
+<td><strong>SHA-2</strong></td>
+<td>-</td>
+<td>224-512 bits</td>
+<td>✓ Sûr actuellement</td>
+</tr>
+<tr class="odd">
+<td><strong>SHA-3</strong> (Keccak)</td>
+<td>2012</td>
+<td>224-512 bits</td>
+<td>✓ Standard actuel</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Évolution des attaques :</strong></p>
+<ul>
+<li>2004 : Collisions complètes sur MD5 (X. Wang)</li>
+<li>2005 : SHA-1 cassé théoriquement (<span class="math inline">\(2^{63}\)</span> opérations)</li>
+<li>2008 : Création de certificats CA frauduleux via MD5</li>
+<li>2012 : SHA-3 adopté comme nouveau standard</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled" title="Texte original">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Texte original
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-15" class="callout-15-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Il s’agit de fonctions conçues exclusivement pour générer des codes d’intégrité (des digests) avec un soucis principal de vitesse et sécurité.</p>
+<p>Leur fonctionnement se base sur les éléments suivants:</p>
+<ul>
+<li>des opérations d’initialisation (<strong>padding</strong> + rajouter la longueur).</li>
+<li>un ensemble de <strong>constantes prédéfinies</strong> choisies spécialement pour augmenter la dispersion.</li>
+<li>un ensemble “d’étapes” (<strong>rounds</strong>) qui vont séquentiellement s’appliquer a tous les blocs des données originaux. Ces rounds vont effectuer une combinaison d’opérations logiques et des rotations sur les données et les constantes.</li>
+<li>des opérations de <strong>chaînage</strong> impliquant les sorties des rounds précédents.</li>
+</ul>
+<p>Dans ces fonctions, chaque bit du digest est une fonction de chaque bit des entrées.</p>
+<p>Les plus connues sont:</p>
+<ul>
+<li><strong>MD5</strong>: R. Rivest, 1992; RFC 1321. Digest = 128 bits. <strong>Cassé!</strong></li>
+<li><strong>SHA-0</strong>: NIST, 1993. Digest = 160 bits. Collisions en <span class="math inline">\(2^{39}\)</span> opérations au lieu de <span class="math inline">\(2^{80}\)</span></li>
+<li><strong>SHA-1</strong>: NIST, 1995. Digest = 160 bits. Révision de SHA-0 avec rotation de bits additionnelle. Collisions en <span class="math inline">\(2^{63}\)</span> opérations (au lieu de <span class="math inline">\(2^{80}\)</span>).</li>
+<li><strong>SHA-2</strong>: NIST (FIPS 190-3). Comprend: SHA-224, SHA-256, SHA-384 et SHA-512. Les tailles du digest vont de 224 à 512 bits.</li>
+<li><strong>SHA-3</strong>: Keccak Algorithm (taille du digest variable de 224 à 512 bits)</li>
+</ul>
+<p><strong>Derniers Développements</strong>:</p>
+<ul>
+<li>X.Wang et al.&nbsp;culminent en 2004 un long travail visant à trouver des collisions dans l’algorithme MD5. Ils publient deux paires de collisions pour des messages de 1024 bits.</li>
+<li>En 2005, X.Wang et al.&nbsp;prouvent dans la conférence CRYPTO’05 que le nombre d’opérations nécessaires pour trouver des collisions sur SHA-1 (standard actuel pour les fonctions de hashage sécurisées) est seulement de <span class="math inline">\(2^{63}\)</span>.</li>
+<li>Ces attaques ont pour cible la recherche de collisions arbitraires mais lors de CRYPTO’06 des chercheurs de l’Université de Graz en Autriche proposent une méthode pour contrôler partiellement le contenu des collisions.</li>
+<li>En Décembre 2008 on montre qu’on peut générer des collisions contrôlées sur MD5 et créer ainsi une Certification Authority illicite permettant des forger des certificats acceptés par n’importe quel browser.</li>
+<li>Ces résultats s’appuient sur des approches <strong>analytiques</strong> (par opposition au brute force!)</li>
+<li>Le processus de sélection de successeur de SHA-1 est semblable à celui ayant désigné AES comme standard de cryptage en blocs. Le NIST a décidé (Octobre 2012) que <strong>Keccak</strong> serait l’algorithme de base pour <strong>SHA-3</strong>.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Révision rapide">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Révision rapide
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-16" class="callout-16-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Customized MDCs</strong></p>
+<ul>
+<li>MD5 (cassé)</li>
+<li>SHA-0 (cassé)</li>
+<li>SHA-1 (faible)</li>
+<li>SHA-2 (sûr)</li>
+<li>SHA-3/Keccak (standard actuel).</li>
+</ul>
+<p>Construction : padding + constantes + rounds + chaînage.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="macs-basés-sur-des-systèmes-de-cryptage" class="level2">
+<h2 class="anchored" data-anchor-id="macs-basés-sur-des-systèmes-de-cryptage">MACs Basés sur des Systèmes de Cryptage</h2>
+<p><strong>CBC-MAC :</strong> Utilise un algorithme de chiffrement par blocs en mode CBC.</p>
+<p><strong>Fonctionnement :</strong></p>
+<ul>
+<li>Mode CBC avec IV = 0</li>
+<li>Élimination des ciphertexts intermédiaires</li>
+<li>Seul le dernier bloc chiffré est conservé comme MAC</li>
+</ul>
+<p><strong>Avec DES :</strong></p>
+<ul>
+<li>Longueur clé : 56 bits (112 en Triple-DES optionnel)</li>
+<li>Longueur MAC : 64 bits</li>
+</ul>
+<p><strong>Avantages :</strong></p>
+<ul>
+<li>Réutilisation de l’infrastructure de chiffrement existante</li>
+<li>Performances acceptables</li>
+</ul>
+<p><strong>Limitations :</strong></p>
+<ul>
+<li>Sécurité limitée par la taille du bloc (64 bits pour DES)</li>
+<li>Vulnérable si utilisé incorrectement (ex: sans IV variable)</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled" title="Texte original">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Texte original
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-17" class="callout-17-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Algorithme CBC-MAC basé sur DES-CBC avec IV = 0 et élimination des ciphertext intermédiaires</strong></p>
+<ul>
+<li>longueur de clé = 56 bits (112 en cas d’utilisation de la partie optionnelle)</li>
+<li>Longueur du MAC-value = 64 bits</li>
+</ul>
+<p>Le schéma montre le traitement séquentiel des blocs de message <span class="math inline">\(M_1, M_2, M_3\)</span> avec l’algorithme de cryptage <span class="math inline">\(E\)</span> et la clé <span class="math inline">\(k\)</span>. Les ciphertexts intermédiaires <span class="math inline">\(C_1, C_2\)</span> sont éliminés. Seul le dernier bloc <span class="math inline">\(C_3\)</span> constitue le MAC.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Révision rapide">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Révision rapide
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-18" class="callout-18-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>CBC-MAC</strong> : mode CBC + IV=0, seul dernier bloc gardé. DES : clé 56/112 bits, MAC 64 bits.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="nested-macs-et-hmacs" class="level2">
+<h2 class="anchored" data-anchor-id="nested-macs-et-hmacs">Nested MACs et HMACs</h2>
+<p><strong>Nested MAC (NMAC) :</strong> Composition de deux familles de MACs <span class="math inline">\(G\)</span> et <span class="math inline">\(H\)</span> :</p>
+<p><span class="math display">\[\text{NMAC}_{k,l}(x) = g_k(h_l(x))\]</span></p>
+<p><strong>Sécurité :</strong> Dépend de deux critères :</p>
+<ul>
+<li><span class="math inline">\(G\)</span> résistante aux collisions</li>
+<li><span class="math inline">\(H\)</span> résistante aux attaques spécifiques MACs</li>
+</ul>
+<p><strong>HMAC (standard FIPS 198, 2002) :</strong> Nested MAC utilisant des MDCs sans clé (SHA-1, SHA-256).</p>
+<p><strong>Construction :</strong></p>
+<ul>
+<li>Constantes : <code>ipad = 0x363636...36</code> et <code>opad = 0x5C5C5C...5C</code> (512 bits)</li>
+<li>Clé <span class="math inline">\(k\)</span> de 512 bits</li>
+</ul>
+<p><span class="math display">\[\text{HMAC-256}_k(x) = \text{SHA-256}((k \oplus \text{opad}) \parallel \text{SHA-256}((k \oplus \text{ipad}) \parallel x))\]</span></p>
+<p><strong>Avantages :</strong></p>
+<ul>
+<li>MACs les plus utilisés en pratique</li>
+<li>Attaques sur SHA plus difficiles avec clé secrète</li>
+<li>Performance excellente</li>
+<li>Standardisé et largement supporté</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled" title="Texte original">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Texte original
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-19" class="callout-19-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Un <strong>Nested MAC</strong> ou <strong>NMAC</strong> est une composition de 2 familles de fonctions MACs <span class="math inline">\(G\)</span> et <span class="math inline">\(H\)</span> paramètrès par les clés <span class="math inline">\(k\)</span> et <span class="math inline">\(l\)</span> tel que:</p>
+<p><span class="math display">\[G \circ H = \{ g \circ h \text{ avec } g \in G \text{ et } h \in H \} \text{ avec } g \circ h_{(k,l)}(x) = g_k(h_l(x))\]</span></p>
+<p>La sécurité d’un NMAC dépend de deux critères:</p>
+<ul>
+<li>La famille de fonctions <span class="math inline">\(G\)</span> est résistante aux collisions.</li>
+<li>La famille de fonctions <span class="math inline">\(H\)</span> est résistante aux attaques spécifiques pour MACs, i.e.: Il est impossible de trouver un couple <span class="math inline">\((x,y)\)</span> et une clé <span class="math inline">\(m\)</span> fixée mais inconnue, telle que: <span class="math inline">\(\text{MAC}_m(x) = y\)</span>.</li>
+</ul>
+<p>Un <strong>HMAC</strong> (FIPS 198, 2002) est un Nested MAC utilisant à la base des MDCs sans clé dédiées comme SHA-1 ou SHA-256.</p>
+<p>Un HMAC utilise deux constantes de 512 bits dénommés <code>ipad</code> et <code>opad</code> telles que:</p>
+<ul>
+<li><code>opad := 363636 ... 36</code></li>
+<li><code>ipad := 5C5C5C ... 5C</code></li>
+</ul>
+<p>et une clé <span class="math inline">\(k\)</span> de 512 bits.</p>
+<p>Le schéma de fonctionnement de HMAC-256 (sur la base de SHA-256) est le suivant:</p>
+<p><span class="math display">\[\text{HMAC-256}_k(x) := \text{SHA-256}((k \oplus \text{opad}) \parallel \text{SHA-256}((k \oplus \text{ipad}) \parallel x))\]</span></p>
+<p>Les <strong>HMACs</strong> sont les MACs les plus utilisés. Les attaques mentionnées sur les fonctions de la famille SHA sont plus difficiles à réaliser sur un HMAC par cause de la clé <span class="math inline">\(k\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Révision rapide">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-20-contents" aria-controls="callout-20" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Révision rapide
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-20" class="callout-20-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>HMAC</strong> : double hash avec clés dérivées (<code>ipad</code>/<code>opad</code>). <span class="math inline">\(\text{HMAC}_k(x) = H((k \oplus \text{opad}) \parallel H((k \oplus \text{ipad}) \parallel x))\)</span>. Standard, sûr, performant.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="applications-des-hash-functions" class="level2">
+<h2 class="anchored" data-anchor-id="applications-des-hash-functions">Applications des Hash Functions</h2>
+<section id="intégrité-des-données" class="level3">
+<h3 class="anchored" data-anchor-id="intégrité-des-données">Intégrité des Données</h3>
+<p><strong>Trois approches principales :</strong></p>
+<ol type="1">
+<li><strong>MAC seul :</strong>
+<ul>
+<li><span class="math inline">\(A \to B: X, \text{MAC}_k(X)\)</span></li>
+<li>Authentification + intégrité garanties</li>
+<li>Nécessite clé partagée</li>
+</ul></li>
+<li><strong>MDC + Encryption :</strong>
+<ul>
+<li><span class="math inline">\(A \to B: E_k(X, \text{MDC}(X))\)</span></li>
+<li>Confidentialité + intégrité</li>
+<li>Clé symétrique partagée</li>
+</ul></li>
+<li><strong>MDC + Canal authentique :</strong>
+<ul>
+<li><span class="math inline">\(A \to B: X\)</span> (canal normal)</li>
+<li><span class="math inline">\(A \to B: \text{MDC}(X)\)</span> (canal authentique)</li>
+<li>Séparation des canaux</li>
+</ul></li>
+</ol>
+<p><strong>Limitations :</strong> Ces protocoles simples n’offrent pas de protection contre les replay attacks.</p>
+<p><strong>Solution :</strong> ajouter timestamps ou numéros de séquence.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Texte original">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Texte original
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-21" class="callout-21-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>MAC Seul</strong>: <span class="math display">\[A \to B: X, \text{MAC}_k(X)\]</span> Si <span class="math inline">\(B\)</span> calcule de son coté <span class="math inline">\(\text{MAC}_k(X)\)</span> et obtient la même valeur ⇒ le message provient de <span class="math inline">\(A\)</span>.</p>
+<p><strong>MDC + cryptage symétrique</strong> (clé <span class="math inline">\(k\)</span> connue de <span class="math inline">\(A\)</span> et <span class="math inline">\(B\)</span>) <span class="math display">\[A \to B: X, E_k(\text{MDC}(X))\]</span> <span class="math inline">\(B\)</span> calcule <span class="math inline">\(\text{MDC}(X)\)</span> et puis <span class="math inline">\(E_k(\text{MDC}(X))\)</span>. Si égal ⇒ message vient de <span class="math inline">\(A\)</span>.</p>
+<p><strong>Comme 2) avec confidentialité de <span class="math inline">\(X\)</span> en plus</strong>: <span class="math display">\[A \to B: E_k(X,\text{MDC}(X))\]</span></p>
+<p><strong>MDC + signature digitale</strong>: <span class="math display">\[A \to B: X, \text{Sig}_{\text{priv-A}}(\text{MDC}(X))\]</span> <span class="math inline">\(B\)</span> calcule <span class="math inline">\(\text{MDC}(X)\)</span> et vérifie <span class="math inline">\(\text{Sig}_{\text{priv-A}}(\text{MDC}(X))\)</span> avec une copie authentique de <code>pub-A</code>. Si égalité ⇒ <span class="math inline">\(A\)</span> est à l’origine du message. Cette solution offre en plus la <strong>non-répudiation d’origine</strong>.</p>
+<p>Ces protocoles simples n’offrent aucun support sur l’unicité ni sur l’actualité (timeliness) des messages reçus et sont exposés à des <strong>replay attacks</strong>! Ils nécessitent des mécanismes tenant compte du temps ou du contexte de la transaction (cf.&nbsp;authentification d’entités).</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Révision rapide">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-22-contents" aria-controls="callout-22" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Révision rapide
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-22" class="callout-22-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Intégrité</strong> : MAC seul, MDC+crypto, MDC+signature.</p>
+<p>⚠️ Vulnérable aux replay sans timestamps/nonces.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="blockchains-et-proof-of-work" class="level3">
+<h3 class="anchored" data-anchor-id="blockchains-et-proof-of-work">Blockchains et Proof of Work</h3>
+<p><strong>Bitcoin et blockchains :</strong> Utilisation de hash functions pour chaîner les blocs de transactions.</p>
+<p><strong>Caractéristiques :</strong></p>
+<ul>
+<li>Transactions publiques et visibles</li>
+<li>Blocs chaînés via fonctions de hachage cryptographiques</li>
+<li>Minage = résolution d’un puzzle cryptographique (proof of work)</li>
+</ul>
+<p><strong>Proof of Work :</strong></p>
+<ul>
+<li>Trouver un nonce tel que <span class="math inline">\(\text{hash}(\text{bloc} \parallel \text{nonce}) &lt; \text{target}\)</span></li>
+<li>Puzzle coûteux en calcul, validation rapide</li>
+<li>Premier mineur à résoudre reçoit récompense en bitcoins</li>
+</ul>
+<p><strong>Sécurité :</strong></p>
+<ul>
+<li>Blockchain = registre public, décentralisé, immuable</li>
+<li>Falsification nécessiterait effort &gt; tous mineurs honnêtes</li>
+<li>Protection basée sur propriétés CRHF</li>
+</ul>
+<p><strong>Statistiques Bitcoin (octobre 2025) :</strong></p>
+<ul>
+<li>Difficulty : 150.84 T</li>
+<li>Target : <span class="math inline">\(\approx 2^{177}\)</span> (pseudo-collision sur 79 bits)</li>
+<li>Hashrate : ~1.1 ZH/sec (<span class="math inline">\(1.1 \times 10^{21}\)</span> hash/sec)</li>
+<li>Temps moyen génération bloc : 10 minutes</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled" title="Texte original">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-23-contents" aria-controls="callout-23" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Texte original
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-23" class="callout-23-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Les transactions bitcoin sont publiées et visibles par tous les intervenants. Elles sont encapsulées dans des blocs chaînés à l’aide de fonctions de hachage cryptographiques.</p>
+<p>Le <strong>minage</strong> (mining) consiste à rajouter itérativement des nouveaux blocs contenant les transactions courantes.</p>
+<p>La génération d’un bloc valable nécessite la résolution d’un <strong>puzzle cryptographique</strong> (proof of work) très coûteux en temps de calcul (trouver des pseudo-collisions dans les fonctions de hachage cryptographiques). La validation reste très efficace.</p>
+<p>Le premier mineur capable de générer un bloc valable recevra une récompense monétaire (en bitcoins). Le processus de minage est ouvert à tous les mineurs mais seul le premier est récompensé.</p>
+<p>La chaine de blocs résultante (<strong>blockchain</strong>) devient alors un registre publique (public ledger), décentralisé et <strong>immuable</strong> protégeant toutes les transactions passées. La falsification/modification des données protégées par la blockchain nécessiterait un effort calculatoire supérieur à celui effectué par tous les mineurs honnêtes.</p>
+<p><strong>Statistiques Bitcoin 13/10/2025</strong>:</p>
+<ul>
+<li><strong>Difficulty</strong>: 150.84 T</li>
+<li><strong>Target</strong>: <span class="math inline">\(2^{224} / \text{Difficulty} = \approx 2^{177}\)</span>. Le digest valable pour générer un bloc doit être inférieur à <span class="math inline">\(2^{177}\)</span>, ce qui signifie une pseudo-collision sur les 79 bits de poids plus fort. La variation sur les inputs dépend du <strong>nonce</strong>.</li>
+<li><strong>Hashrate</strong>: ~ 1.1 ZH/sec (<span class="math inline">\(1.1 \times 10^{21}\)</span> hashes /sec)</li>
+<li><strong>Fonctions de hachage exécutées pour obtenir un bloc</strong>: ~ <span class="math inline">\(660 \times 10^{21}\)</span></li>
+<li><strong>Temps moyen de génération d’un bloc</strong>: 10 min</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Révision rapide">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-24-contents" aria-controls="callout-24" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Révision rapide
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-24" class="callout-24-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Blockchain</strong> : chaînage de blocs via hash.</p>
+<p><strong>Proof of Work</strong> : trouver nonce pour hash &lt; target.</p>
+<p>Sécurité = effort &gt; tous mineurs.</p>
+<p>Bitcoin : ~10 min/bloc, <span class="math inline">\(10^{21}\)</span> hash/sec.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="autres-applications" class="level3">
+<h3 class="anchored" data-anchor-id="autres-applications">Autres Applications</h3>
+<p><strong>1. Authentification :</strong></p>
+<ul>
+<li>Data origin authentication (DOA)</li>
+<li>Transaction authentication (DOA + paramètres temporels)</li>
+</ul>
+<p><strong>2. Virus checking :</strong></p>
+<ul>
+<li>Créateur publie <span class="math inline">\(\text{digest} = h(\text{logiciel})\)</span> via canal sûr</li>
+<li>Utilisateurs vérifient intégrité en recalculant le digest</li>
+</ul>
+<p><strong>3. Distribution des clés publiques :</strong></p>
+<ul>
+<li>Publier <span class="math inline">\(h(\text{clé publique})\)</span> au lieu de la clé complète</li>
+<li>Vérification d’authenticité simplifiée</li>
+</ul>
+<p><strong>4. Timestamp sur documents :</strong></p>
+<ul>
+<li>Timestamp appliqué au digest plutôt qu’au document complet</li>
+<li>Réduction des données à signer</li>
+</ul>
+<p><strong>5. One-time password (S-Key) :</strong></p>
+<ul>
+<li>Chaîne de hash : <span class="math inline">\(x_1 = h(x_0), x_2 = h(x_1), \ldots, x_n = h(x_{n-1})\)</span></li>
+<li>Système stocke <span class="math inline">\(x_n\)</span>, utilisateur fournit <span class="math inline">\(x_{n-1}\)</span></li>
+<li>Vérification : <span class="math inline">\(h(x_{n-1}) = x_n\)</span></li>
+<li>Après validation, système stocke <span class="math inline">\(x_{n-1}\)</span> pour prochaine fois</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled" title="Texte original">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-25-contents" aria-controls="callout-25" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Texte original
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-25" class="callout-25-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Authentification</strong>:</p>
+<ul>
+<li>data origin authentication (DOA)</li>
+<li>transaction authentication (= DOA + time-variant parameters)</li>
+</ul>
+<p><strong>Virus checking</strong>:</p>
+<ul>
+<li>Le créateur d’un logiciel crée un digest = <span class="math inline">\(h(x)\)</span> avec <span class="math inline">\(x\)</span> étant l’original et le distribue par un canal sûr (eg. CD-ROM).</li>
+</ul>
+<p><strong>Distribution des clés publiques</strong>:</p>
+<ul>
+<li>Permet de contrôler l’authenticité d’une clé publique.</li>
+</ul>
+<p><strong>Timestamp sur un document</strong>:</p>
+<ul>
+<li>Le document sur lequel on veut effectuer le timestamp est d’abord soumis à une hash function. Le timestamp (avec la signature de l’entité correspondante) s’applique alors seulement au digest.</li>
+</ul>
+<p><strong>One-time password (S-Key)</strong> (mécanisme d’identification):</p>
+<ul>
+<li>A partir d’un seed secret <span class="math inline">\(x_0\)</span>, on crée une chaîne de hash-values: <span class="math inline">\(x_1 = h(x_0)\)</span>, <span class="math inline">\(x_2 = h(x_1)\)</span>, … <span class="math inline">\(x_n = h(x_{n-1})\)</span>.</li>
+<li>Le système mémorise <span class="math inline">\(x_n\)</span> et l’utilsateur rentre <span class="math inline">\(x_{n-1}\)</span>. Si <span class="math inline">\(h(x_{n-1}) == x_n\)</span> ⇒ OK.</li>
+<li>Le système mémorise alors <span class="math inline">\(x_{n-1}\)</span> et ainsi de suite.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Révision rapide">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-26-contents" aria-controls="callout-26" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Révision rapide
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-26" class="callout-26-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Applications</strong></p>
+<ul>
+<li>authentification</li>
+<li>virus checking</li>
+<li>distribution clés publiques</li>
+<li>timestamp</li>
+<li>one-time passwords (chaîne de hash)</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="randomized-hash-functions-exemple-unix" class="level2">
+<h2 class="anchored" data-anchor-id="randomized-hash-functions-exemple-unix">Randomized Hash Functions : Exemple UNIX</h2>
+<p><strong>Problème :</strong> Fonctions de hachage déterministes produisent toujours le même résultat pour le même mot de passe.</p>
+<p><strong>Risques :</strong></p>
+<ul>
+<li>Détection de mots de passe identiques</li>
+<li>Attaques par dictionnaire offline (codebooks pré-calculés)</li>
+<li>Rainbow tables</li>
+</ul>
+<p><strong>Solution UNIX : Salt</strong></p>
+<ul>
+<li>Ajout d’un élément pseudo-aléatoire de 12 bits (salt) avant hachage</li>
+<li>Salt différent pour chaque utilisateur</li>
+<li>4096 possibilités (<span class="math inline">\(2^{12}\)</span>) pour chaque mot de passe</li>
+</ul>
+<p><strong>Avantages :</strong></p>
+<ul>
+<li>Empêche détection des duplications</li>
+<li>Codebooks pré-calculés deviennent inefficaces</li>
+<li>Chaque mot de passe nécessite 4096 entrées dans le dictionnaire</li>
+</ul>
+<p><strong>Implémentation UNIX :</strong></p>
+<ul>
+<li>Fichier <code>/etc/passwd</code> accessible globalement</li>
+<li>Format : <code>username:hash(salt+password):uid:gid:...</code></li>
+<li>Hash basé sur DES modifié (25 itérations)</li>
+<li>Salt stocké en clair (2 premiers caractères du hash)</li>
+</ul>
+<p><strong>Exemple :</strong></p>
+<pre><code>root:Jw87u9bebeb9i:0:1:Operator:/:/bin/csh
+pp:1Qhw.oihEtHK6:359:355:PP:/net/spp_telecom/pp:/bin/cs</code></pre>
+<p><strong>Limitations :</strong></p>
+<ul>
+<li>Protection efficace contre dictionnaires pré-calculés</li>
+<li>Attaques online limitées par le système (nombre d’essais)</li>
+<li>Attaques offline possibles si fichier compromis</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled" title="Texte original">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-27-contents" aria-controls="callout-27" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Texte original
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-27" class="callout-27-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>UNIX garde ses mots de passe dans un fichier globalement accessible (ou éventuellement distribué par NIS). L’information stockée correspond au résultat produit par une hash function.</p>
+<p><strong>Exemple (fictif)</strong>:</p>
+<pre><code>root:Jw87u9bebeb9i:0:1:Operator:/:/bin/csh
+pp:1Qhw.oihEtHK6:359:355:PP:/net/spp_telecom/pp:/bin/cs</code></pre>
+<p><strong>Problèmes</strong>:</p>
+<ul>
+<li>la hash function étant déterministe, elle produit le même résultat pour des mots de passe identiques.</li>
+<li>on pourrait créer des “cahiers” (codebooks) contenant le résultat de l’application de la hash function à des entrées données (p.ex. un dictionnaire) et les comparer facilement (off-line) avec les chaînes stockées par UNIX (<strong>brute force dictionnary attack</strong>).</li>
+</ul>
+<p><strong>Solution</strong>:</p>
+<ul>
+<li>Rajouter un élément (pseudo) aléatoire de <strong>12 bits</strong> différent pour chaque mot de passe (appelé <strong>salt</strong>) avant de calculer la hash function et lors de la vérification.</li>
+<li>Cet élément permet de rajouter un facteur aléatoire de <strong>4096 possibilités</strong> pour chaque mot de passe et de prévenir la détection des duplications.</li>
+</ul>
+<p>Le schéma de fonctionnement utilise DES avec 25 itérations, le password comme clé, et le salt pour modifier les E-boxes. Le résultat final de 64 bits est converti en 11 caractères ASCII.</p>
+<p>La sensibilisation des utilisateurs (ne pas visiter des sites douteux) diminue l’efficacité de cette technique dans la transmission de malware.</p>
+<p>Les attaques dictionnaire sont normalement moins efficaces <strong>online</strong> car les systèmes d’exploitation limitent le nombre d’essais infructueux d’authentification.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Révision rapide">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-28-contents" aria-controls="callout-28" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Révision rapide
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-28" class="callout-28-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>UNIX salt</strong> : 12 bits aléatoires ajoutés au password avant hash.</p>
+<p>4096 variations possibles.</p>
+<p>Empêche codebooks pré-calculés et détection duplications.</p>
+</div>
+</div>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -1,0 +1,2926 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>ch3 – ISS</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b758ccaa5987ceb1b75504551e579abf.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-96c1bb8b336142dcc39f931773fab1b9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-9ee82e006983bafa07c9ac29a901142c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-96c1bb8b336142dcc39f931773fab1b9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">ISS</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-langage" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="bi bi-globe" role="img">
+</i> 
+ <span class="menu-text">Langage</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-langage">    
+        <li>
+    <a class="dropdown-item" href="./../index.html">
+ <span class="dropdown-text">Anglais</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./index.html">
+ <span class="dropdown-text">Français</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch1.html">Cours</a></li><li class="breadcrumb-item"><a href="./ch3.html">Cryptographie symétrique</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Cours</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Notions de base en cryptographie</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch3.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Cryptographie symétrique</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cryptographie Asymétrique (à Clés Publiques)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Fonctions de Hachage Cryptographiques et MACs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Signatures Digitales</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Authentification</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Protocoles d’Établissement de Clés (KEP)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch9.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tiers de Confiance et Certification (Trusted Third Parties - TTP)</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./exercices.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercices</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./presentations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Présentations</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#cryptographie-symétrique" id="toc-cryptographie-symétrique" class="nav-link active" data-scroll-target="#cryptographie-symétrique">Cryptographie symétrique</a>
+  <ul class="collapse">
+  <li><a href="#stream-ciphers-cryptage-en-chaîne" id="toc-stream-ciphers-cryptage-en-chaîne" class="nav-link" data-scroll-target="#stream-ciphers-cryptage-en-chaîne">Stream Ciphers (Cryptage en chaîne)</a>
+  <ul class="collapse">
+  <li><a href="#introduction-aux-stream-ciphers" id="toc-introduction-aux-stream-ciphers" class="nav-link" data-scroll-target="#introduction-aux-stream-ciphers">Introduction aux Stream Ciphers</a></li>
+  <li><a href="#stream-ciphers-synchrones" id="toc-stream-ciphers-synchrones" class="nav-link" data-scroll-target="#stream-ciphers-synchrones">Stream Ciphers Synchrones</a></li>
+  <li><a href="#stream-ciphers-asynchrones" id="toc-stream-ciphers-asynchrones" class="nav-link" data-scroll-target="#stream-ciphers-asynchrones">Stream Ciphers Asynchrones</a></li>
+  <li><a href="#générateurs-de-keystreams-lsfr" id="toc-générateurs-de-keystreams-lsfr" class="nav-link" data-scroll-target="#générateurs-de-keystreams-lsfr">Générateurs de Keystreams : LSFR</a></li>
+  <li><a href="#rc4-stream-cipher-logiciel" id="toc-rc4-stream-cipher-logiciel" class="nav-link" data-scroll-target="#rc4-stream-cipher-logiciel">RC4 : Stream Cipher Logiciel</a></li>
+  </ul></li>
+  <li><a href="#block-ciphers-cryptage-par-blocs" id="toc-block-ciphers-cryptage-par-blocs" class="nav-link" data-scroll-target="#block-ciphers-cryptage-par-blocs">Block Ciphers (Cryptage par Blocs)</a>
+  <ul class="collapse">
+  <li><a href="#introduction-aux-block-ciphers" id="toc-introduction-aux-block-ciphers" class="nav-link" data-scroll-target="#introduction-aux-block-ciphers">1. Introduction aux Block Ciphers</a></li>
+  <li><a href="#modes-dopération-des-block-ciphers" id="toc-modes-dopération-des-block-ciphers" class="nav-link" data-scroll-target="#modes-dopération-des-block-ciphers">2. Modes d’Opération des Block Ciphers</a></li>
+  <li><a href="#product-ciphers-et-feistel-ciphers" id="toc-product-ciphers-et-feistel-ciphers" class="nav-link" data-scroll-target="#product-ciphers-et-feistel-ciphers">3. Product Ciphers et Feistel Ciphers</a></li>
+  <li><a href="#data-encryption-standard-des" id="toc-data-encryption-standard-des" class="nav-link" data-scroll-target="#data-encryption-standard-des">4. Data Encryption Standard (DES)</a></li>
+  <li><a href="#triple-des-et-sécurité-de-des" id="toc-triple-des-et-sécurité-de-des" class="nav-link" data-scroll-target="#triple-des-et-sécurité-de-des">5. Triple-DES et Sécurité de DES</a></li>
+  <li><a href="#advanced-encryption-standard-aes" id="toc-advanced-encryption-standard-aes" class="nav-link" data-scroll-target="#advanced-encryption-standard-aes">6. Advanced Encryption Standard (AES)</a></li>
+  <li><a href="#attaques-et-sécurité-daes" id="toc-attaques-et-sécurité-daes" class="nav-link" data-scroll-target="#attaques-et-sécurité-daes">7. Attaques et Sécurité d’AES</a></li>
+  <li><a href="#techniques-de-cryptanalyse-des-block-ciphers" id="toc-techniques-de-cryptanalyse-des-block-ciphers" class="nav-link" data-scroll-target="#techniques-de-cryptanalyse-des-block-ciphers">8. Techniques de Cryptanalyse des Block Ciphers</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="ch3.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch1.html">Cours</a></li><li class="breadcrumb-item"><a href="./ch3.html">Cryptographie symétrique</a></li></ol></nav></header>
+
+
+
+
+
+<section id="cryptographie-symétrique" class="level1">
+<h1>Cryptographie symétrique</h1>
+<section id="stream-ciphers-cryptage-en-chaîne" class="level2">
+<h2 class="anchored" data-anchor-id="stream-ciphers-cryptage-en-chaîne">Stream Ciphers (Cryptage en chaîne)</h2>
+<section id="introduction-aux-stream-ciphers" class="level3">
+<h3 class="anchored" data-anchor-id="introduction-aux-stream-ciphers">Introduction aux Stream Ciphers</h3>
+<section id="définition-et-principe" class="level4">
+<h4 class="anchored" data-anchor-id="définition-et-principe">Définition et Principe</h4>
+<p>Les <strong>stream ciphers</strong> (chiffrements en flux) sont une famille de systèmes de cryptage caractérisés par :</p>
+<ul>
+<li><strong>Taille de bloc unitaire</strong> : chaque bloc encrypté = 1 bit</li>
+<li><strong>Architecture en deux phases</strong> :
+<ol type="1">
+<li><strong>Génération du keystream</strong> : production de la séquence de clés</li>
+<li><strong>Substitution</strong> : opération sur les bits du plaintext en fonction du keystream</li>
+</ol></li>
+</ul>
+<p><strong>Exemple classique</strong> : le <em>one-time pad</em></p>
+<ul>
+<li>Génération : générateur (pseudo-)aléatoire</li>
+<li>Substitution : opération XOR (<span class="math inline">\(\oplus\)</span>) avec le keystream</li>
+</ul>
+</section>
+<section id="caractéristiques-générales" class="level4">
+<h4 class="anchored">Caractéristiques Générales</h4>
+<p><strong>Avantages :</strong></p>
+<ul>
+<li><strong>Rapidité</strong> : cryptage au niveau des registres, idéal pour le <em>streaming</em> en temps réel (vidéo)</li>
+<li><strong>Légèreté</strong> : fonctionnent sur systèmes à ressources CPU limitées</li>
+<li><strong>Faible mémoire</strong> : pas ou peu de buffering nécessaire</li>
+<li><strong>Erreurs non propagées</strong> : retransmission des paquets défectueux suffisante (adapté aux transmissions sans fil - WiFi)</li>
+</ul>
+<p><strong>Inconvénients :</strong></p>
+<ul>
+<li><strong>Dépendance à la qualité du keystream</strong> : le caractère aléatoire (randomness) détermine la robustesse</li>
+<li><strong>Réutilisation dangereuse</strong> : la réutilisation du keystream permet une cryptanalyse facile</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>📄 Texte original
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<section id="cryptage-en-chaîne-stream-ciphers" class="level3">
+<h3 class="anchored" data-anchor-id="cryptage-en-chaîne-stream-ciphers">Cryptage en chaîne (Stream Ciphers)</h3>
+<ul>
+<li>Les <strong>stream ciphers</strong> constituent une <strong>famille de systèmes de cryptage</strong> où la <strong>taille du bloc encrypté est égale à 1 bit</strong>.</li>
+<li>Les stream ciphers sont généralement composés de <strong>deux phases</strong>:
+<ul>
+<li>Une <strong>phase de génération</strong> de la séquence d’éléments formant la clé (le <strong>keystream</strong>).</li>
+<li>Une <strong>phase de substitution</strong> où les bits du <em>plaintext</em> subissent une opération spécifique dépendante du keystream.</li>
+</ul></li>
+<li>Un exemple évident d’un stream cipher est le <strong>one-time pad</strong> avec:
+<ul>
+<li>Une phase de génération du keystream effectuée par un <strong>générateur (pséudo-) aléatoire</strong>.</li>
+<li>Une phase de substitution qui consiste à effectuer un <strong>xor</strong> (<span class="math inline">\(\oplus\)</span>) avec le keystream.</li>
+</ul></li>
+</ul>
+</section>
+<section id="stream-ciphers-caractéristiques" class="level3">
+<h3 class="anchored" data-anchor-id="stream-ciphers-caractéristiques">Stream Ciphers: Caractéristiques</h3>
+<ul>
+<li><strong>Rapidité</strong>: Le cryptage se fait directement au niveau des registres. Idéal pour des applications nécessitant un cryptage <em>“on the fly”</em> comme le <strong>video streaming</strong>.</li>
+<li><strong>Facilité</strong>: Les opérations peuvent être effectuées par des systèmes ayant des <strong>ressources CPU limitées</strong>.</li>
+<li><strong>Pas (ou peu…) besoin de mémoire/buffering</strong>.</li>
+<li><strong>Propagation des erreurs limitée ou absente</strong>: la retransmission des paquets fautifs suffit normalement (adapté aux applications où les pertes de paquets sont fréquentes comme les <strong>transmissions sans fil (WiFi)</strong>).</li>
+<li><strong>Inconvénients</strong>:
+<ul>
+<li>La <strong>qualité en termes de randomness</strong> du keystream généré détermine la <strong>robustesse du système</strong>.</li>
+<li>La <strong>réutilisation du keystream</strong> permet une <strong>cryptanalyse facile</strong> (cf.&nbsp;le one-time pad).</li>
+</ul></li>
+</ul>
+</section>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>📌 Révision rapide
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Stream Ciphers</strong> = cryptage bit par bit en 2 phases (génération keystream + substitution).</p>
+<p><strong>Avantages</strong> : rapides, légers, pas de propagation d’erreurs.</p>
+<p><strong>Inconvénients</strong> : qualité du keystream critique, réutilisation = vulnérabilité.</p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="stream-ciphers-synchrones" class="level3">
+<h3 class="anchored" data-anchor-id="stream-ciphers-synchrones">Stream Ciphers Synchrones</h3>
+<section id="principe-de-fonctionnement" class="level4">
+<h4 class="anchored" data-anchor-id="principe-de-fonctionnement">Principe de Fonctionnement</h4>
+<p>Dans un <strong>stream cipher synchrone</strong>, le keystream dépend <strong>uniquement de la clé</strong>, indépendamment du plaintext et du ciphertext.</p>
+<p><strong>Équations du processus :</strong></p>
+<p><span class="math display">\[\sigma_{i+1} = f(\sigma_i, k)\]</span> <span class="math display">\[z_i = g(\sigma_i, k)\]</span> <span class="math display">\[c_i = h(z_i, m_i)\]</span></p>
+<p>Où :</p>
+<ul>
+<li><span class="math inline">\(\sigma_i\)</span> : état à l’instant <span class="math inline">\(i\)</span> (état initial <span class="math inline">\(\sigma_0\)</span> peut dépendre de <span class="math inline">\(k\)</span>)</li>
+<li><span class="math inline">\(k\)</span> : clé secrète</li>
+<li><span class="math inline">\(f\)</span> : fonction de transition d’état</li>
+<li><span class="math inline">\(g\)</span> : fonction de production du keystream <span class="math inline">\(z_i\)</span></li>
+<li><span class="math inline">\(h\)</span> : fonction de sortie produisant le ciphertext <span class="math inline">\(c_i\)</span> à partir du plaintext <span class="math inline">\(m_i\)</span></li>
+</ul>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">graph LR
+    A[Clé k] --&gt; B[État σi]
+    B --&gt; C[Fonction f]
+    C --&gt; D[État σi+1]
+    B --&gt; E[Fonction g]
+    E --&gt; F[Keystream zi]
+    F --&gt; G[Fonction h]
+    H[Plaintext mi] --&gt; G
+    G --&gt; I[Ciphertext ci]
+    D -.-&gt;|boucle| B
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="caractéristiques" class="level4">
+<h4 class="anchored" data-anchor-id="caractéristiques">Caractéristiques</h4>
+<p><strong>Exigence de synchronisation :</strong></p>
+<ul>
+<li>Émetteur et récepteur doivent partager la même clé <span class="math inline">\(k\)</span> <strong>ET</strong> le même état <span class="math inline">\(\sigma_i\)</span></li>
+<li>Perte de synchronisation = nécessité de mécanismes externes (marqueurs, analyse de redondance)</li>
+</ul>
+<p><strong>Propriétés :</strong></p>
+<ul>
+<li><strong>Pas de propagation d’erreur</strong> : modification du ciphertext n’affecte pas les séquences ultérieures</li>
+<li><strong>Attention</strong> : suppression d’un ciphertext = désynchronisation du récepteur</li>
+</ul>
+<p><strong>Vulnérabilités aux attaques actives :</strong></p>
+<ul>
+<li>✓ Détection : insertion, élimination, replay de fragments</li>
+<li>✗ Modification de bits : adversaire peut modifier des bits et analyser l’impact sur le plaintext</li>
+<li><strong>Solution</strong> : mécanismes d’authentification supplémentaires nécessaires</li>
+</ul>
+</section>
+<section id="cas-particulier-stream-cipher-additif" class="level4">
+<h4 class="anchored">Cas particulier : Stream Cipher Additif</h4>
+<p>Le cas le plus fréquent où :</p>
+<ul>
+<li>Fonctions <span class="math inline">\(f\)</span> et <span class="math inline">\(g\)</span> remplacées par un générateur aléatoire</li>
+<li>Fonction <span class="math inline">\(h\)</span> = addition modulo 2 (XOR : <span class="math inline">\(\oplus\)</span>)</li>
+</ul>
+<p><strong>Formule</strong> : <span class="math inline">\(c_i = z_i \oplus m_i\)</span></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>📄 Texte original
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<section id="stream-ciphers-synchrones-1" class="level3">
+<h3 class="anchored" data-anchor-id="stream-ciphers-synchrones-1">Stream Ciphers Synchrones</h3>
+<ul>
+<li>Le <strong>keystream généré dépend seulement de la clé</strong> et non pas du plaintext ni du ciphertext.</li>
+<li>Le processus d’encryption d’un <strong>stream cipher synchrone</strong> est décrit par les équations suivantes: <span class="math display">\[\sigma_{i+1} = f(\sigma_i, k)\]</span> <span class="math display">\[z_i = g(\sigma_i, k)\]</span> <span class="math display">\[c_i = h(z_i, m_i)\]</span> avec <span class="math inline">\(\sigma_i\)</span> l’<strong>état initial</strong> qui peut dépendre de la clé <span class="math inline">\(k\)</span>, <span class="math inline">\(f\)</span> la <strong>fonction qui détermine l’état suivant</strong>, <span class="math inline">\(g\)</span> la <strong>fonction qui produit le keystream</strong> <span class="math inline">\(z_i\)</span> et <span class="math inline">\(h\)</span> la <strong>fonction de sortie</strong> qui produit le ciphertext <span class="math inline">\(c_i\)</span> à partir du plaintext <span class="math inline">\(m_i\)</span>.</li>
+</ul>
+</section>
+<section id="stream-ciphers-synchrones-caractéristiques" class="level3">
+<h3 class="anchored" data-anchor-id="stream-ciphers-synchrones-caractéristiques">Stream Ciphers Synchrones: Caractéristiques</h3>
+<ul>
+<li><strong>Nécessitent la synchronisation</strong> de l’émetteur et du récepteur: En plus d’utiliser la même clé <span class="math inline">\(k\)</span>, les deux doivent se trouver dans le <strong>même état</strong> pour que le processus fonctionne. Si la synchronisation est perdue il faut des <strong>mécanismes externes</strong> pour la récupérer (marqueurs spéciaux, analyses de redondance du plaintext, etc.)</li>
+<li><strong>Pas de propagation d’erreur</strong>. La modification du ciphertext pendant la transmission n’entraîne pas des perturbations dans des séquences de ciphertext ultérieures (cependant, la <strong>suppression</strong> d’un ciphertext provoquerait la <strong>désynchronisation</strong> du récepteur).</li>
+<li><strong>Attaques actives</strong>: L’insertion, l’élimination ou le replay de parties de ciphertext sont <strong>détectés</strong> par le récepteur. Cependant, un adversaire pourrait <strong>modifier certains bits</strong> du ciphertext et analyser l’impact sur le plaintext correspondant. Des <strong>mécanismes d’authentification d’origine</strong> supplémentaires sont nécessaires afin de détecter ces attaques.</li>
+<li><strong>Cas les plus fréquent</strong> des Stream Cipher Synchrones: le <strong>stream cipher additif</strong> (cf.&nbsp;le one-time pad) où les fonctions <span class="math inline">\(f\)</span> et <span class="math inline">\(g\)</span> générant le keystream sont remplacées par un <strong>générateur aléatoire</strong> et la fonction <span class="math inline">\(h\)</span> est une <strong>addition modulo 2 (xor)</strong>.</li>
+</ul>
+</section>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>📌 Révision rapide
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Synchrone</strong> : keystream = <span class="math inline">\(f\)</span>(clé uniquement). Équations : <span class="math inline">\(\sigma_{i+1} = f(\sigma_i, k)\)</span>, <span class="math inline">\(z_i = g(\sigma_i, k)\)</span>, <span class="math inline">\(c_i = h(z_i, m_i)\)</span>.</p>
+<p><strong>Exige synchronisation</strong> émetteur/récepteur. Pas de propagation d’erreur mais vulnérable aux modifications de bits.</p>
+<p><strong>Cas fréquent</strong> : cipher additif avec XOR.</p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="stream-ciphers-asynchrones" class="level3">
+<h3 class="anchored" data-anchor-id="stream-ciphers-asynchrones">Stream Ciphers Asynchrones</h3>
+<section id="principe-de-fonctionnement-1" class="level4">
+<h4 class="anchored" data-anchor-id="principe-de-fonctionnement-1">Principe de Fonctionnement</h4>
+<p>Aussi appelés <strong>auto-synchronisés</strong> (<em>self-synchronizing ciphers</em>).</p>
+<p>Le keystream dépend de la clé <strong>ET</strong> d’un nombre fixe de ciphertexts précédents.</p>
+<p><strong>Équations du processus :</strong></p>
+<p><span class="math display">\[\sigma_i = (c_{i-t}, c_{i-t+1}, \ldots, c_{i-1})\]</span> <span class="math display">\[z_i = g(\sigma_i, k)\]</span> <span class="math display">\[c_i = h(z_i, m_i)\]</span></p>
+<p>Où <span class="math inline">\(\sigma_i\)</span> représente un buffer des <span class="math inline">\(t\)</span> derniers ciphertexts.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">graph LR
+    A[Clé k] --&gt; B[Fonction g]
+    C[Buffer: ci-t...ci-1] --&gt; B
+    B --&gt; D[Keystream zi]
+    D --&gt; E[Fonction h]
+    F[Plaintext mi] --&gt; E
+    E --&gt; G[Ciphertext ci]
+    G -.-&gt;|feedback| C
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="caractéristiques-1" class="level4">
+<h4 class="anchored">Caractéristiques</h4>
+<p><strong>Auto-synchronisation :</strong></p>
+<ul>
+<li>En cas d’insertion/élimination de ciphertexts, le récepteur se <strong>re-synchronise automatiquement</strong></li>
+<li>Mécanisme : mémorisation (buffer) des derniers ciphertexts</li>
+</ul>
+<p><strong>Propagation d’erreurs limitée :</strong></p>
+<ul>
+<li>Erreur se propage uniquement sur la <strong>taille du buffer</strong> (<span class="math inline">\(t\)</span> bits)</li>
+<li>Après épuisement du buffer, décryption correcte reprend</li>
+</ul>
+<p><strong>Sécurité face aux attaques actives :</strong></p>
+<ul>
+<li><strong>Meilleure détection</strong> : modifications détectées grâce à la propagation d’erreurs</li>
+<li><strong>Attention</strong> : l’auto-synchronisation permet au récepteur de continuer même après insertions/suppressions</li>
+<li><strong>Solution</strong> : vérification de l’intégrité et l’authenticité du flux entier nécessaire</li>
+</ul>
+<p><strong>Diffusion des statistiques du plaintext :</strong></p>
+<ul>
+<li>Chaque bit du plaintext influence <strong>tous les ciphertexts subséquents</strong></li>
+<li><strong>Résultat</strong> : meilleure dispersion des statistiques vs.&nbsp;cas synchrone</li>
+<li><strong>Application</strong> : utiliser pour plaintexts à faible entropie ou fortement redondants</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>📄 Texte original
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<section id="stream-ciphers-asynchrones-1" class="level3">
+<h3 class="anchored" data-anchor-id="stream-ciphers-asynchrones-1">Stream Ciphers Asynchrones</h3>
+<ul>
+<li>Aussi appelés <strong>auto-synchronisés</strong> (<em>self synchronizing ciphers</em>).</li>
+<li>Le <strong>keystream généré dépend de la clé ainsi que d’un nombre fixé de ciphertexts précédents</strong>.</li>
+<li>Le processus d’encryption d’un <strong>stream cipher asynchrone</strong> est décrit par les équations suivantes: <span class="math display">\[\sigma_i = (c_{i-t}, c_{i-t+1}, \ldots, c_{i-1})\]</span> <span class="math display">\[z_i = g(\sigma_i, k)\]</span> <span class="math display">\[c_i = h(z_i, m_i)\]</span> avec <span class="math inline">\(\sigma_i\)</span>, <span class="math inline">\(g\)</span> et <span class="math inline">\(h\)</span> comme pour le cas synchrone.</li>
+</ul>
+</section>
+<section id="stream-ciphers-asynchrones-caractéristiques" class="level3">
+<h3 class="anchored" data-anchor-id="stream-ciphers-asynchrones-caractéristiques">Stream Ciphers Asynchrones: Caractéristiques</h3>
+<ul>
+<li><strong>Auto-synchronisation</strong>: En cas d’élimination ou d’insertion de ciphertexts en cours de route, le récepteur est capable de <strong>se re-synchroniser avec l’émetteur</strong> grâce à la <strong>mémorisation (buffer)</strong> d’un nombre de ciphertext précédents.</li>
+<li><strong>Propagation d’erreurs limitée</strong>: La propagation d’erreurs s’étend uniquement au <strong>nombre de bits du ciphertext mémorisés</strong> (taille du buffer). Après, la decryption se déroule à nouveau correctement.</li>
+<li><strong>Attaques actives</strong>: La modification de fragments du ciphertext sera <strong>plus facilement détecté</strong> que dans le cas synchrone à cause de la propagation d’erreurs. Cependant, comme le récepteur est capable de s’auto-synchroniser avec l’émetteur, même si des ciphertexts sont éliminés ou insérés en cours de route, il convient de <strong>vérifier l’intégrité et l’authenticité du flot entier</strong>.</li>
+<li><strong>Diffusion des statistiques du plaintext</strong>: Le fait que <strong>chaque bit du plaintext aura une influence sur la totalité des ciphertexts subséquents</strong> se traduit par une <strong>plus grande dispersion des statistiques</strong> du plaintext comparée au cas synchrone…</li>
+<li>… Il convient, donc, d’utiliser des <strong>stream ciphers asynchrones lorsque l’entropie des plaintexts est limitée</strong> et pourrait permettre des attaques ciblées aux plaintexts fortement redondants.</li>
+</ul>
+</section>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>📌 Révision rapide
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Asynchrone</strong> (auto-synchronisé) : keystream = <span class="math inline">\(f\)</span>(clé + derniers ciphertexts). État <span class="math inline">\(\sigma_i\)</span> = buffer de <span class="math inline">\(t\)</span> ciphertexts précédents.</p>
+<p><strong>Auto-synchronisation</strong> automatique. Propagation d’erreur limitée au buffer.</p>
+<p><strong>Meilleure diffusion</strong> des statistiques → idéal pour plaintexts redondants/faible entropie.</p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="générateurs-de-keystreams-lsfr" class="level3">
+<h3 class="anchored" data-anchor-id="générateurs-de-keystreams-lsfr">Générateurs de Keystreams : LSFR</h3>
+<section id="contexte-et-nécessité" class="level4">
+<h4 class="anchored" data-anchor-id="contexte-et-nécessité">Contexte et Nécessité</h4>
+<p><strong>Problématique</strong> : générer un keystream de longueur <span class="math inline">\(m\)</span> à partir d’une clé secrète de longueur <span class="math inline">\(l\)</span> avec <span class="math inline">\(l \ll m\)</span>.</p>
+<p><strong>Solution</strong> : Linear Feedback Shift Register (<strong>LSFR</strong> ou <strong>LFSR</strong>)</p>
+</section>
+<section id="caractéristiques-des-lsfr" class="level4">
+<h4 class="anchored" data-anchor-id="caractéristiques-des-lsfr">Caractéristiques des LSFR</h4>
+<p><strong>Avantages :</strong></p>
+<ul>
+<li><strong>Implémentation hardware optimale</strong> : circuits très efficaces</li>
+<li><strong>Périodes longues</strong> : séquences de grande longueur</li>
+<li><strong>Bonne qualité aléatoire</strong> : randomness notable</li>
+<li><strong>Base mathématique</strong> : propriétés algébriques des combinaisons linéaires</li>
+</ul>
+<p><strong>Structure générique</strong> : LSFR de longueur <span class="math inline">\(L\)</span></p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">graph LR
+    A[bit L-1] --&gt; B[bit L-2]
+    B --&gt; C[...]
+    C --&gt; D[bit 1]
+    D --&gt; E[bit 0]
+    E --&gt; F[Output]
+    A -.-&gt;|feedback| G[⊕]
+    D -.-&gt;|coeff| G
+    C -.-&gt;|coeff| G
+    G --&gt; A
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="remarques-importantes-sur-les-lsfr" class="level4">
+<h4 class="anchored">Remarques Importantes sur les LSFR</h4>
+<p><strong>Historique et Usage :</strong></p>
+<ul>
+<li>Construction très répandue en cryptographie et théorie des codes</li>
+<li>Nombreux stream ciphers militaires basés sur LSFR</li>
+</ul>
+<p><strong>Limites de Sécurité :</strong></p>
+<ul>
+<li><strong>Niveau de sécurité insuffisant</strong> comparé aux block ciphers modernes</li>
+<li><strong>Vulnérabilité</strong> : l’algorithme de Berlekamp-Massey permet de :
+<ul>
+<li>Déterminer la <strong>complexité linéaire</strong> d’un LSFR</li>
+<li>Calculer un nombre arbitraire de séquences générées</li>
+</ul></li>
+</ul>
+<p><strong>Métrique</strong> : Complexité linéaire (<em>linear complexity</em>)</p>
+<p><strong>Solution d’Amélioration :</strong></p>
+<p>Remplacer la combinaison linéaire par une <strong>fonction non linéaire</strong> <span class="math inline">\(f\)</span></p>
+<p>→ <strong>Non Linear Feedback Shift Registers</strong> (NLFSR)</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>📄 Texte original
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<section id="stream-ciphers-générateurs-de-keystreams" class="level3">
+<h3 class="anchored" data-anchor-id="stream-ciphers-générateurs-de-keystreams">Stream Ciphers: Générateurs de Keystreams</h3>
+<ul>
+<li>Lorsqu’il convient de <strong>générer un keystream d’une longueur <span class="math inline">\(m\)</span></strong> à partir d’une <strong>clé secrète de longueur <span class="math inline">\(l\)</span></strong> avec <span class="math inline">\(l \ll m\)</span>, on fait appel à des <strong>générateurs de keystreams</strong>.</li>
+<li>Le plus courant de ces générateurs est le <strong>Linear Feedback Shift Register (LSFR)</strong>.</li>
+<li>Un LSFR a les caractéristiques suivantes:
+<ul>
+<li>S’adapte <strong>très bien aux implantations hardware</strong>.</li>
+<li>Produit des séquences de <strong>périodes longues</strong> et avec une <strong>qualité aléatoire notable</strong> (randomness assez forte)</li>
+<li>Se base sur les <strong>propriétés algébriques des combinaisons linéaires</strong>.</li>
+</ul></li>
+</ul>
+</section>
+<section id="lsfrs-quelques-remarques" class="level3">
+<h3 class="anchored" data-anchor-id="lsfrs-quelques-remarques">LSFRs: Quelques Remarques</h3>
+<ul>
+<li>Les LSFRs sont des constructions <strong>très répandues</strong> dans la cryptographie et dans la théorie de codes.</li>
+<li>Un <strong>grand nombre de stream ciphers</strong> basés sur les LSFRs (surtout dans la <strong>sphère militaire</strong>) ont été développés dans le passé.</li>
+<li>Malheureusement, le <strong>niveau de sécurité offert par ces systèmes est jugé insuffisant</strong> de nos jours (comparé à celui des blocks ciphers…)</li>
+<li>La <strong>métrique</strong> permettant d’analyser un LFSR est sa <strong>complexité linéaire</strong> (<em>linear complexity</em>). L’<strong>algorithme de Berlekamp-Massey</strong> permet de déterminer la complexité linéaire d’un LSFR et de calculer ainsi un nombre arbitrairement grand de séquences générées par un LSFR.</li>
+<li>Une solution pour <strong>augmenter la complexité</strong> est de substituer la combinaison linéaire des bits du ciphertext par une <strong>fonction non linéaire</strong> <span class="math inline">\(f\)</span>. Ce sont les <strong>Non Linear Feedback Shift Registers</strong>.</li>
+</ul>
+</section>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>📌 Révision rapide
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>LSFR</strong> : générateur de keystream long (<span class="math inline">\(m\)</span>) depuis clé courte (<span class="math inline">\(l\)</span>). Base = combinaisons linéaires.</p>
+<p><strong>Avantages</strong> : hardware efficace, périodes longues.</p>
+<p><strong>Problème</strong> : sécurité insuffisante, vulnérable à Berlekamp-Massey (calcul de complexité linéaire).</p>
+<p><strong>Solution</strong> : NLFSR (fonction non linéaire).</p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="rc4-stream-cipher-logiciel" class="level3">
+<h3 class="anchored" data-anchor-id="rc4-stream-cipher-logiciel">RC4 : Stream Cipher Logiciel</h3>
+<section id="présentation-générale" class="level4">
+<h4 class="anchored" data-anchor-id="présentation-générale">Présentation Générale</h4>
+<p><strong>RC4™</strong> (<em>Rivest Cipher 4</em>) développé en 1987 par Ron Rivest pour RSA Security.</p>
+<p><strong>Caractéristiques principales :</strong></p>
+<ul>
+<li><strong>Clé variable</strong> : longueur flexible</li>
+<li><strong>Extrêmement rapide</strong> : 10× plus rapide que DES</li>
+<li><strong>Mode synchrone</strong> : keystream indépendant du plaintext/ciphertext</li>
+</ul>
+<p><strong>Historique :</strong></p>
+<ul>
+<li>1987-1994 : breveté, détails confidentiels (contrat NDA requis)</li>
+<li>1994 : publication non officielle dans un newsgroup</li>
+<li>Depuis : analyse intensive par la communauté cryptographique</li>
+</ul>
+</section>
+<section id="architecture" class="level4">
+<h4 class="anchored" data-anchor-id="architecture">Architecture</h4>
+<p><strong>Composants clés :</strong></p>
+<ul>
+<li><strong>S-box</strong> : boîte de substitution 8×8 (256 entrées)
+<ul>
+<li>Contenu : permutation des nombres 0 à 255</li>
+<li>Dépend de la clé principale de longueur variable : <span class="math inline">\(0 &lt; len(k) \leq 255\)</span></li>
+</ul></li>
+<li><strong>Combinaisons</strong> : linéaires et non linéaires</li>
+<li><strong>Chiffrement final</strong> : XOR entre keystream et plaintext</li>
+</ul>
+</section>
+<section id="applications-et-sécurité" class="level4">
+<h4 class="anchored" data-anchor-id="applications-et-sécurité">Applications et Sécurité</h4>
+<p><strong>Utilisations commerciales (nombreuses) :</strong></p>
+<ul>
+<li>Lotus Notes</li>
+<li>Oracle SQL</li>
+<li>Microsoft Windows</li>
+<li>SSL/TLS</li>
+<li>Et bien d’autres…</li>
+</ul>
+<p><strong>Analyses et Vulnérabilités :</strong></p>
+<ul>
+<li>Travaux exhaustifs sur le key scheduling et le PRGA</li>
+<li><strong>Faille majeure</strong> : implémentation dans WEP (WiFi Wired Equivalent Privacy)
+<ul>
+<li>Protocole WEP complètement compromis</li>
+<li>Problème : mode d’utilisation défaillant, pas l’algorithme RC4 lui-même</li>
+</ul></li>
+</ul>
+</section>
+<section id="fonctionnement" class="level4">
+<h4 class="anchored">Fonctionnement</h4>
+<p>RC4 se décompose en <strong>deux étapes</strong> :</p>
+<ol type="1">
+<li><strong>Key Scheduling Algorithm (KSA)</strong>
+<ul>
+<li>Responsable de la permutation initiale de la S-box</li>
+<li>Fonction de la clé de longueur variable <span class="math inline">\(len(k) = l\)</span></li>
+</ul></li>
+<li><strong>Pseudo Random Generator Algorithm (PRGA)</strong>
+<ul>
+<li>Génère le keystream de taille arbitraire</li>
+<li>S’appuie sur la S-box permutée par KSA</li>
+</ul></li>
+</ol>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">graph TB
+    A[Clé k de longueur variable] --&gt; B[KSA: Key Scheduling]
+    B --&gt; C[S-box permutée]
+    C --&gt; D[PRGA: Génération]
+    D --&gt; E[Keystream zi]
+    E --&gt; F[XOR]
+    G[Plaintext mi] --&gt; F
+    F --&gt; H[Ciphertext ci]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>📄 Texte original
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<section id="software-cipher-streams-rc4" class="level3">
+<h3 class="anchored" data-anchor-id="software-cipher-streams-rc4">Software Cipher Streams: RC4</h3>
+<ul>
+<li>Le grand <strong>désavantage des stream ciphers basés sur des registres</strong> est qu’ils sont <strong>très lents en version programmée</strong> dans une machine générique. <strong>RC4™</strong> est un <strong>stream cipher à clé variable</strong> développé en <strong>1987 par Ron Rivest</strong> pour la société RSA security. Il est <strong>très rapide</strong> (<strong>10 fois plus rapide que DES</strong> !)</li>
+<li>Pendant 7 ans, cet algorithme était <strong>breveté</strong> et les détails son fonctionnement interne était dévoilés seulement après la <strong>signature d’un contrat de confidentialité</strong>. Depuis sa <strong>publication (non officielle) dans un newsgroup en 1994</strong>, il est globalement discuté et analysé dans toute la communauté cryptographique.</li>
+<li>L’algorithme travaille en <strong>mode synchrone</strong> (le keystream est indépendant du ciphertext et du plaintext).</li>
+<li>Il est composé de <strong>combinaisons linéaires et non linéaires</strong>. L’élément clé est une <strong>boîte de substitution (S-box) de taille 8×8</strong> dont les entrées sont une <strong>permutation des chiffres 0 à 255</strong>. La permutation est une <strong>fonction de la clé principale</strong> de taille variable avec <span class="math inline">\(0 &lt; len(k) \leq 255\)</span>. L’<strong>encryption finale est obtenue par un xor</strong> entre le keystream et le plaintext.</li>
+<li>RC4 est utilisé dans un <strong>grand nombre d’applications commerciales</strong>: Lotus Notes, Oracle SQL, MS Windows, SSL, etc. Il est l’objet d’un grand nombre de <strong>travaux analytiques et exhaustifs</strong> qui ont réussi à <strong>compromettre la sécurité</strong> du key scheduling et du PRGA.</li>
+<li>En particulier l’application de RC4 sur les <strong>Wired Equivalent Privacy (WiFi WEP) protocole a été “cassée”</strong> suite à une <strong>faille dans le mode d’utilisation</strong> du protocole.</li>
+</ul>
+</section>
+<section id="rc4-fonctionnement" class="level3">
+<h3 class="anchored" data-anchor-id="rc4-fonctionnement">RC4: Fonctionnement</h3>
+<ul>
+<li>L’algorithme est constitué de <strong>deux étapes</strong>:
+<ul>
+<li>Le <strong>Key Scheduling Algorithm (KSA)</strong>: Responsable de la <strong>permutation initiale</strong> qui remplira la S-box en fonction de la clé de longueur variable <span class="math inline">\(len(k) = l\)</span>.</li>
+<li>Le <strong>Pseudo Random Generator Algorithm (PRGA)</strong>: Génère le <strong>keystream de taille arbitraire</strong> en s’appuyant sur la S-box.</li>
+</ul></li>
+</ul>
+</section>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>📌 Révision rapide
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>RC4</strong> : stream cipher logiciel, clé variable, 10× plus rapide que DES.</p>
+<p><strong>Architecture</strong> : S-box 8×8 (permutation 0-255) + XOR.</p>
+<p><strong>2 étapes</strong> : KSA (permutation S-box) + PRGA (génération keystream). Mode synchrone.</p>
+<p><strong>Vulnérabilité</strong> : WEP cassé (faille d’utilisation). Utilisé dans SSL, Windows, Oracle…</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="block-ciphers-cryptage-par-blocs" class="level2">
+<h2 class="anchored" data-anchor-id="block-ciphers-cryptage-par-blocs">Block Ciphers (Cryptage par Blocs)</h2>
+<section id="introduction-aux-block-ciphers" class="level3">
+<h3 class="anchored" data-anchor-id="introduction-aux-block-ciphers">1. Introduction aux Block Ciphers</h3>
+<section id="définition-et-principe-1" class="level4">
+<h4 class="anchored" data-anchor-id="définition-et-principe-1">Définition et Principe</h4>
+<p>Un <strong>block cipher</strong> (chiffrement par blocs) est une fonction cryptographique qui :</p>
+<ul>
+<li><strong>Transforme des blocs de taille fixe</strong> : fait correspondre un bloc de <span class="math inline">\(n\)</span> bits à un autre bloc de la même taille</li>
+<li><strong>Est paramétrisée par une clé</strong> : la clé <span class="math inline">\(K\)</span> de <span class="math inline">\(k\)</span> bits définit la transformation</li>
+<li><strong>Doit être bijective</strong> : pour permettre un décryptage unique</li>
+<li><strong>Chaque clé = bijection différente</strong> : garantit la variabilité</li>
+</ul>
+<p><strong>Taille nominale</strong> : taille d’entrée du bloc sur lequel s’applique l’encryption</p>
+</section>
+<section id="critères-de-qualité" class="level4">
+<h4 class="anchored" data-anchor-id="critères-de-qualité">Critères de Qualité</h4>
+<p><strong>1. Taille/Entropie de la clé</strong></p>
+<ul>
+<li>Clés idéalement <strong>équiprobables</strong> avec entropie = <span class="math inline">\(k\)</span> bits</li>
+<li>Forte entropie protège contre les <strong>attaques brute-force</strong></li>
+<li><strong>Minimum requis</strong> : 128 bits pour les block ciphers modernes</li>
+</ul>
+<p><strong>2. Performances</strong></p>
+<ul>
+<li>Vitesse d’exécution</li>
+<li>Efficacité en software/hardware</li>
+</ul>
+<p><strong>3. Taille du bloc</strong></p>
+<ul>
+<li>Bloc trop petit = vulnérabilité aux <strong>dictionnaires plaintext/ciphertext</strong></li>
+<li><strong>Standard moderne</strong> : blocs ≥ 128 bits</li>
+</ul>
+<p><strong>4. Résistance cryptographique</strong></p>
+<ul>
+<li>Résistance aux techniques connues :
+<ul>
+<li>Cryptanalyse linéaire</li>
+<li>Cryptanalyse différentielle</li>
+<li>Meet in the middle</li>
+</ul></li>
+<li><strong>Effort de cryptanalyse</strong> équivalent au brute force</li>
+</ul>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">graph LR
+    A[Plaintext n bits] --&gt; B[Block Cipher]
+    C[Clé K k bits] --&gt; B
+    B --&gt; D[Ciphertext n bits]
+    
+    style B fill:#e1f5ff
+    style C fill:#fff4e1
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>📄 Texte original
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<section id="cryptage-par-blocs-block-ciphers" class="level4 callout-body-container callout-body">
+<h4 class="anchored" data-anchor-id="cryptage-par-blocs-block-ciphers">Cryptage par Blocs (Block Ciphers)</h4>
+<ul>
+<li><p>Les <strong>block ciphers symétriques</strong> constituent la <strong>pierre angulaire de la cryptographie</strong>. Leur fonctionnalité principale est la <strong>confidentialité</strong> mais ils sont également à la base des services d’<strong>authentification</strong>, <strong>fonctions de hachage</strong>, <strong>génération aléatoire</strong>, etc.</p></li>
+<li><p><strong>Définition</strong>: Un block cipher est une <strong>fonction</strong> qui fait correspondre à un <strong>bloc de <span class="math inline">\(n\)</span> bits</strong> un autre bloc de <strong>la même taille</strong>. La fonction est <strong>paramètrée par une clé <span class="math inline">\(K\)</span> de <span class="math inline">\(k\)</span> bits</strong>. Afin de permettre une <strong>decryption unique</strong>, la fonction doit être <strong>bijective</strong>. <strong>Chaque clé définit une bijection différente</strong>. La <strong>taille d’entrée du bloc</strong> sur lequel s’applique l’encryption s’appelle aussi <strong>taille nominale de l’algorithme</strong>.</p></li>
+<li><p><strong>Critères pour évaluer la qualité</strong> d’un block cipher:</p>
+<ul>
+<li><strong>Taille/Entropie de la clé</strong>: Idéalement, les clés sont <strong>équiprobables</strong> et l’espace des clés a une <strong>entropie égale à <span class="math inline">\(k\)</span></strong>. Une <strong>forte entropie</strong> de la clé protège des <strong>attaques brute-force</strong> à partir de chosen/known plaintexts. Les block ciphers modernes doivent avoir des <strong>clés d’au moins 128 bits</strong>.</li>
+<li><strong>Performances</strong></li>
+<li><strong>Taille du bloc</strong>: Un bloc <strong>trop petit</strong> permettrait des attaques où des <strong>“dictionnaires” plaintext/ciphertext</strong> seraient construits. De nos jours, des <strong>blocs de taille ≥ 128 bits</strong> deviennent courants.</li>
+<li><strong>Résistance cryptographique</strong>: Le block cipher doit se montrer <strong>résistant</strong> à des techniques de cryptanalyse connues: <strong>cryptanalyse linéaire ou différentielle</strong>, <strong>meet in the middle</strong>, etc. L’<strong>effort inhérent</strong> à ces attaques (complexité, stockage, parallélisation, etc.) doit être <strong>équivalent à celui d’une attaque brute force</strong>.</li>
+</ul></li>
+</ul>
+</section>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>📌 Révision rapide
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Block cipher</strong> : fonction bijective transformant blocs de <span class="math inline">\(n\)</span> bits avec clé <span class="math inline">\(K\)</span> de <span class="math inline">\(k\)</span> bits. <strong>Critères</strong> : entropie clé ≥ 128 bits, taille bloc ≥ 128 bits, résistance cryptanalyse = effort brute force. <strong>Usage</strong> : confidentialité, authentification, hachage, génération aléatoire.</p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="modes-dopération-des-block-ciphers" class="level3">
+<h3 class="anchored" data-anchor-id="modes-dopération-des-block-ciphers">2. Modes d’Opération des Block Ciphers</h3>
+<section id="electronic-codebook-ecb" class="level4">
+<h4 class="anchored" data-anchor-id="electronic-codebook-ecb">2.1 Electronic Codebook (ECB)</h4>
+<p><strong>Principe</strong> : chaque bloc de plaintext est encrypté <strong>indépendamment</strong> avec la même clé.</p>
+<p><span class="math display">\[c_i = E_K(m_i)\]</span> <span class="math display">\[m_i = D_K(c_i)\]</span></p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">graph TB
+    subgraph Encryption
+        P1[Plaintext Block 1] --&gt; E1[Block Cipher E]
+        K1[Key K] --&gt; E1
+        E1 --&gt; C1[Ciphertext Block 1]
+        
+        P2[Plaintext Block 2] --&gt; E2[Block Cipher E]
+        K2[Key K] --&gt; E2
+        E2 --&gt; C2[Ciphertext Block 2]
+    end
+    
+    style E1 fill:#ffcccc
+    style E2 fill:#ffcccc
+    style K1 fill:#fff4e1
+    style K2 fill:#fff4e1
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p><strong>Caractéristiques :</strong></p>
+<ul>
+<li>✗ <strong>Plaintexts identiques</strong> → ciphertexts identiques (prévisible)</li>
+<li>✓ <strong>Pas de propagation d’erreurs</strong> : erreur sur <span class="math inline">\(c_j\)</span> n’affecte que <span class="math inline">\(m_j\)</span></li>
+<li>✗ <strong>Patterns visibles</strong> : structure du plaintext transparente dans le ciphertext</li>
+<li>✓ <strong>Parallélisable</strong> : chaque bloc traité indépendamment</li>
+</ul>
+<p><strong>⚠️ Vulnérabilité majeure</strong> : Ne doit PAS être utilisé pour des données redondantes</p>
+<hr>
+</section>
+<section id="cipher-block-chaining-cbc" class="level4">
+<h4 class="anchored" data-anchor-id="cipher-block-chaining-cbc">2.2 Cipher Block Chaining (CBC)</h4>
+<p><strong>Principe</strong> : chaque bloc de plaintext est <strong>XORé avec le ciphertext précédent</strong> avant encryption.</p>
+<p><span class="math display">\[c_i = E_K(m_i \oplus c_{i-1})\]</span> <span class="math display">\[m_i = D_K(c_i) \oplus c_{i-1}\]</span></p>
+<p>Avec <span class="math inline">\(c_0 = IV\)</span> (Initialization Vector)</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">graph TB
+    subgraph Encryption
+        IV[IV] --&gt; X1[⊕]
+        P1[Plaintext m1] --&gt; X1
+        X1 --&gt; E1[Block Cipher E]
+        K1[Key K] --&gt; E1
+        E1 --&gt; C1[Ciphertext c1]
+        
+        C1 --&gt; X2[⊕]
+        P2[Plaintext m2] --&gt; X2
+        X2 --&gt; E2[Block Cipher E]
+        K2[Key K] --&gt; E2
+        E2 --&gt; C2[Ciphertext c2]
+    end
+    
+    style E1 fill:#ccffcc
+    style E2 fill:#ccffcc
+    style X1 fill:#ffffcc
+    style X2 fill:#ffffcc
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p><strong>Caractéristiques :</strong></p>
+<ul>
+<li>✓ <strong>Plaintexts identiques</strong> → ciphertexts différents (si IV change)</li>
+<li>✓ <strong>Patterns effacés</strong> : chaînage masque la structure</li>
+<li>✓ <strong>Propagation d’erreurs limitée</strong> : erreur sur <span class="math inline">\(c_j\)</span> affecte <span class="math inline">\(m_j\)</span> et <span class="math inline">\(m_{j+1}\)</span> uniquement</li>
+<li>✗ <strong>Non parallélisable</strong> en encryption (séquentiel)</li>
+<li>✓ <strong>Parallélisable</strong> en décryption</li>
+</ul>
+<p><strong>IV (Initialization Vector)</strong> :</p>
+<ul>
+<li>Doit être <strong>aléatoire</strong> ou <strong>pseudo-aléatoire</strong></li>
+<li>Peut être transmis <strong>en clair</strong></li>
+<li>Doit être <strong>différent</strong> pour chaque message avec la même clé</li>
+</ul>
+<hr>
+</section>
+<section id="cipher-feedback-mode-cfb" class="level4">
+<h4 class="anchored" data-anchor-id="cipher-feedback-mode-cfb">2.3 Cipher Feedback Mode (CFB)</h4>
+<p><strong>Principe</strong> : fonctionne comme un <strong>stream cipher</strong> où le keystream est généré par le block cipher. Le keystream dépend des <strong>ciphertexts précédents</strong> (mode <strong>asynchrone</strong>).</p>
+<p><span class="math display">\[c_i = m_i \oplus E_K(c_{i-1})\]</span> <span class="math display">\[m_i = c_i \oplus E_K(c_{i-1})\]</span></p>
+<p>Avec <span class="math inline">\(c_0 = IV\)</span></p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">graph TB
+    subgraph CFB_Encryption
+        IV[IV / ci-1] --&gt; E1[Block Cipher E]
+        K1[Key K] --&gt; E1
+        E1 --&gt; X1[⊕]
+        P1[Plaintext mi] --&gt; X1
+        X1 --&gt; C1[Ciphertext ci]
+        C1 -.feedback.-&gt; IV
+    end
+    
+    style E1 fill:#ffccff
+    style X1 fill:#ffffcc
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p><strong>Caractéristiques :</strong></p>
+<ul>
+<li>✓ <strong>Plaintexts identiques</strong> → ciphertexts différents (si IV change)</li>
+<li>✓ <strong>Chaînage</strong> : dépendances entre ciphertexts</li>
+<li>⚠️ <strong>Propagation d’erreurs</strong> : erreur sur <span class="math inline">\(c_j\)</span> affecte <span class="math inline">\(\frac{n}{r}\)</span> blocs suivants
+<ul>
+<li><span class="math inline">\(n\)</span> = taille nominale du block cipher</li>
+<li><span class="math inline">\(r\)</span> = taille des plaintexts</li>
+</ul></li>
+<li>✗ <strong>Non parallélisable</strong></li>
+<li>⚠️ <strong>IV non confidentiel</strong> mais doit être transmis</li>
+</ul>
+<p><strong>Usage</strong> : adapté aux transmissions avec pertes de paquets fréquentes</p>
+<hr>
+</section>
+<section id="output-feedback-mode-ofb" class="level4">
+<h4 class="anchored" data-anchor-id="output-feedback-mode-ofb">2.4 Output Feedback Mode (OFB)</h4>
+<p><strong>Principe</strong> : fonctionne comme un <strong>stream cipher synchrone</strong>. Le keystream est <strong>entièrement déterminé</strong> par la clé et l’IV, <strong>indépendant</strong> du plaintext et du ciphertext.</p>
+<p><span class="math display">\[z_i = E_K(z_{i-1})\]</span> <span class="math display">\[c_i = m_i \oplus z_i\]</span> <span class="math display">\[m_i = c_i \oplus z_i\]</span></p>
+<p>Avec <span class="math inline">\(z_0 = IV\)</span></p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">graph TB
+    subgraph OFB_Mode
+        IV[IV / zi-1] --&gt; E1[Block Cipher E]
+        K1[Key K] --&gt; E1
+        E1 --&gt; Z[zi keystream]
+        Z --&gt; X1[⊕]
+        P1[Plaintext mi] --&gt; X1
+        X1 --&gt; C1[Ciphertext ci]
+        Z -.feedback.-&gt; IV
+    end
+    
+    style E1 fill:#cce5ff
+    style X1 fill:#ffffcc
+    style Z fill:#e1ffe1
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p><strong>Caractéristiques :</strong></p>
+<ul>
+<li>✓ <strong>Plaintexts identiques</strong> → ciphertexts différents (si IV change)</li>
+<li>✓ <strong>Pas de propagation d’erreurs</strong> : erreur sur <span class="math inline">\(c_j\)</span> n’affecte que <span class="math inline">\(m_j\)</span></li>
+<li>✓ <strong>Keystream pré-calculable</strong> : efficace</li>
+<li>⚠️ <strong>CRITIQUE</strong> : ne JAMAIS réutiliser le même IV avec la même clé (sinon keystream identique)</li>
+<li>✓ <strong>Parallélisable</strong> si keystream pré-calculé</li>
+</ul>
+<p><strong>⚠️ Attention réutilisation</strong> : Modifier l’IV pour chaque nouveau message !</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>📄 Texte original (Modes CFB et OFB)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<section id="modes-cfb-et-ofb-caractéristiques" class="level4 callout-body-container callout-body">
+<h4 class="anchored" data-anchor-id="modes-cfb-et-ofb-caractéristiques">Modes CFB et OFB: Caractéristiques</h4>
+<p>Les modes <strong>CFB et OFB</strong> fonctionnent comme un <strong>stream cipher</strong> avec un <strong>keystream généré par le bloc de cryptage</strong>. Dans <strong>CFB</strong>, le keystream dépend des <strong>ciphertexts précédents</strong> (<strong>asynchrone</strong>) alors que dans <strong>OFB</strong>, le keystream est <strong>entièrement déterminé par la clé et le IV</strong> (<strong>synchrone</strong>).</p>
+<p><strong>Particularités de CFB</strong>:</p>
+<ul>
+<li>Comme dans le mode CBC, des <strong>plaintext identiques</strong> sont traduits en <strong>ciphertexts différents</strong> si le <strong>IV change</strong>. Le <strong>IV n’est pas nécessairement confidentiel</strong> et peut être échangé en clair entre les parties.</li>
+<li>Le <strong>chaînage</strong> introduit également des <strong>dépendances</strong> entre les ciphertexts courants et les ciphertexts précédents. En particulier, si <span class="math inline">\(n\)</span> est la <strong>taille nominale de l’algorithme</strong> et <span class="math inline">\(r\)</span> est la <strong>taille des plaintexts</strong>, le ciphertext courant dépendra des <span class="math inline">\(\frac{n}{r}\)</span> <strong>ciphertexts précédents</strong> (chaque itération décalera l’entrée fautive de <span class="math inline">\(r\)</span> positions, après <span class="math inline">\(\frac{n}{r}\)</span> itérations le ciphertext fautif sera “expulsé” complètement).</li>
+<li>La <strong>propagation d’erreurs</strong> obéit au même principe: une erreur dans un ciphertext se traduira par une mauvaise decryption des <span class="math inline">\(\frac{n}{r}\)</span> ciphertexts suivants.</li>
+</ul>
+<p><strong>Particularités de OFB</strong>:</p>
+<ul>
+<li>OFB a un comportement <strong>identique</strong> aux modes CBC et CFB pour l’<strong>encryption de plaintext identiques</strong>.</li>
+<li><strong>Pas de propagation d’erreurs</strong> sur les ciphertexts adjacents.</li>
+<li><strong>Modifiez le IV</strong> si la clé ne change pas pour <strong>éviter la réutilisation du keystream</strong> !!!</li>
+</ul>
+</section>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>📌 Révision rapide (Modes CFB/OFB)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>CFB</strong> (asynchrone) : keystream = <span class="math inline">\(f\)</span>(ciphertexts précédents). Propagation erreur limitée (<span class="math inline">\(\frac{n}{r}\)</span> blocs).</p>
+<p><strong>OFB</strong> (synchrone) : keystream = <span class="math inline">\(f\)</span>(clé + IV uniquement). Pas propagation erreur.</p>
+<p><strong>CRITIQUE</strong> : ne JAMAIS réutiliser même IV avec même clé. IV transmissible en clair.</p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="counter-mode-ctr" class="level4">
+<h4 class="anchored" data-anchor-id="counter-mode-ctr">2.5 Counter Mode (CTR)</h4>
+<p><strong>Principe</strong> : le keystream est généré par l’<strong>encryption d’un compteur</strong> incrémenté à chaque bloc.</p>
+<p><span class="math display">\[c_i = m_i \oplus E_K(counter + i)\]</span> <span class="math display">\[m_i = c_i \oplus E_K(counter + i)\]</span></p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">graph TB
+    subgraph CTR_Mode
+        CTR1[Counter + 0] --&gt; E1[Block Cipher E]
+        K1[Key K] --&gt; E1
+        E1 --&gt; X1[⊕]
+        P1[Plaintext m1] --&gt; X1
+        X1 --&gt; C1[Ciphertext c1]
+        
+        CTR2[Counter + 1] --&gt; E2[Block Cipher E]
+        K2[Key K] --&gt; E2
+        E2 --&gt; X2[⊕]
+        P2[Plaintext m2] --&gt; X2
+        X2 --&gt; C2[Ciphertext c2]
+    end
+    
+    style E1 fill:#ffe6cc
+    style E2 fill:#ffe6cc
+    style X1 fill:#ffffcc
+    style X2 fill:#ffffcc
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p><strong>Caractéristiques :</strong></p>
+<ul>
+<li>✓ <strong>Mode synchrone</strong> : keystream = <span class="math inline">\(f\)</span>(compteur)</li>
+<li>✓ <strong>Parallélisable</strong> : keystream pré-calculable pour encryption ET décryption</li>
+<li>✓ <strong>Accès aléatoire</strong> : chaque bloc décryptable indépendamment</li>
+<li>✓ <strong>Pas de propagation d’erreurs</strong></li>
+<li>✓ <strong>Profite des architectures SIMD</strong> : pas de dépendances entre blocs</li>
+<li>⚠️ <strong>Compteur</strong> : doit être de taille <span class="math inline">\(2^b\)</span> (<span class="math inline">\(b\)</span> = taille du bloc)</li>
+<li>⚠️ <strong>CRITIQUE</strong> : ne JAMAIS réutiliser le même compteur avec la même clé</li>
+</ul>
+<p><strong>Gestion du compteur</strong> :</p>
+<ul>
+<li><strong>Incrémenter modulo</strong> <span class="math inline">\(2^b\)</span> après chaque itération</li>
+<li><strong>Solution</strong> : toujours incrémenter pour chaque flux encrypté</li>
+<li>Premier bloc du flux <span class="math inline">\(i+1\)</span> &gt; dernier bloc du flux <span class="math inline">\(i\)</span></li>
+</ul>
+<p><strong>Applications</strong> :</p>
+<ul>
+<li><strong>ATM</strong> (Asynchronous Transfer Mode)</li>
+<li><strong>IPsec</strong> (IP security)</li>
+<li><strong>Lignes à haut débit</strong> : transmission sélective des blocs</li>
+<li><strong>Transferts de grands volumes</strong> : vidéo</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>📄 Texte original (Counter Mode)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-15" class="callout-15-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<section id="counter-mode-ctr-mode" class="level4">
+<h4 class="anchored" data-anchor-id="counter-mode-ctr-mode">Counter Mode (CTR Mode)</h4>
+<p>Fréquemment utilisé comme support d’encryption dans des protocoles de transfert de données comme <strong>ATM</strong> (Asynchronous Transfer Mode) et <strong>IPsec</strong> (IP security).</p>
+</section>
+<section id="counter-mode-ii" class="level4">
+<h4 class="anchored" data-anchor-id="counter-mode-ii">Counter Mode (II)</h4>
+<ul>
+<li>Le <strong>keystream</strong> est généré par l’<strong>encryption d’un compteur aléatoire</strong> de taille <span class="math inline">\(2^b\)</span> (avec <span class="math inline">\(b\)</span> la taille du bloc) et nécessaire pour la décryption. Ce compteur est <strong>incrémenté modulo</strong> <span class="math inline">\(2^b\)</span> après chaque itération.</li>
+<li>Travaille en <strong>mode synchrone</strong>. La <strong>réutilisation d’un même compteur</strong> se traduit par un <strong>keystream identique</strong> !</li>
+<li><strong>Solution</strong>: Toujours <strong>incrémenter le compteur</strong> pour chaque flot encrypté de telle sorte que le compteur du premier bloc d’un flot soit <strong>plus grand que le dernier bloc</strong> du flot précédent.</li>
+<li><strong>Facilement parallélisable</strong>: Le keystream peut être <strong>pré-calculé</strong> aussi bien pour l’encryption que pour la décryption. Profite pleinement des <strong>architectures SIMD</strong> car contrairement aux autres modes de chaînage il n’y a pas des <strong>dépendances entre les opérations</strong> des différents blocs.</li>
+<li><strong>Accès aléatoire</strong> à l’encryption/décryption de chaque bloc: Contrairement aux autres modes de chaînage où la <span class="math inline">\(i\)</span>-ème opération dépend de la <span class="math inline">\((i-1)\)</span>-ème opération.</li>
+<li>Si à ceci on ajoute l’<strong>absence de propagation d’erreurs</strong>, le mode compteur facilite la <strong>(re)transmission sélective</strong> des blocs de ciphertext, ce qui le rend très attractif pour la <strong>sécurisation de lignes à haut débit</strong> ainsi que pour les <strong>transferts encryptés de grands volumes</strong> d’information (p.ex. vidéo).</li>
+</ul>
+</section>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>📌 Révision rapide (Counter Mode)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-16" class="callout-16-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>CTR</strong> : keystream = <span class="math inline">\(E_K\)</span>(compteur + <span class="math inline">\(i\)</span>).</p>
+<p><strong>Avantages</strong> : parallélisable (encryption + décryption), accès aléatoire, pas propagation erreur, SIMD-friendly.</p>
+<p><strong>CRITIQUE</strong> : ne jamais réutiliser compteur.</p>
+<p><strong>Usage</strong> : ATM, IPsec, haut débit, vidéo.</p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="product-ciphers-et-feistel-ciphers" class="level3">
+<h3 class="anchored" data-anchor-id="product-ciphers-et-feistel-ciphers">3. Product Ciphers et Feistel Ciphers</h3>
+<section id="product-ciphers" class="level4">
+<h4 class="anchored" data-anchor-id="product-ciphers">Product Ciphers</h4>
+<p><strong>Définition</strong> : schéma de cryptage combinant une <strong>série de transformations successives</strong> pour renforcer la résistance à la cryptanalyse.</p>
+<p><strong>Transformations courantes</strong> :</p>
+<ul>
+<li>Transpositions (permutations)</li>
+<li>Substitutions (S-boxes)</li>
+<li>XORs</li>
+<li>Combinaisons linéaires</li>
+<li>Multiplications modulaires</li>
+</ul>
+</section>
+<section id="feistel-ciphers" class="level4">
+<h4 class="anchored" data-anchor-id="feistel-ciphers">Feistel Ciphers</h4>
+<p><strong>Définition</strong> : product cipher itératif avec structure spécifique.</p>
+<p><strong>Principe de fonctionnement</strong> :</p>
+<ul>
+<li><strong>Entrée</strong> : plaintext de <span class="math inline">\(2t\)</span> bits = <span class="math inline">\((L_0, R_0)\)</span> (deux sous-blocs de <span class="math inline">\(t\)</span> bits)</li>
+<li><strong>Sortie</strong> : ciphertext de <span class="math inline">\(2t\)</span> bits = <span class="math inline">\((R_r, L_r)\)</span> après <span class="math inline">\(r\)</span> étapes (rounds)</li>
+<li><strong>Chaque étape</strong> : bijection inversible (pour décryption unique)</li>
+</ul>
+<p><strong>Équations d’une étape</strong> <span class="math inline">\(i\)</span> (<span class="math inline">\(1 \leq i \leq r\)</span>) :</p>
+<p><span class="math display">\[(L_{i-1}, R_{i-1}) \xrightarrow{K_i} (L_i, R_i)\]</span></p>
+<p>Avec :</p>
+<ul>
+<li><span class="math inline">\(L_i = R_{i-1}\)</span></li>
+<li><span class="math inline">\(R_i = L_{i-1} \oplus f(R_{i-1}, K_i)\)</span></li>
+</ul>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">graph TB
+    subgraph Feistel_Round
+        L0[Li-1] --&gt; R1[Ri = Li-1 ⊕ f]
+        R0[Ri-1] --&gt; L1[Li = Ri-1]
+        R0 --&gt; F[Function f]
+        K[Key Ki] --&gt; F
+        F --&gt; XOR[⊕]
+        L0 --&gt; XOR
+        XOR --&gt; R1
+    end
+    
+    style F fill:#ffcccc
+    style XOR fill:#ffffcc
+    style K fill:#fff4e1
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p><strong>Caractéristiques</strong> :</p>
+<ul>
+<li><span class="math inline">\(K_i\)</span> : sous-clés générées à partir de la clé principale <span class="math inline">\(K\)</span></li>
+<li>Nombre d’étapes <span class="math inline">\(r\)</span> : généralement <strong>pair</strong> et <span class="math inline">\(\geq 3\)</span>
+<ul>
+<li>Exemple : DES a 16 étapes</li>
+</ul></li>
+<li><strong>Permutation finale</strong> : <span class="math inline">\((L_r, R_r) \rightarrow (R_r, L_r)\)</span></li>
+<li><strong>Décryption</strong> : identique à l’encryption mais sous-clés appliquées en <strong>ordre inverse</strong> (de <span class="math inline">\(K_r\)</span> à <span class="math inline">\(K_1\)</span>)</li>
+</ul>
+<p><strong>Opérations fréquentes</strong> :</p>
+<ul>
+<li>Permutations</li>
+<li>Substitutions (S-boxes)</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>📄 Texte original
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-17" class="callout-17-contents callout-collapse collapse">
+<section id="product-ciphers-et-feistel-ciphers-1" class="level4 callout-body-container callout-body">
+<h4 class="anchored" data-anchor-id="product-ciphers-et-feistel-ciphers-1">Product Ciphers et Feistel Ciphers</h4>
+<ul>
+<li><p>Un <strong>product cipher</strong> est un <strong>schéma de cryptage</strong> combinant une <strong>série de transformations successives</strong> dans le but de <strong>renforcer la résistance à la cryptanalyse</strong>. Des transformations courantes pour un product cipher sont: des <strong>transpositions</strong>, des <strong>substitutions</strong>, des <strong>XORs</strong>, des <strong>combinaisons linéaires</strong>, des <strong>multiplications modulaires</strong>, etc.</p></li>
+<li><p>Un <strong>Feistel cipher</strong> est un <strong>product cipher itératif</strong> capable de transformer un <strong>plaintext de <span class="math inline">\(2t\)</span> bits</strong> de la forme <span class="math inline">\((L_0, R_0)\)</span> composé par deux <strong>sous-blocs</strong> <span class="math inline">\(L_0\)</span> et <span class="math inline">\(R_0\)</span> de <span class="math inline">\(t\)</span> bits en un <strong>ciphertext de taille <span class="math inline">\(2t\)</span></strong> de la forme <span class="math inline">\((R_r, L_r)\)</span> après <span class="math inline">\(r\)</span> <strong>étapes (rounds) successives</strong> avec <span class="math inline">\(r \geq 1\)</span>. <strong>Chaque étape</strong> définit une <strong>bijection (inversible !)</strong> pour permettre une decryption unique.</p></li>
+<li><p>Des <strong>permutations</strong> et des <strong>substitutions</strong> sont les opérations les plus fréquentes.</p></li>
+<li><p>Les étapes <span class="math inline">\(1 \leq i \leq r\)</span> s’écrivent: <span class="math inline">\((L_{i-1}, R_{i-1}) \xrightarrow{K_i} (L_i, R_i)\)</span> avec <span class="math inline">\(L_i = R_{i-1}\)</span> et <span class="math inline">\(R_i = L_{i-1} \oplus f(R_{i-1}, K_i)\)</span>. Les <span class="math inline">\(K_i\)</span> sont des <strong>sous-clés</strong>, <strong>différentes pour chaque étape</strong>, générées à partir de la <strong>clé principale <span class="math inline">\(K\)</span></strong> du schéma de cryptage.</p></li>
+<li><p>Le <strong>nombre d’étapes</strong> propres à un Feistel cipher est normalement <strong>pair</strong> et <span class="math inline">\(\geq 3\)</span> (p.ex. <strong>DES a 16 étapes</strong>)</p></li>
+<li><p>Après l’exécution de toutes les étapes, un Feistel cipher effectue une <strong>permutation</strong> des deux parties <span class="math inline">\((L_r, R_r)\)</span> en <span class="math inline">\((R_r, L_r)\)</span>.</p></li>
+<li><p>La <strong>decryption</strong> d’un Feistel Cipher est <strong>identique à l’encryption</strong> sauf que les sous-clés <span class="math inline">\(K_i\)</span> sont appliquées en <strong>ordre inverse</strong> (De <span class="math inline">\(K_r\)</span> à <span class="math inline">\(K_1\)</span>).</p></li>
+</ul>
+</section>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>📌 Révision rapide
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-18" class="callout-18-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Product cipher</strong> : combinaison de transformations successives (transpositions, substitutions, XOR).</p>
+<p><strong>Feistel cipher</strong> :</p>
+<ul>
+<li>product cipher itératif</li>
+<li>plaintext <span class="math inline">\(2t\)</span> bits = <span class="math inline">\((L_0, R_0)\)</span></li>
+<li><span class="math inline">\(r\)</span> rounds avec <span class="math inline">\(L_i = R_{i-1}\)</span> et <span class="math inline">\(R_i = L_{i-1} \oplus f(R_{i-1}, K_i)\)</span>.</li>
+<li>Décryption = encryption avec sous-clés inversées.</li>
+<li>Exemple : DES (16 rounds).</li>
+</ul>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="data-encryption-standard-des" class="level3">
+<h3 class="anchored" data-anchor-id="data-encryption-standard-des">4. Data Encryption Standard (DES)</h3>
+<section id="présentation-générale-1" class="level4">
+<h4 class="anchored" data-anchor-id="présentation-générale-1">Présentation Générale</h4>
+<p><strong>DES</strong> (Data Encryption Standard) : algorithme cryptographique le plus important jusqu’à l’avènement d’AES en 2001.</p>
+<p><strong>Caractéristiques principales</strong> :</p>
+<ul>
+<li><strong>Type</strong> : Feistel Cipher</li>
+<li><strong>Taille des blocs</strong> : 64 bits (taille nominale)</li>
+<li><strong>Taille de la clé</strong> : 56 bits effectifs (64 bits totaux avec 8 bits de parité)</li>
+<li><strong>Nombre d’étapes</strong> : 16 rounds</li>
+<li><strong>Sous-clés</strong> : 16 sous-clés de 48 bits (une par étape)</li>
+<li><strong>Modes d’utilisation</strong> : ECB, CBC, CFB, OFB</li>
+</ul>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">graph TB
+    subgraph DES_Overview
+        P[Plaintext 64 bits] --&gt; DES[DES Encryption]
+        K[Key 56 bits] --&gt; DES
+        DES --&gt; C[Ciphertext 64 bits]
+        
+        C --&gt; DES_INV[DES Decryption]
+        K2[Key 56 bits] --&gt; DES_INV
+        DES_INV --&gt; P2[Plaintext 64 bits]
+    end
+    
+    style DES fill:#ffcccc
+    style DES_INV fill:#ccffcc
+    style K fill:#fff4e1
+    style K2 fill:#fff4e1
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="structure-de-des" class="level4">
+<h4 class="anchored" data-anchor-id="structure-de-des">Structure de DES</h4>
+<p><strong>Composants principaux</strong> :</p>
+<ol type="1">
+<li><strong>Permutation initiale (IP)</strong> : permutation des 64 bits d’entrée</li>
+<li><strong>16 rounds Feistel</strong> : transformation itérative</li>
+<li><strong>Permutation finale (IP⁻¹)</strong> : inverse de IP</li>
+</ol>
+<p><strong>Chaque round applique</strong> :</p>
+<ul>
+<li>Division en deux moitiés : <span class="math inline">\(L_{i-1}\)</span> et <span class="math inline">\(R_{i-1}\)</span> (32 bits chacune)</li>
+<li>Fonction <span class="math inline">\(f\)</span> sur <span class="math inline">\(R_{i-1}\)</span> avec sous-clé <span class="math inline">\(K_i\)</span></li>
+<li>XOR avec <span class="math inline">\(L_{i-1}\)</span></li>
+<li>Échange des moitiés</li>
+</ul>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">graph TB
+    Plain[Plaintext 64 bits] --&gt; IP[Initial Permutation IP]
+    IP --&gt; Split[Split L0, R0]
+    
+    Split --&gt; Round1[Round 1]
+    K1[K1] --&gt; Round1
+    Round1 --&gt; Round2[Round 2]
+    K2[K2] --&gt; Round2
+    Round2 --&gt; Dots[...]
+    Dots --&gt; Round16[Round 16]
+    K16[K16] --&gt; Round16
+    
+    Round16 --&gt; Swap[Swap R16, L16]
+    Swap --&gt; IP_inv[Final Permutation IP⁻¹]
+    IP_inv --&gt; Cipher[Ciphertext 64 bits]
+    
+    style IP fill:#e1f5ff
+    style IP_inv fill:#e1f5ff
+    style Round1 fill:#ffcccc
+    style Round2 fill:#ffcccc
+    style Round16 fill:#ffcccc
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="fonction-cipher-de-des" class="level4">
+<h4 class="anchored" data-anchor-id="fonction-cipher-de-des">Fonction Cipher de DES</h4>
+<p>La <strong>fonction <span class="math inline">\(f\)</span></strong> pour chaque round :</p>
+<ol type="1">
+<li><strong>Expansion E</strong> : 32 bits → 48 bits (table E)</li>
+<li><strong>Key Addition</strong> : XOR avec sous-clé <span class="math inline">\(K_i\)</span> (48 bits)</li>
+<li><strong>S-boxes</strong> : 8 S-boxes transforment 48 bits → 32 bits
+<ul>
+<li>Chaque S-box : 6 bits entrée → 4 bits sortie</li>
+</ul></li>
+<li><strong>Permutation P</strong> : permutation des 32 bits résultants</li>
+</ol>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">graph TB
+    R[Ri-1 32 bits] --&gt; E[Expansion E]
+    E --&gt; E_out[48 bits]
+    E_out --&gt; XOR1[⊕]
+    K[Ki 48 bits] --&gt; XOR1
+    XOR1 --&gt; S[8 S-boxes]
+    S --&gt; S_out[32 bits]
+    S_out --&gt; P[Permutation P]
+    P --&gt; F_out[f output 32 bits]
+    
+    style E fill:#cce5ff
+    style S fill:#ffcccc
+    style P fill:#e1ffe1
+    style XOR1 fill:#ffffcc
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p><strong>Fonctionnement des S-boxes</strong> :</p>
+<p>Entrée : <span class="math inline">\(a_1a_2a_3a_4a_5a_6\)</span> (6 bits)</p>
+<ul>
+<li><strong>Ligne</strong> : <span class="math inline">\(a_1 + 2a_6\)</span> (bits externes)</li>
+<li><strong>Colonne</strong> : <span class="math inline">\(a_2 + 2a_3 + 4a_4 + 8a_5\)</span> (bits internes)</li>
+<li><strong>Sortie</strong> : valeur de la cellule correspondante (4 bits)</li>
+</ul>
+</section>
+<section id="génération-des-sous-clés" class="level4">
+<h4 class="anchored" data-anchor-id="génération-des-sous-clés">Génération des Sous-clés</h4>
+<p><strong>Processus</strong> :</p>
+<ol type="1">
+<li>Clé principale : 64 bits (56 effectifs + 8 parité)</li>
+<li><strong>Permuted Choice 1 (PC-1)</strong> : sélection de 56 bits</li>
+<li>Division en deux moitiés : <span class="math inline">\(C_0\)</span> et <span class="math inline">\(D_0\)</span> (28 bits chacune)</li>
+<li>Pour chaque round <span class="math inline">\(i\)</span> :
+<ul>
+<li>Rotation circulaire gauche de <span class="math inline">\(C_{i-1}\)</span> et <span class="math inline">\(D_{i-1}\)</span></li>
+<li><strong>Permuted Choice 2 (PC-2)</strong> : sélection de 48 bits pour <span class="math inline">\(K_i\)</span></li>
+</ul></li>
+</ol>
+<p><strong>Rotations</strong> :</p>
+<ul>
+<li>Rounds 1, 2, 9, 16 : 1 position</li>
+<li>Autres rounds : 2 positions</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>📄 Texte original (DES Fonctionnement)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-19" class="callout-19-contents callout-collapse collapse">
+<section id="des-fonctionnement" class="level4 callout-body-container callout-body">
+<h4 class="anchored" data-anchor-id="des-fonctionnement">DES: Fonctionnement</h4>
+<p><strong>Cipher Fonction</strong></p>
+<ul>
+<li><p><strong>Expansion E</strong>: Les <strong>32 bits de l’entrée</strong> sont transformés en un vecteur de <strong>48 bits</strong> en utilisant la <strong>table E</strong>. La première ligne de cette table indique comment sera généré le premier sous-bloc de 6 bits: on prendra en premier le 32e bit et après les bits 1,2,3,4,5. Le deuxième sous-bloc commence par le 4e bit ensuite les bits 5,6,7,8,9 et ainsi de suite…</p></li>
+<li><p><strong>Key addition</strong>: <strong>XOR du vecteur de 48 bits</strong> avec la clé.</p></li>
+<li><p><strong>S-boxes</strong>: On applique <strong>8 S-boxes</strong> sur le vecteur de 48 bits résultant du XOR précédent. Chacune de ces S-boxes prend un <strong>sous-bloc de 6 bits</strong> et le transforme en un <strong>sous-bloc de 4 bits</strong>. L’opération s’effectue de la manière suivante: Si on dénote les 6 bits d’input de la S-box comme: <span class="math inline">\(a_1a_2a_3a_4a_5a_6\)</span>. La sortie est donnée par le contenu de la cellule située dans la <strong>ligne</strong> <span class="math inline">\(a_1 + 2a_6\)</span> et la <strong>colonne</strong> <span class="math inline">\(a_2 + 2a_3 + 4a_4 + 8a_5\)</span>.</p></li>
+<li><p><strong>Permutation P</strong>: La permutation P fonctionne comme suit: Le premier bit est envoyé à la 16e position, le deuxième à la 7e position et ainsi de suite.</p></li>
+</ul>
+<p><strong>Permutations IP et IP⁻¹</strong></p>
+<ul>
+<li>Agissent respectivement au <strong>début</strong> et à la <strong>fin</strong> du traitement du bloc et sur l’<strong>ensemble des 64 bits</strong>.</li>
+</ul>
+</section>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-20-contents" aria-controls="callout-20" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>📌 Révision rapide (DES)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-20" class="callout-20-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>DES</strong> : Feistel cipher, 64 bits blocs, 56 bits clé effective, 16 rounds.</p>
+<p><strong>Fonction <span class="math inline">\(f\)</span></strong> : Expansion E (32→48 bits) → XOR <span class="math inline">\(K_i\)</span> → 8 S-boxes (48→32 bits) → Permutation P.</p>
+<p><strong>S-box</strong> : 6 bits input → 4 bits output via table (ligne = bits externes, colonne = bits internes).</p>
+<p><strong>Permutations</strong> : IP (initiale) et IP⁻¹ (finale) sur 64 bits.</p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="triple-des-et-sécurité-de-des" class="level3">
+<h3 class="anchored" data-anchor-id="triple-des-et-sécurité-de-des">5. Triple-DES et Sécurité de DES</h3>
+<section id="vulnérabilités-de-des" class="level4">
+<h4 class="anchored" data-anchor-id="vulnérabilités-de-des">Vulnérabilités de DES</h4>
+<p><strong>Problème principal</strong> : taille de l’espace de clés <span class="math inline">\(\{0,1\}^{56}\)</span> insuffisante.</p>
+<p><strong>Attaque brute force</strong> :</p>
+<ul>
+<li><strong>1999</strong> : clé trouvée en <strong>24 heures</strong></li>
+<li>Technique : brute force massivement parallèle (100’000 PCs sur Internet)</li>
+<li>Known plaintext attack</li>
+</ul>
+</section>
+<section id="triple-des-3des" class="level4">
+<h4 class="anchored" data-anchor-id="triple-des-3des">Triple-DES (3DES)</h4>
+<p><strong>Solution</strong> : augmenter l’espace des clés à <span class="math inline">\(\{0,1\}^{112}\)</span>.</p>
+<p><strong>Schéma</strong> :</p>
+<p><span class="math display">\[C = E_{K_1}(D_{K_2}(E_{K_1}(P)))\]</span></p>
+<p>Avec :</p>
+<ul>
+<li><span class="math inline">\(E\)</span> : encryption DES</li>
+<li><span class="math inline">\(D\)</span> : décryption DES</li>
+<li><span class="math inline">\(K_1, K_2\)</span> : deux clés de 56 bits</li>
+</ul>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">graph LR
+    P[Plaintext 64 bits] --&gt; E1[DES Encrypt K1]
+    E1 --&gt; D[DES Decrypt K2]
+    D --&gt; E2[DES Encrypt K1]
+    E2 --&gt; C[Ciphertext 64 bits]
+    
+    K1a[Key K1 56 bits] --&gt; E1
+    K2[Key K2 56 bits] --&gt; D
+    K1b[Key K1 56 bits] --&gt; E2
+    
+    style E1 fill:#ffcccc
+    style D fill:#ccffcc
+    style E2 fill:#ffcccc
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p><strong>Avantages</strong> :</p>
+<ul>
+<li>✓ <strong>Sécurité satisfaisante</strong> : espace de clés <span class="math inline">\(2^{112}\)</span></li>
+<li>✓ <strong>Compatibilité</strong> : réutilisation du hardware/software DES existant</li>
+<li>✓ <strong>Migration progressive</strong> : en attendant AES</li>
+</ul>
+<p><strong>Inconvénient</strong> :</p>
+<ul>
+<li>✗ <strong>Performances</strong> : 3× plus lent (3 exécutions DES successives)</li>
+</ul>
+</section>
+<section id="propriétés-de-des" class="level4">
+<h4 class="anchored" data-anchor-id="propriétés-de-des">Propriétés de DES</h4>
+<p><strong>1. DES n’est pas un groupe</strong></p>
+<p>DES n’est PAS un groupe pour la composition :</p>
+<p><span class="math display">\[\nexists K_3 \text{ tel que } E_{K_3}(E_{K_2}(E_{K_1}(x))) = E_{K_3}(x)\]</span></p>
+<p><strong>Conséquence</strong> : encryption composée (Triple-DES) augmente considérablement la sécurité.</p>
+<p><strong>Si DES était un groupe</strong> : recherche exhaustive sur <span class="math inline">\(\{0,1\}^{56}\)</span> casserait l’algorithme indépendamment du nombre d’exécutions consécutives.</p>
+<p><strong>2. Clés faibles et semi-faibles</strong></p>
+<ul>
+<li><p><strong>Clé faible</strong> : <span class="math inline">\(E_K(E_K(x)) = x\)</span></p></li>
+<li><p><strong>Paire de clés semi-faibles</strong> : <span class="math inline">\(E_{K_1}(E_{K_2}(x)) = x\)</span></p></li>
+</ul>
+<p><strong>Caractéristique</strong> : clés faibles génèrent des sous-clés identiques par paires :</p>
+<ul>
+<li><span class="math inline">\(k_1 = k_{16}\)</span>, <span class="math inline">\(k_2 = k_{15}\)</span>, …, <span class="math inline">\(k_8 = k_9\)</span></li>
+<li>Facilite la cryptanalyse</li>
+</ul>
+<p><strong>DES a 4 clés faibles</strong> :</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Clé faible (hexadécimal)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0101 0101 0101 0101</td>
+</tr>
+<tr class="even">
+<td>0101 0101 FEFE FEFE</td>
+</tr>
+<tr class="odd">
+<td>FEFE FEFE FEFE FEFE</td>
+</tr>
+<tr class="even">
+<td>FEFE FEFE 0101 0101</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Et 6 paires de clés semi-faibles</strong></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>📄 Texte original (DES et 3DES)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-21" class="callout-21-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<section id="des-et-triple-des" class="level4">
+<h4 class="anchored" data-anchor-id="des-et-triple-des">DES et Triple-DES</h4>
+<ul>
+<li><p>La <strong>taille de l’ensemble de clés</strong> (<span class="math inline">\(\{0,1\}^{56}\)</span>) constitue la <strong>plus grande menace</strong> qui pèse sur DES avec les ressources de calcul actuels. En <strong>1999</strong> il a suffit de <strong>24 heures</strong> pour trouver la clé à partir d’un <strong>known plaintext</strong> en utilisant une technique <strong>brute force massivement parallèle</strong> (100’000 PCs connectés sur Internet).</p></li>
+<li><p><strong>Triple DES</strong> nous met à l’abri de ces <strong>attaques brute force</strong> en augmentant l’<strong>espace des clés possibles</strong> à <span class="math inline">\(\{0,1\}^{112}\)</span>.</p></li>
+<li><p>Cette alternative permet de continuer à utiliser les <strong>“boîtes” DES</strong> (hardware et software) en attendant une migration vers AES.</p></li>
+<li><p>Le <strong>niveau de sécurité</strong> obtenu par cette solution est <strong>très satisfaisant</strong>.</p></li>
+<li><p>L’<strong>impact en termes de performances</strong> de trois exécutions successives de DES reste un <strong>inconvénient</strong> pour certaines applications.</p></li>
+</ul>
+</section>
+<section id="des-propriétés" class="level4">
+<h4 class="anchored" data-anchor-id="des-propriétés">DES: propriétés</h4>
+<ul>
+<li><p><strong>DES n’est pas un groupe</strong> (au sens algébrique) avec la composition: En d’autres termes, DES étant une permutation: <span class="math inline">\(\{0,1\}^{64} \rightarrow \{0,1\}^{64}\)</span>, si DES était un groupe pour la composition, ceci voudrait dire que: <span class="math inline">\(\exists K_3\)</span> t.q. <span class="math inline">\(E_{K_3}(E_{K_2}(x)) = E_{K_3}(x)\)</span></p>
+<p>Cette propriété permet d’assurer que l’<strong>encryption composée</strong> (comme Triple-DES) <strong>augmente considérablement la sécurité</strong> de DES. Si DES était un groupe, la recherche exhaustive sur l’ensemble de clés possibles (<span class="math inline">\(\{0,1\}^{56}\)</span>) permettrait de “casser” l’algorithme <strong>indépendamment du nombre d’exécutions consécutives</strong> de DES.</p></li>
+<li><p><strong>Clés faibles et mi-faibles</strong> (weak and semi-weak keys):</p>
+<ul>
+<li>Une clé <span class="math inline">\(K\)</span> est dite <strong>faible</strong> si <span class="math inline">\(E_K(E_K(x)) = x\)</span>.</li>
+<li>Une paire de clés <span class="math inline">\((K_1, K_2)\)</span> est dite <strong>mi-faible</strong> si <span class="math inline">\(E_{K_1}(E_{K_2}(x)) = x\)</span>.</li>
+</ul></li>
+<li><p>Les clés faibles ont la particularité de générer de <strong>sous-clés identiques par paires</strong> (<span class="math inline">\(k_1 = k_{16}\)</span>, <span class="math inline">\(k_2 = k_{15}\)</span>, …, <span class="math inline">\(k_8 = k_9\)</span>), ce qui <strong>facilite la cryptanalyse</strong>.</p></li>
+<li><p><strong>DES a 4 clés faibles</strong> (et 6 paires de clés mi-faibles).</p></li>
+</ul>
+</section>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-22-contents" aria-controls="callout-22" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>📌 Révision rapide (3DES et sécurité)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-22" class="callout-22-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Vulnérabilité DES</strong> : espace clés <span class="math inline">\(2^{56}\)</span> cassable en 24h (1999). <strong>Triple-DES</strong> : <span class="math inline">\(E_{K_1}(D_{K_2}(E_{K_1}(P)))\)</span>, espace <span class="math inline">\(2^{112}\)</span>, réutilise hardware DES, 3× plus lent. <strong>DES ≠ groupe</strong> → encryption composée renforce sécurité. <strong>4 clés faibles</strong> générant sous-clés identiques par paires → facilite cryptanalyse.</p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="advanced-encryption-standard-aes" class="level3">
+<h3 class="anchored" data-anchor-id="advanced-encryption-standard-aes">6. Advanced Encryption Standard (AES)</h3>
+<section id="présentation-générale-2" class="level4">
+<h4 class="anchored" data-anchor-id="présentation-générale-2">Présentation Générale</h4>
+<p><strong>AES</strong> (Advanced Encryption Standard) : standard adopté en novembre 2001.</p>
+<p><strong>Conception</strong> : Johan Daemen et Vincent Rijmen (nom original : <strong>Rijndael</strong>)</p>
+<p><strong>Caractéristiques principales</strong> :</p>
+<ul>
+<li><strong>Type</strong> : block cipher itératif (mais <strong>PAS un Feistel Cipher</strong>)</li>
+<li><strong>Taille des blocs</strong> : 128 bits</li>
+<li><strong>Taille de clé variable</strong> : 128, 192 ou 256 bits</li>
+<li><strong>Nombre de rounds</strong> : dépend de la taille de clé
+<ul>
+<li>10 rounds pour clé 128 bits</li>
+<li>12 rounds pour clé 192 bits</li>
+<li>14 rounds pour clé 256 bits</li>
+</ul></li>
+<li><strong>Modes d’utilisation</strong> : ECB, CBC, CFB, OFB, CTR</li>
+</ul>
+<p><strong>Avantages par rapport à DES</strong> :</p>
+<ul>
+<li>✓ <strong>Processus ouvert</strong> : consultation et analyse par experts mondiaux</li>
+<li>✓ <strong>~2× plus performant</strong> en software</li>
+<li>✓ <strong>~10²² fois plus sûr</strong> (théoriquement)</li>
+<li>✓ <strong>Évolutif</strong> : taille de clé augmentable si nécessaire</li>
+</ul>
+</section>
+<section id="structure-daes" class="level4">
+<h4 class="anchored" data-anchor-id="structure-daes">Structure d’AES</h4>
+<p><strong>Unité de base</strong> : matrice <strong>State</strong> de 4 lignes × 4 colonnes (pour clé 128 bits)</p>
+<ul>
+<li>Chaque élément = 1 byte</li>
+<li><strong>Total</strong> : 16 bytes = 128 bits</li>
+</ul>
+<p><strong>Opérations sur le corps</strong> <span class="math inline">\(GF(2^8)\)</span> :</p>
+<ul>
+<li>Byte = élément de <span class="math inline">\(GF(2^8)\)</span></li>
+<li>Corps fini de polynômes de degré ≤ 7 avec coefficients dans <span class="math inline">\(GF(2)\)</span></li>
+<li>Additions, multiplications définies dans <span class="math inline">\(GF(2^8)\)</span></li>
+</ul>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">graph TB
+    subgraph State_Matrix
+        S00[s0,0] --- S01[s0,1]
+        S01 --- S02[s0,2]
+        S02 --- S03[s0,3]
+        
+        S10[s1,0] --- S11[s1,1]
+        S11 --- S12[s1,2]
+        S12 --- S13[s1,3]
+        
+        S20[s2,0] --- S21[s2,1]
+        S21 --- S22[s2,2]
+        S22 --- S23[s2,3]
+        
+        S30[s3,0] --- S31[s3,1]
+        S31 --- S32[s3,2]
+        S32 --- S33[s3,3]
+    end
+    
+    style S00 fill:#ffe6cc
+    style S11 fill:#ffe6cc
+    style S22 fill:#ffe6cc
+    style S33 fill:#ffe6cc
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="détail-dun-round-aes" class="level4">
+<h4 class="anchored" data-anchor-id="détail-dun-round-aes">Détail d’un Round AES</h4>
+<p><strong>Quatre opérations par round</strong> :</p>
+<p><strong>1. SubBytes (ByteSub)</strong></p>
+<ul>
+<li>Substitution non linéaire via <strong>S-box</strong></li>
+<li>Chaque byte transformé indépendamment</li>
+<li>Résistance à la cryptanalyse linéaire et différentielle</li>
+</ul>
+<p><strong>2. ShiftRows</strong></p>
+<ul>
+<li><strong>Permutation des bytes</strong> avec décalages variables par ligne</li>
+<li>Ligne 0 : pas de décalage</li>
+<li>Ligne 1 : décalage gauche 1 position</li>
+<li>Ligne 2 : décalage gauche 2 positions</li>
+<li>Ligne 3 : décalage gauche 3 positions</li>
+</ul>
+<p><strong>3. MixColumns</strong></p>
+<ul>
+<li>Chaque colonne = combinaison linéaire des autres colonnes</li>
+<li><strong>Multiplication de matrices</strong> dans <span class="math inline">\(GF(2^8)\)</span></li>
+<li>Diffusion maximale</li>
+</ul>
+<p><strong>4. AddRoundKey</strong></p>
+<ul>
+<li><strong>XOR</strong> de la matrice State avec la sous-clé du round</li>
+<li>Sous-clé = résultat du Key Schedule</li>
+</ul>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">graph TB
+    Input[State Input] --&gt; SB[SubBytes]
+    SB --&gt; SR[ShiftRows]
+    SR --&gt; MC[MixColumns]
+    MC --&gt; ARK[AddRoundKey]
+    K[Round Key] --&gt; ARK
+    ARK --&gt; Output[State Output]
+    
+    style SB fill:#ffcccc
+    style SR fill:#ccffcc
+    style MC fill:#cce5ff
+    style ARK fill:#ffffcc
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p><strong>Round final</strong> : identique SAUF <strong>pas de MixColumns</strong></p>
+</section>
+<section id="key-schedule-génération-des-sous-clés" class="level4">
+<h4 class="anchored" data-anchor-id="key-schedule-génération-des-sous-clés">Key Schedule (Génération des Sous-clés)</h4>
+<p><strong>Processus</strong> :</p>
+<ol type="1">
+<li><strong>Key Expansion</strong> : génération d’une matrice étendue
+<ul>
+<li>Clé 128 bits → matrice 4 × 4 × (<span class="math inline">\(N_e\)</span> + 1) bytes</li>
+<li><span class="math inline">\(N_e\)</span> = nombre de rounds</li>
+</ul></li>
+<li><strong>Key Selection</strong> : extraction des sous-clés
+<ul>
+<li>Première sous-clé : 4 premières colonnes</li>
+<li>Deuxième sous-clé : 4 colonnes suivantes</li>
+<li>Etc.</li>
+</ul></li>
+</ol>
+<p><strong>Opérations</strong> :</p>
+<ul>
+<li>Rotations de bytes</li>
+<li>Substitutions via S-box</li>
+<li>XOR avec constantes (Rcon)</li>
+</ul>
+</section>
+<section id="pseudo-code-aes" class="level4">
+<h4 class="anchored" data-anchor-id="pseudo-code-aes">Pseudo-code AES</h4>
+<pre><code>Rijndael(State, CipherKey) {
+    KeyExpansion(CipherKey, ExpandedKey);  // Key Schedule
+    
+    AddRoundKey(State, ExpandedKey[0..3]); // XOR initial
+    
+    for(i = 1; i &lt; Ne; i++) {
+        Round(State, ExpandedKey[4*i...(4*i)+3]);
+    }
+    
+    FinalRound(State, ExpandedKey[4*Ne...4*Ne+3]);  // Sans MixColumns
+}</code></pre>
+</section>
+<section id="décryption-aes" class="level4">
+<h4 class="anchored" data-anchor-id="décryption-aes">Décryption AES</h4>
+<p><strong>Principe</strong> : appliquer les <strong>opérations inverses</strong> dans chaque round.</p>
+<p><strong>Opérations inverses</strong> :</p>
+<ul>
+<li><strong>InvSubBytes</strong> : substitution inverse via S-box⁻¹</li>
+<li><strong>InvShiftRows</strong> : décalages droite (au lieu de gauche)</li>
+<li><strong>InvMixColumns</strong> : multiplication matricielle inverse</li>
+<li><strong>AddRoundKey</strong> : auto-inverse (XOR)</li>
+</ul>
+<p><strong>Ordre</strong> : inverse de l’encryption avec sous-clés en ordre inverse</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-23-contents" aria-controls="callout-23" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>📄 Texte original (AES)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-23" class="callout-23-contents callout-collapse collapse">
+<section id="advanced-encryption-standard-aes-1" class="level4 callout-body-container callout-body">
+<h4 class="anchored" data-anchor-id="advanced-encryption-standard-aes-1">Advanced Encryption Standard (AES)</h4>
+<ul>
+<li><p>Adopté comme <strong>standard en Novembre 2001</strong>, conçu par <strong>Johan Daemen et Vincent Rijmen</strong> (d’où son nom original <strong>Rijndael</strong>).</p></li>
+<li><p>Il s’agit également d’un <strong>block cipher itératif</strong> (comme DES) mais <strong>pas d’un Feistel Cipher</strong>.</p></li>
+<li><p><strong>Blocs Plaintext/Ciphertext</strong>: <strong>128 bits</strong>.</p></li>
+<li><p><strong>Clé de longueur variable</strong>: <strong>128, 192, ou 256 bits</strong>.</p></li>
+<li><p>Contrairement à DES, AES est issu d’un <strong>processus de consultation et d’analyse ouvert</strong> à des experts mondiaux.</p></li>
+<li><p>Techniques semblables à DES (substitutions, permutations, XOR…) complémentées par des <strong>opérations algébriques simples</strong> et très performantes.</p></li>
+<li><p>Toutes les opérations s’effectuent dans le <strong>corps</strong> <span class="math inline">\(GF(2^8)\)</span>: le corps fini de <strong>polynômes de degré ≤ 7</strong> avec des <strong>coefficients dans</strong> <span class="math inline">\(GF(2)\)</span>.</p></li>
+<li><p>En particulier, un <strong>byte pour AES est un élément dans</strong> <span class="math inline">\(GF(2^8)\)</span> et les <strong>opérations sur les bytes</strong> (additions, multiplications,…) sont <strong>définies comme sur</strong> <span class="math inline">\(GF(2^8)\)</span>.</p></li>
+<li><p><strong>~2 fois plus performant</strong> (en software) et <strong>~10²² fois (en théorie…) plus sûr</strong> que DES…</p></li>
+<li><p><strong>Évolutif</strong>: La taille de la clé peut être augmentée si nécessaire.</p></li>
+</ul>
+<section id="détail-dune-etape-round-aes" class="level5">
+<h5 class="anchored" data-anchor-id="détail-dune-etape-round-aes">Détail d’une Etape (round) AES</h5>
+<p>L’<strong>unité de base</strong> sur laquelle s’appliquent les calculs est une <strong>matrice de 4 lignes et 4 colonnes</strong> (dans le cas d’une clé de 128 bits) dont les éléments sont des <strong>bytes</strong>:</p>
+<ul>
+<li><p><strong>ByteSub</strong>: Opération <strong>non linéaire (S-box)</strong> conçu pour <strong>résister à la cryptanalyse linéaire et différentielle</strong>.</p></li>
+<li><p><strong>ShiftRow</strong>: <strong>Permutation des bytes</strong> introduisant des <strong>décalages variables</strong> sur les lignes.</p></li>
+<li><p><strong>MixColumn</strong>: Chaque colonne est remplacée par des <strong>combinaisons linéaires</strong> des autres colonnes (<strong>multiplication des matrices</strong> !)</p></li>
+<li><p><strong>AddRoundKey</strong>: <strong>XOR</strong> de la matrice courante avec la <strong>sous-clé</strong> correspondante à l’étape courante.</p></li>
+</ul>
+</section>
+<section id="aes-fonctionnement-global" class="level5">
+<h5 class="anchored" data-anchor-id="aes-fonctionnement-global">AES: Fonctionnement Global</h5>
+<ul>
+<li><p>Le <strong>nombre d’étapes</strong> d’AES varie en fonction de la <strong>taille de la clé</strong>. Pour une clé de <strong>128 bits</strong>, il faut effectuer <strong>10 étapes</strong>. Chaque augmentation de 32 bits sur la taille de la clé, entraîne une <strong>étape supplémentaire</strong> (14 étapes pour des clés de 256 bits).</p></li>
+<li><p>La <strong>decryption</strong> consiste en appliquer les <strong>opérations inverses</strong> dans chacune des étapes (<strong>InvSubBytes</strong>, <strong>InvShiftRows</strong>, <strong>InvMixColumns</strong>). <strong>AddRoundKey</strong> (à cause du XOR) est <strong>sa propre inverse</strong>.</p></li>
+<li><p>Le <strong>Key Schedule</strong> consiste en:</p>
+<ul>
+<li>Une opération d’<strong>expansion de la clé</strong> principal. Si <span class="math inline">\(N_e\)</span> est le nombre d’étapes (dépendant de la clé), une <strong>matrice de 4 lignes et 4 × (<span class="math inline">\(N_e\)</span> + 1) colonnes</strong> est générée.</li>
+<li>Une opération de <strong>sélection de la clé d’étape</strong>: La <strong>première sous-clé</strong> sera constituée des <strong>4 premières colonnes</strong> de la matrice générée lors de l’expansion et ainsi de suite.</li>
+</ul></li>
+</ul>
+</section>
+</section>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-24-contents" aria-controls="callout-24" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>📌 Révision rapide (AES)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-24" class="callout-24-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>AES</strong> (Rijndael 2001) : block cipher itératif (PAS Feistel), 128 bits blocs, clés 128/192/256 bits → 10/12/14 rounds.</p>
+<p><strong>State</strong> : matrice 4×4 bytes dans <span class="math inline">\(GF(2^8)\)</span>.</p>
+<p><strong>4 opérations/round</strong> :</p>
+<ul>
+<li>SubBytes (S-box non linéaire)</li>
+<li>ShiftRows (décalages lignes)</li>
+<li>MixColumns (combinaisons linéaires)</li>
+<li>AddRoundKey (XOR sous-clé).</li>
+</ul>
+<p>2× plus rapide que DES, 10²² fois plus sûr.</p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="attaques-et-sécurité-daes" class="level3">
+<h3 class="anchored" data-anchor-id="attaques-et-sécurité-daes">7. Attaques et Sécurité d’AES</h3>
+<section id="forces-daes" class="level4">
+<h4 class="anchored" data-anchor-id="forces-daes">Forces d’AES</h4>
+<p><strong>Simplicité et performances</strong> :</p>
+<ul>
+<li>✓ Algorithme simple et efficace</li>
+<li>✓ Fonctionne sur plateformes limitées (cartes à puce 8 bits)</li>
+<li>✓ Optimisations hardware et software</li>
+</ul>
+</section>
+<section id="attaques-publiées" class="level4">
+<h4 class="anchored" data-anchor-id="attaques-publiées">Attaques Publiées</h4>
+<p><strong>1. Attaques algébriques (2002)</strong></p>
+<p><strong>Technique XSL</strong> (N. Courtois et P. Pieprzyk) :</p>
+<ul>
+<li>Représente AES comme <strong>système de 8000 équations quadratiques</strong> avec 1600 inconnues binaires</li>
+<li><strong>Effort estimé</strong> : <span class="math inline">\(2^{100}\)</span> opérations (encore une conjecture)</li>
+<li><strong>Caractéristique</strong> : nécessite peu de known plaintexts</li>
+<li><strong>Distinction</strong> : différent des attaques linéaires/différentielles</li>
+</ul>
+<p><strong>Critique</strong> : basées sur le caractère “fortement algébrique” d’AES (largement contesté)</p>
+<p><strong>2. Related Key Attacks (2009-2011)</strong></p>
+<p><strong>Principe</strong> : attaques basées sur des <strong>clés similaires</strong></p>
+<ul>
+<li>Résultats intéressants sur <strong>versions réduites</strong> d’AES</li>
+<li>Ne compromettent pas AES complet</li>
+</ul>
+<p><strong>3. Side Channel Attacks</strong></p>
+<p><strong>Principe</strong> : attaques sur l’<strong>implémentation</strong> (pas l’algorithme)</p>
+<p><strong>Techniques</strong> :</p>
+<ul>
+<li><strong>Cache timing attacks</strong> : analyse des accès cache</li>
+<li><strong>Power analysis</strong> : consommation électrique</li>
+<li><strong>Electromagnetic analysis</strong> : émissions électromagnétiques</li>
+</ul>
+<p><strong>Exemple</strong> (2005) : Osvik, Shamir, Tromer</p>
+<ul>
+<li>Extraction de clé 128 bits avec <strong>6-7 couples plaintext/ciphertext</strong></li>
+<li>Basée sur analyse des <strong>accès cache</strong></li>
+</ul>
+<p><strong>4. Meet in the Middle sur structures bicycliques (2011-2015)</strong></p>
+<p><strong>Résultat</strong> :</p>
+<ul>
+<li>Réduit l’effort pour AES-128 à <strong><span class="math inline">\(2^{126}\)</span></strong> (facteur 4 vs brute force)</li>
+<li><strong>Reste largement au-dessus</strong> des capacités actuelles</li>
+</ul>
+</section>
+<section id="sécurité-pratique" class="level4">
+<h4 class="anchored" data-anchor-id="sécurité-pratique">Sécurité Pratique</h4>
+<p><strong>Hypothèse fondamentale</strong> : clé d’<strong>entropie maximale</strong></p>
+<p><strong>Attaques récentes</strong> (WPA2, etc.) :</p>
+<ul>
+<li>Exploitent la <strong>faiblesse des passwords/passphrases</strong></li>
+<li>Pas de faille dans AES lui-même</li>
+<li>Problème : génération de clés depuis passwords faibles</li>
+</ul>
+<p><strong>⚠️ Rappel critique</strong> : qualité de la clé = sécurité du système</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-25-contents" aria-controls="callout-25" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>📄 Texte original (Attaques AES)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-25" class="callout-25-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<section id="aes-remarques-finales-et-attaques-i" class="level4">
+<h4 class="anchored" data-anchor-id="aes-remarques-finales-et-attaques-i">AES: Remarques Finales et Attaques (I)</h4>
+<ul>
+<li><p>La plus grande <strong>force de AES</strong> réside dans sa <strong>simplicité</strong> et dans ses <strong>performances</strong>, y compris sur des plate-formes à <strong>capacité de calcul réduite</strong> (p.ex. des <strong>cartes à puces</strong> avec des processeurs à 8 bits).</p></li>
+<li><p>Depuis sa publication officielle, des <strong>nombreux travaux de cryptanalyse</strong> ont été publiés avec des résultats très intéressants. En particulier, <strong>N. Courtois et P.Pieprzyk</strong> ont présenté une technique appelée <strong>XSL</strong> permettant de représenter AES comme un <strong>système de 8000 équations quadratiques</strong> avec <strong>1600 inconnues binaires</strong>. L’<strong>effort nécessaire</strong> pour casser ce système est estimé (il s’agit encore d’une <strong>conjecture</strong>…) à <strong><span class="math inline">\(2^{100}\)</span></strong>.</p></li>
+<li><p>Ces attaques se basent sur le <strong>caractère fortement algébrique</strong> (et largement contesté…) de AES. De plus, il suffit de <strong>quelques known plaintexts</strong> pour les mettre en place, ce qui les distingue des attaques linéaires et différentielles.</p></li>
+<li><p>Ces dernières années (2009-2011) des <strong>attaques basées sur des clés similaires</strong> (related key attacks) ont obtenu des résultats intéressants sur des <strong>versions réduites</strong> d’AES.</p></li>
+<li><p>Une autre famille d’attaques dénommée <strong>side channel attacks</strong> agissant directement sur l’<strong>implémentation de l’algorithme</strong> permet d’extraire des informations d’intérêt cryptographique lors de l’exécution de l’encryption.</p></li>
+</ul>
+</section>
+<section id="aes-remarques-finales-et-attaques-ii" class="level4">
+<h4 class="anchored" data-anchor-id="aes-remarques-finales-et-attaques-ii">AES: Remarques finales et Attaques (II)</h4>
+<ul>
+<li><p>En <strong>2015</strong> une attaque de type <strong>Meet in the Middle</strong> basé sur des <strong>structure bicycliques</strong> a montré qu’il était possible de réduire l’<strong>effort nécessaire</strong> pour trouver une clé AES-128 à <strong><span class="math inline">\(2^{126}\)</span></strong>, soit un <strong>facteur 4</strong> par rapport au brute force. Ceci reste tout de même <strong>largement au dessus</strong> des capacités de calcul actuelles.</p></li>
+<li><p>Une autre famille d’attaques dénommée <strong>side channel attacks</strong> agissant directement sur l’<strong>implémentation de l’algorithme</strong> permet d’extraire des informations d’intérêt cryptographique lors de l’exécution de l’encryption. En particulier, les auteurs arrivent à <strong>extraire la clé de 128 bits</strong> avec seulement <strong>6-7 couples plaintext/ciphertexts</strong> en se basant sur les <strong>accès cache</strong>.</p></li>
+<li><p>La <strong>sécurité de AES</strong> (comme pour tout autre algorithme d’encryption) se base toujours sur l’hypothèse d’une <strong>clé d’entropie maximale</strong>. Les <strong>attaques publiées récemment</strong> sur des protocoles basés sur AES (comme WPA2) exploitent la <strong>faiblesse des passwords/passphrases</strong> qui sont à l’origine des clés utilisées.</p></li>
+</ul>
+</section>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-26-contents" aria-controls="callout-26" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>📌 Révision rapide (Sécurité AES)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-26" class="callout-26-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Forces</strong> : simplicité, performances (même cartes 8 bits). <strong>Attaques</strong> : XSL (<span class="math inline">\(2^{100}\)</span>, algébrique), related keys (versions réduites), side channel (implémentation, cache), Meet-in-Middle bicyclique (<span class="math inline">\(2^{126}\)</span>). <strong>Sécurité</strong> : hypothèse clé entropie max. Attaques pratiques = passwords faibles, pas faille AES.</p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="techniques-de-cryptanalyse-des-block-ciphers" class="level3">
+<h3 class="anchored" data-anchor-id="techniques-de-cryptanalyse-des-block-ciphers">8. Techniques de Cryptanalyse des Block Ciphers</h3>
+<section id="cryptanalyse-différentielle" class="level4">
+<h4 class="anchored" data-anchor-id="cryptanalyse-différentielle">8.1 Cryptanalyse Différentielle</h4>
+<p><strong>Principe</strong> : attaque <strong>chosen plaintext</strong> analysant la <strong>propagation des différences</strong> entre deux plaintexts à travers les rounds.</p>
+<p><strong>Méthode</strong> :</p>
+<ol type="1">
+<li>Choisir deux plaintexts avec différence connue : <span class="math inline">\(x_a\)</span> et <span class="math inline">\(x_b\)</span></li>
+<li>Observer la propagation : <span class="math inline">\(\Delta x = x_a \oplus x_b\)</span></li>
+<li>Analyser les ciphertexts : <span class="math inline">\(\Delta y = y_a \oplus y_b\)</span></li>
+<li><strong>Attribuer des probabilités aux clés</strong> selon les changements observés</li>
+<li><strong>Clé la plus probable</strong> = clé correcte (après nombreux essais)</li>
+</ol>
+<p><strong>Caractéristiques</strong> :</p>
+<ul>
+<li>Nécessite <strong><span class="math inline">\(2^{47}\)</span> couples chosen plaintext</strong> pour DES</li>
+<li><strong>Probabilités</strong> : dépendent des S-boxes et de la structure</li>
+<li>Plus le nombre de couples augmente, plus la probabilité de succès augmente</li>
+</ul>
+<p><strong>Sensibilité</strong> : très sensible au <strong>nombre de rounds</strong></p>
+<ul>
+<li>Chances de réussite augmentent <strong>exponentiellement</strong> quand rounds diminuent</li>
+</ul>
+</section>
+<section id="cryptanalyse-linéaire" class="level4">
+<h4 class="anchored" data-anchor-id="cryptanalyse-linéaire">8.2 Cryptanalyse Linéaire</h4>
+<p><strong>Principe</strong> : attaque <strong>known plaintext</strong> créant un <strong>simulateur linéaire</strong> du block cipher.</p>
+<p><strong>Méthode</strong> :</p>
+<ol type="1">
+<li>Créer des <strong>approximations linéaires</strong> de l’algorithme</li>
+<li>Analyser un grand nombre de paires plaintext/ciphertext</li>
+<li>Les bits de la clé du simulateur <strong>tendent à coïncider</strong> avec ceux de la clé réelle (calcul probabiliste)</li>
+</ol>
+<p><strong>Complexité pour DES</strong> :</p>
+<ul>
+<li><strong><span class="math inline">\(2^{38}\)</span> known plaintexts</strong> → probabilité 10% de deviner juste</li>
+<li><strong><span class="math inline">\(2^{43}\)</span> known plaintexts</strong> → probabilité 85% de succès</li>
+</ul>
+<p><strong>Caractéristiques</strong> :</p>
+<ul>
+<li><strong>Attaque analytique la plus puissante</strong> à ce jour sur block ciphers</li>
+<li>Aussi <strong>sensible au nombre de rounds</strong></li>
+</ul>
+</section>
+<section id="comparaison-différentielle-vs-linéaire" class="level4">
+<h4 class="anchored" data-anchor-id="comparaison-différentielle-vs-linéaire">8.3 Comparaison Différentielle vs Linéaire</h4>
+<p><strong>Difficultés communes</strong> :</p>
+<ul>
+<li>✗ <strong>Parallélisation</strong> : moins efficace que brute force parallèle</li>
+<li>⚠️ <strong>Sensibilité aux rounds</strong> : efficacité diminue exponentiellement avec le nombre de rounds</li>
+</ul>
+<p><strong>DES et ces attaques</strong> :</p>
+<ul>
+<li>Conjecture répandue : concepteurs de DES <strong>connaissaient ces attaques</strong> (années 1970, inédites à l’époque)</li>
+<li><strong>Design des S-boxes</strong> : résistance très grande aux deux techniques</li>
+</ul>
+</section>
+<section id="attaque-meet-in-the-middle" class="level4">
+<h4 class="anchored" data-anchor-id="attaque-meet-in-the-middle">8.4 Attaque Meet-in-the-Middle</h4>
+<p><strong>Principe</strong> : exploite les constructions <strong>composées</strong> du type <span class="math inline">\(y = E_{K_2}(E_{K_1}(x))\)</span>.</p>
+<p><strong>Méthode</strong> :</p>
+<ol type="1">
+<li>Construire liste <span class="math inline">\(L_1\)</span> : <span class="math inline">\(L_1 = \{E_{K_1}(x) \mid K_1 \in \text{KeySpace}\}\)</span></li>
+<li>Construire liste <span class="math inline">\(L_2\)</span> : <span class="math inline">\(L_2 = \{D_{K_2}(y) \mid K_2 \in \text{KeySpace}\}\)</span></li>
+<li>Identifier <strong>éléments répétés</strong> dans <span class="math inline">\(L_1\)</span> et <span class="math inline">\(L_2\)</span></li>
+<li>Vérifier hypothèse avec <strong>deuxième known plaintext</strong></li>
+<li>Les clés <span class="math inline">\(K_1\)</span> et <span class="math inline">\(K_2\)</span> associées sont probablement les clés recherchées</li>
+</ol>
+<p><strong>Exemple pour DES</strong> :</p>
+<p>Espace de clés intuitif pour <span class="math inline">\(E_{K_2}(E_{K_1}(x))\)</span> : <span class="math inline">\(\{0,1\}^{112}\)</span></p>
+<p><strong>Effort réel</strong> :</p>
+<ul>
+<li><strong><span class="math inline">\(2^{57}\)</span> opérations</strong> pour établir les deux listes</li>
+<li><strong><span class="math inline">\(2^{56}\)</span> blocs</strong> de 64 bits de stockage</li>
+<li><strong>Nettement inférieur</strong> au <span class="math inline">\(2^{112}\)</span> estimé intuitivement</li>
+</ul>
+<p><strong>Applications</strong> :</p>
+<ul>
+<li>Attaques sur <strong>constructions composées</strong></li>
+<li>Cryptanalyse <strong>interne</strong> des block ciphers</li>
+</ul>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">graph TB
+    subgraph Meet_in_Middle
+        X[Known Plaintext x] --&gt; E1[Encrypt K1]
+        E1 --&gt; M[Middle Value m]
+        M --&gt; E2[Encrypt K2]
+        E2 --&gt; Y[Known Ciphertext y]
+        
+        X2[x] --&gt; L1[List L1: EK1 pour tous K1]
+        Y2[y] --&gt; L2[List L2: DK2 pour tous K2]
+        
+        L1 -.match.-&gt; Match[Trouver m commun]
+        L2 -.match.-&gt; Match
+    end
+    
+    style M fill:#ffffcc
+    style Match fill:#ccffcc
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-27-contents" aria-controls="callout-27" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>📄 Texte original (Cryptanalyse)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-27" class="callout-27-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<section id="techniques-de-cryptanalyse-sur-les-block-ciphers" class="level4">
+<h4 class="anchored" data-anchor-id="techniques-de-cryptanalyse-sur-les-block-ciphers">Techniques de Cryptanalyse sur les Block Ciphers</h4>
+<p><strong>Cryptanalyse Différentielle</strong></p>
+<ul>
+<li><p>Il s’agit d’une <strong>attaque chosen plaintext</strong> qui s’intéresse à la <strong>propagation des différences</strong> dans deux plaintexts au fur et à mesure qu’ils évoluent dans les différentes étapes de l’algorithme.</p></li>
+<li><p>Il <strong>attribue des probabilités aux clés</strong> qu’il “devine” en fonction des <strong>changements</strong> qu’elles induisent sur les ciphertexts. La <strong>clé la plus probable</strong> a des bonnes chances d’être la clé correcte après un <strong>grand nombre</strong> de couples plaintext/ciphertext.</p></li>
+<li><p>Nécessite <strong><span class="math inline">\(2^{47}\)</span> couples chosen plaintext</strong> (pour DES) pour obtenir des résultats corrects.</p></li>
+</ul>
+<p><strong>Cryptanalyse Linéaire</strong></p>
+<ul>
+<li><p>Il s’agit d’une <strong>attaque known plaintext</strong> qui crée un <strong>simulateur du bloc</strong> à partir des <strong>approximations linéaires</strong>. En analysant un <strong>grand nombre</strong> de paires plaintext/ciphertexts, les <strong>bits de la clé du simulateur</strong> ont tendance à <strong>coïncider</strong> avec ceux du block cipher analysés (<strong>calcul probabiliste</strong>)</p></li>
+<li><p>Pour DES une attaque basée sur cette technique nécessite <strong><span class="math inline">\(2^{38}\)</span> known plaintexts</strong> pour obtenir une probabilité de <strong>10%</strong> de deviner juste et <strong><span class="math inline">\(2^{43}\)</span> pour un 85%</strong> !</p></li>
+<li><p>Il s’agit de l’<strong>attaque analytique la plus puissante</strong> à ce jour sur les block ciphers.</p></li>
+</ul>
+</section>
+<section id="techniques-de-cryptanalyse-sur-les-block-ciphers-ii" class="level4">
+<h4 class="anchored" data-anchor-id="techniques-de-cryptanalyse-sur-les-block-ciphers-ii">Techniques de Cryptanalyse sur les Block Ciphers (II)</h4>
+<ul>
+<li><p>La mise en pratique des <strong>attaques différentielles et linéaires</strong> présente des <strong>difficultés dans la parallélisation</strong> des calculs par rapport à une recherche exhaustive de la clé.</p></li>
+<li><p>Ces deux attaques sont <strong>très sensibles au nombre d’étapes</strong> du block cipher: les chances de réussite augmentent <strong>exponentiellement</strong> au fur et à mesure que le nombre d’étapes de l’algorithme diminue.</p></li>
+<li><p>Une conjecture très répandue parmi les cryptographes est que ces attaques, à l’époque <strong>inédites</strong>, étaient <strong>connues par les concepteurs des DES</strong>. En particulier, le <strong>design des S-boxes</strong> offre une <strong>résistance très grande</strong> aux deux techniques.</p></li>
+</ul>
+<p><strong>Attaque Meet-in-the-Middle</strong></p>
+<ul>
+<li><p>S’applique aux constructions du type <span class="math inline">\(y := E_{K_2}(E_{K_1}(x))\)</span>. Pour DES, l’espace de clés pour cette solution serait de <span class="math inline">\(\{0,1\}^{112}\)</span>. On construit d’abord <strong>deux listes</strong> <span class="math inline">\(L_1\)</span> et <span class="math inline">\(L_2\)</span> de <span class="math inline">\(2^{56}\)</span> messages de la forme: <span class="math inline">\(L_1 = E_{K_1}(x)\)</span> et <span class="math inline">\(L_2 = D_{K_2}(y)\)</span> avec <span class="math inline">\(E\)</span> et <span class="math inline">\(D\)</span> les opérations d’encryption et decryption respectivement. Il faut alors <strong>identifier des éléments qui se répètent</strong> dans les deux listes et <strong>vérifier notre hypothèse</strong> avec un deuxième known plaintext. Les <span class="math inline">\(K_1\)</span> et <span class="math inline">\(K_2\)</span> associées à cette paire de known plaintexts seront (en toute vraisemblance) <strong>les clés recherchées</strong> !</p></li>
+<li><p><strong>Effort nécessaire</strong> à réaliser les attaques (pour DES): <strong><span class="math inline">\(2^{57}\)</span> opérations</strong> pour établir les deux listes + <strong><span class="math inline">\(2^{56}\)</span> blocs</strong> de 64 bits de stockage pour mémoriser les résultats intermédiaires… <strong>nettement inférieur</strong> au <span class="math inline">\(2^{112}\)</span> estimé intuitivement…</p></li>
+<li><p>Ces techniques meet-in-the-middle sont aussi appliquées à la <strong>cryptanalyse interne</strong> des block ciphers.</p></li>
+</ul>
+</section>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-28-contents" aria-controls="callout-28" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>📌 Révision rapide (Cryptanalyse)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-28" class="callout-28-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Différentielle</strong> : chosen plaintext, propagation différences, probabilités sur clés, <span class="math inline">\(2^{47}\)</span> couples (DES).</p>
+<p><strong>Linéaire</strong> : known plaintext, approximations linéaires, <span class="math inline">\(2^{38}\)</span>-<span class="math inline">\(2^{43}\)</span> plaintexts (DES), attaque la plus puissante.</p>
+<p><strong>Meet-in-Middle</strong> : constructions composées, 2 listes <span class="math inline">\(2^{56}\)</span>, effort <span class="math inline">\(2^{57}\)</span> &lt;&lt; <span class="math inline">\(2^{112}\)</span>.</p>
+<p><strong>Sensibilité</strong> : très dépendantes du nombre de rounds.</p>
+</div>
+</div>
+</div>
+
+
+</section>
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
