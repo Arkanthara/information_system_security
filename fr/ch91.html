@@ -1,0 +1,1987 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.27">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>ch91 – ISS</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-4d9afe2b8d18ee9fa5d0d57b5ed4214d.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-96c1bb8b336142dcc39f931773fab1b9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-9ee82e006983bafa07c9ac29a901142c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-96c1bb8b336142dcc39f931773fab1b9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">ISS</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-langage" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="bi bi-globe" role="img">
+</i> 
+ <span class="menu-text">Langage</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-langage">    
+        <li>
+    <a class="dropdown-item" href="./../index.html">
+ <span class="dropdown-text">Anglais</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./index.html">
+ <span class="dropdown-text">Français</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch1.html">Cours</a></li><li class="breadcrumb-item"><a href="./ch91.html">Document de Révision : Cryptographie Quantique et Post-Quantique</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Cours</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Notions de base en cryptographie</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cryptographie symétrique</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cryptographie Asymétrique (à Clés Publiques)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Fonctions de Hachage Cryptographiques et MACs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Signatures Digitales</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Authentification</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Protocoles d’Établissement de Clés (KEP)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch9.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tiers de Confiance et Certification (Trusted Third Parties - TTP)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch91.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Document de Révision : Cryptographie Quantique et Post-Quantique</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch92.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cryptographie Quantique &amp; Post-Quantique - Support de révision oral</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch93.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cryptographie Quantique et Post-Quantique</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./exercices.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercices</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./presentations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Présentations</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#document-de-révision-cryptographie-quantique-et-post-quantique" id="toc-document-de-révision-cryptographie-quantique-et-post-quantique" class="nav-link active" data-scroll-target="#document-de-révision-cryptographie-quantique-et-post-quantique">Document de Révision : Cryptographie Quantique et Post-Quantique</a>
+  <ul class="collapse">
+  <li><a href="#introduction-générale" id="toc-introduction-générale" class="nav-link" data-scroll-target="#introduction-générale">Introduction générale</a>
+  <ul class="collapse">
+  <li><a href="#contexte-de-la-cryptographie-quantique" id="toc-contexte-de-la-cryptographie-quantique" class="nav-link" data-scroll-target="#contexte-de-la-cryptographie-quantique">Contexte de la cryptographie quantique</a></li>
+  </ul></li>
+  <li><a href="#ordinateur-classique-vs-ordinateur-quantique" id="toc-ordinateur-classique-vs-ordinateur-quantique" class="nav-link" data-scroll-target="#ordinateur-classique-vs-ordinateur-quantique">Ordinateur classique vs Ordinateur quantique</a>
+  <ul class="collapse">
+  <li><a href="#ordinateurs-classiques" id="toc-ordinateurs-classiques" class="nav-link" data-scroll-target="#ordinateurs-classiques">Ordinateurs classiques</a></li>
+  <li><a href="#ordinateurs-quantiques" id="toc-ordinateurs-quantiques" class="nav-link" data-scroll-target="#ordinateurs-quantiques">Ordinateurs quantiques</a></li>
+  <li><a href="#différence-principale" id="toc-différence-principale" class="nav-link" data-scroll-target="#différence-principale">Différence principale</a></li>
+  </ul></li>
+  <li><a href="#défis-de-linformatique-quantique" id="toc-défis-de-linformatique-quantique" class="nav-link" data-scroll-target="#défis-de-linformatique-quantique">Défis de l’informatique quantique</a>
+  <ul class="collapse">
+  <li><a href="#défi-1-effondrement-collapsing" id="toc-défi-1-effondrement-collapsing" class="nav-link" data-scroll-target="#défi-1-effondrement-collapsing">Défi 1 : Effondrement (Collapsing)</a></li>
+  <li><a href="#défi-2-sensibilité-environnementale" id="toc-défi-2-sensibilité-environnementale" class="nav-link" data-scroll-target="#défi-2-sensibilité-environnementale">Défi 2 : Sensibilité environnementale</a></li>
+  <li><a href="#défi-3-portes-logiques" id="toc-défi-3-portes-logiques" class="nav-link" data-scroll-target="#défi-3-portes-logiques">Défi 3 : Portes logiques</a></li>
+  <li><a href="#défi-4-translation-dalgorithmes" id="toc-défi-4-translation-dalgorithmes" class="nav-link" data-scroll-target="#défi-4-translation-dalgorithmes">Défi 4 : Translation d’algorithmes</a></li>
+  </ul></li>
+  <li><a href="#dangers-pour-la-cryptographie-actuelle" id="toc-dangers-pour-la-cryptographie-actuelle" class="nav-link" data-scroll-target="#dangers-pour-la-cryptographie-actuelle">Dangers pour la cryptographie actuelle</a>
+  <ul class="collapse">
+  <li><a href="#algorithmes-asymétriques-actuels" id="toc-algorithmes-asymétriques-actuels" class="nav-link" data-scroll-target="#algorithmes-asymétriques-actuels">Algorithmes asymétriques actuels</a></li>
+  <li><a href="#menace-quantique-algorithme-de-shor" id="toc-menace-quantique-algorithme-de-shor" class="nav-link" data-scroll-target="#menace-quantique-algorithme-de-shor">Menace quantique : Algorithme de Shor</a></li>
+  <li><a href="#impact-sur-aes" id="toc-impact-sur-aes" class="nav-link" data-scroll-target="#impact-sur-aes">Impact sur AES</a></li>
+  <li><a href="#nécessité-de-solutions-post-quantiques" id="toc-nécessité-de-solutions-post-quantiques" class="nav-link" data-scroll-target="#nécessité-de-solutions-post-quantiques">Nécessité de solutions post-quantiques</a></li>
+  </ul></li>
+  <li><a href="#notations-mathématiques" id="toc-notations-mathématiques" class="nav-link" data-scroll-target="#notations-mathématiques">Notations mathématiques</a>
+  <ul class="collapse">
+  <li><a href="#ensembles-de-base" id="toc-ensembles-de-base" class="nav-link" data-scroll-target="#ensembles-de-base">Ensembles de base</a></li>
+  <li><a href="#normes-et-petits-polynômes" id="toc-normes-et-petits-polynômes" class="nav-link" data-scroll-target="#normes-et-petits-polynômes">Normes et “petits” polynômes</a></li>
+  </ul></li>
+  <li><a href="#learning-without-errors-lwe" id="toc-learning-without-errors-lwe" class="nav-link" data-scroll-target="#learning-without-errors-lwe">Learning Without Errors (LWE)</a>
+  <ul class="collapse">
+  <li><a href="#configuration-du-problème" id="toc-configuration-du-problème" class="nav-link" data-scroll-target="#configuration-du-problème">Configuration du problème</a></li>
+  <li><a href="#problème-lwe-sans-erreurs" id="toc-problème-lwe-sans-erreurs" class="nav-link" data-scroll-target="#problème-lwe-sans-erreurs">Problème LWE (sans erreurs)</a></li>
+  </ul></li>
+  <li><a href="#learning-with-errors-lwe" id="toc-learning-with-errors-lwe" class="nav-link" data-scroll-target="#learning-with-errors-lwe">Learning With Errors (LWE)</a>
+  <ul class="collapse">
+  <li><a href="#ajout-derreurs-aléatoires" id="toc-ajout-derreurs-aléatoires" class="nav-link" data-scroll-target="#ajout-derreurs-aléatoires">Ajout d’erreurs aléatoires</a></li>
+  <li><a href="#problème-lwe-avec-erreurs" id="toc-problème-lwe-avec-erreurs" class="nav-link" data-scroll-target="#problème-lwe-avec-erreurs">Problème LWE (avec erreurs)</a></li>
+  </ul></li>
+  <li><a href="#module-learning-with-errors-mlwe" id="toc-module-learning-with-errors-mlwe" class="nav-link" data-scroll-target="#module-learning-with-errors-mlwe">Module Learning With Errors (MLWE)</a>
+  <ul class="collapse">
+  <li><a href="#problème-mlwe" id="toc-problème-mlwe" class="nav-link" data-scroll-target="#problème-mlwe">Problème MLWE</a></li>
+  </ul></li>
+  <li><a href="#decision-module-learning-with-errors-d-mlwe" id="toc-decision-module-learning-with-errors-d-mlwe" class="nav-link" data-scroll-target="#decision-module-learning-with-errors-d-mlwe">Decision Module Learning With Errors (D-MLWE)</a>
+  <ul class="collapse">
+  <li><a href="#problème-d-mlwe" id="toc-problème-d-mlwe" class="nav-link" data-scroll-target="#problème-d-mlwe">Problème D-MLWE</a></li>
+  <li><a href="#propriétés-de-d-mlwe" id="toc-propriétés-de-d-mlwe" class="nav-link" data-scroll-target="#propriétés-de-d-mlwe">Propriétés de D-MLWE</a></li>
+  <li><a href="#comparaison-mlwe-vs-d-mlwe" id="toc-comparaison-mlwe-vs-d-mlwe" class="nav-link" data-scroll-target="#comparaison-mlwe-vs-d-mlwe">Comparaison MLWE vs D-MLWE</a></li>
+  </ul></li>
+  <li><a href="#réseaux-euclidiens-lattices" id="toc-réseaux-euclidiens-lattices" class="nav-link" data-scroll-target="#réseaux-euclidiens-lattices">Réseaux euclidiens (Lattices)</a>
+  <ul class="collapse">
+  <li><a href="#définition-dun-réseau" id="toc-définition-dun-réseau" class="nav-link" data-scroll-target="#définition-dun-réseau">Définition d’un réseau</a></li>
+  <li><a href="#problèmes-classiques-sur-les-réseaux" id="toc-problèmes-classiques-sur-les-réseaux" class="nav-link" data-scroll-target="#problèmes-classiques-sur-les-réseaux">Problèmes classiques sur les réseaux</a></li>
+  <li><a href="#complexité-des-problèmes-de-réseaux" id="toc-complexité-des-problèmes-de-réseaux" class="nav-link" data-scroll-target="#complexité-des-problèmes-de-réseaux">Complexité des problèmes de réseaux</a></li>
+  <li><a href="#lien-avec-mlwe-et-d-mlwe" id="toc-lien-avec-mlwe-et-d-mlwe" class="nav-link" data-scroll-target="#lien-avec-mlwe-et-d-mlwe">Lien avec MLWE et D-MLWE</a></li>
+  </ul></li>
+  <li><a href="#crystals-kyber-vue-densemble" id="toc-crystals-kyber-vue-densemble" class="nav-link" data-scroll-target="#crystals-kyber-vue-densemble">CRYSTALS-Kyber : Vue d’ensemble</a>
+  <ul class="collapse">
+  <li><a href="#quest-ce-que-kyber-kem" id="toc-quest-ce-que-kyber-kem" class="nav-link" data-scroll-target="#quest-ce-que-kyber-kem">Qu’est-ce que Kyber-KEM ?</a></li>
+  <li><a href="#composantes-de-kyber" id="toc-composantes-de-kyber" class="nav-link" data-scroll-target="#composantes-de-kyber">Composantes de Kyber</a></li>
+  </ul></li>
+  <li><a href="#kyber-pke-public-key-encryption" id="toc-kyber-pke-public-key-encryption" class="nav-link" data-scroll-target="#kyber-pke-public-key-encryption">Kyber-PKE (Public Key Encryption)</a>
+  <ul class="collapse">
+  <li><a href="#espace-de-texte-clair" id="toc-espace-de-texte-clair" class="nav-link" data-scroll-target="#espace-de-texte-clair">Espace de texte clair</a></li>
+  <li><a href="#propriété-importante" id="toc-propriété-importante" class="nav-link" data-scroll-target="#propriété-importante">Propriété importante</a></li>
+  <li><a href="#schéma-général" id="toc-schéma-général" class="nav-link" data-scroll-target="#schéma-général">Schéma général</a></li>
+  </ul></li>
+  <li><a href="#kyber-kem-mécanisme-complet" id="toc-kyber-kem-mécanisme-complet" class="nav-link" data-scroll-target="#kyber-kem-mécanisme-complet">Kyber-KEM : Mécanisme complet</a>
+  <ul class="collapse">
+  <li><a href="#fonctions-de-hachage-utilisées" id="toc-fonctions-de-hachage-utilisées" class="nav-link" data-scroll-target="#fonctions-de-hachage-utilisées">Fonctions de hachage utilisées</a></li>
+  <li><a href="#structure-de-kyber-kem" id="toc-structure-de-kyber-kem" class="nav-link" data-scroll-target="#structure-de-kyber-kem">Structure de Kyber-KEM</a></li>
+  <li><a href="#propriétés-de-sécurité" id="toc-propriétés-de-sécurité" class="nav-link" data-scroll-target="#propriétés-de-sécurité">Propriétés de sécurité</a></li>
+  </ul></li>
+  <li><a href="#paramètres-de-kyber" id="toc-paramètres-de-kyber" class="nav-link" data-scroll-target="#paramètres-de-kyber">Paramètres de Kyber</a>
+  <ul class="collapse">
+  <li><a href="#fonctions-de-hachage" id="toc-fonctions-de-hachage" class="nav-link" data-scroll-target="#fonctions-de-hachage">Fonctions de hachage</a></li>
+  <li><a href="#tailles-de-paramètres" id="toc-tailles-de-paramètres" class="nav-link" data-scroll-target="#tailles-de-paramètres">Tailles de paramètres</a></li>
+  </ul></li>
+  <li><a href="#sécurité-de-kyber-kem" id="toc-sécurité-de-kyber-kem" class="nav-link" data-scroll-target="#sécurité-de-kyber-kem">Sécurité de Kyber-KEM</a>
+  <ul class="collapse">
+  <li><a href="#base-de-la-sécurité" id="toc-base-de-la-sécurité" class="nav-link" data-scroll-target="#base-de-la-sécurité">Base de la sécurité</a></li>
+  <li><a href="#propriétés-des-réseaux" id="toc-propriétés-des-réseaux" class="nav-link" data-scroll-target="#propriétés-des-réseaux">Propriétés des réseaux</a></li>
+  <li><a href="#attaques-dimplémentation" id="toc-attaques-dimplémentation" class="nav-link" data-scroll-target="#attaques-dimplémentation">Attaques d’implémentation</a></li>
+  <li><a href="#considérations-pratiques" id="toc-considérations-pratiques" class="nav-link" data-scroll-target="#considérations-pratiques">Considérations pratiques</a></li>
+  </ul></li>
+  <li><a href="#crypto-agilité-crypto-agility" id="toc-crypto-agilité-crypto-agility" class="nav-link" data-scroll-target="#crypto-agilité-crypto-agility">Crypto-agilité (Crypto-agility)</a>
+  <ul class="collapse">
+  <li><a href="#définition" id="toc-définition" class="nav-link" data-scroll-target="#définition">Définition</a></li>
+  <li><a href="#objectifs-dun-système-crypto-agile" id="toc-objectifs-dun-système-crypto-agile" class="nav-link" data-scroll-target="#objectifs-dun-système-crypto-agile">Objectifs d’un système crypto-agile</a></li>
+  <li><a href="#importance-pour-la-transition-post-quantique" id="toc-importance-pour-la-transition-post-quantique" class="nav-link" data-scroll-target="#importance-pour-la-transition-post-quantique">Importance pour la transition post-quantique</a></li>
+  <li><a href="#recommandations-nist" id="toc-recommandations-nist" class="nav-link" data-scroll-target="#recommandations-nist">Recommandations NIST</a></li>
+  <li><a href="#approche-hybride" id="toc-approche-hybride" class="nav-link" data-scroll-target="#approche-hybride">Approche hybride</a></li>
+  <li><a href="#conclusion-sur-la-crypto-agilité" id="toc-conclusion-sur-la-crypto-agilité" class="nav-link" data-scroll-target="#conclusion-sur-la-crypto-agilité">Conclusion sur la crypto-agilité</a></li>
+  </ul></li>
+  <li><a href="#exemple-jouet-de-kyber-kem" id="toc-exemple-jouet-de-kyber-kem" class="nav-link" data-scroll-target="#exemple-jouet-de-kyber-kem">Exemple jouet de Kyber-KEM</a>
+  <ul class="collapse">
+  <li><a href="#avertissement" id="toc-avertissement" class="nav-link" data-scroll-target="#avertissement">Avertissement</a></li>
+  <li><a href="#étape-0-anneau-jouet-et-représentation" id="toc-étape-0-anneau-jouet-et-représentation" class="nav-link" data-scroll-target="#étape-0-anneau-jouet-et-représentation">Étape 0 : Anneau jouet et représentation</a></li>
+  <li><a href="#étape-1-génération-de-clés-récepteur" id="toc-étape-1-génération-de-clés-récepteur" class="nav-link" data-scroll-target="#étape-1-génération-de-clés-récepteur">Étape 1 : Génération de clés (Récepteur)</a></li>
+  <li><a href="#étape-2-encapsulation-de-clé-émetteur---partie-1" id="toc-étape-2-encapsulation-de-clé-émetteur---partie-1" class="nav-link" data-scroll-target="#étape-2-encapsulation-de-clé-émetteur---partie-1">Étape 2 : Encapsulation de clé (Émetteur) - Partie 1</a></li>
+  <li><a href="#étape-2-encapsulation-de-clé-émetteur---partie-2" id="toc-étape-2-encapsulation-de-clé-émetteur---partie-2" class="nav-link" data-scroll-target="#étape-2-encapsulation-de-clé-émetteur---partie-2">Étape 2 : Encapsulation de clé (Émetteur) - Partie 2</a></li>
+  <li><a href="#étape-3-décapsulation-de-clé-récepteur" id="toc-étape-3-décapsulation-de-clé-récepteur" class="nav-link" data-scroll-target="#étape-3-décapsulation-de-clé-récepteur">Étape 3 : Décapsulation de clé (Récepteur)</a></li>
+  <li><a href="#relation-avec-le-vrai-kyber-kem" id="toc-relation-avec-le-vrai-kyber-kem" class="nav-link" data-scroll-target="#relation-avec-le-vrai-kyber-kem">Relation avec le vrai Kyber-KEM</a></li>
+  </ul></li>
+  <li><a href="#flux-complet-de-kyber-kem" id="toc-flux-complet-de-kyber-kem" class="nav-link" data-scroll-target="#flux-complet-de-kyber-kem">Flux complet de Kyber-KEM</a>
+  <ul class="collapse">
+  <li><a href="#vue-densemble-du-protocole" id="toc-vue-densemble-du-protocole" class="nav-link" data-scroll-target="#vue-densemble-du-protocole">Vue d’ensemble du protocole</a></li>
+  <li><a href="#garanties-de-sécurité" id="toc-garanties-de-sécurité" class="nav-link" data-scroll-target="#garanties-de-sécurité">Garanties de sécurité</a></li>
+  </ul></li>
+  <li><a href="#avantages-et-limitations-de-kyber" id="toc-avantages-et-limitations-de-kyber" class="nav-link" data-scroll-target="#avantages-et-limitations-de-kyber">Avantages et limitations de Kyber</a>
+  <ul class="collapse">
+  <li><a href="#avantages" id="toc-avantages" class="nav-link" data-scroll-target="#avantages">Avantages</a></li>
+  <li><a href="#limitations-et-défis" id="toc-limitations-et-défis" class="nav-link" data-scroll-target="#limitations-et-défis">Limitations et défis</a></li>
+  </ul></li>
+  <li><a href="#comparaison-avec-dautres-approches-post-quantiques" id="toc-comparaison-avec-dautres-approches-post-quantiques" class="nav-link" data-scroll-target="#comparaison-avec-dautres-approches-post-quantiques">Comparaison avec d’autres approches post-quantiques</a>
+  <ul class="collapse">
+  <li><a href="#familles-de-cryptographie-post-quantique" id="toc-familles-de-cryptographie-post-quantique" class="nav-link" data-scroll-target="#familles-de-cryptographie-post-quantique">Familles de cryptographie post-quantique</a></li>
+  <li><a href="#pourquoi-kyber" id="toc-pourquoi-kyber" class="nav-link" data-scroll-target="#pourquoi-kyber">Pourquoi Kyber ?</a></li>
+  </ul></li>
+  <li><a href="#concepts-mathématiques-à-maîtriser" id="toc-concepts-mathématiques-à-maîtriser" class="nav-link" data-scroll-target="#concepts-mathématiques-à-maîtriser">Concepts mathématiques à maîtriser</a>
+  <ul class="collapse">
+  <li><a href="#algèbre" id="toc-algèbre" class="nav-link" data-scroll-target="#algèbre">Algèbre</a></li>
+  <li><a href="#théorie-des-réseaux" id="toc-théorie-des-réseaux" class="nav-link" data-scroll-target="#théorie-des-réseaux">Théorie des réseaux</a></li>
+  <li><a href="#cryptographie" id="toc-cryptographie" class="nav-link" data-scroll-target="#cryptographie">Cryptographie</a></li>
+  <li><a href="#problèmes-de-difficulté" id="toc-problèmes-de-difficulté" class="nav-link" data-scroll-target="#problèmes-de-difficulté">Problèmes de difficulté</a></li>
+  </ul></li>
+  <li><a href="#questions-dexamen-types" id="toc-questions-dexamen-types" class="nav-link" data-scroll-target="#questions-dexamen-types">Questions d’examen types</a>
+  <ul class="collapse">
+  <li><a href="#questions-conceptuelles" id="toc-questions-conceptuelles" class="nav-link" data-scroll-target="#questions-conceptuelles">Questions conceptuelles</a></li>
+  <li><a href="#questions-techniques" id="toc-questions-techniques" class="nav-link" data-scroll-target="#questions-techniques">Questions techniques</a></li>
+  <li><a href="#questions-pratiques" id="toc-questions-pratiques" class="nav-link" data-scroll-target="#questions-pratiques">Questions pratiques</a></li>
+  </ul></li>
+  <li><a href="#recommandations-pratiques" id="toc-recommandations-pratiques" class="nav-link" data-scroll-target="#recommandations-pratiques">Recommandations pratiques</a>
+  <ul class="collapse">
+  <li><a href="#pour-la-transition-post-quantique" id="toc-pour-la-transition-post-quantique" class="nav-link" data-scroll-target="#pour-la-transition-post-quantique">Pour la transition post-quantique</a></li>
+  <li><a href="#pour-limplémentation-de-kyber" id="toc-pour-limplémentation-de-kyber" class="nav-link" data-scroll-target="#pour-limplémentation-de-kyber">Pour l’implémentation de Kyber</a></li>
+  </ul></li>
+  <li><a href="#conclusion-générale" id="toc-conclusion-générale" class="nav-link" data-scroll-target="#conclusion-générale">Conclusion générale</a>
+  <ul class="collapse">
+  <li><a href="#résumé-des-points-clés" id="toc-résumé-des-points-clés" class="nav-link" data-scroll-target="#résumé-des-points-clés">Résumé des points clés</a></li>
+  <li><a href="#perspectives-futures" id="toc-perspectives-futures" class="nav-link" data-scroll-target="#perspectives-futures">Perspectives futures</a></li>
+  </ul></li>
+  <li><a href="#glossaire-des-termes-importants" id="toc-glossaire-des-termes-importants" class="nav-link" data-scroll-target="#glossaire-des-termes-importants">Glossaire des termes importants</a></li>
+  </ul></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="ch91.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch1.html">Cours</a></li><li class="breadcrumb-item"><a href="./ch91.html">Document de Révision : Cryptographie Quantique et Post-Quantique</a></li></ol></nav></header>
+
+
+
+
+
+<section id="document-de-révision-cryptographie-quantique-et-post-quantique" class="level1">
+<h1>Document de Révision : Cryptographie Quantique et Post-Quantique</h1>
+<hr>
+<section id="introduction-générale" class="level2">
+<h2 class="anchored" data-anchor-id="introduction-générale">Introduction générale</h2>
+<section id="contexte-de-la-cryptographie-quantique" class="level3">
+<h3 class="anchored" data-anchor-id="contexte-de-la-cryptographie-quantique">Contexte de la cryptographie quantique</h3>
+<p>Ce cours aborde les <strong>défis posés par l’informatique quantique</strong> à la cryptographie actuelle et les <strong>solutions post-quantiques</strong> développées pour y faire face, en particulier l’algorithme <strong>CRYSTALS-Kyber</strong>.</p>
+<p><strong>Problématique centrale :</strong></p>
+<p>L’avènement des ordinateurs quantiques menace de briser la sécurité des systèmes cryptographiques actuels, nécessitant une transition vers des algorithmes <strong>résistants aux attaques quantiques</strong>.</p>
+<hr>
+</section>
+</section>
+<section id="ordinateur-classique-vs-ordinateur-quantique" class="level2">
+<h2 class="anchored" data-anchor-id="ordinateur-classique-vs-ordinateur-quantique">Ordinateur classique vs Ordinateur quantique</h2>
+<section id="ordinateurs-classiques" class="level3">
+<h3 class="anchored" data-anchor-id="ordinateurs-classiques">Ordinateurs classiques</h3>
+<p><strong>Unité de base d’information : Bit</strong></p>
+<ul>
+<li>Valeurs possibles : <strong>0 ou 1</strong></li>
+<li>Nombre <strong>fini</strong> d’états</li>
+<li>États distingués par des états <strong>électriques/magnétiques</strong> dans le matériel</li>
+<li>Opérations effectuées via des <strong>portes logiques</strong></li>
+</ul>
+</section>
+<section id="ordinateurs-quantiques" class="level3">
+<h3 class="anchored" data-anchor-id="ordinateurs-quantiques">Ordinateurs quantiques</h3>
+<p><strong>Unité fondamentale d’information : Qubit</strong></p>
+<p>Un <strong>qubit</strong> est un petit système quantique avec des propriétés spéciales</p>
+<p><strong>Propriété 1 : Superposition</strong></p>
+<ul>
+<li>Peut exister dans un <strong>nombre infini d’états</strong> (superposition de ses états de base)</li>
+<li>Lors de la <strong>mesure</strong> → le qubit <strong>s’effondre</strong> (décoherence)</li>
+</ul>
+<p><strong>Propriété 2 : Intrication (Entanglement)</strong></p>
+<p>Système de <span class="math inline">\(n\)</span> qubits : <span class="math inline">\(n\)</span> qubits intriqués avec <span class="math inline">\(2^n\)</span> états de base</p>
+<p><strong>Implications fondamentales :</strong></p>
+<ul>
+<li>Le nombre d’états de base croît <strong>exponentiellement</strong> : <span class="math inline">\(2^n\)</span></li>
+<li>Opère sur <strong>tous les états de base simultanément</strong> → <strong>“parallélisme naturel”</strong></li>
+</ul>
+</section>
+<section id="différence-principale" class="level3">
+<h3 class="anchored" data-anchor-id="différence-principale">Différence principale</h3>
+<p>📌 <strong>Point clé :</strong> La différence principale entre informatique classique et quantique réside dans la <strong>représentation de l’information</strong></p>
+<p><strong>Informatique quantique :</strong></p>
+<ul>
+<li>S’inspire du <strong>comportement des particules quantiques</strong></li>
+<li>Nécessite un <strong>ordinateur quantique</strong> réel (pas de simulation classique efficace)</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="défis-de-linformatique-quantique" class="level2">
+<h2 class="anchored" data-anchor-id="défis-de-linformatique-quantique">Défis de l’informatique quantique</h2>
+<section id="défi-1-effondrement-collapsing" class="level3">
+<h3 class="anchored" data-anchor-id="défi-1-effondrement-collapsing">Défi 1 : Effondrement (Collapsing)</h3>
+<p>⚠️ <strong>Problème :</strong> Le qubit perd sa propriété de <strong>superposition</strong> lors de la mesure</p>
+<p><strong>Conséquence :</strong> Les mesures doivent être soigneusement planifiées dans les algorithmes</p>
+</section>
+<section id="défi-2-sensibilité-environnementale" class="level3">
+<h3 class="anchored" data-anchor-id="défi-2-sensibilité-environnementale">Défi 2 : Sensibilité environnementale</h3>
+<p>⚠️ <strong>Problème :</strong> Grande <strong>sensibilité</strong> du système quantique à son environnement</p>
+<p><strong>Conséquence :</strong> Nécessite une <strong>infrastructure</strong> très particulière (températures extrêmes, isolation)</p>
+</section>
+<section id="défi-3-portes-logiques" class="level3">
+<h3 class="anchored" data-anchor-id="défi-3-portes-logiques">Défi 3 : Portes logiques</h3>
+<p><strong>Distinction importante :</strong></p>
+<ul>
+<li><strong>Portes quantiques logiques</strong> (théoriques)</li>
+<li><strong>Portes quantiques physiques</strong> (implémentation réelle)</li>
+</ul>
+<p><strong>Impact :</strong> Influence sur les <strong>performances</strong> des circuits quantiques</p>
+</section>
+<section id="défi-4-translation-dalgorithmes" class="level3">
+<h3 class="anchored" data-anchor-id="défi-4-translation-dalgorithmes">Défi 4 : Translation d’algorithmes</h3>
+<p><strong>Exemple : AES (Advanced Encryption Standard)</strong></p>
+<p>❌ La translation directe n’est <strong>pas faisable</strong></p>
+<p>✅ <strong>Solution unique :</strong> Développer des <strong>algorithmes appropriés</strong> → nouveau paradigme</p>
+<p>📌 <strong>Conclusion :</strong> Beaucoup de questions non résolues dans le domaine</p>
+<hr>
+</section>
+</section>
+<section id="dangers-pour-la-cryptographie-actuelle" class="level2">
+<h2 class="anchored" data-anchor-id="dangers-pour-la-cryptographie-actuelle">Dangers pour la cryptographie actuelle</h2>
+<section id="algorithmes-asymétriques-actuels" class="level3">
+<h3 class="anchored" data-anchor-id="algorithmes-asymétriques-actuels">Algorithmes asymétriques actuels</h3>
+<p><strong>Sécurité basée sur des problèmes mathématiques difficiles pour ordinateurs classiques :</strong></p>
+<ul>
+<li><strong>Factorisation</strong> des grands nombres (RSA)</li>
+<li><strong>Logarithmes discrets</strong></li>
+<li><strong>Problème de Diffie-Hellman</strong></li>
+</ul>
+</section>
+<section id="menace-quantique-algorithme-de-shor" class="level3">
+<h3 class="anchored" data-anchor-id="menace-quantique-algorithme-de-shor">Menace quantique : Algorithme de Shor</h3>
+<p>⚠️ <strong>Problème majeur :</strong> Ces problèmes sont résolus en <strong>temps polynomial</strong> par l’<strong>algorithme de Shor</strong> sur un ordinateur quantique</p>
+<p><strong>Systèmes affectés :</strong></p>
+<ul>
+<li>Chiffrement/déchiffrement</li>
+<li>Signatures numériques</li>
+<li>Authentification</li>
+<li>Établissement de clés (key establishment)</li>
+</ul>
+<p><strong>Protocoles menacés :</strong></p>
+<ul>
+<li><strong>HTTPS</strong></li>
+<li><strong>TLS</strong></li>
+<li>Et beaucoup d’autres</li>
+</ul>
+<p>💡 <strong>“Apocalypse quantique” :</strong> L’Internet tel que nous le connaissons aujourd’hui n’existerait plus</p>
+</section>
+<section id="impact-sur-aes" class="level3">
+<h3 class="anchored" data-anchor-id="impact-sur-aes">Impact sur AES</h3>
+<p><strong>AES vs Algorithme de Grover :</strong></p>
+<p>L’algorithme de Grover menace AES mais de manière moins dramatique</p>
+<p>✅ <strong>Solution :</strong> Doubler la taille des clés suffit pour maintenir la sécurité</p>
+</section>
+<section id="nécessité-de-solutions-post-quantiques" class="level3">
+<h3 class="anchored" data-anchor-id="nécessité-de-solutions-post-quantiques">Nécessité de solutions post-quantiques</h3>
+<p>📌 <strong>Conclusion :</strong> Besoin de <strong>solutions post-quantiques</strong> basées sur des problèmes mathématiques <strong>plus difficiles</strong></p>
+<hr>
+</section>
+</section>
+<section id="notations-mathématiques" class="level2">
+<h2 class="anchored" data-anchor-id="notations-mathématiques">Notations mathématiques</h2>
+<section id="ensembles-de-base" class="level3">
+<h3 class="anchored" data-anchor-id="ensembles-de-base">Ensembles de base</h3>
+<p><strong>1. Entiers modulo q :</strong></p>
+<p><span class="math display">\[\mathbb{Z}_q = \{0, 1, 2, \ldots, q-1\}\]</span></p>
+<p>L’ensemble des entiers modulo <span class="math inline">\(q\)</span></p>
+<p><strong>2. Polynômes à coefficients dans <span class="math inline">\(\mathbb{Z}_q\)</span> :</strong></p>
+<p>Pour <span class="math inline">\(q\)</span> premier : <span class="math inline">\(\mathbb{Z}_q[X]\)</span> est l’ensemble des polynômes avec coefficients dans <span class="math inline">\(\mathbb{Z}_q\)</span></p>
+<p>⚠️ <strong>Note importante :</strong> Le degré n’est <strong>pas borné</strong></p>
+<p><strong>3. Anneau de polynômes (Polynomial ring) :</strong></p>
+<p>Pour un entier positif <span class="math inline">\(n\)</span> :</p>
+<p><span class="math display">\[R_q = \mathbb{Z}_q[X]/(X^n + 1)\]</span></p>
+<p>C’est l’anneau des polynômes modulo <span class="math inline">\((X^n + 1)\)</span></p>
+<p><strong>4. Module :</strong></p>
+<p>Pour un entier positif <span class="math inline">\(k\)</span> :</p>
+<p><span class="math display">\[R_q^k\]</span></p>
+<p>Un module de rang <span class="math inline">\(k\)</span> sur <span class="math inline">\(R_q\)</span></p>
+</section>
+<section id="normes-et-petits-polynômes" class="level3">
+<h3 class="anchored" data-anchor-id="normes-et-petits-polynômes">Normes et “petits” polynômes</h3>
+<p><strong>5. Norme infinie :</strong></p>
+<p>On peut définir la notion de <strong>“taille”</strong> ou <strong>norme infinie</strong> sur tous ces ensembles</p>
+<p><strong>6. “Petits” polynômes :</strong></p>
+<p>Polynômes avec des coefficients de petite magnitude (proches de 0)</p>
+<p>💡 Ces polynômes jouent un rôle crucial dans la sécurité de Kyber</p>
+<hr>
+</section>
+</section>
+<section id="learning-without-errors-lwe" class="level2">
+<h2 class="anchored" data-anchor-id="learning-without-errors-lwe">Learning Without Errors (LWE)</h2>
+<section id="configuration-du-problème" class="level3">
+<h3 class="anchored" data-anchor-id="configuration-du-problème">Configuration du problème</h3>
+<p><strong>Situation :</strong></p>
+<p>Alice possède un <strong>vecteur secret</strong> <span class="math inline">\(s\)</span> (d’entiers)</p>
+<p><strong>Information publique :</strong></p>
+<p>Ensemble d’équations avec <strong>coefficients entiers</strong> auxquelles <span class="math inline">\(s\)</span> est solution</p>
+</section>
+<section id="problème-lwe-sans-erreurs" class="level3">
+<h3 class="anchored" data-anchor-id="problème-lwe-sans-erreurs">Problème LWE (sans erreurs)</h3>
+<p><strong>Objectif :</strong> Trouver <span class="math inline">\(s\)</span> à partir de ces équations</p>
+<p><strong>Méthode :</strong> Utiliser l’<strong>élimination de Gauss</strong></p>
+<p>❌ <strong>Conclusion :</strong> Facile à résoudre → Ne fournit <strong>aucune sécurité</strong></p>
+<hr>
+</section>
+</section>
+<section id="learning-with-errors-lwe" class="level2">
+<h2 class="anchored" data-anchor-id="learning-with-errors-lwe">Learning With Errors (LWE)</h2>
+<section id="ajout-derreurs-aléatoires" class="level3">
+<h3 class="anchored" data-anchor-id="ajout-derreurs-aléatoires">Ajout d’erreurs aléatoires</h3>
+<p><strong>Pour rendre le problème plus difficile :</strong></p>
+<p>Ajouter une <strong>erreur aléatoire</strong> (proche de zéro) au <strong>membre de droite</strong> des équations</p>
+</section>
+<section id="problème-lwe-avec-erreurs" class="level3">
+<h3 class="anchored" data-anchor-id="problème-lwe-avec-erreurs">Problème LWE (avec erreurs)</h3>
+<p><strong>Objectif :</strong> Trouver <span class="math inline">\(s\)</span> à partir des équations <strong>avec erreurs ajoutées</strong></p>
+<p><strong>Difficulté :</strong></p>
+<p>Un système <strong>surdéterminé</strong> d’équations rempli d’erreurs n’a presque certainement <strong>pas de solution</strong> (au sens traditionnel)</p>
+<p>✅ <strong>Conclusion :</strong> Maintenant <span class="math inline">\(s\)</span> est vraiment un <strong>secret</strong></p>
+<p>📌 <strong>Note pratique :</strong> Généralement, les opérations sont effectuées <strong>modulo un grand nombre</strong></p>
+<hr>
+</section>
+</section>
+<section id="module-learning-with-errors-mlwe" class="level2">
+<h2 class="anchored" data-anchor-id="module-learning-with-errors-mlwe">Module Learning With Errors (MLWE)</h2>
+<section id="problème-mlwe" class="level3">
+<h3 class="anchored" data-anchor-id="problème-mlwe">Problème MLWE</h3>
+<p><strong>Caractéristiques :</strong></p>
+<ul>
+<li>Extension de LWE aux <strong>modules</strong> sur les anneaux de polynômes</li>
+<li>Travaille avec <span class="math inline">\(R_q^k\)</span> au lieu de vecteurs d’entiers</li>
+</ul>
+<p><strong>Propriété fondamentale :</strong></p>
+<p>⚠️ <strong>Aucun algorithme efficace</strong> n’est connu pour résoudre MLWE</p>
+<p><strong>Type de problème :</strong></p>
+<p>MLWE est un <strong>problème de recherche</strong> (search problem) : trouver <span class="math inline">\(s\)</span></p>
+<hr>
+</section>
+</section>
+<section id="decision-module-learning-with-errors-d-mlwe" class="level2">
+<h2 class="anchored" data-anchor-id="decision-module-learning-with-errors-d-mlwe">Decision Module Learning With Errors (D-MLWE)</h2>
+<section id="problème-d-mlwe" class="level3">
+<h3 class="anchored" data-anchor-id="problème-d-mlwe">Problème D-MLWE</h3>
+<p><strong>Mêmes paramètres que MLWE mais :</strong></p>
+<p>Une instance de D-MLWE est donnée par une paire <span class="math inline">\((A, t)\)</span></p>
+<p><strong>Question à résoudre :</strong></p>
+<p>Déterminer si <span class="math inline">\((A, t)\)</span> est :</p>
+<ul>
+<li>Une instance <strong>valide</strong> de MLWE (où <span class="math inline">\(t\)</span> dépend d’un secret <span class="math inline">\(s\)</span>)</li>
+<li>Ou simplement une paire <strong>aléatoire</strong></li>
+</ul>
+</section>
+<section id="propriétés-de-d-mlwe" class="level3">
+<h3 class="anchored" data-anchor-id="propriétés-de-d-mlwe">Propriétés de D-MLWE</h3>
+<p><strong>Difficulté :</strong></p>
+<p>Si D-MLWE est difficile → <span class="math inline">\((A, t)\)</span> ne donne <strong>aucune information</strong> sur <span class="math inline">\(s\)</span></p>
+<p>⚠️ <strong>Aucun algorithme efficace</strong> connu pour D-MLWE</p>
+<p><strong>Type de problème :</strong></p>
+<p>D-MLWE est un <strong>problème de décision</strong> (decision problem)</p>
+</section>
+<section id="comparaison-mlwe-vs-d-mlwe" class="level3">
+<h3 class="anchored" data-anchor-id="comparaison-mlwe-vs-d-mlwe">Comparaison MLWE vs D-MLWE</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Aspect</th>
+<th>MLWE</th>
+<th>D-MLWE</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Type</td>
+<td>Problème de recherche</td>
+<td>Problème de décision</td>
+</tr>
+<tr class="even">
+<td>Objectif</td>
+<td>Trouver <span class="math inline">\(s\)</span></td>
+<td>Distinguer instance valide d’aléatoire</td>
+</tr>
+<tr class="odd">
+<td>Utilisation</td>
+<td>Construction de clés</td>
+<td>Preuves de sécurité</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+</section>
+<section id="réseaux-euclidiens-lattices" class="level2">
+<h2 class="anchored" data-anchor-id="réseaux-euclidiens-lattices">Réseaux euclidiens (Lattices)</h2>
+<section id="définition-dun-réseau" class="level3">
+<h3 class="anchored" data-anchor-id="définition-dun-réseau">Définition d’un réseau</h3>
+<p><strong>Réseau (Lattice) :</strong></p>
+<p>Ensemble de toutes les <strong>combinaisons linéaires entières</strong> de <span class="math inline">\(n\)</span> vecteurs <strong>linéairement indépendants</strong> dans <span class="math inline">\(\mathbb{R}^n\)</span> (la base)</p>
+<p><strong>Notation mathématique :</strong></p>
+<p>Si <span class="math inline">\(\{b_1, b_2, \ldots, b_n\}\)</span> est la base, le réseau est :</p>
+<p><span class="math display">\[\mathcal{L} = \left\{\sum_{i=1}^{n} z_i b_i \mid z_i \in \mathbb{Z}\right\}\]</span></p>
+</section>
+<section id="problèmes-classiques-sur-les-réseaux" class="level3">
+<h3 class="anchored" data-anchor-id="problèmes-classiques-sur-les-réseaux">Problèmes classiques sur les réseaux</h3>
+<p><strong>Closest Vector Problem (CVP) :</strong></p>
+<p>Étant donné un point <span class="math inline">\(x\)</span> dans <span class="math inline">\(\mathbb{R}^n\)</span>, trouver le vecteur du réseau <strong>le plus proche</strong> de <span class="math inline">\(x\)</span></p>
+<p><strong>Shortest Vector Problem (SVP) :</strong></p>
+<p>Trouver un vecteur <strong>non nul</strong> dans le réseau avec <strong>norme euclidienne minimale</strong></p>
+<p>💡 SVP est un <strong>cas particulier</strong> de CVP pour <span class="math inline">\(x = 0\)</span></p>
+</section>
+<section id="complexité-des-problèmes-de-réseaux" class="level3">
+<h3 class="anchored" data-anchor-id="complexité-des-problèmes-de-réseaux">Complexité des problèmes de réseaux</h3>
+<p>✅ <strong>Propriétés importantes :</strong></p>
+<ul>
+<li>La plupart des problèmes de réseaux sont <strong>NP-difficiles</strong></li>
+<li>Ils sont <strong>difficiles en moyenne</strong> (average-case hard)</li>
+</ul>
+<p>📌 <strong>Différence avec d’autres problèmes NP :</strong></p>
+<p>Beaucoup de problèmes NP sont faciles “en moyenne” mais difficiles seulement dans le pire cas. Les problèmes de réseaux sont difficiles <strong>même en moyenne</strong>.</p>
+</section>
+<section id="lien-avec-mlwe-et-d-mlwe" class="level3">
+<h3 class="anchored" data-anchor-id="lien-avec-mlwe-et-d-mlwe">Lien avec MLWE et D-MLWE</h3>
+<p><strong>Reformulation :</strong></p>
+<p>MLWE et D-MLWE peuvent être <strong>reformulés comme problèmes de réseaux</strong></p>
+<p><strong>Difficulté moyenne :</strong></p>
+<p>La difficulté moyenne est <strong>au moins celle</strong> de la difficulté quantique du pire cas de certains problèmes de réseaux</p>
+<p>💡 <strong>Intérêt pratique :</strong></p>
+<p>Ceci est très intéressant pour <strong>évaluer la difficulté</strong> de MLWE et D-MLWE car :</p>
+<ul>
+<li>Les problèmes de réseaux sont bien étudiés</li>
+<li>Leur difficulté est bien comprise</li>
+<li>Même avec un ordinateur quantique, ils restent difficiles</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="crystals-kyber-vue-densemble" class="level2">
+<h2 class="anchored" data-anchor-id="crystals-kyber-vue-densemble">CRYSTALS-Kyber : Vue d’ensemble</h2>
+<section id="quest-ce-que-kyber-kem" class="level3">
+<h3 class="anchored" data-anchor-id="quest-ce-que-kyber-kem">Qu’est-ce que Kyber-KEM ?</h3>
+<p><strong>Kyber-KEM</strong> est un <strong>KEM</strong> (Key Encapsulation Mechanism) <strong>IND-CCA2-secure</strong></p>
+<p><strong>Caractéristiques principales :</strong></p>
+<ul>
+<li><strong>Système cryptographique asymétrique</strong></li>
+<li>Sécurité basée sur la difficulté des problèmes <strong>MLWE</strong> et <strong>D-MLWE</strong></li>
+<li>Travaille avec :
+<ul>
+<li>Anneau de polynômes <span class="math inline">\(R_q\)</span></li>
+<li>Module <span class="math inline">\(R_q^k\)</span></li>
+<li>Polynômes “petits”</li>
+</ul></li>
+<li>Cryptosystème <strong>basé sur les réseaux</strong> (lattice-based)</li>
+</ul>
+</section>
+<section id="composantes-de-kyber" class="level3">
+<h3 class="anchored" data-anchor-id="composantes-de-kyber">Composantes de Kyber</h3>
+<p><strong>Structure en couches :</strong></p>
+<pre class="mermaid"><code>graph TD
+    A[Kyber-KEM] --&gt; B[Kyber-PKE]
+    B --&gt; C[MLWE]
+    B --&gt; D[D-MLWE]
+    A --&gt; E[Fonctions de hachage]
+    E --&gt; F[SHA3-512 G]
+    E --&gt; G[SHA3-256 H]
+    E --&gt; H[SHAKE256 J]</code></pre>
+<hr>
+</section>
+</section>
+<section id="kyber-pke-public-key-encryption" class="level2">
+<h2 class="anchored" data-anchor-id="kyber-pke-public-key-encryption">Kyber-PKE (Public Key Encryption)</h2>
+<section id="espace-de-texte-clair" class="level3">
+<h3 class="anchored" data-anchor-id="espace-de-texte-clair">Espace de texte clair</h3>
+<p><strong>Plaintext space :</strong></p>
+<p><span class="math display">\[\{0, 1\}^n \subset R_q\]</span></p>
+<p>Les messages sont des <strong>polynômes</strong> dans <span class="math inline">\(R_q\)</span> représentant des bits</p>
+</section>
+<section id="propriété-importante" class="level3">
+<h3 class="anchored" data-anchor-id="propriété-importante">Propriété importante</h3>
+<p>⚠️ <strong>Le déchiffrement peut échouer</strong> (avec une <strong>petite probabilité</strong>)</p>
+<p>💡 <strong>Raison :</strong> Les erreurs ajoutées peuvent parfois être trop grandes</p>
+<p><strong>Gestion pratique :</strong></p>
+<p>Cette probabilité d’échec est rendue <strong>négligeable</strong> par le choix approprié des paramètres</p>
+</section>
+<section id="schéma-général" class="level3">
+<h3 class="anchored" data-anchor-id="schéma-général">Schéma général</h3>
+<p><strong>Kyber-PKE est le cœur cryptographique</strong> utilisé par Kyber-KEM</p>
+<p>Il fournit les opérations de base :</p>
+<ul>
+<li><strong>Génération de clés</strong> (KeyGen)</li>
+<li><strong>Chiffrement</strong> (Encrypt)</li>
+<li><strong>Déchiffrement</strong> (Decrypt)</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="kyber-kem-mécanisme-complet" class="level2">
+<h2 class="anchored" data-anchor-id="kyber-kem-mécanisme-complet">Kyber-KEM : Mécanisme complet</h2>
+<section id="fonctions-de-hachage-utilisées" class="level3">
+<h3 class="anchored" data-anchor-id="fonctions-de-hachage-utilisées">Fonctions de hachage utilisées</h3>
+<p><strong>Trois fonctions de hachage cryptographiques :</strong></p>
+<ul>
+<li><strong>G</strong> : SHA3-512</li>
+<li><strong>H</strong> : SHA3-256</li>
+<li><strong>J</strong> : SHAKE256</li>
+</ul>
+<p>💡 Ces fonctions assurent différentes propriétés de sécurité et permettent de dériver des clés</p>
+</section>
+<section id="structure-de-kyber-kem" class="level3">
+<h3 class="anchored" data-anchor-id="structure-de-kyber-kem">Structure de Kyber-KEM</h3>
+<p><strong>Opérations principales :</strong></p>
+<p><strong>1. KeyGen (Génération de clés) :</strong></p>
+<p>Génère une paire de clés publique/privée</p>
+<p><strong>2. Encapsulation :</strong></p>
+<ul>
+<li>Entrée : Clé publique</li>
+<li>Sortie :
+<ul>
+<li>Texte chiffré (ciphertext)</li>
+<li>Clé partagée (shared secret)</li>
+</ul></li>
+</ul>
+<p><strong>3. Decapsulation :</strong></p>
+<ul>
+<li>Entrée : Clé privée + texte chiffré</li>
+<li>Sortie : Clé partagée</li>
+</ul>
+</section>
+<section id="propriétés-de-sécurité" class="level3">
+<h3 class="anchored" data-anchor-id="propriétés-de-sécurité">Propriétés de sécurité</h3>
+<p><strong>Plaintext awareness ⇒ IND-CCA</strong></p>
+<p>La <strong>conscience du texte clair</strong> (plaintext awareness) implique la sécurité <strong>IND-CCA</strong> (Indistinguishability under Chosen Ciphertext Attack)</p>
+<p>⚠️ <strong>La décapsulation peut échouer</strong> même si honnête (petite probabilité)</p>
+<p><strong>Gestion :</strong></p>
+<p>Les paramètres sont choisis pour rendre cette probabilité <strong>négligeable</strong></p>
+<hr>
+</section>
+</section>
+<section id="paramètres-de-kyber" class="level2">
+<h2 class="anchored" data-anchor-id="paramètres-de-kyber">Paramètres de Kyber</h2>
+<section id="fonctions-de-hachage" class="level3">
+<h3 class="anchored" data-anchor-id="fonctions-de-hachage">Fonctions de hachage</h3>
+<p><strong>Récapitulatif des fonctions :</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Fonction</th>
+<th>Algorithme</th>
+<th>Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>G</strong></td>
+<td>SHA3-512</td>
+<td>Dérivation de clés longues</td>
+</tr>
+<tr class="even">
+<td><strong>H</strong></td>
+<td>SHA3-256</td>
+<td>Hachage standard</td>
+</tr>
+<tr class="odd">
+<td><strong>J</strong></td>
+<td>SHAKE256</td>
+<td>Fonction XOF (extensible)</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="tailles-de-paramètres" class="level3">
+<h3 class="anchored" data-anchor-id="tailles-de-paramètres">Tailles de paramètres</h3>
+<p><strong>Kyber propose plusieurs niveaux de sécurité :</strong></p>
+<p>Les paramètres varient selon le niveau souhaité, notamment :</p>
+<ul>
+<li><span class="math inline">\(k\)</span> : rang du module (typiquement 2, 3 ou 4)</li>
+<li><span class="math inline">\(n\)</span> : degré des polynômes</li>
+<li><span class="math inline">\(q\)</span> : modulo pour les coefficients</li>
+</ul>
+<p>💡 <strong>Compromis :</strong> Plus <span class="math inline">\(k\)</span> est grand, plus la sécurité est élevée mais plus les clés et calculs sont grands</p>
+<hr>
+</section>
+</section>
+<section id="sécurité-de-kyber-kem" class="level2">
+<h2 class="anchored" data-anchor-id="sécurité-de-kyber-kem">Sécurité de Kyber-KEM</h2>
+<section id="base-de-la-sécurité" class="level3">
+<h3 class="anchored" data-anchor-id="base-de-la-sécurité">Base de la sécurité</h3>
+<p><strong>Sécurité IND-CCA sous l’hypothèse :</strong></p>
+<p>D-MLWE est <strong>intraitable</strong> (computationally hard)</p>
+<p><strong>Choix des distributions :</strong></p>
+<p>Les distributions d’erreurs sont choisies pour être <strong>“aussi difficiles que”</strong> certains problèmes de réseaux</p>
+</section>
+<section id="propriétés-des-réseaux" class="level3">
+<h3 class="anchored" data-anchor-id="propriétés-des-réseaux">Propriétés des réseaux</h3>
+<p>✅ <strong>Réseaux euclidiens sont :</strong></p>
+<ul>
+<li><strong>NP-difficiles</strong></li>
+<li><strong>Difficiles en moyenne</strong> (average-case hard)</li>
+</ul>
+<p>💡 Ceci fournit une <strong>base solide</strong> pour la sécurité à long terme</p>
+</section>
+<section id="attaques-dimplémentation" class="level3">
+<h3 class="anchored" data-anchor-id="attaques-dimplémentation">Attaques d’implémentation</h3>
+<p>⚠️ <strong>Préoccupations pratiques :</strong></p>
+<p><strong>Attaques par canaux auxiliaires (side-channel attacks) :</strong></p>
+<ul>
+<li>Analyse de la consommation électrique</li>
+<li>Analyse temporelle</li>
+<li>Analyse électromagnétique</li>
+</ul>
+<p><strong>Attaques par injection de fautes (fault attacks) :</strong></p>
+<ul>
+<li>Perturbation délibérée du calcul</li>
+<li>Observation du comportement erroné</li>
+</ul>
+<p><strong>Défis :</strong></p>
+<ul>
+<li>Difficile à prévoir toutes les attaques</li>
+<li>Nouvelles techniques d’attaque en développement</li>
+<li>⚠️ <strong>Soyez prudent</strong> car les algorithmes sont nouveaux</li>
+</ul>
+</section>
+<section id="considérations-pratiques" class="level3">
+<h3 class="anchored" data-anchor-id="considérations-pratiques">Considérations pratiques</h3>
+<p>📌 <strong>Points importants :</strong></p>
+<ol type="1">
+<li>La sécurité théorique est bien fondée</li>
+<li>L’implémentation pratique nécessite des <strong>contre-mesures</strong></li>
+<li>Évaluation continue de la sécurité nécessaire</li>
+</ol>
+<hr>
+</section>
+</section>
+<section id="crypto-agilité-crypto-agility" class="level2">
+<h2 class="anchored" data-anchor-id="crypto-agilité-crypto-agility">Crypto-agilité (Crypto-agility)</h2>
+<section id="définition" class="level3">
+<h3 class="anchored" data-anchor-id="définition">Définition</h3>
+<p><strong>Crypto-agilité :</strong></p>
+<p>Capacité de <strong>basculer entre différentes primitives cryptographiques</strong> facilement</p>
+</section>
+<section id="objectifs-dun-système-crypto-agile" class="level3">
+<h3 class="anchored" data-anchor-id="objectifs-dun-système-crypto-agile">Objectifs d’un système crypto-agile</h3>
+<p><strong>Permettre :</strong></p>
+<ul>
+<li><strong>Adaptations rapides</strong> de nouveaux algorithmes sans perturber l’infrastructure</li>
+<li>Sécurité en cas de primitives <strong>cassées/vulnérables</strong></li>
+<li>Transition en douceur vers de nouvelles solutions</li>
+</ul>
+</section>
+<section id="importance-pour-la-transition-post-quantique" class="level3">
+<h3 class="anchored" data-anchor-id="importance-pour-la-transition-post-quantique">Importance pour la transition post-quantique</h3>
+<p><strong>Pourquoi est-ce crucial ?</strong></p>
+<p>Se préparer à l’avènement d’un ordinateur quantique consistera en une <strong>migration massive</strong> (probablement la <strong>plus grande de l’histoire</strong>)</p>
+</section>
+<section id="recommandations-nist" class="level3">
+<h3 class="anchored" data-anchor-id="recommandations-nist">Recommandations NIST</h3>
+<p>📌 <strong>Conseil du NIST :</strong></p>
+<p><strong>Ne pas abandonner</strong> les algorithmes classiques</p>
+<p><strong>Pourquoi ?</strong></p>
+<ol type="1">
+<li><strong>Transition plus douce</strong> + optimisations actuelles conservées</li>
+<li><strong>Nouvelles mathématiques</strong> : sécurité empirique, pas encore complètement testée</li>
+<li><strong>Incertitude temporelle</strong> : on ne sait pas quand un ordinateur quantique sera réalisé</li>
+</ol>
+</section>
+<section id="approche-hybride" class="level3">
+<h3 class="anchored" data-anchor-id="approche-hybride">Approche hybride</h3>
+<p>💡 <strong>Solution recommandée :</strong></p>
+<p><strong>Combiner</strong> algorithmes classiques et post-quantiques :</p>
+<ul>
+<li>Sécurité garantie si <strong>au moins un</strong> des deux est sûr</li>
+<li>Transition progressive possible</li>
+<li>Flexibilité selon les applications</li>
+</ul>
+</section>
+<section id="conclusion-sur-la-crypto-agilité" class="level3">
+<h3 class="anchored" data-anchor-id="conclusion-sur-la-crypto-agilité">Conclusion sur la crypto-agilité</h3>
+<p>✅ <strong>Considérer des systèmes crypto-agiles est très important</strong> pour :</p>
+<ul>
+<li>Permettre une <strong>transition en douceur</strong> vers le post-quantique</li>
+<li>Concevoir des systèmes <strong>flexibles</strong> proposant :
+<ul>
+<li>Différentes primitives</li>
+<li>Différents niveaux de sécurité</li>
+<li>Adaptation selon l’application</li>
+</ul></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="exemple-jouet-de-kyber-kem" class="level2">
+<h2 class="anchored" data-anchor-id="exemple-jouet-de-kyber-kem">Exemple jouet de Kyber-KEM</h2>
+<section id="avertissement" class="level3">
+<h3 class="anchored" data-anchor-id="avertissement">Avertissement</h3>
+<p>⚠️ <strong>Important :</strong></p>
+<p>Les paramètres sont <strong>minuscules</strong> et pour <strong>illustration uniquement</strong></p>
+<p>❌ Ils ne sont <strong>PAS cryptographiquement sûrs</strong></p>
+<p>💡 <strong>Objectif :</strong> Comprendre les calculs derrière Kyber-KEM sans se perdre dans les grands nombres</p>
+</section>
+<section id="étape-0-anneau-jouet-et-représentation" class="level3">
+<h3 class="anchored" data-anchor-id="étape-0-anneau-jouet-et-représentation">Étape 0 : Anneau jouet et représentation</h3>
+<p><strong>Définition de l’anneau jouet :</strong></p>
+<p>Petit anneau de polynômes avec paramètres réduits pour faciliter les calculs à la main</p>
+<p><strong>Exemple :</strong></p>
+<ul>
+<li><span class="math inline">\(n\)</span> très petit (par ex. <span class="math inline">\(n = 4\)</span>)</li>
+<li><span class="math inline">\(q\)</span> petit (par ex. <span class="math inline">\(q = 17\)</span>)</li>
+<li><span class="math inline">\(R_q = \mathbb{Z}_q[X]/(X^n + 1)\)</span></li>
+</ul>
+</section>
+<section id="étape-1-génération-de-clés-récepteur" class="level3">
+<h3 class="anchored" data-anchor-id="étape-1-génération-de-clés-récepteur">Étape 1 : Génération de clés (Récepteur)</h3>
+<p><strong>Le récepteur génère :</strong></p>
+<ul>
+<li><strong>Clé secrète</strong> : vecteur/polynôme secret <span class="math inline">\(s\)</span> avec petits coefficients</li>
+<li><strong>Clé publique</strong> : paire <span class="math inline">\((A, t)\)</span> où :
+<ul>
+<li><span class="math inline">\(A\)</span> est une matrice/vecteur aléatoire publique</li>
+<li><span class="math inline">\(t = As + e\)</span> où <span class="math inline">\(e\)</span> est une petite erreur</li>
+</ul></li>
+</ul>
+<p>💡 La sécurité repose sur la difficulté de retrouver <span class="math inline">\(s\)</span> à partir de <span class="math inline">\((A, t)\)</span></p>
+</section>
+<section id="étape-2-encapsulation-de-clé-émetteur---partie-1" class="level3">
+<h3 class="anchored" data-anchor-id="étape-2-encapsulation-de-clé-émetteur---partie-1">Étape 2 : Encapsulation de clé (Émetteur) - Partie 1</h3>
+<p><strong>L’émetteur :</strong></p>
+<ol type="1">
+<li>Choisit un message aléatoire <span class="math inline">\(m\)</span> (qui deviendra la clé partagée)</li>
+<li>Choisit un vecteur aléatoire court <span class="math inline">\(r\)</span> et des erreurs <span class="math inline">\(e_1, e_2\)</span></li>
+</ol>
+</section>
+<section id="étape-2-encapsulation-de-clé-émetteur---partie-2" class="level3">
+<h3 class="anchored" data-anchor-id="étape-2-encapsulation-de-clé-émetteur---partie-2">Étape 2 : Encapsulation de clé (Émetteur) - Partie 2</h3>
+<p><strong>L’émetteur calcule :</strong></p>
+<ul>
+<li><strong><span class="math inline">\(u = A^T r + e_1\)</span></strong> : première partie du chiffré</li>
+<li><strong><span class="math inline">\(v = t^T r + e_2 + \text{encode}(m)\)</span></strong> : seconde partie du chiffré</li>
+</ul>
+<p><strong>Sortie :</strong></p>
+<ul>
+<li><strong>Ciphertext</strong> : <span class="math inline">\((u, v)\)</span></li>
+<li><strong>Clé partagée</strong> : dérivée de <span class="math inline">\(m\)</span> via fonction de hachage</li>
+</ul>
+</section>
+<section id="étape-3-décapsulation-de-clé-récepteur" class="level3">
+<h3 class="anchored" data-anchor-id="étape-3-décapsulation-de-clé-récepteur">Étape 3 : Décapsulation de clé (Récepteur)</h3>
+<p><strong>Le récepteur :</strong></p>
+<ol type="1">
+<li>Calcule <span class="math inline">\(v - s^T u\)</span></li>
+<li>Remarque que :</li>
+</ol>
+<p><span class="math display">\[v - s^T u = t^T r + e_2 + \text{encode}(m) - s^T(A^T r + e_1)\]</span></p>
+<p><span class="math display">\[= (As + e)^T r + e_2 + \text{encode}(m) - s^T A^T r - s^T e_1\]</span></p>
+<p><span class="math display">\[= \text{encode}(m) + \text{(petites erreurs)}\]</span></p>
+<ol start="3" type="1">
+<li><strong>Décode</strong> pour retrouver <span class="math inline">\(m\)</span> (si les erreurs sont assez petites)</li>
+<li>Dérive la <strong>clé partagée</strong> de <span class="math inline">\(m\)</span></li>
+</ol>
+</section>
+<section id="relation-avec-le-vrai-kyber-kem" class="level3">
+<h3 class="anchored" data-anchor-id="relation-avec-le-vrai-kyber-kem">Relation avec le vrai Kyber-KEM</h3>
+<p><strong>Dans le vrai Kyber :</strong></p>
+<ul>
+<li>Les polynômes vivent dans un anneau <strong>beaucoup plus grand</strong></li>
+<li>Il y a des <strong>vecteurs de polynômes</strong> (module de rang <span class="math inline">\(k = 2, 3\)</span> ou 4)</li>
+<li>Des <strong>termes de bruit</strong> petits sont ajoutés</li>
+<li>La structure globale suit le <strong>même schéma</strong> :
+<ul>
+<li>Clé publique de style <strong>module-LWE</strong> : <span class="math inline">\((A, t)\)</span></li>
+<li>Étape d’<strong>encapsulation</strong> utilisant un court <span class="math inline">\(r\)</span></li>
+<li>Étape de <strong>décapsulation</strong> qui annule le terme principal et récupère le message (modulo petit bruit)</li>
+</ul></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="flux-complet-de-kyber-kem" class="level2">
+<h2 class="anchored" data-anchor-id="flux-complet-de-kyber-kem">Flux complet de Kyber-KEM</h2>
+<section id="vue-densemble-du-protocole" class="level3">
+<h3 class="anchored" data-anchor-id="vue-densemble-du-protocole">Vue d’ensemble du protocole</h3>
+<pre class="mermaid"><code>sequenceDiagram
+    participant R as Récepteur
+    participant E as Émetteur
+    
+    Note over R: 1. KeyGen
+    R-&gt;&gt;R: Génère (sk, pk)
+    R-&gt;&gt;E: Envoie pk = (A, t)
+    
+    Note over E: 2. Encapsulation
+    E-&gt;&gt;E: Choisit m aléatoire
+    E-&gt;&gt;E: Calcule (u, v)
+    E-&gt;&gt;E: Dérive K = H(m)
+    E-&gt;&gt;R: Envoie c = (u, v)
+    
+    Note over R: 3. Decapsulation
+    R-&gt;&gt;R: Calcule m' = Decode(v - s^T u)
+    R-&gt;&gt;R: Dérive K' = H(m')
+    
+    Note over R,E: Si tout va bien : K = K'</code></pre>
+</section>
+<section id="garanties-de-sécurité" class="level3">
+<h3 class="anchored" data-anchor-id="garanties-de-sécurité">Garanties de sécurité</h3>
+<p><strong>Si D-MLWE est difficile :</strong></p>
+<ol type="1">
+<li>Un adversaire ne peut pas distinguer <span class="math inline">\((A, t)\)</span> d’aléatoire</li>
+<li>Un adversaire ne peut pas retrouver <span class="math inline">\(s\)</span> de <span class="math inline">\((A, t)\)</span></li>
+<li>Un adversaire ne peut pas retrouver <span class="math inline">\(m\)</span> de <span class="math inline">\((u, v)\)</span> sans <span class="math inline">\(s\)</span></li>
+<li>La clé partagée <span class="math inline">\(K\)</span> est indistinguable d’une clé aléatoire</li>
+</ol>
+<p>✅ <strong>Résultat :</strong> Sécurité <strong>IND-CCA2</strong> (la plus forte notion de sécurité pour KEM)</p>
+<hr>
+</section>
+</section>
+<section id="avantages-et-limitations-de-kyber" class="level2">
+<h2 class="anchored" data-anchor-id="avantages-et-limitations-de-kyber">Avantages et limitations de Kyber</h2>
+<section id="avantages" class="level3">
+<h3 class="anchored" data-anchor-id="avantages">Avantages</h3>
+<p>✅ <strong>Sécurité post-quantique :</strong></p>
+<p>Résistant aux attaques d’ordinateurs quantiques</p>
+<p>✅ <strong>Performances :</strong></p>
+<ul>
+<li>Clés relativement petites</li>
+<li>Calculs efficaces</li>
+<li>Peut être implémenté sur matériel limité</li>
+</ul>
+<p>✅ <strong>Fondements mathématiques solides :</strong></p>
+<p>Basé sur problèmes de réseaux bien étudiés</p>
+<p>✅ <strong>Standardisation :</strong></p>
+<p>Sélectionné par le NIST pour standardisation</p>
+</section>
+<section id="limitations-et-défis" class="level3">
+<h3 class="anchored" data-anchor-id="limitations-et-défis">Limitations et défis</h3>
+<p>⚠️ <strong>Tailles de clés :</strong></p>
+<p>Plus grandes que RSA/ECC classiques (mais acceptables)</p>
+<p>⚠️ <strong>Nouveauté :</strong></p>
+<ul>
+<li>Moins de temps pour analyse cryptanalytique</li>
+<li>Implémentations peuvent avoir des vulnérabilités</li>
+</ul>
+<p>⚠️ <strong>Attaques d’implémentation :</strong></p>
+<p>Nécessite des contre-mesures spécifiques</p>
+<p>⚠️ <strong>Probabilité d’échec :</strong></p>
+<p>Très faible mais non nulle (contrairement aux schémas classiques)</p>
+<hr>
+</section>
+</section>
+<section id="comparaison-avec-dautres-approches-post-quantiques" class="level2">
+<h2 class="anchored" data-anchor-id="comparaison-avec-dautres-approches-post-quantiques">Comparaison avec d’autres approches post-quantiques</h2>
+<section id="familles-de-cryptographie-post-quantique" class="level3">
+<h3 class="anchored" data-anchor-id="familles-de-cryptographie-post-quantique">Familles de cryptographie post-quantique</h3>
+<p><strong>1. Basés sur les réseaux (Lattice-based) :</strong></p>
+<ul>
+<li><strong>Kyber</strong> (KEM)</li>
+<li>Dilithium (signatures)</li>
+<li><strong>Avantages :</strong> Efficaces, bien étudiés</li>
+<li><strong>Kyber appartient à cette famille</strong></li>
+</ul>
+<p><strong>2. Basés sur les codes (Code-based) :</strong></p>
+<ul>
+<li>Classic McEliece</li>
+<li><strong>Avantages :</strong> Très mature</li>
+<li><strong>Inconvénients :</strong> Très grandes clés</li>
+</ul>
+<p><strong>3. Basés sur les hash (Hash-based) :</strong></p>
+<ul>
+<li>SPHINCS+</li>
+<li><strong>Avantages :</strong> Sécurité minimale bien comprise</li>
+<li><strong>Inconvénients :</strong> Signatures volumineuses</li>
+</ul>
+<p><strong>4. Basés sur les isogénies (Isogeny-based) :</strong></p>
+<ul>
+<li>SIKE (cassé en 2022)</li>
+<li><strong>Inconvénients :</strong> Moins mature, vulnérabilités découvertes</li>
+</ul>
+</section>
+<section id="pourquoi-kyber" class="level3">
+<h3 class="anchored" data-anchor-id="pourquoi-kyber">Pourquoi Kyber ?</h3>
+<p>📌 <strong>Kyber a été choisi par le NIST</strong> pour :</p>
+<ul>
+<li>Bon équilibre <strong>performance/sécurité</strong></li>
+<li>Flexibilité (plusieurs niveaux de sécurité)</li>
+<li>Implémentations efficaces possibles</li>
+<li>Fondements mathématiques robustes</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="concepts-mathématiques-à-maîtriser" class="level2">
+<h2 class="anchored" data-anchor-id="concepts-mathématiques-à-maîtriser">Concepts mathématiques à maîtriser</h2>
+<section id="algèbre" class="level3">
+<h3 class="anchored" data-anchor-id="algèbre">Algèbre</h3>
+<p><strong>Structures algébriques :</strong></p>
+<ul>
+<li>Anneaux de polynômes</li>
+<li>Modules</li>
+<li>Opérations modulo</li>
+</ul>
+<p><strong>Polynômes :</strong></p>
+<ul>
+<li>Addition, multiplication de polynômes</li>
+<li>Réduction modulo <span class="math inline">\(X^n + 1\)</span></li>
+<li>Coefficients modulo <span class="math inline">\(q\)</span></li>
+</ul>
+</section>
+<section id="théorie-des-réseaux" class="level3">
+<h3 class="anchored" data-anchor-id="théorie-des-réseaux">Théorie des réseaux</h3>
+<p><strong>Concepts fondamentaux :</strong></p>
+<ul>
+<li>Base d’un réseau</li>
+<li>Combinaisons linéaires entières</li>
+<li>SVP et CVP</li>
+<li>Difficulté NP et average-case</li>
+</ul>
+</section>
+<section id="cryptographie" class="level3">
+<h3 class="anchored" data-anchor-id="cryptographie">Cryptographie</h3>
+<p><strong>Primitives :</strong></p>
+<ul>
+<li>KEM (Key Encapsulation Mechanism)</li>
+<li>PKE (Public Key Encryption)</li>
+<li>Sécurité IND-CCA2</li>
+</ul>
+<p><strong>Fonctions de hachage :</strong></p>
+<ul>
+<li>SHA3-256, SHA3-512</li>
+<li>SHAKE256 (XOF)</li>
+</ul>
+</section>
+<section id="problèmes-de-difficulté" class="level3">
+<h3 class="anchored" data-anchor-id="problèmes-de-difficulté">Problèmes de difficulté</h3>
+<p><strong>LWE et variantes :</strong></p>
+<ul>
+<li>Learning With Errors</li>
+<li>Module-LWE</li>
+<li>Decision-MLWE</li>
+<li>Lien avec les réseaux</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="questions-dexamen-types" class="level2">
+<h2 class="anchored" data-anchor-id="questions-dexamen-types">Questions d’examen types</h2>
+<section id="questions-conceptuelles" class="level3">
+<h3 class="anchored" data-anchor-id="questions-conceptuelles">Questions conceptuelles</h3>
+<p><strong>Ordinateurs quantiques :</strong></p>
+<ul>
+<li>Différence entre bit et qubit</li>
+<li>Qu’est-ce que la superposition ?</li>
+<li>Qu’est-ce que l’intrication ?</li>
+<li>Quels sont les défis de l’informatique quantique ?</li>
+</ul>
+<p><strong>Menaces :</strong></p>
+<ul>
+<li>Pourquoi les ordinateurs quantiques menacent-ils la cryptographie actuelle ?</li>
+<li>Qu’est-ce que l’algorithme de Shor ?</li>
+<li>Quels systèmes sont affectés ?</li>
+</ul>
+<p><strong>Solutions post-quantiques :</strong></p>
+<ul>
+<li>Qu’est-ce que la cryptographie post-quantique ?</li>
+<li>Pourquoi les réseaux sont-ils intéressants ?</li>
+<li>Qu’est-ce que CRYSTALS-Kyber ?</li>
+</ul>
+</section>
+<section id="questions-techniques" class="level3">
+<h3 class="anchored" data-anchor-id="questions-techniques">Questions techniques</h3>
+<p><strong>LWE et MLWE :</strong></p>
+<ul>
+<li>Différence entre LWE et Learning Without Errors</li>
+<li>Qu’est-ce que MLWE ?</li>
+<li>Différence entre MLWE (search) et D-MLWE (decision)</li>
+</ul>
+<p><strong>Réseaux :</strong></p>
+<ul>
+<li>Définir un réseau euclidien</li>
+<li>Qu’est-ce que SVP et CVP ?</li>
+<li>Pourquoi sont-ils NP-difficiles ?</li>
+</ul>
+<p><strong>Kyber :</strong></p>
+<ul>
+<li>Structure de Kyber-KEM</li>
+<li>Rôle de Kyber-PKE</li>
+<li>Fonctions de hachage utilisées</li>
+</ul>
+</section>
+<section id="questions-pratiques" class="level3">
+<h3 class="anchored" data-anchor-id="questions-pratiques">Questions pratiques</h3>
+<p><strong>Sécurité :</strong></p>
+<ul>
+<li>Sur quoi repose la sécurité de Kyber ?</li>
+<li>Qu’est-ce que IND-CCA2 ?</li>
+<li>Quelles sont les attaques d’implémentation possibles ?</li>
+</ul>
+<p><strong>Crypto-agilité :</strong></p>
+<ul>
+<li>Pourquoi est-elle importante ?</li>
+<li>Recommandations du NIST</li>
+<li>Approche hybride classique/post-quantique</li>
+</ul>
+<p><strong>Exemple jouet :</strong></p>
+<ul>
+<li>Expliquer les étapes de KeyGen, Encapsulation, Decapsulation</li>
+<li>Pourquoi le déchiffrement peut-il échouer ?</li>
+<li>Comment récupère-t-on le message ?</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="recommandations-pratiques" class="level2">
+<h2 class="anchored" data-anchor-id="recommandations-pratiques">Recommandations pratiques</h2>
+<section id="pour-la-transition-post-quantique" class="level3">
+<h3 class="anchored" data-anchor-id="pour-la-transition-post-quantique">Pour la transition post-quantique</h3>
+<p><strong>1. Inventaire :</strong></p>
+<p>Identifier tous les systèmes utilisant la cryptographie asymétrique</p>
+<p><strong>2. Priorisation :</strong></p>
+<p>Prioriser les systèmes critiques pour la migration</p>
+<p><strong>3. Crypto-agilité :</strong></p>
+<p>Concevoir les systèmes pour permettre le changement d’algorithmes</p>
+<p><strong>4. Approche hybride :</strong></p>
+<p>Combiner algorithmes classiques et post-quantiques pendant la transition</p>
+<p><strong>5. Tests :</strong></p>
+<p>Tester les implémentations contre les attaques d’implémentation</p>
+</section>
+<section id="pour-limplémentation-de-kyber" class="level3">
+<h3 class="anchored" data-anchor-id="pour-limplémentation-de-kyber">Pour l’implémentation de Kyber</h3>
+<p><strong>Sécurité :</strong></p>
+<ul>
+<li>Implémenter des <strong>contre-mesures</strong> contre les canaux auxiliaires</li>
+<li>Utiliser des <strong>générateurs aléatoires cryptographiques</strong> de qualité</li>
+<li>Valider tous les <strong>paramètres</strong> en entrée</li>
+</ul>
+<p><strong>Performance :</strong></p>
+<ul>
+<li>Optimiser les opérations sur polynômes</li>
+<li>Utiliser des implémentations vectorisées si possible</li>
+<li>Considérer l’utilisation de matériel dédié</li>
+</ul>
+<p><strong>Conformité :</strong></p>
+<ul>
+<li>Suivre les <strong>spécifications NIST</strong></li>
+<li>Utiliser des implémentations <strong>certifiées</strong> si possible</li>
+<li>Rester à jour avec les recommandations</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="conclusion-générale" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion-générale">Conclusion générale</h2>
+<section id="résumé-des-points-clés" class="level3">
+<h3 class="anchored" data-anchor-id="résumé-des-points-clés">Résumé des points clés</h3>
+<p><strong>Menace quantique :</strong></p>
+<p>Les ordinateurs quantiques menacent la cryptographie actuelle basée sur factorisation et logarithmes discrets</p>
+<p><strong>Solution : Kyber-KEM :</strong></p>
+<ul>
+<li>Mécanisme d’encapsulation de clés <strong>post-quantique</strong></li>
+<li>Basé sur la difficulté de <strong>MLWE</strong> et <strong>D-MLWE</strong></li>
+<li>Fondé sur les <strong>problèmes de réseaux</strong> (NP-difficiles et average-case hard)</li>
+<li>Sécurité <strong>IND-CCA2</strong> prouvée</li>
+</ul>
+<p><strong>Transition :</strong></p>
+<ul>
+<li>Nécessite une <strong>crypto-agilité</strong></li>
+<li>Approche <strong>hybride</strong> recommandée</li>
+<li>Plus grande <strong>migration cryptographique</strong> de l’histoire</li>
+</ul>
+</section>
+<section id="perspectives-futures" class="level3">
+<h3 class="anchored" data-anchor-id="perspectives-futures">Perspectives futures</h3>
+<p><strong>Défis à venir :</strong></p>
+<ul>
+<li>Optimisation des implémentations</li>
+<li>Analyse cryptanalytique continue</li>
+<li>Standardisation complète</li>
+<li>Déploiement à grande échelle</li>
+</ul>
+<p><strong>Opportunités :</strong></p>
+<ul>
+<li>Nouvelles primitives cryptographiques</li>
+<li>Meilleure compréhension des mathématiques sous-jacentes</li>
+<li>Infrastructure plus robuste et agile</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="glossaire-des-termes-importants" class="level2">
+<h2 class="anchored" data-anchor-id="glossaire-des-termes-importants">Glossaire des termes importants</h2>
+<p><strong>AES :</strong> Advanced Encryption Standard - chiffrement symétrique</p>
+<p><strong>Average-case hard :</strong> Difficile en moyenne, pas seulement dans le pire cas</p>
+<p><strong>Ciphertext :</strong> Texte chiffré</p>
+<p><strong>CVP :</strong> Closest Vector Problem</p>
+<p><strong>D-MLWE :</strong> Decision Module Learning With Errors</p>
+<p><strong>Decoherence :</strong> Effondrement de la superposition quantique</p>
+<p><strong>Entanglement :</strong> Intrication quantique</p>
+<p><strong>IND-CCA2 :</strong> Indistinguishability under Adaptive Chosen Ciphertext Attack</p>
+<p><strong>KEM :</strong> Key Encapsulation Mechanism</p>
+<p><strong>Lattice :</strong> Réseau euclidien</p>
+<p><strong>LWE :</strong> Learning With Errors</p>
+<p><strong>MLWE :</strong> Module Learning With Errors</p>
+<p><strong>NP-hard :</strong> Non-deterministic Polynomial-time hard</p>
+<p><strong>PKE :</strong> Public Key Encryption</p>
+<p><strong>Plaintext awareness :</strong> Conscience du texte clair</p>
+<p><strong>Qubit :</strong> Quantum bit - unité quantique d’information</p>
+<p><strong>Superposition :</strong> État quantique combinant plusieurs états de base</p>
+<p><strong>SVP :</strong> Shortest Vector Problem</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

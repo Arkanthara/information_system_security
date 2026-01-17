@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Redirection… – ISS</title>
+<title>ch92 – ISS</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -284,7 +284,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Redirection…</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch1.html">Cours</a></li><li class="breadcrumb-item"><a href="./ch92.html">Cryptographie Quantique &amp; Post-Quantique - Support de révision oral</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -375,7 +375,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch92.html" class="sidebar-item-text sidebar-link">
+  <a href="./ch92.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Cryptographie Quantique &amp; Post-Quantique - Support de révision oral</span></a>
   </div>
 </li>
@@ -405,36 +405,387 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="index.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#cryptographie-quantique-post-quantique---support-de-révision-oral" id="toc-cryptographie-quantique-post-quantique---support-de-révision-oral" class="nav-link active" data-scroll-target="#cryptographie-quantique-post-quantique---support-de-révision-oral">Cryptographie Quantique &amp; Post-Quantique - Support de révision oral</a>
+  <ul class="collapse">
+  <li><a href="#le-problème-lapocalypse-cryptographique-quantique" id="toc-le-problème-lapocalypse-cryptographique-quantique" class="nav-link" data-scroll-target="#le-problème-lapocalypse-cryptographique-quantique">1. Le Problème : L’Apocalypse Cryptographique Quantique</a></li>
+  <li><a href="#qubit-vs-bit-la-différence-fondamentale" id="toc-qubit-vs-bit-la-différence-fondamentale" class="nav-link" data-scroll-target="#qubit-vs-bit-la-différence-fondamentale">2. Qubit vs Bit : La Différence Fondamentale</a>
+  <ul class="collapse">
+  <li><a href="#le-bit-classique-un-interrupteur" id="toc-le-bit-classique-un-interrupteur" class="nav-link" data-scroll-target="#le-bit-classique-un-interrupteur">Le Bit Classique : Un Interrupteur</a></li>
+  <li><a href="#le-qubit-quantique-une-sphère-de-possibilités" id="toc-le-qubit-quantique-une-sphère-de-possibilités" class="nav-link" data-scroll-target="#le-qubit-quantique-une-sphère-de-possibilités">Le Qubit Quantique : Une Sphère de Possibilités</a></li>
+  <li><a href="#lintrication-la-magie-quantique" id="toc-lintrication-la-magie-quantique" class="nav-link" data-scroll-target="#lintrication-la-magie-quantique">L’Intrication : La Magie Quantique</a></li>
+  </ul></li>
+  <li><a href="#pourquoi-nos-cryptosystèmes-sont-en-danger" id="toc-pourquoi-nos-cryptosystèmes-sont-en-danger" class="nav-link" data-scroll-target="#pourquoi-nos-cryptosystèmes-sont-en-danger">3. Pourquoi Nos Cryptosystèmes Sont en Danger</a>
+  <ul class="collapse">
+  <li><a href="#le-cauchemar-de-shor" id="toc-le-cauchemar-de-shor" class="nav-link" data-scroll-target="#le-cauchemar-de-shor">Le Cauchemar de Shor</a></li>
+  <li><a href="#le-calendrier-de-la-menace" id="toc-le-calendrier-de-la-menace" class="nav-link" data-scroll-target="#le-calendrier-de-la-menace">Le Calendrier de la Menace</a></li>
+  </ul></li>
+  <li><a href="#la-solution-la-cryptographie-post-quantique" id="toc-la-solution-la-cryptographie-post-quantique" class="nav-link" data-scroll-target="#la-solution-la-cryptographie-post-quantique">4. La Solution : La Cryptographie Post-Quantique</a>
+  <ul class="collapse">
+  <li><a href="#lidée-générale" id="toc-lidée-générale" class="nav-link" data-scroll-target="#lidée-générale">L’Idée Générale</a></li>
+  <li><a href="#les-5-familles-de-solutions" id="toc-les-5-familles-de-solutions" class="nav-link" data-scroll-target="#les-5-familles-de-solutions">Les 5 Familles de Solutions</a></li>
+  <li><a href="#pourquoi-kyber-réseaux-a-gagné" id="toc-pourquoi-kyber-réseaux-a-gagné" class="nav-link" data-scroll-target="#pourquoi-kyber-réseaux-a-gagné">Pourquoi Kyber (Réseaux) a Gagné ?</a></li>
+  </ul></li>
+  <li><a href="#lintuition-derrière-kyber-apprendre-avec-des-erreurs" id="toc-lintuition-derrière-kyber-apprendre-avec-des-erreurs" class="nav-link" data-scroll-target="#lintuition-derrière-kyber-apprendre-avec-des-erreurs">5. L’Intuition derrière Kyber : Apprendre avec des Erreurs</a>
+  <ul class="collapse">
+  <li><a href="#lanalogie-du-professeur-distrait" id="toc-lanalogie-du-professeur-distrait" class="nav-link" data-scroll-target="#lanalogie-du-professeur-distrait">L’Analogie du Professeur Distrait</a></li>
+  <li><a href="#la-formulation-mathématique" id="toc-la-formulation-mathématique" class="nav-link" data-scroll-target="#la-formulation-mathématique">La Formulation Mathématique</a></li>
+  </ul></li>
+  <li><a href="#comment-fonctionne-kyber-kem-schéma-simplifié" id="toc-comment-fonctionne-kyber-kem-schéma-simplifié" class="nav-link" data-scroll-target="#comment-fonctionne-kyber-kem-schéma-simplifié">6. Comment Fonctionne Kyber-KEM (Schéma Simplifié)</a>
+  <ul class="collapse">
+  <li><a href="#les-trois-personnages" id="toc-les-trois-personnages" class="nav-link" data-scroll-target="#les-trois-personnages">Les Trois Personnages</a></li>
+  <li><a href="#les-3-étapes" id="toc-les-3-étapes" class="nav-link" data-scroll-target="#les-3-étapes">Les 3 Étapes</a></li>
+  <li><a href="#lidée-clé-de-sécurité" id="toc-lidée-clé-de-sécurité" class="nav-link" data-scroll-target="#lidée-clé-de-sécurité">L’Idée Clé de Sécurité</a></li>
+  </ul></li>
+  <li><a href="#la-crypto-agilité-préparer-la-transition" id="toc-la-crypto-agilité-préparer-la-transition" class="nav-link" data-scroll-target="#la-crypto-agilité-préparer-la-transition">7. La Crypto-Agilité : Préparer la Transition</a>
+  <ul class="collapse">
+  <li><a href="#pourquoi-cest-essentiel" id="toc-pourquoi-cest-essentiel" class="nav-link" data-scroll-target="#pourquoi-cest-essentiel">Pourquoi C’est Essentiel ?</a></li>
+  <li><a href="#lapproche-hybride-recommandée" id="toc-lapproche-hybride-recommandée" class="nav-link" data-scroll-target="#lapproche-hybride-recommandée">L’Approche Hybride Recommandée</a></li>
+  </ul></li>
+  <li><a href="#les-défis-pratiques-de-kyber" id="toc-les-défis-pratiques-de-kyber" class="nav-link" data-scroll-target="#les-défis-pratiques-de-kyber">8. Les Défis Pratiques de Kyber</a>
+  <ul class="collapse">
+  <li><a href="#les-bonnes-nouvelles" id="toc-les-bonnes-nouvelles" class="nav-link" data-scroll-target="#les-bonnes-nouvelles">Les Bonnes Nouvelles ✅</a></li>
+  <li><a href="#les-défis" id="toc-les-défis" class="nav-link" data-scroll-target="#les-défis">Les Défis ⚠️</a></li>
+  <li><a href="#comparaison-des-tailles" id="toc-comparaison-des-tailles" class="nav-link" data-scroll-target="#comparaison-des-tailles">Comparaison des Tailles</a></li>
+  </ul></li>
+  <li><a href="#exemple-jouet-comprendre-avec-des-petits-nombres" id="toc-exemple-jouet-comprendre-avec-des-petits-nombres" class="nav-link" data-scroll-target="#exemple-jouet-comprendre-avec-des-petits-nombres">9. Exemple Jouet : Comprendre avec des Petits Nombres</a>
+  <ul class="collapse">
+  <li><a href="#notre-monde-miniature" id="toc-notre-monde-miniature" class="nav-link" data-scroll-target="#notre-monde-miniature">Notre Monde Miniature</a></li>
+  <li><a href="#la-magie-des-polynômes-circulants" id="toc-la-magie-des-polynômes-circulants" class="nav-link" data-scroll-target="#la-magie-des-polynômes-circulants">La Magie des Polynômes Circulants</a></li>
+  <li><a href="#pourquoi-cest-sûr-même-en-miniature" id="toc-pourquoi-cest-sûr-même-en-miniature" class="nav-link" data-scroll-target="#pourquoi-cest-sûr-même-en-miniature">Pourquoi C’est Sûr Même en Miniature ?</a></li>
+  </ul></li>
+  <li><a href="#fiche-de-révision-express" id="toc-fiche-de-révision-express" class="nav-link" data-scroll-target="#fiche-de-révision-express">10. Fiche de Révision Express</a></li>
+  <li><a href="#pour-loral-lhistoire-à-raconter" id="toc-pour-loral-lhistoire-à-raconter" class="nav-link" data-scroll-target="#pour-loral-lhistoire-à-raconter">11. Pour l’Oral : L’Histoire à Raconter</a></li>
+  <li><a href="#questions-fréquentes-à-lexamen" id="toc-questions-fréquentes-à-lexamen" class="nav-link" data-scroll-target="#questions-fréquentes-à-lexamen">12. Questions Fréquentes à l’Examen</a></li>
+  <li><a href="#le-mot-de-la-fin" id="toc-le-mot-de-la-fin" class="nav-link" data-scroll-target="#le-mot-de-la-fin">13. Le Mot de la Fin</a></li>
+  </ul></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="ch92.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+    </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch1.html">Cours</a></li><li class="breadcrumb-item"><a href="./ch92.html">Cryptographie Quantique &amp; Post-Quantique - Support de révision oral</a></li></ol></nav></header>
 
 
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Redirection…</h1>
+
+
+
+<section id="cryptographie-quantique-post-quantique---support-de-révision-oral" class="level1">
+<h1>Cryptographie Quantique &amp; Post-Quantique - Support de révision oral</h1>
+<section id="le-problème-lapocalypse-cryptographique-quantique" class="level2">
+<h2 class="anchored" data-anchor-id="le-problème-lapocalypse-cryptographique-quantique">1. Le Problème : L’Apocalypse Cryptographique Quantique</h2>
+<p><strong>Imaginez :</strong> Tous les cadenas du monde deviennent soudainement transparents. C’est ce qui pourrait arriver avec l’avènement des ordinateurs quantiques pour notre cryptographie actuelle.</p>
+<p><strong>Le danger concret :</strong> L’algorithme de <strong>Shor</strong> sur un ordinateur quantique peut casser : - RSA (basé sur la factorisation) - Diffie-Hellman (basé sur les logarithmes discrets) - ECC (courbes elliptiques)</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-
-
-
-<div class="quarto-title-meta">
-
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Concept Clé : Menace existentielle</strong> Un ordinateur quantique suffisamment puissant rendrait <strong>obsolète toute la cryptographie asymétrique</strong> actuelle, menaçant HTTPS, banques, communications sécurisées…</p>
+</div>
+</div>
+<pre class="mermaid"><code>flowchart TD
+    A[Ordinateur quantique&lt;br/&gt;suffisamment puissant] --&gt; B[Algorithme de Shor]
+    B --&gt; C[Casse RSA, ECC, DH]
+    C --&gt; D[Internet actuel&lt;br/&gt;devient vulnérable]
     
-  
+    style D fill:#ffcccc</code></pre>
+</section>
+<section id="qubit-vs-bit-la-différence-fondamentale" class="level2">
+<h2 class="anchored" data-anchor-id="qubit-vs-bit-la-différence-fondamentale">2. Qubit vs Bit : La Différence Fondamentale</h2>
+<section id="le-bit-classique-un-interrupteur" class="level3">
+<h3 class="anchored" data-anchor-id="le-bit-classique-un-interrupteur">Le Bit Classique : Un Interrupteur</h3>
+<ul>
+<li><strong>État</strong> : 0 <strong>OU</strong> 1</li>
+<li><strong>Comportement</strong> : Déterministe</li>
+<li><strong>Visualisation</strong> : Comme un interrupteur ON/OFF</li>
+</ul>
+</section>
+<section id="le-qubit-quantique-une-sphère-de-possibilités" class="level3">
+<h3 class="anchored" data-anchor-id="le-qubit-quantique-une-sphère-de-possibilités">Le Qubit Quantique : Une Sphère de Possibilités</h3>
+<ul>
+<li><strong>État</strong> : 0 <strong>ET</strong> 1 simultanément (superposition)</li>
+<li><strong>Comportement</strong> : Probabiliste jusqu’à la mesure</li>
+<li><strong>Visualisation</strong> : Comme une sphère de Bloch (flèche pouvant pointer n’importe où)</li>
+</ul>
+<pre class="mermaid"><code>flowchart LR
+    A[Bit classique] --&gt; B[0 ou 1&lt;br/&gt;Comme un interrupteur]
+    C[Qubit quantique] --&gt; D[Superposition 0 et 1&lt;br/&gt;Comme une sphère de possibilités]
     
-  </div>
-  
+    style B fill:#e6f3ff
+    style D fill:#e6ffe6</code></pre>
+</section>
+<section id="lintrication-la-magie-quantique" class="level3">
+<h3 class="anchored" data-anchor-id="lintrication-la-magie-quantique">L’Intrication : La Magie Quantique</h3>
+<p><strong>Phénomène contre-intuitif :</strong> Deux qubits intriqués restent connectés quelle que soit la distance. Mesurer l’un affecte instantanément l’autre.</p>
+<p><strong>Conséquence pratique :</strong> n qubits peuvent représenter 2ⁿ états simultanément → <strong>parallélisme quantique</strong>.</p>
+</section>
+</section>
+<section id="pourquoi-nos-cryptosystèmes-sont-en-danger" class="level2">
+<h2 class="anchored" data-anchor-id="pourquoi-nos-cryptosystèmes-sont-en-danger">3. Pourquoi Nos Cryptosystèmes Sont en Danger</h2>
+<section id="le-cauchemar-de-shor" class="level3">
+<h3 class="anchored" data-anchor-id="le-cauchemar-de-shor">Le Cauchemar de Shor</h3>
+<p><strong>Problème classique difficile :</strong> Factoriser 2048 bits prendrait des milliers d’années avec les meilleurs algorithmes classiques.</p>
+<p><strong>Solution quantique :</strong> L’algorithme de Shor résout ce problème en <strong>temps polynomial</strong> sur un ordinateur quantique.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Piège à éviter : Ne pas confondre les menaces</strong> - <strong>Shor</strong> menace l’<strong>asymétrique</strong> (RSA, ECC, DH) → <strong>apocalyptique</strong> - <strong>Grover</strong> menace le <strong>symétrique</strong> (AES) → gérable en doublant la taille des clés</p>
+</div>
+</div>
+</section>
+<section id="le-calendrier-de-la-menace" class="level3">
+<h3 class="anchored" data-anchor-id="le-calendrier-de-la-menace">Le Calendrier de la Menace</h3>
+<ol type="1">
+<li><strong>Aujourd’hui</strong> : Ordinateurs quantiques très limités (NISQ era)</li>
+<li><strong>Prochaines années</strong> : Avancées progressives</li>
+<li><strong>“Harvest now, decrypt later”</strong> : On capture déjà des données chiffrées pour les déchiffrer plus tard</li>
+</ol>
+</section>
+</section>
+<section id="la-solution-la-cryptographie-post-quantique" class="level2">
+<h2 class="anchored" data-anchor-id="la-solution-la-cryptographie-post-quantique">4. La Solution : La Cryptographie Post-Quantique</h2>
+<section id="lidée-générale" class="level3">
+<h3 class="anchored" data-anchor-id="lidée-générale">L’Idée Générale</h3>
+<p>Trouver des problèmes mathématiques <strong>difficiles même pour les ordinateurs quantiques</strong>.</p>
+</section>
+<section id="les-5-familles-de-solutions" class="level3">
+<h3 class="anchored" data-anchor-id="les-5-familles-de-solutions">Les 5 Familles de Solutions</h3>
+<pre class="mermaid"><code>flowchart TD
+    A[Cryptographie Post-Quantique] --&gt; B[Réseaux&lt;br/&gt;ex: Kyber]
+    A --&gt; C[Codes correcteurs&lt;br/&gt;ex: McEliece]
+    A --&gt; D[Multivarié&lt;br/&gt;équations polynomiales]
+    A --&gt; E[Hash-based&lt;br/&gt;ex: SPHINCS+]
+    A --&gt; F[Isogénies&lt;br/&gt;courbes elliptiques]
+    
+    style B fill:#ccffcc</code></pre>
+</section>
+<section id="pourquoi-kyber-réseaux-a-gagné" class="level3">
+<h3 class="anchored" data-anchor-id="pourquoi-kyber-réseaux-a-gagné">Pourquoi Kyber (Réseaux) a Gagné ?</h3>
+<p>Le NIST a choisi Kyber car : ✅ <strong>Équilibre</strong> sécurité/performance<br>
+✅ <strong>Clés raisonnables</strong> (1-2KB vs 1MB pour McEliece)<br>
+✅ <strong>Opérations efficaces</strong><br>
+✅ <strong>Bien étudié</strong> depuis 20+ ans</p>
+</section>
+</section>
+<section id="lintuition-derrière-kyber-apprendre-avec-des-erreurs" class="level2">
+<h2 class="anchored" data-anchor-id="lintuition-derrière-kyber-apprendre-avec-des-erreurs">5. L’Intuition derrière Kyber : Apprendre avec des Erreurs</h2>
+<section id="lanalogie-du-professeur-distrait" class="level3">
+<h3 class="anchored" data-anchor-id="lanalogie-du-professeur-distrait">L’Analogie du Professeur Distrait</h3>
+<p>Imaginez un professeur qui donne des équations pour trouver un secret <code>s</code>, mais qui <strong>ajoute de petites erreurs</strong> à chaque résultat.</p>
+<p><strong>Sans erreurs</strong> (facile) :</p>
+<pre><code>3s = 12  → s = 4
+2s = 8   → s = 4</code></pre>
+<p><strong>Avec erreurs</strong> (difficile) :</p>
+<pre><code>3s = 12 + 1  = 13
+2s = 8 - 2   = 6</code></pre>
+<p>Trouver <code>s</code> devient très difficile !</p>
+</section>
+<section id="la-formulation-mathématique" class="level3">
+<h3 class="anchored" data-anchor-id="la-formulation-mathématique">La Formulation Mathématique</h3>
+<p>Kyber utilise <strong>Module-Learning With Errors (MLWE)</strong> : - Secrets et erreurs sont des <strong>polynômes</strong> avec petits coefficients - Opérations modulo <code>q</code> et modulo <code>Xⁿ + 1</code> - Problème : distinguer <code>(A, As + e)</code> d’aléatoire</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Astuce mnémotechnique :</strong> - <strong>LWE</strong> = Learning With Errors (erreurs dans Z) - <strong>MLWE</strong> = Module-LWE (erreurs dans des modules sur anneaux de polynômes)</p>
+</div>
+</div>
+</section>
+</section>
+<section id="comment-fonctionne-kyber-kem-schéma-simplifié" class="level2">
+<h2 class="anchored" data-anchor-id="comment-fonctionne-kyber-kem-schéma-simplifié">6. Comment Fonctionne Kyber-KEM (Schéma Simplifié)</h2>
+<section id="les-trois-personnages" class="level3">
+<h3 class="anchored" data-anchor-id="les-trois-personnages">Les Trois Personnages</h3>
+<ul>
+<li><strong>Alice</strong> veut envoyer un secret à Bob</li>
+<li><strong>Bob</strong> génère une paire de clés</li>
+<li><strong>Eve</strong> l’attaquant quantique</li>
+</ul>
+</section>
+<section id="les-3-étapes" class="level3">
+<h3 class="anchored" data-anchor-id="les-3-étapes">Les 3 Étapes</h3>
+<pre class="mermaid"><code>sequenceDiagram
+    participant B as Bob
+    participant A as Alice
+    participant E as Eve (quantique)
+    
+    Note over B: 1. KeyGen
+    B-&gt;&gt;B: Génère (sk, pk)
+    B-&gt;&gt;A: Envoie pk
+    
+    Note over A: 2. Encapsulation
+    A-&gt;&gt;A: Calcule chiffré + clé
+    A-&gt;&gt;B: Envoie chiffré
+    
+    Note over B: 3. Decapsulation
+    B-&gt;&gt;B: Utilise sk pour retrouver la clé
+    
+    Note over E: Même avec un ordinateur quantique,&lt;br/&gt;Eve ne peut pas casser MLWE</code></pre>
+</section>
+<section id="lidée-clé-de-sécurité" class="level3">
+<h3 class="anchored" data-anchor-id="lidée-clé-de-sécurité">L’Idée Clé de Sécurité</h3>
+<p>Même si Eve intercepte <code>pk = (A, t = As + e)</code>, elle ne peut pas trouver <code>s</code> car : 1. <code>A</code> est aléatoire public 2. <code>e</code> est une petite erreur secrète 3. Sans <code>s</code>, impossible de déchiffrer</p>
+</section>
+</section>
+<section id="la-crypto-agilité-préparer-la-transition" class="level2">
+<h2 class="anchored" data-anchor-id="la-crypto-agilité-préparer-la-transition">7. La Crypto-Agilité : Préparer la Transition</h2>
+<section id="pourquoi-cest-essentiel" class="level3">
+<h3 class="anchored" data-anchor-id="pourquoi-cest-essentiel">Pourquoi C’est Essentiel ?</h3>
+<p>On ne sait pas <strong>quand</strong> les ordinateurs quantiques arriveront, ni <strong>quel</strong> algorithme post-quantique survivra aux analyses.</p>
+<p><strong>Solution :</strong> Construire des systèmes qui peuvent <strong>changer d’algorithme</strong> facilement.</p>
+</section>
+<section id="lapproche-hybride-recommandée" class="level3">
+<h3 class="anchored" data-anchor-id="lapproche-hybride-recommandée">L’Approche Hybride Recommandée</h3>
+<p><strong>Ne pas remplacer, mais combiner :</strong></p>
+<pre><code>Clé = RSA-2048 + Kyber-768</code></pre>
+<p><strong>Avantage :</strong> Cassé seulement si <strong>les deux</strong> sont cassés.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Recommandation NIST :</strong> Transition en 3 phases : 1. <strong>Hybride</strong> (classique + post-quantique) 2. <strong>Évaluation</strong> (surveillance des attaques) 3. <strong>Transition complète</strong> (si nécessaire)</p>
+</div>
+</div>
+</section>
+</section>
+<section id="les-défis-pratiques-de-kyber" class="level2">
+<h2 class="anchored" data-anchor-id="les-défis-pratiques-de-kyber">8. Les Défis Pratiques de Kyber</h2>
+<section id="les-bonnes-nouvelles" class="level3">
+<h3 class="anchored" data-anchor-id="les-bonnes-nouvelles">Les Bonnes Nouvelles ✅</h3>
+<ul>
+<li><strong>Performances</strong> : presque aussi rapide que RSA</li>
+<li><strong>Tailles</strong> : clés 1-2KB, chiffrés ~1KB</li>
+<li><strong>Standardisation</strong> : NIST, IETF en cours</li>
+</ul>
+</section>
+<section id="les-défis" class="level3">
+<h3 class="anchored" data-anchor-id="les-défis">Les Défis ⚠️</h3>
+<ol type="1">
+<li><strong>Nouveauté</strong> : moins de 10 ans d’analyse vs 40+ pour RSA</li>
+<li><strong>Implémentation</strong> : attaques par canaux auxiliaires possibles</li>
+<li><strong>Probabilité d’échec</strong> : très faible mais non nulle (contrairement à RSA)</li>
+<li><strong>Migration</strong> : mettre à jour toute l’infrastructure Internet</li>
+</ol>
+</section>
+<section id="comparaison-des-tailles" class="level3">
+<h3 class="anchored" data-anchor-id="comparaison-des-tailles">Comparaison des Tailles</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Algorithme</th>
+<th>Taille clé publique</th>
+<th>Taille signature</th>
+<th>Sécurité</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>RSA-2048</strong></td>
+<td>256 bytes</td>
+<td>256 bytes</td>
+<td>Classique</td>
+</tr>
+<tr class="even">
+<td><strong>Kyber-768</strong></td>
+<td>1184 bytes</td>
+<td>1088 bytes</td>
+<td>Post-quantique Niveau 3</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="exemple-jouet-comprendre-avec-des-petits-nombres" class="level2">
+<h2 class="anchored" data-anchor-id="exemple-jouet-comprendre-avec-des-petits-nombres">9. Exemple Jouet : Comprendre avec des Petits Nombres</h2>
+<section id="notre-monde-miniature" class="level3">
+<h3 class="anchored" data-anchor-id="notre-monde-miniature">Notre Monde Miniature</h3>
+<ul>
+<li><code>n = 4</code> (polynômes de degré &lt; 4)</li>
+<li><code>q = 17</code> (coefficients modulo 17)</li>
+<li>Secret <code>s = [1, 0, -1, 1]</code> (petits coefficients)</li>
+</ul>
+</section>
+<section id="la-magie-des-polynômes-circulants" class="level3">
+<h3 class="anchored" data-anchor-id="la-magie-des-polynômes-circulants">La Magie des Polynômes Circulants</h3>
+<p>Opération modulo <code>X⁴ + 1</code> : <code>X⁴ = -1</code>, <code>X⁵ = -X</code>, etc.</p>
+<p><strong>Exemple :</strong></p>
+<pre><code>(1 + X) * (1 - X) = 1 - X²
+Car X * (-X) = -X² et X⁴ = -1</code></pre>
+</section>
+<section id="pourquoi-cest-sûr-même-en-miniature" class="level3">
+<h3 class="anchored" data-anchor-id="pourquoi-cest-sûr-même-en-miniature">Pourquoi C’est Sûr Même en Miniature ?</h3>
+<p>Même avec nos petits nombres, résoudre MLWE reste difficile. Dans la vraie vie : - <code>n = 256</code> ou <code>512</code> - <code>q ≈ 2³²</code> - Matrices de polynômes, pas juste scalaires</p>
+</section>
+</section>
+<section id="fiche-de-révision-express" class="level2">
+<h2 class="anchored" data-anchor-id="fiche-de-révision-express">10. Fiche de Révision Express</h2>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>En 30 secondes pour l’oral :</strong></p>
+<ol type="1">
+<li><strong>Problème</strong> : Ordinateurs quantiques cassent RSA/ECC avec Shor</li>
+<li><strong>Solution</strong> : Cryptographie post-quantique basée sur problèmes difficiles même quantiques</li>
+<li><strong>Kyber</strong> : Algorithme gagnant du NIST, basé sur MLWE (réseaux)</li>
+<li><strong>Sécurité</strong> : Distinguer (A, As+e) d’aléatoire est difficile</li>
+<li><strong>Transition</strong> : Crypto-agilité + approche hybride</li>
+<li><strong>Statut</strong> : Standardisation en cours, migration massive à venir</li>
+</ol>
+</div>
+</div>
+</section>
+<section id="pour-loral-lhistoire-à-raconter" class="level2">
+<h2 class="anchored" data-anchor-id="pour-loral-lhistoire-à-raconter">11. Pour l’Oral : L’Histoire à Raconter</h2>
+<p>“Imaginez que toutes les serrures de Paris deviennent transparentes. C’est ce que ferait un ordinateur quantique à notre Internet. Heureusement, des mathématiciens ont trouvé des problèmes si complexes que même les ordinateurs quantiques peinent : comme deviner un secret dans des équations pleines de petites erreurs. C’est la base de Kyber, le futur standard de sécurité post-quantique choisi par le NIST.”</p>
+</section>
+<section id="questions-fréquentes-à-lexamen" class="level2">
+<h2 class="anchored" data-anchor-id="questions-fréquentes-à-lexamen">12. Questions Fréquentes à l’Examen</h2>
+<p><strong>Q : “Pourquoi RSA est vulnérable au quantique mais pas AES ?”</strong> R : “Shor utilise la transformée de Fourier quantique pour trouver des périodes, ce qui casse la factorisation. Grover donne seulement une racine carrée d’accélération pour la recherche, donc doubler la taille de clé AES suffit.”</p>
+<p><strong>Q : “Quand doit-on migrer vers le post-quantique ?”</strong> R : “Maintenant ! À cause du ‘harvest now, decrypt later’. Les données sensibles à longue durée de vie (secrets d’État, biométrie) sont déjà en danger.”</p>
+<p><strong>Q : “Kyber est-il parfait ?”</strong> R : “Non, c’est un compromis. Ses clés sont plus grosses que RSA, c’est un nouvel algorithme moins analysé, mais c’est le meilleur équilibre trouvé à ce jour.”</p>
+</section>
+<section id="le-mot-de-la-fin" class="level2">
+<h2 class="anchored" data-anchor-id="le-mot-de-la-fin">13. Le Mot de la Fin</h2>
+<p>La cryptographie post-quantique n’est pas de la science-fiction. C’est une <strong>nécessité pratique</strong> qui demande une <strong>transition planifiée</strong>. Kyber représente le début de cette nouvelle ère, mais la vigilance reste de mise : l’histoire de la cryptographie nous apprend que <strong>seul le temps révèle les vraies faiblesses</strong>.</p>
+<p><strong>En résumé :</strong> Nous vivons une révolution cryptographique aussi importante que le passage du DES à l’AES. Comprendre Kyber, c’est comprendre comment nous protégerons nos données dans le monde quantique à venir.</p>
 
 
-</header>
-
-
-<meta http-equiv="refresh" content="0; url=ch1.html">
-<p>Si vous n’êtes pas redirigés automatiquement,<br>
-<a href="ch1.html">cliquez ici pour aller au Cours</a>.</p>
-
-
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

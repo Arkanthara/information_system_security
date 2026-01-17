@@ -1,0 +1,2747 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.27">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>ch93 – ISS</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-4d9afe2b8d18ee9fa5d0d57b5ed4214d.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-96c1bb8b336142dcc39f931773fab1b9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-9ee82e006983bafa07c9ac29a901142c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-96c1bb8b336142dcc39f931773fab1b9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">ISS</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-langage" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="bi bi-globe" role="img">
+</i> 
+ <span class="menu-text">Langage</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-langage">    
+        <li>
+    <a class="dropdown-item" href="./../index.html">
+ <span class="dropdown-text">Anglais</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./index.html">
+ <span class="dropdown-text">Français</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch1.html">Cours</a></li><li class="breadcrumb-item"><a href="./ch93.html">Cryptographie Quantique et Post-Quantique</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Cours</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Notions de base en cryptographie</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cryptographie symétrique</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cryptographie Asymétrique (à Clés Publiques)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Fonctions de Hachage Cryptographiques et MACs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Signatures Digitales</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Authentification</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Protocoles d’Établissement de Clés (KEP)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch9.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tiers de Confiance et Certification (Trusted Third Parties - TTP)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch91.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Document de Révision : Cryptographie Quantique et Post-Quantique</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch92.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cryptographie Quantique &amp; Post-Quantique - Support de révision oral</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch93.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Cryptographie Quantique et Post-Quantique</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./exercices.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercices</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./presentations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Présentations</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#cryptographie-quantique-et-post-quantique" id="toc-cryptographie-quantique-et-post-quantique" class="nav-link active" data-scroll-target="#cryptographie-quantique-et-post-quantique">Cryptographie Quantique et Post-Quantique</a>
+  <ul class="collapse">
+  <li><a href="#introduction-et-contexte" id="toc-introduction-et-contexte" class="nav-link" data-scroll-target="#introduction-et-contexte">Introduction et Contexte</a>
+  <ul class="collapse">
+  <li><a href="#vue-densemble-du-domaine" id="toc-vue-densemble-du-domaine" class="nav-link" data-scroll-target="#vue-densemble-du-domaine">Vue d’ensemble du domaine</a></li>
+  <li><a href="#problématique-centrale" id="toc-problématique-centrale" class="nav-link" data-scroll-target="#problématique-centrale">Problématique centrale</a></li>
+  <li><a href="#notations-générales-du-document" id="toc-notations-générales-du-document" class="nav-link" data-scroll-target="#notations-générales-du-document">Notations générales du document</a></li>
+  </ul></li>
+  <li><a href="#fondements-de-linformatique-quantique" id="toc-fondements-de-linformatique-quantique" class="nav-link" data-scroll-target="#fondements-de-linformatique-quantique">Fondements de l’Informatique Quantique</a>
+  <ul class="collapse">
+  <li><a href="#informatique-classique-vs-quantique" id="toc-informatique-classique-vs-quantique" class="nav-link" data-scroll-target="#informatique-classique-vs-quantique">Informatique Classique vs Quantique</a></li>
+  <li><a href="#défis-de-linformatique-quantique" id="toc-défis-de-linformatique-quantique" class="nav-link" data-scroll-target="#défis-de-linformatique-quantique">Défis de l’Informatique Quantique</a></li>
+  <li><a href="#état-de-lart-et-perspectives" id="toc-état-de-lart-et-perspectives" class="nav-link" data-scroll-target="#état-de-lart-et-perspectives">État de l’art et perspectives</a></li>
+  </ul></li>
+  <li><a href="#menaces-quantiques-pour-la-cryptographie" id="toc-menaces-quantiques-pour-la-cryptographie" class="nav-link" data-scroll-target="#menaces-quantiques-pour-la-cryptographie">Menaces Quantiques pour la Cryptographie</a>
+  <ul class="collapse">
+  <li><a href="#algorithmes-cryptographiques-menacés" id="toc-algorithmes-cryptographiques-menacés" class="nav-link" data-scroll-target="#algorithmes-cryptographiques-menacés">Algorithmes Cryptographiques Menacés</a></li>
+  <li><a href="#algorithme-de-shor-menace-principale" id="toc-algorithme-de-shor-menace-principale" class="nav-link" data-scroll-target="#algorithme-de-shor-menace-principale">Algorithme de Shor : Menace Principale</a></li>
+  <li><a href="#scénario-apocalypse-quantique" id="toc-scénario-apocalypse-quantique" class="nav-link" data-scroll-target="#scénario-apocalypse-quantique">Scénario “Apocalypse Quantique”</a></li>
+  <li><a href="#algorithme-de-grover-et-impact-limité" id="toc-algorithme-de-grover-et-impact-limité" class="nav-link" data-scroll-target="#algorithme-de-grover-et-impact-limité">Algorithme de Grover et Impact Limité</a></li>
+  </ul></li>
+  <li><a href="#fondements-mathématiques" id="toc-fondements-mathématiques" class="nav-link" data-scroll-target="#fondements-mathématiques">Fondements Mathématiques</a>
+  <ul class="collapse">
+  <li><a href="#notations-et-structures-algébriques" id="toc-notations-et-structures-algébriques" class="nav-link" data-scroll-target="#notations-et-structures-algébriques">Notations et Structures Algébriques</a></li>
+  <li><a href="#normes-et-polynômes-petits" id="toc-normes-et-polynômes-petits" class="nav-link" data-scroll-target="#normes-et-polynômes-petits">Normes et Polynômes “Petits”</a></li>
+  <li><a href="#problèmes-lwe-et-variantes" id="toc-problèmes-lwe-et-variantes" class="nav-link" data-scroll-target="#problèmes-lwe-et-variantes">Problèmes LWE et Variantes</a></li>
+  <li><a href="#réseaux-euclidiens-lattices" id="toc-réseaux-euclidiens-lattices" class="nav-link" data-scroll-target="#réseaux-euclidiens-lattices">Réseaux Euclidiens (Lattices)</a></li>
+  </ul></li>
+  <li><a href="#crystals-kyber-architecture-et-fonctionnement" id="toc-crystals-kyber-architecture-et-fonctionnement" class="nav-link" data-scroll-target="#crystals-kyber-architecture-et-fonctionnement">CRYSTALS-Kyber : Architecture et Fonctionnement</a>
+  <ul class="collapse">
+  <li><a href="#vue-densemble-de-kyber" id="toc-vue-densemble-de-kyber" class="nav-link" data-scroll-target="#vue-densemble-de-kyber">Vue d’Ensemble de Kyber</a></li>
+  <li><a href="#kyber-pke-chiffrement-de-base" id="toc-kyber-pke-chiffrement-de-base" class="nav-link" data-scroll-target="#kyber-pke-chiffrement-de-base">Kyber-PKE : Chiffrement de Base</a></li>
+  <li><a href="#kyber-kem-mécanisme-complet" id="toc-kyber-kem-mécanisme-complet" class="nav-link" data-scroll-target="#kyber-kem-mécanisme-complet">Kyber-KEM : Mécanisme Complet</a></li>
+  <li><a href="#paramètres-de-kyber" id="toc-paramètres-de-kyber" class="nav-link" data-scroll-target="#paramètres-de-kyber">Paramètres de Kyber</a></li>
+  <li><a href="#sécurité-de-kyber-kem" id="toc-sécurité-de-kyber-kem" class="nav-link" data-scroll-target="#sécurité-de-kyber-kem">Sécurité de Kyber-KEM</a></li>
+  <li><a href="#attaques-dimplémentation" id="toc-attaques-dimplémentation" class="nav-link" data-scroll-target="#attaques-dimplémentation">Attaques d’Implémentation</a></li>
+  </ul></li>
+  <li><a href="#aspects-pratiques-et-transition" id="toc-aspects-pratiques-et-transition" class="nav-link" data-scroll-target="#aspects-pratiques-et-transition">Aspects Pratiques et Transition</a>
+  <ul class="collapse">
+  <li><a href="#crypto-agilité" id="toc-crypto-agilité" class="nav-link" data-scroll-target="#crypto-agilité">Crypto-Agilité</a></li>
+  <li><a href="#recommandations-du-nist" id="toc-recommandations-du-nist" class="nav-link" data-scroll-target="#recommandations-du-nist">Recommandations du NIST</a></li>
+  <li><a href="#implémentation-de-kyber" id="toc-implémentation-de-kyber" class="nav-link" data-scroll-target="#implémentation-de-kyber">Implémentation de Kyber</a></li>
+  <li><a href="#comparaisons-avec-autres-approches-post-quantiques" id="toc-comparaisons-avec-autres-approches-post-quantiques" class="nav-link" data-scroll-target="#comparaisons-avec-autres-approches-post-quantiques">Comparaisons avec Autres Approches Post-Quantiques</a></li>
+  </ul></li>
+  <li><a href="#exemple-pédagogique-kyber-jouet" id="toc-exemple-pédagogique-kyber-jouet" class="nav-link" data-scroll-target="#exemple-pédagogique-kyber-jouet">Exemple Pédagogique : Kyber Jouet</a>
+  <ul class="collapse">
+  <li><a href="#avertissement-important" id="toc-avertissement-important" class="nav-link" data-scroll-target="#avertissement-important">Avertissement Important</a></li>
+  <li><a href="#configuration-de-lanneau-jouet" id="toc-configuration-de-lanneau-jouet" class="nav-link" data-scroll-target="#configuration-de-lanneau-jouet">Configuration de l’Anneau Jouet</a></li>
+  <li><a href="#étape-1-génération-de-clés-récepteur" id="toc-étape-1-génération-de-clés-récepteur" class="nav-link" data-scroll-target="#étape-1-génération-de-clés-récepteur">Étape 1 : Génération de Clés (Récepteur)</a></li>
+  <li><a href="#étape-2-encapsulation-émetteur" id="toc-étape-2-encapsulation-émetteur" class="nav-link" data-scroll-target="#étape-2-encapsulation-émetteur">Étape 2 : Encapsulation (Émetteur)</a></li>
+  <li><a href="#étape-3-décapsulation-récepteur" id="toc-étape-3-décapsulation-récepteur" class="nav-link" data-scroll-target="#étape-3-décapsulation-récepteur">Étape 3 : Décapsulation (Récepteur)</a></li>
+  <li><a href="#analyse-du-mécanisme" id="toc-analyse-du-mécanisme" class="nav-link" data-scroll-target="#analyse-du-mécanisme">Analyse du Mécanisme</a></li>
+  <li><a href="#relation-avec-le-vrai-kyber-kem" id="toc-relation-avec-le-vrai-kyber-kem" class="nav-link" data-scroll-target="#relation-avec-le-vrai-kyber-kem">Relation avec le Vrai Kyber-KEM</a></li>
+  </ul></li>
+  <li><a href="#aide-mémoire-et-synthèse" id="toc-aide-mémoire-et-synthèse" class="nav-link" data-scroll-target="#aide-mémoire-et-synthèse">Aide-Mémoire et Synthèse</a>
+  <ul class="collapse">
+  <li><a href="#concepts-clés-à-retenir" id="toc-concepts-clés-à-retenir" class="nav-link" data-scroll-target="#concepts-clés-à-retenir">Concepts Clés à Retenir</a></li>
+  <li><a href="#formules-essentielles" id="toc-formules-essentielles" class="nav-link" data-scroll-target="#formules-essentielles">Formules Essentielles</a></li>
+  <li><a href="#questions-types-dexamen" id="toc-questions-types-dexamen" class="nav-link" data-scroll-target="#questions-types-dexamen">Questions Types d’Examen</a></li>
+  <li><a href="#tableaux-récapitulatifs" id="toc-tableaux-récapitulatifs" class="nav-link" data-scroll-target="#tableaux-récapitulatifs">Tableaux Récapitulatifs</a></li>
+  <li><a href="#recommandations-pratiques" id="toc-recommandations-pratiques" class="nav-link" data-scroll-target="#recommandations-pratiques">Recommandations Pratiques</a></li>
+  <li><a href="#glossaire" id="toc-glossaire" class="nav-link" data-scroll-target="#glossaire">Glossaire</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="ch93.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch1.html">Cours</a></li><li class="breadcrumb-item"><a href="./ch93.html">Cryptographie Quantique et Post-Quantique</a></li></ol></nav></header>
+
+
+
+
+
+<section id="cryptographie-quantique-et-post-quantique" class="level1">
+<h1>Cryptographie Quantique et Post-Quantique</h1>
+<section id="introduction-et-contexte" class="level2">
+<h2 class="anchored" data-anchor-id="introduction-et-contexte">Introduction et Contexte</h2>
+<section id="vue-densemble-du-domaine" class="level3">
+<h3 class="anchored" data-anchor-id="vue-densemble-du-domaine">Vue d’ensemble du domaine</h3>
+<p>La cryptographie post-quantique représente un défi majeur pour la sécurité informatique moderne. Ce cours aborde les <strong>menaces posées par l’informatique quantique</strong> à la cryptographie actuelle et les <strong>solutions post-quantiques</strong> développées pour y faire face, en particulier l’algorithme <strong>CRYSTALS-Kyber</strong>.</p>
+</section>
+<section id="problématique-centrale" class="level3">
+<h3 class="anchored" data-anchor-id="problématique-centrale">Problématique centrale</h3>
+<p>L’avènement des ordinateurs quantiques menace de compromettre la sécurité des systèmes cryptographiques actuels. Cette situation nécessite une transition urgente vers des algorithmes <strong>résistants aux attaques quantiques</strong>.</p>
+<section id="enjeux-de-sécurité" class="level4">
+<h4 class="anchored" data-anchor-id="enjeux-de-sécurité">Enjeux de sécurité</h4>
+<p>Les systèmes cryptographiques asymétriques actuels (RSA, ECC) reposent sur des problèmes mathématiques difficiles pour les ordinateurs classiques mais résolus efficacement par les ordinateurs quantiques.</p>
+</section>
+<section id="ampleur-de-la-transition" class="level4">
+<h4 class="anchored" data-anchor-id="ampleur-de-la-transition">Ampleur de la transition</h4>
+<p>La migration vers la cryptographie post-quantique constituera probablement la <strong>plus grande transition cryptographique de l’histoire</strong>, affectant :</p>
+<ul>
+<li>L’infrastructure Internet mondiale (HTTPS, TLS)</li>
+<li>Les systèmes bancaires et financiers</li>
+<li>Les communications gouvernementales</li>
+<li>Les dispositifs IoT et embarqués</li>
+<li>Les signatures numériques et certificats</li>
+</ul>
+</section>
+</section>
+<section id="notations-générales-du-document" class="level3">
+<h3 class="anchored" data-anchor-id="notations-générales-du-document">Notations générales du document</h3>
+<section id="symboles-mathématiques" class="level4">
+<h4 class="anchored" data-anchor-id="symboles-mathématiques">Symboles mathématiques</h4>
+<ul>
+<li><span class="math inline">\(\mathbb{Z}\)</span> : ensemble des entiers</li>
+<li><span class="math inline">\(\mathbb{R}\)</span> : ensemble des nombres réels</li>
+<li><span class="math inline">\(\mathbb{Z}_q\)</span> : entiers modulo <span class="math inline">\(q\)</span></li>
+<li><span class="math inline">\(\perp\)</span> : indépendance</li>
+<li><span class="math inline">\(\equiv\)</span> : équivalence ou congruence</li>
+</ul>
+</section>
+<section id="conventions-de-notation" class="level4">
+<h4 class="anchored" data-anchor-id="conventions-de-notation">Conventions de notation</h4>
+<ul>
+<li><strong>Majuscules</strong> : matrices ou ensembles (<span class="math inline">\(A\)</span>, <span class="math inline">\(\mathcal{X}\)</span>)</li>
+<li><strong>Minuscules</strong> : vecteurs ou scalaires (<span class="math inline">\(s\)</span>, <span class="math inline">\(e\)</span>)</li>
+<li><strong>Gras</strong> : vecteurs (<span class="math inline">\(\mathbf{s}\)</span>, <span class="math inline">\(\mathbf{e}\)</span>) (optionnel)</li>
+</ul>
+</section>
+</section>
+</section>
+<section id="fondements-de-linformatique-quantique" class="level2">
+<h2 class="anchored" data-anchor-id="fondements-de-linformatique-quantique">Fondements de l’Informatique Quantique</h2>
+<section id="informatique-classique-vs-quantique" class="level3">
+<h3 class="anchored" data-anchor-id="informatique-classique-vs-quantique">Informatique Classique vs Quantique</h3>
+<section id="architecture-des-ordinateurs-classiques" class="level4">
+<h4 class="anchored" data-anchor-id="architecture-des-ordinateurs-classiques">Architecture des ordinateurs classiques</h4>
+<section id="unité-de-base-le-bit" class="level5">
+<h5 class="anchored" data-anchor-id="unité-de-base-le-bit">Unité de base : le bit</h5>
+<p><strong>Définition :</strong> Un <strong>bit</strong> (binary digit) est l’unité fondamentale d’information dans un ordinateur classique.</p>
+<p><strong>Caractéristiques :</strong> - Valeurs possibles : <strong>0 ou 1</strong> uniquement - Nombre <strong>fini</strong> d’états discrets - États physiques distingués par des propriétés <strong>électriques ou magnétiques</strong></p>
+</section>
+<section id="opérations-logiques" class="level5">
+<h5 class="anchored" data-anchor-id="opérations-logiques">Opérations logiques</h5>
+<p>Les opérations sont effectuées via des <strong>portes logiques</strong> (AND, OR, NOT, XOR, etc.) qui manipulent les bits de manière déterministe.</p>
+</section>
+<section id="traitement-de-linformation" class="level5">
+<h5 class="anchored" data-anchor-id="traitement-de-linformation">Traitement de l’information</h5>
+<p>Pour <span class="math inline">\(n\)</span> bits, il existe <span class="math inline">\(2^n\)</span> configurations possibles, mais le système ne peut être que dans <strong>une seule</strong> de ces configurations à un instant donné.</p>
+</section>
+</section>
+<section id="architecture-des-ordinateurs-quantiques" class="level4">
+<h4 class="anchored" data-anchor-id="architecture-des-ordinateurs-quantiques">Architecture des ordinateurs quantiques</h4>
+<section id="unité-fondamentale-le-qubit" class="level5">
+<h5 class="anchored" data-anchor-id="unité-fondamentale-le-qubit">Unité fondamentale : le qubit</h5>
+<p><strong>Définition :</strong> Un <strong>qubit</strong> (quantum bit) est un système quantique à deux niveaux qui peut exister dans une superposition de ses états de base.</p>
+<p><strong>Représentation mathématique :</strong> <span class="math display">\[|\psi\rangle = \alpha|0\rangle + \beta|1\rangle\]</span></p>
+<p>où <span class="math inline">\(\alpha, \beta \in \mathbb{C}\)</span> avec <span class="math inline">\(|\alpha|^2 + |\beta|^2 = 1\)</span>.</p>
+</section>
+<section id="propriétés-quantiques-fondamentales" class="level5">
+<h5 class="anchored" data-anchor-id="propriétés-quantiques-fondamentales">Propriétés quantiques fondamentales</h5>
+<p><strong>Propriété 1 : Superposition</strong></p>
+<p>Un qubit peut exister dans un <strong>nombre infini d’états</strong> correspondant à des superpositions linéaires de ses états de base <span class="math inline">\(|0\rangle\)</span> et <span class="math inline">\(|1\rangle\)</span>.</p>
+<p><strong>Conséquence :</strong> - Avant la mesure : le qubit est dans une superposition - Lors de la <strong>mesure</strong> : le qubit <strong>s’effondre</strong> vers l’un des états de base - Ce phénomène est appelé <strong>décoherence</strong></p>
+<p><strong>Propriété 2 : Intrication (Entanglement)</strong></p>
+<p><strong>Définition :</strong> Des qubits sont <strong>intriqués</strong> lorsque l’état de l’un ne peut être décrit indépendamment de l’état des autres.</p>
+<p><strong>Pour un système de <span class="math inline">\(n\)</span> qubits intriqués :</strong> - Espace d’états : <span class="math inline">\(2^n\)</span> états de base - Croissance <strong>exponentielle</strong> avec <span class="math inline">\(n\)</span> - Un système de 300 qubits aurait plus d’états que d’atomes dans l’univers observable</p>
+</section>
+<section id="parallélisme-quantique" class="level5">
+<h5 class="anchored" data-anchor-id="parallélisme-quantique">Parallélisme quantique</h5>
+<p><strong>Concept fondamental :</strong> Un ordinateur quantique peut opérer sur <strong>tous les états de base simultanément</strong> grâce à la superposition.</p>
+<p><strong>Exemple :</strong> Avec 10 qubits en superposition, une opération quantique agit simultanément sur <span class="math inline">\(2^{10} = 1024\)</span> états.</p>
+<p><strong>Limitation importante :</strong> Bien que le calcul soit effectué sur tous les états, la mesure ne donne qu’<strong>un seul résultat</strong>. Des algorithmes spéciaux (comme ceux de Shor et Grover) exploitent des interférences quantiques pour amplifier les bonnes réponses.</p>
+</section>
+</section>
+<section id="différence-fondamentale" class="level4">
+<h4 class="anchored" data-anchor-id="différence-fondamentale">Différence fondamentale</h4>
+<section id="représentation-de-linformation" class="level5">
+<h5 class="anchored" data-anchor-id="représentation-de-linformation">Représentation de l’information</h5>
+<p><strong>Point clé :</strong> La différence principale entre informatique classique et quantique réside dans la <strong>représentation de l’information</strong> et non dans la vitesse brute de calcul.</p>
+</section>
+<section id="inspiration-physique" class="level5">
+<h5 class="anchored" data-anchor-id="inspiration-physique">Inspiration physique</h5>
+<p>L’informatique quantique s’inspire du <strong>comportement des particules quantiques</strong> à l’échelle atomique et subatomique.</p>
+</section>
+<section id="nécessité-dun-matériel-quantique" class="level5">
+<h5 class="anchored" data-anchor-id="nécessité-dun-matériel-quantique">Nécessité d’un matériel quantique</h5>
+<p><strong>Important :</strong> Un ordinateur quantique <strong>ne peut pas être simulé efficacement</strong> sur un ordinateur classique pour des problèmes non triviaux, en raison de la croissance exponentielle de l’espace d’états.</p>
+</section>
+</section>
+</section>
+<section id="défis-de-linformatique-quantique" class="level3">
+<h3 class="anchored" data-anchor-id="défis-de-linformatique-quantique">Défis de l’Informatique Quantique</h3>
+<section id="défi-1-effondrement-quantique-collapsing" class="level4">
+<h4 class="anchored" data-anchor-id="défi-1-effondrement-quantique-collapsing">Défi 1 : Effondrement quantique (Collapsing)</h4>
+<section id="problème-de-la-mesure" class="level5">
+<h5 class="anchored" data-anchor-id="problème-de-la-mesure">Problème de la mesure</h5>
+<p><strong>Nature du défi :</strong> Le qubit perd sa propriété de <strong>superposition</strong> lors de la mesure, s’effondrant vers un état classique.</p>
+</section>
+<section id="implications-algorithmiques" class="level5">
+<h5 class="anchored" data-anchor-id="implications-algorithmiques">Implications algorithmiques</h5>
+<p><strong>Conséquence pratique :</strong> - Les mesures doivent être soigneusement <strong>planifiées</strong> dans les algorithmes - On ne peut pas “observer” l’état intermédiaire d’un calcul sans le détruire - Nécessite des techniques comme la <strong>correction d’erreurs quantiques</strong></p>
+</section>
+<section id="stratégies-de-gestion" class="level5">
+<h5 class="anchored" data-anchor-id="stratégies-de-gestion">Stratégies de gestion</h5>
+<p>Les algorithmes quantiques sont conçus pour : - Minimiser le nombre de mesures - Utiliser des interférences quantiques pour amplifier les bonnes réponses - Mesurer uniquement à la fin du calcul</p>
+</section>
+</section>
+<section id="défi-2-sensibilité-environnementale" class="level4">
+<h4 class="anchored" data-anchor-id="défi-2-sensibilité-environnementale">Défi 2 : Sensibilité environnementale</h4>
+<section id="nature-de-la-fragilité" class="level5">
+<h5 class="anchored" data-anchor-id="nature-de-la-fragilité">Nature de la fragilité</h5>
+<p><strong>Problème :</strong> Les systèmes quantiques sont extrêmement <strong>sensibles</strong> à leur environnement : - Vibrations mécaniques - Rayonnement électromagnétique - Fluctuations thermiques - Interactions avec l’environnement (décohérence)</p>
+</section>
+<section id="exigences-infrastructurelles" class="level5">
+<h5 class="anchored" data-anchor-id="exigences-infrastructurelles">Exigences infrastructurelles</h5>
+<p><strong>Conditions nécessaires :</strong> - <strong>Températures cryogéniques</strong> : souvent près du zéro absolu (∼15 mK pour les qubits supraconducteurs) - <strong>Isolation électromagnétique</strong> : blindage contre les interférences - <strong>Vide poussé</strong> : pour certaines technologies - <strong>Stabilité mécanique</strong> : tables anti-vibrations</p>
+</section>
+<section id="temps-de-cohérence" class="level5">
+<h5 class="anchored" data-anchor-id="temps-de-cohérence">Temps de cohérence</h5>
+<p><strong>Limitation temporelle :</strong> Les qubits ne maintiennent leur état quantique que pendant un temps limité (temps de cohérence), typiquement : - Qubits supraconducteurs : 10-100 μs - Ions piégés : secondes à minutes - Qubits topologiques (théoriques) : potentiellement beaucoup plus long</p>
+</section>
+</section>
+<section id="défi-3-architecture-des-portes-logiques" class="level4">
+<h4 class="anchored" data-anchor-id="défi-3-architecture-des-portes-logiques">Défi 3 : Architecture des portes logiques</h4>
+<section id="distinction-théorique-vs-physique" class="level5">
+<h5 class="anchored" data-anchor-id="distinction-théorique-vs-physique">Distinction théorique vs physique</h5>
+<p><strong>Portes quantiques logiques :</strong> - Opérations théoriques parfaites - Décrites mathématiquement par des matrices unitaires - Exemples : Hadamard, CNOT, Toffoli</p>
+<p><strong>Portes quantiques physiques :</strong> - Implémentation réelle avec du matériel - Soumises aux erreurs et au bruit - Fidélité limitée (typiquement 99-99.9%)</p>
+</section>
+<section id="impact-sur-les-performances" class="level5">
+<h5 class="anchored" data-anchor-id="impact-sur-les-performances">Impact sur les performances</h5>
+<p><strong>Conséquences :</strong> - Nécessité de <strong>correction d’erreurs quantiques</strong> - Overhead important : besoin de nombreux qubits physiques pour un qubit logique - Influence directe sur la <strong>profondeur des circuits</strong> réalisables</p>
+</section>
+<section id="overhead-de-correction-derreurs" class="level5">
+<h5 class="anchored" data-anchor-id="overhead-de-correction-derreurs">Overhead de correction d’erreurs</h5>
+<p>Pour exécuter des algorithmes complexes comme Shor, on estime qu’il faut : - Des milliers de qubits logiques - Des millions de qubits physiques (avec correction d’erreurs) - Actuellement, les systèmes ont quelques centaines de qubits physiques</p>
+</section>
+</section>
+<section id="défi-4-translation-dalgorithmes" class="level4">
+<h4 class="anchored" data-anchor-id="défi-4-translation-dalgorithmes">Défi 4 : Translation d’algorithmes</h4>
+<section id="non-transférabilité-directe" class="level5">
+<h5 class="anchored" data-anchor-id="non-transférabilité-directe">Non-transférabilité directe</h5>
+<p><strong>Constat important :</strong> Les algorithmes classiques ne peuvent généralement <strong>pas être traduits directement</strong> en algorithmes quantiques.</p>
+</section>
+<section id="exemple-aes" class="level5">
+<h5 class="anchored" data-anchor-id="exemple-aes">Exemple : AES</h5>
+<p><strong>Advanced Encryption Standard (AES) :</strong> - Translation directe <strong>non faisable</strong> efficacement - Nécessite une <strong>refonte complète</strong> de l’approche - Les accélérations quantiques pour AES sont limitées</p>
+</section>
+<section id="nécessité-dun-nouveau-paradigme" class="level5">
+<h5 class="anchored" data-anchor-id="nécessité-dun-nouveau-paradigme">Nécessité d’un nouveau paradigme</h5>
+<p><strong>Approche requise :</strong> - Développer des <strong>algorithmes appropriés</strong> spécifiquement pour l’informatique quantique - Exploiter les propriétés quantiques (superposition, intrication) - Nouveau paradigme de programmation</p>
+</section>
+<section id="état-actuel" class="level5">
+<h5 class="anchored" data-anchor-id="état-actuel">État actuel</h5>
+<p><strong>Situation :</strong> - Nombre limité d’algorithmes quantiques connus - Beaucoup de questions <strong>non résolues</strong> - Recherche active pour trouver de nouvelles applications</p>
+</section>
+</section>
+</section>
+<section id="état-de-lart-et-perspectives" class="level3">
+<h3 class="anchored" data-anchor-id="état-de-lart-et-perspectives">État de l’art et perspectives</h3>
+<section id="qubits-actuels-2024-2025" class="level4">
+<h4 class="anchored" data-anchor-id="qubits-actuels-2024-2025">Qubits actuels (2024-2025)</h4>
+<p><strong>Technologies principales :</strong> - <strong>Supraconducteurs</strong> : IBM, Google (50-400 qubits) - <strong>Ions piégés</strong> : IonQ, Quantinuum (32-56 qubits) - <strong>Photoniques</strong> : Xanadu, PsiQuantum - <strong>Atomes neutres</strong> : QuEra, Pasqal</p>
+</section>
+<section id="horizon-temporel" class="level4">
+<h4 class="anchored" data-anchor-id="horizon-temporel">Horizon temporel</h4>
+<p><strong>Estimations pour un ordinateur quantique cryptographiquement pertinent :</strong> - <strong>Optimiste</strong> : 10-15 ans - <strong>Réaliste</strong> : 15-30 ans - <strong>Conservateur</strong> : 30+ ans ou incertain</p>
+<p><strong>Facteurs d’incertitude :</strong> - Avancées technologiques imprévisibles - Percées théoriques possibles - Investissements massifs en cours</p>
+</section>
+</section>
+</section>
+<section id="menaces-quantiques-pour-la-cryptographie" class="level2">
+<h2 class="anchored" data-anchor-id="menaces-quantiques-pour-la-cryptographie">Menaces Quantiques pour la Cryptographie</h2>
+<section id="algorithmes-cryptographiques-menacés" class="level3">
+<h3 class="anchored" data-anchor-id="algorithmes-cryptographiques-menacés">Algorithmes Cryptographiques Menacés</h3>
+<section id="cryptographie-asymétrique-classique" class="level4">
+<h4 class="anchored" data-anchor-id="cryptographie-asymétrique-classique">Cryptographie asymétrique classique</h4>
+<section id="fondement-de-la-sécurité-actuelle" class="level5">
+<h5 class="anchored" data-anchor-id="fondement-de-la-sécurité-actuelle">Fondement de la sécurité actuelle</h5>
+<p><strong>Base mathématique :</strong> Les systèmes cryptographiques asymétriques actuels reposent sur des problèmes mathématiques difficiles pour les ordinateurs <strong>classiques</strong> :</p>
+<p><strong>Problème 1 : Factorisation des grands nombres</strong> - <strong>Utilisé dans</strong> : RSA - <strong>Difficulté classique</strong> : exponentielle (<span class="math inline">\(O(e^{n^{1/3}})\)</span> avec GNFS) - <strong>Difficulté quantique</strong> : polynomiale (algorithme de Shor)</p>
+<p><strong>Problème 2 : Logarithme discret</strong> - <strong>Utilisé dans</strong> : Diffie-Hellman, DSA, ElGamal - <strong>Difficulté classique</strong> : exponentielle - <strong>Difficulté quantique</strong> : polynomiale (algorithme de Shor)</p>
+<p><strong>Problème 3 : Logarithme discret sur courbes elliptiques</strong> - <strong>Utilisé dans</strong> : ECDSA, ECDH - <strong>Difficulté classique</strong> : exponentielle - <strong>Difficulité quantique</strong> : polynomiale (variante de Shor)</p>
+</section>
+<section id="systèmes-et-protocoles-affectés" class="level5">
+<h5 class="anchored" data-anchor-id="systèmes-et-protocoles-affectés">Systèmes et protocoles affectés</h5>
+<p><strong>Infrastructure à clé publique :</strong> - Chiffrement/déchiffrement asymétrique - Signatures numériques - Authentification des entités - Établissement de clés (key establishment) - Certificats numériques</p>
+<p><strong>Protocoles réseau menacés :</strong> - <strong>TLS/SSL</strong> : sécurisation des connexions web - <strong>HTTPS</strong> : navigation web sécurisée - <strong>SSH</strong> : accès distant sécurisé - <strong>VPN</strong> : réseaux privés virtuels - <strong>PGP/GPG</strong> : chiffrement d’emails - <strong>Blockchain</strong> : signatures de transactions</p>
+</section>
+</section>
+<section id="cryptographie-symétrique" class="level4">
+<h4 class="anchored" data-anchor-id="cryptographie-symétrique">Cryptographie symétrique</h4>
+<section id="résistance-relative" class="level5">
+<h5 class="anchored" data-anchor-id="résistance-relative">Résistance relative</h5>
+<p><strong>Situation différente :</strong> La cryptographie symétrique (comme AES) est <strong>moins menacée</strong> mais pas totalement sûre.</p>
+</section>
+<section id="impact-de-lalgorithme-de-grover" class="level5">
+<h5 class="anchored" data-anchor-id="impact-de-lalgorithme-de-grover">Impact de l’algorithme de Grover</h5>
+<p><strong>Accélération quantique :</strong> L’algorithme de Grover offre une accélération <strong>quadratique</strong> pour la recherche exhaustive : - Complexité classique : <span class="math inline">\(O(2^n)\)</span> pour une clé de <span class="math inline">\(n\)</span> bits - Complexité quantique : <span class="math inline">\(O(2^{n/2})\)</span></p>
+<p><strong>Conséquence pratique :</strong> Un ordinateur quantique réduit effectivement la sécurité de moitié.</p>
+</section>
+<section id="solution-pour-aes" class="level5">
+<h5 class="anchored" data-anchor-id="solution-pour-aes">Solution pour AES</h5>
+<p><strong>Mitigation simple :</strong> <strong>Doubler la taille des clés</strong> suffit pour maintenir la sécurité : - AES-128 → AES-256 (retrouve niveau de sécurité équivalent) - AES-256 → AES-512 (si nécessaire à très long terme)</p>
+<p><strong>Conclusion :</strong> La cryptographie symétrique reste <strong>viable</strong> dans l’ère post-quantique avec des ajustements simples.</p>
+</section>
+</section>
+</section>
+<section id="algorithme-de-shor-menace-principale" class="level3">
+<h3 class="anchored" data-anchor-id="algorithme-de-shor-menace-principale">Algorithme de Shor : Menace Principale</h3>
+<section id="présentation-de-lalgorithme" class="level4">
+<h4 class="anchored" data-anchor-id="présentation-de-lalgorithme">Présentation de l’algorithme</h4>
+<section id="invention-et-contexte" class="level5">
+<h5 class="anchored" data-anchor-id="invention-et-contexte">Invention et contexte</h5>
+<p><strong>Développé par</strong> : Peter Shor (1994)</p>
+<p><strong>Innovation majeure :</strong> Premier algorithme quantique à offrir une accélération <strong>exponentielle</strong> pour un problème d’intérêt pratique.</p>
+</section>
+<section id="problèmes-résolus" class="level5">
+<h5 class="anchored" data-anchor-id="problèmes-résolus">Problèmes résolus</h5>
+<p><strong>Capacités de Shor :</strong> 1. <strong>Factorisation</strong> : Décomposer <span class="math inline">\(N = p \times q\)</span> en facteurs premiers 2. <strong>Logarithme discret</strong> : Résoudre <span class="math inline">\(g^x \equiv h \pmod{p}\)</span> 3. <strong>Problème de Diffie-Hellman</strong></p>
+</section>
+</section>
+<section id="complexité-et-performances" class="level4">
+<h4 class="anchored" data-anchor-id="complexité-et-performances">Complexité et performances</h4>
+<section id="complexité-temporelle" class="level5">
+<h5 class="anchored" data-anchor-id="complexité-temporelle">Complexité temporelle</h5>
+<p><strong>Ordinateur classique (meilleur algorithme connu - GNFS) :</strong> <span class="math display">\[O\left(\exp\left((c + o(1))(\ln N)^{1/3}(\ln \ln N)^{2/3}\right)\right)\]</span></p>
+<p><strong>Ordinateur quantique (algorithme de Shor) :</strong> <span class="math display">\[O\left((\log N)^2 (\log \log N) (\log \log \log N)\right)\]</span></p>
+<p>Essentiellement <strong>polynomial</strong> en <span class="math inline">\(\log N\)</span> (le nombre de bits).</p>
+</section>
+<section id="exemple-concret" class="level5">
+<h5 class="anchored" data-anchor-id="exemple-concret">Exemple concret</h5>
+<p><strong>Pour factoriser un nombre RSA-2048 (617 chiffres décimaux) :</strong> - <strong>Classique</strong> : &gt; âge de l’univers avec technologie actuelle - <strong>Quantique</strong> : quelques heures à jours (avec ordinateur quantique suffisant)</p>
+</section>
+</section>
+<section id="exigences-matérielles" class="level4">
+<h4 class="anchored" data-anchor-id="exigences-matérielles">Exigences matérielles</h4>
+<section id="qubits-nécessaires" class="level5">
+<h5 class="anchored" data-anchor-id="qubits-nécessaires">Qubits nécessaires</h5>
+<p><strong>Estimations :</strong> Pour casser RSA-2048 avec l’algorithme de Shor : - <strong>Qubits logiques</strong> : ~3000-4000 - <strong>Qubits physiques</strong> (avec correction d’erreurs) : 10-20 millions</p>
+<p><strong>État actuel :</strong> Les systèmes existants ont ~100-1000 qubits de qualité limitée.</p>
+</section>
+<section id="autres-ressources" class="level5">
+<h5 class="anchored" data-anchor-id="autres-ressources">Autres ressources</h5>
+<p><strong>Besoins supplémentaires :</strong> - Temps de cohérence suffisant - Fidélité des portes élevée - Capacité de correction d’erreurs</p>
+</section>
+</section>
+</section>
+<section id="scénario-apocalypse-quantique" class="level3">
+<h3 class="anchored" data-anchor-id="scénario-apocalypse-quantique">Scénario “Apocalypse Quantique”</h3>
+<section id="impact-sur-linfrastructure-internet" class="level4">
+<h4 class="anchored" data-anchor-id="impact-sur-linfrastructure-internet">Impact sur l’infrastructure Internet</h4>
+<section id="effondrement-de-la-confiance" class="level5">
+<h5 class="anchored" data-anchor-id="effondrement-de-la-confiance">Effondrement de la confiance</h5>
+<p><strong>Conséquence majeure :</strong> Si un ordinateur quantique cryptographiquement pertinent existait aujourd’hui :</p>
+<p><strong>“L’Internet tel que nous le connaissons n’existerait plus”</strong></p>
+</section>
+<section id="systèmes-compromis" class="level5">
+<h5 class="anchored" data-anchor-id="systèmes-compromis">Systèmes compromis</h5>
+<p><strong>Services affectés :</strong> - <strong>Banques en ligne</strong> : transactions financières - <strong>E-commerce</strong> : paiements sécurisés - <strong>Communications</strong> : emails, messageries - <strong>Cloud</strong> : stockage et calcul - <strong>Gouvernements</strong> : services publics numériques - <strong>Santé</strong> : dossiers médicaux</p>
+</section>
+</section>
+<section id="menace-harvest-now-decrypt-later" class="level4">
+<h4 class="anchored" data-anchor-id="menace-harvest-now-decrypt-later">Menace “Harvest Now, Decrypt Later”</h4>
+<section id="concept-de-la-menace" class="level5">
+<h5 class="anchored" data-anchor-id="concept-de-la-menace">Concept de la menace</h5>
+<p><strong>Stratégie adversaire :</strong> Certains acteurs malveillants pourraient : 1. <strong>Aujourd’hui</strong> : capturer et stocker les communications chiffrées 2. <strong>Future</strong> : déchiffrer avec un ordinateur quantique</p>
+</section>
+<section id="données-sensibles-à-long-terme" class="level5">
+<h5 class="anchored" data-anchor-id="données-sensibles-à-long-terme">Données sensibles à long terme</h5>
+<p><strong>Particulièrement préoccupant pour :</strong> - Secrets d’État à long terme - Données biométriques - Informations médicales - Propriété intellectuelle - Données personnelles sensibles</p>
+</section>
+<section id="urgence-de-la-transition" class="level5">
+<h5 class="anchored" data-anchor-id="urgence-de-la-transition">Urgence de la transition</h5>
+<p><strong>Implication :</strong> La transition vers le post-quantique est urgente <strong>maintenant</strong>, même si les ordinateurs quantiques sont à 10-20 ans.</p>
+</section>
+</section>
+</section>
+<section id="algorithme-de-grover-et-impact-limité" class="level3">
+<h3 class="anchored" data-anchor-id="algorithme-de-grover-et-impact-limité">Algorithme de Grover et Impact Limité</h3>
+<section id="présentation-de-grover" class="level4">
+<h4 class="anchored" data-anchor-id="présentation-de-grover">Présentation de Grover</h4>
+<section id="nature-de-lalgorithme" class="level5">
+<h5 class="anchored" data-anchor-id="nature-de-lalgorithme">Nature de l’algorithme</h5>
+<p><strong>Développé par</strong> : Lov Grover (1996)</p>
+<p><strong>Fonction :</strong> Accélération de la <strong>recherche dans une base de données non structurée</strong>.</p>
+</section>
+<section id="accélération-quadratique" class="level5">
+<h5 class="anchored" data-anchor-id="accélération-quadratique">Accélération quadratique</h5>
+<p><strong>Performance :</strong> - <strong>Classique</strong> : <span class="math inline">\(O(N)\)</span> opérations pour chercher dans <span class="math inline">\(N\)</span> éléments - <strong>Quantique</strong> : <span class="math inline">\(O(\sqrt{N})\)</span> opérations</p>
+</section>
+</section>
+<section id="application-à-la-cryptographie" class="level4">
+<h4 class="anchored" data-anchor-id="application-à-la-cryptographie">Application à la cryptographie</h4>
+<section id="impact-sur-les-chiffrements-symétriques" class="level5">
+<h5 class="anchored" data-anchor-id="impact-sur-les-chiffrements-symétriques">Impact sur les chiffrements symétriques</h5>
+<p><strong>Pour une clé de <span class="math inline">\(n\)</span> bits :</strong> - <strong>Recherche exhaustive classique</strong> : <span class="math inline">\(2^n\)</span> essais - <strong>Recherche avec Grover</strong> : <span class="math inline">\(2^{n/2}\)</span> essais</p>
+<p><strong>Réduction de sécurité :</strong> Équivaut à diviser par 2 la longueur effective de la clé.</p>
+</section>
+<section id="mitigation-simple" class="level5">
+<h5 class="anchored" data-anchor-id="mitigation-simple">Mitigation simple</h5>
+<p><strong>Solution :</strong> Augmenter la taille des clés : - AES-128 → sécurité effective de 64 bits contre Grover - AES-256 → sécurité effective de 128 bits contre Grover</p>
+<p><strong>Conclusion :</strong> Ajustement <strong>beaucoup plus simple</strong> que pour la cryptographie asymétrique.</p>
+</section>
+</section>
+<section id="limitations-pratiques" class="level4">
+<h4 class="anchored" data-anchor-id="limitations-pratiques">Limitations pratiques</h4>
+<section id="overhead-important" class="level5">
+<h5 class="anchored" data-anchor-id="overhead-important">Overhead important</h5>
+<p><strong>Difficultés d’implémentation :</strong> - Nécessite un nombre important de qubits - Requiert de nombreuses opérations quantiques - Circuit profond → sensible aux erreurs</p>
+</section>
+<section id="impact-limité-en-pratique" class="level5">
+<h5 class="anchored" data-anchor-id="impact-limité-en-pratique">Impact limité en pratique</h5>
+<p>Pour la cryptographie symétrique, l’avantage de Grover est <strong>moins dramatique</strong> que celui de Shor pour l’asymétrique.</p>
+</section>
+</section>
+</section>
+</section>
+<section id="fondements-mathématiques" class="level2">
+<h2 class="anchored" data-anchor-id="fondements-mathématiques">Fondements Mathématiques</h2>
+<section id="notations-et-structures-algébriques" class="level3">
+<h3 class="anchored" data-anchor-id="notations-et-structures-algébriques">Notations et Structures Algébriques</h3>
+<section id="ensembles-de-base" class="level4">
+<h4 class="anchored" data-anchor-id="ensembles-de-base">Ensembles de base</h4>
+<section id="entiers-modulo-q" class="level5">
+<h5 class="anchored" data-anchor-id="entiers-modulo-q">Entiers modulo q</h5>
+<p><strong>Définition :</strong> <span class="math display">\[\mathbb{Z}_q = \{0, 1, 2, \ldots, q-1\}\]</span></p>
+<p><strong>Description :</strong> Ensemble des <strong>entiers modulo <span class="math inline">\(q\)</span></strong> avec opérations d’addition et multiplication modulo <span class="math inline">\(q\)</span>.</p>
+<p><strong>Propriétés :</strong> - Si <span class="math inline">\(q\)</span> est premier : <span class="math inline">\(\mathbb{Z}_q\)</span> est un <strong>corps</strong> (field) - Sinon : <span class="math inline">\(\mathbb{Z}_q\)</span> est un <strong>anneau</strong> (ring)</p>
+<p><strong>Opérations :</strong> - Addition : <span class="math inline">\((a + b) \bmod q\)</span> - Multiplication : <span class="math inline">\((a \cdot b) \bmod q\)</span></p>
+</section>
+<section id="polynômes-à-coefficients-dans-mathbbz_q" class="level5">
+<h5 class="anchored" data-anchor-id="polynômes-à-coefficients-dans-mathbbz_q">Polynômes à coefficients dans <span class="math inline">\(\mathbb{Z}_q\)</span></h5>
+<p><strong>Notation :</strong> <span class="math display">\[\mathbb{Z}_q[X]\]</span></p>
+<p><strong>Définition :</strong> Ensemble des polynômes avec coefficients dans <span class="math inline">\(\mathbb{Z}_q\)</span> : <span class="math display">\[p(X) = a_0 + a_1 X + a_2 X^2 + \cdots + a_d X^d\]</span> où <span class="math inline">\(a_i \in \mathbb{Z}_q\)</span>.</p>
+<p><strong>Propriété importante :</strong> Le degré <span class="math inline">\(d\)</span> n’est <strong>pas borné</strong> (peut être arbitrairement grand).</p>
+<p><strong>Opérations :</strong> - Addition : coefficient par coefficient - Multiplication : convolution des coefficients, modulo <span class="math inline">\(q\)</span></p>
+</section>
+</section>
+<section id="anneaux-de-polynômes" class="level4">
+<h4 class="anchored" data-anchor-id="anneaux-de-polynômes">Anneaux de polynômes</h4>
+<section id="anneau-de-polynômes-quotient" class="level5">
+<h5 class="anchored" data-anchor-id="anneau-de-polynômes-quotient">Anneau de polynômes quotient</h5>
+<p><strong>Notation :</strong> <span class="math display">\[R_q = \mathbb{Z}_q[X]/(X^n + 1)\]</span></p>
+<p><strong>Définition :</strong> Anneau des polynômes de degré <strong>strictement inférieur à <span class="math inline">\(n\)</span></strong> avec coefficients dans <span class="math inline">\(\mathbb{Z}_q\)</span>, où la multiplication est effectuée modulo <span class="math inline">\(X^n + 1\)</span>.</p>
+<p><strong>Représentation d’un élément :</strong> <span class="math display">\[p(X) = a_0 + a_1 X + \cdots + a_{n-1} X^{n-1}, \quad a_i \in \mathbb{Z}_q\]</span></p>
+</section>
+<section id="réduction-modulo-xn-1" class="level5">
+<h5 class="anchored" data-anchor-id="réduction-modulo-xn-1">Réduction modulo <span class="math inline">\(X^n + 1\)</span></h5>
+<p><strong>Règle de réduction :</strong> <span class="math display">\[X^n \equiv -1 \pmod{X^n + 1}\]</span></p>
+<p><strong>Conséquence :</strong> <span class="math display">\[X^{n+k} \equiv -X^k \pmod{X^n + 1}\]</span></p>
+<p><strong>Exemple avec <span class="math inline">\(n = 4\)</span> :</strong> <span class="math display">\[X^4 \equiv -1\]</span> <span class="math display">\[X^5 \equiv -X\]</span> <span class="math display">\[X^6 \equiv -X^2\]</span></p>
+</section>
+<section id="multiplication-dans-r_q" class="level5">
+<h5 class="anchored" data-anchor-id="multiplication-dans-r_q">Multiplication dans <span class="math inline">\(R_q\)</span></h5>
+<p><strong>Procédure :</strong> 1. Multiplier les polynômes normalement 2. Réduire modulo <span class="math inline">\(X^n + 1\)</span> (ramener degrés <span class="math inline">\(\geq n\)</span>) 3. Réduire coefficients modulo <span class="math inline">\(q\)</span></p>
+<p><strong>Exemple :</strong> Pour <span class="math inline">\(n = 4\)</span>, <span class="math inline">\(q = 17\)</span> : <span class="math display">\[(1 + X) \cdot (1 + X^2) = 1 + X + X^2 + X^3\]</span></p>
+<p><span class="math display">\[(X^3 + X^2) \cdot (X^2 + X) = X^5 + X^4 + X^4 + X^3\]</span> <span class="math display">\[\equiv -X - 1 - 1 + X^3 = X^3 - X - 2 \pmod{X^4+1}\]</span></p>
+</section>
+</section>
+<section id="modules" class="level4">
+<h4 class="anchored" data-anchor-id="modules">Modules</h4>
+<section id="définition-dun-module" class="level5">
+<h5 class="anchored" data-anchor-id="définition-dun-module">Définition d’un module</h5>
+<p><strong>Notation :</strong> <span class="math display">\[R_q^k\]</span></p>
+<p><strong>Définition :</strong> Un <strong>module de rang <span class="math inline">\(k\)</span></strong> sur <span class="math inline">\(R_q\)</span> : ensemble des <span class="math inline">\(k\)</span>-uplets de polynômes dans <span class="math inline">\(R_q\)</span>.</p>
+<p><strong>Élément type :</strong> <span class="math display">\[\mathbf{v} = \begin{pmatrix} v_1(X) \\ v_2(X) \\ \vdots \\ v_k(X) \end{pmatrix}, \quad v_i \in R_q\]</span></p>
+</section>
+<section id="opérations-sur-les-modules" class="level5">
+<h5 class="anchored" data-anchor-id="opérations-sur-les-modules">Opérations sur les modules</h5>
+<p><strong>Addition :</strong> <span class="math display">\[\mathbf{v} + \mathbf{w} = \begin{pmatrix} v_1 + w_1 \\ \vdots \\ v_k + w_k \end{pmatrix}\]</span></p>
+<p><strong>Multiplication scalaire (par <span class="math inline">\(r \in R_q\)</span>) :</strong> <span class="math display">\[r \cdot \mathbf{v} = \begin{pmatrix} r \cdot v_1 \\ \vdots \\ r \cdot v_k \end{pmatrix}\]</span></p>
+</section>
+<section id="matrices-sur-r_q" class="level5">
+<h5 class="anchored" data-anchor-id="matrices-sur-r_q">Matrices sur <span class="math inline">\(R_q\)</span></h5>
+<p><strong>Matrice <span class="math inline">\(m \times k\)</span> :</strong> <span class="math display">\[\mathbf{A} = \begin{pmatrix}
+a_{11} &amp; \cdots &amp; a_{1k} \\
+\vdots &amp; \ddots &amp; \vdots \\
+a_{m1} &amp; \cdots &amp; a_{mk}
+\end{pmatrix}, \quad a_{ij} \in R_q\]</span></p>
+<p><strong>Multiplication matrice-vecteur :</strong> <span class="math display">\[\mathbf{A} \cdot \mathbf{v} = \begin{pmatrix}
+\sum_{j=1}^k a_{1j} v_j \\
+\vdots \\
+\sum_{j=1}^k a_{mj} v_j
+\end{pmatrix}\]</span></p>
+<p>où les multiplications et additions se font dans <span class="math inline">\(R_q\)</span>.</p>
+</section>
+</section>
+</section>
+<section id="normes-et-polynômes-petits" class="level3">
+<h3 class="anchored" data-anchor-id="normes-et-polynômes-petits">Normes et Polynômes “Petits”</h3>
+<section id="norme-infinie" class="level4">
+<h4 class="anchored" data-anchor-id="norme-infinie">Norme infinie</h4>
+<section id="définition-pour-les-entiers" class="level5">
+<h5 class="anchored" data-anchor-id="définition-pour-les-entiers">Définition pour les entiers</h5>
+<p><strong>Pour <span class="math inline">\(a \in \mathbb{Z}_q\)</span> :</strong> <span class="math display">\[\|a\|_\infty = \min\{|a|, q - |a|\}\]</span></p>
+<p>C’est la distance minimale à 0 en considérant la réduction modulo <span class="math inline">\(q\)</span> symétrique.</p>
+<p><strong>Exemple avec <span class="math inline">\(q = 17\)</span> :</strong> - <span class="math inline">\(\|3\|_\infty = 3\)</span> - <span class="math inline">\(\|15\|_\infty = \min\{15, 2\} = 2\)</span> (car <span class="math inline">\(15 \equiv -2 \pmod{17}\)</span>)</p>
+</section>
+<section id="définition-pour-les-polynômes" class="level5">
+<h5 class="anchored" data-anchor-id="définition-pour-les-polynômes">Définition pour les polynômes</h5>
+<p><strong>Pour <span class="math inline">\(p(X) = \sum_{i=0}^{n-1} a_i X^i \in R_q\)</span> :</strong> <span class="math display">\[\|p\|_\infty = \max_{0 \leq i &lt; n} \|a_i\|_\infty\]</span></p>
+<p>C’est le <strong>maximum des normes</strong> des coefficients.</p>
+</section>
+<section id="définition-pour-les-vecteursmodules" class="level5">
+<h5 class="anchored" data-anchor-id="définition-pour-les-vecteursmodules">Définition pour les vecteurs/modules</h5>
+<p><strong>Pour <span class="math inline">\(\mathbf{v} = (v_1, \ldots, v_k) \in R_q^k\)</span> :</strong> <span class="math display">\[\|\mathbf{v}\|_\infty = \max_{1 \leq i \leq k} \|v_i\|_\infty\]</span></p>
+</section>
+</section>
+<section id="polynômes-petits" class="level4">
+<h4 class="anchored" data-anchor-id="polynômes-petits">Polynômes “petits”</h4>
+<section id="concept" class="level5">
+<h5 class="anchored" data-anchor-id="concept">Concept</h5>
+<p><strong>Définition intuitive :</strong> Un polynôme est dit <strong>“petit”</strong> si ses coefficients ont une <strong>magnitude faible</strong> (proches de 0).</p>
+<p><strong>Formalisation :</strong> Un polynôme <span class="math inline">\(p \in R_q\)</span> est “<span class="math inline">\(\eta\)</span>-petit” si : <span class="math display">\[\|p\|_\infty \leq \eta\]</span></p>
+<p>où <span class="math inline">\(\eta\)</span> est typiquement très petit devant <span class="math inline">\(q\)</span> (par exemple <span class="math inline">\(\eta = 2\)</span> ou <span class="math inline">\(3\)</span>, alors que <span class="math inline">\(q = 3329\)</span>).</p>
+</section>
+<section id="rôle-dans-kyber" class="level5">
+<h5 class="anchored" data-anchor-id="rôle-dans-kyber">Rôle dans Kyber</h5>
+<p><strong>Importance cruciale :</strong> Les polynômes petits jouent un rôle <strong>fondamental</strong> dans la sécurité de Kyber : - <strong>Clé secrète</strong> : vecteur de polynômes petits - <strong>Erreurs</strong> : polynômes petits ajoutés pour la sécurité - <strong>Masquage</strong> : les petites erreurs masquent le secret sans empêcher le déchiffrement</p>
+</section>
+<section id="distributions-de-coefficients" class="level5">
+<h5 class="anchored" data-anchor-id="distributions-de-coefficients">Distributions de coefficients</h5>
+<p><strong>Distribution centrée binomiale :</strong> Dans Kyber, les coefficients des polynômes petits sont tirés selon une <strong>distribution centrée binomiale</strong> <span class="math inline">\(\beta_\eta\)</span>, qui produit des valeurs dans <span class="math inline">\(\{-\eta, \ldots, \eta\}\)</span> avec une distribution proche d’une gaussienne discrète.</p>
+</section>
+</section>
+</section>
+<section id="problèmes-lwe-et-variantes" class="level3">
+<h3 class="anchored" data-anchor-id="problèmes-lwe-et-variantes">Problèmes LWE et Variantes</h3>
+<section id="learning-without-errors-configuration-de-base" class="level4">
+<h4 class="anchored" data-anchor-id="learning-without-errors-configuration-de-base">Learning Without Errors (Configuration de base)</h4>
+<section id="problème-sans-erreurs" class="level5">
+<h5 class="anchored" data-anchor-id="problème-sans-erreurs">Problème sans erreurs</h5>
+<p><strong>Configuration :</strong> Alice possède un <strong>vecteur secret</strong> <span class="math inline">\(\mathbf{s} = (s_1, \ldots, s_n) \in \mathbb{Z}_q^n\)</span>.</p>
+<p><strong>Information publique :</strong> Ensemble d’équations linéaires : <span class="math display">\[\mathbf{a}_i \cdot \mathbf{s} = b_i \pmod{q}, \quad i = 1, \ldots, m\]</span></p>
+<p>où les <span class="math inline">\(\mathbf{a}_i \in \mathbb{Z}_q^n\)</span> sont des vecteurs publics (aléatoires).</p>
+<p><strong>Formulation matricielle :</strong> <span class="math display">\[\mathbf{A} \mathbf{s} = \mathbf{b} \pmod{q}\]</span></p>
+<p>où <span class="math inline">\(\mathbf{A}\)</span> est une matrice <span class="math inline">\(m \times n\)</span> et <span class="math inline">\(\mathbf{b}\)</span> est un vecteur de dimension <span class="math inline">\(m\)</span>.</p>
+</section>
+<section id="facilité-de-résolution" class="level5">
+<h5 class="anchored" data-anchor-id="facilité-de-résolution">Facilité de résolution</h5>
+<p><strong>Objectif :</strong> Trouver le vecteur secret <span class="math inline">\(\mathbf{s}\)</span> à partir de <span class="math inline">\((\mathbf{A}, \mathbf{b})\)</span>.</p>
+<p><strong>Méthode :</strong> <strong>Élimination de Gauss</strong> (ou méthodes d’algèbre linéaire).</p>
+<p><strong>Complexité :</strong> Polynomial en <span class="math inline">\(n\)</span> et <span class="math inline">\(m\)</span> (typiquement <span class="math inline">\(O(n^3)\)</span> ou moins).</p>
+<p><strong>Conclusion :</strong> ❌ <strong>Facile à résoudre</strong> → ne fournit <strong>aucune sécurité</strong>.</p>
+</section>
+</section>
+<section id="learning-with-errors-lwe" class="level4">
+<h4 class="anchored" data-anchor-id="learning-with-errors-lwe">Learning With Errors (LWE)</h4>
+<section id="ajout-derreurs-aléatoires" class="level5">
+<h5 class="anchored" data-anchor-id="ajout-derreurs-aléatoires">Ajout d’erreurs aléatoires</h5>
+<p><strong>Modification :</strong> Ajouter une <strong>petite erreur aléatoire</strong> <span class="math inline">\(e_i\)</span> à chaque équation : <span class="math display">\[\mathbf{a}_i \cdot \mathbf{s} + e_i = b_i \pmod{q}\]</span></p>
+<p>où <span class="math inline">\(e_i\)</span> est tiré d’une distribution d’erreur (typiquement gaussienne discrète ou distribution centrée).</p>
+<p><strong>Formulation matricielle :</strong> <span class="math display">\[\mathbf{A} \mathbf{s} + \mathbf{e} = \mathbf{b} \pmod{q}\]</span></p>
+<p>où <span class="math inline">\(\mathbf{e} = (e_1, \ldots, e_m)\)</span> est un vecteur d’erreurs.</p>
+</section>
+<section id="difficulté-du-problème" class="level5">
+<h5 class="anchored" data-anchor-id="difficulté-du-problème">Difficulté du problème</h5>
+<p><strong>Problème LWE (version recherche) :</strong> Étant donné <span class="math inline">\((\mathbf{A}, \mathbf{b} = \mathbf{A}\mathbf{s} + \mathbf{e} \bmod q)\)</span>, retrouver <span class="math inline">\(\mathbf{s}\)</span>.</p>
+<p><strong>Difficulté :</strong> Un système <strong>surdéterminé</strong> (<span class="math inline">\(m &gt; n\)</span>) d’équations avec erreurs n’a presque certainement <strong>pas de solution exacte</strong>.</p>
+<p><strong>Méthodes classiques :</strong> - Élimination de Gauss : ne fonctionne plus - Méthodes d’approximation : très coûteuses</p>
+<p><strong>Conclusion :</strong> ✅ Le secret <span class="math inline">\(\mathbf{s}\)</span> est vraiment <strong>protégé</strong> par les erreurs.</p>
+</section>
+<section id="paramètres-importants" class="level5">
+<h5 class="anchored" data-anchor-id="paramètres-importants">Paramètres importants</h5>
+<p><strong>Dimension</strong> <span class="math inline">\(n\)</span> : taille du vecteur secret <strong>Modulo</strong> <span class="math inline">\(q\)</span> : souvent premier ou puissance de 2 <strong>Nombre d’échantillons</strong> <span class="math inline">\(m\)</span> : nombre d’équations <strong>Distribution d’erreur</strong> : détermine la “taille” des erreurs</p>
+<p><strong>Compromis :</strong> - Erreurs trop petites → problème trop facile - Erreurs trop grandes → déchiffrement impossible - Il existe un équilibre optimal</p>
+</section>
+</section>
+<section id="variante-ring-lwe-r-lwe" class="level4">
+<h4 class="anchored" data-anchor-id="variante-ring-lwe-r-lwe">Variante : Ring-LWE (R-LWE)</h4>
+<section id="motivation" class="level5">
+<h5 class="anchored" data-anchor-id="motivation">Motivation</h5>
+<p><strong>Problème de LWE standard :</strong> - Clés publiques très grandes : <span class="math inline">\(m \times n\)</span> coefficients - Opérations coûteuses : multiplication matrice-vecteur</p>
+<p><strong>Solution :</strong> Utiliser des <strong>anneaux de polynômes</strong> pour réduire les tailles.</p>
+</section>
+<section id="définition-de-ring-lwe" class="level5">
+<h5 class="anchored" data-anchor-id="définition-de-ring-lwe">Définition de Ring-LWE</h5>
+<p><strong>Configuration :</strong> - Anneau : <span class="math inline">\(R_q = \mathbb{Z}_q[X]/(X^n + 1)\)</span> - Secret : <span class="math inline">\(s \in R_q\)</span> (polynôme) - Échantillon R-LWE : <span class="math inline">\((a, b = a \cdot s + e)\)</span> où <span class="math inline">\(a \in R_q\)</span> aléatoire, <span class="math inline">\(e \in R_q\)</span> petit</p>
+<p><strong>Réduction de taille :</strong> Un échantillon Ring-LWE = 2 polynômes = <span class="math inline">\(2n\)</span> coefficients vs LWE standard : besoin de <span class="math inline">\(m\)</span> échantillons de <span class="math inline">\(n\)</span> coefficients chacun</p>
+</section>
+<section id="problème-r-lwe" class="level5">
+<h5 class="anchored" data-anchor-id="problème-r-lwe">Problème R-LWE</h5>
+<p><strong>Version recherche :</strong> Étant donné des paires <span class="math inline">\((a_i, b_i = a_i s + e_i)\)</span>, retrouver <span class="math inline">\(s\)</span>.</p>
+<p><strong>Version décision :</strong> Distinguer <span class="math inline">\((a, as + e)\)</span> d’une paire <span class="math inline">\((a, b)\)</span> aléatoire.</p>
+</section>
+</section>
+<section id="module-lwe-mlwe" class="level4">
+<h4 class="anchored" data-anchor-id="module-lwe-mlwe">Module-LWE (MLWE)</h4>
+<section id="généralisation-de-r-lwe" class="level5">
+<h5 class="anchored" data-anchor-id="généralisation-de-r-lwe">Généralisation de R-LWE</h5>
+<p><strong>Motivation :</strong> - Ring-LWE : sécurité liée à la structure d’anneau spécifique - Module-LWE : plus flexible, entre LWE et R-LWE</p>
+<p><strong>Compromis :</strong> - <span class="math inline">\(k = 1\)</span> : équivalent à Ring-LWE - <span class="math inline">\(k = n\)</span> : proche de LWE standard - <span class="math inline">\(k\)</span> intermédiaire : équilibre taille/sécurité</p>
+</section>
+<section id="définition-formelle" class="level5">
+<h5 class="anchored" data-anchor-id="définition-formelle">Définition formelle</h5>
+<p><strong>Configuration :</strong> - Module : <span class="math inline">\(R_q^k\)</span> (vecteurs de <span class="math inline">\(k\)</span> polynômes) - Secret : <span class="math inline">\(\mathbf{s} = (s_1, \ldots, s_k) \in R_q^k\)</span> - Matrice publique : <span class="math inline">\(\mathbf{A} \in R_q^{m \times k}\)</span> - Vecteur d’erreur : <span class="math inline">\(\mathbf{e} \in R_q^m\)</span></p>
+<p><strong>Échantillon MLWE :</strong> <span class="math display">\[(\mathbf{A}, \mathbf{t} = \mathbf{A}\mathbf{s} + \mathbf{e})\]</span></p>
+<p>où toutes les opérations sont dans le module <span class="math inline">\(R_q^m\)</span>.</p>
+</section>
+<section id="problème-mlwe-recherche" class="level5">
+<h5 class="anchored" data-anchor-id="problème-mlwe-recherche">Problème MLWE (recherche)</h5>
+<p><strong>Objectif :</strong> Étant donné <span class="math inline">\((\mathbf{A}, \mathbf{t})\)</span>, retrouver le vecteur secret <span class="math inline">\(\mathbf{s}\)</span>.</p>
+<p><strong>Difficulté :</strong> ⚠️ <strong>Aucun algorithme efficace connu</strong> (classique ou quantique) pour résoudre MLWE avec paramètres appropriés.</p>
+<p><strong>Type :</strong> MLWE est un <strong>problème de recherche</strong> (search problem).</p>
+</section>
+<section id="flexibilité-des-paramètres" class="level5">
+<h5 class="anchored" data-anchor-id="flexibilité-des-paramètres">Flexibilité des paramètres</h5>
+<p><strong>Paramètre de rang <span class="math inline">\(k\)</span> :</strong> - Petit <span class="math inline">\(k\)</span> (2-3) : clés plus petites, sécurité basée sur structure algébrique - Grand <span class="math inline">\(k\)</span> : clés plus grandes, sécurité plus proche de LWE général</p>
+<p><strong>Kyber utilise :</strong> - Kyber512 : <span class="math inline">\(k = 2\)</span> - Kyber768 : <span class="math inline">\(k = 3\)</span> - Kyber1024 : <span class="math inline">\(k = 4\)</span></p>
+</section>
+</section>
+<section id="decision-module-lwe-d-mlwe" class="level4">
+<h4 class="anchored" data-anchor-id="decision-module-lwe-d-mlwe">Decision Module-LWE (D-MLWE)</h4>
+<section id="version-décision-du-problème" class="level5">
+<h5 class="anchored" data-anchor-id="version-décision-du-problème">Version décision du problème</h5>
+<p><strong>Même configuration que MLWE :</strong> - Module <span class="math inline">\(R_q^k\)</span> - Matrice <span class="math inline">\(\mathbf{A} \in R_q^{m \times k}\)</span></p>
+<p><strong>Instance D-MLWE :</strong> Une paire <span class="math inline">\((\mathbf{A}, \mathbf{t})\)</span> où <span class="math inline">\(\mathbf{t} \in R_q^m\)</span>.</p>
+</section>
+<section id="question-posée" class="level5">
+<h5 class="anchored" data-anchor-id="question-posée">Question posée</h5>
+<p><strong>Problème de décision :</strong> Déterminer si <span class="math inline">\((\mathbf{A}, \mathbf{t})\)</span> est : - <strong>Instance valide de MLWE</strong> : <span class="math inline">\(\mathbf{t} = \mathbf{A}\mathbf{s} + \mathbf{e}\)</span> pour un secret <span class="math inline">\(\mathbf{s}\)</span> et des erreurs <span class="math inline">\(\mathbf{e}\)</span> - Ou <strong>paire aléatoire</strong> : <span class="math inline">\(\mathbf{t}\)</span> choisi uniformément dans <span class="math inline">\(R_q^m\)</span></p>
+</section>
+<section id="importance-pour-la-cryptographie" class="level5">
+<h5 class="anchored" data-anchor-id="importance-pour-la-cryptographie">Importance pour la cryptographie</h5>
+<p><strong>Propriété de sécurité :</strong> Si D-MLWE est difficile, alors <span class="math inline">\((\mathbf{A}, \mathbf{t})\)</span> ne révèle <strong>aucune information</strong> sur <span class="math inline">\(\mathbf{s}\)</span>.</p>
+<p><strong>Conséquence :</strong> Permet de prouver que la <strong>clé publique</strong> ne fuit pas d’information sur la <strong>clé secrète</strong>.</p>
+</section>
+<section id="difficulté" class="level5">
+<h5 class="anchored" data-anchor-id="difficulté">Difficulté</h5>
+<p>⚠️ <strong>Aucun algorithme efficace connu</strong> pour résoudre D-MLWE (avec bons paramètres).</p>
+<p><strong>Type :</strong> D-MLWE est un <strong>problème de décision</strong> (decision problem).</p>
+</section>
+</section>
+<section id="comparaison-des-variantes" class="level4">
+<h4 class="anchored" data-anchor-id="comparaison-des-variantes">Comparaison des variantes</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 17%">
+<col style="width: 40%">
+<col style="width: 42%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Aspect</th>
+<th>MLWE (recherche)</th>
+<th>D-MLWE (décision)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Type</strong></td>
+<td>Problème de recherche</td>
+<td>Problème de décision</td>
+</tr>
+<tr class="even">
+<td><strong>Objectif</strong></td>
+<td>Trouver <span class="math inline">\(\mathbf{s}\)</span></td>
+<td>Distinguer valide/aléatoire</td>
+</tr>
+<tr class="odd">
+<td><strong>Sortie</strong></td>
+<td>Vecteur secret ou échec</td>
+<td>Bit (valide ou non)</td>
+</tr>
+<tr class="even">
+<td><strong>Utilisation crypto</strong></td>
+<td>Construction de schémas</td>
+<td>Preuves de sécurité</td>
+</tr>
+<tr class="odd">
+<td><strong>Relation</strong></td>
+<td>Plus difficile</td>
+<td>Plus facile (en principe)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Relation importante :</strong> Dans la pratique, MLWE et D-MLWE semblent avoir une difficulté similaire pour les paramètres utilisés.</p>
+</section>
+</section>
+<section id="réseaux-euclidiens-lattices" class="level3">
+<h3 class="anchored" data-anchor-id="réseaux-euclidiens-lattices">Réseaux Euclidiens (Lattices)</h3>
+<section id="définition-et-propriétés" class="level4">
+<h4 class="anchored" data-anchor-id="définition-et-propriétés">Définition et Propriétés</h4>
+<section id="définition-mathématique" class="level5">
+<h5 class="anchored" data-anchor-id="définition-mathématique">Définition mathématique</h5>
+<p><strong>Réseau (Lattice) :</strong> Soit <span class="math inline">\(\{\mathbf{b}_1, \mathbf{b}_2, \ldots, \mathbf{b}_n\}\)</span> une famille de <span class="math inline">\(n\)</span> vecteurs <strong>linéairement indépendants</strong> dans <span class="math inline">\(\mathbb{R}^n\)</span> (la <strong>base</strong> du réseau).</p>
+<p>Le <strong>réseau</strong> <span class="math inline">\(\mathcal{L}\)</span> engendré par cette base est :</p>
+<p><span class="math display">\[\mathcal{L}(\mathbf{b}_1, \ldots, \mathbf{b}_n) = \left\{\sum_{i=1}^{n} z_i \mathbf{b}_i \mid z_i \in \mathbb{Z}\right\}\]</span></p>
+<p><strong>En termes simples :</strong> Ensemble de toutes les <strong>combinaisons linéaires entières</strong> des vecteurs de base.</p>
+</section>
+<section id="représentation-matricielle" class="level5">
+<h5 class="anchored" data-anchor-id="représentation-matricielle">Représentation matricielle</h5>
+<p><strong>Matrice de base :</strong> <span class="math display">\[\mathbf{B} = [\mathbf{b}_1 \mid \mathbf{b}_2 \mid \cdots \mid \mathbf{b}_n] \in \mathbb{R}^{n \times n}\]</span></p>
+<p><strong>Le réseau :</strong> <span class="math display">\[\mathcal{L}(\mathbf{B}) = \{\mathbf{B}\mathbf{z} \mid \mathbf{z} \in \mathbb{Z}^n\}\]</span></p>
+</section>
+<section id="propriétés-fondamentales" class="level5">
+<h5 class="anchored" data-anchor-id="propriétés-fondamentales">Propriétés fondamentales</h5>
+<p><strong>Non-unicité de la base :</strong> Un même réseau peut avoir <strong>plusieurs bases différentes</strong>.</p>
+<p><strong>Déterminant du réseau :</strong> <span class="math display">\[\det(\mathcal{L}) = |\det(\mathbf{B})|\]</span></p>
+<p>Cette quantité est <strong>indépendante</strong> du choix de base.</p>
+<p><strong>Volume fondamental :</strong> Le déterminant représente le volume du <strong>parallélépipède fondamental</strong>.</p>
+</section>
+<section id="exemple-en-dimension-2" class="level5">
+<h5 class="anchored" data-anchor-id="exemple-en-dimension-2">Exemple en dimension 2</h5>
+<p><strong>Base :</strong> <span class="math display">\[\mathbf{b}_1 = \begin{pmatrix} 1 \\ 0 \end{pmatrix}, \quad \mathbf{b}_2 = \begin{pmatrix} 0 \\ 1 \end{pmatrix}\]</span></p>
+<p><strong>Réseau :</strong> <span class="math display">\[\mathcal{L} = \mathbb{Z}^2\]</span></p>
+<p>C’est le réseau le plus simple : les points à coordonnées entières dans le plan.</p>
+</section>
+</section>
+<section id="problèmes-classiques-sur-les-réseaux" class="level4">
+<h4 class="anchored" data-anchor-id="problèmes-classiques-sur-les-réseaux">Problèmes Classiques sur les Réseaux</h4>
+<section id="shortest-vector-problem-svp" class="level5">
+<h5 class="anchored" data-anchor-id="shortest-vector-problem-svp">Shortest Vector Problem (SVP)</h5>
+<p><strong>Énoncé :</strong> Étant donné un réseau <span class="math inline">\(\mathcal{L}\)</span> (via une base), trouver un vecteur <strong>non nul</strong> dans <span class="math inline">\(\mathcal{L}\)</span> avec <strong>norme euclidienne minimale</strong>.</p>
+<p><strong>Formulation mathématique :</strong> <span class="math display">\[\text{Trouver } \mathbf{v} \in \mathcal{L} \setminus \{\mathbf{0}\} \text{ tel que } \|\mathbf{v}\|_2 = \min_{\mathbf{w} \in \mathcal{L} \setminus \{\mathbf{0}\}} \|\mathbf{w}\|_2\]</span></p>
+<p><strong>Variante approchée (approx-SVP) :</strong> Trouver <span class="math inline">\(\mathbf{v} \in \mathcal{L} \setminus \{\mathbf{0}\}\)</span> tel que : <span class="math display">\[\|\mathbf{v}\|_2 \leq \gamma \cdot \lambda_1(\mathcal{L})\]</span></p>
+<p>où <span class="math inline">\(\lambda_1(\mathcal{L})\)</span> est la longueur du plus court vecteur et <span class="math inline">\(\gamma &gt; 1\)</span> est le facteur d’approximation.</p>
+</section>
+<section id="closest-vector-problem-cvp" class="level5">
+<h5 class="anchored" data-anchor-id="closest-vector-problem-cvp">Closest Vector Problem (CVP)</h5>
+<p><strong>Énoncé :</strong> Étant donné un réseau <span class="math inline">\(\mathcal{L}\)</span> et un point cible <span class="math inline">\(\mathbf{t} \in \mathbb{R}^n\)</span>, trouver le vecteur du réseau <strong>le plus proche</strong> de <span class="math inline">\(\mathbf{t}\)</span>.</p>
+<p><strong>Formulation mathématique :</strong> <span class="math display">\[\text{Trouver } \mathbf{v} \in \mathcal{L} \text{ tel que } \|\mathbf{t} - \mathbf{v}\|_2 = \min_{\mathbf{w} \in \mathcal{L}} \|\mathbf{t} - \mathbf{w}\|_2\]</span></p>
+<p><strong>Variante approchée (approx-CVP) :</strong> Trouver <span class="math inline">\(\mathbf{v} \in \mathcal{L}\)</span> tel que : <span class="math display">\[\|\mathbf{t} - \mathbf{v}\|_2 \leq \gamma \cdot \min_{\mathbf{w} \in \mathcal{L}} \|\mathbf{t} - \mathbf{w}\|_2\]</span></p>
+</section>
+<section id="relation-entre-svp-et-cvp" class="level5">
+<h5 class="anchored" data-anchor-id="relation-entre-svp-et-cvp">Relation entre SVP et CVP</h5>
+<p><strong>SVP comme cas particulier :</strong> SVP est un <strong>cas particulier</strong> de CVP avec <span class="math inline">\(\mathbf{t} = \mathbf{0}\)</span>.</p>
+<p><strong>Réductions :</strong> - CVP peut se réduire à SVP (avec un certain overhead) - En pratique, les deux problèmes ont une difficulté similaire</p>
+</section>
+</section>
+<section id="complexité-des-problèmes-de-réseaux" class="level4">
+<h4 class="anchored" data-anchor-id="complexité-des-problèmes-de-réseaux">Complexité des Problèmes de Réseaux</h4>
+<section id="np-difficulté" class="level5">
+<h5 class="anchored" data-anchor-id="np-difficulté">NP-difficulté</h5>
+<p><strong>Résultats théoriques :</strong> - <strong>SVP exact</strong> : NP-difficile sous hypothèse de randomisation - <strong>CVP exact</strong> : NP-difficile - Même les <strong>versions approchées</strong> (avec petit facteur d’approximation) sont difficiles</p>
+</section>
+<section id="difficulté-en-moyenne-average-case-hardness" class="level5">
+<h5 class="anchored" data-anchor-id="difficulté-en-moyenne-average-case-hardness">Difficulté en moyenne (Average-Case Hardness)</h5>
+<p><strong>Propriété remarquable :</strong> Les problèmes de réseaux sont <strong>difficiles en moyenne</strong>, pas seulement dans le pire cas.</p>
+<p><strong>Distinction importante :</strong> - <strong>Plupart des problèmes NP</strong> : faciles “en moyenne”, difficiles seulement dans le pire cas - <strong>Problèmes de réseaux</strong> : difficiles <strong>même en moyenne</strong></p>
+<p><strong>Implication cryptographique :</strong> Cette propriété est <strong>cruciale</strong> pour la cryptographie : - Les instances aléatoires sont difficiles - Pas besoin de générer des instances spéciales “difficiles”</p>
+</section>
+<section id="résistance-aux-attaques-quantiques" class="level5">
+<h5 class="anchored" data-anchor-id="résistance-aux-attaques-quantiques">Résistance aux attaques quantiques</h5>
+<p><strong>Propriété fondamentale :</strong> Les meilleurs algorithmes connus pour résoudre SVP et CVP, <strong>même sur ordinateurs quantiques</strong>, restent <strong>exponentiels</strong>.</p>
+<p><strong>Algorithmes quantiques connus :</strong> - Accélération polynomiale au mieux - Pas de percée comme celle de Shor pour la factorisation</p>
+<p><strong>Conclusion :</strong> Les réseaux offrent une <strong>résistance quantique</strong> intrinsèque.</p>
+</section>
+</section>
+<section id="lien-avec-mlwe-et-d-mlwe" class="level4">
+<h4 class="anchored" data-anchor-id="lien-avec-mlwe-et-d-mlwe">Lien avec MLWE et D-MLWE</h4>
+<section id="reformulation-comme-problèmes-de-réseaux" class="level5">
+<h5 class="anchored" data-anchor-id="reformulation-comme-problèmes-de-réseaux">Reformulation comme problèmes de réseaux</h5>
+<p><strong>Théorème (informel) :</strong> Les problèmes MLWE et D-MLWE peuvent être <strong>reformulés</strong> comme des variantes de problèmes de réseaux (SVP, CVP).</p>
+<p><strong>Construction du réseau :</strong> À partir d’une instance <span class="math inline">\((\mathbf{A}, \mathbf{t})\)</span> de MLWE, on peut construire un réseau <span class="math inline">\(\mathcal{L}\)</span> tel que : - Résoudre MLWE ≈ résoudre CVP dans <span class="math inline">\(\mathcal{L}\)</span></p>
+</section>
+<section id="réduction-de-difficulté" class="level5">
+<h5 class="anchored" data-anchor-id="réduction-de-difficulté">Réduction de difficulté</h5>
+<p><strong>Résultat théorique important :</strong> La difficulté <strong>moyenne</strong> de MLWE est au moins aussi grande que la difficulté <strong>quantique du pire cas</strong> de certains problèmes de réseaux (comme approx-SVP).</p>
+<p><strong>Formulation technique :</strong> <span class="math display">\[\text{Worst-case quantum SVP}_\gamma \leq_{\text{reduction}} \text{Average-case MLWE}\]</span></p>
+<p>pour un facteur d’approximation <span class="math inline">\(\gamma\)</span> approprié.</p>
+</section>
+<section id="intérêt-pratique-pour-la-sécurité" class="level5">
+<h5 class="anchored" data-anchor-id="intérêt-pratique-pour-la-sécurité">Intérêt pratique pour la sécurité</h5>
+<p><strong>Avantages de ce lien :</strong></p>
+<ol type="1">
+<li><strong>Évaluation de difficulté</strong> : Les problèmes de réseaux sont <strong>bien étudiés</strong> depuis des décennies</li>
+<li><strong>Confiance mathématique</strong> : Compréhension approfondie de leur structure</li>
+<li><strong>Résistance quantique</strong> : Aucune attaque quantique efficace connue</li>
+<li><strong>Base solide</strong> : Fondement théorique rigoureux pour la sécurité</li>
+</ol>
+<p><strong>Conclusion :</strong> Ce lien fournit une <strong>base solide</strong> pour affirmer que Kyber est sûr contre les ordinateurs quantiques.</p>
+</section>
+</section>
+</section>
+</section>
+<section id="crystals-kyber-architecture-et-fonctionnement" class="level2">
+<h2 class="anchored" data-anchor-id="crystals-kyber-architecture-et-fonctionnement">CRYSTALS-Kyber : Architecture et Fonctionnement</h2>
+<section id="vue-densemble-de-kyber" class="level3">
+<h3 class="anchored" data-anchor-id="vue-densemble-de-kyber">Vue d’Ensemble de Kyber</h3>
+<section id="nature-et-classification" class="level4">
+<h4 class="anchored" data-anchor-id="nature-et-classification">Nature et Classification</h4>
+<section id="type-de-système" class="level5">
+<h5 class="anchored" data-anchor-id="type-de-système">Type de système</h5>
+<p><strong>CRYSTALS-Kyber :</strong> - <strong>KEM</strong> : Key Encapsulation Mechanism (mécanisme d’encapsulation de clés) - <strong>Système cryptographique asymétrique</strong> - <strong>Post-quantique</strong> : résistant aux attaques quantiques</p>
+</section>
+<section id="paradigme-cryptographique" class="level5">
+<h5 class="anchored" data-anchor-id="paradigme-cryptographique">Paradigme cryptographique</h5>
+<p><strong>Basé sur les réseaux (Lattice-based) :</strong> Kyber appartient à la famille des cryptosystèmes basés sur les problèmes de réseaux euclidiens.</p>
+<p><strong>Caractéristiques :</strong> - Opère sur des <strong>anneaux de polynômes</strong> <span class="math inline">\(R_q\)</span> - Utilise des <strong>modules</strong> <span class="math inline">\(R_q^k\)</span> - S’appuie sur des <strong>polynômes “petits”</strong></p>
+</section>
+</section>
+<section id="fondements-de-sécurité" class="level4">
+<h4 class="anchored" data-anchor-id="fondements-de-sécurité">Fondements de Sécurité</h4>
+<section id="problèmes-mathématiques-sous-jacents" class="level5">
+<h5 class="anchored" data-anchor-id="problèmes-mathématiques-sous-jacents">Problèmes mathématiques sous-jacents</h5>
+<p><strong>Sécurité basée sur :</strong> 1. <strong>Module-LWE (MLWE)</strong> : problème de recherche 2. <strong>Decision Module-LWE (D-MLWE)</strong> : problème de décision</p>
+<p><strong>Hypothèse de sécurité :</strong> Si MLWE et D-MLWE sont <strong>intraitable</strong> (computationally hard), alors Kyber est sûr.</p>
+</section>
+<section id="niveau-de-sécurité" class="level5">
+<h5 class="anchored" data-anchor-id="niveau-de-sécurité">Niveau de sécurité</h5>
+<p><strong>IND-CCA2 secure :</strong> <strong>Indistinguishability under Adaptive Chosen Ciphertext Attack</strong></p>
+<p>C’est la <strong>plus forte notion de sécurité</strong> pour un KEM : - Résistant aux attaques à texte chiffré choisi - Résistant même quand l’adversaire peut interroger un oracle de déchiffrement</p>
+</section>
+</section>
+<section id="structure-en-couches" class="level4">
+<h4 class="anchored" data-anchor-id="structure-en-couches">Structure en Couches</h4>
+<section id="architecture-modulaire" class="level5">
+<h5 class="anchored" data-anchor-id="architecture-modulaire">Architecture modulaire</h5>
+<pre class="mermaid"><code>graph TD
+    A[Kyber-KEM] --&gt; B[Kyber-PKE]
+    A --&gt; C[Transformée FO]
+    B --&gt; D[MLWE/D-MLWE]
+    A --&gt; E[Fonctions de hachage]
+    E --&gt; F[SHA3-512: G]
+    E --&gt; G[SHA3-256: H]
+    E --&gt; H[SHAKE256: J]</code></pre>
+<p><strong>Composantes principales :</strong> 1. <strong>Kyber-PKE</strong> : chiffrement à clé publique de base 2. <strong>Transformée de Fujisaki-Okamoto (FO)</strong> : conversion PKE → KEM 3. <strong>Fonctions de hachage</strong> : dérivation de clés et randomness</p>
+</section>
+<section id="kyber-pke-le-cœur-cryptographique" class="level5">
+<h5 class="anchored" data-anchor-id="kyber-pke-le-cœur-cryptographique">Kyber-PKE : Le cœur cryptographique</h5>
+<p><strong>Rôle :</strong> Fournit les opérations de chiffrement de base.</p>
+<p><strong>Opérations :</strong> - <strong>KeyGen</strong> : génération de paire de clés - <strong>Encrypt</strong> : chiffrement d’un message - <strong>Decrypt</strong> : déchiffrement</p>
+<p><strong>Limitation :</strong> Kyber-PKE seul n’est que <strong>IND-CPA</strong> (secure against chosen plaintext attack).</p>
+</section>
+<section id="transformation-fo-renforcement-de-sécurité" class="level5">
+<h5 class="anchored" data-anchor-id="transformation-fo-renforcement-de-sécurité">Transformation FO : Renforcement de sécurité</h5>
+<p><strong>Transformation de Fujisaki-Okamoto :</strong> Technique générique pour transformer un PKE (IND-CPA) en KEM (IND-CCA2).</p>
+<p><strong>Méthode :</strong> - Ajoute des vérifications cryptographiques - Utilise le hachage du message comme randomness - Permet la détection de textes chiffrés malformés</p>
+<p><strong>Résultat :</strong> Kyber-KEM atteint la sécurité <strong>IND-CCA2</strong>.</p>
+</section>
+</section>
+</section>
+<section id="kyber-pke-chiffrement-de-base" class="level3">
+<h3 class="anchored" data-anchor-id="kyber-pke-chiffrement-de-base">Kyber-PKE : Chiffrement de Base</h3>
+<section id="espace-de-texte-clair" class="level4">
+<h4 class="anchored" data-anchor-id="espace-de-texte-clair">Espace de Texte Clair</h4>
+<section id="définition-du-plaintext-space" class="level5">
+<h5 class="anchored" data-anchor-id="définition-du-plaintext-space">Définition du plaintext space</h5>
+<p><strong>Messages :</strong> <span class="math display">\[\mathcal{M} = \{0, 1\}^n \subset R_q\]</span></p>
+<p><strong>Interprétation :</strong> - Messages = vecteurs de <span class="math inline">\(n\)</span> bits - Encodés comme polynômes dans <span class="math inline">\(R_q\)</span> - Coefficients ∈ <span class="math inline">\(\{0, 1\}\)</span></p>
+</section>
+<section id="encodage-des-bits" class="level5">
+<h5 class="anchored" data-anchor-id="encodage-des-bits">Encodage des bits</h5>
+<p><strong>Procédure d’encodage :</strong> Un message <span class="math inline">\(m = (m_0, m_1, \ldots, m_{n-1}) \in \{0, 1\}^n\)</span> est encodé comme :</p>
+<p><span class="math display">\[\text{Encode}(m) = \sum_{i=0}^{n-1} m_i X^i \cdot \left\lfloor \frac{q}{2} \right\rfloor \in R_q\]</span></p>
+<p><strong>Principe :</strong> - Bit 0 → coefficient 0 - Bit 1 → coefficient <span class="math inline">\(\lfloor q/2 \rfloor\)</span> (milieu de <span class="math inline">\(\mathbb{Z}_q\)</span>)</p>
+</section>
+<section id="décodage-des-bits" class="level5">
+<h5 class="anchored" data-anchor-id="décodage-des-bits">Décodage des bits</h5>
+<p><strong>Procédure de décodage :</strong> Pour un polynôme <span class="math inline">\(p(X) = \sum a_i X^i \in R_q\)</span> :</p>
+<p><span class="math display">\[\text{Decode}(p)_i = \begin{cases}
+0 &amp; \text{si } |a_i| &lt; q/4 \\
+1 &amp; \text{si } |a_i - \lfloor q/2 \rfloor| &lt; q/4
+\end{cases}\]</span></p>
+<p><strong>Tolérance aux erreurs :</strong> Le décodage réussit si les erreurs sont <span class="math inline">\(&lt; q/4\)</span> en magnitude.</p>
+</section>
+</section>
+<section id="propriété-importante-échec-de-déchiffrement" class="level4">
+<h4 class="anchored" data-anchor-id="propriété-importante-échec-de-déchiffrement">Propriété Importante : Échec de Déchiffrement</h4>
+<section id="possibilité-déchec" class="level5">
+<h5 class="anchored" data-anchor-id="possibilité-déchec">Possibilité d’échec</h5>
+<p><strong>Avertissement :</strong> ⚠️ Le déchiffrement de Kyber-PKE peut <strong>échouer</strong> avec une <strong>petite probabilité</strong>.</p>
+</section>
+<section id="raison-de-léchec" class="level5">
+<h5 class="anchored" data-anchor-id="raison-de-léchec">Raison de l’échec</h5>
+<p><strong>Cause :</strong> Les <strong>erreurs ajoutées</strong> pour la sécurité peuvent parfois être <strong>trop grandes</strong>.</p>
+<p><strong>Mécanisme :</strong> 1. Chiffrement ajoute des termes d’erreur <span class="math inline">\(e_1, e_2\)</span> 2. Déchiffrement calcule <span class="math inline">\(m' + \text{(erreurs cumulées)}\)</span> 3. Si les erreurs dépassent <span class="math inline">\(q/4\)</span>, le décodage échoue</p>
+</section>
+<section id="gestion-de-la-probabilité-déchec" class="level5">
+<h5 class="anchored" data-anchor-id="gestion-de-la-probabilité-déchec">Gestion de la probabilité d’échec</h5>
+<p><strong>Contrôle par paramètres :</strong> La probabilité d’échec est rendue <strong>négligeable</strong> par le choix approprié de : - Modulo <span class="math inline">\(q\)</span> (assez grand) - Distribution d’erreur (assez petite) - Dimension <span class="math inline">\(n\)</span> et rang <span class="math inline">\(k\)</span></p>
+<p><strong>Valeurs typiques :</strong> Probabilité d’échec <span class="math inline">\(&lt; 2^{-128}\)</span> ou <span class="math inline">\(2^{-256}\)</span> (astronomiquement faible).</p>
+</section>
+</section>
+<section id="schéma-kyber-pke" class="level4">
+<h4 class="anchored" data-anchor-id="schéma-kyber-pke">Schéma Kyber-PKE</h4>
+<section id="génération-de-clés-keygen" class="level5">
+<h5 class="anchored" data-anchor-id="génération-de-clés-keygen">Génération de clés (KeyGen)</h5>
+<p><strong>Entrée :</strong> Paramètres <span class="math inline">\((n, k, q, \eta_1)\)</span></p>
+<p><strong>Procédure :</strong> 1. Générer une matrice aléatoire <span class="math inline">\(\mathbf{A} \in R_q^{k \times k}\)</span> 2. Tirer un vecteur secret <span class="math inline">\(\mathbf{s} \in R_q^k\)</span> avec petits coefficients (distribution <span class="math inline">\(\beta_{\eta_1}\)</span>) 3. Tirer un vecteur d’erreur <span class="math inline">\(\mathbf{e} \in R_q^k\)</span> avec petits coefficients 4. Calculer <span class="math inline">\(\mathbf{t} = \mathbf{A}\mathbf{s} + \mathbf{e} \in R_q^k\)</span></p>
+<p><strong>Sortie :</strong> - <strong>Clé publique</strong> : <span class="math inline">\(pk = (\mathbf{A}, \mathbf{t})\)</span> - <strong>Clé secrète</strong> : <span class="math inline">\(sk = \mathbf{s}\)</span></p>
+</section>
+<section id="chiffrement-encrypt" class="level5">
+<h5 class="anchored" data-anchor-id="chiffrement-encrypt">Chiffrement (Encrypt)</h5>
+<p><strong>Entrée :</strong> - Clé publique <span class="math inline">\(pk = (\mathbf{A}, \mathbf{t})\)</span> - Message <span class="math inline">\(m \in \{0, 1\}^n\)</span> - Randomness (pièces aléatoires)</p>
+<p><strong>Procédure :</strong> 1. Tirer un vecteur aléatoire court <span class="math inline">\(\mathbf{r} \in R_q^k\)</span> (distribution <span class="math inline">\(\beta_{\eta_1}\)</span>) 2. Tirer des erreurs <span class="math inline">\(\mathbf{e}_1 \in R_q^k\)</span>, <span class="math inline">\(e_2 \in R_q\)</span> (distribution <span class="math inline">\(\beta_{\eta_2}\)</span>) 3. Calculer : - <span class="math inline">\(\mathbf{u} = \mathbf{A}^T \mathbf{r} + \mathbf{e}_1 \in R_q^k\)</span> - <span class="math inline">\(v = \mathbf{t}^T \mathbf{r} + e_2 + \text{Encode}(m) \in R_q\)</span></p>
+<p><strong>Sortie :</strong> - <strong>Ciphertext</strong> : <span class="math inline">\(c = (\mathbf{u}, v)\)</span></p>
+</section>
+<section id="déchiffrement-decrypt" class="level5">
+<h5 class="anchored" data-anchor-id="déchiffrement-decrypt">Déchiffrement (Decrypt)</h5>
+<p><strong>Entrée :</strong> - Clé secrète <span class="math inline">\(sk = \mathbf{s}\)</span> - Ciphertext <span class="math inline">\(c = (\mathbf{u}, v)\)</span></p>
+<p><strong>Procédure :</strong> 1. Calculer <span class="math inline">\(w = v - \mathbf{s}^T \mathbf{u} \in R_q\)</span> 2. Décoder : <span class="math inline">\(m' = \text{Decode}(w)\)</span></p>
+<p><strong>Sortie :</strong> - Message <span class="math inline">\(m'\)</span> (si déchiffrement réussit) - ou <span class="math inline">\(\perp\)</span> (symbole d’échec)</p>
+</section>
+<section id="correction-du-déchiffrement" class="level5">
+<h5 class="anchored" data-anchor-id="correction-du-déchiffrement">Correction du déchiffrement</h5>
+<p><strong>Analyse :</strong> <span class="math display">\[w = v - \mathbf{s}^T \mathbf{u}\]</span> <span class="math display">\[= (\mathbf{t}^T \mathbf{r} + e_2 + \text{Encode}(m)) - \mathbf{s}^T(\mathbf{A}^T \mathbf{r} + \mathbf{e}_1)\]</span> <span class="math display">\[= (\mathbf{A}\mathbf{s} + \mathbf{e})^T \mathbf{r} + e_2 + \text{Encode}(m) - \mathbf{s}^T \mathbf{A}^T \mathbf{r} - \mathbf{s}^T \mathbf{e}_1\]</span> <span class="math display">\[= \mathbf{e}^T \mathbf{r} + e_2 - \mathbf{s}^T \mathbf{e}_1 + \text{Encode}(m)\]</span> <span class="math display">\[= \text{Encode}(m) + \underbrace{(\mathbf{e}^T \mathbf{r} + e_2 - \mathbf{s}^T \mathbf{e}_1)}_{\text{erreur totale}}\]</span></p>
+<p><strong>Condition de succès :</strong> Si l’erreur totale reste <span class="math inline">\(&lt; q/4\)</span> en norme infinie, le décodage récupère <span class="math inline">\(m\)</span> correctement.</p>
+</section>
+</section>
+</section>
+<section id="kyber-kem-mécanisme-complet" class="level3">
+<h3 class="anchored" data-anchor-id="kyber-kem-mécanisme-complet">Kyber-KEM : Mécanisme Complet</h3>
+<section id="fonctions-de-hachage-utilisées" class="level4">
+<h4 class="anchored" data-anchor-id="fonctions-de-hachage-utilisées">Fonctions de Hachage Utilisées</h4>
+<section id="suite-de-fonctions-sha-3" class="level5">
+<h5 class="anchored" data-anchor-id="suite-de-fonctions-sha-3">Suite de fonctions SHA-3</h5>
+<p>Kyber utilise des fonctions de la famille <strong>SHA-3</strong> (Keccak), standardisées par le NIST.</p>
+</section>
+<section id="fonction-g-sha3-512" class="level5">
+<h5 class="anchored" data-anchor-id="fonction-g-sha3-512">Fonction G : SHA3-512</h5>
+<p><strong>Algorithme :</strong> SHA3-512</p>
+<p><strong>Usage dans Kyber :</strong> - Dérivation de clés longues (512 bits) - Génération de randomness pour le chiffrement - Hachage de la clé publique</p>
+<p><strong>Propriétés :</strong> - Sortie : 512 bits (64 octets) - Résistance aux collisions : 256 bits de sécurité</p>
+</section>
+<section id="fonction-h-sha3-256" class="level5">
+<h5 class="anchored" data-anchor-id="fonction-h-sha3-256">Fonction H : SHA3-256</h5>
+<p><strong>Algorithme :</strong> SHA3-256</p>
+<p><strong>Usage dans Kyber :</strong> - Hachage standard du ciphertext - Dérivation de la clé partagée finale - Vérification d’intégrité</p>
+<p><strong>Propriétés :</strong> - Sortie : 256 bits (32 octets) - Résistance aux collisions : 128 bits de sécurité</p>
+</section>
+<section id="fonction-j-shake256" class="level5">
+<h5 class="anchored" data-anchor-id="fonction-j-shake256">Fonction J : SHAKE256</h5>
+<p><strong>Algorithme :</strong> SHAKE256 (XOF - eXtendable Output Function)</p>
+<p><strong>Usage dans Kyber :</strong> - Génération de la matrice publique <span class="math inline">\(\mathbf{A}\)</span> (déterministe à partir d’une graine) - Expansion de petites graines en longues séquences pseudo-aléatoires</p>
+<p><strong>Propriétés :</strong> - Sortie de longueur <strong>variable</strong> - Peut générer autant d’octets que nécessaire - Basé sur Keccak</p>
+</section>
+</section>
+<section id="structure-de-kyber-kem" class="level4">
+<h4 class="anchored" data-anchor-id="structure-de-kyber-kem">Structure de Kyber-KEM</h4>
+<section id="opérations-principales" class="level5">
+<h5 class="anchored" data-anchor-id="opérations-principales">Opérations principales</h5>
+<p><strong>1. Génération de clés (KeyGen)</strong></p>
+<p><strong>Entrée :</strong> Paramètres de sécurité</p>
+<p><strong>Sortie :</strong> - Clé publique <span class="math inline">\(pk\)</span> - Clé secrète <span class="math inline">\(sk\)</span> (inclut <span class="math inline">\(pk\)</span>, le secret PKE, et des informations auxiliaires)</p>
+<p><strong>Procédure :</strong> 1. Générer <span class="math inline">\((pk_{PKE}, sk_{PKE}) \leftarrow\)</span> Kyber-PKE.KeyGen() 2. Calculer <span class="math inline">\(h = H(pk_{PKE})\)</span> 3. Tirer une graine aléatoire <span class="math inline">\(z\)</span> 4. Définir <span class="math inline">\(sk = (sk_{PKE}, pk_{PKE}, h, z)\)</span> 5. Retourner <span class="math inline">\((pk = pk_{PKE}, sk)\)</span></p>
+<p><strong>2. Encapsulation</strong></p>
+<p><strong>Entrée :</strong> - Clé publique <span class="math inline">\(pk\)</span></p>
+<p><strong>Sortie :</strong> - <strong>Ciphertext</strong> <span class="math inline">\(c\)</span> - <strong>Clé partagée</strong> <span class="math inline">\(K\)</span></p>
+<p><strong>Procédure :</strong> 1. Tirer un message aléatoire <span class="math inline">\(m \in \{0, 1\}^{256}\)</span> 2. Calculer <span class="math inline">\((\bar{K}, r) = G(m \| H(pk))\)</span> (dérivation de clé et randomness) 3. Chiffrer : <span class="math inline">\(c \leftarrow\)</span> Kyber-PKE.Encrypt<span class="math inline">\((pk, m; r)\)</span> 4. Calculer la clé partagée : <span class="math inline">\(K = H(\bar{K} \| c)\)</span> 5. Retourner <span class="math inline">\((c, K)\)</span></p>
+<p><strong>3. Decapsulation</strong></p>
+<p><strong>Entrée :</strong> - Clé secrète <span class="math inline">\(sk = (sk_{PKE}, pk, h, z)\)</span> - Ciphertext <span class="math inline">\(c\)</span></p>
+<p><strong>Sortie :</strong> - Clé partagée <span class="math inline">\(K\)</span></p>
+<p><strong>Procédure :</strong> 1. Déchiffrer : <span class="math inline">\(m' \leftarrow\)</span> Kyber-PKE.Decrypt<span class="math inline">\((sk_{PKE}, c)\)</span> 2. Calculer <span class="math inline">\((\bar{K}', r') = G(m' \| h)\)</span> 3. Rechiffrer : <span class="math inline">\(c' \leftarrow\)</span> Kyber-PKE.Encrypt<span class="math inline">\((pk, m'; r')\)</span> 4. Si <span class="math inline">\(c = c'\)</span> : - Retourner <span class="math inline">\(K = H(\bar{K}' \| c)\)</span> (succès) 5. Sinon : - Retourner <span class="math inline">\(K = H(z \| c)\)</span> (rejet implicite)</p>
+</section>
+<section id="transformation-fo-et-vérification" class="level5">
+<h5 class="anchored" data-anchor-id="transformation-fo-et-vérification">Transformation FO et vérification</h5>
+<p><strong>Principe du rechiffrement :</strong> La transformation de Fujisaki-Okamoto nécessite de <strong>rechiffrer</strong> le message déchiffré et de <strong>comparer</strong> avec le ciphertext reçu.</p>
+<p><strong>Détection de manipulation :</strong> Si <span class="math inline">\(c \neq c'\)</span>, cela indique : - Une attaque active (ciphertext modifié) - Ou une erreur de transmission</p>
+<p><strong>Rejet implicite :</strong> Au lieu de renvoyer une erreur, Kyber retourne une clé pseudo-aléatoire dépendant de <span class="math inline">\(z\)</span> (la graine secrète) et <span class="math inline">\(c\)</span>.</p>
+<p><strong>Sécurité :</strong> Cette approche empêche les attaques par oracle de déchiffrement (CCA2).</p>
+</section>
+</section>
+<section id="propriétés-de-sécurité" class="level4">
+<h4 class="anchored" data-anchor-id="propriétés-de-sécurité">Propriétés de Sécurité</h4>
+<section id="plaintext-awareness" class="level5">
+<h5 class="anchored" data-anchor-id="plaintext-awareness">Plaintext Awareness</h5>
+<p><strong>Concept :</strong> <strong>Conscience du texte clair</strong> (plaintext awareness) signifie qu’un adversaire ne peut créer un ciphertext valide sans “connaître” le plaintext correspondant.</p>
+<p><strong>Dans Kyber :</strong> La transformation FO force l’adversaire à utiliser Encrypt honnêtement, car toute manipulation est détectée par le rechiffrement.</p>
+</section>
+<section id="ind-cca2-security" class="level5">
+<h5 class="anchored" data-anchor-id="ind-cca2-security">IND-CCA2 Security</h5>
+<p><strong>Implication :</strong> Plaintext awareness ⇒ <strong>IND-CCA2</strong> security</p>
+<p><strong>Définition IND-CCA2 :</strong> Un adversaire ne peut pas distinguer entre : - Encapsulation d’un message choisi - Encapsulation d’un message aléatoire</p>
+<p>Même avec accès à un <strong>oracle de decapsulation</strong> (sauf pour le ciphertext challenge).</p>
+<p><strong>Niveau de sécurité :</strong> C’est la <strong>plus forte notion</strong> pour un KEM.</p>
+</section>
+<section id="probabilité-déchec" class="level5">
+<h5 class="anchored" data-anchor-id="probabilité-déchec">Probabilité d’échec</h5>
+<p><strong>Dans Kyber-KEM :</strong> La decapsulation peut théoriquement échouer si Kyber-PKE.Decrypt échoue.</p>
+<p><strong>Gestion :</strong> - Paramètres choisis pour que la probabilité soit <strong>négligeable</strong> (<span class="math inline">\(&lt; 2^{-128}\)</span>) - En pratique, n’arrive presque jamais</p>
+<p><strong>Comportement en cas d’échec :</strong> Le rejet implicite retourne une clé dérivée de <span class="math inline">\(z\)</span>, pas d’erreur explicite.</p>
+</section>
+</section>
+</section>
+<section id="paramètres-de-kyber" class="level3">
+<h3 class="anchored" data-anchor-id="paramètres-de-kyber">Paramètres de Kyber</h3>
+<section id="niveaux-de-sécurité" class="level4">
+<h4 class="anchored" data-anchor-id="niveaux-de-sécurité">Niveaux de Sécurité</h4>
+<p>Kyber propose <strong>trois variantes</strong> correspondant à différents niveaux de sécurité NIST :</p>
+<section id="kyber512" class="level5">
+<h5 class="anchored" data-anchor-id="kyber512">Kyber512</h5>
+<p><strong>Paramètres :</strong> - <span class="math inline">\(n = 256\)</span> - <span class="math inline">\(k = 2\)</span> - <span class="math inline">\(q = 3329\)</span> - <span class="math inline">\(\eta_1 = 3\)</span>, <span class="math inline">\(\eta_2 = 2\)</span></p>
+<p><strong>Sécurité :</strong> - <strong>NIST niveau 1</strong> : équivalent à AES-128 - Résiste à ~<span class="math inline">\(2^{143}\)</span> opérations classiques - Résiste à ~<span class="math inline">\(2^{120}\)</span> opérations quantiques (MAXDEPTH)</p>
+<p><strong>Tailles :</strong> - Clé publique : 800 octets - Clé secrète : 1632 octets - Ciphertext : 768 octets</p>
+</section>
+<section id="kyber768" class="level5">
+<h5 class="anchored" data-anchor-id="kyber768">Kyber768</h5>
+<p><strong>Paramètres :</strong> - <span class="math inline">\(n = 256\)</span> - <span class="math inline">\(k = 3\)</span> - <span class="math inline">\(q = 3329\)</span> - <span class="math inline">\(\eta_1 = 2\)</span>, <span class="math inline">\(\eta_2 = 2\)</span></p>
+<p><strong>Sécurité :</strong> - <strong>NIST niveau 3</strong> : équivalent à AES-192 - Résiste à ~<span class="math inline">\(2^{207}\)</span> opérations classiques - Résiste à ~<span class="math inline">\(2^{174}\)</span> opérations quantiques</p>
+<p><strong>Tailles :</strong> - Clé publique : 1184 octets - Clé secrète : 2400 octets - Ciphertext : 1088 octets</p>
+</section>
+<section id="kyber1024" class="level5">
+<h5 class="anchored" data-anchor-id="kyber1024">Kyber1024</h5>
+<p><strong>Paramètres :</strong> - <span class="math inline">\(n = 256\)</span> - <span class="math inline">\(k = 4\)</span> - <span class="math inline">\(q = 3329\)</span> - <span class="math inline">\(\eta_1 = 2\)</span>, <span class="math inline">\(\eta_2 = 2\)</span></p>
+<p><strong>Sécurité :</strong> - <strong>NIST niveau 5</strong> : équivalent à AES-256 - Résiste à ~<span class="math inline">\(2^{272}\)</span> opérations classiques - Résiste à ~<span class="math inline">\(2^{229}\)</span> opérations quantiques</p>
+<p><strong>Tailles :</strong> - Clé publique : 1568 octets - Clé secrète : 3168 octets - Ciphertext : 1568 octets</p>
+</section>
+</section>
+<section id="choix-des-paramètres" class="level4">
+<h4 class="anchored" data-anchor-id="choix-des-paramètres">Choix des Paramètres</h4>
+<section id="paramètre-n-degré-des-polynômes" class="level5">
+<h5 class="anchored" data-anchor-id="paramètre-n-degré-des-polynômes">Paramètre <span class="math inline">\(n\)</span> : degré des polynômes</h5>
+<p><strong>Valeur fixe :</strong> <span class="math inline">\(n = 256\)</span> pour toutes les variantes</p>
+<p><strong>Raison :</strong> - Permet des implémentations efficaces (FFT, NTT) - Dimension suffisante pour la sécurité - <span class="math inline">\(X^{256} + 1\)</span> est le polynôme cyclotomique approprié</p>
+</section>
+<section id="paramètre-k-rang-du-module" class="level5">
+<h5 class="anchored" data-anchor-id="paramètre-k-rang-du-module">Paramètre <span class="math inline">\(k\)</span> : rang du module</h5>
+<p><strong>Variable selon sécurité :</strong> - <span class="math inline">\(k = 2\)</span> : Kyber512 - <span class="math inline">\(k = 3\)</span> : Kyber768 - <span class="math inline">\(k = 4\)</span> : Kyber1024</p>
+<p><strong>Compromis :</strong> - Plus <span class="math inline">\(k\)</span> est grand → plus de sécurité - Plus <span class="math inline">\(k\)</span> est grand → clés et ciphertexts plus grands</p>
+</section>
+<section id="paramètre-q-modulo" class="level5">
+<h5 class="anchored" data-anchor-id="paramètre-q-modulo">Paramètre <span class="math inline">\(q\)</span> : modulo</h5>
+<p><strong>Valeur fixe :</strong> <span class="math inline">\(q = 3329 = 13 \times 256 + 1\)</span> (nombre premier)</p>
+<p><strong>Propriétés :</strong> - Premier pour avoir un corps <span class="math inline">\(\mathbb{Z}_q\)</span> - Forme <span class="math inline">\(q \equiv 1 \pmod{2n}\)</span> permet NTT efficace - Assez grand pour supporter les erreurs</p>
+</section>
+<section id="paramètres-eta_1-eta_2-distributions-derreurs" class="level5">
+<h5 class="anchored" data-anchor-id="paramètres-eta_1-eta_2-distributions-derreurs">Paramètres <span class="math inline">\(\eta_1, \eta_2\)</span> : distributions d’erreurs</h5>
+<p><strong>Valeurs :</strong> - <span class="math inline">\(\eta_1 \in \{2, 3\}\)</span> : pour les secrets et erreurs KeyGen/Encrypt - <span class="math inline">\(\eta_2 = 2\)</span> : pour les erreurs de chiffrement additionnelles</p>
+<p><strong>Distribution centrée binomiale <span class="math inline">\(\beta_\eta\)</span> :</strong> Produit des coefficients dans <span class="math inline">\(\{-\eta, \ldots, \eta\}\)</span> avec distribution proche d’une gaussienne discrète.</p>
+<p><strong>Compromis :</strong> - <span class="math inline">\(\eta\)</span> plus petit → meilleure probabilité de déchiffrement correct - <span class="math inline">\(\eta\)</span> plus grand → plus de sécurité</p>
+</section>
+</section>
+<section id="tableau-récapitulatif" class="level4">
+<h4 class="anchored" data-anchor-id="tableau-récapitulatif">Tableau Récapitulatif</h4>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Paramètre</th>
+<th>Kyber512</th>
+<th>Kyber768</th>
+<th>Kyber1024</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Niveau NIST</td>
+<td>1</td>
+<td>3</td>
+<td>5</td>
+</tr>
+<tr class="even">
+<td>Équivalent</td>
+<td>AES-128</td>
+<td>AES-192</td>
+<td>AES-256</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(k\)</span></td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\eta_1\)</span></td>
+<td>3</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td>Clé publique</td>
+<td>800 B</td>
+<td>1184 B</td>
+<td>1568 B</td>
+</tr>
+<tr class="even">
+<td>Ciphertext</td>
+<td>768 B</td>
+<td>1088 B</td>
+<td>1568 B</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="sécurité-de-kyber-kem" class="level3">
+<h3 class="anchored" data-anchor-id="sécurité-de-kyber-kem">Sécurité de Kyber-KEM</h3>
+<section id="base-théorique-de-la-sécurité" class="level4">
+<h4 class="anchored" data-anchor-id="base-théorique-de-la-sécurité">Base Théorique de la Sécurité</h4>
+<section id="hypothèse-de-sécurité-fondamentale" class="level5">
+<h5 class="anchored" data-anchor-id="hypothèse-de-sécurité-fondamentale">Hypothèse de sécurité fondamentale</h5>
+<p><strong>Proposition :</strong> La sécurité IND-CCA2 de Kyber-KEM repose sur l’hypothèse que <strong>D-MLWE est intraitable</strong>.</p>
+<p><strong>Réduction formelle :</strong> <span class="math display">\[\text{D-MLWE difficile} \Rightarrow \text{Kyber-PKE IND-CPA} \Rightarrow \text{Kyber-KEM IND-CCA2}\]</span></p>
+<p>(via transformation FO)</p>
+</section>
+<section id="justification-de-d-mlwe" class="level5">
+<h5 class="anchored" data-anchor-id="justification-de-d-mlwe">Justification de D-MLWE</h5>
+<p><strong>Lien avec les réseaux :</strong> - D-MLWE se réduit à des problèmes de réseaux (approx-SVP) - Ces problèmes sont <strong>NP-difficiles</strong> - <strong>Difficiles en moyenne</strong> (average-case hard)</p>
+<p><strong>Résistance quantique :</strong> Aucun algorithme quantique efficace connu pour résoudre approx-SVP avec des facteurs d’approximation utilisés dans Kyber.</p>
+</section>
+</section>
+<section id="choix-des-distributions-derreurs" class="level4">
+<h4 class="anchored" data-anchor-id="choix-des-distributions-derreurs">Choix des Distributions d’Erreurs</h4>
+<section id="distributions-centrées-binomiales" class="level5">
+<h5 class="anchored" data-anchor-id="distributions-centrées-binomiales">Distributions centrées binomiales</h5>
+<p><strong>Pourquoi <span class="math inline">\(\beta_\eta\)</span> ?</strong> - Échantillonnage <strong>efficace</strong> - Propriétés statistiques proches d’une gaussienne discrète - Analyse de sécurité bien comprise</p>
+</section>
+<section id="lien-avec-la-difficulté-des-réseaux" class="level5">
+<h5 class="anchored" data-anchor-id="lien-avec-la-difficulté-des-réseaux">Lien avec la difficulté des réseaux</h5>
+<p><strong>Propriété importante :</strong> Les distributions d’erreurs sont choisies pour que la difficulté de MLWE soit <strong>au moins celle</strong> de résoudre certains problèmes de réseaux dans le pire cas.</p>
+<p><strong>Théorème (informel) :</strong> Résoudre MLWE en moyenne est au moins aussi difficile que résoudre approx-SVP dans le pire cas (même quantiquement).</p>
+</section>
+</section>
+<section id="analyse-de-sécurité-concrète" class="level4">
+<h4 class="anchored" data-anchor-id="analyse-de-sécurité-concrète">Analyse de Sécurité Concrète</h4>
+<section id="modèles-dattaques-considérés" class="level5">
+<h5 class="anchored" data-anchor-id="modèles-dattaques-considérés">Modèles d’attaques considérés</h5>
+<p><strong>1. Attaques par réseaux (Lattice attacks) :</strong> - <strong>BKZ</strong> (Block Korkine-Zolotarev) - <strong>Sieving algorithms</strong> (GaussSieve, etc.) - Estimation du coût pour différentes dimensions</p>
+<p><strong>2. Attaques algébriques :</strong> - Exploitation de la structure d’anneau - Aucune attaque efficace connue</p>
+<p><strong>3. Attaques combinatoires :</strong> - Recherche exhaustive - Meet-in-the-middle - Coût exponentiel</p>
+</section>
+<section id="estimation-de-sécurité" class="level5">
+<h5 class="anchored" data-anchor-id="estimation-de-sécurité">Estimation de sécurité</h5>
+<p><strong>Méthode :</strong> Utiliser des outils comme le <strong>Lattice Estimator</strong> pour estimer le coût des meilleures attaques connues.</p>
+<p><strong>Résultat pour Kyber768 (exemple) :</strong> - Coût classique : ~<span class="math inline">\(2^{207}\)</span> opérations (niveau 3 NIST) - Coût quantique : ~<span class="math inline">\(2^{174}\)</span> opérations</p>
+<p><strong>Marge de sécurité :</strong> Les paramètres incluent une <strong>marge de sécurité</strong> substantielle.</p>
+</section>
+</section>
+</section>
+<section id="attaques-dimplémentation" class="level3">
+<h3 class="anchored" data-anchor-id="attaques-dimplémentation">Attaques d’Implémentation</h3>
+<section id="attaques-par-canaux-auxiliaires-side-channel" class="level4">
+<h4 class="anchored" data-anchor-id="attaques-par-canaux-auxiliaires-side-channel">Attaques par Canaux Auxiliaires (Side-Channel)</h4>
+<section id="types-dattaques" class="level5">
+<h5 class="anchored" data-anchor-id="types-dattaques">Types d’attaques</h5>
+<p><strong>1. Analyse de consommation électrique (Power Analysis) :</strong> - <strong>SPA</strong> (Simple Power Analysis) - <strong>DPA</strong> (Differential Power Analysis) - Exploitation de la corrélation entre consommation et données secrètes</p>
+<p><strong>2. Analyse temporelle (Timing Attacks) :</strong> - Mesure du temps d’exécution - Détection de branches conditionnelles dépendant du secret - Exemple : if (secret_bit == 1) peut révéler le bit</p>
+<p><strong>3. Analyse électromagnétique (EM Analysis) :</strong> - Mesure des émissions électromagnétiques - Principe similaire à l’analyse de puissance</p>
+<p><strong>4. Attaques par cache :</strong> - Exploitation des accès mémoire cache - Flush+Reload, Prime+Probe</p>
+</section>
+<section id="vulnérabilités-dans-kyber" class="level5">
+<h5 class="anchored" data-anchor-id="vulnérabilités-dans-kyber">Vulnérabilités dans Kyber</h5>
+<p><strong>Points sensibles :</strong> - Génération de clés (échantillonnage du secret) - Déchiffrement (dépend de la clé secrète) - Comparaison dans FO (test <span class="math inline">\(c = c'\)</span>)</p>
+<p><strong>Exemples de fuites :</strong> - Temps variable selon les valeurs secrètes - Accès mémoire dépendant du secret</p>
+</section>
+<section id="contre-mesures" class="level5">
+<h5 class="anchored" data-anchor-id="contre-mesures">Contre-mesures</h5>
+<p><strong>Implémentation en temps constant :</strong> - Éviter les branches conditionnelles dépendant du secret - Utiliser des opérations arithmétiques au lieu de if/else - Masking des données sensibles</p>
+<p><strong>Blinding :</strong> Ajouter du bruit aléatoire aux calculs intermédiaires</p>
+<p><strong>Shuffling :</strong> Randomiser l’ordre des opérations</p>
+</section>
+</section>
+<section id="attaques-par-injection-de-fautes-fault-attacks" class="level4">
+<h4 class="anchored" data-anchor-id="attaques-par-injection-de-fautes-fault-attacks">Attaques par Injection de Fautes (Fault Attacks)</h4>
+<section id="principe" class="level5">
+<h5 class="anchored" data-anchor-id="principe">Principe</h5>
+<p><strong>Méthode :</strong> - Perturber délibérément le calcul (laser, glitch électrique, etc.) - Observer le comportement erroné - Déduire des informations sur le secret</p>
+</section>
+<section id="vulnérabilités-dans-kyber-1" class="level5">
+<h5 class="anchored" data-anchor-id="vulnérabilités-dans-kyber-1">Vulnérabilités dans Kyber</h5>
+<p><strong>Cibles potentielles :</strong> - Corruption du ciphertext <span class="math inline">\(c\)</span> avant comparaison - Modification du résultat de Decrypt - Skip de vérifications critiques</p>
+</section>
+<section id="contre-mesures-1" class="level5">
+<h5 class="anchored" data-anchor-id="contre-mesures-1">Contre-mesures</h5>
+<p><strong>Redondance des calculs :</strong> Effectuer les opérations critiques plusieurs fois</p>
+<p><strong>Détection de fautes :</strong> Vérifications d’intégrité, checksums</p>
+<p><strong>Code de correction d’erreurs :</strong> Encoder les données critiques</p>
+</section>
+</section>
+<section id="prudence-avec-les-nouveaux-algorithmes" class="level4">
+<h4 class="anchored" data-anchor-id="prudence-avec-les-nouveaux-algorithmes">Prudence avec les Nouveaux Algorithmes</h4>
+<section id="maturité-limitée" class="level5">
+<h5 class="anchored" data-anchor-id="maturité-limitée">Maturité limitée</h5>
+<p><strong>Contexte :</strong> Kyber et autres algorithmes post-quantiques sont <strong>relativement nouveaux</strong> (standardisés en 2022-2024).</p>
+<p><strong>Implications :</strong> - Moins de temps pour découvrir les vulnérabilités d’implémentation - Implémentations encore en évolution - Nouveaux vecteurs d’attaque peuvent émerger</p>
+</section>
+<section id="recommandations" class="level5">
+<h5 class="anchored" data-anchor-id="recommandations">Recommandations</h5>
+<p><strong>Pour les développeurs :</strong> - Utiliser des <strong>bibliothèques certifiées</strong> et auditées - Suivre les <strong>meilleures pratiques</strong> publiées par le NIST - Implémenter des <strong>contre-mesures</strong> dès la conception - Effectuer des <strong>audits de sécurité</strong> réguliers</p>
+<p><strong>Pour les utilisateurs :</strong> - ⚠️ <strong>Soyez prudent</strong> dans les environnements critiques - Préférer les implémentations <strong>validées</strong> - Considérer une <strong>approche hybride</strong> pendant la transition</p>
+</section>
+</section>
+</section>
+</section>
+<section id="aspects-pratiques-et-transition" class="level2">
+<h2 class="anchored" data-anchor-id="aspects-pratiques-et-transition">Aspects Pratiques et Transition</h2>
+<section id="crypto-agilité" class="level3">
+<h3 class="anchored" data-anchor-id="crypto-agilité">Crypto-Agilité</h3>
+<section id="définition-et-concepts" class="level4">
+<h4 class="anchored" data-anchor-id="définition-et-concepts">Définition et Concepts</h4>
+<section id="quest-ce-que-la-crypto-agilité" class="level5">
+<h5 class="anchored" data-anchor-id="quest-ce-que-la-crypto-agilité">Qu’est-ce que la crypto-agilité ?</h5>
+<p><strong>Définition :</strong> La <strong>crypto-agilité</strong> (cryptographic agility) est la capacité d’un système à <strong>basculer facilement</strong> entre différentes primitives cryptographiques sans refonte majeure de l’architecture.</p>
+<p><strong>Concrètement :</strong> Un système crypto-agile permet de : - Changer d’algorithme de chiffrement - Mettre à jour les mécanismes de signature - Modifier les protocoles de key agreement</p>
+<p>avec un minimum de modifications du code et de l’infrastructure.</p>
+</section>
+<section id="principes-de-conception" class="level5">
+<h5 class="anchored" data-anchor-id="principes-de-conception">Principes de conception</h5>
+<p><strong>Abstraction :</strong> Utiliser des interfaces abstraites pour les opérations cryptographiques :</p>
+<pre><code>interface KEM {
+    KeyGen() -&gt; (pk, sk)
+    Encapsulate(pk) -&gt; (c, K)
+    Decapsulate(sk, c) -&gt; K
+}</code></pre>
+<p><strong>Configuration externe :</strong> Spécifier les algorithmes via fichiers de configuration, pas en dur dans le code.</p>
+<p><strong>Modularité :</strong> Composants cryptographiques interchangeables comme des “plugins”.</p>
+</section>
+</section>
+<section id="objectifs-dun-système-crypto-agile" class="level4">
+<h4 class="anchored" data-anchor-id="objectifs-dun-système-crypto-agile">Objectifs d’un Système Crypto-Agile</h4>
+<section id="adaptation-rapide-aux-menaces" class="level5">
+<h5 class="anchored" data-anchor-id="adaptation-rapide-aux-menaces">Adaptation rapide aux menaces</h5>
+<p><strong>Scénario 1 : Vulnérabilité découverte</strong> Si un algorithme est cassé ou affaibli : - Basculer rapidement vers une alternative - Minimiser le temps d’exposition - Limiter les perturbations opérationnelles</p>
+<p><strong>Scénario 2 : Nouvelle menace</strong> Apparition d’un ordinateur quantique cryptographiquement pertinent : - Transition vers post-quantique immédiate - Pas de refonte complète des systèmes</p>
+</section>
+<section id="flexibilité-et-évolutivité" class="level5">
+<h5 class="anchored" data-anchor-id="flexibilité-et-évolutivité">Flexibilité et évolutivité</h5>
+<p><strong>Avantages à long terme :</strong> - Adaptation aux évolutions technologiques - Support de multiples niveaux de sécurité - Personnalisation selon les besoins</p>
+<p><strong>Coûts réduits :</strong> - Moins de développement pour chaque transition - Infrastructure réutilisable - Formation simplifiée</p>
+</section>
+</section>
+<section id="importance-pour-la-transition-post-quantique" class="level4">
+<h4 class="anchored" data-anchor-id="importance-pour-la-transition-post-quantique">Importance pour la Transition Post-Quantique</h4>
+<section id="ampleur-de-la-migration" class="level5">
+<h5 class="anchored" data-anchor-id="ampleur-de-la-migration">Ampleur de la migration</h5>
+<p><strong>Défi historique :</strong> La transition vers la cryptographie post-quantique sera probablement la <strong>plus grande migration cryptographique de l’histoire</strong>.</p>
+<p><strong>Échelle :</strong> - Milliards de dispositifs à mettre à jour - Infrastructure Internet mondiale - Systèmes embarqués (IoT, cartes à puce) - Certificats, signatures, protocoles</p>
+</section>
+<section id="incertitude-temporelle" class="level5">
+<h5 class="anchored" data-anchor-id="incertitude-temporelle">Incertitude temporelle</h5>
+<p><strong>Problème :</strong> On ne sait pas <strong>quand</strong> un ordinateur quantique cryptographiquement pertinent sera construit.</p>
+<p><strong>Implications :</strong> - Besoin de préparer la transition <strong>maintenant</strong> - Mais timing exact inconnu (5 ans ? 20 ans ?) - Système agile permet d’être prêt pour toute échéance</p>
+</section>
+<section id="complexité-de-la-transition" class="level5">
+<h5 class="anchored" data-anchor-id="complexité-de-la-transition">Complexité de la transition</h5>
+<p><strong>Défis techniques :</strong> - Compatibilité descendante nécessaire - Coexistence d’algorithmes classiques et post-quantiques - Tests et validation à grande échelle - Formation des développeurs et administrateurs</p>
+<p><strong>La crypto-agilité facilite :</strong> - Transition progressive - Coexistence de plusieurs algorithmes - Retour en arrière si nécessaire</p>
+</section>
+</section>
+</section>
+<section id="recommandations-du-nist" class="level3">
+<h3 class="anchored" data-anchor-id="recommandations-du-nist">Recommandations du NIST</h3>
+<section id="ne-pas-abandonner-les-algorithmes-classiques" class="level4">
+<h4 class="anchored" data-anchor-id="ne-pas-abandonner-les-algorithmes-classiques">Ne Pas Abandonner les Algorithmes Classiques</h4>
+<section id="approche-recommandée" class="level5">
+<h5 class="anchored" data-anchor-id="approche-recommandée">Approche recommandée</h5>
+<p><strong>Position du NIST :</strong> Ne <strong>pas abandonner complètement</strong> les algorithmes cryptographiques classiques (RSA, ECC) pendant la transition.</p>
+</section>
+<section id="justifications" class="level5">
+<h5 class="anchored" data-anchor-id="justifications">Justifications</h5>
+<p><strong>Raison 1 : Transition plus douce</strong> - Permet une <strong>coexistence</strong> progressive - Maintient la compatibilité avec systèmes existants - Réduit les risques de perturbations - Conserve les <strong>optimisations actuelles</strong> (matériel, bibliothèques)</p>
+<p><strong>Raison 2 : Nouvelles mathématiques</strong> - Cryptographie post-quantique basée sur <strong>mathématiques moins matures</strong> - Sécurité <strong>empirique</strong> plus que théorique dans certains cas - Moins de temps pour analyse cryptanalytique - Risque de vulnérabilités non découvertes</p>
+<p><strong>Raison 3 : Incertitude temporelle</strong> - Horizon des ordinateurs quantiques <strong>incertain</strong> - Peut-être 10 ans, peut-être 30 ans - Pas de raison d’abandonner sécurité actuelle prématurément - Les algorithmes classiques restent sûrs <strong>aujourd’hui</strong></p>
+</section>
+</section>
+<section id="approche-hybride" class="level4">
+<h4 class="anchored" data-anchor-id="approche-hybride">Approche Hybride</h4>
+<section id="concept-dhybridation" class="level5">
+<h5 class="anchored" data-anchor-id="concept-dhybridation">Concept d’hybridation</h5>
+<p><strong>Principe :</strong> <strong>Combiner</strong> algorithmes classiques et post-quantiques dans un même système.</p>
+<p><strong>Schéma hybride typique :</strong> 1. Établir une clé avec algorithme classique (ex: ECDH) 2. Établir une clé avec algorithme post-quantique (ex: Kyber) 3. Combiner les deux clés (ex: <span class="math inline">\(K = \text{KDF}(K_{\text{classique}} \| K_{\text{PQ}})\)</span>)</p>
+</section>
+<section id="avantages-de-lapproche-hybride" class="level5">
+<h5 class="anchored" data-anchor-id="avantages-de-lapproche-hybride">Avantages de l’approche hybride</h5>
+<p><strong>Sécurité garantie :</strong> Le système reste sûr si <strong>au moins un</strong> des deux algorithmes est sûr : - Si ordinateur quantique arrive : post-quantique protège - Si vulnérabilité dans post-quantique : classique protège - <strong>Double protection</strong></p>
+<p><strong>Transition progressive :</strong> - Déploiement graduel possible - Test en conditions réelles - Ajustements selon retours d’expérience</p>
+<p><strong>Flexibilité :</strong> - Adaptation selon applications - Choix du niveau de sécurité - Balance performance/sécurité</p>
+</section>
+<section id="exemples-dhybridation" class="level5">
+<h5 class="anchored" data-anchor-id="exemples-dhybridation">Exemples d’hybridation</h5>
+<p><strong>TLS 1.3 hybride :</strong> - Key exchange : X25519 (classique) + Kyber768 (post-quantique) - Signature : ECDSA + Dilithium</p>
+<p><strong>SSH hybride :</strong> - Authentification : RSA + SPHINCS+ - Key exchange : ECDH + Kyber</p>
+</section>
+</section>
+</section>
+<section id="implémentation-de-kyber" class="level3">
+<h3 class="anchored" data-anchor-id="implémentation-de-kyber">Implémentation de Kyber</h3>
+<section id="considérations-de-sécurité" class="level4">
+<h4 class="anchored" data-anchor-id="considérations-de-sécurité">Considérations de Sécurité</h4>
+<section id="génération-de-nombres-aléatoires" class="level5">
+<h5 class="anchored" data-anchor-id="génération-de-nombres-aléatoires">Génération de nombres aléatoires</h5>
+<p><strong>Importance critique :</strong> La sécurité de Kyber dépend fortement de la <strong>qualité du générateur aléatoire</strong>.</p>
+<p><strong>Exigences :</strong> - Utiliser un <strong>CSPRNG</strong> (Cryptographically Secure Pseudo-Random Number Generator) - Sources d’entropie appropriées (/dev/urandom, RDRAND, etc.) - Graine initiale suffisamment aléatoire</p>
+<p><strong>À éviter :</strong> ❌ Générateurs non cryptographiques (rand(), Math.random()) ❌ Graines prévisibles ou réutilisées ❌ Sources d’entropie insuffisantes</p>
+</section>
+<section id="contre-mesures-side-channel" class="level5">
+<h5 class="anchored" data-anchor-id="contre-mesures-side-channel">Contre-mesures side-channel</h5>
+<p><strong>Implémentation en temps constant :</strong> Éviter tout branchement ou accès mémoire dépendant de données secrètes.</p>
+<p><strong>Masking :</strong> - Ajouter du bruit aléatoire aux calculs - Rend l’analyse de puissance plus difficile</p>
+<p><strong>Shuffling et blinding :</strong> - Randomiser l’ordre des opérations - Masquer les données intermédiaires</p>
+</section>
+<section id="validation-des-entrées" class="level5">
+<h5 class="anchored" data-anchor-id="validation-des-entrées">Validation des entrées</h5>
+<p><strong>Vérifications nécessaires :</strong> - Taille des clés publiques reçues - Validité des ciphertexts - Cohérence des paramètres</p>
+<p><strong>Protection contre malformations :</strong> Rejeter les entrées invalides proprement (sans fuite d’information).</p>
+</section>
+</section>
+<section id="optimisations-de-performance" class="level4">
+<h4 class="anchored" data-anchor-id="optimisations-de-performance">Optimisations de Performance</h4>
+<section id="number-theoretic-transform-ntt" class="level5">
+<h5 class="anchored" data-anchor-id="number-theoretic-transform-ntt">Number Theoretic Transform (NTT)</h5>
+<p><strong>Principe :</strong> Transformation similaire à la FFT pour la multiplication de polynômes modulo <span class="math inline">\(X^n + 1\)</span>.</p>
+<p><strong>Avantage :</strong> - Multiplication en <span class="math inline">\(O(n \log n)\)</span> au lieu de <span class="math inline">\(O(n^2)\)</span> - Critique pour les performances de Kyber</p>
+<p><strong>Implémentation :</strong> Utiliser des bibliothèques optimisées (AVX2, NEON sur ARM).</p>
+</section>
+<section id="vectorisation" class="level5">
+<h5 class="anchored" data-anchor-id="vectorisation">Vectorisation</h5>
+<p><strong>SIMD (Single Instruction, Multiple Data) :</strong> - Traiter plusieurs coefficients simultanément - Extensions : AVX2, AVX-512 (x86), NEON (ARM)</p>
+<p><strong>Gain de performance :</strong> Facteur 2-4x typiquement.</p>
+</section>
+<section id="matériel-dédié" class="level5">
+<h5 class="anchored" data-anchor-id="matériel-dédié">Matériel dédié</h5>
+<p><strong>Accélération matérielle :</strong> - Coprocesseurs cryptographiques - FPGA - ASICs dédiés</p>
+<p><strong>Cas d’usage :</strong> Dispositifs haute performance ou très contraints (IoT).</p>
+</section>
+</section>
+<section id="conformité-aux-standards" class="level4">
+<h4 class="anchored" data-anchor-id="conformité-aux-standards">Conformité aux Standards</h4>
+<section id="spécifications-du-nist" class="level5">
+<h5 class="anchored" data-anchor-id="spécifications-du-nist">Spécifications du NIST</h5>
+<p><strong>Documentation de référence :</strong> - FIPS 203 (standard Kyber final) - Spécifications techniques détaillées - Vecteurs de test</p>
+<p><strong>Respect des spécifications :</strong> Implémenter <strong>exactement</strong> selon le standard pour : - Interopérabilité - Validation - Certification</p>
+</section>
+<section id="certifications" class="level5">
+<h5 class="anchored" data-anchor-id="certifications">Certifications</h5>
+<p><strong>Utiliser des implémentations certifiées :</strong> - Bibliothèques auditées (liboqs, PQClean) - Implémentations validées NIST - Code source ouvert et auditable</p>
+<p><strong>Processus de validation :</strong> - Tests avec vecteurs officiels - Audits de sécurité - Peer review</p>
+</section>
+<section id="mises-à-jour" class="level5">
+<h5 class="anchored" data-anchor-id="mises-à-jour">Mises à jour</h5>
+<p><strong>Rester à jour :</strong> - Suivre les bulletins du NIST - Appliquer les correctifs de sécurité - Surveiller les nouvelles recommandations</p>
+</section>
+</section>
+</section>
+<section id="comparaisons-avec-autres-approches-post-quantiques" class="level3">
+<h3 class="anchored" data-anchor-id="comparaisons-avec-autres-approches-post-quantiques">Comparaisons avec Autres Approches Post-Quantiques</h3>
+<section id="familles-de-cryptographie-post-quantique" class="level4">
+<h4 class="anchored" data-anchor-id="familles-de-cryptographie-post-quantique">Familles de Cryptographie Post-Quantique</h4>
+<section id="basés-sur-les-réseaux-lattice-based" class="level5">
+<h5 class="anchored" data-anchor-id="basés-sur-les-réseaux-lattice-based">1. Basés sur les réseaux (Lattice-based)</h5>
+<p><strong>Algorithmes :</strong> - <strong>Kyber</strong> (KEM) - <strong>Dilithium</strong> (signatures) - NTRU, FrodoKEM</p>
+<p><strong>Avantages :</strong> - <strong>Performances</strong> excellentes (clés, vitesse) - <strong>Bien étudiés</strong> théoriquement - <strong>Flexibles</strong> (différents niveaux de sécurité) - Preuves de sécurité solides</p>
+<p><strong>Inconvénients :</strong> - Mathématiques relativement récentes - Structure algébrique potentiellement exploitable</p>
+<p><strong>Kyber appartient à cette famille.</strong></p>
+</section>
+<section id="basés-sur-les-codes-code-based" class="level5">
+<h5 class="anchored" data-anchor-id="basés-sur-les-codes-code-based">2. Basés sur les codes (Code-based)</h5>
+<p><strong>Algorithmes :</strong> - <strong>Classic McEliece</strong> - BIKE, HQC</p>
+<p><strong>Avantages :</strong> - <strong>Très mature</strong> (30+ ans d’étude) - Sécurité bien comprise - Résistance structurelle forte</p>
+<p><strong>Inconvénients :</strong> - <strong>Très grandes clés</strong> (centaines de Ko) - Moins flexibles en taille</p>
+<p><strong>Comparaison avec Kyber :</strong> - McEliece : clé publique ~1 Mo vs Kyber768 : ~1 Ko - Kyber préféré pour plupart des applications</p>
+</section>
+<section id="basés-sur-les-hash-hash-based" class="level5">
+<h5 class="anchored" data-anchor-id="basés-sur-les-hash-hash-based">3. Basés sur les hash (Hash-based)</h5>
+<p><strong>Algorithmes :</strong> - <strong>SPHINCS+</strong> - XMSS, LMS</p>
+<p><strong>Avantages :</strong> - Sécurité basée <strong>uniquement sur fonctions de hachage</strong> - Hypothèses minimales - Très conservateur</p>
+<p><strong>Inconvénients :</strong> - <strong>Signatures volumineuses</strong> (10-50 Ko) - Plus lent - Stateful pour certains (XMSS)</p>
+<p><strong>Usage :</strong> Principalement pour signatures, pas KEM.</p>
+</section>
+<section id="basés-sur-les-isogénies-isogeny-based" class="level5">
+<h5 class="anchored" data-anchor-id="basés-sur-les-isogénies-isogeny-based">4. Basés sur les isogénies (Isogeny-based)</h5>
+<p><strong>Algorithmes :</strong> - SIKE (❌ <strong>cassé en 2022</strong>) - Nouveaux candidats en développement</p>
+<p><strong>Historique :</strong> - Prometteur initialement (clés très petites) - SIKE cassé en quelques heures sur PC standard - Famille moins mature</p>
+<p><strong>État actuel :</strong> - Recherche active mais prudence - Pas recommandé pour déploiement production</p>
+</section>
+</section>
+<section id="pourquoi-kyber-a-été-choisi-par-le-nist" class="level4">
+<h4 class="anchored" data-anchor-id="pourquoi-kyber-a-été-choisi-par-le-nist">Pourquoi Kyber a été Choisi par le NIST</h4>
+<section id="sélection-du-nist" class="level5">
+<h5 class="anchored" data-anchor-id="sélection-du-nist">Sélection du NIST</h5>
+<p><strong>Processus :</strong> Compétition post-quantique du NIST (2016-2024) : - Round 1 : 69 candidats - Round 2 : 26 candidats - Round 3 : 7 finalistes - <strong>Kyber sélectionné</strong> en 2022, standardisé en 2024 (FIPS 203)</p>
+</section>
+<section id="critères-de-sélection" class="level5">
+<h5 class="anchored" data-anchor-id="critères-de-sélection">Critères de sélection</h5>
+<p><strong>Équilibre performance/sécurité :</strong> Kyber offre un excellent compromis : - Tailles de clés <strong>raisonnables</strong> (800-1500 octets) - <strong>Vitesse</strong> élevée (ms pour encaps/decaps) - <strong>Sécurité</strong> prouvée et configurable</p>
+<p><strong>Flexibilité :</strong> - Trois niveaux de sécurité (512, 768, 1024) - Adaptable aux différents cas d’usage</p>
+<p><strong>Maturité relative :</strong> - Fondements mathématiques <strong>bien étudiés</strong> (réseaux) - Analyse cryptanalytique intensive - Pas de faiblesse majeure découverte</p>
+<p><strong>Implémentabilité :</strong> - Peut être implémenté sur matériel <strong>varié</strong> - Des serveurs aux dispositifs embarqués - Optimisations possibles (NTT, SIMD)</p>
+</section>
+<section id="écosystème-et-adoption" class="level5">
+<h5 class="anchored" data-anchor-id="écosystème-et-adoption">Écosystème et adoption</h5>
+<p><strong>Support industriel :</strong> - Bibliothèques disponibles (liboqs, Bouncy Castle, etc.) - Intégration dans TLS, SSH, VPN - Support des navigateurs (Chrome, Firefox)</p>
+<p><strong>Standardisation complémentaire :</strong> - Dilithium pour signatures (même famille que Kyber) - SPHINCS+ comme backup conservateur</p>
+</section>
+</section>
+</section>
+</section>
+<section id="exemple-pédagogique-kyber-jouet" class="level2">
+<h2 class="anchored" data-anchor-id="exemple-pédagogique-kyber-jouet">Exemple Pédagogique : Kyber Jouet</h2>
+<section id="avertissement-important" class="level3">
+<h3 class="anchored" data-anchor-id="avertissement-important">Avertissement Important</h3>
+<section id="nature-de-lexemple" class="level4">
+<h4 class="anchored" data-anchor-id="nature-de-lexemple">Nature de l’exemple</h4>
+<p><strong>⚠️ IMPORTANT :</strong> Les paramètres utilisés ci-dessous sont <strong>minuscules</strong> et fournis <strong>uniquement à des fins pédagogiques</strong>.</p>
+<p><strong>❌ Ces paramètres ne sont PAS cryptographiquement sûrs.</strong></p>
+</section>
+<section id="objectif-pédagogique" class="level4">
+<h4 class="anchored" data-anchor-id="objectif-pédagogique">Objectif pédagogique</h4>
+<p><strong>But :</strong> Comprendre les <strong>mécanismes</strong> et <strong>calculs</strong> derrière Kyber-KEM sans se perdre dans des nombres gigantesques.</p>
+<p><strong>Approche :</strong> - Paramètres très réduits - Calculs faisables à la main - Logique identique au vrai Kyber</p>
+</section>
+</section>
+<section id="configuration-de-lanneau-jouet" class="level3">
+<h3 class="anchored" data-anchor-id="configuration-de-lanneau-jouet">Configuration de l’Anneau Jouet</h3>
+<section id="paramètres-réduits" class="level4">
+<h4 class="anchored" data-anchor-id="paramètres-réduits">Paramètres réduits</h4>
+<p><strong>Choix des paramètres :</strong> - <span class="math inline">\(n = 4\)</span> (au lieu de 256) - <span class="math inline">\(q = 17\)</span> (au lieu de 3329) - <span class="math inline">\(k = 2\)</span> (comme Kyber512) - Erreurs : coefficients dans <span class="math inline">\(\{-1, 0, 1\}\)</span></p>
+<p><strong>Anneau de polynômes :</strong> <span class="math display">\[R_q = \mathbb{Z}_{17}[X]/(X^4 + 1)\]</span></p>
+</section>
+<section id="représentation-des-polynômes" class="level4">
+<h4 class="anchored" data-anchor-id="représentation-des-polynômes">Représentation des polynômes</h4>
+<p><strong>Éléments de <span class="math inline">\(R_q\)</span> :</strong> <span class="math display">\[p(X) = a_0 + a_1 X + a_2 X^2 + a_3 X^3, \quad a_i \in \{0, 1, \ldots, 16\}\]</span></p>
+<p><strong>Notation vectorielle :</strong> On notera parfois <span class="math inline">\(p = [a_0, a_1, a_2, a_3]\)</span> pour simplifier.</p>
+<p><strong>Exemple :</strong> <span class="math display">\[p(X) = 1 + 3X + 2X^2 + 5X^3 = [1, 3, 2, 5]\]</span></p>
+</section>
+<section id="réduction-modulo-x4-1" class="level4">
+<h4 class="anchored" data-anchor-id="réduction-modulo-x4-1">Réduction modulo <span class="math inline">\(X^4 + 1\)</span></h4>
+<p><strong>Règle :</strong> <span class="math display">\[X^4 \equiv -1 \equiv 16 \pmod{17}\]</span></p>
+<p><strong>Exemple de réduction :</strong> <span class="math display">\[X^5 = X \cdot X^4 \equiv X \cdot (-1) = -X \equiv 16X \pmod{X^4+1, 17}\]</span></p>
+</section>
+</section>
+<section id="étape-1-génération-de-clés-récepteur" class="level3">
+<h3 class="anchored" data-anchor-id="étape-1-génération-de-clés-récepteur">Étape 1 : Génération de Clés (Récepteur)</h3>
+<section id="paramètres-publics" class="level4">
+<h4 class="anchored" data-anchor-id="paramètres-publics">Paramètres publics</h4>
+<p><strong>Matrice publique <span class="math inline">\(\mathbf{A} \in R_q^{2 \times 2}\)</span> :</strong></p>
+<p>Supposons (générée aléatoirement ou de manière déterministe via SHAKE) :</p>
+<p><span class="math display">\[\mathbf{A} = \begin{pmatrix}
+[2, 1, 4, 3] &amp; [5, 2, 1, 6] \\
+[3, 5, 2, 1] &amp; [1, 4, 3, 2]
+\end{pmatrix}\]</span></p>
+<p>(Chaque entrée est un polynôme dans <span class="math inline">\(R_q\)</span>)</p>
+</section>
+<section id="vecteur-secret" class="level4">
+<h4 class="anchored" data-anchor-id="vecteur-secret">Vecteur secret</h4>
+<p><strong>Tirage d’un petit secret <span class="math inline">\(\mathbf{s} \in R_q^2\)</span> :</strong></p>
+<p><span class="math display">\[\mathbf{s} = \begin{pmatrix} s_1 \\ s_2 \end{pmatrix} = \begin{pmatrix} [1, -1, 0, 1] \\ [0, 1, -1, 0] \end{pmatrix}\]</span></p>
+<p><strong>Interprétation :</strong> - <span class="math inline">\(s_1(X) = 1 - X + X^3\)</span> - <span class="math inline">\(s_2(X) = X - X^2\)</span> - Coefficients petits (dans <span class="math inline">\(\{-1, 0, 1\}\)</span>)</p>
+</section>
+<section id="vecteur-derreur" class="level4">
+<h4 class="anchored" data-anchor-id="vecteur-derreur">Vecteur d’erreur</h4>
+<p><strong>Tirage d’un petit vecteur d’erreur <span class="math inline">\(\mathbf{e} \in R_q^2\)</span> :</strong></p>
+<p><span class="math display">\[\mathbf{e} = \begin{pmatrix} e_1 \\ e_2 \end{pmatrix} = \begin{pmatrix} [0, 1, 0, -1] \\ [-1, 0, 1, 0] \end{pmatrix}\]</span></p>
+<p><strong>Interprétation :</strong> - <span class="math inline">\(e_1(X) = X - X^3\)</span> - <span class="math inline">\(e_2(X) = -1 + X^2\)</span></p>
+</section>
+<section id="calcul-de-la-clé-publique" class="level4">
+<h4 class="anchored" data-anchor-id="calcul-de-la-clé-publique">Calcul de la clé publique</h4>
+<p><strong>Formule :</strong> <span class="math display">\[\mathbf{t} = \mathbf{A}\mathbf{s} + \mathbf{e} \pmod{q}\]</span></p>
+<p><strong>Calcul détaillé :</strong></p>
+<p><span class="math display">\[\mathbf{t} = \begin{pmatrix}
+[2, 1, 4, 3] &amp; [5, 2, 1, 6] \\
+[3, 5, 2, 1] &amp; [1, 4, 3, 2]
+\end{pmatrix} \begin{pmatrix} [1, -1, 0, 1] \\ [0, 1, -1, 0] \end{pmatrix} + \begin{pmatrix} [0, 1, 0, -1] \\ [-1, 0, 1, 0] \end{pmatrix}\]</span></p>
+<p>(Les calculs exacts nécessiteraient de faire les multiplications de polynômes dans <span class="math inline">\(R_q\)</span>)</p>
+<p><strong>Résultat simplifié (après calculs) :</strong> <span class="math display">\[\mathbf{t} = \begin{pmatrix} t_1 \\ t_2 \end{pmatrix} = \begin{pmatrix} [7, 11, 2, 9] \\ [4, 8, 15, 3] \end{pmatrix}\]</span></p>
+</section>
+<section id="clés-résultantes" class="level4">
+<h4 class="anchored" data-anchor-id="clés-résultantes">Clés résultantes</h4>
+<p><strong>Clé publique :</strong> <span class="math display">\[pk = (\mathbf{A}, \mathbf{t})\]</span></p>
+<p><strong>Clé secrète :</strong> <span class="math display">\[sk = \mathbf{s}\]</span></p>
+</section>
+</section>
+<section id="étape-2-encapsulation-émetteur" class="level3">
+<h3 class="anchored" data-anchor-id="étape-2-encapsulation-émetteur">Étape 2 : Encapsulation (Émetteur)</h3>
+<section id="partie-1-choix-du-message-et-randomness" class="level4">
+<h4 class="anchored" data-anchor-id="partie-1-choix-du-message-et-randomness">Partie 1 : Choix du message et randomness</h4>
+<p><strong>Message aléatoire :</strong> L’émetteur choisit un message <span class="math inline">\(m \in \{0, 1\}^4\)</span> qui deviendra la clé partagée :</p>
+<p><span class="math display">\[m = [1, 0, 1, 1]\]</span></p>
+<p><strong>Encodage du message :</strong> <span class="math display">\[\text{Encode}(m) = \left\lfloor \frac{q}{2} \right\rfloor \cdot m = 8 \cdot [1, 0, 1, 1] = [8, 0, 8, 8]\]</span></p>
+<p><strong>Vecteur aléatoire court <span class="math inline">\(\mathbf{r} \in R_q^2\)</span> :</strong> <span class="math display">\[\mathbf{r} = \begin{pmatrix} r_1 \\ r_2 \end{pmatrix} = \begin{pmatrix} [1, 0, -1, 0] \\ [-1, 1, 0, 0] \end{pmatrix}\]</span></p>
+<p><strong>Erreurs <span class="math inline">\(\mathbf{e}_1 \in R_q^2\)</span> et <span class="math inline">\(e_2 \in R_q\)</span> :</strong> <span class="math display">\[\mathbf{e}_1 = \begin{pmatrix} [0, -1, 0, 1] \\ [1, 0, 0, -1] \end{pmatrix}, \quad e_2 = [0, 1, -1, 0]\]</span></p>
+</section>
+<section id="partie-2-calcul-du-chiffré" class="level4">
+<h4 class="anchored" data-anchor-id="partie-2-calcul-du-chiffré">Partie 2 : Calcul du chiffré</h4>
+<p><strong>Première composante :</strong> <span class="math display">\[\mathbf{u} = \mathbf{A}^T \mathbf{r} + \mathbf{e}_1 \pmod{q}\]</span></p>
+<p><strong>Transposée de <span class="math inline">\(\mathbf{A}\)</span> :</strong> <span class="math display">\[\mathbf{A}^T = \begin{pmatrix}
+[2, 1, 4, 3] &amp; [3, 5, 2, 1] \\
+[5, 2, 1, 6] &amp; [1, 4, 3, 2]
+\end{pmatrix}\]</span></p>
+<p><strong>Calcul (simplifié) :</strong> <span class="math display">\[\mathbf{u} = \begin{pmatrix} u_1 \\ u_2 \end{pmatrix} = \begin{pmatrix} [5, 14, 3, 11] \\ [9, 2, 16, 7] \end{pmatrix}\]</span></p>
+<p><strong>Seconde composante :</strong> <span class="math display">\[v = \mathbf{t}^T \mathbf{r} + e_2 + \text{Encode}(m) \pmod{q}\]</span></p>
+<p><strong>Calcul (simplifié) :</strong> <span class="math display">\[v = [12, 5, 11, 14]\]</span></p>
+</section>
+<section id="sortie-de-lencapsulation" class="level4">
+<h4 class="anchored" data-anchor-id="sortie-de-lencapsulation">Sortie de l’encapsulation</h4>
+<p><strong>Ciphertext :</strong> <span class="math display">\[c = (\mathbf{u}, v)\]</span></p>
+<p><strong>Clé partagée (dérivée de <span class="math inline">\(m\)</span>) :</strong> <span class="math display">\[K = H(m) = H([1, 0, 1, 1])\]</span></p>
+<p>(Dans le vrai Kyber, on utilise SHA3-256)</p>
+</section>
+</section>
+<section id="étape-3-décapsulation-récepteur" class="level3">
+<h3 class="anchored" data-anchor-id="étape-3-décapsulation-récepteur">Étape 3 : Décapsulation (Récepteur)</h3>
+<section id="calcul-du-message" class="level4">
+<h4 class="anchored" data-anchor-id="calcul-du-message">Calcul du message</h4>
+<p><strong>Formule :</strong> <span class="math display">\[w = v - \mathbf{s}^T \mathbf{u} \pmod{q}\]</span></p>
+<p><strong>Développement :</strong> <span class="math display">\[w = v - (s_1 \cdot u_1 + s_2 \cdot u_2)\]</span></p>
+<p><strong>Calcul détaillé :</strong></p>
+<p><span class="math display">\[s_1 \cdot u_1 = [1, -1, 0, 1] \cdot [5, 14, 3, 11]\]</span></p>
+<p>(multiplication de polynômes dans <span class="math inline">\(R_q\)</span>)</p>
+<p><span class="math display">\[s_2 \cdot u_2 = [0, 1, -1, 0] \cdot [9, 2, 16, 7]\]</span></p>
+<p><strong>Résultat (après calculs) :</strong> <span class="math display">\[\mathbf{s}^T \mathbf{u} = [4, 5, 3, 6]\]</span></p>
+<p><strong>Donc :</strong> <span class="math display">\[w = [12, 5, 11, 14] - [4, 5, 3, 6] = [8, 0, 8, 8] \pmod{17}\]</span></p>
+</section>
+<section id="décodage" class="level4">
+<h4 class="anchored" data-anchor-id="décodage">Décodage</h4>
+<p><strong>Rappel de l’encodage :</strong> <span class="math display">\[\text{Encode}(m) = [8, 0, 8, 8]\]</span></p>
+<p><strong>Décodage :</strong> Pour chaque coefficient de <span class="math inline">\(w = [w_0, w_1, w_2, w_3]\)</span> :</p>
+<p><span class="math display">\[m_i = \begin{cases}
+0 &amp; \text{si } |w_i| &lt; q/4 \approx 4 \\
+1 &amp; \text{si } |w_i - 8| &lt; q/4
+\end{cases}\]</span></p>
+<p><strong>Application :</strong> - <span class="math inline">\(w_0 = 8\)</span> : <span class="math inline">\(|8 - 8| = 0 &lt; 4\)</span> → <span class="math inline">\(m_0 = 1\)</span> ✓ - <span class="math inline">\(w_1 = 0\)</span> : <span class="math inline">\(|0| = 0 &lt; 4\)</span> → <span class="math inline">\(m_1 = 0\)</span> ✓ - <span class="math inline">\(w_2 = 8\)</span> : <span class="math inline">\(|8 - 8| = 0 &lt; 4\)</span> → <span class="math inline">\(m_2 = 1\)</span> ✓ - <span class="math inline">\(w_3 = 8\)</span> : <span class="math inline">\(|8 - 8| = 0 &lt; 4\)</span> → <span class="math inline">\(m_3 = 1\)</span> ✓</p>
+<p><strong>Message retrouvé :</strong> <span class="math display">\[m' = [1, 0, 1, 1] = m\]</span></p>
+</section>
+<section id="clé-partagée" class="level4">
+<h4 class="anchored" data-anchor-id="clé-partagée">Clé partagée</h4>
+<p><strong>Dérivation :</strong> <span class="math display">\[K' = H(m') = H([1, 0, 1, 1]) = K\]</span></p>
+<p><strong>Succès :</strong> ✓ Les deux parties partagent la même clé <span class="math inline">\(K\)</span>.</p>
+</section>
+</section>
+<section id="analyse-du-mécanisme" class="level3">
+<h3 class="anchored" data-anchor-id="analyse-du-mécanisme">Analyse du Mécanisme</h3>
+<section id="pourquoi-ça-fonctionne" class="level4">
+<h4 class="anchored" data-anchor-id="pourquoi-ça-fonctionne">Pourquoi ça fonctionne</h4>
+<p><strong>Développement complet de <span class="math inline">\(w\)</span> :</strong></p>
+<p><span class="math display">\[w = v - \mathbf{s}^T \mathbf{u}\]</span> <span class="math display">\[= (\mathbf{t}^T \mathbf{r} + e_2 + \text{Encode}(m)) - \mathbf{s}^T(\mathbf{A}^T \mathbf{r} + \mathbf{e}_1)\]</span> <span class="math display">\[= ((\mathbf{A}\mathbf{s} + \mathbf{e})^T \mathbf{r} + e_2 + \text{Encode}(m)) - \mathbf{s}^T \mathbf{A}^T \mathbf{r} - \mathbf{s}^T \mathbf{e}_1\]</span> <span class="math display">\[= \mathbf{s}^T \mathbf{A}^T \mathbf{r} + \mathbf{e}^T \mathbf{r} + e_2 + \text{Encode}(m) - \mathbf{s}^T \mathbf{A}^T \mathbf{r} - \mathbf{s}^T \mathbf{e}_1\]</span> <span class="math display">\[= \text{Encode}(m) + \underbrace{(\mathbf{e}^T \mathbf{r} + e_2 - \mathbf{s}^T \mathbf{e}_1)}_{\text{erreur totale}}\]</span></p>
+<p><strong>Condition de succès :</strong> Si l’<strong>erreur totale</strong> reste <strong>petite</strong> (&lt; <span class="math inline">\(q/4\)</span> en norme infinie), le décodage récupère <span class="math inline">\(m\)</span> correctement.</p>
+</section>
+<section id="rôle-des-petites-erreurs" class="level4">
+<h4 class="anchored" data-anchor-id="rôle-des-petites-erreurs">Rôle des petites erreurs</h4>
+<p><strong>Sécurité :</strong> Les erreurs <span class="math inline">\(\mathbf{e}, \mathbf{e}_1, e_2\)</span> : - Masquent le secret <span class="math inline">\(\mathbf{s}\)</span> dans <span class="math inline">\(\mathbf{t} = \mathbf{A}\mathbf{s} + \mathbf{e}\)</span> - Rendent MLWE difficile - Empêchent la résolution par algèbre linéaire</p>
+<p><strong>Correction :</strong> Les erreurs restent assez <strong>petites</strong> pour que : - Elles s’annulent partiellement dans <span class="math inline">\(w\)</span> - Le décodage réussisse malgré le bruit résiduel</p>
+</section>
+</section>
+<section id="relation-avec-le-vrai-kyber-kem" class="level3">
+<h3 class="anchored" data-anchor-id="relation-avec-le-vrai-kyber-kem">Relation avec le Vrai Kyber-KEM</h3>
+<section id="différences-déchelle" class="level4">
+<h4 class="anchored" data-anchor-id="différences-déchelle">Différences d’échelle</h4>
+<p><strong>Paramètres réels (Kyber768) :</strong> - <span class="math inline">\(n = 256\)</span> (vs 4) - <span class="math inline">\(q = 3329\)</span> (vs 17) - <span class="math inline">\(k = 3\)</span> (vs 2) - Polynômes de 256 coefficients - Vecteurs de 3 polynômes</p>
+<p><strong>Tailles :</strong> - Clé publique : ~1 Ko (vs quelques octets) - Ciphertext : ~1 Ko (vs quelques octets)</p>
+</section>
+<section id="structure-identique" class="level4">
+<h4 class="anchored" data-anchor-id="structure-identique">Structure identique</h4>
+<p><strong>Malgré les différences de taille, la structure est la même :</strong></p>
+<ol type="1">
+<li><strong>KeyGen :</strong>
+<ul>
+<li>Matrice publique <span class="math inline">\(\mathbf{A}\)</span></li>
+<li>Secret <span class="math inline">\(\mathbf{s}\)</span> petit</li>
+<li>Clé publique <span class="math inline">\(\mathbf{t} = \mathbf{A}\mathbf{s} + \mathbf{e}\)</span></li>
+</ul></li>
+<li><strong>Encapsulation :</strong>
+<ul>
+<li>Message aléatoire <span class="math inline">\(m\)</span></li>
+<li>Vecteur aléatoire court <span class="math inline">\(\mathbf{r}\)</span></li>
+<li><span class="math inline">\(\mathbf{u} = \mathbf{A}^T \mathbf{r} + \mathbf{e}_1\)</span></li>
+<li><span class="math inline">\(v = \mathbf{t}^T \mathbf{r} + e_2 + \text{Encode}(m)\)</span></li>
+</ul></li>
+<li><strong>Decapsulation :</strong>
+<ul>
+<li>Calcul <span class="math inline">\(w = v - \mathbf{s}^T \mathbf{u}\)</span></li>
+<li>Décodage pour récupérer <span class="math inline">\(m\)</span></li>
+<li>Dérivation de <span class="math inline">\(K = H(m)\)</span></li>
+</ul></li>
+</ol>
+</section>
+<section id="transformations-supplémentaires" class="level4">
+<h4 class="anchored" data-anchor-id="transformations-supplémentaires">Transformations supplémentaires</h4>
+<p><strong>Dans le vrai Kyber-KEM :</strong></p>
+<p><strong>Compression/décompression :</strong> Les vecteurs <span class="math inline">\(\mathbf{u}\)</span> et scalaire <span class="math inline">\(v\)</span> sont <strong>compressés</strong> pour réduire la taille du ciphertext.</p>
+<p><strong>Transformation FO :</strong> - Rechiffrement et vérification <span class="math inline">\(c = c'\)</span> - Rejet implicite si manipulation détectée - Garantit sécurité IND-CCA2</p>
+<p><strong>Fonctions de hachage :</strong> - <span class="math inline">\(G\)</span>, <span class="math inline">\(H\)</span>, <span class="math inline">\(J\)</span> pour dérivation et vérification - Randomness déterministe (Encrypt déterministe)</p>
+</section>
+</section>
+</section>
+<section id="aide-mémoire-et-synthèse" class="level2">
+<h2 class="anchored" data-anchor-id="aide-mémoire-et-synthèse">Aide-Mémoire et Synthèse</h2>
+<section id="concepts-clés-à-retenir" class="level3">
+<h3 class="anchored" data-anchor-id="concepts-clés-à-retenir">Concepts Clés à Retenir</h3>
+<section id="informatique-quantique" class="level4">
+<h4 class="anchored" data-anchor-id="informatique-quantique">Informatique quantique</h4>
+<p><strong>Qubits et propriétés :</strong> - <strong>Superposition</strong> : état dans combinaison linéaire de <span class="math inline">\(|0\rangle\)</span> et <span class="math inline">\(|1\rangle\)</span> - <strong>Intrication</strong> : corrélation quantique entre qubits - <strong>Parallélisme</strong> : calcul sur <span class="math inline">\(2^n\)</span> états simultanément</p>
+<p><strong>Défis :</strong> - Décohérence lors de la mesure - Sensibilité environnementale - Difficulté d’implémentation</p>
+</section>
+<section id="menaces-cryptographiques" class="level4">
+<h4 class="anchored" data-anchor-id="menaces-cryptographiques">Menaces cryptographiques</h4>
+<p><strong>Algorithme de Shor :</strong> - Résout factorisation et log discret en temps <strong>polynomial</strong> - Casse RSA, ECC, Diffie-Hellman - Nécessite ordinateur quantique de grande échelle</p>
+<p><strong>Algorithme de Grover :</strong> - Accélération <strong>quadratique</strong> pour recherche - Impact limité sur cryptographie symétrique - Solution : doubler taille des clés</p>
+</section>
+<section id="problèmes-post-quantiques" class="level4">
+<h4 class="anchored" data-anchor-id="problèmes-post-quantiques">Problèmes post-quantiques</h4>
+<p><strong>LWE et variantes :</strong> - <strong>LWE</strong> : Learning With Errors - <strong>MLWE</strong> : Module-LWE (sur anneaux de polynômes) - <strong>D-MLWE</strong> : version décision</p>
+<p><strong>Réseaux euclidiens :</strong> - <strong>SVP</strong> : Shortest Vector Problem - <strong>CVP</strong> : Closest Vector Problem - NP-difficiles, difficiles en moyenne - Résistants aux attaques quantiques</p>
+</section>
+<section id="kyber" class="level4">
+<h4 class="anchored" data-anchor-id="kyber">Kyber</h4>
+<p><strong>Nature :</strong> - KEM post-quantique - Basé sur MLWE/D-MLWE - Sécurité IND-CCA2</p>
+<p><strong>Structure :</strong> - Kyber-PKE (cœur cryptographique) - Transformation FO (sécurité CCA2) - Fonctions de hachage (SHA3)</p>
+<p><strong>Niveaux de sécurité :</strong> - Kyber512 (NIST 1 ≈ AES-128) - Kyber768 (NIST 3 ≈ AES-192) - Kyber1024 (NIST 5 ≈ AES-256)</p>
+</section>
+</section>
+<section id="formules-essentielles" class="level3">
+<h3 class="anchored" data-anchor-id="formules-essentielles">Formules Essentielles</h3>
+<section id="structures-algébriques" class="level4">
+<h4 class="anchored" data-anchor-id="structures-algébriques">Structures algébriques</h4>
+<p><strong>Anneau de polynômes :</strong> <span class="math display">\[R_q = \mathbb{Z}_q[X]/(X^n + 1)\]</span></p>
+<p><strong>Module :</strong> <span class="math display">\[R_q^k = \text{vecteurs de } k \text{ polynômes dans } R_q\]</span></p>
+<p><strong>Norme infinie :</strong> <span class="math display">\[\|p\|_\infty = \max_i |a_i|\]</span></p>
+</section>
+<section id="problème-mlwe" class="level4">
+<h4 class="anchored" data-anchor-id="problème-mlwe">Problème MLWE</h4>
+<p><strong>Instance MLWE :</strong> <span class="math display">\[(\mathbf{A}, \mathbf{t} = \mathbf{A}\mathbf{s} + \mathbf{e})\]</span></p>
+<p><strong>Objectif (recherche) :</strong> Trouver <span class="math inline">\(\mathbf{s}\)</span> à partir de <span class="math inline">\((\mathbf{A}, \mathbf{t})\)</span></p>
+<p><strong>Objectif (décision) :</strong> Distinguer <span class="math inline">\((\mathbf{A}, \mathbf{A}\mathbf{s} + \mathbf{e})\)</span> de <span class="math inline">\((\mathbf{A}, \mathbf{t}_{\text{aléatoire}})\)</span></p>
+</section>
+<section id="kyber-pke" class="level4">
+<h4 class="anchored" data-anchor-id="kyber-pke">Kyber-PKE</h4>
+<p><strong>KeyGen :</strong> <span class="math display">\[\mathbf{t} = \mathbf{A}\mathbf{s} + \mathbf{e}\]</span> <span class="math display">\[pk = (\mathbf{A}, \mathbf{t}), \quad sk = \mathbf{s}\]</span></p>
+<p><strong>Encrypt :</strong> <span class="math display">\[\mathbf{u} = \mathbf{A}^T \mathbf{r} + \mathbf{e}_1\]</span> <span class="math display">\[v = \mathbf{t}^T \mathbf{r} + e_2 + \text{Encode}(m)\]</span> <span class="math display">\[c = (\mathbf{u}, v)\]</span></p>
+<p><strong>Decrypt :</strong> <span class="math display">\[w = v - \mathbf{s}^T \mathbf{u} = \text{Encode}(m) + \text{(petites erreurs)}\]</span> <span class="math display">\[m = \text{Decode}(w)\]</span></p>
+</section>
+</section>
+<section id="questions-types-dexamen" class="level3">
+<h3 class="anchored" data-anchor-id="questions-types-dexamen">Questions Types d’Examen</h3>
+<section id="questions-conceptuelles" class="level4">
+<h4 class="anchored" data-anchor-id="questions-conceptuelles">Questions conceptuelles</h4>
+<p><strong>Sur l’informatique quantique :</strong> 1. Différence entre bit classique et qubit 2. Qu’est-ce que la superposition quantique ? 3. Qu’est-ce que l’intrication ? 4. Quels sont les principaux défis de l’informatique quantique ? 5. Pourquoi ne peut-on pas simuler efficacement un ordinateur quantique sur un ordinateur classique ?</p>
+<p><strong>Sur les menaces :</strong> 1. Pourquoi les ordinateurs quantiques menacent-ils RSA et ECC ? 2. Qu’est-ce que l’algorithme de Shor et quel est son impact ? 3. Différence entre impact de Shor et Grover 4. Qu’est-ce que la menace “Harvest Now, Decrypt Later” ? 5. Quels systèmes sont affectés par un ordinateur quantique ?</p>
+<p><strong>Sur la cryptographie post-quantique :</strong> 1. Qu’est-ce que la cryptographie post-quantique ? 2. Pourquoi les problèmes de réseaux sont-ils intéressants ? 3. Différence entre problème worst-case et average-case 4. Qu’est-ce qu’un KEM ? 5. Qu’est-ce que CRYSTALS-Kyber ?</p>
+</section>
+<section id="questions-techniques" class="level4">
+<h4 class="anchored" data-anchor-id="questions-techniques">Questions techniques</h4>
+<p><strong>Sur LWE et variantes :</strong> 1. Différence entre Learning Without Errors et Learning With Errors 2. Pourquoi ajouter des erreurs rend le problème difficile ? 3. Qu’est-ce que MLWE et en quoi diffère-t-il de LWE ? 4. Différence entre MLWE (search) et D-MLWE (decision) 5. Quel est le rôle de D-MLWE dans la sécurité de Kyber ?</p>
+<p><strong>Sur les réseaux :</strong> 1. Définir un réseau euclidien 2. Qu’est-ce que le Shortest Vector Problem (SVP) ? 3. Qu’est-ce que le Closest Vector Problem (CVP) ? 4. Pourquoi SVP et CVP sont-ils NP-difficiles ? 5. Qu’est-ce que la difficulté average-case et pourquoi est-elle importante ? 6. Quel est le lien entre MLWE et les problèmes de réseaux ?</p>
+<p><strong>Sur Kyber :</strong> 1. Quelle est la structure de Kyber-KEM ? 2. Différence entre Kyber-PKE et Kyber-KEM 3. Rôle de la transformation de Fujisaki-Okamoto 4. Quelles fonctions de hachage sont utilisées et pourquoi ? 5. Qu’est-ce que l’anneau <span class="math inline">\(R_q\)</span> utilisé dans Kyber ? 6. Pourquoi utilise-t-on des polynômes “petits” ?</p>
+</section>
+<section id="questions-de-calcul" class="level4">
+<h4 class="anchored" data-anchor-id="questions-de-calcul">Questions de calcul</h4>
+<p><strong>Structures algébriques :</strong> 1. Réduire un polynôme modulo <span class="math inline">\(X^n + 1\)</span> 2. Multiplier deux polynômes dans <span class="math inline">\(R_q\)</span> 3. Calculer la norme infinie d’un polynôme 4. Encoder et décoder un message binaire</p>
+<p><strong>Exemple jouet :</strong> 1. Effectuer KeyGen avec paramètres jouets 2. Calculer l’encapsulation 3. Effectuer la decapsulation 4. Expliquer pourquoi <span class="math inline">\(w = \text{Encode}(m) + \text{(erreurs)}\)</span></p>
+</section>
+<section id="questions-pratiques" class="level4">
+<h4 class="anchored" data-anchor-id="questions-pratiques">Questions pratiques</h4>
+<p><strong>Sécurité :</strong> 1. Sur quoi repose la sécurité de Kyber ? 2. Qu’est-ce que la sécurité IND-CCA2 ? 3. Quelles sont les attaques d’implémentation possibles contre Kyber ? 4. Comment se protéger des attaques par canaux auxiliaires ? 5. Pourquoi le déchiffrement peut-il échouer ?</p>
+<p><strong>Transition post-quantique :</strong> 1. Qu’est-ce que la crypto-agilité et pourquoi est-elle importante ? 2. Quelles sont les recommandations du NIST ? 3. Qu’est-ce qu’une approche hybride classique/post-quantique ? 4. Avantages et inconvénients de l’approche hybride 5. Pourquoi ne pas abandonner RSA/ECC immédiatement ?</p>
+<p><strong>Comparaisons :</strong> 1. Comparer Kyber avec Classic McEliece 2. Avantages et inconvénients des différentes familles post-quantiques 3. Pourquoi Kyber a-t-il été choisi par le NIST ?</p>
+</section>
+</section>
+<section id="tableaux-récapitulatifs" class="level3">
+<h3 class="anchored" data-anchor-id="tableaux-récapitulatifs">Tableaux Récapitulatifs</h3>
+<section id="ordinateur-classique-vs-quantique" class="level4">
+<h4 class="anchored" data-anchor-id="ordinateur-classique-vs-quantique">Ordinateur classique vs quantique</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 26%">
+<col style="width: 36%">
+<col style="width: 36%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Aspect</th>
+<th>Classique</th>
+<th>Quantique</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Unité de base</td>
+<td>Bit (0 ou 1)</td>
+<td>Qubit (<span class="math inline">\(\alpha|0\rangle + \beta|1\rangle\)</span>)</td>
+</tr>
+<tr class="even">
+<td>États possibles</td>
+<td>Finis, discrets</td>
+<td>Infinis (superposition)</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(n\)</span> unités</td>
+<td><span class="math inline">\(2^n\)</span> configurations (une active)</td>
+<td><span class="math inline">\(2^n\)</span> états (tous actifs)</td>
+</tr>
+<tr class="even">
+<td>Parallélisme</td>
+<td>Séquentiel ou multi-cœur</td>
+<td>Intrinsèque (superposition)</td>
+</tr>
+<tr class="odd">
+<td>Mesure</td>
+<td>Lecture sans destruction</td>
+<td>Effondrement (perte superposition)</td>
+</tr>
+<tr class="even">
+<td>Sensibilité</td>
+<td>Robuste</td>
+<td>Très sensible</td>
+</tr>
+<tr class="odd">
+<td>Infrastructure</td>
+<td>Standard</td>
+<td>Cryogénique, isolation</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="comparaison-des-familles-post-quantiques" class="level4">
+<h4 class="anchored" data-anchor-id="comparaison-des-familles-post-quantiques">Comparaison des familles post-quantiques</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 22%">
+<col style="width: 24%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Famille</th>
+<th>Exemples</th>
+<th>Avantages</th>
+<th>Inconvénients</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Réseaux</strong></td>
+<td>Kyber, Dilithium</td>
+<td>Performances, flexibilité</td>
+<td>Math récentes</td>
+</tr>
+<tr class="even">
+<td><strong>Codes</strong></td>
+<td>McEliece</td>
+<td>Très mature</td>
+<td>Clés énormes</td>
+</tr>
+<tr class="odd">
+<td><strong>Hash</strong></td>
+<td>SPHINCS+</td>
+<td>Hypothèses minimales</td>
+<td>Signatures volumineuses</td>
+</tr>
+<tr class="even">
+<td><strong>Isogénies</strong></td>
+<td>SIKE (cassé)</td>
+<td>Clés petites</td>
+<td>Moins mature, vulnérable</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="paramètres-de-kyber-1" class="level4">
+<h4 class="anchored" data-anchor-id="paramètres-de-kyber-1">Paramètres de Kyber</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 7%">
+<col style="width: 19%">
+<col style="width: 18%">
+<col style="width: 21%">
+<col style="width: 18%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variante</th>
+<th><span class="math inline">\(k\)</span></th>
+<th>Niveau NIST</th>
+<th>Équivalent</th>
+<th>Clé publique</th>
+<th>Ciphertext</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Kyber512</td>
+<td>2</td>
+<td>1</td>
+<td>AES-128</td>
+<td>800 B</td>
+<td>768 B</td>
+</tr>
+<tr class="even">
+<td>Kyber768</td>
+<td>3</td>
+<td>3</td>
+<td>AES-192</td>
+<td>1184 B</td>
+<td>1088 B</td>
+</tr>
+<tr class="odd">
+<td>Kyber1024</td>
+<td>4</td>
+<td>5</td>
+<td>AES-256</td>
+<td>1568 B</td>
+<td>1568 B</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="recommandations-pratiques" class="level3">
+<h3 class="anchored" data-anchor-id="recommandations-pratiques">Recommandations Pratiques</h3>
+<section id="pour-la-transition-post-quantique" class="level4">
+<h4 class="anchored" data-anchor-id="pour-la-transition-post-quantique">Pour la transition post-quantique</h4>
+<p><strong>Étapes clés :</strong></p>
+<ol type="1">
+<li><strong>Inventaire :</strong>
+<ul>
+<li>Identifier tous les systèmes utilisant cryptographie asymétrique</li>
+<li>Cartographier les dépendances</li>
+<li>Évaluer l’impact</li>
+</ul></li>
+<li><strong>Priorisation :</strong>
+<ul>
+<li>Systèmes critiques en premier</li>
+<li>Données à long terme (vulnérables à “Harvest Now, Decrypt Later”)</li>
+<li>Infrastructure exposée</li>
+</ul></li>
+<li><strong>Crypto-agilité :</strong>
+<ul>
+<li>Concevoir pour changements futurs</li>
+<li>Abstractions cryptographiques</li>
+<li>Configuration externe</li>
+</ul></li>
+<li><strong>Approche hybride :</strong>
+<ul>
+<li>Combiner classique + post-quantique</li>
+<li>Transition progressive</li>
+<li>Tests en conditions réelles</li>
+</ul></li>
+<li><strong>Tests et validation :</strong>
+<ul>
+<li>Vecteurs de test officiels</li>
+<li>Audits de sécurité</li>
+<li>Performance et compatibilité</li>
+</ul></li>
+</ol>
+</section>
+<section id="pour-limplémentation-de-kyber" class="level4">
+<h4 class="anchored" data-anchor-id="pour-limplémentation-de-kyber">Pour l’implémentation de Kyber</h4>
+<p><strong>Sécurité :</strong></p>
+<ul>
+<li><strong>Générateur aléatoire</strong> : CSPRNG de qualité</li>
+<li><strong>Contre-mesures side-channel</strong> : implémentation temps constant</li>
+<li><strong>Validation</strong> : vérifier toutes les entrées</li>
+<li><strong>Bibliothèques certifiées</strong> : liboqs, PQClean</li>
+<li><strong>Conformité NIST</strong> : suivre FIPS 203</li>
+</ul>
+<p><strong>Performance :</strong></p>
+<ul>
+<li><strong>NTT</strong> : utiliser pour multiplication de polynômes</li>
+<li><strong>Vectorisation</strong> : SIMD (AVX2, NEON)</li>
+<li><strong>Optimisations</strong> : profiling et tuning</li>
+<li><strong>Matériel</strong> : considérer accélération si besoin</li>
+</ul>
+<p><strong>Maintenance :</strong></p>
+<ul>
+<li><strong>Mises à jour</strong> : suivre bulletins NIST</li>
+<li><strong>Patches</strong> : appliquer rapidement</li>
+<li><strong>Veille</strong> : nouvelles attaques, recommandations</li>
+</ul>
+</section>
+</section>
+<section id="glossaire" class="level3">
+<h3 class="anchored" data-anchor-id="glossaire">Glossaire</h3>
+<ul>
+<li><strong>AES</strong> : Advanced Encryption Standard</li>
+<li><strong>Average-case hard</strong> : Difficile en moyenne</li>
+<li><strong>BKZ</strong> : Block Korkine-Zolotarev (algorithme de réduction de base)</li>
+<li><strong>CCA</strong> : Chosen Ciphertext Attack</li>
+<li><strong>CPA</strong> : Chosen Plaintext Attack</li>
+<li><strong>CSPRNG</strong> : Cryptographically Secure Pseudo-Random Number Generator</li>
+<li><strong>CVP</strong> : Closest Vector Problem</li>
+<li><strong>D-MLWE</strong> : Decision Module Learning With Errors</li>
+<li><strong>DPA</strong> : Differential Power Analysis</li>
+<li><strong>ECC</strong> : Elliptic Curve Cryptography</li>
+<li><strong>FO</strong> : Fujisaki-Okamoto (transformation)</li>
+<li><strong>IND-CCA2</strong> : Indistinguishability under Adaptive Chosen Ciphertext Attack</li>
+<li><strong>IoT</strong> : Internet of Things</li>
+<li><strong>KEM</strong> : Key Encapsulation Mechanism</li>
+<li><strong>Lattice</strong> : Réseau euclidien</li>
+<li><strong>LWE</strong> : Learning With Errors</li>
+<li><strong>MLWE</strong> : Module Learning With Errors</li>
+<li><strong>NIST</strong> : National Institute of Standards and Technology</li>
+<li><strong>NP-hard</strong> : Non-deterministic Polynomial-time hard</li>
+<li><strong>NTT</strong> : Number Theoretic Transform</li>
+<li><strong>PKE</strong> : Public Key Encryption</li>
+<li><strong>Qubit</strong> : Quantum bit</li>
+<li><strong>RSA</strong> : Rivest–Shamir–Adleman</li>
+<li><strong>SHA3</strong> : Secure Hash Algorithm 3</li>
+<li><strong>SHAKE</strong> : Secure Hash Algorithm KECCAK (XOF)</li>
+<li><strong>SIMD</strong> : Single Instruction, Multiple Data</li>
+<li><strong>SPA</strong> : Simple Power Analysis</li>
+<li><strong>SVP</strong> : Shortest Vector Problem</li>
+<li><strong>TLS</strong> : Transport Layer Security</li>
+<li><strong>XOF</strong> : eXtendable Output Function</li>
+</ul>
+
+
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
