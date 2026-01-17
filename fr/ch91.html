@@ -72,6 +72,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -914,14 +917,25 @@ window.Quarto = {
 <section id="composantes-de-kyber" class="level3">
 <h3 class="anchored" data-anchor-id="composantes-de-kyber">Composantes de Kyber</h3>
 <p><strong>Structure en couches :</strong></p>
-<pre class="mermaid"><code>graph TD
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">graph TD
     A[Kyber-KEM] --&gt; B[Kyber-PKE]
     B --&gt; C[MLWE]
     B --&gt; D[D-MLWE]
     A --&gt; E[Fonctions de hachage]
     E --&gt; F[SHA3-512 G]
     E --&gt; G[SHA3-256 H]
-    E --&gt; H[SHAKE256 J]</code></pre>
+    E --&gt; H[SHAKE256 J]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
 <hr>
 </section>
 </section>
@@ -1236,7 +1250,12 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="flux-complet-de-kyber-kem">Flux complet de Kyber-KEM</h2>
 <section id="vue-densemble-du-protocole" class="level3">
 <h3 class="anchored" data-anchor-id="vue-densemble-du-protocole">Vue d’ensemble du protocole</h3>
-<pre class="mermaid"><code>sequenceDiagram
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">sequenceDiagram
     participant R as Récepteur
     participant E as Émetteur
     
@@ -1254,7 +1273,13 @@ window.Quarto = {
     R-&gt;&gt;R: Calcule m' = Decode(v - s^T u)
     R-&gt;&gt;R: Dérive K' = H(m')
     
-    Note over R,E: Si tout va bien : K = K'</code></pre>
+    Note over R,E: Si tout va bien : K = K'
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
 </section>
 <section id="garanties-de-sécurité" class="level3">
 <h3 class="anchored" data-anchor-id="garanties-de-sécurité">Garanties de sécurité</h3>

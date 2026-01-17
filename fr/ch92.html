@@ -72,6 +72,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 </head>
@@ -491,12 +494,23 @@ Important
 <p><strong>Concept Clé : Menace existentielle</strong> Un ordinateur quantique suffisamment puissant rendrait <strong>obsolète toute la cryptographie asymétrique</strong> actuelle, menaçant HTTPS, banques, communications sécurisées…</p>
 </div>
 </div>
-<pre class="mermaid"><code>flowchart TD
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
     A[Ordinateur quantique&lt;br/&gt;suffisamment puissant] --&gt; B[Algorithme de Shor]
     B --&gt; C[Casse RSA, ECC, DH]
     C --&gt; D[Internet actuel&lt;br/&gt;devient vulnérable]
     
-    style D fill:#ffcccc</code></pre>
+    style D fill:#ffcccc
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
 </section>
 <section id="qubit-vs-bit-la-différence-fondamentale" class="level2">
 <h2 class="anchored" data-anchor-id="qubit-vs-bit-la-différence-fondamentale">2. Qubit vs Bit : La Différence Fondamentale</h2>
@@ -515,12 +529,23 @@ Important
 <li><strong>Comportement</strong> : Probabiliste jusqu’à la mesure</li>
 <li><strong>Visualisation</strong> : Comme une sphère de Bloch (flèche pouvant pointer n’importe où)</li>
 </ul>
-<pre class="mermaid"><code>flowchart LR
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
     A[Bit classique] --&gt; B[0 ou 1&lt;br/&gt;Comme un interrupteur]
     C[Qubit quantique] --&gt; D[Superposition 0 et 1&lt;br/&gt;Comme une sphère de possibilités]
     
     style B fill:#e6f3ff
-    style D fill:#e6ffe6</code></pre>
+    style D fill:#e6ffe6
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
 </section>
 <section id="lintrication-la-magie-quantique" class="level3">
 <h3 class="anchored" data-anchor-id="lintrication-la-magie-quantique">L’Intrication : La Magie Quantique</h3>
@@ -565,14 +590,25 @@ Warning
 </section>
 <section id="les-5-familles-de-solutions" class="level3">
 <h3 class="anchored" data-anchor-id="les-5-familles-de-solutions">Les 5 Familles de Solutions</h3>
-<pre class="mermaid"><code>flowchart TD
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
     A[Cryptographie Post-Quantique] --&gt; B[Réseaux&lt;br/&gt;ex: Kyber]
     A --&gt; C[Codes correcteurs&lt;br/&gt;ex: McEliece]
     A --&gt; D[Multivarié&lt;br/&gt;équations polynomiales]
     A --&gt; E[Hash-based&lt;br/&gt;ex: SPHINCS+]
     A --&gt; F[Isogénies&lt;br/&gt;courbes elliptiques]
     
-    style B fill:#ccffcc</code></pre>
+    style B fill:#ccffcc
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
 </section>
 <section id="pourquoi-kyber-réseaux-a-gagné" class="level3">
 <h3 class="anchored" data-anchor-id="pourquoi-kyber-réseaux-a-gagné">Pourquoi Kyber (Réseaux) a Gagné ?</h3>
@@ -625,7 +661,12 @@ Tip
 </section>
 <section id="les-3-étapes" class="level3">
 <h3 class="anchored" data-anchor-id="les-3-étapes">Les 3 Étapes</h3>
-<pre class="mermaid"><code>sequenceDiagram
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">sequenceDiagram
     participant B as Bob
     participant A as Alice
     participant E as Eve (quantique)
@@ -641,7 +682,13 @@ Tip
     Note over B: 3. Decapsulation
     B-&gt;&gt;B: Utilise sk pour retrouver la clé
     
-    Note over E: Même avec un ordinateur quantique,&lt;br/&gt;Eve ne peut pas casser MLWE</code></pre>
+    Note over E: Même avec un ordinateur quantique,&lt;br/&gt;Eve ne peut pas casser MLWE
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
 </section>
 <section id="lidée-clé-de-sécurité" class="level3">
 <h3 class="anchored" data-anchor-id="lidée-clé-de-sécurité">L’Idée Clé de Sécurité</h3>
