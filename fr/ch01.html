@@ -1,0 +1,2204 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.27">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>ch01 – ISS</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-4d9afe2b8d18ee9fa5d0d57b5ed4214d.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-96c1bb8b336142dcc39f931773fab1b9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-9ee82e006983bafa07c9ac29a901142c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-96c1bb8b336142dcc39f931773fab1b9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">ISS</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-langage" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="bi bi-globe" role="img">
+</i> 
+ <span class="menu-text">Langage</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-langage">    
+        <li>
+    <a class="dropdown-item" href="./../index.html">
+ <span class="dropdown-text">Anglais</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./index.html">
+ <span class="dropdown-text">Français</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch01.html">Cours</a></li><li class="breadcrumb-item"><a href="./ch01.html">Cryptographie et Sécurité de l’Information</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Cours</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch01.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Cryptographie et Sécurité de l’Information</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Notions de base en cryptographie</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cryptographie symétrique</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cryptographie Asymétrique (à Clés Publiques)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Fonctions de Hachage Cryptographiques et MACs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Signatures Digitales</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Authentification</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Protocoles d’Établissement de Clés (KEP)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch9.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tiers de Confiance et Certification (Trusted Third Parties - TTP)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch91.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Document de Révision : Cryptographie Quantique et Post-Quantique</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch92.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cryptographie Quantique &amp; Post-Quantique - Support de révision oral</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch93.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cryptographie Quantique et Post-Quantique</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./exercices.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercices</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./presentations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Présentations</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#cryptographie-et-sécurité-de-linformation" id="toc-cryptographie-et-sécurité-de-linformation" class="nav-link active" data-scroll-target="#cryptographie-et-sécurité-de-linformation">Cryptographie et Sécurité de l’Information</a>
+  <ul class="collapse">
+  <li><a href="#fondamentaux-de-la-cryptographie" id="toc-fondamentaux-de-la-cryptographie" class="nav-link" data-scroll-target="#fondamentaux-de-la-cryptographie">Fondamentaux de la Cryptographie</a>
+  <ul class="collapse">
+  <li><a href="#principe-de-kerckhoffs" id="toc-principe-de-kerckhoffs" class="nav-link" data-scroll-target="#principe-de-kerckhoffs">Principe de Kerckhoffs</a></li>
+  <li><a href="#classification-des-systèmes-de-cryptage" id="toc-classification-des-systèmes-de-cryptage" class="nav-link" data-scroll-target="#classification-des-systèmes-de-cryptage">Classification des systèmes de cryptage</a></li>
+  <li><a href="#entropie" id="toc-entropie" class="nav-link" data-scroll-target="#entropie">Entropie</a></li>
+  <li><a href="#oracles-et-modèles-de-sécurité" id="toc-oracles-et-modèles-de-sécurité" class="nav-link" data-scroll-target="#oracles-et-modèles-de-sécurité">Oracles et Modèles de Sécurité</a></li>
+  <li><a href="#histoire-de-la-cryptographie" id="toc-histoire-de-la-cryptographie" class="nav-link" data-scroll-target="#histoire-de-la-cryptographie">Histoire de la Cryptographie</a></li>
+  </ul></li>
+  <li><a href="#cryptographie-symétrique" id="toc-cryptographie-symétrique" class="nav-link" data-scroll-target="#cryptographie-symétrique">Cryptographie Symétrique</a>
+  <ul class="collapse">
+  <li><a href="#stream-ciphers" id="toc-stream-ciphers" class="nav-link" data-scroll-target="#stream-ciphers">Stream Ciphers</a></li>
+  <li><a href="#block-ciphers" id="toc-block-ciphers" class="nav-link" data-scroll-target="#block-ciphers">Block Ciphers</a></li>
+  <li><a href="#techniques-de-cryptanalyse" id="toc-techniques-de-cryptanalyse" class="nav-link" data-scroll-target="#techniques-de-cryptanalyse">Techniques de Cryptanalyse</a></li>
+  </ul></li>
+  <li><a href="#cryptographie-asymétrique" id="toc-cryptographie-asymétrique" class="nav-link" data-scroll-target="#cryptographie-asymétrique">Cryptographie Asymétrique</a>
+  <ul class="collapse">
+  <li><a href="#fondements-mathématiques" id="toc-fondements-mathématiques" class="nav-link" data-scroll-target="#fondements-mathématiques">Fondements Mathématiques</a></li>
+  <li><a href="#problèmes-de-base-et-complexité" id="toc-problèmes-de-base-et-complexité" class="nav-link" data-scroll-target="#problèmes-de-base-et-complexité">Problèmes de Base et Complexité</a></li>
+  <li><a href="#rsa" id="toc-rsa" class="nav-link" data-scroll-target="#rsa">RSA</a></li>
+  <li><a href="#elgamal" id="toc-elgamal" class="nav-link" data-scroll-target="#elgamal">ElGamal</a></li>
+  <li><a href="#rabin" id="toc-rabin" class="nav-link" data-scroll-target="#rabin">Rabin</a></li>
+  <li><a href="#courbes-elliptiques" id="toc-courbes-elliptiques" class="nav-link" data-scroll-target="#courbes-elliptiques">Courbes Elliptiques</a></li>
+  </ul></li>
+  <li><a href="#fonctions-de-hachage-et-intégrité" id="toc-fonctions-de-hachage-et-intégrité" class="nav-link" data-scroll-target="#fonctions-de-hachage-et-intégrité">Fonctions de Hachage et Intégrité</a>
+  <ul class="collapse">
+  <li><a href="#fonctions-à-sens-unique" id="toc-fonctions-à-sens-unique" class="nav-link" data-scroll-target="#fonctions-à-sens-unique">Fonctions à Sens Unique</a></li>
+  <li><a href="#hash-functions" id="toc-hash-functions" class="nav-link" data-scroll-target="#hash-functions">Hash Functions</a></li>
+  <li><a href="#message-authentication-codes" id="toc-message-authentication-codes" class="nav-link" data-scroll-target="#message-authentication-codes">Message Authentication Codes</a></li>
+  <li><a href="#attaques-sur-mdcs" id="toc-attaques-sur-mdcs" class="nav-link" data-scroll-target="#attaques-sur-mdcs">Attaques sur MDCs</a></li>
+  <li><a href="#résistance-calculatoire" id="toc-résistance-calculatoire" class="nav-link" data-scroll-target="#résistance-calculatoire">Résistance Calculatoire</a></li>
+  <li><a href="#mdcs-basés-sur-cryptage" id="toc-mdcs-basés-sur-cryptage" class="nav-link" data-scroll-target="#mdcs-basés-sur-cryptage">MDCs Basés sur Cryptage</a></li>
+  <li><a href="#customized-mdcs" id="toc-customized-mdcs" class="nav-link" data-scroll-target="#customized-mdcs">Customized MDCs</a></li>
+  <li><a href="#macs-basés-sur-cryptage" id="toc-macs-basés-sur-cryptage" class="nav-link" data-scroll-target="#macs-basés-sur-cryptage">MACs Basés sur Cryptage</a></li>
+  <li><a href="#nested-macs-et-hmacs" id="toc-nested-macs-et-hmacs" class="nav-link" data-scroll-target="#nested-macs-et-hmacs">Nested MACs et HMACs</a></li>
+  <li><a href="#applications" id="toc-applications" class="nav-link" data-scroll-target="#applications">Applications</a></li>
+  <li><a href="#unix-salt" id="toc-unix-salt" class="nav-link" data-scroll-target="#unix-salt">UNIX Salt</a></li>
+  </ul></li>
+  <li><a href="#signatures-digitales" id="toc-signatures-digitales" class="nav-link" data-scroll-target="#signatures-digitales">Signatures Digitales</a>
+  <ul class="collapse">
+  <li><a href="#définitions-et-classifications" id="toc-définitions-et-classifications" class="nav-link" data-scroll-target="#définitions-et-classifications">Définitions et Classifications</a></li>
+  <li><a href="#signatures-avec-appendice" id="toc-signatures-avec-appendice" class="nav-link" data-scroll-target="#signatures-avec-appendice">Signatures avec Appendice</a></li>
+  <li><a href="#signatures-avec-reconstitution" id="toc-signatures-avec-reconstitution" class="nav-link" data-scroll-target="#signatures-avec-reconstitution">Signatures avec Reconstitution</a></li>
+  <li><a href="#signature-rsa" id="toc-signature-rsa" class="nav-link" data-scroll-target="#signature-rsa">Signature RSA</a></li>
+  <li><a href="#signatures-aveugles" id="toc-signatures-aveugles" class="nav-link" data-scroll-target="#signatures-aveugles">Signatures Aveugles</a></li>
+  <li><a href="#signature-rabin" id="toc-signature-rabin" class="nav-link" data-scroll-target="#signature-rabin">Signature Rabin</a></li>
+  <li><a href="#signature-elgamal" id="toc-signature-elgamal" class="nav-link" data-scroll-target="#signature-elgamal">Signature ElGamal</a></li>
+  <li><a href="#signatures-et-crypto-monnaies" id="toc-signatures-et-crypto-monnaies" class="nav-link" data-scroll-target="#signatures-et-crypto-monnaies">Signatures et Crypto-monnaies</a></li>
+  <li><a href="#tableau-récapitulatif" id="toc-tableau-récapitulatif" class="nav-link" data-scroll-target="#tableau-récapitulatif">Tableau Récapitulatif</a></li>
+  <li><a href="#types-dattaques" id="toc-types-dattaques" class="nav-link" data-scroll-target="#types-dattaques">Types d’Attaques</a></li>
+  </ul></li>
+  <li><a href="#authentification" id="toc-authentification" class="nav-link" data-scroll-target="#authentification">Authentification</a>
+  <ul class="collapse">
+  <li><a href="#méthodes-dauthentification-de-messages" id="toc-méthodes-dauthentification-de-messages" class="nav-link" data-scroll-target="#méthodes-dauthentification-de-messages">Méthodes d’Authentification de Messages</a></li>
+  <li><a href="#authentification-dentités" id="toc-authentification-dentités" class="nav-link" data-scroll-target="#authentification-dentités">Authentification d’Entités</a></li>
+  <li><a href="#attaques-dictionnaire" id="toc-attaques-dictionnaire" class="nav-link" data-scroll-target="#attaques-dictionnaire">Attaques Dictionnaire</a></li>
+  <li><a href="#plaintext-equivalence" id="toc-plaintext-equivalence" class="nav-link" data-scroll-target="#plaintext-equivalence">Plaintext-Equivalence</a></li>
+  <li><a href="#authentification-faible" id="toc-authentification-faible" class="nav-link" data-scroll-target="#authentification-faible">Authentification Faible</a></li>
+  <li><a href="#authentification-forte-symétrique" id="toc-authentification-forte-symétrique" class="nav-link" data-scroll-target="#authentification-forte-symétrique">Authentification Forte Symétrique</a></li>
+  <li><a href="#authentification-forte-asymétrique" id="toc-authentification-forte-asymétrique" class="nav-link" data-scroll-target="#authentification-forte-asymétrique">Authentification Forte Asymétrique</a></li>
+  <li><a href="#zero-knowledge-proofs" id="toc-zero-knowledge-proofs" class="nav-link" data-scroll-target="#zero-knowledge-proofs">Zero-Knowledge Proofs</a></li>
+  <li><a href="#zkip-isomorphisme-de-graphes" id="toc-zkip-isomorphisme-de-graphes" class="nav-link" data-scroll-target="#zkip-isomorphisme-de-graphes">ZKIP Isomorphisme de Graphes</a></li>
+  <li><a href="#zkip-fiat-shamir" id="toc-zkip-fiat-shamir" class="nav-link" data-scroll-target="#zkip-fiat-shamir">ZKIP Fiat-Shamir</a></li>
+  <li><a href="#implantations-pratiques" id="toc-implantations-pratiques" class="nav-link" data-scroll-target="#implantations-pratiques">Implantations Pratiques</a></li>
+  <li><a href="#attaque-mafia" id="toc-attaque-mafia" class="nav-link" data-scroll-target="#attaque-mafia">Attaque Mafia</a></li>
+  <li><a href="#tableau-attaques-et-protections" id="toc-tableau-attaques-et-protections" class="nav-link" data-scroll-target="#tableau-attaques-et-protections">Tableau Attaques et Protections</a></li>
+  </ul></li>
+  <li><a href="#établissement-de-clés" id="toc-établissement-de-clés" class="nav-link" data-scroll-target="#établissement-de-clés">Établissement de Clés</a>
+  <ul class="collapse">
+  <li><a href="#kep-key-establishment-protocol" id="toc-kep-key-establishment-protocol" class="nav-link" data-scroll-target="#kep-key-establishment-protocol">KEP (Key Establishment Protocol)</a></li>
+  <li><a href="#protocoles-symétriques" id="toc-protocoles-symétriques" class="nav-link" data-scroll-target="#protocoles-symétriques">Protocoles Symétriques</a></li>
+  <li><a href="#protocoles-asymétriques" id="toc-protocoles-asymétriques" class="nav-link" data-scroll-target="#protocoles-asymétriques">Protocoles Asymétriques</a></li>
+  <li><a href="#attaques-et-vulnérabilités" id="toc-attaques-et-vulnérabilités" class="nav-link" data-scroll-target="#attaques-et-vulnérabilités">Attaques et Vulnérabilités</a></li>
+  <li><a href="#ktp-asymétrique" id="toc-ktp-asymétrique" class="nav-link" data-scroll-target="#ktp-asymétrique">KTP Asymétrique</a></li>
+  <li><a href="#protocoles-avec-kdc" id="toc-protocoles-avec-kdc" class="nav-link" data-scroll-target="#protocoles-avec-kdc">Protocoles avec KDC</a></li>
+  <li><a href="#ssltls" id="toc-ssltls" class="nav-link" data-scroll-target="#ssltls">SSL/TLS</a></li>
+  <li><a href="#bonnes-pratiques-kep" id="toc-bonnes-pratiques-kep" class="nav-link" data-scroll-target="#bonnes-pratiques-kep">Bonnes pratiques KEP</a></li>
+  </ul></li>
+  <li><a href="#tiers-de-confiance-ttp" id="toc-tiers-de-confiance-ttp" class="nav-link" data-scroll-target="#tiers-de-confiance-ttp">Tiers de Confiance (TTP)</a>
+  <ul class="collapse">
+  <li><a href="#modes-ttp" id="toc-modes-ttp" class="nav-link" data-scroll-target="#modes-ttp">Modes TTP</a></li>
+  <li><a href="#kdc-key-distribution-center" id="toc-kdc-key-distribution-center" class="nav-link" data-scroll-target="#kdc-key-distribution-center">KDC (Key Distribution Center)</a></li>
+  <li><a href="#ca-certification-authority" id="toc-ca-certification-authority" class="nav-link" data-scroll-target="#ca-certification-authority">CA (Certification Authority)</a></li>
+  <li><a href="#entités-fonctionnelles-certification" id="toc-entités-fonctionnelles-certification" class="nav-link" data-scroll-target="#entités-fonctionnelles-certification">Entités fonctionnelles certification</a></li>
+  <li><a href="#autres-ttps" id="toc-autres-ttps" class="nav-link" data-scroll-target="#autres-ttps">Autres TTPs</a></li>
+  <li><a href="#certificats" id="toc-certificats" class="nav-link" data-scroll-target="#certificats">Certificats</a></li>
+  <li><a href="#arbres-dauthentification" id="toc-arbres-dauthentification" class="nav-link" data-scroll-target="#arbres-dauthentification">Arbres d’authentification</a></li>
+  <li><a href="#topologies-certification" id="toc-topologies-certification" class="nav-link" data-scroll-target="#topologies-certification">Topologies certification</a></li>
+  <li><a href="#pki---infrastructure" id="toc-pki---infrastructure" class="nav-link" data-scroll-target="#pki---infrastructure">PKI - Infrastructure</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="ch01.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch01.html">Cours</a></li><li class="breadcrumb-item"><a href="./ch01.html">Cryptographie et Sécurité de l’Information</a></li></ol></nav></header>
+
+
+
+
+
+<section id="cryptographie-et-sécurité-de-linformation" class="level1">
+<h1>Cryptographie et Sécurité de l’Information</h1>
+<section id="fondamentaux-de-la-cryptographie" class="level2">
+<h2 class="anchored" data-anchor-id="fondamentaux-de-la-cryptographie">Fondamentaux de la Cryptographie</h2>
+<section id="principe-de-kerckhoffs" class="level3">
+<h3 class="anchored" data-anchor-id="principe-de-kerckhoffs">Principe de Kerckhoffs</h3>
+<p><strong>Sécurité basée sur la clé</strong> : La sécurité du système repose uniquement sur le secret de la clé, jamais sur celui de l’algorithme.</p>
+<p><strong>Algorithme public</strong> : Le système doit rester sûr même si l’algorithme est connu de l’adversaire.</p>
+<p><strong>Pas de sécurité par l’obscurité</strong> : Kerckhoffs rejette explicitement ce principe dès le XIXe siècle en affirmant que la sécurité doit être mathématiquement démontrable.</p>
+</section>
+<section id="classification-des-systèmes-de-cryptage" class="level3">
+<h3 class="anchored" data-anchor-id="classification-des-systèmes-de-cryptage">Classification des systèmes de cryptage</h3>
+<p><strong>Inconditionnelle</strong> : Sécurité parfaite et théorique, indépendante de la puissance de calcul. Exemple : <em>one-time pad</em>.</p>
+<p><strong>Provable security</strong> : La cryptanalyse est équivalente à la résolution d’un problème mathématique réputé difficile (comme la factorisation pour RSA).</p>
+<p><strong>Calculatoire</strong> : Sécurité pratique basée sur le coût irréaliste des attaques avec les ressources actuelles. C’est la catégorie la plus utilisée.</p>
+</section>
+<section id="entropie" class="level3">
+<h3 class="anchored" data-anchor-id="entropie">Entropie</h3>
+<p><strong>Entropie</strong> : Mesure la quantité d’information effective contenue dans un message, approximant le nombre de bits nécessaires pour l’encoder.</p>
+<p><strong>Entropie conditionnelle</strong> : Quantifie l’incertitude restante sur le plaintext après avoir observé le ciphertext.</p>
+<p><strong>Redondance</strong> : Différence entre le codage effectif d’un message et son entropie minimale.</p>
+</section>
+<section id="oracles-et-modèles-de-sécurité" class="level3">
+<h3 class="anchored" data-anchor-id="oracles-et-modèles-de-sécurité">Oracles et Modèles de Sécurité</h3>
+<p><strong>Oracle Aléatoire</strong> : Fonction de hachage “idéale” utilisée dans les preuves théoriques (modèle ROM), qui renvoie des valeurs uniformes et aléatoires.</p>
+<p><strong>Oracles CPA/CCA</strong> : Simulent un accès aux opérations de chiffrement/déchiffrement avec la clé secrète pour tester la résistance du système face à un adversaire.</p>
+<p><strong>IND-CPA</strong> : Propriété d’indiscernabilité garantissant qu’un adversaire ne peut distinguer les chiffrés de deux messages différents (équivalent à la sécurité sémantique).</p>
+<p><strong>Chiffrement Probabiliste</strong> : Ajoute de l’aléa au message pour éviter les attaques par dictionnaire, indispensable en cryptographie asymétrique.</p>
+<p><strong>OAEP</strong> : Méthode de padding (remplissage) qui ajoute l’aléa nécessaire au chiffrement RSA en combinant le message avec un nombre aléatoire via des fonctions de hachage.</p>
+</section>
+<section id="histoire-de-la-cryptographie" class="level3">
+<h3 class="anchored" data-anchor-id="histoire-de-la-cryptographie">Histoire de la Cryptographie</h3>
+<p><strong>Historique</strong> : Les systèmes classiques reposent sur la substitution (César, Vigenère) et la transposition (permutation des caractères).</p>
+<p><strong>One-Time Pad</strong> : Seul système à sécurité absolue si la clé est aléatoire, unique et aussi longue que le message. Condition de Shannon : H(K) ≥ H(X).</p>
+<p><strong>Stéganographie</strong> : Technique qui cache l’existence même du message plutôt que de le rendre illisible (exemple : technique des LSB dans les images numériques).</p>
+</section>
+</section>
+<section id="cryptographie-symétrique" class="level2">
+<h2 class="anchored" data-anchor-id="cryptographie-symétrique">Cryptographie Symétrique</h2>
+<section id="stream-ciphers" class="level3">
+<h3 class="anchored" data-anchor-id="stream-ciphers">Stream Ciphers</h3>
+<section id="caractéristiques-générales" class="level4">
+<h4 class="anchored" data-anchor-id="caractéristiques-générales">Caractéristiques générales</h4>
+<p><strong>Stream Ciphers</strong> : Cryptage bit par bit en 2 phases (génération keystream + substitution). Taille de bloc = 1 bit.</p>
+<p><strong>Avantages</strong> :</p>
+<ul>
+<li>Rapides (cryptage au niveau registres)</li>
+<li>Légers (ressources CPU limitées)</li>
+<li>Pas de buffering</li>
+<li>Pas de propagation d’erreurs (retransmission suffisante pour WiFi)</li>
+</ul>
+<p><strong>Inconvénients</strong> :</p>
+<ul>
+<li>Qualité du keystream critique pour la robustesse</li>
+<li>Réutilisation du keystream = vulnérabilité majeure</li>
+</ul>
+</section>
+<section id="stream-ciphers-synchrones" class="level4">
+<h4 class="anchored" data-anchor-id="stream-ciphers-synchrones">Stream Ciphers Synchrones</h4>
+<p><strong>Synchrone</strong> : Keystream dépend uniquement de la clé, indépendant du plaintext/ciphertext. Équations : <span class="math inline">\(\sigma_{i+1} = f(\sigma_i, k)\)</span>, <span class="math inline">\(z_i = g(\sigma_i, k)\)</span>, <span class="math inline">\(c_i = h(z_i, m_i)\)</span>.</p>
+<p><strong>Exige synchronisation</strong> : Émetteur et récepteur doivent partager même clé ET même état <span class="math inline">\(\sigma_i\)</span>.</p>
+<p><strong>Pas de propagation d’erreur</strong> : Modification de <span class="math inline">\(c_j\)</span> affecte uniquement <span class="math inline">\(m_j\)</span>, mais suppression = désynchronisation.</p>
+<p><strong>Vulnérable aux modifications de bits</strong> : Adversaire peut modifier des bits et analyser l’impact. Nécessite mécanismes d’authentification supplémentaires.</p>
+<p><strong>Cas fréquent</strong> : Stream cipher additif avec fonction <span class="math inline">\(h\)</span> = XOR (comme one-time pad).</p>
+</section>
+<section id="stream-ciphers-asynchrones" class="level4">
+<h4 class="anchored" data-anchor-id="stream-ciphers-asynchrones">Stream Ciphers Asynchrones</h4>
+<p><strong>Asynchrone</strong> (auto-synchronisé) : Keystream dépend de la clé ET des derniers ciphertexts. État <span class="math inline">\(\sigma_i\)</span> = buffer de <span class="math inline">\(t\)</span> ciphertexts précédents : <span class="math inline">\(\sigma_i = (c_{i-t}, ..., c_{i-1})\)</span>.</p>
+<p><strong>Auto-synchronisation</strong> : Re-synchronisation automatique après insertion/élimination de ciphertexts grâce au buffer.</p>
+<p><strong>Propagation d’erreur limitée</strong> : Erreur se propage uniquement sur <span class="math inline">\(\frac{n}{r}\)</span> blocs (<span class="math inline">\(n\)</span> = taille nominale, <span class="math inline">\(r\)</span> = taille plaintexts). Après épuisement du buffer, décryption correcte reprend.</p>
+<p><strong>Meilleure diffusion</strong> des statistiques : Chaque bit du plaintext influence tous les ciphertexts subséquents. Idéal pour plaintexts redondants ou à faible entropie.</p>
+</section>
+<section id="générateurs-lsfr" class="level4">
+<h4 class="anchored" data-anchor-id="générateurs-lsfr">Générateurs LSFR</h4>
+<p><strong>LSFR</strong> : Générateur de keystream long (<span class="math inline">\(m\)</span> bits) depuis clé courte (<span class="math inline">\(l\)</span> bits) avec <span class="math inline">\(l \ll m\)</span>. Base = combinaisons linéaires de bits.</p>
+<p><strong>Avantages</strong> :</p>
+<ul>
+<li>Hardware efficace</li>
+<li>Périodes longues</li>
+<li>Bonne qualité aléatoire</li>
+</ul>
+<p><strong>Problème</strong> : Sécurité insuffisante comparé aux block ciphers modernes. Vulnérable à l’algorithme de Berlekamp-Massey qui calcule la complexité linéaire et génère arbitrairement de nouvelles séquences.</p>
+<p><strong>Solution</strong> : NLFSR (Non Linear Feedback Shift Registers) utilisant fonction non linéaire <span class="math inline">\(f\)</span> au lieu de combinaison linéaire.</p>
+</section>
+<section id="rc4" class="level4">
+<h4 class="anchored" data-anchor-id="rc4">RC4</h4>
+<p><strong>RC4</strong> (Rivest Cipher 4, 1987) : Stream cipher logiciel à clé variable, mode synchrone, 10× plus rapide que DES.</p>
+<p><strong>Architecture</strong> : S-box 8×8 (permutation 0-255 dépendant de la clé) + XOR entre keystream et plaintext. Combinaisons linéaires et non linéaires.</p>
+<p><strong>2 étapes</strong> :</p>
+<ul>
+<li>KSA (Key Scheduling Algorithm, permutation S-box)</li>
+<li>PRGA (Pseudo Random Generator Algorithm, génération keystream)</li>
+</ul>
+<p><strong>Applications</strong> : SSL/TLS, Windows, Oracle, Lotus Notes. Usage commercial très répandu.</p>
+<p><strong>Vulnérabilité</strong> : Protocole WEP (WiFi) complètement cassé à cause d’une faille dans le mode d’utilisation, pas de l’algorithme RC4 lui-même.</p>
+</section>
+</section>
+<section id="block-ciphers" class="level3">
+<h3 class="anchored" data-anchor-id="block-ciphers">Block Ciphers</h3>
+<section id="caractéristiques-générales-1" class="level4">
+<h4 class="anchored" data-anchor-id="caractéristiques-générales-1">Caractéristiques générales</h4>
+<p><strong>Block cipher</strong> : Fonction bijective transformant blocs de <span class="math inline">\(n\)</span> bits avec clé <span class="math inline">\(K\)</span> de <span class="math inline">\(k\)</span> bits. Chaque clé définit une bijection différente.</p>
+<p><strong>Critères qualité</strong> :</p>
+<ul>
+<li>Entropie clé ≥ 128 bits (protection brute force)</li>
+<li>Taille bloc ≥ 128 bits (éviter dictionnaires plaintext/ciphertext)</li>
+<li>Résistance cryptanalyse = effort brute force</li>
+</ul>
+<p><strong>Usage</strong> : Confidentialité, authentification, hachage, génération aléatoire (pierre angulaire de la cryptographie).</p>
+</section>
+<section id="modes-dopération" class="level4">
+<h4 class="anchored" data-anchor-id="modes-dopération">Modes d’Opération</h4>
+<section id="ecb-electronic-codebook" class="level5">
+<h5 class="anchored" data-anchor-id="ecb-electronic-codebook">ECB (Electronic Codebook)</h5>
+<p><strong>ECB</strong> : Chaque bloc encrypté indépendamment avec même clé : <span class="math inline">\(c_i = E_K(m_i)\)</span>.</p>
+<p><strong>Vulnérabilité majeure</strong> : Plaintexts identiques → ciphertexts identiques. Patterns visibles, structure du plaintext transparente.</p>
+<p><strong>Avantages</strong> :</p>
+<ul>
+<li>Parallélisable</li>
+<li>Pas de propagation d’erreurs</li>
+</ul>
+<p><strong>Ne JAMAIS utiliser</strong> pour données redondantes.</p>
+</section>
+<section id="cbc-cipher-block-chaining" class="level5">
+<h5 class="anchored" data-anchor-id="cbc-cipher-block-chaining">CBC (Cipher Block Chaining)</h5>
+<p><strong>CBC</strong> : Chaque plaintext XORé avec ciphertext précédent avant encryption : <span class="math inline">\(c_i = E_K(m_i \oplus c_{i-1})\)</span> avec <span class="math inline">\(c_0 = IV\)</span>.</p>
+<p><strong>Avantages</strong> :</p>
+<ul>
+<li>Plaintexts identiques → ciphertexts différents (si IV change)</li>
+<li>Patterns effacés par chaînage</li>
+<li>Propagation erreur limitée (<span class="math inline">\(c_j\)</span> affecte <span class="math inline">\(m_j\)</span> et <span class="math inline">\(m_{j+1}\)</span> uniquement)</li>
+</ul>
+<p><strong>IV (Initialization Vector)</strong> : Doit être aléatoire ou pseudo-aléatoire, transmissible en clair, différent pour chaque message avec même clé.</p>
+<p><strong>Parallélisation</strong> : Non parallélisable en encryption (séquentiel), parallélisable en décryption.</p>
+</section>
+<section id="cfb-cipher-feedback" class="level5">
+<h5 class="anchored" data-anchor-id="cfb-cipher-feedback">CFB (Cipher Feedback)</h5>
+<p><strong>CFB</strong> (asynchrone) : Fonctionne comme stream cipher où keystream dépend des ciphertexts précédents : <span class="math inline">\(c_i = m_i \oplus E_K(c_{i-1})\)</span> avec <span class="math inline">\(c_0 = IV\)</span>.</p>
+<p><strong>Propagation erreur</strong> : Erreur sur <span class="math inline">\(c_j\)</span> affecte <span class="math inline">\(\frac{n}{r}\)</span> blocs suivants (<span class="math inline">\(n\)</span> = taille nominale, <span class="math inline">\(r\)</span> = taille plaintexts).</p>
+<p><strong>Non parallélisable</strong>. IV non confidentiel mais doit être transmis.</p>
+<p><strong>Usage</strong> : Adapté aux transmissions avec pertes de paquets fréquentes.</p>
+</section>
+<section id="ofb-output-feedback" class="level5">
+<h5 class="anchored" data-anchor-id="ofb-output-feedback">OFB (Output Feedback)</h5>
+<p><strong>OFB</strong> (synchrone) : Stream cipher où keystream dépend uniquement de clé + IV : <span class="math inline">\(z_i = E_K(z_{i-1})\)</span>, <span class="math inline">\(c_i = m_i \oplus z_i\)</span> avec <span class="math inline">\(z_0 = IV\)</span>.</p>
+<p><strong>Avantages</strong> :</p>
+<ul>
+<li>Pas de propagation d’erreurs (erreur sur <span class="math inline">\(c_j\)</span> n’affecte que <span class="math inline">\(m_j\)</span>)</li>
+<li>Keystream pré-calculable (parallélisable si pré-calculé)</li>
+</ul>
+<p><strong>CRITIQUE</strong> : Ne JAMAIS réutiliser même IV avec même clé (sinon keystream identique = vulnérabilité majeure). Modifier l’IV pour chaque nouveau message.</p>
+</section>
+<section id="ctr-counter-mode" class="level5">
+<h5 class="anchored" data-anchor-id="ctr-counter-mode">CTR (Counter Mode)</h5>
+<p><strong>CTR</strong> : Keystream généré par encryption d’un compteur incrémenté : <span class="math inline">\(c_i = m_i \oplus E_K(\text{counter} + i)\)</span>.</p>
+<p><strong>Avantages</strong> :</p>
+<ul>
+<li>Parallélisable (encryption + décryption)</li>
+<li>Accès aléatoire à chaque bloc</li>
+<li>Pas de propagation d’erreurs</li>
+<li>SIMD-friendly (pas de dépendances entre blocs)</li>
+</ul>
+<p><strong>Compteur</strong> : Taille <span class="math inline">\(2^b\)</span> (<span class="math inline">\(b\)</span> = taille bloc), incrémenter modulo <span class="math inline">\(2^b\)</span> après chaque itération.</p>
+<p><strong>CRITIQUE</strong> : Ne jamais réutiliser même compteur avec même clé. Premier bloc du flux <span class="math inline">\(i+1\)</span> &gt; dernier bloc du flux <span class="math inline">\(i\)</span>.</p>
+<p><strong>Usage</strong> : ATM, IPsec, haut débit, vidéo, transmission sélective de blocs.</p>
+</section>
+</section>
+<section id="product-ciphers-et-feistel" class="level4">
+<h4 class="anchored" data-anchor-id="product-ciphers-et-feistel">Product Ciphers et Feistel</h4>
+<p><strong>Product cipher</strong> : Schéma combinant série de transformations successives (transpositions, substitutions, XOR, multiplications modulaires) pour renforcer résistance cryptanalyse.</p>
+<p><strong>Feistel cipher</strong> : Product cipher itératif transformant plaintext <span class="math inline">\(2t\)</span> bits = <span class="math inline">\((L_0, R_0)\)</span> en ciphertext <span class="math inline">\((R_r, L_r)\)</span> après <span class="math inline">\(r\)</span> rounds (généralement pair et <span class="math inline">\(\geq 3\)</span>).</p>
+<p><strong>Équations round</strong> <span class="math inline">\(i\)</span> : <span class="math inline">\(L_i = R_{i-1}\)</span> et <span class="math inline">\(R_i = L_{i-1} \oplus f(R_{i-1}, K_i)\)</span> où <span class="math inline">\(K_i\)</span> = sous-clés générées depuis clé principale <span class="math inline">\(K\)</span>.</p>
+<p><strong>Décryption</strong> : Identique à encryption avec sous-clés appliquées en ordre inverse (<span class="math inline">\(K_r\)</span> à <span class="math inline">\(K_1\)</span>).</p>
+<p><strong>Exemple</strong> : DES (16 rounds).</p>
+</section>
+<section id="des-data-encryption-standard" class="level4">
+<h4 class="anchored" data-anchor-id="des-data-encryption-standard">DES (Data Encryption Standard)</h4>
+<section id="structure" class="level5">
+<h5 class="anchored" data-anchor-id="structure">Structure</h5>
+<p><strong>DES</strong> : Feistel cipher, 64 bits blocs, 56 bits clé effective (64 totaux avec 8 parité), 16 rounds, 16 sous-clés de 48 bits.</p>
+<p><strong>Structure</strong> : Permutation initiale IP → 16 rounds Feistel → Permutation finale IP⁻¹.</p>
+</section>
+<section id="fonction-de-round" class="level5">
+<h5 class="anchored" data-anchor-id="fonction-de-round">Fonction de round</h5>
+<p><strong>Fonction <span class="math inline">\(f\)</span></strong> par round :</p>
+<ul>
+<li>Expansion E (32→48 bits)</li>
+<li>XOR avec sous-clé <span class="math inline">\(K_i\)</span> (48 bits)</li>
+<li>8 S-boxes (48→32 bits, chaque S-box : 6 bits entrée → 4 bits sortie)</li>
+<li>Permutation P (32 bits)</li>
+</ul>
+<p><strong>S-box</strong> : 6 bits input <span class="math inline">\(a_1a_2a_3a_4a_5a_6\)</span> → ligne = <span class="math inline">\(a_1 + 2a_6\)</span> (bits externes), colonne = <span class="math inline">\(a_2 + 2a_3 + 4a_4 + 8a_5\)</span> (bits internes) → 4 bits output.</p>
+</section>
+<section id="génération-sous-clés" class="level5">
+<h5 class="anchored" data-anchor-id="génération-sous-clés">Génération sous-clés</h5>
+<p><strong>Génération sous-clés</strong> :</p>
+<ul>
+<li>PC-1 (sélection 56 bits)</li>
+<li>Division <span class="math inline">\(C_0\)</span>, <span class="math inline">\(D_0\)</span> (28 bits)</li>
+<li>Rotations circulaires gauche (1 ou 2 positions)</li>
+<li>PC-2 (sélection 48 bits pour <span class="math inline">\(K_i\)</span>)</li>
+</ul>
+</section>
+</section>
+<section id="triple-des-et-sécurité" class="level4">
+<h4 class="anchored" data-anchor-id="triple-des-et-sécurité">Triple-DES et Sécurité</h4>
+<p><strong>Vulnérabilité DES</strong> : Espace clés <span class="math inline">\(2^{56}\)</span> cassable en 24h (1999, brute force parallèle, 100’000 PCs).</p>
+<p><strong>Triple-DES</strong> : <span class="math inline">\(C = E_{K_1}(D_{K_2}(E_{K_1}(P)))\)</span> avec deux clés 56 bits → espace <span class="math inline">\(2^{112}\)</span>.</p>
+<p><strong>Avantages</strong> :</p>
+<ul>
+<li>Sécurité satisfaisante</li>
+<li>Réutilise hardware/software DES existant</li>
+<li>Compatibilité</li>
+<li>Migration progressive vers AES</li>
+</ul>
+<p><strong>Inconvénient</strong> : 3× plus lent (3 exécutions DES successives).</p>
+<p><strong>DES ≠ groupe</strong> : Encryption composée renforce considérablement la sécurité. Si DES était un groupe, recherche exhaustive <span class="math inline">\(2^{56}\)</span> casserait l’algorithme indépendamment du nombre d’exécutions.</p>
+<p><strong>4 clés faibles</strong> : Génèrent sous-clés identiques par paires (<span class="math inline">\(k_1 = k_{16}\)</span>, <span class="math inline">\(k_2 = k_{15}\)</span>, …, <span class="math inline">\(k_8 = k_9\)</span>) → facilite cryptanalyse. 6 paires de clés semi-faibles.</p>
+</section>
+<section id="aes-advanced-encryption-standard" class="level4">
+<h4 class="anchored" data-anchor-id="aes-advanced-encryption-standard">AES (Advanced Encryption Standard)</h4>
+<section id="structure-générale" class="level5">
+<h5 class="anchored" data-anchor-id="structure-générale">Structure générale</h5>
+<p><strong>AES</strong> (Rijndael, 2001) : Block cipher itératif (PAS Feistel), 128 bits blocs, clés 128/192/256 bits → 10/12/14 rounds respectivement.</p>
+<p><strong>State</strong> : Matrice 4×4 bytes (16 bytes = 128 bits). Opérations dans corps <span class="math inline">\(GF(2^8)\)</span> (polynômes degré ≤ 7 avec coefficients <span class="math inline">\(GF(2)\)</span>).</p>
+</section>
+<section id="opérations-par-round" class="level5">
+<h5 class="anchored" data-anchor-id="opérations-par-round">Opérations par round</h5>
+<p><strong>4 opérations par round</strong> :</p>
+<ul>
+<li><strong>SubBytes</strong> : Substitution non linéaire via S-box (résistance cryptanalyse linéaire/différentielle)</li>
+<li><strong>ShiftRows</strong> : Décalages lignes (ligne 0 : 0, ligne 1 : 1, ligne 2 : 2, ligne 3 : 3 positions gauche)</li>
+<li><strong>MixColumns</strong> : Combinaisons linéaires des colonnes (multiplication matrices dans <span class="math inline">\(GF(2^8)\)</span>, diffusion maximale)</li>
+<li><strong>AddRoundKey</strong> : XOR State avec sous-clé du round</li>
+</ul>
+<p><strong>Round final</strong> : Identique SAUF pas de MixColumns.</p>
+</section>
+<section id="key-schedule-et-performances" class="level5">
+<h5 class="anchored" data-anchor-id="key-schedule-et-performances">Key Schedule et performances</h5>
+<p><strong>Key Schedule</strong> : Expansion clé → matrice 4 × 4 × (<span class="math inline">\(N_e\)</span> + 1) bytes (<span class="math inline">\(N_e\)</span> = nombre rounds) → sélection sous-clés (rotations, substitutions S-box, XOR constantes Rcon).</p>
+<p><strong>Décryption</strong> : Opérations inverses (InvSubBytes, InvShiftRows, InvMixColumns) avec sous-clés en ordre inverse.</p>
+<p><strong>Avantages</strong> :</p>
+<ul>
+<li>2× plus rapide que DES</li>
+<li>10²² fois plus sûr (théoriquement)</li>
+<li>Processus ouvert</li>
+<li>Évolutif</li>
+<li>Fonctionne sur cartes 8 bits</li>
+</ul>
+</section>
+<section id="sécurité-aes" class="level5">
+<h5 class="anchored" data-anchor-id="sécurité-aes">Sécurité AES</h5>
+<p><strong>Forces</strong> : Simplicité, performances (même sur plateformes limitées comme cartes à puce 8 bits), optimisations hardware/software.</p>
+<p><strong>Attaques publiées</strong> :</p>
+<ul>
+<li><strong>XSL (2002)</strong> : Système 8000 équations quadratiques, 1600 inconnues binaires, effort <span class="math inline">\(2^{100}\)</span> (conjecture). Contestée car basée sur caractère “fortement algébrique” d’AES</li>
+<li><strong>Related Key Attacks (2009-2011)</strong> : Résultats intéressants sur versions réduites, ne compromettent pas AES complet</li>
+<li><strong>Side Channel Attacks</strong> : Sur implémentation (cache timing, power analysis, electromagnetic). Exemple : extraction clé 128 bits avec 6-7 couples plaintext/ciphertext via analyse accès cache (2005)</li>
+<li><strong>Meet-in-Middle bicyclique (2011-2015)</strong> : Réduit effort AES-128 à <span class="math inline">\(2^{126}\)</span> (facteur 4 vs brute force), reste largement au-dessus capacités actuelles</li>
+</ul>
+<p><strong>Sécurité pratique</strong> : Hypothèse clé entropie maximale fondamentale. Attaques récentes (WPA2) = faiblesse passwords/passphrases, pas faille AES. Problème = génération clés depuis passwords faibles.</p>
+</section>
+</section>
+</section>
+<section id="techniques-de-cryptanalyse" class="level3">
+<h3 class="anchored" data-anchor-id="techniques-de-cryptanalyse">Techniques de Cryptanalyse</h3>
+<section id="cryptanalyse-différentielle" class="level4">
+<h4 class="anchored" data-anchor-id="cryptanalyse-différentielle">Cryptanalyse Différentielle</h4>
+<p><strong>Différentielle</strong> : Attaque chosen plaintext analysant propagation des différences (<span class="math inline">\(\Delta x = x_a \oplus x_b\)</span>) entre plaintexts à travers rounds.</p>
+<p><strong>Méthode</strong> : Attribuer probabilités aux clés selon changements observés dans ciphertexts. Clé la plus probable = clé correcte après nombreux essais.</p>
+<p><strong>Effort DES</strong> : <span class="math inline">\(2^{47}\)</span> couples chosen plaintext.</p>
+<p><strong>Très sensible au nombre de rounds</strong> : Chances succès augmentent exponentiellement quand rounds diminuent.</p>
+</section>
+<section id="cryptanalyse-linéaire" class="level4">
+<h4 class="anchored" data-anchor-id="cryptanalyse-linéaire">Cryptanalyse Linéaire</h4>
+<p><strong>Linéaire</strong> : Attaque known plaintext créant simulateur linéaire du block cipher via approximations linéaires. Bits clé simulateur tendent à coïncider avec clé réelle (calcul probabiliste).</p>
+<p><strong>Effort DES</strong> :</p>
+<ul>
+<li><span class="math inline">\(2^{38}\)</span> known plaintexts → 10% probabilité succès</li>
+<li><span class="math inline">\(2^{43}\)</span> → 85% probabilité</li>
+</ul>
+<p><strong>Attaque analytique la plus puissante</strong> à ce jour sur block ciphers. Très sensible au nombre de rounds.</p>
+</section>
+<section id="meet-in-the-middle" class="level4">
+<h4 class="anchored" data-anchor-id="meet-in-the-middle">Meet-in-the-Middle</h4>
+<p><strong>Meet-in-Middle</strong> : Attaque sur constructions composées <span class="math inline">\(y = E_{K_2}(E_{K_1}(x))\)</span>.</p>
+<p><strong>Méthode</strong> : Construire 2 listes <span class="math inline">\(L_1 = \{E_{K_1}(x)\}\)</span> et <span class="math inline">\(L_2 = \{D_{K_2}(y)\}\)</span> pour tous <span class="math inline">\(K_1\)</span>, <span class="math inline">\(K_2\)</span>. Identifier éléments répétés. Vérifier avec deuxième known plaintext.</p>
+<p><strong>Effort DES composé</strong> : <span class="math inline">\(2^{57}\)</span> opérations + <span class="math inline">\(2^{56}\)</span> blocs stockage &lt;&lt; <span class="math inline">\(2^{112}\)</span> attendu intuitivement.</p>
+<p><strong>Applications</strong> : Constructions composées, cryptanalyse interne des block ciphers.</p>
+</section>
+<section id="observations-communes" class="level4">
+<h4 class="anchored" data-anchor-id="observations-communes">Observations communes</h4>
+<p><strong>Difficultés communes</strong> (différentielle/linéaire) :</p>
+<ul>
+<li>Parallélisation moins efficace que brute force parallèle</li>
+<li>Sensibilité rounds</li>
+</ul>
+<p><strong>DES et S-boxes</strong> : Conjecture répandue = concepteurs DES connaissaient ces attaques (inédites années 1970). Design S-boxes offre résistance très grande aux deux techniques.</p>
+</section>
+</section>
+</section>
+<section id="cryptographie-asymétrique" class="level2">
+<h2 class="anchored" data-anchor-id="cryptographie-asymétrique">Cryptographie Asymétrique</h2>
+<section id="fondements-mathématiques" class="level3">
+<h3 class="anchored" data-anchor-id="fondements-mathématiques">Fondements Mathématiques</h3>
+<section id="théorie-des-nombres" class="level4">
+<h4 class="anchored" data-anchor-id="théorie-des-nombres">Théorie des nombres</h4>
+<p><strong>Décomposition unique</strong> : Tout entier = produit de nombres premiers (à l’ordre près).</p>
+<p><strong><span class="math inline">\(\phi(n)\)</span></strong> : Fonction d’Euler comptant les entiers <span class="math inline">\(&lt; n\)</span> premiers avec <span class="math inline">\(n\)</span>.</p>
+<p><strong>Clé pour RSA</strong> : Si <span class="math inline">\(n = pq\)</span> avec <span class="math inline">\(p\)</span> et <span class="math inline">\(q\)</span> premiers, alors <span class="math inline">\(\phi(n) = (p-1)(q-1)\)</span>.</p>
+<p><strong>Théorème d’Euler</strong> : Si <span class="math inline">\(\gcd(a,n) = 1\)</span>, alors <span class="math inline">\(a^{\phi(n)} \equiv 1 \pmod{n}\)</span>.</p>
+<p><strong>Petit Théorème de Fermat</strong> : Cas spécial si <span class="math inline">\(p\)</span> premier : <span class="math inline">\(a^{p-1} \equiv 1 \pmod{p}\)</span>.</p>
+<p><strong>Inverse modulaire</strong> : <span class="math inline">\(a^{-1} \equiv a^{\phi(n)-1} \pmod{n}\)</span>. Si <span class="math inline">\(p\)</span> premier, <span class="math inline">\(a^{-1} \equiv a^{p-2} \pmod{p}\)</span>.</p>
+<p><strong>Base de RSA</strong> : Ces théorèmes permettent encryption/decryption avec exposants.</p>
+</section>
+<section id="groupes-multiplicatifs" class="level4">
+<h4 class="anchored" data-anchor-id="groupes-multiplicatifs">Groupes Multiplicatifs</h4>
+<p><strong><span class="math inline">\(\mathbb{Z}_n^*\)</span></strong> : Ensemble des éléments premiers avec <span class="math inline">\(n\)</span>, cardinal = <span class="math inline">\(\phi(n)\)</span>.</p>
+<p><strong>Générateur</strong> : Élément d’ordre <span class="math inline">\(\phi(n)\)</span> qui génère tout le groupe par puissances successives.</p>
+<p><strong>Crucial pour DH et ElGamal</strong> : Sécurité basée sur logarithme discret dans groupe cyclique.</p>
+<p><strong>Safe prime</strong> : Nombre premier <span class="math inline">\(n = 2p+1\)</span> avec <span class="math inline">\(p\)</span> également premier. Test de générateur simplifié : <span class="math inline">\(\alpha\)</span> est générateur ssi <span class="math inline">\(\alpha^2 \not\equiv 1 \pmod{n}\)</span> et <span class="math inline">\(\alpha^p \not\equiv 1 \pmod{n}\)</span>.</p>
+</section>
+<section id="fast-exponentiation" class="level4">
+<h4 class="anchored" data-anchor-id="fast-exponentiation">Fast Exponentiation</h4>
+<p><strong>Idée</strong> : Utiliser la représentation binaire de l’exposant pour calculer <span class="math inline">\(a^k \bmod n\)</span> efficacement.</p>
+<p><strong>Complexité</strong> : <span class="math inline">\(O(\log^3 n)\)</span> - polynomial et très efficace.</p>
+<p><strong>Essentiel</strong> : Rend RSA, ElGamal, Diffie-Hellman praticables en temps raisonnable.</p>
+<p><strong>Alternative</strong> : Algorithme d’Euclide étendu pour calculer inverses modulaires, même complexité <span class="math inline">\(O(\log^3 n)\)</span>.</p>
+</section>
+<section id="théorème-des-restes-chinois" class="level4">
+<h4 class="anchored" data-anchor-id="théorème-des-restes-chinois">Théorème des Restes Chinois</h4>
+<p><strong>Résout</strong> : Systèmes de congruences simultanées avec moduli premiers entre eux.</p>
+<p><strong>Solution unique</strong> : Modulo produit des moduli. Algorithme de Gauss donne la solution explicite.</p>
+<p><strong>Complexité</strong> : <span class="math inline">\(O(\log^3 n)\)</span> - polynomial.</p>
+<p><strong>Usage cryptographique</strong> :</p>
+<ul>
+<li>Optimisation des calculs RSA (utiliser <span class="math inline">\(p\)</span> et <span class="math inline">\(q\)</span> séparément)</li>
+<li>Partage de secret</li>
+<li>Certaines attaques si exposant petit avec messages multiples</li>
+</ul>
+</section>
+</section>
+<section id="problèmes-de-base-et-complexité" class="level3">
+<h3 class="anchored" data-anchor-id="problèmes-de-base-et-complexité">Problèmes de Base et Complexité</h3>
+<section id="problèmes-fondamentaux" class="level4">
+<h4 class="anchored" data-anchor-id="problèmes-fondamentaux">Problèmes fondamentaux</h4>
+<p><strong>FACTP</strong> (Factorisation) : Factoriser <span class="math inline">\(n\)</span> en nombres premiers → base de RSA/Rabin.</p>
+<p><strong>DLP</strong> (Logarithme Discret) : Trouver <span class="math inline">\(x\)</span> tel que <span class="math inline">\(\alpha^x \equiv \beta \pmod{p}\)</span> → base ElGamal/Diffie-Hellman.</p>
+<p><strong>SQROOTP</strong> (Racine Carrée mod Composite) : Trouver <span class="math inline">\(\sqrt{a} \bmod n\)</span> avec <span class="math inline">\(n\)</span> composite → base de Rabin.</p>
+<p><strong>Équivalences prouvées</strong> : Casser l’algorithme = résoudre le problème de base correspondant.</p>
+</section>
+<section id="techniques-de-factorisation" class="level4">
+<h4 class="anchored" data-anchor-id="techniques-de-factorisation">Techniques de Factorisation</h4>
+<p><strong>Sous-exponentiel</strong> : NFS (Number Field Sieve) actuellement le plus rapide, complexité <span class="math inline">\(O(\exp(c \cdot (\ln(n))^{1/3}))\)</span>.</p>
+<p><strong>Record 2020</strong> : RSA-829 (829 bits, 250 chiffres) factorisé en 2700 années-cœur avec GNFS.</p>
+<p><strong>Recommandation</strong> : Clés RSA ≥ 2048 bits minimum (3072-4096 bits pour sécurité long terme).</p>
+<p><strong>Menace future</strong> : Ordinateurs quantiques avec algorithme de Shor (complexité polynomiale <span class="math inline">\(O(\log^c n)\)</span>).</p>
+</section>
+</section>
+<section id="rsa" class="level3">
+<h3 class="anchored" data-anchor-id="rsa">RSA</h3>
+<section id="principe" class="level4">
+<h4 class="anchored" data-anchor-id="principe">Principe</h4>
+<p><strong>Clé publique</strong> : <span class="math inline">\((n, e)\)</span> avec <span class="math inline">\(n = pq\)</span> (produit de deux grands nombres premiers).</p>
+<p><strong>Clé privée</strong> : <span class="math inline">\(d\)</span> tel que <span class="math inline">\(ed \equiv 1 \pmod{\phi(n)}\)</span>.</p>
+<p><strong>Chiffrement</strong> : <span class="math inline">\(c = m^e \bmod n\)</span>.</p>
+<p><strong>Déchiffrement</strong> : <span class="math inline">\(m = c^d \bmod n\)</span>.</p>
+<p><strong>Sécurité</strong> : Basée sur difficulté de factoriser <span class="math inline">\(n\)</span>. Trouver <span class="math inline">\(d\)</span> ⟺ factoriser <span class="math inline">\(n\)</span> (équivalence prouvée).</p>
+<p><strong>Taille recommandée</strong> : <span class="math inline">\(n \geq 2048\)</span> bits minimum.</p>
+</section>
+<section id="choix-des-paramètres" class="level4">
+<h4 class="anchored" data-anchor-id="choix-des-paramètres">Choix des paramètres</h4>
+<p><strong><span class="math inline">\(e\)</span> petit</strong> : Souvent 3, 17 ou 65537 pour encryption rapide, mais nécessite padding obligatoire.</p>
+<p><strong><span class="math inline">\(d\)</span> grand</strong> : Doit être au moins <span class="math inline">\(\text{taille}(n)/2\)</span> pour sécurité. Exposant de décryption toujours grand.</p>
+<p><strong>Clés séparées</strong> : Utiliser des paires de clés distinctes pour encryption et signature.</p>
+</section>
+<section id="attaques-sur-rsa" class="level4">
+<h4 class="anchored" data-anchor-id="attaques-sur-rsa">Attaques sur RSA</h4>
+<p><strong>Même message, petit <span class="math inline">\(e\)</span></strong> : Si message identique envoyé à plusieurs destinataires avec <span class="math inline">\(e = 3\)</span>, le Théorème des Restes Chinois permet d’extraire <span class="math inline">\(m\)</span> directement par racine cubique.</p>
+<p><strong>Message trop petit</strong> : Si <span class="math inline">\(m &lt; n^{1/e}\)</span>, alors <span class="math inline">\(c = m^e\)</span> dans <span class="math inline">\(\mathbb{Z}\)</span> (pas modulo) → racine <span class="math inline">\(e\)</span>-ième directe possible.</p>
+<p><strong>Propriété multiplicative</strong> : <span class="math inline">\(E(m_1) \cdot E(m_2) = E(m_1 \cdot m_2) \bmod n\)</span>. Permet attaques chosen-ciphertext et blind signatures.</p>
+<p><strong>Protection essentielle</strong> : Toujours utiliser padding/randomization (standard OAEP) avant encryption pour éviter ces attaques.</p>
+<p><strong>Attaque générale</strong> : Méthode la plus efficace reste la factorisation de <span class="math inline">\(n\)</span> si paramètres bien choisis et implémentation correcte.</p>
+</section>
+</section>
+<section id="elgamal" class="level3">
+<h3 class="anchored" data-anchor-id="elgamal">ElGamal</h3>
+<section id="principe-1" class="level4">
+<h4 class="anchored" data-anchor-id="principe-1">Principe</h4>
+<p><strong>Base</strong> : Problème du logarithme discret (DLP) dans <span class="math inline">\(\mathbb{Z}_p^*\)</span>.</p>
+<p><strong>Clé publique</strong> : <span class="math inline">\((p, \alpha, y)\)</span> avec <span class="math inline">\(p\)</span> premier, <span class="math inline">\(\alpha\)</span> générateur, <span class="math inline">\(y = \alpha^a \bmod p\)</span>.</p>
+<p><strong>Clé privée</strong> : <span class="math inline">\(a\)</span> (exposant secret).</p>
+<p><strong>Chiffrement</strong> : Pour message <span class="math inline">\(m\)</span>, choisir <span class="math inline">\(k\)</span> aléatoire unique, calculer <span class="math inline">\(\gamma = \alpha^k \bmod p\)</span> et <span class="math inline">\(\delta = m \cdot y^k \bmod p\)</span>. Envoyer <span class="math inline">\((\gamma, \delta)\)</span>.</p>
+<p><strong>Déchiffrement</strong> : <span class="math inline">\(m = \delta \cdot \gamma^{-a} \bmod p\)</span>.</p>
+</section>
+<section id="propriétés-et-limites" class="level4">
+<h4 class="anchored" data-anchor-id="propriétés-et-limites">Propriétés et limites</h4>
+<p><strong>Sécurité</strong> : <span class="math inline">\(k\)</span> doit être unique et grand pour chaque message.</p>
+<p><strong>Inconvénient majeur</strong> : Double la taille du message (expansion 1:2).</p>
+<p><strong>Équivalence</strong> : Basé sur DLP mais équivalence stricte non prouvée (contrairement à Rabin).</p>
+<p><strong><span class="math inline">\(k\)</span> unique CRITIQUE</strong> : Si <span class="math inline">\(k\)</span> réutilisé pour deux messages, <span class="math inline">\(\delta_1/\delta_2 = m_1/m_2\)</span> révèle les messages.</p>
+<p><strong>Taille exposants</strong> : <span class="math inline">\(k\)</span> et <span class="math inline">\(a\)</span> doivent être grands, sinon vulnérable aux algorithmes baby-step giant-step.</p>
+<p><strong>Extensions</strong> : Peut se généraliser aux corps <span class="math inline">\(GF(2^n)\)</span> ou aux courbes elliptiques.</p>
+</section>
+</section>
+<section id="rabin" class="level3">
+<h3 class="anchored" data-anchor-id="rabin">Rabin</h3>
+<section id="principe-2" class="level4">
+<h4 class="anchored" data-anchor-id="principe-2">Principe</h4>
+<p><strong>Base</strong> : Problème SQROOTP (racine carrée modulo composite).</p>
+<p><strong>Clé publique</strong> : <span class="math inline">\(n = pq\)</span> (produit de deux grands nombres premiers).</p>
+<p><strong>Clé privée</strong> : <span class="math inline">\((p, q)\)</span> les facteurs premiers.</p>
+<p><strong>Chiffrement</strong> : <span class="math inline">\(c = m^2 \bmod n\)</span>.</p>
+<p><strong>Déchiffrement</strong> : Calculer les 4 racines carrées possibles de <span class="math inline">\(c \bmod n\)</span> via algorithmes efficaces modulo <span class="math inline">\(p\)</span> et <span class="math inline">\(q\)</span>.</p>
+</section>
+<section id="sécurité" class="level4">
+<h4 class="anchored" data-anchor-id="sécurité">Sécurité</h4>
+<p><strong>Avantage unique</strong> : Seul algorithme avec équivalence PROUVÉE à la factorisation (SQROOTP ⟺ FACTP). Catégorie “provably secure”.</p>
+<p><strong>Problème</strong> : 4 solutions possibles au déchiffrement, nécessite mécanisme de redondance ou indication pour identifier le message correct.</p>
+<p><strong>Attaque chosen-ciphertext</strong> : Si adversaire <span class="math inline">\(M\)</span> envoie <span class="math inline">\(c = m^2 \bmod n\)</span> et reçoit racine <span class="math inline">\(m_x \neq m\)</span>, alors <span class="math inline">\(\gcd(m - m_x, n)\)</span> donne un facteur de <span class="math inline">\(n\)</span> (probabilité 0.5 de succès).</p>
+<p><strong>Parade</strong> : Exiger redondance suffisante dans les messages permettant d’identifier sans ambiguïté la solution correcte et rejeter les autres.</p>
+</section>
+</section>
+<section id="courbes-elliptiques" class="level3">
+<h3 class="anchored" data-anchor-id="courbes-elliptiques">Courbes Elliptiques</h3>
+<section id="structure-mathématique" class="level4">
+<h4 class="anchored" data-anchor-id="structure-mathématique">Structure mathématique</h4>
+<p><strong>Équation</strong> : <span class="math inline">\(y^2 = x^3 + ax + b\)</span> avec discriminant <span class="math inline">\(4a^3 + 27b^2 \neq 0\)</span>.</p>
+<p><strong>Structure</strong> : Forme un groupe commutatif avec point à l’infini <span class="math inline">\(\mathcal{O}\)</span> comme élément identité.</p>
+<p><strong>Opération fondamentale</strong> : Addition géométrique de points (3ème point d’intersection + symétrie).</p>
+<p><strong>Inverse</strong> : <span class="math inline">\(-P = (x, -y)\)</span> (symétrie par rapport à l’axe des <span class="math inline">\(x\)</span>).</p>
+<p><strong>Addition</strong> : Tracer droite entre <span class="math inline">\(P\)</span> et <span class="math inline">\(Q\)</span>, trouver 3ème point d’intersection, prendre son symétrique.</p>
+<p><strong>Doublement</strong> : Utiliser tangente au point <span class="math inline">\(P\)</span> au lieu de droite entre deux points.</p>
+</section>
+<section id="sécurité-et-avantages" class="level4">
+<h4 class="anchored" data-anchor-id="sécurité-et-avantages">Sécurité et avantages</h4>
+<p><strong>Problème dur</strong> : ECDLP (Elliptic Curve Discrete Logarithm Problem) - trouver <span class="math inline">\(k\)</span> dans <span class="math inline">\(Q = kP\)</span> nécessite effort exponentiel.</p>
+<p><strong>Gain majeur</strong> : Clés environ 6-10× plus courtes que RSA/DH classique pour sécuritééquivalente.</p>
+<p><strong>Limite</strong> : Représenter messages en points de la courbe reste opération complexe.</p>
+<p><strong>Adoption</strong> : NSA a acheté brevet Certicom en 2003 pour utilisation cryptographique.</p>
+</section>
+<section id="comparaison-des-tailles-de-clés" class="level4">
+<h4 class="anchored" data-anchor-id="comparaison-des-tailles-de-clés">Comparaison des tailles de clés</h4>
+<p>Pour sécurité équivalente à AES 128 bits :</p>
+<ul>
+<li>RSA nécessite 3072 bits</li>
+<li>Courbes elliptiques seulement 256 bits (rapport 1:12)</li>
+</ul>
+<p>Pour sécurité équivalente à AES 256 bits :</p>
+<ul>
+<li>RSA nécessite 15360 bits</li>
+<li>Courbes elliptiques seulement 512 bits (rapport 1:30)</li>
+</ul>
+</section>
+<section id="elgamal-sur-courbes-elliptiques" class="level4">
+<h4 class="anchored" data-anchor-id="elgamal-sur-courbes-elliptiques">ElGamal sur Courbes Elliptiques</h4>
+<p><strong>Principe</strong> : Adaptation directe d’ElGamal en remplaçant opérations dans <span class="math inline">\(\mathbb{Z}_p^*\)</span> par opérations sur courbe <span class="math inline">\(E_p\)</span>.</p>
+<p><strong>Clé publique</strong> : <span class="math inline">\((E_p, P_0, P_a)\)</span> avec <span class="math inline">\(P_0\)</span> point de grand ordre, <span class="math inline">\(P_a = xP_0\)</span>.</p>
+<p><strong>Clé privée</strong> : <span class="math inline">\(x\)</span> (scalaire secret).</p>
+<p><strong>Chiffrement</strong> : Pour message <span class="math inline">\(m_i \in E_p\)</span>, choisir <span class="math inline">\(k\)</span> aléatoire, calculer <span class="math inline">\(\gamma = kP_0\)</span> et <span class="math inline">\(\delta = kP_a + m_i\)</span>. Envoyer <span class="math inline">\((\gamma, \delta)\)</span>.</p>
+<p><strong>Déchiffrement</strong> : <span class="math inline">\(m_i = \delta - x\gamma\)</span>.</p>
+<p><strong>Opérations</strong> : Addition de points et multiplication scalaire sur courbe elliptique.</p>
+<p><strong>Sécurité</strong> : Repose sur ECDLP (difficulté de calculer logarithme discret sur courbe).</p>
+<p><strong>Authentification</strong> : Nécessaire pour éviter attaques man-in-the-middle, comme pour ElGamal classique.</p>
+<p><strong>Avantage</strong> : Clés beaucoup plus courtes pour sécurité équivalente (facteur 6-30).</p>
+</section>
+</section>
+</section>
+<section id="fonctions-de-hachage-et-intégrité" class="level2">
+<h2 class="anchored" data-anchor-id="fonctions-de-hachage-et-intégrité">Fonctions de Hachage et Intégrité</h2>
+<section id="fonctions-à-sens-unique" class="level3">
+<h3 class="anchored" data-anchor-id="fonctions-à-sens-unique">Fonctions à Sens Unique</h3>
+<p><strong>OWF</strong> : facile dans un sens (<span class="math inline">\(f(x) \to y\)</span>), impossible dans l’autre (<span class="math inline">\(y \to x\)</span>).</p>
+<p>Exemples :</p>
+<ul>
+<li>Carrés modulaires</li>
+<li><span class="math inline">\(E_k(x) \oplus x\)</span></li>
+</ul>
+<p>OWF ≠ OWHF (hash functions = plus de contraintes).</p>
+</section>
+<section id="hash-functions" class="level3">
+<h3 class="anchored" data-anchor-id="hash-functions">Hash Functions</h3>
+<section id="types-et-propriétés" class="level4">
+<h4 class="anchored" data-anchor-id="types-et-propriétés">Types et propriétés</h4>
+<p><strong>Hash function</strong> : compression + calcul facile</p>
+<p><strong>MDC</strong> (sans clé) pour intégrité</p>
+<p><strong>MAC</strong> (avec clé) pour authentification</p>
+<p><strong>Propriétés</strong> :</p>
+<ol type="1">
+<li>preimage resistance</li>
+<li>2nd-preimage resistance</li>
+<li>collision resistance</li>
+</ol>
+<p><strong>OWHF</strong> = (1)+(2)</p>
+<p><strong>CRHF</strong> = (2)+(3)</p>
+</section>
+</section>
+<section id="message-authentication-codes" class="level3">
+<h3 class="anchored" data-anchor-id="message-authentication-codes">Message Authentication Codes</h3>
+<p><strong>MAC</strong> = hash avec clé <span class="math inline">\(k\)</span></p>
+<p>Sans <span class="math inline">\(k\)</span> : impossible de forger <span class="math inline">\((x, h_k(x))\)</span> ou retrouver <span class="math inline">\(k\)</span></p>
+<p>Garantit authentification d’origine + intégrité.</p>
+</section>
+<section id="attaques-sur-mdcs" class="level3">
+<h3 class="anchored" data-anchor-id="attaques-sur-mdcs">Attaques sur MDCs</h3>
+<p>Pour casser 2nd-preimage resistance avec digest de <span class="math inline">\(m\)</span> bits : <span class="math inline">\(2^{m-1}\)</span> essais (prob 0.5).</p>
+<p><strong>Birthday paradox</strong> : pour casser collision resistance avec digest de <span class="math inline">\(m\)</span> bits : <span class="math inline">\(2^{m/2}\)</span> essais (prob &gt; 0.5).</p>
+<p>Exemple : 23 personnes suffisent pour anniversaires identiques.</p>
+</section>
+<section id="résistance-calculatoire" class="level3">
+<h3 class="anchored" data-anchor-id="résistance-calculatoire">Résistance Calculatoire</h3>
+<p><strong>Efforts</strong> :</p>
+<ul>
+<li>preimage <span class="math inline">\(2^n\)</span></li>
+<li>2nd-preimage <span class="math inline">\(2^{n-1}\)</span></li>
+<li>collision <span class="math inline">\(2^{n/2}\)</span></li>
+</ul>
+<p><strong>Tailles</strong> :</p>
+<ul>
+<li>OWHF ≥128 bits</li>
+<li>CRHF ≥256 bits</li>
+<li>MAC clé ≥256 bits</li>
+</ul>
+</section>
+<section id="mdcs-basés-sur-cryptage" class="level3">
+<h3 class="anchored" data-anchor-id="mdcs-basés-sur-cryptage">MDCs Basés sur Cryptage</h3>
+<p>MDCs à partir de crypto symétrique : casser réversibilité + chaînage XOR.</p>
+<p>Modèles :</p>
+<ul>
+<li>Matyas-Meyer-Oseas</li>
+<li>Davies-Meyer</li>
+<li>Miyaguchi-Preneel</li>
+</ul>
+<p>MDC-2/4 avec DES → 128 bits.</p>
+</section>
+<section id="customized-mdcs" class="level3">
+<h3 class="anchored" data-anchor-id="customized-mdcs">Customized MDCs</h3>
+<p><strong>Customized MDCs</strong> :</p>
+<ul>
+<li>MD5 (cassé)</li>
+<li>SHA-0 (cassé)</li>
+<li>SHA-1 (faible)</li>
+<li>SHA-2 (sûr)</li>
+<li>SHA-3/Keccak (standard actuel)</li>
+</ul>
+<p>Construction : padding + constantes + rounds + chaînage.</p>
+</section>
+<section id="macs-basés-sur-cryptage" class="level3">
+<h3 class="anchored" data-anchor-id="macs-basés-sur-cryptage">MACs Basés sur Cryptage</h3>
+<p><strong>CBC-MAC</strong> : mode CBC + IV=0, seul dernier bloc gardé. DES : clé 56/112 bits, MAC 64 bits.</p>
+</section>
+<section id="nested-macs-et-hmacs" class="level3">
+<h3 class="anchored" data-anchor-id="nested-macs-et-hmacs">Nested MACs et HMACs</h3>
+<p><strong>HMAC</strong> : double hash avec clés dérivées (<code>ipad</code>/<code>opad</code>).</p>
+<p><span class="math inline">\(\text{HMAC}_k(x) = H((k \oplus \text{opad}) \parallel H((k \oplus \text{ipad}) \parallel x))\)</span></p>
+<p>Standard, sûr, performant.</p>
+</section>
+<section id="applications" class="level3">
+<h3 class="anchored" data-anchor-id="applications">Applications</h3>
+<section id="intégrité" class="level4">
+<h4 class="anchored" data-anchor-id="intégrité">Intégrité</h4>
+<p><strong>Intégrité</strong> : MAC seul, MDC+crypto, MDC+signature.</p>
+<p>⚠️ Vulnérable aux replay sans timestamps/nonces.</p>
+</section>
+<section id="blockchain" class="level4">
+<h4 class="anchored" data-anchor-id="blockchain">Blockchain</h4>
+<p><strong>Blockchain</strong> : chaînage de blocs via hash.</p>
+<p><strong>Proof of Work</strong> : trouver nonce pour hash &lt; target.</p>
+<p>Sécurité = effort &gt; tous mineurs.</p>
+<p>Bitcoin : ~10 min/bloc, <span class="math inline">\(10^{21}\)</span> hash/sec.</p>
+</section>
+<section id="autres-applications" class="level4">
+<h4 class="anchored" data-anchor-id="autres-applications">Autres applications</h4>
+<p><strong>Applications</strong> :</p>
+<ul>
+<li>authentification</li>
+<li>virus checking</li>
+<li>distribution clés publiques</li>
+<li>timestamp</li>
+<li>one-time passwords (chaîne de hash)</li>
+</ul>
+</section>
+</section>
+<section id="unix-salt" class="level3">
+<h3 class="anchored" data-anchor-id="unix-salt">UNIX Salt</h3>
+<p><strong>UNIX salt</strong> : 12 bits aléatoires ajoutés au password avant hash.</p>
+<p>4096 variations possibles.</p>
+<p>Empêche codebooks pré-calculés et détection duplications.</p>
+</section>
+</section>
+<section id="signatures-digitales" class="level2">
+<h2 class="anchored" data-anchor-id="signatures-digitales">Signatures Digitales</h2>
+<section id="définitions-et-classifications" class="level3">
+<h3 class="anchored" data-anchor-id="définitions-et-classifications">Définitions et Classifications</h3>
+<p><strong>Signature digitale</strong> = chaîne associant message + entité</p>
+<p><strong>Deux types</strong> :</p>
+<ul>
+<li>avec appendice (nécessite message original)</li>
+<li>avec reconstitution (reconstruit le message)</li>
+</ul>
+<p>Basée sur crypto asymétrique</p>
+</section>
+<section id="signatures-avec-appendice" class="level3">
+<h3 class="anchored" data-anchor-id="signatures-avec-appendice">Signatures avec Appendice</h3>
+<p>Signature : <span class="math inline">\(S_A(m_h) = s\)</span> (clé privée).</p>
+<p>Vérification : <span class="math inline">\(V_A(m_h, s)\)</span> (clé publique).</p>
+<p>Impossible de forger sans clé privée.</p>
+</section>
+<section id="signatures-avec-reconstitution" class="level3">
+<h3 class="anchored" data-anchor-id="signatures-avec-reconstitution">Signatures avec Reconstitution</h3>
+<p><strong>Avec reconstitution :</strong> Fonction redondance <span class="math inline">\(R(m) = m_R\)</span>.</p>
+<p>Signature <span class="math inline">\(s = S_A(m_R)\)</span>.</p>
+<p>Vérification : <span class="math inline">\(m_R = V_A(s)\)</span>, reconstituer <span class="math inline">\(m = R^{-1}(m_R)\)</span>.</p>
+<p>Redondance cruciale pour sécurité.</p>
+</section>
+<section id="signature-rsa" class="level3">
+<h3 class="anchored" data-anchor-id="signature-rsa">Signature RSA</h3>
+<p><strong>RSA signature :</strong> <span class="math inline">\(s = m_R^d \bmod n\)</span> (privée).</p>
+<p>Vérif : <span class="math inline">\(m'_R = s^e \bmod n\)</span> (publique).</p>
+<p>Avec appendice : <span class="math inline">\(s = H(m)^d \bmod n\)</span>.</p>
+<p>Signature lente, vérif rapide.</p>
+</section>
+<section id="signatures-aveugles" class="level3">
+<h3 class="anchored" data-anchor-id="signatures-aveugles">Signatures Aveugles</h3>
+<p><strong>Blind signature :</strong> Exploite multiplicativité RSA.</p>
+<p>Camouflage <span class="math inline">\(f(m) = m \cdot k^e\)</span></p>
+<p>Décamouflage <span class="math inline">\(g(m) = k^{-1} \cdot m\)</span>.</p>
+<p>B signe <span class="math inline">\(f(m)\)</span>, A obtient <span class="math inline">\(S_B(m)\)</span> sans que B voie <span class="math inline">\(m\)</span>.</p>
+</section>
+<section id="signature-rabin" class="level3">
+<h3 class="anchored" data-anchor-id="signature-rabin">Signature Rabin</h3>
+<p><strong>Rabin :</strong> <span class="math inline">\(s = \sqrt{m_R} \bmod n\)</span>.</p>
+<p>Vérif : <span class="math inline">\(m'_R = s^2 \bmod n\)</span>.</p>
+<p><strong>Provably secure</strong> (équivalent factorisation).</p>
+<p>Vulnérable attaques actives chosen-ciphertext.</p>
+</section>
+<section id="signature-elgamal" class="level3">
+<h3 class="anchored" data-anchor-id="signature-elgamal">Signature ElGamal</h3>
+<p><strong>ElGamal :</strong> <span class="math inline">\((r,s)\)</span> avec <span class="math inline">\(r = \alpha^k \bmod p\)</span>, <span class="math inline">\(s = k^{-1}(m_h - ar) \bmod (p-1)\)</span>.</p>
+<p>Vérif : <span class="math inline">\(y^r r^s \stackrel{?}{=} \alpha^{H(m)} \bmod p\)</span>.</p>
+<p>Base de DSA.</p>
+<p><span class="math inline">\(k\)</span> unique crucial.</p>
+</section>
+<section id="signatures-et-crypto-monnaies" class="level3">
+<h3 class="anchored" data-anchor-id="signatures-et-crypto-monnaies">Signatures et Crypto-monnaies</h3>
+<p><strong>Crypto-monnaies :</strong> Bitcoin/Ethereum utilisent <strong>ECDSA</strong> (ElGamal sur courbes elliptiques).</p>
+<p>Chaque transaction signée avec clé privée détenteur.</p>
+<p>Sécurité basée ECDLP.</p>
+</section>
+<section id="tableau-récapitulatif" class="level3">
+<h3 class="anchored" data-anchor-id="tableau-récapitulatif">Tableau Récapitulatif</h3>
+<p><strong>Signatures classiques :</strong></p>
+<ul>
+<li>RSA/Rabin (recovery)</li>
+<li>ElGamal/DSS (appendice)</li>
+</ul>
+<p><strong>Spécialisées :</strong></p>
+<ul>
+<li>One-time</li>
+<li>Undeniable</li>
+<li>Fail-Stop</li>
+<li>Blind</li>
+</ul>
+<p>Problèmes base : RSAP, SQROOTP, DLP, dépend de la OWF.</p>
+</section>
+<section id="types-dattaques" class="level3">
+<h3 class="anchored" data-anchor-id="types-dattaques">Types d’Attaques</h3>
+<p><strong>Casser signature :</strong></p>
+<ul>
+<li>Total break (clé privée)</li>
+<li>falsification sélective (message fixé)</li>
+<li>existentielle (un message)</li>
+</ul>
+<p><strong>Attaques :</strong></p>
+<ul>
+<li>key-only</li>
+<li>known/chosen/adaptive-chosen-messages</li>
+</ul>
+</section>
+</section>
+<section id="authentification" class="level2">
+<h2 class="anchored" data-anchor-id="authentification">Authentification</h2>
+<section id="méthodes-dauthentification-de-messages" class="level3">
+<h3 class="anchored" data-anchor-id="méthodes-dauthentification-de-messages">Méthodes d’Authentification de Messages</h3>
+<p><strong>4 méthodes</strong> :</p>
+<ul>
+<li>MAC seul</li>
+<li>MDC+cryptage</li>
+<li>MDC+cryptage confidentiel</li>
+<li>MDC+signature</li>
+</ul>
+<p><strong>Attention</strong> : Vulnérable aux replay attacks sans mécanisme temporel</p>
+</section>
+<section id="authentification-dentités" class="level3">
+<h3 class="anchored" data-anchor-id="authentification-dentités">Authentification d’Entités</h3>
+<section id="niveaux-dauthentification" class="level4">
+<h4 class="anchored" data-anchor-id="niveaux-dauthentification">Niveaux d’authentification</h4>
+<p><strong>3 niveaux</strong> :</p>
+<ul>
+<li>Faible (révèle secret)</li>
+<li>Forte (preuve de possession)</li>
+<li>Zero-knowledge (aucune info révélée)</li>
+</ul>
+<p><strong>4 objectifs</strong> :</p>
+<ul>
+<li>Acceptation si honnête</li>
+<li>non-réutilisation</li>
+<li>résistance usurpation</li>
+<li>résistance observation</li>
+</ul>
+</section>
+</section>
+<section id="attaques-dictionnaire" class="level3">
+<h3 class="anchored" data-anchor-id="attaques-dictionnaire">Attaques Dictionnaire</h3>
+<p><strong>Offline</strong> (via BdD ou capture) &gt; <strong>Online</strong> (limitée par le système)</p>
+<p><strong>Protection</strong> :</p>
+<ul>
+<li>salting</li>
+<li>limitation tentatives</li>
+<li>authentification forte</li>
+</ul>
+</section>
+<section id="plaintext-equivalence" class="level3">
+<h3 class="anchored" data-anchor-id="plaintext-equivalence">Plaintext-Equivalence</h3>
+<p><strong>Plaintext-equivalent</strong> : Donnée utilisable comme le password original</p>
+<p><strong>Danger</strong> : Si le système transmet <code>H(p)</code> et stocke <code>H(p)</code> → <code>H(p)</code> est plaintext-equivalent</p>
+<p><strong>Bon design</strong> : Système transmet <code>p</code>, stocke <code>H(p)</code> → pas plaintext-equivalent</p>
+</section>
+<section id="authentification-faible" class="level3">
+<h3 class="anchored" data-anchor-id="authentification-faible">Authentification Faible</h3>
+<section id="types-et-stockage" class="level4">
+<h4 class="anchored" data-anchor-id="types-et-stockage">Types et stockage</h4>
+<p><strong>2 types</strong> :</p>
+<ul>
+<li>Password fixe (statique)</li>
+<li>Password variable (change à chaque instance)</li>
+</ul>
+<p><strong>Stockage</strong> :</p>
+<ul>
+<li>Clair (très vulnérable)</li>
+<li>Encrypté/Hashé (attaques offline)</li>
+</ul>
+<p><strong>Protections</strong> :</p>
+<ul>
+<li>Règles strictes</li>
+<li>limitation tentatives</li>
+<li>salting</li>
+<li>non-diffusion</li>
+</ul>
+</section>
+<section id="méthodes-spécifiques" class="level4">
+<h4 class="anchored" data-anchor-id="méthodes-spécifiques">Méthodes spécifiques</h4>
+<p><strong>Lamport</strong> : wn+1 = H(wn), authentification par vérification de la chaîne de hash</p>
+<p><strong>Hardware</strong> : Générateur synchronisé (30-60s), limité au pre-play</p>
+<p><strong>Attention</strong> : Nécessite authentification de B pour éviter pre-play et small-n attacks</p>
+</section>
+</section>
+<section id="authentification-forte-symétrique" class="level3">
+<h3 class="anchored" data-anchor-id="authentification-forte-symétrique">Authentification Forte Symétrique</h3>
+<p><strong>Challenge-Response</strong> : B envoie challenge R, A répond avec E_k(R)</p>
+<p><strong>Alternative</strong> : MAC au lieu d’encryption (plus rapide)</p>
+<p><strong>Avec timestamp</strong> : Un message en moins mais nécessite synchronisation horloges</p>
+<p><strong>Reflection attack</strong> : Utiliser la réponse d’une session pour en authentifier une autre</p>
+<p><strong>Protection</strong> : Inclure identités + asymétrie dans challenges (R1,R2) vs (R2,R1)</p>
+</section>
+<section id="authentification-forte-asymétrique" class="level3">
+<h3 class="anchored" data-anchor-id="authentification-forte-asymétrique">Authentification Forte Asymétrique</h3>
+<p><strong>Vulnérabilité</strong> : Chosen-ciphertext attacks si pas de structure</p>
+<p><strong>Protection</strong> : Inclure H(R), identité B dans le message encrypté, A vérifie avant de révéler R</p>
+<p><strong>Needham-Schroeder</strong> : 3 messages avec inclusion identités pour éviter chosen-ciphertext</p>
+</section>
+<section id="zero-knowledge-proofs" class="level3">
+<h3 class="anchored" data-anchor-id="zero-knowledge-proofs">Zero-Knowledge Proofs</h3>
+<section id="propriétés-fondamentales" class="level4">
+<h4 class="anchored" data-anchor-id="propriétés-fondamentales">Propriétés fondamentales</h4>
+<p><strong>3 propriétés</strong> :</p>
+<ul>
+<li>Consistance (accepte si honnête)</li>
+<li>Significativité (nécessite secret)</li>
+<li>Zero-knowledge (aucune info révélée)</li>
+</ul>
+<p><strong>Structure</strong> : Témoin → Défi → Réponse (répéter n fois)</p>
+<p><strong>Perfect ZK</strong> : Indistinguable d’une simulation même avec ressources infinies</p>
+</section>
+<section id="exemple-de-la-caverne" class="level4">
+<h4 class="anchored" data-anchor-id="exemple-de-la-caverne">Exemple de la caverne</h4>
+<p><strong>Caverne</strong> : A entre aléatoirement (y ou z), B demande sortie (gauche/droite)</p>
+<p><strong>Probabilité triche</strong> : <span class="math inline">\(2^{-n}\)</span> après n répétitions</p>
+<p><strong>ZK</strong> : B vérifie connaissance mais n’apprend pas le secret, ne peut convaincre tierce partie</p>
+</section>
+</section>
+<section id="zkip-isomorphisme-de-graphes" class="level3">
+<h3 class="anchored" data-anchor-id="zkip-isomorphisme-de-graphes">ZKIP Isomorphisme de Graphes</h3>
+<p><strong>Problème</strong> : Trouver permutation entre 2 graphes isomorphes = difficile</p>
+<p><strong>Protocole</strong> : A crée H aléatoire, B demande permutation vers G1 ou G2, A répond</p>
+<p><strong>Perfect ZK</strong> : Transcriptions indistinguables d’un simulateur</p>
+</section>
+<section id="zkip-fiat-shamir" class="level3">
+<h3 class="anchored" data-anchor-id="zkip-fiat-shamir">ZKIP Fiat-Shamir</h3>
+<p><strong>Secret</strong> : <span class="math inline">\(s\)</span> tel que <span class="math inline">\(v = s^2 \bmod n\)</span> (clé publique)</p>
+<p><strong>Protocole</strong> :</p>
+<ul>
+<li>Témoin <span class="math inline">\(r^2\)</span></li>
+<li>défi <span class="math inline">\(e \in \{0,1\}\)</span></li>
+<li>réponse <span class="math inline">\(y = r \cdot s^e\)</span></li>
+</ul>
+<p><strong>Vérification</strong> : <span class="math inline">\(y^2 \equiv x \cdot v^e \pmod{n}\)</span></p>
+<p><strong>Perfect ZK</strong> : Paires (x,y) simulables par B</p>
+</section>
+<section id="implantations-pratiques" class="level3">
+<h3 class="anchored" data-anchor-id="implantations-pratiques">Implantations Pratiques</h3>
+<p><strong>FSS</strong> : Témoins/défis multiples → probabilité <span class="math inline">\(2^{-nk}\)</span></p>
+<p><strong>GQ</strong> : Domaine de défis élargi → moins d’échanges</p>
+<p><strong>Schnorr</strong> : DLP + grands défis → <strong>3 échanges seulement</strong></p>
+<p><strong>Tous</strong> : Plus efficaces que RSA, adaptés aux cartes à puces</p>
+</section>
+<section id="attaque-mafia" class="level3">
+<h3 class="anchored" data-anchor-id="attaque-mafia">Attaque Mafia</h3>
+<p><strong>Attaque Mafia</strong> : Relais des messages via complice → authentification frauduleuse transparente</p>
+<p><strong>Protections</strong> :</p>
+<ul>
+<li>Cage Faraday</li>
+<li>synchronisation forte</li>
+<li>distance bounding</li>
+</ul>
+</section>
+<section id="tableau-attaques-et-protections" class="level3">
+<h3 class="anchored" data-anchor-id="tableau-attaques-et-protections">Tableau Attaques et Protections</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Attaque</th>
+<th>Protection</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>replay</td>
+<td>zero-knowledge, challenge-response, one-time password</td>
+</tr>
+<tr class="even">
+<td>known/chosen-plaintext</td>
+<td>zero-knowledge</td>
+</tr>
+<tr class="odd">
+<td>chosen-ciphertext</td>
+<td>zero-knowledge, témoin + structure</td>
+</tr>
+<tr class="even">
+<td>reflection</td>
+<td>inclure identités, asymétrie messages</td>
+</tr>
+<tr class="odd">
+<td>interleaving</td>
+<td>inclure identités, chaînage cryptographique</td>
+</tr>
+<tr class="even">
+<td>collusion</td>
+<td>cage Faraday, synchronisation forte</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="établissement-de-clés" class="level2">
+<h2 class="anchored" data-anchor-id="établissement-de-clés">Établissement de Clés</h2>
+<section id="kep-key-establishment-protocol" class="level3">
+<h3 class="anchored" data-anchor-id="kep-key-establishment-protocol">KEP (Key Establishment Protocol)</h3>
+<section id="définitions" class="level4">
+<h4 class="anchored" data-anchor-id="définitions">Définitions</h4>
+<p>Mécanisme pour partager un secret destiné aux échanges cryptographiques.</p>
+<p><strong>Types de protocoles</strong> :</p>
+<ul>
+<li><strong>KTP</strong> : Une entité crée et transmet la clé</li>
+<li><strong>KAP</strong> : Les entités dérivent conjointement la clé</li>
+<li><strong>Pré-distribution</strong> : Clés déterminées à priori</li>
+<li><strong>DKE (Dynamic Key Establishment)</strong> : Clés changeant à chaque exécution</li>
+</ul>
+</section>
+<section id="propriétés-dauthentification" class="level4">
+<h4 class="anchored" data-anchor-id="propriétés-dauthentification">Propriétés d’authentification</h4>
+<p><strong>Propriétés d’authentification</strong> :</p>
+<ul>
+<li><strong>Implicit key authentication</strong> : Assurance que seul le correspondant peut accéder à la clé</li>
+<li><strong>Key confirmation</strong> : Assurance que le correspondant possède effectivement la clé</li>
+<li><strong>Explicit key authentication</strong> : Implicit + confirmation</li>
+</ul>
+</section>
+<section id="propriétés-de-sécurité" class="level4">
+<h4 class="anchored" data-anchor-id="propriétés-de-sécurité">Propriétés de sécurité</h4>
+<p><strong>Propriétés de sécurité</strong> :</p>
+<ul>
+<li><strong>PFS (Perfect Forward Secrecy)</strong> : Clés passées protégées même si clés long terme compromises</li>
+<li><strong>Future Secrecy</strong> : Clés futures protégées même si compromission par attaquant passif</li>
+<li><strong>Deniability</strong> : Participation non prouvable à un tiers</li>
+</ul>
+</section>
+</section>
+<section id="protocoles-symétriques" class="level3">
+<h3 class="anchored" data-anchor-id="protocoles-symétriques">Protocoles Symétriques</h3>
+<section id="kap-symétrique-trivial-pré-distribution" class="level4">
+<h4 class="anchored" data-anchor-id="kap-symétrique-trivial-pré-distribution">KAP symétrique trivial (pré-distribution)</h4>
+<p><span class="math inline">\(n(n-1)/2\)</span> clés pour <span class="math inline">\(n\)</span> utilisateurs</p>
+<p>Inconditionnellement sûr</p>
+<p>Problème : <span class="math inline">\(O(n^2)\)</span> en stockage, <span class="math inline">\(O(n)\)</span> clés par utilisateur</p>
+</section>
+<section id="kap-symétrique-dke-simple" class="level4">
+<h4 class="anchored" data-anchor-id="kap-symétrique-dke-simple">KAP symétrique DKE simple</h4>
+<p><span class="math inline">\(K := E_S(r_a \oplus r_b)\)</span></p>
+<p>Propriétés :</p>
+<ul>
+<li>✅ Implicit key authentication</li>
+<li>❌ Entity authentication, key confirmation, PFS</li>
+</ul>
+</section>
+<section id="akep2" class="level4">
+<h4 class="anchored" data-anchor-id="akep2">AKEP2</h4>
+<p>Utilise MACs pour authentification, clé dérivée <span class="math inline">\(K := h'_{S'}(r_b)\)</span></p>
+<p>Propriétés :</p>
+<ul>
+<li>✅ Entity authentication mutuelle</li>
+<li>✅ Implicit key authentication</li>
+<li>❌ Key confirmation, PFS</li>
+</ul>
+</section>
+</section>
+<section id="protocoles-asymétriques" class="level3">
+<h3 class="anchored" data-anchor-id="protocoles-asymétriques">Protocoles Asymétriques</h3>
+<section id="diffie-hellman" class="level4">
+<h4 class="anchored" data-anchor-id="diffie-hellman">Diffie-Hellman</h4>
+<p><span class="math inline">\(K := \alpha^{xy} \mod p\)</span> calculée indépendamment par A et B</p>
+<p>Sûr contre attaques passives (DHP ≡ DLP)</p>
+<p>Vulnérable Man-in-the-Middle sans authentification</p>
+<p>Générer clés symétriques : <span class="math inline">\(K_{sym} := \text{SHA}(K)\)</span></p>
+<p>Propriétés :</p>
+<ul>
+<li>❌ Entity authentication, implicit key authentication, key confirmation</li>
+</ul>
+</section>
+<section id="station-to-station-sts" class="level4">
+<h4 class="anchored" data-anchor-id="station-to-station-sts">Station to Station (STS)</h4>
+<p>DH authentifié avec signatures numériques</p>
+<p>Propriétés :</p>
+<ul>
+<li>✅ Entity authentication mutuelle</li>
+<li>✅ Implicit + explicit key authentication</li>
+<li>✅ PFS : clés session passées protégées même si clé signature compromise</li>
+</ul>
+<p>Utilisé dans IPv6</p>
+</section>
+<section id="otrsignal" class="level4">
+<h4 class="anchored" data-anchor-id="otrsignal">OTR/Signal</h4>
+<p>Protocoles pour messagerie instantanée</p>
+<p>SIGMA : signature + MAC</p>
+<p>KDF génère <span class="math inline">\(K_e\)</span> (chiffrement) et <span class="math inline">\(K_m\)</span> (MAC)</p>
+<p>Révélation anciennes clés MAC → répudiabilité</p>
+<p>Propriétés :</p>
+<ul>
+<li>✅ PFS, future secrecy, repudiability</li>
+</ul>
+<p>Utilisés : WhatsApp, Facebook Messenger</p>
+</section>
+<section id="srp-secure-remote-password" class="level4">
+<h4 class="anchored" data-anchor-id="srp-secure-remote-password">SRP (Secure Remote Password)</h4>
+<p>KAP asymétrique basé mot de passe</p>
+<p>B stocke vérificateur <span class="math inline">\(v := \alpha^x\)</span> (pas le password)</p>
+<p>Résiste aux attaques dictionnaire</p>
+<p>Propriétés :</p>
+<ul>
+<li>✅ Toutes propriétés KEP</li>
+</ul>
+</section>
+</section>
+<section id="attaques-et-vulnérabilités" class="level3">
+<h3 class="anchored" data-anchor-id="attaques-et-vulnérabilités">Attaques et Vulnérabilités</h3>
+<section id="logjam-2015" class="level4">
+<h4 class="anchored" data-anchor-id="logjam-2015">Logjam (2015)</h4>
+<p>Attaque sur DH :</p>
+<ul>
+<li>Downgrade vers groupes 512 bits via MIM</li>
+<li>Pré-calcul (1 semaine) + calcul individuel (1 minute)</li>
+<li>Réutilisation si même premier <span class="math inline">\(p\)</span></li>
+</ul>
+<p>⚠️ Acteurs étatiques peuvent casser PFS sur 1024 bits</p>
+</section>
+</section>
+<section id="ktp-asymétrique" class="level3">
+<h3 class="anchored" data-anchor-id="ktp-asymétrique">KTP Asymétrique</h3>
+<section id="ktp-symétrique-trivial" class="level4">
+<h4 class="anchored" data-anchor-id="ktp-symétrique-trivial">KTP symétrique trivial</h4>
+<p><span class="math inline">\(K := r_a\)</span> avec <span class="math inline">\(E_S(r_a)\)</span></p>
+<p>Propriétés :</p>
+<ul>
+<li>✅ Implicit key authentication</li>
+<li>❌ Entity authentication, key confirmation, PFS</li>
+</ul>
+</section>
+<section id="shamirs-no-key-protocol" class="level4">
+<h4 class="anchored" data-anchor-id="shamirs-no-key-protocol">Shamir’s No-key Protocol</h4>
+<p>Transport via exponentiations successives <span class="math inline">\(K^a\)</span>, <span class="math inline">\((K^a)^b\)</span>, <span class="math inline">\(K^b\)</span></p>
+<p>Vulnérable Man-in-the-Middle</p>
+</section>
+<section id="needham-schroeder-asymétrique" class="level4">
+<h4 class="anchored" data-anchor-id="needham-schroeder-asymétrique">Needham-Schroeder asymétrique</h4>
+<p><span class="math inline">\(K := H(k_1, k_2)\)</span> avec échanges encryptés par clés publiques</p>
+<p>Propriétés :</p>
+<ul>
+<li>✅ Entity authentication, implicit key authentication, key confirmation</li>
+<li>❌ PFS</li>
+</ul>
+</section>
+<section id="eke-encrypted-key-exchange" class="level4">
+<h4 class="anchored" data-anchor-id="eke-encrypted-key-exchange">EKE (Encrypted Key Exchange)</h4>
+<p>Protocole mixte symétrique + asymétrique</p>
+<p>Password + crypto asymétrique</p>
+<p>Robuste même si password faible</p>
+<p>Propriétés :</p>
+<ul>
+<li>✅ PFS si clés régénérées à chaque fois</li>
+</ul>
+</section>
+</section>
+<section id="protocoles-avec-kdc" class="level3">
+<h3 class="anchored" data-anchor-id="protocoles-avec-kdc">Protocoles avec KDC</h3>
+<section id="needham-schroeder-symétrique-avec-kdc" class="level4">
+<h4 class="anchored" data-anchor-id="needham-schroeder-symétrique-avec-kdc">Needham-Schroeder symétrique (avec KDC)</h4>
+<p>KDC génère et distribue <span class="math inline">\(k_{AB}\)</span></p>
+<p>Vulnérable replay et known-key attacks</p>
+<p>Solution : ajouter timestamp</p>
+<p>Base de Kerberos</p>
+</section>
+<section id="kerberos" class="level4">
+<h4 class="anchored" data-anchor-id="kerberos">Kerberos</h4>
+<p>Authentification et distribution de clés avec KDC</p>
+<p>AS émet TGT (Ticket Granting Ticket)</p>
+<p>TGS émet tickets pour services</p>
+<p>Tickets contiennent clés de session encryptées</p>
+<p>Authentification via authenticators</p>
+<p>Propriétés :</p>
+<ul>
+<li>✅ Entity authentication, implicit key authentication</li>
+<li>⚠️ Key confirmation partielle</li>
+<li>❌ PFS</li>
+</ul>
+<p>Vulnérabilités : password guessing, replay attacks</p>
+<p>Solutions : pré-authentification, timestamps</p>
+</section>
+</section>
+<section id="ssltls" class="level3">
+<h3 class="anchored" data-anchor-id="ssltls">SSL/TLS</h3>
+<p>Meta-protocole entre TCP et couche application</p>
+<p>Services :</p>
+<ul>
+<li>confidentialité</li>
+<li>intégrité</li>
+<li>authentification</li>
+<li>identification serveur</li>
+</ul>
+<p>Handshake : négociation paramètres + authentification par certificats</p>
+<p>Clés dérivées par cascade : <span class="math inline">\(pre\_master\_secret\)</span> → <span class="math inline">\(master\_secret\)</span> → <span class="math inline">\(key\_block\)</span></p>
+<p>Propriétés :</p>
+<ul>
+<li>✅ Entity authentication, implicit key authentication, key confirmation</li>
+<li>⚠️ PFS dépend du protocole d’échange (DH oui, RSA non)</li>
+</ul>
+<p>Standard HTTPS</p>
+<p>Failles notables : génération aléatoire, heartbleed, renégociation</p>
+</section>
+<section id="bonnes-pratiques-kep" class="level3">
+<h3 class="anchored" data-anchor-id="bonnes-pratiques-kep">Bonnes pratiques KEP</h3>
+<p><strong>Bonnes pratiques KEP</strong> :</p>
+<ul>
+<li>Définir objectifs (confidentialité, authentification, non-répudiation)</li>
+<li>Définir niveau de sécurité souhaité (key confirmation, PFS)</li>
+<li>Établir contraintes environnement</li>
+<li>Choisir solution prouvée et robuste</li>
+<li>Vérifier propriétés : analyse pratique + formelle</li>
+<li>Éviter pièges : reflection attacks, contrôle nombres aléatoires, redondance quantités encryptées</li>
+</ul>
+</section>
+</section>
+<section id="tiers-de-confiance-ttp" class="level2">
+<h2 class="anchored" data-anchor-id="tiers-de-confiance-ttp">Tiers de Confiance (TTP)</h2>
+<section id="modes-ttp" class="level3">
+<h3 class="anchored" data-anchor-id="modes-ttp">Modes TTP</h3>
+<p><strong>Modes TTP</strong> :</p>
+<ul>
+<li><strong>In-line</strong> : TTP intermédiaire relaye tous les échanges</li>
+<li><strong>On-line</strong> : TTP participe en temps réel, A et B communiquent directement</li>
+<li><strong>Off-line</strong> : TTP ne participe pas en temps réel, info disponible à priori (ex: CA)</li>
+</ul>
+<p>Off-line : pas de disponibilité permanente requise mais révocation plus complexe</p>
+</section>
+<section id="kdc-key-distribution-center" class="level3">
+<h3 class="anchored" data-anchor-id="kdc-key-distribution-center">KDC (Key Distribution Center)</h3>
+<p>Résout problème distribution : <span class="math inline">\(n^2\)</span> clés → <span class="math inline">\(n\)</span> clés seulement</p>
+<p>Scalable : +1 entité = +1 clé</p>
+<p>Clés de session générées dynamiquement</p>
+<p><strong>Risques</strong> :</p>
+<ul>
+<li>single point of failure (sécurité + opérationnel)</li>
+<li>performance bottleneck</li>
+</ul>
+<p>Solutions : mirroring, répartition charge</p>
+</section>
+<section id="ca-certification-authority" class="level3">
+<h3 class="anchored" data-anchor-id="ca-certification-authority">CA (Certification Authority)</h3>
+<section id="rôle-et-fonctionnement" class="level4">
+<h4 class="anchored" data-anchor-id="rôle-et-fonctionnement">Rôle et fonctionnement</h4>
+<p>Authentifie association entité ↔︎ clé publique</p>
+<p>Crée et signe certificats</p>
+<p>Mode off-line</p>
+<p>CRLs (Certificate Revocation Lists) pour certificats invalides</p>
+<p>Compromission CA = conséquences graves</p>
+</section>
+<section id="pop-proof-of-possession" class="level4">
+<h4 class="anchored" data-anchor-id="pop-proof-of-possession">PoP (Proof of Possession)</h4>
+<p>Vérifier possession clé privée (pas seulement identité)</p>
+<p>Sans PoP : attaquant peut usurper identité via certificat frauduleux</p>
+<p>Protocole : CA envoie challenge <span class="math inline">\(A, r\)</span>, vérifie <span class="math inline">\(S_{priv_A}(A, r)\)</span></p>
+<p>Introduit niveaux de confiance pour CAs</p>
+</section>
+<section id="separation-of-duties" class="level4">
+<h4 class="anchored" data-anchor-id="separation-of-duties">Separation of Duties</h4>
+<p>Certificats ≠ CRLs signés avec clés différentes</p>
+<p>CA (certification) ≠ Revocation Authority (révocation)</p>
+<p>Machines et security policies séparées</p>
+<p>Évite attaques post-compromission clé CA</p>
+</section>
+</section>
+<section id="entités-fonctionnelles-certification" class="level3">
+<h3 class="anchored" data-anchor-id="entités-fonctionnelles-certification">Entités fonctionnelles certification</h3>
+<p><strong>Entités fonctionnelles certification</strong> :</p>
+<ul>
+<li><strong>Name Server</strong> : gestion noms uniques + DNSSec</li>
+<li><strong>RA (Registration Authority)</strong> : contact direct, vérifications identité/PoP</li>
+<li><strong>Key Generator</strong> : génération paires clés (⚠️ perd non-répudiation car clé privée connue)</li>
+<li><strong>Certificate Directory</strong> : accès lecture certificats</li>
+</ul>
+</section>
+<section id="autres-ttps" class="level3">
+<h3 class="anchored" data-anchor-id="autres-ttps">Autres TTPs</h3>
+<p><strong>Autres TTPs</strong> :</p>
+<ul>
+<li><strong>TA (Timestamp Agent)</strong> : certifie existence document à moment précis</li>
+<li><strong>Notary Agent</strong> : TA + validité/origine (support non-répudiation)</li>
+<li><strong>KEA (Key Escrow Agent)</strong> : accès clés session sous conditions légales</li>
+</ul>
+<p>Exemple historique : Clipper/Capstone/Fortezza (controversé)</p>
+</section>
+<section id="certificats" class="level3">
+<h3 class="anchored" data-anchor-id="certificats">Certificats</h3>
+<section id="structure-1" class="level4">
+<h4 class="anchored" data-anchor-id="structure-1">Structure</h4>
+<p><strong>Certificat - Structure</strong> :</p>
+<ul>
+<li><strong>Issuer</strong> : identité CA signataire</li>
+<li><strong>Subject</strong> : nom entité certifiée</li>
+<li><strong>Subject Public Key</strong> : clé publique (ex: RSA <span class="math inline">\((n,e)\)</span>, DH <span class="math inline">\((p, \alpha, \alpha^x)\)</span>)</li>
+<li><strong>Subject Public Key Algorithm</strong> : RSA, DH, etc.</li>
+<li><strong>Validity</strong> : période validité (UTC)</li>
+<li><strong>Signature</strong> : CA signe tout, garantit authenticité</li>
+</ul>
+</section>
+<section id="crls-certificate-revocation-lists" class="level4">
+<h4 class="anchored" data-anchor-id="crls-certificate-revocation-lists">CRLs (Certificate Revocation Lists)</h4>
+<p>Listes certificats devenus invalides (clé compromise, changement algorithme, etc.)</p>
+<p>Structure : issuer, dates émission, serial numbers révoqués, signature</p>
+<p>Publication fréquente requise (large audience)</p>
+<p><strong>Talon d’Achille</strong> des systèmes PKI</p>
+<p>Alternative : certificats validité très courte (quelques minutes) → retour mode on-line</p>
+</section>
+</section>
+<section id="arbres-dauthentification" class="level3">
+<h3 class="anchored" data-anchor-id="arbres-dauthentification">Arbres d’authentification</h3>
+<p>Alternative certification via hash functions + structure arbre</p>
+<p>Seule racine <span class="math inline">\(R\)</span> nécessite signature</p>
+<p>Vérification : fournir chemin depuis feuille (<span class="math inline">\(\sim \log_2 n\)</span> valeurs)</p>
+<p>Construction : feuilles <span class="math inline">\(Y_i\)</span>, arcs <span class="math inline">\(h(Y_i)\)</span>, nœuds <span class="math inline">\(h(h_1 || h_2)\)</span></p>
+<p><strong>Application principale</strong> : timestamping</p>
+<p>TA publie <span class="math inline">\(R\)</span> quotidiennement (journal) pour empêcher triche</p>
+</section>
+<section id="topologies-certification" class="level3">
+<h3 class="anchored" data-anchor-id="topologies-certification">Topologies certification</h3>
+<p><strong>Topologies certification</strong> :</p>
+<ul>
+<li><strong>Cross-certification</strong> : <span class="math inline">\(CA_A\)</span> certifie <span class="math inline">\(pub_{CA_B}\)</span></li>
+<li>Chaîne : <span class="math inline">\(CA_A\{CA_B\} \rightarrow CA_B\{B\}\)</span></li>
+<li><strong>Modèle hiérarchique</strong> (PEM/X.509) : racine universelle, clé publique supposée connue mondialement</li>
+<li><strong>Modèle graphe</strong> (PGP) : utilisateurs agissent comme CAs, décentralisé</li>
+<li><strong>Hybride</strong> : hiérarchie + cross-certification bidirectionnelle</li>
+</ul>
+<p><strong>Règle d’or</strong> : chaînes courtes (maillon le plus faible)</p>
+</section>
+<section id="pki---infrastructure" class="level3">
+<h3 class="anchored" data-anchor-id="pki---infrastructure">PKI - Infrastructure</h3>
+<section id="entités-principales" class="level4">
+<h4 class="anchored" data-anchor-id="entités-principales">Entités principales</h4>
+<p><strong>PKI - Entités principales</strong> :</p>
+<ul>
+<li><strong>CA</strong> : création et maintenance certificats</li>
+<li><strong>Certificate Repository</strong> : stockage accessible (X.500, LDAP, WWW, DNS)</li>
+<li><strong>Revocation</strong> : gestion CRLs</li>
+<li><strong>Key Backup/Recovery</strong> : sauvegarde clés perdues (clés décryption uniquement, pas signature)</li>
+<li><strong>Automatic Key Update</strong> : renouvellement clés</li>
+<li><strong>Key/Certificate History</strong> : récupération clés obsolètes pour anciens documents</li>
+<li><strong>Cross-Certification</strong> : validation certificats autres PKIs</li>
+<li><strong>Support Non-Répudiation</strong> : data origin authentication, time-stamped signatures, signed receipts</li>
+<li><strong>Secure Time Stamping</strong> : référence temps acceptée par tous</li>
+<li><strong>Logiciel Client</strong> : opérations utilisateur (gestion certificats, signatures, périphériques)</li>
+</ul>
+</section>
+<section id="avantages" class="level4">
+<h4 class="anchored" data-anchor-id="avantages">Avantages</h4>
+<p><strong>PKI - Avantages</strong> :</p>
+<ul>
+<li><strong>Sécurité</strong> : environnement intégré sans maillons faibles</li>
+<li><strong>Tout-en-un</strong> : multi-services (authentification forte, signatures, single sign-on, VPNs, B2C/B2B)</li>
+<li><strong>Interopérabilité</strong> : standards répandus (X.509, PKCS, OCSP), compatibilité inter-entreprise</li>
+</ul>
+</section>
+<section id="inconvénients" class="level4">
+<h4 class="anchored" data-anchor-id="inconvénients">Inconvénients</h4>
+<p><strong>PKI - Inconvénients</strong> :</p>
+<ul>
+<li><strong>Coût</strong> : produits chers, compétences rares</li>
+<li><strong>Complexité</strong> : mise en œuvre et gestion</li>
+</ul>
+<p><strong>Solution</strong> : sous-traitance service PKI</p>
+
+
+</section>
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
