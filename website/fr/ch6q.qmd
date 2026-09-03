@@ -1,0 +1,387 @@
+---
+execute:
+  enabled: false
+---
+
+## Quiz : Signatures Digitales
+
+```quizdown
+### Quelle affirmation distingue correctement une signature avec appendice d'une signature avec reconstitution du message ?
+
+> Repense à ce dont chaque type de vérification a besoin en entrée.
+
+1. [ ] Une signature avec appendice est toujours plus courte qu'une signature avec reconstitution.
+1. [x] Une signature avec appendice nécessite la présence du message original pour être vérifiée, contrairement à une signature avec reconstitution qui permet de retrouver le message à partir de la signature elle-même.
+    > Correct : c'est précisément la distinction posée dans le cours entre les deux classes de schémas.
+1. [ ] Une signature avec reconstitution nécessite obligatoirement une fonction de hachage, contrairement à une signature avec appendice.
+    > Incorrect : c'est l'inverse qui est vrai dans les exemples du cours (RSA et Rabin, avec reconstitution, n'utilisent pas nécessairement de hachage ; ElGamal, avec appendice, en utilise une).
+1. [ ] Les deux classes offrent exactement les mêmes garanties de sécurité et ne diffèrent que par leur nom.
+    > Incorrect : elles diffèrent par la nature de l'application de vérification et par ce qu'elle permet de récupérer.
+```
+
+```quizdown
+### Dans le cadre formel des signatures avec appendice, quelles affirmations sur les applications $S_A$ et $V_A$ sont correctes ?
+
+> Relis la définition des espaces $M_h$, $S$ et de la relation entre $S_A$ et $V_A$.
+
+- [x] $S_A$ est une application injective de $M_h$ vers $S$.
+    > Correct : c'est la définition donnée dans le cours pour la signature.
+- [x] $V_A$ nécessite la clé publique de A, alors que $S_A$ nécessite la clé privée de A.
+    > Correct : le cours précise explicitement cette séparation des clés utilisées.
+- [ ] $V_A$ prend uniquement $m_h$ en entrée et retourne un élément de $S$.
+    > Incorrect : $V_A$ prend le couple $(m_h, s)$ en entrée et retourne un booléen (vrai/faux).
+- [ ] Il doit être facile, même sans la clé privée de A, de trouver un couple $(m', s')$ tel que $V_A(m'_h, s') = \text{vrai}$.
+    > Incorrect : c'est l'inverse, cette opération doit être calculatoirement impossible sans la clé privée de A.
+```
+
+```quizdown
+### Les signatures digitales sont pour la plupart basées sur la cryptographie symétrique, car la notion de clé partagée est la mieux adaptée pour identifier une entité de façon explicite.
+
+> Pense à ce que signifie « partager » une clé entre plusieurs entités.
+
+1. [ ] Vrai
+1. [x] Faux
+    > Faux : le cours indique que les signatures digitales sont pour la plupart basées sur la cryptographie asymétrique, précisément parce qu'une clé partagée ne permet pas d'identifier une entité de façon explicite.
+```
+
+```quizdown
+### RSA et Rabin appartiennent à quelle catégorie de signatures selon la classification du cours ?
+
+> Reviens à la liste d'exemples donnée pour chacune des deux classes de signatures.
+
+1. [ ] Signatures avec appendice, comme ElGamal et DSS.
+1. [x] Signatures avec reconstitution du message.
+    > Correct : le cours cite explicitement RSA et Rabin comme exemples de signatures avec reconstitution du message.
+1. [ ] Signatures aveugles (blind signatures).
+    > Incorrect : les signatures aveugles forment un procédé distinct, bien que dérivé de RSA.
+1. [ ] Arbitrated digital signatures.
+    > Incorrect : cette catégorie repose sur la cryptographie symétrique et des tierces de confiance, pas sur RSA ou Rabin directement.
+```
+
+```quizdown
+### Remets dans l'ordre les étapes de la génération des clés du procédé de signature RSA.
+
+> Pense à ce qui doit être connu avant de pouvoir calculer l'exposant de signature d.
+
+1. Calculer l'exposant de signature d tel que ed ≡ 1 mod Φ(n)
+2. Choisir la taille du modulus n
+3. Calculer n = pq et Φ(n) = (p-1)(q-1)
+4. Générer l'exposant de vérification e premier avec Φ(n)
+5. Générer deux nombres premiers p et q de grande taille
+```
+
+```quizdown
+### Lors de la vérification d'une signature RSA avec reconstitution, un étudiant calcule $m'_R = s^e \bmod n$ mais omet de vérifier que $m'_R \in M_R$ avant de reconstituer le message. Quel est le principal risque de cette omission ?
+
+> Repense au rôle de la fonction de redondance dans le rejet des signatures invalides.
+
+1. [ ] Aucun risque : cette vérification n'est qu'une optimisation de performance, pas une mesure de sécurité.
+    > Incorrect : le cours indique explicitement que la signature doit être rejetée si $m'_R \notin M_R$, ce n'est pas facultatif.
+1. [x] Un attaquant pourrait faire accepter une valeur $s'$ arbitraire comme signature valide, car aucune vérification n'empêche de reconstituer un message à partir d'une valeur qui n'a jamais été réellement signée par A.
+    > Correct : la vérification de l'appartenance à $M_R$ est précisément ce qui empêche un adversaire sans clé privée de forger des signatures acceptées.
+1. [ ] Le message reconstitué serait systématiquement plus long que le message original.
+    > Incorrect : ce n'est pas la conséquence décrite dans le cours ; il s'agit d'un problème de sécurité, pas de taille.
+1. [ ] Cela n'a d'impact que sur la vitesse de calcul de la signature, pas sur sa vérification.
+    > Incorrect : l'omission concerne l'étape de vérification elle-même, pas la génération de la signature.
+```
+
+```quizdown
+### Pourquoi le choix de la fonction de redondance R est-il qualifié d'essentiel pour la sécurité d'un schéma de signature avec reconstitution du message ?
+
+> Pense à ce qui se passerait si presque toute valeur de $M_S$ appartenait à $M_R$.
+
+1. [ ] Parce que R détermine la taille de la clé privée utilisée pour signer.
+    > Incorrect : la taille de la clé privée dépend du choix de n, p et q, pas de R.
+1. [x] Parce que si $M_R$ est trop proche de $M_S$ en taille, il devient facile de choisir arbitrairement une valeur dans $M_S$ qui appartient à $M_R$, ce qui permettrait de forger une signature sans connaître la clé privée.
+    > Correct : le cours illustre ce point avec l'exemple où $M_R = M_S$ rend la falsification triviale.
+1. [ ] Parce que R doit rester secrète pour que le schéma soit sûr.
+    > Incorrect : le cours précise au contraire que R doit être publique et inversible.
+1. [ ] Parce que R remplace entièrement le rôle de la clé publique dans la vérification.
+    > Incorrect : R et la clé publique jouent des rôles distincts et complémentaires.
+```
+
+```quizdown
+### Si $M_R = M_S$ et que $R$ ainsi que $S_A$ sont des bijections, quelle conséquence directe cela a-t-il sur la sécurité du schéma ?
+
+> Compare la taille de M et de S dans ce cas particulier.
+
+1. [ ] Le schéma devient plus sûr, car chaque message possède une signature unique.
+    > Incorrect : l'unicité de la signature n'empêche pas ici la falsification.
+1. [x] M et S ont une taille identique, ce qui rend trivial de forger des messages portant la signature de A.
+    > Correct : c'est exactement la remarque du cours sur ce cas particulier.
+1. [ ] La vérification devient impossible sans la clé privée de A.
+    > Incorrect : c'est l'inverse qui pose problème, la vérification (et donc la falsification) devient trop facile.
+1. [ ] Cela n'a aucun effet particulier tant que la fonction de hachage reste sécurisée.
+    > Incorrect : ce cas ne concerne même pas l'usage d'une fonction de hachage, il s'agit d'un défaut structurel de R.
+```
+
+```quizdown
+### Dans un schéma avec reconstitution du message, quelles affirmations sur l'application de vérification $V_A$ sont correctes ?
+
+> Reviens à la définition de $V_A$ donnée dans le cadre formel avec reconstitution.
+
+- [x] $V_A$ satisfait $V_A \circ S_A = \text{Identité}$ sur $M_s$.
+    > Correct : c'est la propriété fondamentale qui permet de reconstituer le message.
+- [x] La vérification s'effectue sans la clé privée de A.
+    > Correct : le cours le précise explicitement, contrairement à certaines opérations de génération.
+- [ ] $V_A$ prend en entrée le message original m et retourne la signature s.
+    > Incorrect : c'est l'inverse, $V_A$ prend s en entrée et permet de retrouver $m_R$ puis m.
+- [ ] $V_A$ nécessite systématiquement une fonction de hachage pour fonctionner.
+    > Incorrect : ce cadre formel n'introduit pas de fonction de hachage, contrairement à la variante avec appendice.
+```
+
+```quizdown
+### Un adversaire, sans connaître la clé privée de A, parvient à trouver un couple $(m', s')$ tel que $V_A(m'_h, s') = \text{vrai}$. Que révèle cette situation par rapport aux propriétés attendues du schéma ?
+
+> Reviens à la propriété simple posée sur l'impossibilité calculatoire dans le cadre formel avec appendice.
+
+1. [ ] Rien d'anormal : cette situation est prévue et acceptée par le schéma tant que m' est différent du message original.
+    > Incorrect : le cours pose explicitement qu'il doit être impossible de trouver un tel couple sans la clé privée.
+1. [x] Le schéma viole la propriété de sécurité fondamentale attendue, puisqu'il devrait être calculatoirement impossible de produire un tel couple sans la clé privée de A.
+    > Correct : cette propriété est justement ce qui garantit que seule A peut produire des signatures valides.
+1. [ ] Cela signifie simplement que A a réutilisé la même clé publique pour deux messages différents.
+    > Incorrect : la réutilisation de la clé publique n'est pas en cause ici, c'est la propriété d'impossibilité de forger qui est violée.
+1. [ ] Cela prouve uniquement que la fonction de hachage H utilisée est mal choisie.
+    > Incorrect : le problème concerne l'application $S_A$/$V_A$ elle-même, pas nécessairement le choix de H.
+```
+
+```quizdown
+### Pourquoi le calcul de la signature RSA est-il plus lent que sa vérification ?
+
+> Compare la taille typique de l'exposant de signature d à celle de l'exposant de vérification e.
+
+1. [ ] Parce que la signature nécessite de générer de nouveaux nombres premiers p et q à chaque fois.
+    > Incorrect : p et q sont générés une seule fois lors de la création de la paire de clés, pas à chaque signature.
+1. [x] Parce que la taille de l'exposant de signature d est comparable à celle de Φ(n), alors que l'exposant de vérification e peut être choisi beaucoup plus petit.
+    > Correct : c'est exactement la remarque du cours sur la différence de taille entre d et e.
+1. [ ] Parce que la vérification n'utilise pas d'exponentiation modulaire, contrairement à la signature.
+    > Incorrect : les deux opérations reposent sur une exponentiation modulaire, seule la taille de l'exposant diffère.
+1. [ ] Parce que la signature nécessite une clé publique tandis que la vérification n'en nécessite pas.
+    > Incorrect : c'est l'inverse : la signature utilise la clé privée, la vérification utilise la clé publique.
+```
+
+```quizdown
+### Dans la variante RSA avec appendice, quel est le rôle de la fonction de hachage H ?
+
+> Pense à ce qui est effectivement signé, et à ce qui distingue cette variante du schéma RSA de base avec fonction de redondance.
+
+1. [ ] Elle remplace entièrement le rôle de l'exposant de signature d.
+    > Incorrect : H et d jouent des rôles distincts ; d reste indispensable pour calculer la signature.
+1. [x] Elle produit un condensé $m_h = H(m)$ de taille fixe, qui est signé à la place du message complet, évitant ainsi d'appliquer directement une fonction de redondance sur tout le message.
+    > Correct : c'est ce que décrit le cours pour la version RSA avec appendice, où (m,s) est envoyé et où B recalcule H(m) pour vérifier.
+1. [ ] Elle sert uniquement à compresser le message pour réduire la bande passante, sans lien avec la sécurité.
+    > Incorrect : son rôle est directement lié à la génération et à la vérification de la signature, pas seulement à la compression.
+1. [ ] Elle permet à B de reconstituer intégralement le message m à partir de la signature s.
+    > Incorrect : avec appendice, B a déjà accès à m directement ; ce n'est pas la signature qui permet de le reconstituer.
+```
+
+```quizdown
+### La sécurité du procédé de signature RSA repose sur un problème mathématique différent de celui du chiffrement RSA.
+
+> Le cours renvoie explicitement à la preuve du procédé d'encryption pour justifier le fonctionnement de la signature.
+
+1. [ ] Vrai
+1. [x] Faux
+    > Faux : le cours indique que la preuve de fonctionnement de la signature est identique à celle du procédé d'encryption, et le tableau récapitulatif associe RSA au même problème de base (RSAP) pour les deux usages.
+```
+
+```quizdown
+### Remets dans l'ordre les étapes du protocole de signature aveugle (blind signature) de Chaum.
+
+> Pense à ce que A doit faire avant d'envoyer quoi que ce soit à B, puis à ce qu'elle fait après avoir reçu la réponse de B.
+
+1. A calcule g(s') pour obtenir la signature déblindée sur m
+2. A calcule m' = f(m) en utilisant la fonction de blinding
+3. B calcule et retourne s' = S_B(m')
+4. A envoie m' à B pour signature
+```
+
+```quizdown
+### Pourquoi peut-on dire que la signature aveugle permet à A d'obtenir une signature de B sur un message que B n'a jamais vu ?
+
+> Repense à ce que B reçoit réellement : le message m ou une version transformée de celui-ci ?
+
+1. [ ] Parce que B signe le message m directement mais ne le lit jamais, se contentant de calculer sa signature sans l'analyser.
+    > Incorrect : le point clé n'est pas que B ne lit pas m, mais que B ne reçoit jamais m sous sa forme originale.
+1. [x] Parce que B ne reçoit et ne signe que la version aveuglée $m' = f(m)$, et c'est seulement A, en appliquant la fonction de déblindage g, qui obtient la signature correspondant au véritable message m.
+    > Correct : c'est exactement le mécanisme décrit dans le cours, exploitant la propriété multiplicative de RSA.
+1. [ ] Parce que A envoie le message m en clair mais chiffré avec la clé publique de B, que B ne peut donc pas déchiffrer.
+    > Incorrect : le mécanisme ne repose pas sur un chiffrement du message mais sur les fonctions de blinding/unblinding.
+1. [ ] Parce que B délègue entièrement le calcul de la signature à A, qui a accès à la clé privée de B.
+    > Incorrect : B garde sa clé privée et effectue lui-même le calcul de signature sur m'.
+```
+
+```quizdown
+### Dans le procédé de signature de Rabin, la signature s est calculée comme une racine carrée de $m_R$ modulo n. Que précise le cours à ce sujet ?
+
+> Combien de racines carrées distinctes une valeur possède-t-elle modulo un produit de deux grands nombres premiers ?
+
+1. [ ] Il n'existe qu'une seule racine carrée possible, ce qui rend le calcul déterministe.
+    > Incorrect : le cours précise qu'il existe 4 racines carrées possibles.
+1. [x] Il existe 4 racines carrées possibles modulo n, et A en envoie une seule comme signature s.
+    > Correct : c'est ce qu'indique explicitement le cours à propos de la signature de Rabin.
+1. [ ] Le nombre de racines carrées dépend de la taille du message et non de n.
+    > Incorrect : ce nombre découle de la structure de n = pq, pas de la taille du message.
+1. [ ] A doit envoyer les 4 racines carrées à B pour que la vérification fonctionne.
+    > Incorrect : une seule des 4 racines est envoyée en tant que signature.
+```
+
+```quizdown
+### Quelle différence fondamentale distingue la clé privée de RSA de celle de Rabin ?
+
+> Compare ce que chaque algorithme utilise pour effectuer l'opération de signature (exponentiation vs racine carrée).
+
+1. [ ] La clé privée de RSA est (p,q), alors que celle de Rabin est l'exposant d.
+    > Incorrect : c'est l'inverse : RSA utilise l'exposant d comme clé privée, Rabin utilise directement (p,q).
+1. [x] La clé privée de RSA est l'exposant de signature d, tandis que la clé privée de Rabin est directement la paire de facteurs premiers (p,q), utilisée pour calculer des racines carrées modulaires.
+    > Correct : c'est la distinction posée dans les sections « Génération des clés » de RSA et de Rabin.
+1. [ ] RSA et Rabin utilisent exactement la même clé privée, seule la formule de signature diffère.
+    > Incorrect : les clés privées elles-mêmes diffèrent, pas seulement la formule appliquée.
+1. [ ] La clé privée de Rabin inclut un générateur α, contrairement à celle de RSA.
+    > Incorrect : le générateur α apparaît dans le schéma ElGamal, pas dans Rabin.
+```
+
+```quizdown
+### Sur quel problème mathématique repose la sécurité du procédé de signature d'ElGamal ?
+
+> Repense à la nature du nombre a, de α et de y = α^a mod p.
+
+1. [ ] Le problème de la factorisation des grands nombres (comme RSA).
+    > Incorrect : ce problème correspond à RSA et Rabin, pas à ElGamal.
+1. [x] Le problème du logarithme discret (DLP).
+    > Correct : le cours associe explicitement ElGamal au problème du logarithme discret, notamment dans le tableau récapitulatif.
+1. [ ] Le problème de la racine carrée modulaire (SQROOTP).
+    > Incorrect : ce problème correspond au procédé de Rabin.
+1. [ ] Aucun problème mathématique particulier n'est requis, la sécurité vient uniquement de la longueur de p.
+    > Incorrect : la seule longueur de p ne suffit pas, la difficulté du DLP est essentielle.
+```
+
+```quizdown
+### Dans la génération de la signature ElGamal, pourquoi la condition $\text{pgcd}(k, p-1) = 1$ est-elle nécessaire ?
+
+> Pense à quelle opération sur k est indispensable juste après son tirage aléatoire.
+
+1. [ ] Parce que k doit être un nombre premier pour que r = α^k mod p soit valide.
+    > Incorrect : rien n'impose que k soit premier, seulement qu'il soit premier avec (p-1).
+1. [x] Parce que le calcul de la signature nécessite $k^{-1} \bmod (p-1)$, qui n'existe que si k et (p-1) sont premiers entre eux.
+    > Correct : sans cette condition, l'inverse modulaire de k utilisé pour calculer s ne pourrait pas être calculé.
+1. [ ] Parce que cette condition garantit que la clé privée a reste secrète.
+    > Incorrect : le secret de a repose sur la difficulté du logarithme discret, pas sur cette condition portant sur k.
+1. [ ] Parce que cela accélère le calcul de α^k mod p.
+    > Incorrect : cette condition concerne l'inversibilité de k, pas la vitesse de l'exponentiation.
+```
+
+```quizdown
+### Que représentent respectivement r et s dans une signature ElGamal (r,s) ?
+
+> Reviens à la formule de calcul de s, qui combine k, m_h, a et r.
+
+- [x] r est calculé à partir d'un nombre aléatoire k, indépendamment du message : $r = \alpha^k \bmod p$.
+    > Correct : r ne dépend que de k et non du condensé du message.
+- [x] s combine le condensé du message $m_h$, la clé privée a, r et l'inverse de k modulo (p-1).
+    > Correct : c'est exactement la formule $s = k^{-1}(m_h - ar) \bmod (p-1)$ donnée dans le cours.
+- [ ] r et s sont tous deux indépendants du message m.
+    > Incorrect : s dépend explicitement de $m_h = H(m)$, contrairement à r.
+- [ ] s est calculé uniquement à partir de la clé publique de A, sans utiliser sa clé privée.
+    > Incorrect : le calcul de s utilise directement a, la clé privée de A.
+```
+
+```quizdown
+### Le schéma d'ElGamal, tel que présenté dans le cours, permet nativement la reconstitution du message à partir de la signature.
+
+> Repense à quelle variante du schéma est mentionnée comme permettant la reconstitution.
+
+1. [ ] Vrai
+1. [x] Faux
+    > Faux : le cours précise qu'ElGamal, par construction, fonctionne uniquement avec appendice ; c'est le schéma de Nyberg-Rueppel, une variante dérivée, qui introduit la reconstitution du message.
+```
+
+```quizdown
+### Le Digital Signature Algorithm (DSA), standard approuvé par le NIST, est construit comment par rapport au cours ?
+
+> Repense au lien explicite fait entre DSA, ElGamal et une fonction de hachage particulière.
+
+1. [ ] DSA est un algorithme totalement indépendant d'ElGamal, basé sur la factorisation.
+    > Incorrect : le cours indique au contraire que DSA est un dérivé direct du schéma d'ElGamal.
+1. [x] DSA est un dérivé direct du schéma d'ElGamal, utilisant la fonction de hachage SHA-1.
+    > Correct : c'est exactement ce qu'indique le cours à propos du standard DSA.
+1. [ ] DSA remplace la clé publique par une clé symétrique partagée entre signataire et vérifieur.
+    > Incorrect : DSA reste un schéma à clé publique, comme ElGamal dont il dérive.
+1. [ ] DSA est identique au schéma RSA, seul le nom change.
+    > Incorrect : DSA est associé au problème du logarithme discret, pas à la factorisation comme RSA.
+```
+
+```quizdown
+### Bitcoin et Ethereum utilisent l'algorithme ECDSA pour authentifier leurs transactions. De quel schéma de signature ECDSA est-il dérivé, et sur quel problème repose sa sécurité ?
+
+> Repense au nom complet d'ECDSA et à ce que signifie le sigle ECDLP.
+
+1. [ ] Il est dérivé de RSA et repose sur la difficulté de la factorisation.
+    > Incorrect : ECDSA n'est pas dérivé de RSA selon le cours.
+1. [x] Il est dérivé du schéma de signature d'ElGamal, appliqué sur les courbes elliptiques, et sa sécurité repose sur l'ECDLP.
+    > Correct : c'est exactement ce qu'indique le cours à propos de l'usage d'ECDSA par Bitcoin et Ethereum.
+1. [ ] Il est dérivé de Rabin et repose sur le calcul de racines carrées modulaires sur les courbes elliptiques.
+    > Incorrect : ECDSA est présenté comme un dérivé d'ElGamal, pas de Rabin.
+1. [ ] Il ne repose sur aucun problème mathématique difficile, sa sécurité provient uniquement du secret du protocole.
+    > Incorrect : sa sécurité repose explicitement sur la difficulté de l'ECDLP.
+```
+
+```quizdown
+### D'après le tableau récapitulatif du cours, quelles affirmations sont correctes ?
+
+> Repense à la colonne « Message Recovery » et à la colonne « Problème de base » pour chaque schéma cité.
+
+- [x] RSA et le schéma de Chaum (blind signatures) partagent le même problème de base, le RSAP.
+    > Correct : le tableau associe bien RSAP à la fois à RSA (signatures classiques) et à Chaum (blind signatures).
+- [x] ElGamal et DSS ne permettent pas la reconstitution du message et reposent tous deux sur le DLP.
+    > Correct : le tableau indique « non » pour Message Recovery et « DLP » pour les deux schémas.
+- [ ] Les schémas one-time comme Lamport reposent systématiquement sur le problème du logarithme discret.
+    > Incorrect : le tableau indique que leur sécurité dépend de la fonction à sens unique (OWF) utilisée, pas spécifiquement du DLP.
+- [ ] Rabin ne permet pas la reconstitution du message, contrairement à RSA.
+    > Incorrect : le tableau indique « oui » pour Message Recovery aussi bien pour Rabin que pour RSA.
+```
+
+```quizdown
+### Quelle est la différence fondamentale entre une falsification sélective (selective forgery) et une falsification existentielle (existential forgery) ?
+
+> Repense à qui choisit le message concerné par la falsification : l'adversaire ou non.
+
+1. [ ] Il n'y a pas de différence, ce sont deux noms pour le même critère de rupture.
+    > Incorrect : le cours distingue clairement ces deux critères parmi les façons de « casser » un schéma.
+1. [x] Dans la falsification sélective, l'adversaire parvient à forger une signature valide pour un message fixé à l'avance, alors que dans la falsification existentielle, il parvient seulement à forger une signature pour au moins un message, sans en avoir le contrôle.
+    > Correct : c'est exactement la distinction donnée dans le cours entre ces deux critères de succès pour l'adversaire.
+1. [ ] La falsification sélective nécessite de calculer la clé privée du signataire, contrairement à la falsification existentielle.
+    > Incorrect : calculer la clé privée correspond au critère de « total break », un troisième critère distinct des deux falsifications.
+1. [ ] La falsification existentielle est strictement plus difficile à réaliser que la falsification sélective.
+    > Incorrect : c'est l'inverse qui est généralement vrai : contrôler le message rend l'attaque plus contraignante, donc la falsification sélective est plus exigeante pour l'adversaire.
+```
+
+```quizdown
+### Parmi les types d'attaques suivants contre un schéma de signature digitale, lesquels supposent que l'adversaire a accès à des signatures correspondant à des messages, et non uniquement à la clé publique du signataire ?
+
+> Reviens à la distinction faite entre attaques « key-only » et attaques « basées sur les messages ».
+
+- [x] Attaque par known-messages
+    > Correct : cette attaque suppose que l'adversaire dispose de signatures de messages connus.
+- [x] Attaque par chosen-messages
+    > Correct : cette attaque suppose que l'adversaire a pu choisir des messages et obtenir leurs signatures.
+- [x] Attaque par adaptive chosen-messages
+    > Correct : cette attaque va plus loin en permettant à l'adversaire de choisir ses messages de façon adaptative, en fonction des signatures déjà obtenues.
+- [ ] Attaque key-only
+    > Incorrect : cette attaque suppose au contraire que l'adversaire n'a connaissance que de la clé publique du signataire, sans accès à des signatures.
+```
+
+```quizdown
+### Un adversaire ne connaissant que la clé publique du signataire parvient malgré tout à calculer sa clé privée. Quel type d'attaque a-t-il mené, et quel critère de succès a-t-il atteint ?
+
+> Combine le type d'accès dont dispose l'adversaire avec le niveau de gravité de la rupture obtenue.
+
+1. [ ] Une attaque chosen-messages ayant abouti à une falsification existentielle.
+    > Incorrect : l'adversaire n'a utilisé que la clé publique, pas de signatures obtenues sur des messages choisis.
+1. [x] Une attaque key-only ayant abouti à un total break, le critère de rupture le plus grave pour un schéma de signature digitale.
+    > Correct : l'adversaire n'a eu accès qu'à la clé publique (attaque key-only) et a réussi à calculer la clé privée, ce qui correspond au total break.
+1. [ ] Une attaque adaptive chosen-messages ayant abouti à une falsification sélective.
+    > Incorrect : aucune signature de message choisi n'a été utilisée dans ce scénario, seulement la clé publique.
+1. [ ] Aucun critère du cours ne correspond à cette situation, car calculer la clé privée n'est pas considéré comme casser le schéma.
+    > Incorrect : calculer la clé privée est justement l'exemple donné dans le cours pour le critère de total break.
+```

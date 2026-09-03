@@ -1,0 +1,170 @@
+## Vue d'ensemble
+
+![](qmd_images/schema_recapitulatif.png)
+
+- **MDC** (unkeyed, intégrité) → OWHF (*preimage* + *2nd-preimage resistant*) / CRHF (*2nd-preimage* + *collision resistant*).
+- **MAC** (keyed, authentification + intégrité, sans cryptage).
+
+::: {.callout-important title="À retenir"}
+**OWF** (one-way function) ≠ **OWHF** (one-way hash function) : une OWHF est un MDC, donc respecte aussi la compression et impose la *2nd-preimage resistance* — pas garanti par une simple OWF.
+
+Exemple : $f(x)=x^2 \bmod n$ est une OWF mais pas une OWHF (collision triviale $x,-x$).
+:::
+
+## Fonctions à sens unique (OWF)
+
+**Def :** $f$ facile à calculer $\forall x$, mais **inverse impossible** pour la majorité des $y$.
+
+Exemples :
+
+- $f(x) = x^2 \bmod n$, $n=pq$ inconnus (SQROOTP)
+- $f(x) = E_k(x) \oplus x$ (avec E = DES ou autre bloc-cipher, k fixée connue) — irréversible car le XOR casse la réversibilité de E. **Piège :** $f(x)=E_k(x)$ seul n'est PAS une OWF (réversible si k connue).
+
+## Hash function : définitions
+
+| Propriété | Def |
+|---|---|
+| **compression** | $X$ (taille arbitraire) → $Y$ (taille fixe, $h(x)=y$) |
+| **facile à calculer** | $h(x)$ calculable rapidement $\forall x$ |
+| **keyed** | $h_k(x)=y$ (clé impliquée) → **MAC** |
+| **unkeyed** | pas de clé → **MDC** |
+
+### 3 propriétés de résistance
+
+| # | Propriété | Def | Alias |
+|---|---|---|---|
+| 1 | **preimage resistance** | connaissant $y$, impossible de trouver $x$ tq $h(x)=y$ | — |
+| 2 | **2nd-preimage resistance** | connaissant $x$ (et $h(x)$), impossible de trouver $x'\neq x$ tq $h(x')=h(x)$ | *weak collision resistance* |
+| 3 | **collision resistance** | impossible de trouver **une paire** $x,x'$ (libres) tq $h(x)=h(x')$ | *strong collision resistance* |
+
+- **OWHF** = MDC satisfaisant 1) + 2) = *weak one-way hash function*
+- **CRHF** = MDC satisfaisant 2) + 3) = *strong one-way hash function* (3 ⇒ 2, pas l'inverse)
+
+## MAC : 3 propriétés
+
+| # | Propriété | Def |
+|---|---|---|
+| 1 | compression | comme MDC, appliqué à $h_k$ |
+| 2 | facile à calculer | $h_k(x)$ facile si k connue |
+| 3 | **computation-resistance** | sans k, impossible de calculer une paire $(x,h_k(x))$ à partir de paires connues |
+
+::: {.callout-warning title="Piège"}
+*computation-resistance* ⇒ *key non-recovery*, mais **l'inverse est faux** : *known/chosen-plaintext* peut forger des paires $(x,h_k(x))$ sans retrouver la clé.
+:::
+
+## Attaques : combien d'essais ?
+
+| Attaque | Cible | Nb essais (proba 0.5) |
+|---|---|---|
+| **2nd-preimage** | $x$ fixé, trouver $x'$ | $2^{m-1}$ |
+| **collision** (*birthday paradox*) | trouver n'importe quelle paire | $2^{m/2}$ |
+
+**Birthday paradox :** $k \approx \sqrt{2\ln2 \cdot n} \approx 1{,}17\sqrt n \approx \sqrt n$ essais pour proba de collision ≥ 0.5 (n = nb sorties). Ex : anniversaires, $n=365 \Rightarrow k=22{,}3$ (≈23 personnes).
+
+⚠️ La **collision resistance** est **beaucoup plus facile à casser** ($2^{m/2}$) que la **preimage resistance** ($2^m$) → un digest doit être **deux fois plus long** pour résister aux collisions au même niveau de sécurité.
+
+## Tailles recommandées
+
+| Type | Attaque | Difficulté | Taille conseillée |
+|---|---|---|---|
+| OWHF | preimage | $2^n$ | $n \ge 80$ bits |
+| OWHF | 2nd-preimage | $2^{n-1}$ | $n \ge 80$ bits |
+| CRHF | collision | $2^{n/2}$ | $n \ge 160$ bits |
+| MAC | key non-recovery | $2^t$ | $t \ge 80$ |
+| MAC | forger $(x,h_k(x))$ | $\min(2^t,2^n)$ | $t \ge 80$ |
+
+## MDCs basées sur des systèmes de cryptage
+
+**Principe :** chaînage de blocs via un bloc-cipher (ex. DES) + XOR → casse la réversibilité.
+
+| Modèle | Entrée chaînée dans E | Clé de E |
+|---|---|---|
+| **Matyas-Meyer-Oseas** | $x_i$ | $g(H_{i-1})$ |
+| **Davies-Meyer** | $H_{i-1}$ | $x_i$ |
+| **Miyaguchi-Preneel** | $x_i$ | $g(H_{i-1})$, puis XOR avec $H_{i-1}$ en plus |
+
+- **MDC-2** (2 boîtes DES) / **MDC-4** (4 boîtes DES) : digest = 128 bits, DES = 64 bits nominal → il faut combiner n boîtes pour digest = n × largeur.
+
+## MDCs personnalisées (customized)
+
+Construites pour vitesse + sécurité : padding + longueur, constantes fixes, *rounds* (opérations logiques + rotations), chaînage.
+
+| Algo | Auteur/date | Digest | Statut |
+|---|---|---|---|
+| **MD5** | Rivest 1992, RFC 1321 | 128 bits | **Cassé** |
+| **SHA-0** | NIST 1993 | 160 bits | Collisions en $2^{39}$ (au lieu $2^{80}$) |
+| **SHA-1** | NIST 1995 | 160 bits | Collisions en $2^{63}$ (au lieu $2^{80}$) |
+| **SHA-2** | NIST FIPS 190-3 | 224–512 bits | SHA-224/256/384/512 |
+| **SHA-3** | Keccak (NIST, oct. 2012) | 224–512 bits | successeur de SHA-1 |
+
+::: {.callout-tip title="Repère historique"}
+X.Wang (2004) : collisions MD5. X.Wang (CRYPTO'05) : SHA-1 cassable en $2^{63}$. Déc. 2008 : CA illicite via collisions MD5 contrôlées. → attaques **analytiques**, pas brute-force.
+:::
+
+## MACs basés sur cryptage : CBC-MAC
+
+DES-CBC, $IV=0$, **ciphertexts intermédiaires éliminés** (seul le dernier bloc = MAC).
+
+- clé = 56 bits (112 bits en option)
+- MAC-value = 64 bits
+
+## Nested MAC / HMAC
+
+$$G \circ H = \{g \circ h_{(k,l)}(x) = g_k(h_l(x))\}$$
+
+Sécurité NMAC : G résistante aux collisions **+** H résistante aux attaques MAC.
+
+**HMAC** (FIPS 198) = Nested MAC basé sur un MDC sans clé (SHA-1, SHA-256...) :
+
+$$HMAC\text{-}256_k(x) = SHA\text{-}256\big((k\oplus opad)\,\|\,SHA\text{-}256((k\oplus ipad)\,\|\,x)\big)$$
+
+avec $opad = 36\dots36$, $ipad = 5C\dots5C$ (512 bits), clé $k$ = 512 bits. → MAC le plus utilisé ; la clé $k$ complique les attaques connues sur SHA.
+
+## Applications
+
+| Schéma | Principe |
+|---|---|
+| **MAC seul** | message + MAC(clé secrète) envoyés en clair |
+| **MDC + Encryption** | message + MDC, le tout chiffré |
+| **MDC + canal authentique** | message en clair (canal non sûr) + MDC transmis via canal authentifié à part |
+
+Autres usages : *virus checking* (digest distribué par canal sûr), distribution de clés publiques, *timestamp* (appliqué au digest, pas au document), **one-time password S-Key** :
+
+- seed $x_0$ → chaîne $x_1=h(x_0), \dots, x_n=h(x_{n-1})$
+- système mémorise $x_n$, user fournit $x_{n-1}$ ; vérifie $h(x_{n-1})=x_n$ puis mémorise $x_{n-1}$ (décroissant à chaque connexion).
+
+## Application : Blockchain (Bitcoin)
+
+- Transactions groupées en **blocs chaînés** par hachage
+- **Minage** = chercher un **nonce** tq digest du bloc < *target* (**proof of work**, *pseudo-collision*)
+- Validation rapide, génération coûteuse ; 1er mineur récompensé
+- **Blockchain** = registre public décentralisé immuable ; modifier l'historique = refaire le PoW de tous les blocs suivants, plus vite que tous les mineurs honnêtes réunis
+
+::: {.callout-tip title="Chiffres clés (oct. 2025)"}
+Difficulty ≈ 150.84 T → target ≈ $2^{177}$ → pseudo-collision sur les **79 bits de poids fort**. Hashrate ≈ 1.1 ZH/s. ~$660\times10^{21}$ hachages/bloc. ~10 min/bloc.
+:::
+
+## Fonctions de hachage randomisées : le *salt* UNIX
+
+::: {.callout-warning title="Piège"}
+Une hash function **déterministe** produit le même résultat pour 2 mots de passe identiques → vulnérable aux attaques par **dictionnaire off-line** (*codebooks*).
+:::
+
+**Solution : le *salt*** — élément (pseudo-)aléatoire de **12 bits**, différent par mot de passe :
+
+- ajouté **avant** le calcul du hash (chargement) et **relu** depuis le fichier (vérification)
+- **×4096** variantes possibles par mot de passe → empêche la détection de duplicatas et les *codebooks* précalculés
+- stocké en clair avec le résultat dans `/etc/passwd` : `user:hash(salt):uid:...`
+- mécanisme : mot de passe (8 car. ASCII, 56 bits) = clé DES modifiée par le salt, appliquée 25 fois en chaîne à partir de $I_1=0$ → repack en 11 caractères
+
+## Synthèse — à retenir
+
+::: {.callout-important title="Essentiel"}
+- **MDC** = sans clé (intégrité seule) ; **MAC** = avec clé (intégrité + authentification source).
+- 3 propriétés : **preimage** ($2^n$) < **2nd-preimage** ($2^{n-1}$) < **collision** ($2^{n/2}$, *birthday paradox*) — la collision est la plus facile à casser, donc $n\ge160$ bits pour un CRHF contre $n\ge80$ pour une OWHF.
+- **OWHF** = preimage + 2nd-preimage ; **CRHF** = 2nd-preimage + collision resistance (plus fort).
+- MD5 et SHA-1 sont **cassés/affaiblis** analytiquement (Wang et al.) → migrer vers **SHA-2/SHA-3**.
+- **HMAC** = Nested MAC (clé + MDC sans clé) = standard actuel pour les MAC.
+- **Blockchain** = MDC + *proof of work* (pseudo-collision) pour sécuriser un registre décentralisé.
+- **Salt UNIX** = défense contre dictionnaires off-line en randomisant une hash function déterministe.
+:::

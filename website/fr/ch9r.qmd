@@ -1,0 +1,231 @@
+# Vue d'ensemble
+
+Chaîne logique du chapitre :
+
+**TTP** (modes *in-/on-/off-line*) → **KDC** (clés symétriques) *vs* **CA** (clés publiques) → **Certificats** + **CRL** → **Arbres d'authentification** (alternative aux certificats) → **Topologies de certification** (comment relier plusieurs CAs) → **PKI** (infrastructure intégrant tout ça).
+
+::: {.callout-tip title="Intuition"}
+Un certificat = une CA qui garantit « cette clé publique appartient bien à cette identité ». Toute la suite du chapitre traite de : comment créer/distribuer/révoquer/faire confiance à ces certificats à grande échelle.
+:::
+
+## Modes de fonctionnement d'un TTP
+
+| Mode | TTP intervient en temps réel ? | A et B communiquent directement ? | Disponibilité requise | Exemple |
+|---|---|---|---|---|
+| **In-line** | Oui, intermédiaire (relaie les échanges) | Non | Haute | Proxies, *Secure Gateways* |
+| **On-line** | Oui, participe mais sans relayer | Oui | Haute | *Key Distribution Center* |
+| **Off-line** | Non, info dispo *a priori* | Oui | Basse | *Certification Authority* |
+
+::: {.callout-warning title="Piège"}
+*Off-line* = pas besoin de disponibilité permanente du TTP, **mais** révocation des privilèges (ex. clé compromise) beaucoup plus complexe (asynchrone).
+:::
+
+# Tiers de confiance : KDC vs CA
+
+| | **KDC** (*Key Distribution Center*) | **CA** (*Certification Authority*) |
+|---|---|---|
+| Contexte | Cryptographie symétrique | Cryptographie asymétrique |
+| Objectif | Résoudre le *n² key distribution problem* | Authentifier l'association identité ↔ clé publique |
+| Mode | *On-line* (ev. *in-line*) | *Off-line* |
+| Mécanisme | Clé partagée avec chaque entité + clés de session + tickets (*Kerberos*) | Signe des **certificats** liant identité et clé publique |
+| Risque principal | *Single point of security/operational failure*, goulot de performance | Compromission "moins évidente mais presque aussi néfaste", surtout si la clé de signature fuite |
+
+**Problème du *n² key distribution*** : sans intermédiaire, $n(n-1)/2 \sim n^2$ clés symétriques nécessaires pour $n$ entités, et système non *scalable* (n nouvelles clés par entité ajoutée). Avec un KDC : seulement $n$ clés, et $1$ clé par nouvelle entité.
+
+::: {.callout-important title="À retenir"}
+KDC = problème de **distribution de clés symétriques**. CA = problème d'**authenticité des clés publiques**. Ce sont deux solutions à deux problèmes différents, pas deux alternatives interchangeables.
+:::
+
+**Problèmes du KDC :**
+
+* *Single point of security failure* : le KDC peut usurper l'identité de tout le monde ; s'il est compromis, tout le système l'est.
+* *Single point of operational failure* : mode *on-line* → indisponibilité (DoS) paralyse le système.
+* *Performance bottleneck* : opérations coûteuses → répartition de charge (*mirroring*) nécessaire.
+
+**CA — points clés :**
+
+* Rôle : authentifier l'association entité ↔ clé publique (protège contre le *Man-In-the-Middle*).
+* *Simpler then safer* : pas de protocole complexe requis côté CA.
+* Les *cached certificates* peuvent être stockés n'importe où (non protégé) car signés — mais il faut une copie **authentique** de la clé publique de la CA pour vérifier la signature.
+* Mode *off-line* → problème : validité d'un certificat peut devenir invalide de façon asynchrone (vol de clé privée) → solution : **CRL** (*Certificate Revocation Lists*).
+
+## *Proof of Possession* (PoP)
+
+**Problème** : vérifier l'identité de A ne suffit pas — il faut aussi vérifier que A possède réellement la clé privée correspondante.
+
+**Attaque sans PoP** : A signe et envoie un document + certificat ; un attaquant C intercepte, obtient de sa propre CA<sub>C</sub> un certificat liant *son* identité à la *même* clé publique (celle de A), et se fait passer pour l'auteur.
+
+**Protocole de vérification PoP :**
+
+$$
+CA \rightarrow A: A, r \qquad\qquad CA \leftarrow A: S_{privA}(A,r)
+$$
+
+$r$ = nombre aléatoire (protège des *chosen message attacks*) ; la CA vérifie la signature avec pub<sub>A</sub>.
+
+::: {.callout-tip title="Intuition"}
+PoP + qualité des mises à jour de CRL + sécurité de la clé de signature = **niveaux de confiance** différents entre CAs (aggravé par la prolifération incontrôlée des CAs).
+:::
+
+## Certification et révocation : séparation des tâches
+
+::: {.callout-warning title="Piège"}
+**Problème** : si la *même* clé signe certificats et CRLs, un attaquant possédant cette clé peut révoquer le vrai certificat de A puis créer un faux certificat (A ↔ clé qu'il contrôle) → *Man-In-the-Middle* ou usurpation complète.
+:::
+
+**Solution — *Separation of duties*** :
+
+* Certificats et CRLs signés avec des **clés différentes** ;
+* par des **entités fonctionnelles différentes** (*Certification Authority* / *Revocation Authority*) ;
+* si possible sur des **machines différentes**, avec des *security policies* indépendantes.
+
+## Entités fonctionnelles liées à la certification
+
+| Entité | Rôle |
+|---|---|
+| **Name Server** | Gère un espace de noms unique et cohérent (ex. `DNSsec` = noms + certification combinés) |
+| **Registration Authority** | Vérification d'identité/PoP nécessitant un contact direct — détachée de la CA pour raisons géographiques |
+| **Key Generator** | Délègue la création des paires de clés. Avantage : simplicité, sécurité renforcée. **Limite : perte de la non-répudiation** (clé privée connue d'un tiers) |
+| **Certificate Directory** | Répertoire en lecture seule des certificats |
+
+## Autres TTPs
+
+* **Timestamp Agent (TA)** : certifie l'existence d'un document à un instant donné → signe `h(doc)` + timestamp, ou utilise un **arbre d'authentification**.
+* **Notary agent** : comme le TA, + certifie validité/origine/appartenance → support de la **non-répudiation**.
+* **Key Escrow Agent (KEA)** : accès aux clés de session sous conditions (mandat judiciaire). Exemple : *Clipper chip* (1993, symétrique, 2 KEAs fédéraux) → remplacé par **Capstone chip** (asymétrique, carte *Fortezza*, usage militaire) suite à des failles.
+
+# Authentification à clé publique
+
+## Certificat — champs génériques
+
+| Champ | Contenu |
+|---|---|
+| *Serial Number*, *Version* | Identifiants du certificat |
+| *Issuer* | Identité globale unique de la CA signataire |
+| *Signature Algorithm* | Ex. `MD5+ElGamal`, `SHA+RSA` |
+| *Subject* | Nom global unique de l'entité certifiée |
+| *Subject Public Key* | Ex. RSA `(n,e)` ou Diffie-Hellman `(p, α, α^x mod p)` |
+| *Subject Public Key Algorithm* | Ex. RSA, Diffie-Hellman |
+| *Validity* | Période de validité (UTC) |
+| *Signature* | Signature CA sur tous les champs précédents |
+
+## *Certificate Revocation List* (CRL)
+
+| Champ | Contenu |
+|---|---|
+| *Issuer*, *Signature Algorithm* | Comme le certificat |
+| *Date of Issue* / *Date of Next Issue* | Fréquence de publication |
+| Par certificat révoqué | *Serial Number* + *Revocation Date* |
+| *Signature* | Sur toute la liste |
+
+::: {.callout-warning title="Piège"}
+La révocation est le **talon d'Achille** des systèmes à clé publique. Solution partielle : certificats à très courte validité (re-confirmation fréquente) — mais cela **ramène au mode on-line** et exige une haute disponibilité des CAs, contredisant l'avantage initial de l'*off-line*.
+:::
+
+## Arbres d'authentification
+
+Alternative à la certification pour authentifier des valeurs publiques, basée sur une structure d'arbre + fonction de hachage résistante aux collisions (CRHF) $h$.
+
+**Construction** (pour $n$ feuilles $Y_1 ... Y_n$) :
+
+1. Les $Y_i$ sont placées dans les feuilles.
+2. Chaque arc issu d'une feuille $Y_i$ est étiqueté $h(Y_i)$.
+3. Chaque nœud interne d'arcs entrants $h_1, h_2$ est étiqueté $h(h_1 \| h_2)$.
+
+```{.cetz}
+#cetz.canvas({
+  import cetz.draw: *
+  circle((0,4), radius: 0.4, name: "R")
+  content("R", [*R*])
+  circle((-1.5,2.5), radius: 0.4, name: "h1")
+  content("h1", [$h_1$])
+  circle((1.5,2.5), radius: 0.4, name: "h2")
+  content("h2", [$h_2$])
+  line("R", "h1")
+  line("R", "h2")
+  content((-0.75,3.25), [$h(h_1\|h_2)$], anchor: "south")
+  circle((-2.2,1), radius: 0.35, name: "Y1")
+  content("Y1", [$Y_1$])
+  circle((-0.8,1), radius: 0.35, name: "Y2")
+  content("Y2", [$Y_2$])
+  circle((0.8,1), radius: 0.35, name: "Y3")
+  content("Y3", [$Y_3$])
+  circle((2.2,1), radius: 0.35, name: "Y4")
+  content("Y4", [$Y_4$])
+  line("h1", "Y1")
+  content((-1.9,1.9), [$h(Y_1)$], anchor: "south")
+  line("h1", "Y2")
+  content((-0.7,1.9), [$h(Y_2)$], anchor: "south")
+  line("h2", "Y3")
+  content((0.7,1.9), [$h(Y_3)$], anchor: "south")
+  line("h2", "Y4")
+  content((1.9,1.9), [$h(Y_4)$], anchor: "south")
+})
+```
+
+**Vérification de $Y_1$** : il faut fournir $h(Y_2), h(Y_3), h(Y_4)$, recalculer $h(Y_1)$, $h_1$, $h_2$, et vérifier $h(h_2\|h(Y_4)) = R$. Une modification de $Y_1$ change $R$ (propriété CRHF).
+
+| Avantage | Inconvénients |
+|---|---|
+| Seule la racine **R** doit être protégée cryptographiquement (ex. signature digitale) ; le reste est protégé par la non-réversibilité de la CRHF | Vérifier $Y_i$ nécessite $\sim \log_2 n$ valeurs intermédiaires (arbres **équilibrés**) ; modifier un nœud recalcule tout le chemin vers R ; ajout de nœuds ⇒ arbres déséquilibrés (ajout par la racine) |
+
+**Application** : *timestamping* — le TA construit l'arbre, fournit timestamp signé + chemin de vérification, et publie **R** quotidiennement (ex. journal) → l'empêche de tricher.
+
+## Topologies de certification
+
+**Problème** : deux utilisateurs sous des CAs différentes — faire confiance à un certificat d'une autre CA ?
+
+**Certification croisée (*cross-certification*)** : CA<sub>A</sub> certifie pub<sub>CAB</sub> → **certificat croisé** noté CA<sub>A</sub>{CA<sub>B</sub>}.
+
+**Chaîne de certification** pour que A vérifie la clé de B : CA<sub>A</sub>{CA<sub>B</sub>} · CA<sub>B</sub>{B}, à partir d'une copie authentique de pub<sub>CAA</sub>.
+
+| Modèle | Structure | Points forts / limites |
+|---|---|---|
+| **Hiérarchique strict** (PEM/X.509) | Arbre avec racine dont la clé publique est connue mondialement ; toute chaîne non-locale part de la racine | Structure claire, mais dépendance forte à la racine |
+| **Graphe / *Web of Trust*** (PGP) | Les utilisateurs eux-mêmes agissent comme CAs pour leurs correspondants | Bien adapté aux groupes fermés ; limité pour des populations non connectées |
+| **Mixte** | Hiérarchie + certification croisée bidirectionnelle | Combine les deux approches |
+
+::: {.callout-warning title="Piège"}
+Une chaîne de certification est **aussi vulnérable que son maillon le plus faible** → garder les chaînes aussi courtes que possible.
+:::
+
+# *Public Key Infrastructure* (PKI)
+
+::: {.callout-note title="Définition"}
+Une PKI est une infrastructure intégrée fournissant un ensemble de services de sécurité basés sur la cryptographie à clés publiques.
+:::
+
+## Entités fonctionnelles
+
+| Entité | Rôle |
+|---|---|
+| **Certification Authority (CA)** | Création et maintenance des certificats |
+| **Certificate Repository** | Mise à disposition des certificats (X.500, LDAP, WWW, DNS…) |
+| **Certificate Revocation** | Gestion des certificats compromis/obsolètes (CRLs) |
+| **Key Backup and Recovery** | Récupération de clés perdues (support détruit, mot de passe oublié, départ employé…) — concerne surtout la **clé privée de décryption** |
+| **Automatic Key Update** | Renouvellement automatique après expiration |
+| **Key and Certificate History** | Récupération de clés obsolètes ayant servi à chiffrer dans le passé |
+| **Cross-Certification** | Validation de certificats émis par d'autres PKIs |
+| **Support non-répudiation** | Preuves d'une transaction (origine, horodatage, accusé de réception signé) |
+| **Secure Time Stamping** | Temps de référence commun (non-répudiation, arbitrage) |
+| **Logiciel client** | Opérations côté client : gestion certificats, signature, déchiffrement, périphériques (cartes à puce, biométrie…) |
+
+## Avantages / inconvénients
+
+| Avantages | Inconvénients |
+|---|---|
+| **Sécurité** : environnement intégré sans maillon faible | **Coût de mise en place** élevé, compétences rares |
+| **Tout-en-un** : authentification forte, signature/non-répudiation, SSO, VPN, B2B/B2C — économie vs solutions au cas par cas | **Complexité** |
+| **Interopérabilité** intra/inter-entreprise (standards X.509, PKCS, OCSP) | Alternative : **sous-traitance** du service PKI |
+
+# Synthèse finale
+
+## À retenir
+
+* **KDC** = distribution de clés symétriques (mode *on-line*) ; **CA** = authenticité de clés publiques (mode *off-line*). Deux problèmes différents.
+* Le compromis d'un KDC ou de la clé de signature d'une CA est catastrophique → **séparer certification et révocation** (clés/entités distinctes).
+* **PoP** garantit que le détenteur du certificat possède bien la clé privée associée.
+* **CRL** = réponse au problème de la révocation *off-line*, mais reste le point faible du système.
+* **Arbres d'authentification** : seule la racine R nécessite une protection cryptographique — alternative aux certificats.
+* Faire confiance à une CA étrangère = **certification croisée** ; à grande échelle → **hiérarchie** (PEM/X.509) ou **graphe de confiance** (PGP). Une chaîne vaut son maillon le plus faible.
+* **PKI** = intégration de toutes ces briques (CA, répertoire, révocation, backup/recovery, horodatage…) en une infrastructure de sécurité complète, au prix d'un coût et d'une complexité non négligeables.

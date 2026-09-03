@@ -1,0 +1,434 @@
+---
+execute:
+  enabled: false
+---
+
+## Quiz — Hashes and MACs
+
+This quiz covers the entire chapter: one-way functions, definitions and properties of hash functions, MDCs and MACs, the birthday paradox, constructions based on encryption systems, customized functions (MD5, SHA), CBC-MAC, NMAC/HMAC, and applications (integrity, blockchain, salted passwords).
+
+### Question 1
+
+```quizdown
+### Which property necessarily characterizes any hash function, whether keyed or not?
+
+> Think back to the two properties listed in the general definition of a hash function, even before the question of the key.
+
+1. [ ] Collision resistance
+1. [x] Compression and ease of computation
+    > Correct: these are the two fundamental properties required of any hash function, regardless of its category.
+1. [ ] Computation-resistance
+1. [ ] The mandatory use of a secret key
+```
+
+### Question 2
+
+```quizdown
+### A one-way function (OWF) is defined as a function for which...
+
+> Think about the asymmetry between the forward direction and the reverse direction of the computation.
+
+1. [ ] it is impossible to compute f(x) for any x
+1. [x] f(x) is easy to compute, but recovering x from y = f(x) is computationally infeasible for the vast majority of y
+    > Correct: this is exactly the computational asymmetry that defines an OWF.
+1. [ ] f is bijective and therefore always invertible with additional computation
+1. [ ] f necessarily requires a secret key to be computed
+```
+
+### Question 3
+
+```quizdown
+### Why does the function f(x) = E_k(x) alone (without XOR with x) not constitute a valid one-way function?
+
+> Ask yourself what happens if the key k used by the encryption system E is known.
+
+1. [ ] Because E_k(x) is always too slow to compute
+1. [x] Because E, like DES, is reversible as soon as the key k is known
+    > Correct: unlike E_k(x) XOR x, a classical block cipher remains reversible with the key, which cancels the one-way character.
+1. [ ] Because E_k(x) always produces an output of variable size
+1. [ ] Because the XOR is essential for compression
+```
+
+### Question 4
+
+```quizdown
+### An MDC (manipulation detection code) is distinguished from a MAC mainly by the fact that...
+
+> Focus on the presence or absence of a shared secret in the computation.
+
+- [x] an MDC is a function without a key (unkeyed)
+    > Correct: an MDC does not involve any secret key in its computation.
+- [ ] an MDC allows the source of a message to be authenticated without an additional mechanism
+    > Incorrect: this is precisely what a MAC allows, not an MDC alone.
+- [x] an MDC requires an additional mechanism (signature, secure channel, encryption) to guarantee the authenticity of the source
+    > Correct: on its own, an MDC only provides an integrity service, not source authentication.
+- [ ] an MDC always uses a 512-bit key
+    > Incorrect: this key size concerns the HMAC construction, not MDCs in general.
+```
+
+### Question 5
+
+```quizdown
+### Among the following statements about the three basic properties of hash functions, which are correct?
+
+> Reread carefully the difference between "given y, find x" and "given x and its image, find a different x'".
+
+- [x] Preimage resistance concerns the difficulty of recovering x from y = h(x)
+    > Correct: this is the exact definition of preimage resistance.
+- [ ] 2nd-preimage resistance only applies to keyed functions
+    > Incorrect: it applies to MDCs, which are unkeyed functions.
+- [x] Collision resistance implies 2nd-preimage resistance
+    > Correct: the course states that property 3 implies property 2.
+- [ ] Preimage resistance is always weaker to break than collision resistance
+    > Incorrect: it's the opposite: breaking collision resistance generally requires fewer trials (2^(n/2)) than breaking preimage resistance (2^n).
+```
+
+### Question 6
+
+```quizdown
+### The function f(x) = x² mod n (with n = pq unknown) is an OWF but not an OWHF. Why?
+
+> Look for a trivial and obvious collision on this function, independent of the difficulty of factoring n.
+
+1. [ ] Because it is not easy to compute
+1. [ ] Because it does not compress the input
+1. [x] Because for any x, -x constitutes a trivial collision: h(x) = h(-x)
+    > Correct: this obvious collision violates the 2nd-preimage resistance required of an OWHF, even though inversion remains hard.
+1. [ ] Because it requires knowledge of p and q to be computed
+```
+
+### Question 7
+
+```quizdown
+### Does the fact that a key k cannot be recovered from known pairs (x_i, h_k(x_i)) (key non-recovery) automatically imply the computation-resistance of a MAC?
+
+> Think about chosen/known-plaintext attacks that could produce a forged pair without ever revealing the key.
+
+1. [ ] True
+1. [x] False
+    > False: the course explicitly states that key non-recovery does not imply computation-resistance, because chosen/known-plaintext attacks can allow forging a pair (x, h_k(x)) without ever recovering k.
+```
+
+### Question 8
+
+```quizdown
+### A student controls an original text that they have signed by an authority, then wants to apply that same signature to a forged text of their choice. Which type of attack must they succeed at?
+
+> They choose both texts themselves: which resistance property does this correspond to?
+
+1. [ ] Preimage resistance
+1. [ ] 2nd-preimage resistance
+1. [x] Collision resistance
+    > Correct: since the attacker controls both messages, they are looking for a pair of distinct preimages having the same digest — this is collision search.
+1. [ ] Key non-recovery
+```
+
+### Question 9
+
+```quizdown
+### An attacker has an original text they do not control, along with its associated signature. They want to create a forged text carrying the same signature. Which type of attack must they succeed at?
+
+> This time, only one of the two texts is fixed: the one they do not control.
+
+1. [ ] Preimage resistance
+1. [x] 2nd-preimage resistance
+    > Correct: the attacker starts from a fixed x (the imposed original text) and looks for a different x' producing the same digest — this is exactly the definition of 2nd-preimage resistance.
+1. [ ] Collision resistance
+1. [ ] Key non-recovery
+```
+
+### Question 10
+
+```quizdown
+### For an m-bit digest, what is approximately the number of trials needed to find, with a probability of 0.5, a value y such that h(x) = h(y) for a fixed x?
+
+> Go back to the calculation k = n/2 obtained in the course, with n = 2^m possible outputs.
+
+1. [ ] 2^m
+1. [x] 2^(m-1)
+    > Correct: the course establishes that k = n/2 = 2^m/2 = 2^(m-1) trials suffice for a probability of 0.5 of finding a y such that h(x) = h(y).
+1. [ ] 2^(m/2)
+1. [ ] m/2
+```
+
+### Question 11
+
+```quizdown
+### According to the birthday paradox applied to hash functions with 2^m possible outputs, how many inputs must be tested to obtain a collision with a probability greater than 0.5?
+
+> This number is significantly smaller than that needed to find a preimage: it is the square root of the number of outputs.
+
+1. [ ] 2^m
+1. [ ] 2^(m-1)
+1. [x] 2^(m/2)
+    > Correct: the birthday paradox shows that k = 2^(m/2) trials suffice to exceed a probability of 0.5 of obtaining a collision.
+1. [ ] m/2
+```
+
+### Question 12
+
+```quizdown
+### According to the course's summary table, what minimum digest size is recommended for a collision-resistant function (CRHF) to offer effective security of at least 80 bits?
+
+> The cost of a collision attack is on the order of 2^(n/2): what digest size n then gives a security of 2^80?
+
+1. [ ] 80 bits
+1. [ ] 128 bits
+1. [x] 160 bits
+    > Correct: since a collision attack costs 2^(n/2), n ≥ 160 bits is needed to obtain effective security of 2^80, in line with the course table.
+1. [ ] 256 bits
+```
+
+### Question 13
+
+```quizdown
+### Why does the 64-bit "nominal width" of encryption systems like DES pose a problem for directly building a CRHF?
+
+> Relate this width to the minimum recommended digest size for collision resistance.
+
+1. [ ] Because 64 bits is a block size too large to be processed efficiently
+1. [x] Because 64 bits is insufficient compared to the recommended digest size (at least 160 bits) needed to resist collision attacks
+    > Correct: the course explicitly states that the 64-bit nominal width of DES is not enough to build CRHFs, hence the need to combine several encryption boxes (MDC-2, MDC-4).
+1. [ ] Because DES can only process messages of 64 bits in total
+1. [ ] Because 64 bits makes the encryption reversible
+```
+
+### Question 14
+
+```quizdown
+### MDC-2 and MDC-4 work around the width limitation of DES boxes by...
+
+> Think about the principle mentioned in the course for obtaining digests longer than the nominal width of a single encryption box.
+
+1. [ ] reducing the size of the DES key
+1. [x] respectively combining 2 and 4 DES boxes to obtain a 128-bit digest
+    > Correct: the course states that MDC-2 and MDC-4 respectively use 2 and 4 DES boxes to produce a 128-bit digest in total.
+1. [ ] removing the chaining operations between blocks
+1. [ ] applying a single DES box directly to 128-bit text blocks
+```
+
+### Question 15
+
+```quizdown
+### What makes the construction process of MDCs based on encryption systems irreversible, when the underlying encryption system (e.g. DES) is reversible?
+
+> The course mentions two mechanisms combined around successive blocks.
+
+1. [ ] The mere fact of using 64-bit blocks
+1. [x] The chaining operations between successive blocks combined with logical functions such as XOR
+    > Correct: the course states that compression relies on chaining operations and logical functions (fundamentally XOR), which makes the whole process irreversible despite the reversibility of the encryption box alone.
+1. [ ] The systematic use of a 512-bit secret key
+1. [ ] The complete removal of the input text blocks
+```
+
+### Question 16
+
+```quizdown
+### The same generic scheme (chaining a compression function with previous blocks) gives rise to several constructions depending on how the previous input, the message, and the key are combined. Which constructions correspond to this principle according to the course?
+
+> These are the three generic models presented in the course for encryption-based MDCs.
+
+- [x] Matyas-Meyer-Oseas
+    > Correct: this is one of the three generic models cited in the course.
+- [x] Davies-Meyer
+    > Correct: this is also one of the three generic models cited in the course.
+- [x] Miyaguchi-Preneel
+    > Correct: this is the third generic model cited in the course.
+- [ ] HMAC
+    > Incorrect: HMAC is not a generic model of encryption-based MDC, but a Nested MAC built from an unkeyed hash function such as SHA-1 or SHA-256.
+```
+
+### Question 17
+
+```quizdown
+### In December 2008, researchers exploited controlled collisions on MD5 to...
+
+> Think back to the concrete and alarming application mentioned for this attack.
+
+1. [ ] break DES in polynomial time
+1. [x] create a rogue Certification Authority allowing certificates to be forged that are accepted by any browser
+    > Correct: this is exactly the result obtained, illustrating that a controlled (rather than merely arbitrary) collision can have serious practical consequences.
+1. [ ] recover the secret key used by an HMAC
+1. [ ] demonstrate that SHA-3 was vulnerable
+```
+
+### Question 18
+
+```quizdown
+### Why are the attacks found by X. Wang et al. against MD5 and SHA-1 considered particularly significant, beyond simply finding collisions?
+
+> Compare the number of operations they require to the number theoretically expected for the collision resistance of these functions.
+
+1. [ ] Because they require more operations than predicted by theory
+1. [x] Because they reduce the number of operations needed to well below the theoretical bound of 2^(n/2), thanks to analytical approaches rather than brute force
+    > Correct: for example, collisions on SHA-1 were found in 2^63 operations instead of the theoretically expected 2^80, via an analytical approach rather than simple brute force.
+1. [ ] Because they only target preimage resistance, never collision resistance
+1. [ ] Because they only apply to keyed functions such as HMACs
+```
+
+### Question 19
+
+```quizdown
+### A Nested MAC (NMAC), composed of two families of functions G and H, offers a security that depends on two conditions. Which ones?
+
+> Reread the definition that distinguishes the role of the outer function G from that of the inner function H.
+
+- [x] G must be collision resistant
+    > Correct: this is the first security condition stated in the course for an NMAC.
+- [ ] G must be a keyless function
+    > Incorrect: in an NMAC, G is a family of functions parameterized by a key, just like H.
+- [x] H must resist attacks specific to MACs (impossibility of forging a valid pair (x,y) without knowing the key)
+    > Correct: this is the second condition stated in the course.
+- [ ] H must produce a digest of at least 512 bits
+    > Incorrect: this size corresponds to the ipad/opad constants and the key used by HMAC, not a general requirement on H in an NMAC.
+```
+
+### Question 20
+
+```quizdown
+### How does an HMAC differ structurally from a MAC such as CBC-MAC?
+
+> Compare the nature of the base function used by each of these two mechanisms.
+
+1. [ ] CBC-MAC uses SHA-256 while HMAC uses DES
+1. [x] HMAC is a Nested MAC built from an unkeyed hash function (such as SHA-1 or SHA-256), whereas CBC-MAC is built directly from a symmetric block cipher (DES)
+    > Correct: this is precisely the distinction established in the course between these two approaches to building a MAC.
+1. [ ] CBC-MAC uses two distinct keys k and l, whereas HMAC uses none
+1. [ ] HMAC can only produce a 64-bit digest, like CBC-MAC
+```
+
+### Question 21
+
+```quizdown
+### Why are known attacks against functions of the SHA family harder to carry out when these functions are used within an HMAC?
+
+> Compare what an attacker knows in a direct attack on SHA-1 versus an attack on HMAC-SHA1.
+
+1. [ ] Because HMAC produces a digest twice as long as SHA alone
+1. [x] Because the presence of the secret key k in the HMAC computation prevents the attacker from freely reproducing the conditions exploited by analytical attacks on the bare hash function
+    > Correct: the course points out that the involvement of key k in HMAC makes known attacks on the SHA family harder to carry out.
+1. [ ] Because HMAC never actually uses the SHA function internally
+1. [ ] Because HMAC completely eliminates the compression operation
+```
+
+### Question 22
+
+```quizdown
+### The historical UNIX password storage system had a weakness exploitable by an off-line dictionary attack. What was the main cause of this weakness before the introduction of the salt?
+
+> Think about what happens when two different users choose the same password, with a deterministic hash function.
+
+1. [ ] The hash function used was not collision resistant
+1. [x] Since the hash function was deterministic, the same password always produced the same result, making it possible to precompute a "codebook" associating common passwords with digests
+    > Correct: this is exactly the problem identified in the course, solved by adding a random element (the salt).
+1. [ ] The password file was not accessible to anyone
+1. [ ] The digest size used was 512 bits, which made it too predictable
+```
+
+### Question 23
+
+```quizdown
+### Adding a 12-bit salt to each UNIX password before computing the hash function introduces a random factor of how many possibilities per password?
+
+> How many combinations does 12 bits correspond to? Use 2 to the power of 12.
+
+1. [ ] 12
+1. [ ] 144
+1. [x] 4096
+    > Correct: 2^12 = 4096, which exactly matches the value given in the course for the random factor introduced by the salt.
+1. [ ] 65536
+```
+
+### Question 24
+
+```quizdown
+### Does the UNIX salt prevent an attacker from guessing the password of a particular user if they already know that user's salt?
+
+> Distinguish clearly between the goal of the salt (preventing global precomputation and duplicate detection) and the individual protection of a given password.
+
+1. [ ] True
+1. [x] False
+    > False: the salt mainly prevents the reuse of a single precomputed "codebook" against all users and prevents the detection of identical passwords between users; a targeted attack on a user whose salt is known remains possible by recomputing the hash for each candidate with that specific salt.
+```
+
+### Question 25
+
+```quizdown
+### In the one-time password (S-Key) authentication mechanism, starting from a secret seed x0, a chain is built: x1 = h(x0), x2 = h(x1), ..., xn = h(x(n-1)). Why does this construction allow secure authentication even if an attacker intercepts the value transmitted at each login?
+
+> Think about the direction in which the user traverses the chain across successive logins, and the difficulty of inverting a hash function.
+
+1. [ ] Because each transmitted value is encrypted with a different key
+1. [x] Because the user transmits the chain in reverse order of its construction (from xn towards x0), and recovering x(n-1) from an intercepted xn would require inverting the hash function, which is computationally infeasible
+    > Correct: the security of the S-Key system relies on the preimage resistance of h: knowing x_n does not allow computing x_(n-1), which will nevertheless be the value required at the next login.
+1. [ ] Because the hash chain changes function h at each step
+1. [ ] Because the system never stores any value from the chain
+```
+
+### Question 26
+
+```quizdown
+### In the context of blockchain mining (proof of work), the difficulty of the cryptographic puzzle concretely corresponds to...
+
+> Relate this difficulty to one of the three resistance properties studied in this chapter, applied to a portion of the digest's bits.
+
+1. [ ] finding the secret key used by the block's hash function
+1. [x] finding a pseudo-collision, i.e. a digest whose most significant bits are below a given target, by varying the nonce
+    > Correct: the course states that mining consists of finding pseudo-collisions in the hash function, with the target defining the number of most significant bits involved.
+1. [ ] breaking the 2nd-preimage resistance of an already published transaction
+1. [ ] decrypting previous transactions on the blockchain
+```
+
+### Question 27
+
+```quizdown
+### Why is falsifying data already recorded in a blockchain considered practically impossible?
+
+> Think about what the chaining of blocks by hash functions implies, combined with the computing power already invested by all the honest miners.
+
+1. [ ] Because the blockchain is encrypted with a secret key known only to the miners
+1. [x] Because modifying a block would require redoing the mining work (proof of work) for that block and all subsequent ones, with a computational effort greater than that of all honest miners combined
+    > Correct: this is exactly the guarantee described in the course for the immutability of the public ledger that constitutes the blockchain.
+1. [ ] Because each transaction is individually signed by a central authority
+1. [ ] Because the digest size used makes any collision mathematically impossible
+```
+
+### Question 28
+
+```quizdown
+### Put the historical development of the main customized hash functions mentioned in the course in chronological order.
+
+> Think about the historical evolution in response to successively discovered attacks.
+
+1. MD5 (Rivest, 1992)
+2. SHA-0 (NIST, 1993)
+3. SHA-1 (NIST, 1995)
+4. SHA-2 (NIST, FIPS 190-3)
+5. SHA-3 / Keccak (chosen by NIST in 2012)
+```
+
+### Question 29
+
+```quizdown
+### Put the generic operating steps of a customized hash function (customized MDC) as described in the course in order.
+
+> Think about what must be done even before starting to process the data blocks, then the order in which the rounds and chaining occur.
+
+1. Initialization of the data via padding and appending the message length
+2. Sequential application of the rounds to each block, combining logical operations and rotations with predefined constants
+3. Chaining of the outputs of each round with the following blocks
+4. Obtaining the final digest after processing all the blocks
+```
+
+### Question 30
+
+```quizdown
+### Put the password verification steps in the salted UNIX system described in the course in order.
+
+> The salt must be available before anything can be recomputed.
+
+1. The system retrieves the salt associated with the user, stored together with the digest
+2. The user enters their password in cleartext
+3. The system concatenates the salt and the entered password, then applies the hash function
+4. The system compares the result obtained to the stored digest to grant or deny access
+```

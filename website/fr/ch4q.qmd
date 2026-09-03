@@ -1,0 +1,385 @@
+---
+execute:
+  enabled: false
+---
+
+```quizdown
+### Que représente la fonction Φ d'Euler appliquée à n ?
+
+> Repense à la condition portant sur le pgcd avec n.
+
+1. [ ] Le nombre de diviseurs de n
+    > Incorrect : ce n'est pas le nombre de diviseurs, mais le nombre d'entiers premiers avec n.
+1. [x] Le nombre d'entiers positifs plus petits que n qui sont premiers avec n
+    > Correct : c'est la définition de Φ(n).
+1. [ ] Le plus grand facteur premier de n
+    > Incorrect : Φ(n) est un comptage, pas un facteur.
+1. [ ] Le nombre de facteurs premiers distincts de n
+    > Incorrect : cela correspond au nombre m dans la décomposition, pas à Φ(n).
+```
+
+```quizdown
+### Quelle est la valeur de Φ(21) ?
+
+> 21 = 3 × 7, deux premiers distincts. Utilise Φ(pq) = (p-1)(q-1).
+
+1. [ ] 20
+    > Incorrect : cela correspondrait à Φ(21) si 21 était premier, ce qui n'est pas le cas.
+1. [x] 12
+    > Correct : Φ(21) = (3-1)(7-1) = 2 × 6 = 12.
+1. [ ] 14
+    > Incorrect : vérifie le calcul (p-1)(q-1) et non p×(q-1).
+1. [ ] 8
+    > Incorrect : ce résultat ne correspond pas à la formule Φ(pq) = (p-1)(q-1).
+```
+
+```quizdown
+### Quels éléments caractérisent un générateur α de Z_n^* ?
+
+> Repense à la définition de l'ordre d'un élément et à celui du groupe.
+
+- [x] Son ordre est égal à Φ(n)
+    > Correct : c'est la définition même d'un générateur.
+- [ ] Son ordre est égal à n
+    > Incorrect : Φ(n) est l'ordre du groupe Z_n^*, pas n lui-même.
+- [x] Ses puissances successives engendrent tout Z_n^*
+    > Correct : Z_n^* = {α^i mod n, 0 ≤ i ≤ Φ(n)-1}.
+- [ ] Il existe quel que soit n
+    > Incorrect : Z_n^* n'a un générateur que si n = 2, 4, p^k ou 2p^k.
+```
+
+```quizdown
+### L'ordre d'un élément a de Z_n^* est toujours égal à Φ(n).
+
+> Distingue l'ordre d'un élément particulier de l'ordre du groupe tout entier.
+
+1. [ ] Vrai
+    > Faux : seul un générateur a un ordre égal à Φ(n) ; les autres éléments ont un ordre plus petit qui divise Φ(n).
+1. [x] Faux
+    > Correct : l'ordre d'un élément quelconque est le plus petit t tel que a^t ≡ 1 mod n, qui n'égale Φ(n) que si a est un générateur.
+```
+
+```quizdown
+### En utilisant le théorème d'Euler, quel est l'inverse de 3 modulo 11 ?
+
+> p = 11 est premier, donc l'inverse de a est a^(p-2) mod p.
+
+1. [ ] 8
+    > Incorrect : vérifie que 3 × 8 mod 11 ne vaut pas 1.
+1. [x] 4
+    > Correct : 3 × 4 = 12 ≡ 1 mod 11.
+1. [ ] 7
+    > Incorrect : 3 × 7 = 21 ≡ 10 mod 11, pas 1.
+1. [ ] 9
+    > Incorrect : 3 × 9 = 27 ≡ 5 mod 11, pas 1.
+```
+
+```quizdown
+### Quelle est la complexité de l'algorithme d'exponentiation rapide (fast exponentiation) ?
+
+> Elle dépend du nombre de bits de l'exposant, donc de log(n).
+
+1. [ ] O(n)
+    > Incorrect : ce serait la complexité d'une exponentiation naïve par multiplications successives.
+1. [ ] O(exp(log n))
+    > Incorrect : cette complexité correspond aux méthodes de factorisation, pas à l'exponentiation rapide.
+1. [x] O(log³ n)
+    > Correct : la représentation binaire de l'exposant permet ce gain de complexité.
+1. [ ] O(log n)
+    > Incorrect : c'est le nombre d'étapes, mais chaque étape implique une multiplication modulaire coûteuse, d'où le cube.
+```
+
+```quizdown
+### Un enseignant doit résoudre simultanément plusieurs congruences x ≡ a_i mod n_i avec des n_i premiers entre eux deux à deux. Quel outil du cours permet de trouver x efficacement ?
+
+> Ce théorème date du IIIe siècle et s'appuie sur l'algorithme de Gauss.
+
+1. [ ] Le petit théorème de Fermat
+    > Incorrect : ce théorème concerne les puissances modulo un nombre premier, pas des systèmes de congruences.
+1. [x] Le théorème des restes chinois
+    > Correct : il garantit une solution unique mod N = produit des n_i, calculable en O(log³ n).
+1. [ ] L'algorithme de Shor
+    > Incorrect : cet algorithme sert à factoriser sur un ordinateur quantique.
+1. [ ] La fonction Φ d'Euler
+    > Incorrect : Φ compte les éléments premiers avec n, elle ne résout pas des systèmes de congruences.
+```
+
+```quizdown
+### Remets dans l'ordre les étapes de génération des clés RSA.
+
+> Pense à ce qui doit être calculé avant de pouvoir choisir e, puis avant de pouvoir calculer d.
+
+1. Calculer d tel que ed ≡ 1 mod Φ(n)
+2. Choisir la taille du modulus n
+3. Générer p et q premiers puis calculer n = pq et Φ(n) = (p-1)(q-1)
+4. Choisir e tel que 1 < e < Φ(n) et pgcd(e, Φ(n)) = 1
+```
+
+```quizdown
+### Avec n = 33 (p = 3, q = 11) et e = 7, quel est le chiffré c du message m = 5 ?
+
+> Calcule 5^7 mod 33 en décomposant l'exposant, par exemple 5^4 puis 5^2 puis 5^1.
+
+1. [ ] 19
+    > Incorrect : recalcule 5^7 mod 33 pas à pas.
+1. [x] 14
+    > Correct : 5^7 mod 33 = 14 (et on vérifie que 14^3 mod 33 = 5 avec d = 3).
+1. [ ] 26
+    > Incorrect : ce résultat ne correspond pas à 5^7 mod 33.
+1. [ ] 8
+    > Incorrect : ce résultat ne correspond pas à 5^7 mod 33.
+```
+
+```quizdown
+### Pourquoi le chiffrement RSA est-il en pratique plus rapide que le déchiffrement ?
+
+> Compare la taille typique de e et celle de d.
+
+1. [ ] Parce que n est plus petit lors du chiffrement
+    > Incorrect : n est le même pour le chiffrement et le déchiffrement.
+1. [x] Parce que l'exposant e est choisi petit alors que d doit être grand pour la sécurité
+    > Correct : l'exponentiation rapide est plus coûteuse avec un grand exposant.
+1. [ ] Parce que le déchiffrement nécessite de refactoriser n
+    > Incorrect : la factorisation n'intervient pas dans le déchiffrement, seulement dans une attaque.
+1. [ ] Parce que le chiffrement n'utilise pas l'exponentiation modulaire
+    > Incorrect : chiffrement et déchiffrement utilisent tous deux l'exponentiation rapide.
+```
+
+```quizdown
+### Parmi les affirmations suivantes sur les attaques contre RSA, lesquelles sont correctes ?
+
+> Repense à l'attaque du message commun via le théorème des restes chinois et à la propriété multiplicative.
+
+- [x] Chiffrer le même message vers plusieurs destinataires avec un petit exposant e, sans randomisation, est risqué
+    > Correct : le théorème des restes chinois permet de reconstruire m^e puis d'en extraire la racine e-ième.
+- [ ] Un exposant e petit rend automatiquement d trop petit
+    > Incorrect : e et d sont choisis indépendamment ; c'est seulement d qui doit rester grand.
+- [x] La propriété multiplicative (m1 m2)^e ≡ c1 c2 mod n peut être exploitée dans des attaques comme les signatures aveugles
+    > Correct : cette propriété est explicitement citée comme source de failles.
+- [ ] Trouver d est plus facile que factoriser n
+    > Incorrect : le cours indique que ces deux problèmes nécessitent un effort équivalent.
+```
+
+```quizdown
+### Le problème RSAP a été prouvé strictement équivalent à FACTP dans le cas général.
+
+> Distingue le résultat de 2008 sur la résolution générique du problème RSA du cas général non prouvé.
+
+1. [ ] Vrai
+    > Faux : seule l'équivalence pour le cas générique a été démontrée (2008) ; l'équivalence stricte générale reste ouverte.
+1. [x] Faux
+    > Correct : contrairement à SQROOTP ≅ FACTP (Rabin), l'équivalence RSAP-FACTP n'est prouvée que pour l'attaque générique.
+```
+
+```quizdown
+### Un développeur chiffre le même message m vers trois destinataires avec le même exposant e = 3 et des modulus différents n1, n2, n3, sans randomiser m. Quelle conséquence décrit le mieux le cours ?
+
+> Pense au théorème des restes chinois appliqué aux trois ciphertexts.
+
+1. [ ] Aucun risque particulier tant que n1, n2, n3 sont grands
+    > Incorrect : la taille des modulus n'empêche pas cette attaque spécifique.
+1. [x] Un attaquant peut reconstruire m^3 par le théorème des restes chinois puis en extraire la racine cubique entière
+    > Correct : c'est exactement l'attaque décrite dans le cours pour ce scénario.
+1. [ ] Le déchiffrement devient impossible pour les trois destinataires
+    > Incorrect : les destinataires légitimes déchiffrent normalement ; c'est la confidentialité qui est compromise.
+1. [ ] Cela ne fonctionne que si e est très grand
+    > Incorrect : c'est justement parce que e = 3 est petit que m^e < n1 n2 n3, rendant l'attaque possible.
+```
+
+```quizdown
+### Dans le procédé d'ElGamal, un développeur réutilise accidentellement le même nombre aléatoire k pour chiffrer deux messages différents m1 et m2 destinés à la même clé publique. Quelle conséquence en découle ?
+
+> Compare les deux ciphertexts δ1 et δ2 obtenus avec le même k.
+
+1. [ ] Aucune conséquence, car a reste secret
+    > Incorrect : le cours montre explicitement qu'un plaintext peut être retrouvé à partir de l'autre.
+1. [x] Le rapport δ1/δ2 est égal à m1/m2, ce qui permet de retrouver un message à partir de l'autre
+    > Correct : c'est la conséquence directe de la réutilisation de k démontrée dans le cours.
+1. [ ] Le déchiffrement devient impossible
+    > Incorrect : le déchiffrement fonctionne toujours normalement, c'est la confidentialité qui est atteinte.
+1. [ ] La taille du ciphertext double une seconde fois
+    > Incorrect : ce doublement de taille existe systématiquement dans ElGamal, indépendamment de la réutilisation de k.
+```
+
+```quizdown
+### Par rapport au plaintext, quelle est la taille du ciphertext produit par ElGamal ?
+
+> Le ciphertext est constitué d'une paire (λ, δ).
+
+1. [ ] La même taille
+    > Incorrect : le ciphertext contient deux valeurs, λ et δ.
+1. [x] Le double
+    > Correct : c'est explicitement cité comme un inconvénient d'ElGamal.
+1. [ ] La moitié
+    > Incorrect : le ciphertext est plus grand, pas plus petit, que le plaintext.
+1. [ ] Cela dépend uniquement de la taille de p
+    > Incorrect : quel que soit p, le ciphertext contient systématiquement deux composantes.
+```
+
+```quizdown
+### Que contient la clé publique dans le procédé d'ElGamal classique ?
+
+> Trois éléments permettent au correspondant de chiffrer un message.
+
+- [x] Le nombre premier p
+    > Correct : p définit le groupe multiplicatif utilisé.
+- [x] Un générateur α de Z_p^*
+    > Correct : α permet de générer les valeurs λ et δ.
+- [x] La valeur α^a mod p
+    > Correct : c'est l'image publique du secret a.
+- [ ] L'exposant secret a
+    > Incorrect : a constitue la clé privée et ne doit jamais être publié.
+```
+
+```quizdown
+### Lors du déchiffrement de Rabin, A obtient 4 racines carrées possibles pour un même ciphertext. Comment le cours résout-il cette ambiguïté ?
+
+> Deux méthodes sont mentionnées, l'une reposant sur B, l'autre sur les données elles-mêmes.
+
+1. [ ] En recalculant systématiquement (p,q) à partir de n
+    > Incorrect : (p,q) constitue déjà la clé privée connue de A, ce n'est pas la source du problème.
+1. [x] Par une indication supplémentaire de B, ou par une analyse de redondance du plaintext
+    > Correct : ce sont les deux mécanismes cités par le cours pour lever l'ambiguïté.
+1. [ ] En choisissant le plus grand des quatre nombres
+    > Incorrect : rien dans le procédé ne justifie ce critère arbitraire.
+1. [ ] Ce n'est jamais possible, Rabin étant inutilisable en pratique
+    > Incorrect : le cours propose explicitement des solutions à ce problème.
+```
+
+```quizdown
+### Le procédé de Rabin est prouvé sûr contre toutes les attaques, y compris les attaques actives de type chosen ciphertext.
+
+> Relis attentivement la distinction entre sécurité prouvée contre les attaques passives et vulnérabilité aux attaques actives.
+
+1. [ ] Vrai
+    > Faux : Rabin est provably secure uniquement contre les attaques passives ; l'attaque chosen ciphertext peut le compromettre.
+1. [x] Faux
+    > Correct : le cours décrit explicitement une attaque active permettant de retrouver un facteur de n.
+```
+
+```quizdown
+### Dans l'attaque chosen ciphertext contre Rabin, un attaquant M envoie c = m² mod n et reçoit une racine m_x de A. Que peut faire M si m n'est pas égal à ±m_x mod n ?
+
+> Pense à ce que révèle le pgcd de deux racines carrées distinctes d'un même carré modulo n = pq.
+
+1. [ ] Rien, il doit recommencer indéfiniment
+    > Incorrect : dans ce cas précis (probabilité 0.5), une information exploitable est obtenue.
+1. [x] Calculer pgcd(m - m_x, n) pour obtenir un facteur de n
+    > Correct : c'est exactement le mécanisme décrit dans le cours pour casser Rabin par attaque active.
+1. [ ] Déduire directement la clé privée (p,q) sans calcul supplémentaire
+    > Incorrect : un calcul de pgcd reste nécessaire pour extraire un facteur.
+1. [ ] Résoudre le DLP associé à n
+    > Incorrect : Rabin repose sur SQROOTP, pas sur le logarithme discret.
+```
+
+```quizdown
+### Pourquoi la cryptographie à courbes elliptiques permet-elle d'utiliser des clés plus petites que RSA pour un niveau de sécurité comparable ?
+
+> Compare la complexité des meilleures attaques connues contre ECDLP et contre la factorisation.
+
+- [x] Les meilleures attaques connues contre ECDLP (Pollard-rho) sont pleinement exponentielles
+    > Correct : contrairement au Number Field Sieve, sous-exponentiel, utilisé contre RSA et le DLP classique.
+- [ ] Les courbes elliptiques remplacent le chiffrement asymétrique par du chiffrement symétrique
+    > Incorrect : EC-ElGamal reste un système asymétrique, structurellement proche d'ElGamal classique.
+- [x] Les calculs sur E_p sont structurellement plus complexes à inverser que dans Z_p ou GF(2^m)
+    > Correct : cette complexité accrue justifie l'usage de clés plus courtes.
+- [ ] Le problème ECDLP a été démontré mathématiquement insoluble
+    > Incorrect : il est seulement considéré difficile en pratique, jamais prouvé insoluble.
+```
+
+```quizdown
+### Sur une courbe elliptique E_p définie sur Z_p, connaissant deux points P et Q tels que Q = kP, que représente le problème ECDLP ?
+
+> Pense à l'équivalent du logarithme discret classique, transposé à l'addition sur une courbe.
+
+1. [ ] Trouver les coordonnées (x,y) du point P
+    > Incorrect : P est déjà connu ; le problème porte sur le scalaire k.
+1. [x] Retrouver le scalaire k à partir de P et Q
+    > Correct : c'est la définition du Elliptic Curve Discrete Logarithm Problem.
+1. [ ] Trouver l'équation de la courbe E
+    > Incorrect : l'équation de E est publique et connue de tous.
+1. [ ] Calculer le point à l'infini de E
+    > Incorrect : le point à l'infini est un élément neutre fixe, pas une inconnue à résoudre.
+```
+
+```quizdown
+### Remets dans l'ordre les étapes du chiffrement dans le procédé d'ElGamal sur courbes elliptiques.
+
+> Le nombre aléatoire k doit être généré avant de pouvoir calculer λ et δ.
+
+1. B calcule λ := kP0 et δ := kPa + mi, puis envoie c := (λ,δ)
+2. B transforme son plaintext en une série de points mi appartenant à Ep
+3. B obtient la clé publique authentique (Ep, P0, Pa) de A
+4. B génère un nombre aléatoire unique k
+```
+
+```quizdown
+### Quelle différence fondamentale distingue la base de sécurité de Rabin de celle de RSA ?
+
+> L'un des deux problèmes a été prouvé strictement équivalent à la factorisation, l'autre non.
+
+1. [ ] Rabin repose sur le logarithme discret, RSA sur la factorisation
+    > Incorrect : les deux systèmes reposent sur la difficulté de la factorisation.
+1. [x] SQROOTP (Rabin) est prouvé équivalent à FACTP, alors que RSAP (RSA) ne l'est que pour le cas générique
+    > Correct : c'est la distinction précise établie dans le cours.
+1. [ ] Rabin n'a aucun lien avec la factorisation
+    > Incorrect : Rabin repose justement sur l'impossibilité de calculer des racines carrées modulo un composite de factorisation inconnue.
+1. [ ] RSA est prouvé plus sûr que Rabin dans tous les cas
+    > Incorrect : Rabin bénéficie au contraire d'une preuve de sécurité plus forte contre les attaques passives.
+```
+
+```quizdown
+### Parmi les algorithmes de factorisation suivants, lesquels s'exécutent en temps sous-exponentiel ?
+
+> Distingue les méthodes historiques (temps exponentiel) des méthodes modernes basées sur des cribles.
+
+- [ ] Méthode Rho de Pollard
+    > Incorrect : cet algorithme s'exécute en temps exponentiel.
+- [x] Crible quadratique
+    > Correct : il appartient à la classe des méthodes sous-exponentielles.
+- [x] Crible général du corps de nombres (GNFS)
+    > Correct : c'est actuellement la méthode sous-exponentielle la plus efficace connue.
+- [ ] Division par essais
+    > Incorrect : cette méthode élémentaire s'exécute en temps exponentiel.
+```
+
+```quizdown
+### L'algorithme de Shor s'exécute en temps polynomial sur un ordinateur classique.
+
+> Rappelle-toi sur quel type de machine cet algorithme doit être exécuté.
+
+1. [ ] Vrai
+    > Faux : l'algorithme de Shor nécessite un ordinateur quantique pour atteindre cette complexité.
+1. [x] Faux
+    > Correct : sur un ordinateur classique, aucun algorithme de factorisation polynomial connu n'existe ; Shor exploite spécifiquement le calcul quantique.
+```
+
+```quizdown
+### Le cours précise que l'exposant de déchiffrement d de RSA doit impérativement être de grande taille. Que risque-t-on si d est choisi trop petit ?
+
+> Pense à ce qui rend un système cryptographique vulnérable lorsqu'un secret devient calculable rapidement.
+
+1. [ ] Le chiffrement devient impossible
+    > Incorrect : le chiffrement utilise e, pas d, et n'est pas affecté par la taille de d.
+1. [x] Le système devient vulnérable, un petit d facilitant sa découverte par un attaquant
+    > Correct : le cours indique explicitement que d doit être grand (au moins la moitié de la taille de n) pour garantir la sécurité.
+1. [ ] Le message chiffré double de taille
+    > Incorrect : ce doublement de taille est une caractéristique d'ElGamal, pas une conséquence d'un d trop petit dans RSA.
+1. [ ] n devient plus facile à factoriser directement
+    > Incorrect : c'est la découverte de d qui est facilitée, pas la factorisation de n en tant que telle.
+```
+
+```quizdown
+### Une application doit chiffrer des données sur des appareils mobiles à ressources très limitées, tout en gardant un niveau de sécurité élevé et des clés aussi courtes que possible. Quel système du cours est le plus adapté ?
+
+> Compare la taille des clés nécessaires pour un niveau de sécurité équivalent entre les systèmes vus en cours.
+
+1. [ ] RSA avec un modulus de 2048 bits
+    > Incorrect : RSA nécessite des clés bien plus grandes pour un niveau de sécurité équivalent.
+1. [ ] Rabin, car il est prouvé équivalent à la factorisation
+    > Incorrect : Rabin partage la même contrainte de taille de clé que RSA, basée sur la factorisation.
+1. [x] ElGamal sur courbes elliptiques
+    > Correct : le cours indique explicitement que les clés y sont plus petites grâce à la complexité accrue du ECDLP.
+1. [ ] ElGamal classique sur Z_p^*
+    > Incorrect : ElGamal classique nécessite des p de grande taille (≥1024 bits), comparable à RSA.
+```

@@ -1,0 +1,387 @@
+---
+execute:
+  enabled: false
+---
+
+## Quiz: Digital Signatures
+
+```quizdown
+### Which statement correctly distinguishes a signature with appendix from a signature with message recovery?
+
+> Think about what each type of verification needs as input.
+
+1. [ ] A signature with appendix is always shorter than a signature with recovery.
+1. [x] A signature with appendix requires the presence of the original message to be verified, unlike a signature with recovery, which allows the message to be retrieved from the signature itself.
+    > Correct: this is precisely the distinction made in the course between the two classes of schemes.
+1. [ ] A signature with recovery necessarily requires a hash function, unlike a signature with appendix.
+    > Incorrect: the opposite is true in the course's examples (RSA and Rabin, with recovery, do not necessarily use hashing; ElGamal, with appendix, does use one).
+1. [ ] Both classes offer exactly the same security guarantees and differ only in name.
+    > Incorrect: they differ in the nature of the verification map and in what it allows to be recovered.
+```
+
+```quizdown
+### In the formal framework of signatures with appendix, which statements about the maps $S_A$ and $V_A$ are correct?
+
+> Review the definition of the spaces $M_h$, $S$ and the relationship between $S_A$ and $V_A$.
+
+- [x] $S_A$ is an injective map from $M_h$ to $S$.
+    > Correct: this is the definition given in the course for the signature.
+- [x] $V_A$ requires A's public key, while $S_A$ requires A's private key.
+    > Correct: the course explicitly specifies this separation of keys used.
+- [ ] $V_A$ takes only $m_h$ as input and returns an element of $S$.
+    > Incorrect: $V_A$ takes the pair $(m_h, s)$ as input and returns a boolean (true/false).
+- [ ] It should be easy, even without A's private key, to find a pair $(m', s')$ such that $V_A(m'_h, s') = \text{true}$.
+    > Incorrect: it's the opposite, this operation must be computationally infeasible without A's private key.
+```
+
+```quizdown
+### Digital signatures are mostly based on symmetric cryptography, because the notion of a shared key is best suited to identifying an entity explicitly.
+
+> Think about what it means to "share" a key between multiple entities.
+
+1. [ ] True
+1. [x] False
+    > False: the course states that digital signatures are mostly based on asymmetric cryptography, precisely because a shared key does not allow an entity to be identified explicitly.
+```
+
+```quizdown
+### To which category of signatures do RSA and Rabin belong according to the course's classification?
+
+> Go back to the list of examples given for each of the two signature classes.
+
+1. [ ] Signatures with appendix, like ElGamal and DSS.
+1. [x] Signatures with message recovery.
+    > Correct: the course explicitly cites RSA and Rabin as examples of signatures with message recovery.
+1. [ ] Blind signatures.
+    > Incorrect: blind signatures form a distinct process, although derived from RSA.
+1. [ ] Arbitrated digital signatures.
+    > Incorrect: this category relies on symmetric cryptography and trusted third parties, not directly on RSA or Rabin.
+```
+
+```quizdown
+### Put the steps of RSA signature key generation back in order.
+
+> Think about what must be known before the signature exponent d can be computed.
+
+1. Compute the signature exponent d such that ed ≡ 1 mod Φ(n)
+2. Choose the size of the modulus n
+3. Compute n = pq and Φ(n) = (p-1)(q-1)
+4. Generate the verification exponent e coprime with Φ(n)
+5. Generate two large prime numbers p and q
+```
+
+```quizdown
+### When verifying an RSA signature with recovery, a student computes $m'_R = s^e \bmod n$ but omits checking that $m'_R \in M_R$ before reconstructing the message. What is the main risk of this omission?
+
+> Think back to the role of the redundancy function in rejecting invalid signatures.
+
+1. [ ] No risk: this check is merely a performance optimization, not a security measure.
+    > Incorrect: the course explicitly states that the signature must be rejected if $m'_R \notin M_R$, it is not optional.
+1. [x] An attacker could get an arbitrary value $s'$ accepted as a valid signature, since no check prevents reconstructing a message from a value that was never actually signed by A.
+    > Correct: checking membership in $M_R$ is precisely what prevents an adversary without the private key from forging accepted signatures.
+1. [ ] The reconstructed message would systematically be longer than the original message.
+    > Incorrect: this is not the consequence described in the course; it is a security issue, not a size issue.
+1. [ ] This only affects the speed of computing the signature, not its verification.
+    > Incorrect: the omission concerns the verification step itself, not signature generation.
+```
+
+```quizdown
+### Why is the choice of the redundancy function R described as essential for the security of a signature scheme with message recovery?
+
+> Think about what would happen if almost every value in $M_S$ belonged to $M_R$.
+
+1. [ ] Because R determines the size of the private key used to sign.
+    > Incorrect: the size of the private key depends on the choice of n, p and q, not on R.
+1. [x] Because if $M_R$ is too close in size to $M_S$, it becomes easy to arbitrarily choose a value in $M_S$ that belongs to $M_R$, which would allow a signature to be forged without knowing the private key.
+    > Correct: the course illustrates this point with the example where $M_R = M_S$ makes forgery trivial.
+1. [ ] Because R must remain secret for the scheme to be secure.
+    > Incorrect: the course states on the contrary that R must be public and invertible.
+1. [ ] Because R entirely replaces the role of the public key in verification.
+    > Incorrect: R and the public key play distinct and complementary roles.
+```
+
+```quizdown
+### If $M_R = M_S$ and both $R$ and $S_A$ are bijections, what direct consequence does this have for the security of the scheme?
+
+> Compare the size of M and S in this particular case.
+
+1. [ ] The scheme becomes more secure, because each message has a unique signature.
+    > Incorrect: uniqueness of the signature does not prevent forgery here.
+1. [x] M and S have the same size, which makes it trivial to forge messages bearing A's signature.
+    > Correct: this is exactly the course's remark on this particular case.
+1. [ ] Verification becomes impossible without A's private key.
+    > Incorrect: it's the opposite that is problematic, verification (and therefore forgery) becomes too easy.
+1. [ ] This has no particular effect as long as the hash function remains secure.
+    > Incorrect: this case doesn't even involve the use of a hash function; it is a structural flaw in R.
+```
+
+```quizdown
+### In a scheme with message recovery, which statements about the verification map $V_A$ are correct?
+
+> Go back to the definition of $V_A$ given in the formal framework with recovery.
+
+- [x] $V_A$ satisfies $V_A \circ S_A = \text{Identity}$ on $M_s$.
+    > Correct: this is the fundamental property that allows the message to be reconstructed.
+- [x] Verification is performed without A's private key.
+    > Correct: the course states this explicitly, unlike some generation operations.
+- [ ] $V_A$ takes the original message m as input and returns the signature s.
+    > Incorrect: it's the opposite, $V_A$ takes s as input and allows $m_R$ and then m to be recovered.
+- [ ] $V_A$ always requires a hash function to work.
+    > Incorrect: this formal framework does not introduce a hash function, unlike the variant with appendix.
+```
+
+```quizdown
+### An adversary, without knowing A's private key, manages to find a pair $(m', s')$ such that $V_A(m'_h, s') = \text{true}$. What does this situation reveal about the expected properties of the scheme?
+
+> Go back to the simple property regarding computational infeasibility in the formal framework with appendix.
+
+1. [ ] Nothing abnormal: this situation is expected and accepted by the scheme as long as m' is different from the original message.
+    > Incorrect: the course explicitly states that it must be infeasible to find such a pair without the private key.
+1. [x] The scheme violates the fundamental security property expected, since it should be computationally infeasible to produce such a pair without A's private key.
+    > Correct: this property is precisely what guarantees that only A can produce valid signatures.
+1. [ ] This simply means A reused the same public key for two different messages.
+    > Incorrect: reuse of the public key is not the issue here, it is the infeasibility-of-forgery property that is violated.
+1. [ ] This only proves that the hash function H used is poorly chosen.
+    > Incorrect: the problem concerns the $S_A$/$V_A$ map itself, not necessarily the choice of H.
+```
+
+```quizdown
+### Why is computing an RSA signature slower than verifying it?
+
+> Compare the typical size of the signature exponent d to that of the verification exponent e.
+
+1. [ ] Because signing requires generating new prime numbers p and q each time.
+    > Incorrect: p and q are generated only once when the key pair is created, not for every signature.
+1. [x] Because the size of the signature exponent d is comparable to that of Φ(n), while the verification exponent e can be chosen to be much smaller.
+    > Correct: this is exactly the course's remark on the size difference between d and e.
+1. [ ] Because verification does not use modular exponentiation, unlike signing.
+    > Incorrect: both operations rely on modular exponentiation, only the exponent size differs.
+1. [ ] Because signing requires a public key while verification does not.
+    > Incorrect: it's the opposite: signing uses the private key, verification uses the public key.
+```
+
+```quizdown
+### In the RSA variant with appendix, what is the role of the hash function H?
+
+> Think about what is actually signed, and what distinguishes this variant from the basic RSA scheme with a redundancy function.
+
+1. [ ] It entirely replaces the role of the signature exponent d.
+    > Incorrect: H and d play distinct roles; d remains essential for computing the signature.
+1. [x] It produces a fixed-size digest $m_h = H(m)$, which is signed instead of the full message, thus avoiding the direct application of a redundancy function to the entire message.
+    > Correct: this is what the course describes for the RSA-with-appendix version, where (m,s) is sent and B recomputes H(m) to verify.
+1. [ ] It is used only to compress the message to reduce bandwidth, with no link to security.
+    > Incorrect: its role is directly linked to signature generation and verification, not just compression.
+1. [ ] It allows B to fully reconstruct the message m from the signature s.
+    > Incorrect: with appendix, B already has direct access to m; it is not the signature that allows it to be reconstructed.
+```
+
+```quizdown
+### The security of the RSA signature process relies on a different mathematical problem than that of RSA encryption.
+
+> The course explicitly refers to the proof of the encryption process to justify why the signature works.
+
+1. [ ] True
+1. [x] False
+    > False: the course states that the proof of correctness of the signature is identical to that of the encryption process, and the summary table associates RSA with the same underlying problem (RSAP) for both uses.
+```
+
+```quizdown
+### Put the steps of Chaum's blind signature protocol back in order.
+
+> Think about what A must do before sending anything to B, and then what A does after receiving B's reply.
+
+1. A computes g(s') to obtain the unblinded signature on m
+2. A computes m' = f(m) using the blinding function
+3. B computes and returns s' = S_B(m')
+4. A sends m' to B for signature
+```
+
+```quizdown
+### Why can we say that a blind signature allows A to obtain a signature from B on a message that B has never seen?
+
+> Think back to what B actually receives: the message m or a transformed version of it?
+
+1. [ ] Because B signs the message m directly but never reads it, simply computing its signature without analyzing it.
+    > Incorrect: the key point is not that B doesn't read m, but that B never receives m in its original form.
+1. [x] Because B only receives and signs the blinded version $m' = f(m)$, and it is only A, by applying the unblinding function g, who obtains the signature corresponding to the actual message m.
+    > Correct: this is exactly the mechanism described in the course, exploiting the multiplicative property of RSA.
+1. [ ] Because A sends the message m in the clear but encrypted with B's public key, which B therefore cannot decrypt.
+    > Incorrect: the mechanism does not rely on encrypting the message but on the blinding/unblinding functions.
+1. [ ] Because B entirely delegates the computation of the signature to A, who has access to B's private key.
+    > Incorrect: B keeps its private key and performs the signature computation on m' itself.
+```
+
+```quizdown
+### In the Rabin signature process, the signature s is computed as a square root of $m_R$ modulo n. What does the course specify about this?
+
+> How many distinct square roots does a value have modulo a product of two large primes?
+
+1. [ ] There is only one possible square root, which makes the computation deterministic.
+    > Incorrect: the course states that there are 4 possible square roots.
+1. [x] There are 4 possible square roots modulo n, and A sends only one of them as the signature s.
+    > Correct: this is exactly what the course states about the Rabin signature.
+1. [ ] The number of square roots depends on the size of the message and not on n.
+    > Incorrect: this number follows from the structure of n = pq, not from the message size.
+1. [ ] A must send all 4 square roots to B for verification to work.
+    > Incorrect: only one of the 4 roots is sent as the signature.
+```
+
+```quizdown
+### What fundamental difference distinguishes RSA's private key from Rabin's?
+
+> Compare what each algorithm uses to perform the signing operation (exponentiation vs. square root).
+
+1. [ ] RSA's private key is (p,q), while Rabin's is the exponent d.
+    > Incorrect: it's the opposite: RSA uses the exponent d as the private key, Rabin uses (p,q) directly.
+1. [x] RSA's private key is the signature exponent d, while Rabin's private key is directly the pair of prime factors (p,q), used to compute modular square roots.
+    > Correct: this is the distinction made in the "Key Generation" sections for RSA and Rabin.
+1. [ ] RSA and Rabin use exactly the same private key, only the signature formula differs.
+    > Incorrect: the private keys themselves differ, not just the formula applied.
+1. [ ] Rabin's private key includes a generator α, unlike RSA's.
+    > Incorrect: the generator α appears in the ElGamal scheme, not in Rabin.
+```
+
+```quizdown
+### On which mathematical problem does the security of the ElGamal signature process rely?
+
+> Think about the nature of the number a, of α, and of y = α^a mod p.
+
+1. [ ] The problem of factoring large numbers (as in RSA).
+    > Incorrect: this problem corresponds to RSA and Rabin, not ElGamal.
+1. [x] The discrete logarithm problem (DLP).
+    > Correct: the course explicitly associates ElGamal with the discrete logarithm problem, notably in the summary table.
+1. [ ] The modular square root problem (SQROOTP).
+    > Incorrect: this problem corresponds to the Rabin process.
+1. [ ] No particular mathematical problem is required, security comes solely from the length of p.
+    > Incorrect: the length of p alone is not enough, the hardness of DLP is essential.
+```
+
+```quizdown
+### In generating an ElGamal signature, why is the condition $\text{gcd}(k, p-1) = 1$ necessary?
+
+> Think about which operation on k is essential right after it is randomly drawn.
+
+1. [ ] Because k must be a prime number for r = α^k mod p to be valid.
+    > Incorrect: nothing requires k to be prime, only that it be coprime with (p-1).
+1. [x] Because computing the signature requires $k^{-1} \bmod (p-1)$, which only exists if k and (p-1) are coprime.
+    > Correct: without this condition, the modular inverse of k used to compute s could not be computed.
+1. [ ] Because this condition guarantees that the private key a remains secret.
+    > Incorrect: the secrecy of a relies on the hardness of the discrete logarithm, not on this condition on k.
+1. [ ] Because it speeds up the computation of α^k mod p.
+    > Incorrect: this condition concerns the invertibility of k, not the speed of exponentiation.
+```
+
+```quizdown
+### What do r and s respectively represent in an ElGamal signature (r,s)?
+
+> Go back to the formula for computing s, which combines k, m_h, a and r.
+
+- [x] r is computed from a random number k, independently of the message: $r = \alpha^k \bmod p$.
+    > Correct: r depends only on k and not on the message digest.
+- [x] s combines the message digest $m_h$, the private key a, r, and the inverse of k modulo (p-1).
+    > Correct: this is exactly the formula $s = k^{-1}(m_h - ar) \bmod (p-1)$ given in the course.
+- [ ] r and s are both independent of the message m.
+    > Incorrect: s explicitly depends on $m_h = H(m)$, unlike r.
+- [ ] s is computed solely from A's public key, without using its private key.
+    > Incorrect: computing s directly uses a, A's private key.
+```
+
+```quizdown
+### The ElGamal scheme, as presented in the course, natively allows message recovery from the signature.
+
+> Think back to which variant of the scheme is mentioned as allowing recovery.
+
+1. [ ] True
+1. [x] False
+    > False: the course specifies that ElGamal, by construction, works only with appendix; it is the Nyberg-Rueppel scheme, a derived variant, that introduces message recovery.
+```
+
+```quizdown
+### How is the Digital Signature Algorithm (DSA), a NIST-approved standard, constructed according to the course?
+
+> Think back to the explicit link made between DSA, ElGamal, and a particular hash function.
+
+1. [ ] DSA is a completely independent algorithm from ElGamal, based on factorization.
+    > Incorrect: the course states, on the contrary, that DSA is a direct derivative of the ElGamal scheme.
+1. [x] DSA is a direct derivative of the ElGamal scheme, using the SHA-1 hash function.
+    > Correct: this is exactly what the course states about the DSA standard.
+1. [ ] DSA replaces the public key with a symmetric key shared between signer and verifier.
+    > Incorrect: DSA remains a public-key scheme, like the ElGamal scheme it derives from.
+1. [ ] DSA is identical to the RSA scheme, only the name changes.
+    > Incorrect: DSA is associated with the discrete logarithm problem, not factorization as in RSA.
+```
+
+```quizdown
+### Bitcoin and Ethereum use the ECDSA algorithm to authenticate their transactions. From which signature scheme is ECDSA derived, and on which problem does its security rely?
+
+> Think back to the full name of ECDSA and what the acronym ECDLP means.
+
+1. [ ] It is derived from RSA and relies on the difficulty of factorization.
+    > Incorrect: ECDSA is not derived from RSA according to the course.
+1. [x] It is derived from the ElGamal signature scheme, applied on elliptic curves, and its security relies on ECDLP.
+    > Correct: this is exactly what the course states about the use of ECDSA by Bitcoin and Ethereum.
+1. [ ] It is derived from Rabin and relies on computing modular square roots on elliptic curves.
+    > Incorrect: ECDSA is presented as a derivative of ElGamal, not of Rabin.
+1. [ ] It does not rely on any hard mathematical problem, its security comes solely from the secrecy of the protocol.
+    > Incorrect: its security explicitly relies on the hardness of ECDLP.
+```
+
+```quizdown
+### According to the course's summary table, which statements are correct?
+
+> Think back to the "Message Recovery" column and the "Underlying Problem" column for each scheme listed.
+
+- [x] RSA and Chaum's scheme (blind signatures) share the same underlying problem, RSAP.
+    > Correct: the table associates RSAP with both RSA (classic signatures) and Chaum (blind signatures).
+- [x] ElGamal and DSS do not allow message recovery and both rely on DLP.
+    > Correct: the table shows "no" for Message Recovery and "DLP" for both schemes.
+- [ ] One-time schemes like Lamport systematically rely on the discrete logarithm problem.
+    > Incorrect: the table states that their security depends on the one-way function (OWF) used, not specifically on DLP.
+- [ ] Rabin does not allow message recovery, unlike RSA.
+    > Incorrect: the table shows "yes" for Message Recovery for both Rabin and RSA.
+```
+
+```quizdown
+### What is the fundamental difference between selective forgery and existential forgery?
+
+> Think back to who chooses the message involved in the forgery: the adversary or not.
+
+1. [ ] There is no difference, these are two names for the same breaking criterion.
+    > Incorrect: the course clearly distinguishes these two criteria among the ways to "break" a scheme.
+1. [x] In selective forgery, the adversary manages to forge a valid signature for a message fixed in advance, whereas in existential forgery, the adversary only manages to forge a signature for at least one message, without controlling it.
+    > Correct: this is exactly the distinction given in the course between these two success criteria for the adversary.
+1. [ ] Selective forgery requires computing the signer's private key, unlike existential forgery.
+    > Incorrect: computing the private key corresponds to the "total break" criterion, a third criterion distinct from the two forgeries.
+1. [ ] Existential forgery is strictly harder to achieve than selective forgery.
+    > Incorrect: the opposite is generally true: controlling the message makes the attack more constrained, so selective forgery is more demanding for the adversary.
+```
+
+```quizdown
+### Among the following types of attacks against a digital signature scheme, which assume that the adversary has access to signatures corresponding to messages, and not solely to the signer's public key?
+
+> Go back to the distinction made between "key-only" attacks and "message-based" attacks.
+
+- [x] Known-messages attack
+    > Correct: this attack assumes the adversary has signatures of known messages.
+- [x] Chosen-messages attack
+    > Correct: this attack assumes the adversary was able to choose messages and obtain their signatures.
+- [x] Adaptive chosen-messages attack
+    > Correct: this attack goes further by allowing the adversary to choose its messages adaptively, based on signatures already obtained.
+- [ ] Key-only attack
+    > Incorrect: this attack assumes, on the contrary, that the adversary knows only the signer's public key, without access to signatures.
+```
+
+```quizdown
+### An adversary knowing only the signer's public key nevertheless manages to compute its private key. What type of attack did it carry out, and what success criterion did it achieve?
+
+> Combine the type of access the adversary has with the severity level of the break achieved.
+
+1. [ ] A chosen-messages attack resulting in an existential forgery.
+    > Incorrect: the adversary used only the public key, not signatures obtained on chosen messages.
+1. [x] A key-only attack resulting in a total break, the most severe breaking criterion for a digital signature scheme.
+    > Correct: the adversary had access only to the public key (key-only attack) and succeeded in computing the private key, which corresponds to a total break.
+1. [ ] An adaptive chosen-messages attack resulting in a selective forgery.
+    > Incorrect: no signature of a chosen message was used in this scenario, only the public key.
+1. [ ] No criterion from the course matches this situation, since computing the private key is not considered breaking the scheme.
+    > Incorrect: computing the private key is precisely the example given in the course for the total break criterion.
+```

@@ -1,0 +1,508 @@
+---
+execute:
+  enabled: false
+---
+
+# Quiz — Authentication
+
+## Data Origin Authentication
+
+```quizdown
+### Among the four data-origin authentication protocols presented in the course, which is the only one to additionally offer non-repudiation of origin?
+
+> Compare the mechanisms used: MAC, symmetric encryption, or another cryptographic tool.
+
+1. [ ] $X,\ \mathrm{MAC}_k(X)$
+    > Incorrect: a MAC proves the origin to $B$, but $B$ could just as well have generated this MAC itself, since it knows $k$.
+1. [ ] $X,\ E_k(\mathrm{MDC}(X))$
+    > Incorrect: same problem, the symmetric key $k$ is known to both parties, so nothing proves to a third party that $A$ produced the message.
+1. [x] $X,\ \mathrm{Sig}_{priv\text{-}A}(\mathrm{MDC}(X))$
+    > Correct: only $A$ possesses `priv-A`. B (or a third party) can verify the signature with `pub-A`, which prevents $A$ from denying being the author of the message.
+1. [ ] $E_k(X,\mathrm{MDC}(X))$
+    > Incorrect: this variant adds the confidentiality of $X$, but still uses a shared symmetric key.
+```
+
+```quizdown
+### Why do the four simple data-origin authentication protocols (MAC, MDC + encryption, signature, etc.) remain vulnerable to replay attacks?
+
+> Look at what these protocols never check about the received message.
+
+1. [ ] Because the hash function used is not collision-resistant
+    > Incorrect: the course does not call into question the cryptographic security of the primitives themselves.
+1. [x] Because they contain no information about the uniqueness or freshness (*timeliness*) of the message
+    > Correct: nothing in $X, \mathrm{MAC}_k(X)$ (or variants) prevents an attacker from sending back a legitimate message already observed.
+1. [ ] Because the key $k$ is never renewed
+    > Incorrect: key renewal is not the mechanism referred to by the course for this problem.
+1. [ ] Because $X$ is never encrypted in solution 1
+    > Incorrect: this is true for solution 1, but solutions 3 and 4 remain vulnerable to replay even while encrypting or signing.
+```
+
+## Fundamental Concepts of Entity Authentication
+
+```quizdown
+### Which elements belong to the three basic categories used to prove an identity?
+
+> Think of the three families: what one knows, what one possesses, what one is.
+
+- [x] A password
+    > Correct: belongs to *something known*.
+- [x] A smart card
+    > Correct: belongs to *something possessed*.
+- [ ] The username (userid)
+    > Incorrect: the userid identifies the claimed identity, it is not corroborating evidence.
+- [x] A fingerprint
+    > Correct: belongs to *something inherent*.
+```
+
+```quizdown
+### Which statement correctly describes the difference between weak authentication and strong authentication?
+
+> Focus on what actually transits between $A$ and $B$.
+
+1. [ ] Strong authentication always uses asymmetric keys, unlike weak authentication
+    > Incorrect: strong authentication can be symmetric or asymmetric.
+1. [x] In weak authentication the secret is revealed, in strong authentication only a proof of possession of the secret is provided
+    > Correct: this is the central distinction given by the course (password transmitted vs. proof of possession).
+1. [ ] Weak authentication is slower than strong authentication
+    > Incorrect: speed is not the distinguishing criterion used in the course.
+1. [ ] Strong authentication can only be used in smart cards
+    > Incorrect: smart cards are an example of implementation, not a requirement.
+```
+
+```quizdown
+### Is a ZKIP-type protocol always a strong authentication protocol?
+
+> Reread the definition of ZKIP in relation to strong authentication.
+
+1. [x] True
+    > True: ZKIPs are defined in the course as strong authentication protocols that additionally have the property of revealing no information about the secret.
+1. [ ] False
+    > False: a ZKIP is explicitly described as a particular (reinforced) case of strong authentication.
+```
+
+```quizdown
+### In the course's terminology, which term designates the entity that must prove its identity?
+
+> This is the entity that "claims" to be someone.
+
+1. [ ] Verifier
+    > Incorrect: the *verifier* is the entity that verifies the identity (the system $B$).
+1. [x] Claimant
+    > Correct: the *claimant* is the user $A$, who proves its identity.
+1. [ ] Witness
+    > Incorrect: the *witness* is an element of a ZKIP exchange, not an entity role.
+1. [ ] Prover trusted third party
+    > Incorrect: this term does not correspond to any role defined in the course.
+```
+
+## Generic Attacks and Properties of Password Systems
+
+```quizdown
+### An authentication system stores the hash H(p) of passwords, and it is precisely this value H(p) that the client sends to the server to authenticate. What consequence does the course draw from this?
+
+> Compare this situation with the classic UNIX case where it is p (and not H(p)) that transits.
+
+1. [ ] The system is totally secure because passwords are never stored in the clear
+    > Incorrect: hashing at storage time does not protect if it is the hash itself that serves as proof of authentication.
+1. [x] H(p) is plaintext-equivalent to p: an attacker who obtains H(p) gets the same access as if they knew p
+    > Correct: this is exactly the definition of plaintext-equivalence given in the course, illustrated by this case.
+1. [ ] The system is protected against offline dictionary attacks
+    > Incorrect: on the contrary, if the database of H(p) values leaks, it remains directly exploitable as proof of authentication.
+1. [ ] This mechanism prevents any replay attack
+    > Incorrect: the course makes no link between plaintext-equivalence and protection against replay.
+```
+
+```quizdown
+### An attacker passively observes the following exchange on the network: $A\to B: A$ ; $B\to A: R$ ; $A\to B: E_p(R)$. What type of attack can they mount from the pair $(R, E_p(R))$?
+
+> They cannot directly replay $E_p(R)$ because $R$ changes each time. What can they do offline?
+
+1. [ ] A direct replay attack, since $R$ is reusable
+    > Incorrect: $R$ is a random challenge meant to change with each session, simply replaying $E_p(R)$ will fail.
+1. [x] An offline dictionary attack, testing candidate passwords until finding the one that produces $E_p(R)$
+    > Correct: the course explicitly states that this pair allows an offline dictionary attack to be mounted.
+1. [ ] An active man-in-the-middle attack
+    > Incorrect: the attacker here is purely passive (mere observation), they neither intercept nor modify messages in real time.
+1. [ ] A graph isomorphism attack
+    > Incorrect: this technique concerns ZKIPs, unrelated to this scenario.
+```
+
+```quizdown
+### Why are online dictionary attacks generally less effective than offline attacks?
+
+> Think about what limits the number of possible attempts.
+
+1. [ ] Because user passwords are more complex online
+    > Incorrect: password complexity does not change depending on the attack mode.
+1. [x] Because systems limit the number of unsuccessful authentication attempts
+    > Correct: this is the reason explicitly given in the course.
+1. [ ] Because passwords are always salted online
+    > Incorrect: salting is a storage protection, not specifically related to whether the attack is online or offline.
+1. [ ] Because network latency prevents any computation
+    > Incorrect: no such notion is mentioned in the course.
+```
+
+## Weak Authentication
+
+```quizdown
+### What is the most serious problem associated with fixed-password systems, according to the course?
+
+> Look for the phrasing used to describe this risk in one sentence.
+
+1. [ ] The password must be changed too often
+    > Incorrect: this is not an identified problem for fixed passwords.
+1. [x] The password can be replayed after being intercepted on an unprotected network
+    > Correct: this is explicitly designated as the most serious problem with fixed passwords.
+1. [ ] The password is incompatible with salting
+    > Incorrect: salting is precisely one of the protection techniques proposed for fixed passwords.
+1. [ ] The password can never be stored in hashed form
+    > Incorrect: hashed storage is one of the two storage techniques described.
+```
+
+```quizdown
+### In the Lamport scheme (S/Key), B stores A's secret w in the clear in its database.
+
+> What exactly does B store after initialization: $w$ itself or a derived value?
+
+1. [ ] True
+    > False: B never knows $w$. It only stores $w_{stored} = w_t = H^t(w)$, a value derived via a one-way function.
+1. [x] False
+    > Correct: the secret $w$ is never transmitted nor stored by $B$; only one iteration of $H$ applied to $w$ circulates and is stored.
+```
+
+```quizdown
+### Put the steps of the Lamport scheme (S/Key) in chronological order, from initialization through to the first identification.
+
+1. B tests whether $H(w_n) = w_{stored}$ and, if so, updates $n := n-1$ and $w_{stored} := w_n$
+2. A chooses a secret $w$ and a constant $t$ (~1000 iterations)
+3. A sends $w_t = H^t(w)$ to B, who stores it as $w_{stored}$
+4. During the first identification, A sends $w_{t-1} = H^{t-1}(w)$ to B
+```
+
+```quizdown
+### A SecurID-type hardware token generates a new code every 30 to 60 seconds from an embedded secret key. According to the course, what attack does it nevertheless remain exposed to?
+
+> The code changes periodically, but remains valid for a short period of time.
+
+1. [ ] An offline dictionary attack on the displayed code
+    > Incorrect: the code changes too quickly for a dictionary attack to be relevant here.
+1. [x] A pre-play attack, but limited to the 30-to-60-second window before the code changes
+    > Correct: the course explicitly states that this device remains exposed to the pre-play attack, with an exploitation window limited to the refresh period.
+1. [ ] A reflection attack
+    > Incorrect: this attack concerns bilateral protocols with a shared symmetric key, not hardware generators.
+1. [ ] A graph isomorphism attack
+    > Incorrect: unrelated to this mechanism.
+```
+
+## Strong Authentication — Symmetric Solutions
+
+```quizdown
+### In the unilateral protocol $A\to B: A$ ; $B\to A: R$ ; $A\to B: E_{k_{AB}}(R)$, what role does the random number R play compared to authentication by simple password?
+
+> Compare with the replay attack that worked against a fixed password.
+
+1. [ ] It encrypts the channel for the entire session
+    > Incorrect: R is only used for the identification step, not for session encryption.
+1. [x] It prevents an attacker from replaying a response observed during a previous session, since R changes each time
+    > Correct: this is precisely the improvement highlighted by the course compared to the fixed password.
+1. [ ] It replaces the need for the shared key $k_{AB}$
+    > Incorrect: the key $k_{AB}$ remains indispensable for producing $E_{k_{AB}}(R)$.
+1. [ ] It is used to generate A's digital signature
+    > Incorrect: this symmetric protocol uses no signature.
+```
+
+```quizdown
+### In the naive bilateral protocol $A\to B: A,R_2$ ; $B\to A: R_1,E_{k_{AB}}(R_2)$ ; $A\to B: E_{k_{AB}}(R_1)$, an attacker C manages to authenticate to B as A without ever knowing $k_{AB}$. How does he proceed?
+
+> He opens a second instance of the protocol, reusing a value received in the first.
+
+1. [ ] He brute-forces $k_{AB}$ during the exchange
+    > Incorrect: this would contradict the statement, which specifies that C never knows the key.
+1. [x] He opens a second instance of the protocol with B, using as $R_2$ the $R_1$ received in the first instance, thereby obtaining $E_{k_{AB}}(R_1)$ without computing it himself
+    > Correct: this is exactly the reflection attack described in the course, where C gets B itself to encrypt the value he needs.
+1. [ ] He intercepts the message and modifies it in transit
+    > Incorrect: he does not need to modify the messages, only to orchestrate two parallel instances.
+1. [ ] He exploits a weakness in the hash function used
+    > Incorrect: no hash function is involved in this protocol, only symmetric encryption.
+```
+
+```quizdown
+### What modification transforms the naive bilateral protocol into the robust solution $A\to B: A,R_2$ ; $B\to A: E_{k_{AB}}(R_1,R_2,A)$ ; $A\to B: E_{k_{AB}}(R_2,R_1)$?
+
+> Look for what was added inside the encrypted part.
+
+- [x] The identity of the recipient entity (A or B) is included in the encrypted part of the message
+    > Correct: this prevents an encrypted response for one target from being reused to impersonate another target.
+- [ ] The key $k_{AB}$ is renewed with every message
+    > Incorrect: the key remains the same throughout the protocol, this is not the fix mechanism used.
+- [x] The challenges themselves ($R_1$ and $R_2$) are now included together in the encrypted parts
+    > Correct: this additionally protects against the chosen-plaintext attacks raised in the previous version.
+- [ ] The protocol becomes stateless by using a timestamp
+    > Incorrect: this timestamp variant is a different solution (unilateral v2), not the fix for the reflection attack.
+```
+
+```quizdown
+### An engineer replaces $E_{k_{AB}}(R)$ with a MAC $H_{k_{AB}}(R)$ in the unilateral protocol with a shared symmetric key. According to the course, what is the benefit of this change?
+
+> The desired outcome is identical (proving knowledge of the key), but the computation is different.
+
+1. [ ] It makes the protocol resistant to reflection attacks
+    > Incorrect: protection against the reflection attack relies on including the recipient's identity, not on the choice between encryption and MAC.
+1. [x] It speeds up identification, while equivalently proving knowledge of the shared key
+    > Correct: the course states that an MDC/MAC can replace encryption to speed up identification.
+1. [ ] It turns the protocol into an asymmetric solution
+    > Incorrect: the key $k_{AB}$ remains symmetric, only the cryptographic tool used changes.
+1. [ ] It eliminates the need for a random challenge R
+    > Incorrect: R remains indispensable to prevent replay, whatever tool is used to protect it.
+```
+
+## Strong Authentication — Asymmetric Solutions
+
+```quizdown
+### In the naive unilateral protocol $A\to B: A$ ; $B\to A: E_{pub\text{-}A}(R)$ ; $A\to B: R$, what major attack can B mount against A?
+
+> B has the power to choose what it has encrypted with its own public key.
+
+1. [ ] A reflection attack
+    > Incorrect: this attack concerns bilateral symmetric protocols with crossed challenges, not this protocol.
+1. [x] A chosen-ciphertext attack: B can have A decrypt any ciphertext of its choosing
+    > Correct: this is precisely the risk highlighted by the course for this naive version.
+1. [ ] An offline dictionary attack on A's private key
+    > Incorrect: nothing in this protocol exposes the private key to such an attack.
+1. [ ] A graph isomorphism attack
+    > Incorrect: unrelated to this classic asymmetric protocol.
+```
+
+```quizdown
+### In the Needham-Schroeder protocol $(1)\ A\to B: E_{pub\text{-}B}(r_1,A)$ ; $(2)\ B\to A: E_{pub\text{-}A}(r_1,r_2)$ ; $(3)\ A\to B: r_2$, why is identity A included in message (1)?
+
+> Compare with the robust asymmetric unilateral protocol seen previously, where B itself inserts its identity to protect itself.
+
+1. [ ] To allow B to retrieve A's public key
+    > Incorrect: B must already know A's authentic public key before even receiving this message.
+1. [x] To prevent B from mounting a chosen-ciphertext attack by reusing this ciphertext in another context
+    > Correct: this is exactly the justification given in the course for this structural choice.
+1. [ ] To guarantee the confidentiality of $r_1$
+    > Incorrect: $r_1$ is already protected by encryption with `pub-B`; adding A serves the structure/redundancy, not confidentiality.
+1. [ ] To allow A to verify B's identity
+    > Incorrect: this is unrelated to A verifying B.
+```
+
+```quizdown
+### Which statements are correct about the robust unilateral asymmetric solution $A\to B: A$ ; $B\to A: H(R), B, E_{pub\text{-}A}(B,R)$?
+
+> Think back to what A checks before sending R back in the clear.
+
+- [x] A suspends the protocol if the decrypted identity does not match B or if the hash of R does not match
+    > Correct: this is the explicit check described in the course before the final sending of R.
+- [x] A dual protocol can be built by using A's signature with priv-A instead of encryption with pub-A
+    > Correct: the course mentions this variant, with the same precautions regarding structure.
+- [ ] This protocol totally eliminates the need for an authentic public key of A
+    > Incorrect: B must still know an authentic public key of A in order to encrypt the message correctly.
+- [ ] H(R) is used to encrypt R before sending it to A
+    > Incorrect: H(R) is a simple witness allowing A to verify that the decrypted R matches, it is not an encryption of R.
+```
+
+## Zero-Knowledge Proofs
+
+```quizdown
+### An interactive proof satisfies completeness and soundness, but B learns partial information about A's secret during the exchange. Is this a ZKIP?
+
+> Reread the precise definition of a ZKIP compared to a simple proof of knowledge.
+
+1. [ ] True, as soon as both the completeness and soundness properties are satisfied
+    > False: these two properties define a proof of knowledge, not yet a ZKIP.
+1. [x] False, a ZKIP additionally requires that no information about the secret be revealed
+    > Correct: the zero-knowledge property is an additional requirement, distinct from completeness and soundness.
+```
+
+```quizdown
+### What is the generic three-step structure of a ZKIP exchange?
+
+> Think of the cave example: A goes in, B chooses, A obeys.
+
+1. [ ] Challenge, witness, response
+    > Incorrect: the correct order places the witness first, before any challenge.
+1. [x] Witness, challenge, response
+    > Correct: A first sends a commitment (witness), B then chooses a challenge, then A responds using the secret.
+1. [ ] Response, witness, challenge
+    > Incorrect: the response can logically only come after the challenge.
+1. [ ] Witness, response, challenge
+    > Incorrect: the challenge must precede the response, since the response depends on the challenge chosen by B.
+```
+
+```quizdown
+### Put the generic full course of a ZKIP protocol in order, from the initial commitment to B's final decision.
+
+1. A sends a witness, a commitment to a class of questions
+2. B randomly chooses a challenge within this class and sends it to A
+3. A computes and sends a response using its secret
+4. B verifies the response and repeats the exchange if necessary to reduce the probability of cheating
+```
+
+```quizdown
+### In the intuitive cave example (A knows the secret passage between y and z), why is the protocol repeated n times rather than just once?
+
+> Think about the probability that an impostor guesses the challenge correctly a single time.
+
+1. [ ] Because a single execution does not allow B to verify A's identity
+    > Incorrect: a single execution already provides a partial proof, but with a non-negligible probability of deception.
+1. [x] Because an impostor who does not know the secret has a one-in-two chance of guessing correctly at each iteration; repeating n times reduces this probability to $2^{-n}$
+    > Correct: this is exactly the reasoning given in the course.
+1. [ ] Because the secret changes with each iteration
+    > Incorrect: the secret (the passage between y and z) never changes during the repetitions.
+1. [ ] Because B must verify n different signatures
+    > Incorrect: no digital signature is involved in this example.
+```
+
+```quizdown
+### In the ZKIP based on graph isomorphism, B sends challenge $i=1$ to A. What must A then compute to respond correctly, given that it built $H$ via a random permutation $\delta$ such that $\delta: G_2 \to H$?
+
+> A's secret is the permutation $\pi$ such that $G_2 = \pi(G_1)$.
+
+1. [ ] $\lambda := \delta$
+    > Incorrect: this answer corresponds to the case where the challenge is $i=2$, not $i=1$.
+1. [x] $\lambda := \delta \circ \pi$
+    > Correct: to prove that $H$ is also isomorphic to $G_1$, A must compose $\delta$ with the secret $\pi$ that links $G_1$ to $G_2$.
+1. [ ] $\lambda := \pi^{-1}$
+    > Incorrect: this value alone does not give a permutation from $G_1$ to $H$.
+1. [ ] $\lambda := \pi \circ \pi$
+    > Incorrect: this combination does not correspond to any step of the described protocol.
+```
+
+```quizdown
+### Why does the graph isomorphism paradigm remain relatively marginal in real ZKIP implementations, despite its theoretical validity?
+
+> The course mentions a very concrete limitation, not a security flaw.
+
+1. [ ] Because it is not zero-knowledge
+    > Incorrect: the course explicitly verifies the three properties (completeness, soundness, zero-knowledge) for this protocol.
+1. [x] For implementation efficiency issues
+    > Correct: this is the reason given as such in the course.
+1. [ ] Because no sufficiently large graph exists in practice
+    > Incorrect: nothing of the sort is mentioned; the course instead refers to graphs with about 1000 vertices.
+1. [ ] Because the permutation $\pi$ can be found in polynomial time
+    > Incorrect: it is exactly the opposite: no known polynomial algorithm can determine whether two large graphs are isomorphic.
+```
+
+```quizdown
+### In the Fiat-Shamir protocol, A has published $v = s^2 \bmod n$ as its public key. During one run, B sends the challenge $e=0$. What must A compute and send?
+
+> Go back to the general formula $y = r \cdot s^e \bmod n$ and apply $e=0$.
+
+1. [ ] $y = r \cdot s \bmod n$
+    > Incorrect: this answer corresponds to the case $e=1$, not $e=0$.
+1. [x] $y = r \bmod n$
+    > Correct: when $e=0$, $s^e = 1$, so $y = r \bmod n$, which reveals nothing about $s$.
+1. [ ] $y = v \bmod n$
+    > Incorrect: $v$ is A's public key, it does not directly enter into the computation of the response.
+1. [ ] $y = s^2 \bmod n$
+    > Incorrect: that would amount to sending back $v$ itself, which is not part of the protocol.
+```
+
+```quizdown
+### Why does Fiat-Shamir verification fail if an impostor tries to answer challenge $e=0$ after cheating on $x = r^2/v \bmod n$ to prepare for challenge $e=1$?
+
+> Think about what the impostor would have to compute in this case, and how difficult that operation is.
+
+1. [ ] Because he would need to know the factorization of n, which is public
+    > Incorrect: the factorization of n (p and q) remains secret, kept by the trusted third party T, not public.
+1. [x] Because he would have to compute a square root of x modulo n, a problem known to be hard when the factorization of n is unknown (SQROOTP)
+    > Correct: this is exactly the soundness argument given in the course.
+1. [ ] Because challenge e=0 is never used in practice
+    > Incorrect: e=0 is an integral part of the set of possible challenges {0,1}.
+1. [ ] Because r must then be communicated to B in the clear
+    > Incorrect: r is never transmitted in the clear independently of the computation of y, regardless of the challenge.
+```
+
+```quizdown
+### Which protocols among the common ZKIP implementations sometimes sacrifice the zero-knowledge property to gain efficiency?
+
+> The course explicitly names one of the three common protocols on this point.
+
+- [ ] Feige-Fiat-Shamir (FFS)
+    > Incorrect: this protocol retains the properties of the basic Fiat-Shamir, only the number of witnesses/challenges changes.
+- [ ] Guillou-Quisquater (GQ)
+    > Incorrect: this protocol widens the domain of challenges but does not sacrifice the zero-knowledge property according to the course.
+- [x] Schnorr
+    > Correct: the course explicitly states that the zero-knowledge property is sometimes sacrificed in the case of Schnorr, in favor of efficiency (only 3 exchanges).
+- [x] No ZKIP protocol can guarantee both soundness and efficiency at the same time
+    > Incorrect: this general statement is false and does not correspond to anything in the course; only the Schnorr option is correct for this question.
+```
+
+## Mafia Attack and Synthesis
+
+```quizdown
+### A perfect zero-knowledge ZKIP between A and an accomplice C (relayed in real time to an honest verifier B by another accomplice D) can allow D to successfully authenticate as A to B. Why does the zero-knowledge property of the protocol not prevent this attack?
+
+> The ZKIP proves knowledge of a secret at a given moment, not the physical identity of the party on the other end.
+
+1. [ ] Because the ZKIP protocol used is not computationally secure
+    > Incorrect: the attack works even with a perfect ZKIP, the flaw is not cryptographic.
+1. [x] Because the protocol authenticates knowledge of the secret at the time of the exchange, but guarantees nothing about who is actually responding in real time behind a relay
+    > Correct: this is exactly the analysis of the Mafia attack given in the course; A does indeed respond to a genuine challenge from B, simply relayed via C and D.
+1. [ ] Because A mistakenly revealed its secret s to C
+    > Incorrect: in the Mafia attack, A never reveals its secret, it simply responds to a relayed challenge.
+1. [ ] Because B did not verify A's signature
+    > Incorrect: a ZKIP does not use a classic digital signature in its proof mechanism.
+```
+
+```quizdown
+### What protections does the course propose against the Mafia attack (collusion with real-time relay)?
+
+> The course proposes two types of countermeasures, one physical and one temporal.
+
+- [x] Carrying out identifications inside a Faraday cage
+    > Correct: this prevents the radio relay of messages between accomplices.
+- [x] Using strong synchronization algorithms to avoid additional exchanges
+    > Correct: this is the second countermeasure mentioned in the course.
+- [ ] Increasing the number of iterations of the ZKIP protocol
+    > Incorrect: increasing the repetitions reduces the probability of guessing a challenge, but does not block a faithful relay of the real messages.
+- [ ] Replacing the ZKIP with a simple symmetric challenge-response
+    > Incorrect: a classic challenge-response protocol would be just as vulnerable, if not more so, to this type of relay.
+```
+
+```quizdown
+### A company observes attempts where an attacker intercepts messages belonging to several identification protocol instances running simultaneously, then recombines them to impersonate an identity. What does the course call this type of attack, and what protection does it recommend?
+
+> This is not exactly the same as a reflection attack, which concerns a single pair of symmetric sessions.
+
+1. [ ] Dictionary attack; protection: salting
+    > Incorrect: salting protects password storage, unrelated to mixing several simultaneous instances.
+1. [x] Interleaving attack; protection: including the target entity in the messages and cryptographically chaining the messages of the same instance
+    > Correct: this is the exact definition and protection given in the course's summary table.
+1. [ ] Collusion attack; protection: Faraday cage
+    > Incorrect: collusion concerns physical connivance between accomplices (Mafia attack), not mixing messages between instances.
+1. [ ] Chosen-ciphertext attack; protection: zero-knowledge only
+    > Incorrect: this attack concerns having chosen data decrypted, not mixing several instances.
+```
+
+```quizdown
+### According to the course's summary table, which protections counter a reflection attack?
+
+> These are the two structural measures added in the robust bilateral symmetric solution.
+
+- [x] Including the target entity in the messages
+    > Correct: this is one of the two protections listed in the course's summary table for the reflection attack.
+- [x] Introducing asymmetry into the exchanged messages
+    > Correct: this is the second protection listed in the course's summary table.
+- [ ] Using exclusively one-time passwords
+    > Incorrect: one-time passwords are a protection against replay, not specifically against the reflection attack.
+- [ ] Systematically encrypting with an asymmetric key rather than a symmetric one
+    > Incorrect: the course's robust solution against the reflection attack remains a shared-symmetric-key protocol.
+```
+
+```quizdown
+### A fixed-password authentication protocol, once eavesdropped on the network, can be replayed as-is by an attacker. Which family of solutions from the course structurally fixes this flaw, by making the transmitted value different at each identification?
+
+> Two families of solutions exist in the course for this problem: the changing password and the random challenge.
+
+- [x] The variable password (e.g. the Lamport scheme)
+    > Correct: the transmitted value changes at each identification by construction.
+- [x] Challenge-and-response protocols with a symmetric or asymmetric key
+    > Correct: the random R renewed each session prevents replay.
+- [ ] Storing the password after salting
+    > Incorrect: salting protects storage on the server side, but does not change what transits over the network during classic password authentication.
+- [ ] Data-origin authentication via MAC
+    > Incorrect: this mechanism authenticates a message, not an entity identification session, and remains itself vulnerable to replay according to the course.
+```

@@ -1,0 +1,227 @@
+## Notions de base de cryptographie
+
+- Principe de Kerckhoffs
+- Classification des cryptosystèmes basée sur la complexité
+- Entropie
+- Classification des attaques sur les cryptosystèmes
+- Oracles aléatoires et oracles de cryptage
+- Cryptage déterministe et probabiliste
+- Cryptosystèmes historiques
+- Le *One-Time* Pad
+- Stéganographie
+
+## Principe de Kerckhoffs
+
+Auguste Kerckhoffs a écrit en 1883[^kerckhoffs] deux articles de revue formulant six principes de conception pour les chiffres militaires :
+
+1. **Le système doit être pratiquement, sinon mathématiquement, indéchiffrable.**
+2. **Il ne doit pas nécessiter le secret, et il ne doit pas poser de problème s'il tombe entre les mains de l'ennemi.**
+3. Il doit être possible de communiquer et de mémoriser la clé sans utiliser de notes écrites, et les correspondants doivent pouvoir la changer ou la modifier à volonté.
+4. Il doit être applicable aux communications télégraphiques.
+5. Il doit être portable, et ne doit pas nécessiter plusieurs personnes pour être manipulé ou utilisé.
+6. Enfin, étant donné les circonstances dans lesquelles il doit être utilisé, le système doit être facile à utiliser et ne doit pas être stressant à utiliser ni exiger de ses utilisateurs qu'ils connaissent et respectent une longue liste de règles.
+
+Kerckhoffs affirme déjà au XIXe siècle que le système doit être **mathématiquement prouvé** et qu'il n'y a pas de **sécurité par l'obscurité** !
+
+[^kerckhoffs]: Auguste Kerckhoffs, "La cryptographie militaire" *Journal des sciences militaires*, vol. IX, pp. 5–83, January 1883, pp. 161–191, February 1883.
+
+## Classification des systèmes de cryptage
+
+- **Sécurité inconditionnelle (***unconditional security* aussi appelée *perfect secrecy*) :
+  - La sécurité du système de cryptage n'est pas compromise par la puissance de calcul destinée à la cryptanalyse.
+  - Cette catégorie s'appuie sur la théorie de l'information publiée par Shannon en 1949.
+  - Plus précisément, un système de cryptage est *inconditionnellement sûr* si la probabilité de rencontrer un *plaintext* x après l'observation du *ciphertext* correspondant y est identique à la probabilité *à priori* de rencontrer le plaintext x. En d'autres termes, le fait de disposer de couples plaintext/ciphertext (x, y) ne constitue aucune aide pour la cryptanalyse.
+  - Une condition nécessaire pour qu'un système soit inconditionnellement sûr est que la clé soit au moins de la même taille que le message et, surtout, qu'elle ne soit pas réutilisée pour encrypter des messages différents.
+  - Cette condition rend ces systèmes peu adaptés aux besoins cryptographiques habituels et réduit leur domaine d'intérêt à un cadre théorique.
+  - L'exemple classique est le *one-time pad* inventé en 1917 par J. Mauborgne and G. Vernam.
+  - Fondements théoriques des systèmes inconditionnellement sûrs + d'autres exemples dans [Sti06].
+
+## Classification des systèmes de cryptage (II)
+
+- *As hard as* / équivalent / *provable security*
+  - Lorsqu'on peut prouver que la cryptanalyse de l'algorithme est aussi difficile que de résoudre un problème mathématique réputé difficile.
+  - Par exemple *la factorisation de grands nombres, le calcul de racines carrées modulo un "composite", le calcul de logarithmes discrets dans un groupe fini*, etc. (voir chapitre sur la Cryptographie Asymétrique).
+  - L'algorithme de Rabin et RSA (cas générique[^rsa-generic]) sont "prouvés" équivalents à la factorisation. Une telle preuve s'appelle de "réduction" (*reduction proof*).
+  - La notion de *provable security* est à l'origine d'une importante controverse dans le monde cryptographique[^provable-security].
+- **Sécurité calculatoire** (*computational security* aussi appelé *practical security*)
+  - Un système de cryptage est dans cette catégorie si l'effort calculatoire nécessaire à le "casser" en utilisant les meilleures techniques possibles est au delà (avec une marge raisonnable) des ressources de calcul d'un adversaire hypothétique.
+  - La grande majorité de systèmes de cryptage symétriques (AES, DES, IDEA, RC4, etc.) sont dans cette catégorie.
+
+[^rsa-generic]: *Breaking RSA Generically is Equivalent to Factoring*. D. Aggarwal and U. Maurer. Eurocrypt 2009.
+[^provable-security]: *Another Look at Provable Security*. Neil Koblitz and Alfred Menezes. Cryptology ePrint Archive 2004.
+
+## Entropie
+
+- Une définition essentielle dans la cryptographie est la quantité d'information "effective" contenue dans un message.
+- Par exemple, les jours de la semaine ("lundi",..., "dimanche") peuvent intuitivement être encodés comme des chaînes de caractères de longueur ≤ len("mercredi"), soit 8 x 8 = 64 bits. Cependant, la quantité d'information effective de la variable "jour de la semaine" peut être encodée de manière optimale sur 3 bits (car $2^3 = 8$ est suffisant pour représenter les 7 variations possibles).
+- L'**entropie** (Shannon, 1948) est la formalisation mathématique de cette définition :
+- Soit X une variable aléatoire avec un ensemble fini de valeurs possibles $x_1, x_2,..., x_n$ avec probabilité $P(X=x_i) = p_i$, avec $0 \leq p_i \leq 1 \; \forall i$, t.q. $1 \leq i \leq n$ et t.q.
+
+$$\sum_{i=1}^{n} p_i = 1$$
+
+  L'**entropie** de X, H(X) est définie comme :
+
+$$H(x) = -\sum_{i=1}^{n} p_i \log p_i = \sum_{i=1}^{n} p_i \log(1/p_i)$$
+
+  avec (par convention) $p_i \cdot \log p_i = p_i \cdot \log(1/p_i) = 0$ si $p_i = 0$. Tous les logs à base 2.
+
+- Cette formule permet d'approximer le nombre de bits qui sont nécessaires pour encoder les éléments dans X. La **redondance** est la différence entre le codage effectif d'une pièce d'information et son entropie. Le langage naturel (anglais) a une entropie de 1.3 par lettre et, donc, une redondance de 6.7 bits avec un codage à 8 bits !
+
+## Entropie (II)
+
+Propriétés :
+
+(i) $0 \leq H(X) \leq \log n$
+
+(ii) $H(X) = 0$ ssi $\exists i$ t.q. $p_i = 1$ et $p_j = 0, \forall j \neq i$ (c.à.d. il n'y a pas d'incertitude sur le résultat)
+
+(iii) $H(X) = \log n$ ssi $p_i = 1/n \; \forall i \; 1 \leq i \leq n$ (c.à.d. tous les résultats sont équiprobables).
+
+Exemple :
+
+L'entropie de la variable "jours de la semaine" en admettant que toutes les valeurs sont équiprobables serait :
+
+$$H(\text{jours de la semaine}) = \sum_{i=1}^{7} \frac{1}{7} \log 7 = \log 7 = 2{,}807$$
+
+Entropie conditionnelle de X étant donné Y = y :
+
+$$H(X|Y=y) = -\sum_{x} P(X=x|Y=y) \cdot \log(P(X=x|Y=y))$$
+
+Entropie conditionnelle de X étant donné Y :
+
+$$H(X|Y) = \sum_{y} P(Y=y) \cdot H(X|Y=y)$$
+
+L'entropie conditionnelle mesure le degré d'incertitude qui reste sur X (le *plaintext*) après avoir observé Y (le *ciphertext*).
+
+## Attaques sur les systèmes de cryptage
+
+- Attaque *ciphertext-only* : L'adversaire (ou le cryptanalyste) essaye de trouver la clé ou le plaintext à partir de l'observation du ciphertext seul. Un système de cryptage vulnérable à cette attaque n'offre aucune sécurité.
+- Attaque *known-plaintext* : L'adversaire a des couples plaintext/ciphertext à disposition. Cette attaque est à peine plus facile à mettre en place que le *ciphertext-only*.
+- Attaque *chosen-plaintext* : L'adversaire peut choisir le plaintext et obtenir le ciphertext correspondant, le but étant de retrouver du plaintext à partir des ciphertext observés.
+- Attaque *adaptive chosen-plaintext* : Il s'agit d'une attaque *chosen-plaintext* ou le choix sur les plaintexts peut dépendre des ciphertexts reçus lors des requêtes précédentes.
+- Attaque *chosen-ciphertext* : L'adversaire choisit le ciphertext et obtient le plaintext correspondant. L'objectif de cette attaque étant normalement de trouver la clé.
+- Attaque *adaptive chosen-ciphertext* : Il s'agit d'une attaque *chosen-ciphertext* ou le choix sur les ciphertexts peut dépendre des plaintexts reçus lors des requêtes précédentes.
+
+## Oracles Aléatoires
+
+- Un oracle aléatoire est une entité abstraite (disponible pour les parties légitimes et les adversaires) qui répond aux requêtes contenant une entrée x donnée avec des réponses parfaitement aléatoires `Orc(x)`.
+- La seule exception à ce comportement réside dans les entrées précédemment traitées $(x_1,x_2,x_3,...,x_n)$ où l'oracle aléatoire fournira la même réponse que la requête précédente, de sorte que si `x1' = x1` alors `Orc(x1') = Orc(x1)`, ce qui signifie que l'oracle aléatoire est *déterministe* avec les entrées précédemment traitées.
+- Un oracle aléatoire peut être modélisé comme une fonction mathématique `Orc: X → Y` où $\forall x \in X$ on a que $\Pr(\text{Orc}(x) = y) = 1/\text{Sizeof}(Y) \; \forall y \in Y$.
+- Un oracle aléatoire se comporte comme une fonction de hachage cryptographique "idéale" et, en tant que tel, est un outil précieux pour prouver des assertions de sécurité sous ce qu'on appelle le *random oracle model*[^random-oracle]. Le point précédent garantit que toutes les sorties possibles de la fonction de hachage (*digests*) sont *équiprobables*.
+- Le cas classique où les adversaires sont bornés par des facteurs de calcul est appelé le *standard model*.
+- Un protocole cryptographique dont la sécurité est prouvée dans le *random oracle model* peut s'avérer non sûr lorsqu'on remplace l'oracle aléatoire par une fonction de hachage "réelle" comme `SHA-1`, `SHA-256`, etc.
+
+[^random-oracle]: M. Bellare and P. Rogaway, *Random oracles are practical: A paradigm for designing efficient protocols*, In Proceedings of the 1st ACM Conference on Computer and Communications Security (1993), 62-73.
+
+## Oracles de Cryptage, Décryptage et Signature
+
+- Un oracle de cryptage/décryptage/signature est également une entité abstraite qui effectuera les opérations correspondantes comme un service "à la demande" pour toutes les parties légitimes et illégitimes.
+- Cette entité utilisera (sans les divulguer) les mêmes clés que les propriétaires légitimes des clés, tant pour les cryptosystèmes symétriques qu'asymétriques, en retournant le plaintext authentique, les ciphertexts ou les documents signés !
+- En supposant que E est une primitive de cryptage symétrique et k la clé secrète symétrique, l'oracle de cryptage retournera $y = E_k(x)$ pour toute entrée plaintext x donnée, et l'oracle de décryptage retournera x tel que $E_k(x) = y$ pour toute entrée ciphertext y donnée.
+- Dans les cryptosystèmes à clé publique, l'oracle n'est nécessaire que pour les opérations à clé secrète (qu'il s'agisse de signer ou de décrypter) puisque les opérations à clé publique sont ouvertement disponibles.
+- En conséquence, en supposant que E' est un système de cryptage à clé publique et pubk et privk les clés publique et privée, l'oracle de décryptage retournera x tel que $E'_{pubk}(x) = y$ pour toute entrée ciphertext y donnée.
+- De même, en supposant que S est un système de signature numérique à clé publique et pubk et privk sont respectivement les clés de validation et de signature, l'oracle de signature retournera y tel que $S_{privk}(x) = y$ pour toute entrée x donnée (les données à signer).
+- Les attaques *chosen-plaintext* et *(adaptive) chosen-ciphertexts* sont normalement modélisées sur l'hypothèse que ces oracles sont disponibles pour l'adversaire.
+
+## Indiscernabilité des Ciphertexts et Sécurité Sémantique
+
+- L'*indiscernabilité des ciphertexts* (*Ciphertext Indistinguishability*) est une propriété des protocoles cryptographiques qui garantit qu'un adversaire sera incapable de distinguer entre différents ciphertexts pour des plaintexts donnés.
+- Supposons un adversaire avec une capacité de calcul en temps polynomial et un accès illimité à un oracle de cryptage avec la clé secrète k, procède aux étapes suivantes :
+  - Il génère deux plaintexts $M_0$ et $M_1$ et les envoie à l'oracle de cryptage.
+  - L'oracle de cryptage choisit un indice i au hasard $i \in \{0,1\}$ et envoie le ciphertext correspondant $c_i = E_k(M_i)$ à l'adversaire.
+  - L'adversaire est libre d'effectuer tout calcul supplémentaire, y compris des appels à l'oracle de cryptage pour tout autre $M_j$ avec $j \notin \{0,1\}$.
+- On dit qu'un cryptosystème est *indiscernable sous attaques à plaintext choisi* (**IND-CPA**) si un tel adversaire a un avantage négligeable par rapport au hasard pour deviner correctement l'indice i (Prob = 1/2 + ε avec ε petit et borné).
+- Il convient de noter que pour les cryptosystèmes à clé publique, la présence d'un oracle de cryptage est inutile puisque le cryptage implique des clés publiques et peut donc être facilement effectué par l'adversaire.
+- Les cryptosystèmes présentant la propriété IND-CPA sont également dits fournir la **sécurité sémantique**[^semantic-security].
+
+[^semantic-security]: S. Goldwasser, S. Micali. *Probabilistic encryption and how to play mental poker keeping secret all partial information*. Proc. 14th Symposium on Theory of Computing: 365–377. 1982.
+
+## Problèmes du Cryptage Déterministe
+
+- Les algorithmes cryptographiques présentent un comportement déterministe puisque les opérations de cryptage et de décryptage produisent les mêmes résultats sur des entrées identiques.
+- Cela peut entraîner des faiblesses évidentes en termes d'*indiscernabilité des ciphertexts* si un oracle de cryptage est disponible ou si des cryptosystèmes à clé publique sont utilisés.
+- À titre d'exemple, supposons qu'Alice envoie un message simple (c.-à-d. 'yes' ou 'no') à Bob, crypté avec la clé publique de Bob. Si l'adversaire peut deviner la *sémantique* du message, il pourrait facilement calculer les ciphertexts correspondants $C_{yes} = E_{Bobpubkey}(\text{'Yes'})$ et $C_{non} = E_{Bobpubkey}(\text{'Non'})$.
+- Si aucun aléa supplémentaire n'est ajouté avant le cryptage, les deux ciphertexts sont clairement distinguables avec Prob = 1 et, par conséquent, les plaintexts seraient divulgués sans connaissance de la clé privée de Bob.
+- L'adversaire peut même construire un *codebook* de plaintexts connus, composés de messages sémantiquement cohérents, et les comparer avec les ciphertexts observés pour d'éventuelles correspondances, sans cryptanalyser l'algorithme !
+- Ce problème s'applique également aux cryptosystèmes symétriques, à condition qu'un oracle de cryptage soit disponible et qu'aucun vecteur d'initialisation (IV) aléatoire ne soit utilisé (plus de détails à ce sujet dans la section décrivant les chiffrements par blocs).
+
+## Cryptage Probabiliste
+
+- Consiste à ajouter de l'aléa au cryptosystème en traitant le plaintext *avant* d'appliquer la fonction de cryptage. En conséquence, lorsqu'on traite plusieurs instances de cryptage, le même plaintext donnera lieu à des ciphertexts différents.
+- La construction de codebooks sémantiquement cohérents devient inutile pour les adversaires. L'objectif final étant d'obtenir l'*indiscernabilité des ciphertexts* et la *sécurité sémantique* pour les cryptosystèmes à clé publique.
+- Les premières approches de cryptage probabiliste[^goldwasser-micali] avaient des facteurs d'expansion de message peu pratiques.
+- La solution la plus couramment utilisée est l'*Optimal Asymmetric Encryption Padding*[^oaep] (OAEP) où le plaintext initial P est combiné avec un nombre aléatoire haché R comme suit :
+
+  $M_1 := P \oplus h(R)$ et $M_2 := R \oplus h(M_1)$.
+
+  $M_1$ et $M_2$ sont ensuite cryptés : $C_1 = E_{pubk}(M_1)$ et $C_2 = E_{pubk}(M_2)$ et envoyés.
+
+  Lors du décryptage, R est calculé : $R = M_2 \oplus h(M_1)$ puis P : $P = h(R) \oplus M_1$.
+
+- Les preuves de sécurité fournies dans la publication OAEP initiale ont été remises en question dans des articles récents[^oaep-unprovable]. OAEP est la base du standard de cryptage RSA-PKCS1.
+
+[^goldwasser-micali]: S. Goldwasser, S. Micali. *Probabilistic encryption and how to play mental poker keeping secret all partial information*. Proc. 14th Symposium on Theory of Computing: 365–377. 1982.
+[^oaep]: M. Bellare, P. Rogaway. *Optimal Asymmetric Encryption -- How to encrypt with RSA*. Extended abstract in Advances in Cryptology - Eurocrypt '94 Proceedings, Lecture Notes in Computer Science Vol. 950, A. De Santis ed, Springer-Verlag, 1995.
+[^oaep-unprovable]: D. Brown, *Unprovable Security of RSA-OAEP in the Standard Model*, IACR eprint no 2006/223, http://eprint.iacr.org/2006/223. 2006.
+
+## Systèmes de Cryptage Historiques
+
+- Pendant des siècles la confidentialité a été la seule application de la cryptographie...
+- I av. JC, *Caesar Cipher* : Cryptage à substitution mono-alphabétique
+
+  $$e_k(x) = (x + k) \mod 26, \quad d_k(y) = (y - k) \mod 26$$
+  $$x, y, k \in Z_{26}$$
+
+  - Exemple : $E_1(\text{'bonjour'}) = \text{'cpokpws'}$
+  - Cryptanalyse : facile basée sur la fréquence des caractères
+
+- XVI siècle, *Vigenère* : Cryptage à substitution polyalphabétique
+
+  $$e_k(x_1,...x_n)=(x_1+k_1,...,x_m+k_m,x_{m+1}+k_1,...x_n+k_i) \mod 26$$
+  $$d_k(y_1,...y_n)=(y_1-k_1,...,y_m-k_m,y_{m+1}-k_1,...y_n-k_i) \mod 26$$
+  $$(x_1,...,x_n,y_1,...y_n,k_1,...,k_m) \in Z_{26}$$
+
+  - Cryptanalyse : trouver la taille m de la clé en identifiant les portions de ciphertext répétées et ensuite analyser les blocs séparés comme dans le *Caesar Cipher*
+
+- *Transposition Ciphers* (*Porta*, 1563) : La clé définit une *permutation* sur le *plaintext*.
+- Autres exemples : cf. [Sti95] et [Men97].
+- A noter que ces techniques sont toujours à la base des systèmes de cryptage actuels.
+- *W. Churchill* à propos des Services d'Intelligence Britanniques capables de cryptanalyser les systèmes de cryptage allemands (*Enigma*) : "*that secret weapon that won the war*"
+
+## Le *One-Time* Pad
+
+Soit $n \geq 1$ et les espaces P, C, K resp. des plaintexts, ciphertexts et clés possibles tels que : P, C, K = $(Z_2)^n$. Soient $x = (x_1,x_2,...,x_n) \in X$, $y = (y_1,y_2,...,y_n) \in Y$ et $k = (k_1,k_2,...,k_n) \in K$. Alors, les operations d'encryption et decryption d'un *one-time pad* (aussi appellé *Vernam Cipher*) sont définies comme suit :
+
+$$E_k(x_i) = x_i \oplus k_i \qquad 1 \leq i \leq n$$
+$$D_k(y_i) = y_i \oplus k_i \qquad 1 \leq i \leq n$$
+
+- Si les $k_i$ sont choisis de manière indépendante et aléatoire, le one-time pad est *unconditionellement sûr* contre des attaques *ciphertext-only* ce qui veut dire que le fait d'observer des ciphertexts n'est d'aucune aide pour la cryptanalyse, ou dans d'autres termes, que l'entropie de X n'est pas diminuée après l'obervation des ciphertexts, soit : $H(X|C) = H(X)$. (H(X) = fonction d'entropie, H(X|C) = entropie conditionnelle) Ceci reste vrai même si l'adversaire a des ressources de calcul infinies !
+- Problème : Shannon a prouvé qu'une condition nécessaire pour qu'un système de cryptage à clé symétrique soit inconditionnellement sûr est que $H(K) \geq H(X)$. En admettant que les composants d'une clé de m bits sont aléatoires et équiprobables, on a que $H(K) = m$ et donc que $m \geq H(X)$. Donc pour satisfaire l'hypothèse de Shannon indépendamment de l'entropie de X, il faut que la longueur de la clé aléatoire soit au moins aussi grande que celle du plaintext !
+
+## *One-Time Pad* (II)
+
+- Une première conséquence de cette propriété est que la clé ne peut (même partiellement) être réutilisée. Voyons le résultat de la réutilisation de la même clé sur deux plaintexts différents :
+
+  $$E_k(x_a) = y_a = x_a \oplus k$$
+  $$E_k(x_b) = y_b = x_b \oplus k$$
+  $$y_a \oplus y_b = x_a \oplus k \oplus x_b \oplus k = x_a \oplus x_b \; !!!$$
+
+  ce qui avec des plaintexts de faible entropie permet de retrouver les deux plaintexts et même de calculer la clé k car :
+
+  $$k = y_a \oplus x_a$$
+
+- Ceci signifie que le one-time pad est vulnerable à l'attaque *known plaintext*, même si ceci n'a pas d'importance si une nouvelle clé est regénérée pour chaque nouveau message.
+- La contrainte sur la longueur de la clé pose un problème évident dans la distribution et la gestion des clés. De ce fait l'utilisation réelle du one-time pad est très peu sinificative.
+- L'avènement de la *cryptographie quantique* proposant des canaux confidentiels de distribution de clés de longueur ilimitée a rélancé l'intérêt du one-time pad mais l'application de ces techniques aux réseaux classiques des télécommunications est pour le moment impossible.
+
+## Stéganographie
+
+- Au lieu de rendre le message intelligible comme la cryptographie, la **stéganographie** (*steganography*) cache un message à l'intérieur d'un autre à l'aide de techniques diverses. Les deux éléments constituants de toute solution stéganographique sont les suivants :
+  - Un canal physique ou logique différent de celui qui, de toute évidence, transporte l'information (aussi appelé *canal subliminal*).
+  - Une indication ou un mécanisme secret permettant d'identifier le canal et d'accéder aux informations qu'il transporte.
+- Exemples des solutions stéganographiques classiques :
+  - Former un message secret en utilisant les premières lettres de tous les mots d'un texte.
+  - Utiliser une encre invisible pour cacher les parties secrètes d'un texte
+- [Way93][^way93] propose une solution stéganographique novatrice : former un message secret en utilisant les *least significant bits* des *frames* présents sur un *Kodak Photo CD*. Pour une image de 2048x3072 avec une profondeur RGB de 24 bits, ceci donne 2.3 Mb !, en utilisant seulement 1 des 24 bits (ce qui ne détériore pas la qualité de l'image originale).
+
+[^way93]: Wayner, P. *Should Encryption be Regulated?* BYTE Review, 1993.

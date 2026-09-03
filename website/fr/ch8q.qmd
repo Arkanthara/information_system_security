@@ -1,0 +1,402 @@
+---
+execute:
+  enabled: false
+---
+
+## Quiz — Key Establishment Protocols
+
+```quizdown
+### Un mécanisme permet à deux entités de calculer une clé commune à partir d'informations propres à chacune, sans qu'aucune des deux ne la choisisse seule et ne la transmette à l'autre. De quel type de protocole s'agit-il ?
+
+> Pense à qui « fabrique » la clé et à comment elle circule.
+
+1. [ ] Key Transport Protocol (KTP)
+    > Incorrect : dans un KTP, une entité crée la clé et la transfère à l'autre.
+1. [x] Key Agreement Protocol (KAP)
+    > Correct : dans un KAP, la clé est dérivée conjointement à partir d'informations propres à chaque entité.
+1. [ ] Un schéma de pré-distribution
+    > Incorrect : la pré-distribution concerne le moment où les clés sont fixées, pas le mode de calcul.
+1. [ ] Un Key Distribution Center
+    > Incorrect : un KDC est une entité centrale, pas un type de protocole KAP/KTP.
+```
+
+```quizdown
+### Dans un schéma de pré-distribution des clés, une nouvelle clé est calculée à chaque exécution du protocole.
+
+> Compare avec la définition de Dynamic Key Establishment (DKE).
+
+1. [ ] Vrai
+1. [x] Faux
+    > Faux : en pré-distribution, les clés sont entièrement déterminées à priori. C'est le DKE qui produit une nouvelle clé à chaque exécution.
+```
+
+```quizdown
+### Que signifie exactement l'« explicit key authentication » ?
+
+> Additionne deux propriétés déjà vues séparément.
+
+1. [ ] Une entité est sûre que seul son correspondant peut accéder à la clé.
+    > Incorrect : ceci décrit seulement l'implicit key authentication.
+1. [ ] Une entité est sûre que son correspondant possède déjà la clé.
+    > Incorrect : ceci décrit seulement la key confirmation.
+1. [x] Implicit key authentication et key confirmation réunies.
+    > Correct : explicit key authentication = implicit key authentication + key confirmation.
+1. [ ] La garantie que le protocole résiste à un adversaire actif.
+    > Incorrect : cela correspondrait plutôt à la notion d'« authenticated KEP » face aux attaques actives, pas à l'explicit key authentication.
+```
+
+```quizdown
+### Un adversaire a enregistré une clé de session ancienne, aujourd'hui compromise, échangée entre A et B. Que permet potentiellement une known-key attack exploitant cette clé ?
+
+> Relis la définition : elle mentionne deux types de conséquences possibles.
+
+- [x] Compromettre passivement des clés de session futures.
+    > Correct : c'est exactement l'un des deux effets définissant une known-key attack.
+- [x] Monter des attaques actives d'usurpation d'identité.
+    > Correct : c'est le second effet possible d'une known-key attack.
+- [ ] Retrouver directement la clé privée long terme de A ou B.
+    > Incorrect : une known-key attack exploite une clé de session compromise, pas nécessairement la clé long terme.
+- [ ] Casser le mécanisme cryptographique sous-jacent (ex. DLP) indépendamment du protocole.
+    > Incorrect : ce n'est pas la définition d'une known-key attack, qui exploite une faille de conception du protocole, pas de la primitive cryptographique.
+```
+
+```quizdown
+### Une clé long terme est compromise aujourd'hui par un attaquant purement passif. Quelle propriété garantit que les échanges qui auront lieu après cette date resteront confidentiels ?
+
+> Distingue bien la propriété qui protège le passé de celle qui protège le futur.
+
+1. [ ] Perfect Forward Secrecy
+    > Incorrect : la PFS protège les sessions passées, pas les futures.
+1. [x] Future Secrecy
+    > Correct : la Future Secrecy garantit la sécurité des sessions futures si l'attaquant reste passif, même en cas de compromission de la clé long terme.
+1. [ ] Key confirmation
+    > Incorrect : cette propriété ne concerne pas la confidentialité dans le temps mais la preuve de possession de la clé.
+1. [ ] Deniability
+    > Incorrect : la deniability concerne la non-preuve de participation à un échange, pas la confidentialité future.
+```
+
+```quizdown
+### La Perfect Forward Secrecy (PFS) garantit la confidentialité des sessions futures même en cas de compromission de la clé long terme.
+
+> PFS et Future Secrecy protègent chacune une direction du temps différente.
+
+1. [ ] Vrai
+1. [x] Faux
+    > Faux : la PFS protège les clés de session passées ; c'est la Future Secrecy qui concerne les sessions futures (et uniquement face à un attaquant passif).
+```
+
+```quizdown
+### Dans un réseau de 100 utilisateurs utilisant le protocole trivial de pré-distribution symétrique via un KDC, combien de clés secrètes chaque utilisateur reçoit-il ?
+
+> Chaque utilisateur reçoit une clé pour chacun des autres utilisateurs du réseau.
+
+1. [ ] 100
+1. [x] 99
+    > Correct : le KDC distribue n-1 clés à chaque utilisateur, soit 99 pour n=100.
+1. [ ] 4950
+    > Incorrect : c'est le nombre total de clés générées par le KDC (n(n-1)/2), pas le nombre reçu par un seul utilisateur.
+1. [ ] 9900
+    > Incorrect : cette valeur ne correspond à aucune formule du protocole.
+```
+
+```quizdown
+### Dans ce même réseau de 100 utilisateurs, combien de clés différentes le KDC doit-il générer et stocker au total ?
+
+> Utilise la formule du nombre de paires possibles parmi n utilisateurs.
+
+1. [ ] 100
+1. [ ] 99
+    > Incorrect : c'est le nombre de clés reçues par un utilisateur, pas le total généré par le KDC.
+1. [x] 4950
+    > Correct : n(n-1)/2 = 100 x 99 / 2 = 4950, une clé par paire d'utilisateurs.
+1. [ ] 10000
+    > Incorrect : cela correspondrait à n², pas à n(n-1)/2.
+```
+
+```quizdown
+### Dans le protocole DKE symétrique intuitif (échange de nombres aléatoires r_a et r_b, avec K := E_S(r_a XOR r_b)), un adversaire actif qui modifie r_a ou r_b sera détecté par le protocole.
+
+> Ce protocole n'offre pas de key confirmation.
+
+1. [ ] Vrai
+1. [x] Faux
+    > Faux : les r_i étant de simples nombres aléatoires non protégés en intégrité, leur modification par un adversaire actif empêche A et B de s'accorder sur K sans que cela soit détecté par le protocole.
+```
+
+```quizdown
+### Dans AKEP2, à quoi sert la clé long terme S' (distincte de S) ?
+
+> S sert aux MACs d'authentification, quel est alors le rôle de S' ?
+
+1. [ ] À authentifier les identités de A et B via des MACs
+    > Incorrect : c'est le rôle de S, pas de S'.
+1. [x] À générer la clé de session K
+    > Correct : la clé de session est calculée par K := h'_S'(r_b), dérivée de S'.
+1. [ ] À chiffrer les tickets Kerberos
+    > Incorrect : AKEP2 n'a aucun lien avec les tickets Kerberos.
+1. [ ] À vérifier la fraîcheur des messages via un timestamp
+    > Incorrect : AKEP2 utilise des nombres aléatoires (r_a, r_b), pas des timestamps.
+```
+
+```quizdown
+### Pourquoi le protocole Diffie-Hellman non authentifié est-il vulnérable à une attaque Man-in-the-Middle ?
+
+> La faille ne vient pas de la difficulté du problème mathématique sous-jacent.
+
+1. [ ] Parce que le problème DHP est plus facile que le DLP
+    > Incorrect : au contraire, DHP se réduit au DLP (DHP ≤p DLP), ce n'est pas la cause de la vulnérabilité MIM.
+1. [x] Parce que les parties publiques échangées ne sont pas authentifiées
+    > Correct : rien ne garantit à A que la valeur reçue provient bien de B (et inversement), ce qui permet à un attaquant de s'interposer.
+1. [ ] Parce que les clés générées ne sont pas bit secure
+    > Incorrect : ce problème concerne la dérivation de clés symétriques à partir de K, pas l'attaque MIM elle-même.
+1. [ ] Parce que le nombre premier p est trop petit par défaut
+    > Incorrect : même avec un grand p, l'absence d'authentification des parties publiques suffit à permettre le MIM.
+```
+
+```quizdown
+### A envoie α^x mod p et B envoie α^y mod p lors d'un échange Diffie-Hellman classique. Quelle est la clé secrète finalement partagée par les deux parties ?
+
+> Chaque partie élève la valeur reçue à la puissance de son propre secret.
+
+1. [ ] α^(x+y) mod p
+1. [x] α^(xy) mod p
+    > Correct : A calcule (α^y)^x et B calcule (α^x)^y, ce qui donne dans les deux cas α^(xy) mod p.
+1. [ ] α^x · α^y mod p
+    > Incorrect : cela donnerait α^(x+y) mod p, pas la clé réellement calculée.
+1. [ ] H(α^x, α^y)
+    > Incorrect : aucun hachage n'intervient dans le calcul de la clé DH elle-même.
+```
+
+```quizdown
+### Il est prouvé que les clés issues de Diffie-Hellman sont bit secure : on peut donc utiliser directement un sous-ensemble de leurs bits comme clé symétrique.
+
+> Le cours mentionne explicitement un contre-exemple concernant les bits de poids faible.
+
+1. [ ] Vrai
+1. [x] Faux
+    > Faux : les clés DH ne sont pas bit secure (certains sous-ensembles de bits, notamment les LSB, se calculent avec un effort disproportionné). Il faut appliquer un MDC (SHA, MD5) sur toute la clé pour en dériver des clés symétriques sûres.
+```
+
+```quizdown
+### Sur les courbes elliptiques, pourquoi A (qui calcule x(yP0)) et B (qui calcule y(xP0)) obtiennent-ils la même clé partagée ?
+
+> La réponse tient à une propriété algébrique de l'opération utilisée.
+
+1. [ ] Parce que la multiplication scalaire sur une courbe elliptique est commutative
+    > Correct : x(yP0) = y(xP0) grâce à la commutativité de la multiplication scalaire sur E_p, exactement comme α^(xy) = α^(yx) dans Z_p*.
+1. [ ] Parce que le point P0 est un générateur du groupe
+    > Incorrect : le fait que P0 soit de grand ordre garantit la sécurité, pas l'égalité des deux calculs.
+1. [ ] Parce que x et y sont choisis identiques par construction
+    > Incorrect : x et y sont deux secrets indépendants choisis aléatoirement par A et B.
+1. [ ] Parce qu'un MDC est appliqué avant l'échange
+    > Incorrect : le MDC n'intervient qu'après, pour dériver une clé symétrique de taille adaptée.
+```
+
+```quizdown
+### Quelles propriétés le protocole Station-to-Station (STS) apporte-t-il par rapport à un Diffie-Hellman simple ?
+
+> STS ajoute des signatures aux paramètres DH échangés.
+
+- [x] Authentification mutuelle des entités
+    > Correct : les signatures de A et B fournissent l'entity authentication mutuelle.
+- [x] Protection contre l'attaque Man-in-the-Middle
+    > Correct : un attaquant ne peut plus forger de signature valide pour les parties publiques DH.
+- [x] Key confirmation
+    > Correct : chaque partie prouve la possession de la clé en chiffrant/signant avec elle.
+- [ ] Répudiabilité garantie des échanges
+    > Incorrect : STS ne garantit pas la répudiabilité ; c'est l'ajout de la technique SIGMA (utilisée par OTR) qui l'apporte, en plus des signatures.
+```
+
+```quizdown
+### Quelle technique combine la signature des paramètres Diffie-Hellman avec une authentification éphémère par MAC, pour obtenir en plus la répudiabilité d'une conversation ?
+
+> Le nom de cette technique est un acronyme donné dans le cours pour le protocole OTR.
+
+1. [ ] STS
+    > Incorrect : STS utilise uniquement des signatures, sans le mécanisme d'authentification éphémère par MAC ni la répudiabilité.
+1. [x] SIGMA
+    > Correct : SIGMA (SIGn-and-MAC) combine signature des paramètres DH et authentification par MAC, utilisée par OTR et Signal.
+1. [ ] SRP
+    > Incorrect : SRP est un protocole basé sur un mot de passe, sans rapport avec la signature de paramètres DH.
+1. [ ] AKEP2
+    > Incorrect : AKEP2 est un KAP symétrique basé sur des MACs, sans notion de répudiabilité ni de signature DH.
+```
+
+```quizdown
+### Un attaquant force un serveur à utiliser un groupe Diffie-Hellman de seulement 512 bits, effectue un pré-calcul d'environ une semaine sur le nombre premier p utilisé par de nombreux serveurs, puis casse chaque échange individuel en une minute. Comment s'appelle cette attaque ?
+
+> C'est une attaque documentée en 2015 contre TLS/SSL.
+
+1. [ ] Heartbleed
+    > Incorrect : Heartbleed est une faille d'implémentation (buffer overflow), sans lien avec un downgrade du groupe DH.
+1. [x] Logjam
+    > Correct : Logjam combine un downgrade actif vers un petit groupe DH et une factorisation par Number Field Sieve, rendue efficace par la réutilisation d'un même p par de nombreux serveurs.
+1. [ ] Renegotiation attack
+    > Incorrect : cette attaque de 2009 exploite la re-négociation TLS pour injecter du contenu, sans lien avec le DHP.
+1. [ ] Reflection attack
+    > Incorrect : ce type d'attaque exploite la réutilisation d'un challenge dans un protocole d'authentification, pas la taille d'un groupe DH.
+```
+
+```quizdown
+### Dans SRP, le serveur B stocke directement le mot de passe de A en clair pour pouvoir vérifier les futures connexions.
+
+> Relis la notion de « vérificateur » dans SRP.
+
+1. [ ] Vrai
+1. [x] Faux
+    > Faux : B stocke uniquement le vérificateur v := α^x mod m (avec x = H(password)), jamais le mot de passe lui-même.
+```
+
+```quizdown
+### A et B partagent un mot de passe de mauvaise qualité pour exécuter le protocole Encrypted Key Exchange (EKE). Pourquoi ce protocole reste-t-il robuste face à une attaque dictionnaire ?
+
+> Le mot de passe protège une donnée d'un tout autre type cryptographique.
+
+1. [ ] Parce que le mot de passe est haché avant d'être utilisé
+    > Incorrect : ce n'est pas le mécanisme décrit dans le cours pour EKE.
+1. [x] Parce que deviner le mot de passe nécessiterait aussi de casser l'algorithme asymétrique sous-jacent
+    > Correct : le mot de passe sert à chiffrer une clé publique ; un attaquant testant des mots de passe ne peut valider ses essais sans casser également le chiffrement asymétrique.
+1. [ ] Parce qu'un tiers de confiance vérifie chaque tentative
+    > Incorrect : EKE ne fait intervenir aucun tiers de confiance, seulement A et B.
+1. [ ] Parce que le mot de passe change automatiquement à chaque session
+    > Incorrect : rien dans le protocole n'impose un changement automatique du mot de passe entre les sessions.
+```
+
+```quizdown
+### Que peut-on ajouter au message initial E_S(r_a) du KTP trivial symétrique pour obtenir des garanties supplémentaires ?
+
+> Pense à ce qui manque au protocole de base : la key confirmation et la fraîcheur.
+
+- [x] L'identité de B dans le message chiffré, pour obtenir une key confirmation unilatérale
+    > Correct : E_S(B, r_a) permet à B de vérifier que le message lui était destiné, apportant une forme de confirmation.
+- [x] Un timestamp, pour garantir la fraîcheur (freshness) du message
+    > Correct : E_S(B, t_a, r_a) permet à B de détecter un message rejoué, à condition d'avoir des horloges synchronisées.
+- [ ] Une signature numérique de A
+    > Incorrect : ce protocole est purement symétrique, aucune paire de clés publique/privée n'est utilisée.
+- [ ] La clé publique de A
+    > Incorrect : le KTP trivial symétrique ne fait intervenir aucune cryptographie asymétrique.
+```
+
+```quizdown
+### Quelle est la différence fondamentale entre le protocole de Shamir (No-key) et Diffie-Hellman ?
+
+> L'un des deux protocoles fait choisir la clé par une seule entité.
+
+1. [x] Shamir est un Key Transport Protocol (la clé est choisie par A), alors que DH est un Key Agreement Protocol (la clé est calculée bilatéralement)
+    > Correct : dans Shamir, A choisit K dès le départ et la « cache » par exponentiation successive ; dans DH, aucune des deux parties ne choisit seule la clé finale.
+1. [ ] Shamir utilise des courbes elliptiques, contrairement à DH
+    > Incorrect : les deux protocoles peuvent être décrits sur Z_p*, sans lien nécessaire avec les courbes elliptiques.
+1. [ ] Shamir est résistant à l'attaque Man-in-the-Middle, contrairement à DH
+    > Incorrect : le cours précise explicitement que Shamir souffre des mêmes problèmes que DH, notamment le MIM.
+1. [ ] Shamir ne nécessite aucun nombre premier
+    > Incorrect : Shamir repose lui aussi sur un nombre premier p pour lequel le DLP est difficile.
+```
+
+```quizdown
+### Le protocole Needham-Schroeder à clé publique garantit la Perfect Forward Secrecy.
+
+> Les clés échangées dépendent-elles uniquement de quantités transmises explicitement ?
+
+1. [ ] Vrai
+1. [x] Faux
+    > Faux : la clé K := H(k1, k2) est entièrement déterminée par les quantités k1 et k2 échangées de manière chiffrée ; si les clés privées long terme sont compromises, ces quantités passées deviennent déchiffrables.
+```
+
+```quizdown
+### Un attaquant a obtenu une clé de session k_AB déjà utilisée entre A et B dans le protocole Needham-Schroeder symétrique (version sans timestamp). Que peut-il faire grâce à cette known-key attack ?
+
+> Le problème vient du message (3), rejouable sans contrôle par B.
+
+- [x] Rejouer le message (3) contenant le ticket chiffré pour B
+    > Correct : B ne dispose d'aucun moyen de détecter que ce ticket a déjà été utilisé.
+- [x] Répondre correctement au challenge que B envoie ensuite dans le message (4), grâce à la clé k_AB compromise
+    > Correct : connaissant k_AB, l'attaquant peut compléter l'échange de confirmation comme le ferait A.
+- [ ] Casser directement la clé long terme K_AT ou K_BT
+    > Incorrect : la known-key attack exploite une clé de session compromise, pas les clés long terme partagées avec T.
+- [ ] Obtenir la clé privée du Key Distribution Center T
+    > Incorrect : T utilise de la cryptographie symétrique, sans clé privée, et cette attaque ne la compromet de toute façon pas.
+```
+
+```quizdown
+### Dans Kerberos v5, quelle entité délivre à A le ticket lui permettant ensuite de s'adresser directement au Ticket Granting Server (TGS) ?
+
+> Deux entités fonctionnelles composent le KDC de Kerberos.
+
+1. [ ] Le Ticket Granting Server (TGS) lui-même
+    > Incorrect : le TGS délivre le ticket pour B, pas le ticket permettant de le contacter.
+1. [x] L'Authentication Server (AS)
+    > Correct : l'AS délivre le Ticket Granting Ticket (TGT), chiffré avec K_T, permettant ensuite à A de s'adresser au TGS.
+1. [ ] Le serveur B directement
+    > Incorrect : B n'intervient qu'à la fin de l'échange, pour l'authentification finale.
+1. [ ] La base de données de mots de passe
+    > Incorrect : la BdD passwords est consultée par AS et TGS, mais ne délivre aucun ticket elle-même.
+```
+
+```quizdown
+### Remets dans l'ordre les étapes du protocole Kerberos v5 permettant à A d'établir une session sécurisée avec B.
+
+> Le chemin passe d'abord par l'AS, puis par le TGS, avant d'atteindre B.
+
+1. A envoie son identité, celle du TGS et un nombre aléatoire r_a à l'Authentication Server (AS)
+2. L'AS répond avec la clé k_AT chiffrée et un Ticket Granting Ticket chiffré avec K_T
+3. A envoie un authenticator et le Ticket Granting Ticket au TGS, avec l'identité de B
+4. Le TGS répond avec la clé k_AB chiffrée et un ticket pour B chiffré avec K_B
+5. A envoie un authenticator et le ticket pour B, directement à B
+6. B répond en prouvant la possession de la clé k_AB
+```
+
+```quizdown
+### Remets dans l'ordre les étapes du protocole Station-to-Station entre A et B.
+
+> B ne peut signer les deux parties publiques DH qu'après avoir reçu celle de A.
+
+1. A génère un secret x et envoie la partie publique α^x mod p
+2. B génère un secret y, calcule la clé k, puis signe et chiffre les deux parties publiques avant de répondre avec α^y mod p
+3. A déchiffre, vérifie la signature de B, puis signe et chiffre à son tour les parties publiques
+4. B déchiffre le message de A et vérifie sa signature ; si elle est correcte, le protocole se termine
+```
+
+```quizdown
+### Quels éléments font partie des trois blocs fondamentaux constituant SSL ?
+
+> Le cours distingue explicitement trois composants au sein de la « mini-pile » SSL.
+
+- [x] Le SSL record protocol
+    > Correct : il gère la fragmentation, la compression et le chiffrement des données transmises.
+- [x] Le SSL handshake protocol
+    > Correct : il gère l'authentification et la négociation des paramètres de chiffrement.
+- [x] La SSL state machine
+    > Correct : SSL est un protocole à états, nécessitant un ensemble de variables de session et de connexion.
+- [ ] Un Key Distribution Center intégré
+    > Incorrect : contrairement à Kerberos, SSL ne repose pas sur un KDC central ; il utilise des CAs de manière recommandée mais non indispensable.
+```
+
+```quizdown
+### Quelle faille de sécurité SSL/TLS résulte d'un bug d'implémentation (buffer overflow) plutôt que d'une faiblesse du protocole lui-même ?
+
+> Une des failles évoquées touche spécifiquement une bibliothèque logicielle, pas la spécification du protocole.
+
+1. [ ] Logjam
+    > Incorrect : Logjam exploite une faiblesse liée à la taille des groupes DH et à leur réutilisation, c'est un problème de déploiement/protocole.
+1. [x] Heartbleed
+    > Correct : Heartbleed est un buffer overflow dans l'implémentation, découvert en avril 2014, une faille logicielle et non protocolaire.
+1. [ ] L'attaque de renégociation (2009)
+    > Incorrect : cette faille est explicitement qualifiée de faille de protocole dans le cours, nécessitant un correctif dans toutes les implémentations.
+1. [ ] Password guessing attack
+    > Incorrect : cette attaque concerne Kerberos, pas SSL/TLS, et exploite la dépendance des clés au mot de passe, pas un bug logiciel.
+```
+
+```quizdown
+### Un architecte doit choisir un protocole d'échange de clés garantissant que même si la clé privée long terme du serveur est volée dans cinq ans, les communications interceptées et enregistrées aujourd'hui resteront indéchiffrables. Quelle propriété doit-il rechercher, et laquelle des solutions suivantes la garantit explicitement ?
+
+> Il s'agit de protéger des sessions déjà passées au moment de la compromission.
+
+1. [ ] Future Secrecy, garantie par exemple par SRP
+    > Incorrect : la Future Secrecy protège le futur, pas les communications déjà enregistrées avant la compromission.
+1. [x] Perfect Forward Secrecy, garantie par exemple par Station-to-Station
+    > Correct : STS ne conserve comme clé long terme que la clé de signature ; les clés de session passées, calculées par DH et non explicitement échangées, restent protégées même si cette clé de signature est ensuite compromise.
+1. [ ] Key confirmation, garantie par exemple par le KTP trivial symétrique
+    > Incorrect : la key confirmation prouve la possession d'une clé, elle ne protège pas la confidentialité dans le temps.
+1. [ ] Implicit key authentication, garantie par exemple par Needham-Schroeder à clé publique
+    > Incorrect : ce protocole offre l'implicit key authentication mais explicitement pas la PFS.
+```

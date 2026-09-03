@@ -1,0 +1,188 @@
+## Overview
+
+| Block | Key content |
+| --- | --- |
+| Principles | Kerckhoffs' principle |
+| Classification | Unconditional / provable / computational security |
+| Theory | Entropy |
+| Attacks | 6 attack models on cryptosystems |
+| Oracles | Random oracle, encryption/decryption/signing oracle |
+| Encryption | Deterministic (weaknesses) vs probabilistic (OAEP) |
+| History | Caesar, Vigenère, Transposition |
+| Perfect security | One-Time Pad (Vernam) |
+| Concealment | Steganography |
+
+## Kerckhoffs' Principle
+
+::: {.callout-important title="Key takeaway"}
+
+The system must be secure **even if the algorithm is public**: only the key must remain secret.
+
+No *security through obscurity*.
+
+:::
+
+6 principles (1883) — the 2 essential ones:
+
+1. **The system must be practically (if not mathematically) indecipherable.**
+2. **It must not require secrecy; its disclosure must not be a problem.**
+
+Others (secondary): key memorable/changeable without written notes, applicable to the telegraph, portable, easy to use.
+
+## Classification of Cryptosystems
+
+| Category | Principle | Condition | Example |
+| --- | --- | --- | --- |
+| **Unconditional security** (*unconditional / perfect secrecy*) | $P(x\mid y) = P(x)$: observing the ciphertext doesn't help | key $\geq$ message size, **never reused** | One-Time Pad (1917, Mauborgne/Vernam) |
+| **Provable security** (*as hard as*) | cryptanalysis as hard as a mathematical problem known to be difficult (factoring, discrete log) | "reduction" proof | RSA, Rabin (reduced to factoring) |
+| **Computational security** (*computational / practical*) | breaking = computational effort out of reach of a realistic adversary | — | AES, DES, IDEA, RC4 |
+
+::: {.callout-warning title="Pitfall"}
+
+*Provable security* ≠ absolute proof: academic controversy over the actual scope of these reduction proofs.
+
+:::
+
+## Entropy
+
+**Definition (Shannon, 1948)**: the amount of "effective" information contained in a random variable X.
+
+$$H(X) = -\sum_{i=1}^{n} p_i \log p_i = \sum_{i=1}^{n} p_i \log(1/p_i)$$
+
+- logs base 2; convention $p_i \log p_i = 0$ if $p_i=0$.
+- **Redundancy** = effective encoding − entropy (e.g.: English ≈ 1.3 bit/letter → redundancy of 6.7 bits with an 8-bit encoding).
+
+**Properties:**
+
+| Property | Meaning |
+| --- | --- |
+| $0 \leq H(X) \leq \log n$ | bounds |
+| $H(X)=0$ | no uncertainty ($p_i=1$ for a single i) |
+| $H(X)=\log n$ | total equiprobability |
+
+**Conditional entropy** (uncertainty about X after observing Y = the ciphertext):
+
+$$H(X|Y) = \sum_{y} P(Y=y) \cdot H(X|Y=y)$$
+
+::: {.callout-tip title="Intuition"}
+
+Perfect security ⟺ $H(X|C) = H(X)$: seeing the ciphertext does not reduce the uncertainty about the plaintext.
+
+:::
+
+## Attacks on Cryptosystems
+
+| Attack | What the adversary has | Goal |
+| --- | --- | --- |
+| *Ciphertext-only* | ciphertext alone | find the key/plaintext (minimal attack) |
+| *Known-plaintext* | (plaintext, ciphertext) pairs | barely easier than ciphertext-only |
+| *Chosen-plaintext* | chooses the plaintext, obtains the ciphertext | recover plaintext from observed ciphertexts |
+| *Adaptive chosen-plaintext* | same, choice depends on ciphertexts received before | — |
+| *Chosen-ciphertext* | chooses the ciphertext, obtains the plaintext | find the key |
+| *Adaptive chosen-ciphertext* | same, choice depends on plaintexts received before | — |
+
+::: {.callout-warning title="Pitfall"}
+
+Order of increasing difficulty for the adversary: *ciphertext-only* < *known-plaintext* < *chosen-plaintext* < *chosen-ciphertext*. The *adaptive* versions strengthen each chosen attack.
+
+:::
+
+## Oracles
+
+| Oracle | Role | Formalization |
+| --- | --- | --- |
+| **Random oracle** | responds in a perfectly random way to x, deterministic if x already seen | $\Pr(\text{Orc}(x)=y)=1/|Y|$; models an ideal hash function |
+| **Encryption oracle** | returns $y=E_k(x)$ | used in *chosen-plaintext* attacks |
+| **Decryption oracle** | returns x such that $E_k(x)=y$ | used in *chosen-ciphertext* attacks |
+| **Signing oracle** | returns $y=S_{privk}(x)$ | public key: oracle unnecessary for public operations |
+
+::: {.callout-warning title="Pitfall"}
+
+*Random oracle model* (theoretical proof) ≠ *standard model* (computationally bounded adversary, real hash function such as SHA-256). A proof in the former may fail in the latter.
+
+:::
+
+## Ciphertext Indistinguishability & Semantic Security
+
+**IND-CPA game:** adversary chooses $M_0, M_1$ → oracle encrypts $M_i$ ($i$ random) → adversary must guess $i$.
+
+$$\text{IND-CPA} \iff \Pr(\text{guess } i) = \tfrac12 + \varepsilon,\ \varepsilon \text{ negligible}$$
+
+IND-CPA ⟺ **semantic security**.
+
+::: {.callout-important title="Key takeaway"}
+
+Public key: no need for an encryption oracle to attack (public keys allow encrypting oneself) → IND-CPA is therefore the minimal requirement for a public-key cryptosystem.
+
+:::
+
+## Deterministic vs Probabilistic Encryption
+
+| | Deterministic | Probabilistic |
+| --- | --- | --- |
+| **Behavior** | same plaintext → same ciphertext | same plaintext → different ciphertext each time |
+| **Weakness** | adversary's *codebook* (guess semantics + compare), especially with public key or if oracle available | resists this type of attack |
+| **Standard solution** | — | OAEP (*Optimal Asymmetric Encryption Padding*) |
+| **Symmetric case** | vulnerable if no random IV | random IV = protection |
+
+**OAEP**: $M_1 := P \oplus h(R)$, $M_2 := R \oplus h(M_1)$, then $C_1=E_{pubk}(M_1)$, $C_2=E_{pubk}(M_2)$.
+Decryption: $R = M_2 \oplus h(M_1)$, $P = h(R) \oplus M_1$. Basis of **RSA-PKCS1**.
+
+::: {.callout-warning title="Pitfall"}
+
+Without randomness, an adversary can build a *codebook* of likely plaintexts (e.g. "yes"/"no") encrypted with the public key and compare — without breaking the algorithm!
+
+:::
+
+## Historical Cryptosystems
+
+| System | Era | Principle | Cryptanalysis |
+| --- | --- | --- | --- |
+| **Caesar Cipher** | 1st century BC | mono-alphabetic substitution: $e_k(x)=(x+k)\bmod 26$ | easy (character frequency) |
+| **Vigenère** | 16th c. | polyalphabetic substitution (key repeated over n blocks) | find key length m (repetitions) then Caesar on each block |
+| **Transposition** (Porta, 1563) | 16th c. | the key defines a **permutation** of the plaintext | — |
+
+## One-Time Pad (Vernam, 1917)
+
+$$E_k(x_i) = x_i \oplus k_i, \qquad D_k(y_i) = y_i \oplus k_i \qquad (1 \leq i \leq n)$$
+
+::: {.callout-important title="Key takeaway"}
+
+**The only system proven unconditionally secure** against *ciphertext-only*, even against an adversary with infinite computing power: $H(X|C)=H(X)$.
+
+Shannon's condition: $H(K) \geq H(X)$ → **key $\geq$ message size**.
+
+:::
+
+::: {.callout-warning title="Major pitfall"}
+
+**Never reuse the key!** If $k$ is reused on $x_a, x_b$:
+
+$$y_a \oplus y_b = x_a \oplus x_b$$
+
+→ vulnerable to *known-plaintext*: the key can be recovered via $k = y_a \oplus x_a$.
+
+:::
+
+**Practical limitation:** key as long as the message → key distribution/management problem. Rarely used in practice, except for the prospects opened up by quantum cryptography (key distribution).
+
+## Steganography
+
+Hides a message **inside** another (≠ cryptography, which makes it unreadable).
+
+Components: **subliminal channel** (hidden channel) + secret mechanism to access it.
+
+| Example | Method |
+| --- | --- |
+| Classic | 1st letters of each word; invisible ink |
+| [Way93] | *least significant bits* of an image's pixels (Kodak Photo CD) — imperceptible |
+
+## Final Summary — Key Takeaways
+
+- **Kerckhoffs**: security = secret key, not the algorithm.
+- **3 levels of security**: unconditional (theoretical, OTP) > provable (reduction to a hard problem) > computational (practical, majority of real-world systems).
+- **Entropy** measures uncertainty; perfect security ⟺ $H(X|C)=H(X)$.
+- **6 attacks**, ranked by increasing adversary power (increasing access to oracles).
+- **Deterministic encryption = flaw** (codebook) → **probabilistic encryption** (OAEP) = standard solution in public-key settings.
+- **One-Time Pad** = the only proven unconditional security, but the key must be as long as the message and **never reusable**.
+- **Steganography** hides the very existence of the message, unlike cryptography, which makes it unreadable.

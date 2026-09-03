@@ -1,0 +1,345 @@
+---
+execute:
+  enabled: false
+---
+
+```quizdown
+### Un Key Distribution Center (KDC) fonctionne selon quel mode de TTP ?
+
+> Le KDC participe en temps réel, mais A et B communiquent-ils directement entre eux ?
+
+1. [ ] In-line
+1. [x] On-line
+    > Correct : le KDC intervient en temps réel (génération de clés de session, tickets) mais A et B communiquent ensuite directement.
+1. [ ] Off-line
+    > Incorrect : off-line correspond aux CAs, qui ne participent pas à l'échange en temps réel.
+```
+
+```quizdown
+### Quelles affirmations décrivent correctement le mode off-line ?
+
+> Compare ce que gagne et ce que perd un système en mode off-line par rapport aux modes in-line/on-line.
+
+- [x] Le TTP n'a pas besoin d'être disponible en permanence.
+    > Correct : l'information (les certificats) est rendue disponible a priori, sans intervention en temps réel.
+- [ ] Les échanges entre A et B nécessitent le TTP à chaque transaction.
+    > Incorrect : c'est caractéristique de l'in-line, pas de l'off-line.
+- [x] La révocation des privilèges est plus complexe à gérer.
+    > Correct : une compromission de clé n'est détectée que de façon asynchrone (via CRL), contrairement aux modes en temps réel.
+- [ ] C'est le mode utilisé par les Key Distribution Centers.
+    > Incorrect : les KDCs fonctionnent en mode on-line (ev. in-line), pas off-line.
+```
+
+```quizdown
+### Pourquoi les Certification Authorities publient-elles des CRLs alors qu'elles fonctionnent en mode off-line ?
+
+> Réfléchis à ce qui peut invalider un certificat après qu'il ait été signé et diffusé.
+
+1. [ ] Parce que la CA doit confirmer périodiquement chaque certificat pour qu'il reste valide.
+    > Incorrect : ceci décrit plutôt la stratégie des certificats à courte validité, une solution alternative.
+1. [x] Parce qu'un vol de clé privée peut invalider un certificat déjà diffusé, de manière asynchrone.
+    > Correct : les cached certificates peuvent circuler librement ; la CRL permet de signaler après coup les certificats devenus invalides.
+1. [ ] Parce que le mode off-line interdit la mise en cache des certificats.
+    > Incorrect : au contraire, les certificats peuvent être cachés n'importe où car ils sont signés.
+```
+
+```quizdown
+### Une organisation veut minimiser les contraintes de disponibilité de son infrastructure de confiance, quitte à accepter une gestion plus lourde de la révocation. Quel mode de TTP est le plus cohérent avec cet objectif ?
+
+> Quel mode ne nécessite pas que le TTP soit constamment joignable ?
+
+1. [ ] In-line
+1. [ ] On-line
+1. [x] Off-line
+    > Correct : c'est exactement le compromis du mode off-line (typiquement les CAs) : faible disponibilité requise, révocation plus complexe.
+```
+
+```quizdown
+### Sans KDC, un système symétrique de 100 entités nécessite environ combien de clés différentes pour que chaque paire partage une clé unique ?
+
+> Utilise la formule n(n-1)/2 avec n = 100.
+
+1. [ ] 100
+1. [ ] 200
+1. [x] Environ 4950
+    > Correct : n(n-1)/2 = 100 x 99 / 2 = 4950, soit de l'ordre de n².
+1. [ ] Environ 10000
+```
+
+```quizdown
+### Avec un KDC en place, combien de nouvelles clés faut-il générer lorsqu'une nouvelle entité rejoint un système de 100 entités ?
+
+> Compare avec le cas sans KDC, où l'ajout d'une entité générait n nouvelles clés.
+
+1. [x] 1 seule clé (partagée avec le KDC)
+    > Correct : c'est justement l'intérêt de la scalabilité du KDC : une seule clé par nouvelle entité au lieu de n.
+1. [ ] 100 nouvelles clés
+1. [ ] 4950 nouvelles clés
+```
+
+```quizdown
+### Quels problèmes sont spécifiquement associés aux KDCs (et pas directement aux CAs) ?
+
+> Pense au mode de fonctionnement habituel d'un KDC et à ce que cela implique en termes de disponibilité et de performance.
+
+- [x] Single point of operational failure (le système est paralysé si le KDC est indisponible).
+    > Correct : le mode on-line du KDC rend le système dépendant de sa disponibilité en temps réel.
+- [x] Performance bottleneck lié aux opérations cryptographiques répétées.
+    > Correct : chaque échange sollicite le KDC (chiffrement, génération aléatoire), ce qui peut créer un goulot d'étranglement.
+- [ ] Nécessité de publier des listes de révocation.
+    > Incorrect : les CRLs sont propres aux CAs, pas aux KDCs.
+- [ ] Impossibilité de mettre en cache l'information distribuée.
+    > Incorrect : cette contrainte ne s'applique pas particulièrement au KDC ; elle n'est d'ailleurs pas un problème identifié du cours pour les KDCs.
+```
+
+```quizdown
+### Une CA voit sa clé privée de signature compromise. Quelle affirmation décrit le mieux la gravité de cette situation par rapport à la compromission d'un KDC ?
+
+> Le cours qualifie cette conséquence de « moins évidente mais presque aussi néfaste ».
+
+1. [ ] La compromission d'une CA est totalement anodine, contrairement à celle d'un KDC.
+1. [x] Elle a des conséquences moins immédiatement visibles que la compromission d'un KDC, mais presque aussi graves.
+    > Correct : contrairement au KDC (impact immédiat et total), l'impact de la CA compromise se manifeste surtout via de faux certificats émis, moins visibles au premier abord.
+1. [ ] Elle est strictement plus grave car elle affecte aussi la disponibilité du système.
+    > Incorrect : la disponibilité n'est pas l'enjeu principal ici ; c'est l'authenticité des associations identité-clé qui est compromise.
+```
+
+```quizdown
+### Pourquoi la simple vérification de l'identité de A ne suffit-elle pas pour créer un certificat associant A à sa clé publique ?
+
+> Que se passe-t-il si quelqu'un d'autre connaît la clé publique de A mais pas sa clé privée ?
+
+1. [ ] Parce que l'identité de A change trop souvent.
+1. [x] Parce qu'il faut aussi prouver que A possède réellement la clé privée correspondante (Proof of Possession).
+    > Correct : sans PoP, un attaquant peut faire certifier une clé publique qui n'est pas la sienne, sur la base d'un document déjà signé par le véritable propriétaire.
+1. [ ] Parce que la CA ne peut pas générer de certificat sans passeport numérique.
+```
+
+```quizdown
+### Remets dans l'ordre les étapes de l'attaque décrite dans le cours contre une CA qui ne vérifie pas la Proof of Possession.
+
+> Pense à qui envoie quoi, et à qui intercepte le message initial.
+
+1. C, l'attaquant, obtient de sa propre CA un certificat liant son identité à la même clé publique que celle utilisée par A.
+2. A signe un document décrivant une invention et l'envoie à B avec son certificat signé par sa CA.
+3. C intercepte le paquet envoyé par A à B.
+4. C envoie à B le document signé par A, accompagné de son propre certificat frauduleux.
+```
+
+```quizdown
+### Dans le protocole de vérification de la Proof of Possession, à quoi sert la valeur aléatoire r envoyée par la CA à A ?
+
+> Pense à ce qui empêche un attaquant de faire signer un message de son choix à l'avance.
+
+1. [ ] À chiffrer la clé publique de A.
+1. [x] À protéger A contre les chosen message attacks, en garantissant que la signature porte sur une valeur imprévisible.
+    > Correct : r est un nombre aléatoire ; A signe (A, r), ce qui empêche un attaquant de préparer une signature valide à l'avance.
+1. [ ] À indiquer la durée de validité du futur certificat.
+```
+
+```quizdown
+### Un adversaire possède la clé privée qui sert à la fois à signer les certificats et les CRLs d'une CA. Que peut-il faire contre une victime A sous l'autorité de cette CA ?
+
+> Il peut à la fois révoquer et re-certifier.
+
+- [x] Publier une CRL révoquant le véritable certificat de A.
+    > Correct : c'est la première étape décrite dans le cours pour cette attaque.
+- [x] Créer un nouveau certificat associant A à une clé publique dont il contrôle la clé privée.
+    > Correct : il peut ensuite se faire passer pour A ou intercepter ses communications (Man-in-the-Middle).
+- [ ] Modifier directement le contenu des messages déjà signés par A dans le passé.
+    > Incorrect : la compromission de la clé de la CA ne permet pas de falsifier des signatures déjà produites par A lui-même.
+- [ ] Devenir automatiquement la Registration Authority de A.
+    > Incorrect : ce n'est pas une conséquence évoquée dans le cours.
+```
+
+```quizdown
+### Quel est l'objectif principal du principe de « separation of duties » entre certification et révocation ?
+
+> Pense à ce qui rend l'attaque précédente possible.
+
+1. [ ] Réduire les coûts de fonctionnement de la CA.
+1. [x] Empêcher qu'une seule clé compromise permette à la fois de révoquer un vrai certificat et d'en émettre un faux.
+    > Correct : en utilisant des clés et entités distinctes (CA et Revocation Authority), la compromission de l'une ne compromet pas l'autre fonction.
+1. [ ] Accélérer la publication des certificats.
+```
+
+```quizdown
+### Quelle différence distingue fondamentalement une Registration Authority d'une Certification Authority ?
+
+> L'une nécessite un contact direct avec les utilisateurs, l'autre non.
+
+1. [ ] La Registration Authority signe les certificats, la CA se contente de vérifier les identités.
+1. [x] La Registration Authority effectue les vérifications nécessitant un contact direct avec les entités (identité, PoP), tandis que la CA gère la création/maintenance des certificats, souvent à distance.
+    > Correct : cette séparation est généralement motivée par des considérations géographiques.
+1. [ ] Elles remplissent exactement le même rôle mais dans des juridictions différentes.
+```
+
+```quizdown
+### Quels sont l'avantage et le désavantage principaux de déléguer la génération des paires de clés à un Key Generator ?
+
+> Qui d'autre connaît alors la clé privée de l'utilisateur ?
+
+1. [ ] Avantage : sécurité renforcée uniquement. Désavantage : coût très élevé.
+1. [x] Avantage : simplicité pour l'utilisateur et sécurité potentiellement renforcée. Désavantage : perte de la non-répudiation, car la clé privée est connue d'un tiers.
+    > Correct : c'est exactement le compromis identifié dans le cours.
+1. [ ] Avantage : aucune clé privée n'est nécessaire. Désavantage : incompatibilité avec les CAs.
+```
+
+```quizdown
+### Un Timestamp Agent et un Notary Agent remplissent-ils exactement le même rôle ?
+
+> Le TA certifie l'existence à un instant donné ; le Notary Agent va-t-il plus loin ?
+
+1. [ ] Vrai
+1. [x] Faux
+    > Faux : le Notary Agent certifie en plus la validité, l'origine ou l'appartenance du document, en support à la non-répudiation, ce que ne fait pas nécessairement le TA seul.
+```
+
+```quizdown
+### Quelle est la différence principale entre le Clipper chip et son successeur, le Capstone chip ?
+
+> Pense au type de cryptographie utilisé et au support matériel associé.
+
+1. [ ] Le Clipper chip est asymétrique, le Capstone chip est symétrique.
+1. [x] Le Capstone chip apporte la cryptographie asymétrique et peut être intégré dans une carte PCMCIA (Fortezza) pour un usage de sécurité militaire.
+    > Correct : le Clipper chip (1993) était symétrique ; ses failles et le besoin de crypto asymétrique ont mené au Capstone chip.
+1. [ ] Les deux systèmes sont identiques, seul le nom commercial change.
+```
+
+```quizdown
+### Dans un certificat X.509 générique, quel champ garantit l'authenticité de l'ensemble des autres informations qu'il contient ?
+
+> Quel champ porte sur tous les enregistrements précédents ?
+
+1. [ ] Subject Public Key
+1. [ ] Issuer
+1. [x] Signature
+    > Correct : la signature, calculée avec la clé privée de la CA sur tous les champs précédents, garantit l'intégrité et l'authenticité du certificat.
+1. [ ] Serial Number
+```
+
+```quizdown
+### Une application reçoit un certificat dont le numéro de série figure dans la dernière CRL publiée par la CA émettrice. Que doit-elle faire ?
+
+> Le rôle premier d'une CRL est justement de signaler ce type de cas.
+
+1. [x] Considérer le certificat comme non valide, même s'il n'a pas encore expiré selon son champ Validity.
+    > Correct : la présence dans la CRL signale une révocation (ex. clé compromise), indépendamment de la date d'expiration initiale.
+1. [ ] Faire confiance au certificat tant que sa période de Validity n'est pas écoulée.
+1. [ ] Contacter directement le Subject pour lui demander confirmation.
+```
+
+```quizdown
+### Utiliser des certificats à très courte durée de validité (nécessitant une re-confirmation fréquente) permet-il de résoudre le problème de la révocation sans introduire de nouvel inconvénient ?
+
+> Que devient alors le mode de fonctionnement de la CA ?
+
+1. [ ] Vrai
+1. [x] Faux
+    > Faux : cette solution ramène le système vers un mode on-line, exigeant une haute disponibilité de la CA — l'inconvénient qu'on cherchait justement à éviter avec le mode off-line.
+```
+
+```quizdown
+### Dans un arbre d'authentification, pour vérifier l'authenticité de la feuille Y1 (avec 4 feuilles au total), quelles valeurs doit-on fournir en plus de Y1 lui-même ?
+
+> Quelles branches ne sont pas sur le chemin direct de Y1 vers la racine ?
+
+- [x] h(Y2)
+    > Correct : nécessaire pour recalculer h1 = h(h(Y1) concaténé avec h(Y2)).
+- [ ] Y2 en clair
+    > Incorrect : seule la valeur hachée h(Y2) est nécessaire, pas la valeur en clair.
+- [x] h2 (l'étiquette du nœud interne regroupant Y3 et Y4)
+    > Correct : nécessaire pour recalculer la racine R = h(h1 concaténé avec h2).
+- [ ] La clé privée de la CA
+    > Incorrect : aucune CA n'intervient dans un arbre d'authentification ; seule la racine R doit être authentifiée séparément (ex. signature).
+```
+
+```quizdown
+### Quel est l'avantage principal d'un arbre d'authentification par rapport à un système de certificats classique ?
+
+> Combien d'éléments nécessitent une protection cryptographique directe (signature) dans chaque système ?
+
+1. [ ] Il élimine complètement le besoin de fonctions de hachage.
+1. [x] Seule la racine R nécessite une protection cryptographique ; le reste des valeurs est protégé par la non-réversibilité de la fonction de hachage.
+    > Correct : c'est l'avantage principal identifié dans le cours, contrairement aux certificats où chaque enregistrement est directement signé.
+1. [ ] Il ne nécessite jamais de recalcul, même en cas de modification.
+    > Incorrect : au contraire, modifier un nœud impose de recalculer tout le chemin jusqu'à la racine.
+```
+
+```quizdown
+### Remets dans l'ordre les étapes de construction d'un arbre d'authentification pour n valeurs publiques Y1...Yn.
+
+> Commence par où sont placées les données, puis comment les étiquettes remontent vers la racine.
+
+1. Chaque nœud non-terminal ayant des arcs sous-jacents étiquetés h1 et h2 est étiqueté h(h1 concaténé avec h2).
+2. Les valeurs Y1, Y2, ..., Yn sont placées dans les feuilles de l'arbre.
+3. Chaque arc partant d'une feuille Yi est étiqueté h(Yi).
+```
+
+```quizdown
+### Pourquoi utilise-t-on de préférence des arbres équilibrés pour les arbres d'authentification ?
+
+> Pense au nombre de valeurs intermédiaires nécessaires pour vérifier une feuille.
+
+1. [ ] Parce qu'ils permettent d'éviter complètement les recalculs lors de modifications.
+1. [x] Parce qu'ils réduisent le nombre de valeurs intermédiaires nécessaires à la vérification, de l'ordre de log2(n) plutôt que n.
+    > Correct : un arbre équilibré minimise la longueur du chemin entre une feuille et la racine.
+1. [ ] Parce qu'ils permettent de se passer d'une fonction de hachage résistante aux collisions.
+```
+
+```quizdown
+### Deux CAs différentes, CA_A et CA_B, ont établi un certificat croisé CA_A{CA_B}. A veut vérifier la clé publique de B, certifiée par CA_B. Que doit fournir B à A pour compléter la chaîne de certification ?
+
+> La chaîne complète doit permettre à A de remonter jusqu'à une clé qu'il connaît déjà de façon authentique.
+
+1. [ ] La clé privée de CA_B.
+1. [x] Son certificat signé par CA_B, soit CA_B{B}.
+    > Correct : la chaîne CA_A{CA_B} · CA_B{B} permet à A de vérifier la clé de B en partant de sa copie authentique de pub CA_A.
+1. [ ] Un nouveau certificat croisé signé par CA_A.
+```
+
+```quizdown
+### Quelle différence structurelle oppose le modèle hiérarchique strict (PEM/X.509) au modèle de graphe de confiance (PGP) ?
+
+> Dans l'un, il existe un point de départ unique reconnu par tous ; dans l'autre, non.
+
+1. [ ] Le modèle PGP impose une racine unique connue mondialement, contrairement à PEM/X.509.
+1. [x] PEM/X.509 repose sur une racine unique dont la clé est connue de tous, alors que PGP repose sur un graphe où les utilisateurs eux-mêmes agissent comme CAs pour leurs correspondants.
+    > Correct : cette différence explique pourquoi PGP est bien adapté aux groupes fermés mais limité pour des populations non connectées, contrairement au modèle hiérarchique.
+1. [ ] Les deux modèles sont structurellement identiques, seule la terminologie diffère.
+```
+
+```quizdown
+### Une chaîne de certification est-elle toujours aussi sûre que son maillon le plus fort ?
+
+> Réfléchis à ce qui arrive si un seul certificat intermédiaire de la chaîne est compromis.
+
+1. [ ] Vrai
+1. [x] Faux
+    > Faux : le cours précise qu'une chaîne de certification est aussi vulnérable que son maillon le plus faible, d'où l'intérêt de garder les chaînes aussi courtes que possible.
+```
+
+```quizdown
+### La fonctionnalité « Key Backup and Recovery » d'une PKI s'applique-t-elle indifféremment aux clés privées de signature et de décryption ?
+
+> Le cours précise une nuance importante sur ce point.
+
+1. [ ] Vrai
+1. [x] Faux
+    > Faux : cette procédure s'applique principalement à la clé privée de décryption ; sauvegarder une clé privée de signature poserait un problème de non-répudiation.
+```
+
+```quizdown
+### Une entreprise qui déploie une PKI complète espère éviter les solutions de sécurité « au cas par cas ». Quels avantages cela lui apporte-t-il directement, selon le cours ?
+
+> Pense à l'intégration de plusieurs services de sécurité en un seul environnement.
+
+- [x] Une gestion intégrée de plusieurs services : authentification forte, signature/non-répudiation, single sign-on, VPN, communications sécurisées B2B/B2C.
+    > Correct : c'est l'avantage « tout en un » décrit dans le cours, source d'économies par rapport aux solutions séparées.
+- [x] Une interopérabilité facilitée grâce aux standards largement répandus (X.509, PKCS, OCSP).
+    > Correct : la conformité à ces standards favorise la compatibilité intra et inter-entreprise.
+- [ ] Une réduction garantie du coût de mise en place par rapport à toute autre solution.
+    > Incorrect : le cours identifie au contraire le coût de mise en place comme un inconvénient majeur des PKIs.
+- [ ] La suppression complète du besoin de personnel qualifié.
+    > Incorrect : le cours mentionne au contraire la rareté des compétences comme un inconvénient.
+```

@@ -1,0 +1,188 @@
+## Vue d'ensemble
+
+| Bloc | Contenu clé |
+| --- | --- |
+| Principes | Kerckhoffs' principle |
+| Classification | Sécurité inconditionnelle / provable / calculatoire |
+| Théorie | Entropie |
+| Attaques | 6 modèles d'attaque sur cryptosystèmes |
+| Oracles | Random oracle, encryption/decryption/signing oracle |
+| Cryptage | Déterministe (faiblesses) vs probabiliste (OAEP) |
+| Historique | Caesar, Vigenère, Transposition |
+| Sécurité parfaite | One-Time Pad (Vernam) |
+| Dissimulation | Stéganographie |
+
+## Principe de Kerckhoffs
+
+::: {.callout-important title="À retenir"}
+
+Le système doit être sûr **même si l'algorithme est public** : seule la clé doit rester secrète.
+
+Pas de *security through obscurity*.
+
+:::
+
+6 principes (1883) — les 2 essentiels :
+
+1. **Le système doit être pratiquement (sinon mathématiquement) indéchiffrable.**
+2. **Il ne doit pas nécessiter le secret ; sa divulgation ne doit pas poser problème.**
+
+Autres (secondaires) : clé mémorisable/changeable sans notes écrites, applicable au télégraphe, portable, facile d'usage.
+
+## Classification des cryptosystèmes
+
+| Catégorie | Principe | Condition | Exemple |
+| --- | --- | --- | --- |
+| **Sécurité inconditionnelle** (*unconditional / perfect secrecy*) | $P(x\mid y) = P(x)$ : observer le ciphertext n'aide pas | clé $\geq$ taille du message, **jamais réutilisée** | One-Time Pad (1917, Mauborgne/Vernam) |
+| **Provable security** (*as hard as*) | cryptanalyse aussi dure qu'un problème mathématique réputé difficile (factorisation, log discret) | preuve de "réduction" | RSA, Rabin (réduits à la factorisation) |
+| **Sécurité calculatoire** (*computational / practical*) | casser = effort de calcul hors de portée d'un adversaire réaliste | — | AES, DES, IDEA, RC4 |
+
+::: {.callout-warning title="Piège"}
+
+*Provable security* ≠ preuve absolue : controverse académique sur la portée réelle de ces preuves de réduction.
+
+:::
+
+## Entropie
+
+**Définition (Shannon, 1948)** : quantité d'information "effective" contenue dans une variable aléatoire X.
+
+$$H(X) = -\sum_{i=1}^{n} p_i \log p_i = \sum_{i=1}^{n} p_i \log(1/p_i)$$
+
+- logs en base 2 ; convention $p_i \log p_i = 0$ si $p_i=0$.
+- **Redondance** = codage effectif − entropie (ex : anglais ≈ 1.3 bit/lettre → redondance 6.7 bits sur un codage à 8 bits).
+
+**Propriétés :**
+
+| Propriété | Signification |
+| --- | --- |
+| $0 \leq H(X) \leq \log n$ | bornes |
+| $H(X)=0$ | aucune incertitude ($p_i=1$ pour un seul i) |
+| $H(X)=\log n$ | équiprobabilité totale |
+
+**Entropie conditionnelle** (incertitude sur X après observation de Y = le ciphertext) :
+
+$$H(X|Y) = \sum_{y} P(Y=y) \cdot H(X|Y=y)$$
+
+::: {.callout-tip title="Intuition"}
+
+Sécurité parfaite ⟺ $H(X|C) = H(X)$ : voir le ciphertext ne réduit pas l'incertitude sur le plaintext.
+
+:::
+
+## Attaques sur les cryptosystèmes
+
+| Attaque | Ce que possède l'adversaire | But |
+| --- | --- | --- |
+| *Ciphertext-only* | ciphertext seul | trouver clé/plaintext (attaque minimale) |
+| *Known-plaintext* | couples (plaintext, ciphertext) | à peine plus facile que ciphertext-only |
+| *Chosen-plaintext* | choisit le plaintext, obtient le ciphertext | retrouver du plaintext depuis ciphertexts observés |
+| *Adaptive chosen-plaintext* | idem, choix dépend des ciphertexts reçus avant | — |
+| *Chosen-ciphertext* | choisit le ciphertext, obtient le plaintext | trouver la clé |
+| *Adaptive chosen-ciphertext* | idem, choix dépend des plaintexts reçus avant | — |
+
+::: {.callout-warning title="Piège"}
+
+Ordre de difficulté croissante pour l'adversaire : *ciphertext-only* < *known-plaintext* < *chosen-plaintext* < *chosen-ciphertext*. Les versions *adaptive* renforcent chaque attaque à choix.
+
+:::
+
+## Oracles
+
+| Oracle | Rôle | Formalisation |
+| --- | --- | --- |
+| **Random oracle** | répond de façon parfaitement aléatoire à x, déterministe si x déjà vu | $\Pr(\text{Orc}(x)=y)=1/|Y|$ ; modélise une fonction de hachage idéale |
+| **Encryption oracle** | retourne $y=E_k(x)$ | utilisé dans attaques *chosen-plaintext* |
+| **Decryption oracle** | retourne x tel que $E_k(x)=y$ | utilisé dans attaques *chosen-ciphertext* |
+| **Signing oracle** | retourne $y=S_{privk}(x)$ | clé publique : oracle inutile pour les opérations publiques |
+
+::: {.callout-warning title="Piège"}
+
+*Random oracle model* (preuve théorique) ≠ *standard model* (adversaire borné en calcul, fonction de hachage réelle type SHA-256). Une preuve dans le premier peut échouer dans le second.
+
+:::
+
+## Indiscernabilité des ciphertexts & sécurité sémantique
+
+**Jeu IND-CPA :** adversaire choisit $M_0, M_1$ → oracle chiffre $M_i$ ($i$ aléatoire) → adversaire doit deviner $i$.
+
+$$\text{IND-CPA} \iff \Pr(\text{deviner } i) = \tfrac12 + \varepsilon,\ \varepsilon \text{ négligeable}$$
+
+IND-CPA ⟺ **sécurité sémantique**.
+
+::: {.callout-important title="À retenir"}
+
+Clé publique : pas besoin d'oracle de cryptage pour attaquer (les clés publiques permettent de chiffrer soi-même) → l'IND-CPA est donc l'exigence minimale pour un cryptosystème à clé publique.
+
+:::
+
+## Cryptage déterministe vs probabiliste
+
+| | Déterministe | Probabiliste |
+| --- | --- | --- |
+| **Comportement** | même plaintext → même ciphertext | même plaintext → ciphertext différent à chaque fois |
+| **Faiblesse** | *codebook* d'un adversaire (deviner sémantique + comparer), surtout en clé publique ou si oracle dispo | résiste à ce type d'attaque |
+| **Solution standard** | — | OAEP (*Optimal Asymmetric Encryption Padding*) |
+| **Cas symétrique** | vulnérable si pas d'IV aléatoire | IV aléatoire = protection |
+
+**OAEP** : $M_1 := P \oplus h(R)$, $M_2 := R \oplus h(M_1)$, puis $C_1=E_{pubk}(M_1)$, $C_2=E_{pubk}(M_2)$.
+Décryptage : $R = M_2 \oplus h(M_1)$, $P = h(R) \oplus M_1$. Base de **RSA-PKCS1**.
+
+::: {.callout-warning title="Piège"}
+
+Sans aléa, un adversaire peut construire un *codebook* de plaintexts probables (ex. "yes"/"no") chiffrés avec la clé publique et comparer — sans casser l'algorithme !
+
+:::
+
+## Cryptosystèmes historiques
+
+| Système | Époque | Principe | Cryptanalyse |
+| --- | --- | --- | --- |
+| **Caesar Cipher** | I av. JC | substitution mono-alphabétique : $e_k(x)=(x+k)\bmod 26$ | facile (fréquence des caractères) |
+| **Vigenère** | XVIe s. | substitution polyalphabétique (clé répétée sur n blocs) | trouver taille m de la clé (répétitions) puis Caesar sur chaque bloc |
+| **Transposition** (Porta, 1563) | XVIe s. | la clé définit une **permutation** du plaintext | — |
+
+## One-Time Pad (Vernam, 1917)
+
+$$E_k(x_i) = x_i \oplus k_i, \qquad D_k(y_i) = y_i \oplus k_i \qquad (1 \leq i \leq n)$$
+
+::: {.callout-important title="À retenir"}
+
+**Seul système prouvé inconditionnellement sûr** contre *ciphertext-only*, même avec un adversaire à puissance de calcul infinie : $H(X|C)=H(X)$.
+
+Condition de Shannon : $H(K) \geq H(X)$ → **clé $\geq$ taille du message**.
+
+:::
+
+::: {.callout-warning title="Piège majeur"}
+
+**Ne jamais réutiliser la clé !** Si $k$ réutilisée sur $x_a, x_b$ :
+
+$$y_a \oplus y_b = x_a \oplus x_b$$
+
+→ vulnérable à *known-plaintext* : la clé se retrouve via $k = y_a \oplus x_a$.
+
+:::
+
+**Limite pratique :** clé aussi longue que le message → problème de distribution/gestion des clés. Peu utilisé en pratique, sauf perspectives ouvertes par la cryptographie quantique (distribution de clés).
+
+## Stéganographie
+
+Cache un message **dans** un autre (≠ cryptographie qui le rend illisible).
+
+Composants : **canal subliminal** (canal caché) + mécanisme secret pour y accéder.
+
+| Exemple | Méthode |
+| --- | --- |
+| Classique | 1res lettres de chaque mot ; encre invisible |
+| [Way93] | *least significant bits* des pixels d'une image (Kodak Photo CD) — imperceptible |
+
+## Synthèse finale — À retenir
+
+- **Kerckhoffs** : sécurité = clé secrète, pas l'algorithme.
+- **3 niveaux de sécurité** : inconditionnelle (théorique, OTP) > provable (réduction à un problème dur) > calculatoire (pratique, majorité des systèmes réels).
+- **Entropie** mesure l'incertitude ; sécurité parfaite ⟺ $H(X|C)=H(X)$.
+- **6 attaques**, classées par puissance croissante de l'adversaire (accès croissant à des oracles).
+- **Cryptage déterministe = faille** (codebook) → **cryptage probabiliste** (OAEP) = solution standard en clé publique.
+- **One-Time Pad** = seule sécurité prouvée inconditionnelle, mais clé aussi longue que le message et **jamais réutilisable**.
+- **Stéganographie** cache l'existence même du message, contrairement à la cryptographie qui le rend illisible.

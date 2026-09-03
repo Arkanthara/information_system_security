@@ -1,0 +1,411 @@
+---
+execute:
+  enabled: false
+---
+
+```quizdown
+### What fundamentally defines a stream cipher as opposed to a block cipher?
+
+> Compare the size of the unit that is actually encrypted in each family.
+
+1. [ ] A stream cipher always uses a shorter key than a block cipher
+1. [x] A stream cipher encrypts bit by bit, whereas a block cipher encrypts blocks of n bits
+    > Correct: the fundamental structural difference is the size of the encrypted unit (1 bit vs. a block).
+1. [ ] A stream cipher is always asymmetric
+    > Incorrect: both families are symmetric (same key to encrypt/decrypt).
+1. [ ] A stream cipher cannot use an xor operation
+    > Incorrect: on the contrary, xor is the most common substitution operation in stream ciphers.
+```
+
+```quizdown
+### Which statements correctly describe stream ciphers?
+
+> Think back to both the advantages AND the drawbacks presented in the course.
+
+- [x] They require little or no memory/buffering
+    > Correct: this is a central characteristic, linked to bit-by-bit processing.
+- [x] Reusing the keystream seriously compromises security
+    > Correct: this is the classic weakness illustrated by the one-time pad.
+- [ ] They are slower than a block cipher because they require more computation per bit
+    > Incorrect: on the contrary, they are known to be very fast, well suited to "on the fly" encryption.
+- [ ] Their robustness does not depend on the quality of the random generator used
+    > Incorrect: robustness in fact depends heavily on the quality (randomness) of the generated keystream.
+```
+
+```quizdown
+### A stream cipher necessarily needs more CPU resources than a block cipher to encrypt the same amount of data.
+
+> Think back to one of the arguments in favor of stream ciphers given in the course.
+
+1. [ ] True
+1. [x] False
+    > False: one of the advantages highlighted is precisely their low CPU cost, well suited to resource-limited systems.
+```
+
+```quizdown
+### A video streaming application needs to encrypt a continuous, real-time data stream, with packets sometimes lost during transmission. Why is a stream cipher (rather than a classic block cipher in a chained mode) often well suited to this context?
+
+> Think about error propagation and how packet loss is handled.
+
+1. [ ] Because a stream cipher can never be broken by cryptanalysis
+    > Incorrect: no system presented is described as unbreakable; RC4, for example, has been broken.
+1. [x] Because error propagation is limited or absent, which tolerates packet loss well
+    > Correct: the course explicitly states that this property makes stream ciphers well suited to transmissions with frequent losses (WiFi, streaming).
+1. [ ] Because a stream cipher never requires a secret key
+    > Incorrect: a stream cipher does use a secret key k, like any symmetric system.
+1. [ ] Because block encryption is always slower in every context
+    > Incorrect: the course does not make this general claim; error propagation is the key argument here.
+```
+
+```quizdown
+### In a synchronous stream cipher, what does the keystream generated at step i depend on?
+
+> Look carefully at the arguments of the functions f and g in the course's equations.
+
+1. [ ] On the plaintext m_i only
+1. [ ] On the ciphertext c_i only
+1. [x] On the internal state and the key k, but not on the plaintext or the ciphertext
+    > Correct: this is precisely what distinguishes synchronous mode from asynchronous mode.
+1. [ ] On the previous t ciphertexts only
+    > Incorrect: this dependency characterizes asynchronous mode, not synchronous mode.
+```
+
+```quizdown
+### A sender and a receiver using an asynchronous (self-synchronizing) stream cipher temporarily lose synchronization following the deletion of a ciphertext in transit. What happens next, according to the course?
+
+> Think about the role of the buffer of previous ciphertexts in generating the asynchronous keystream.
+
+1. [ ] The receiver remains permanently out of sync, as in the synchronous case
+    > Incorrect: it is in fact the opposite; self-synchronization is the distinctive property of asynchronous mode.
+1. [x] The receiver automatically regains synchronization after a number of ciphertexts equal to the buffer size
+    > Correct: the asynchronous keystream depends on the last t ciphertexts; once this buffer has been refreshed with correct ciphertexts, synchronization is restored.
+1. [ ] The entire communication must be restarted from scratch with a new key
+    > Incorrect: no complete restart is necessary; self-synchronization happens automatically.
+1. [ ] The loss of synchronization has no observable effect on decryption
+    > Incorrect: it causes error propagation limited to the buffer size, so it is not without effect.
+```
+
+```quizdown
+### An engineer needs to encrypt highly redundant plaintexts (for example, near-identical protocol headers), with a risk of targeted statistical attacks. Which type of stream cipher does the course recommend favoring in this case, and why?
+
+> The course explicitly links one type of stream cipher to better diffusion of the plaintext's statistics.
+
+1. [ ] Synchronous, because it propagates no errors
+1. [x] Asynchronous, because each plaintext bit influences all subsequent ciphertexts, which better disperses the statistics
+    > Correct: the course explicitly recommends asynchronous stream ciphers when plaintext entropy is limited.
+1. [ ] Synchronous, because it requires less buffer memory
+    > Incorrect: the question is about protection against redundant statistics, not about memory.
+1. [ ] Neither of the two; a block cipher must be used in this case
+    > Incorrect: the course states a preference between the two types of stream ciphers, not a rejection of stream ciphers.
+```
+
+```quizdown
+### Which of the following are correct characteristics of an LFSR (Linear Feedback Shift Register), according to the course?
+
+> Think back to both the practical advantages and the security limitations of LFSRs.
+
+- [x] It adapts very well to hardware implementations
+    > Correct: this is one of the highlighted advantages.
+- [x] It produces long-period sequences with notable randomness
+    > Correct: this is explicitly mentioned as a property of the LFSR.
+- [ ] It nowadays offers a level of security comparable to modern block ciphers
+    > Incorrect: the course states that the security of LFSR-based systems is considered insufficient compared to block ciphers.
+- [ ] Its linear complexity cannot be computed algorithmically
+    > Incorrect: the Berlekamp-Massey algorithm makes it possible to compute exactly this linear complexity.
+```
+
+```quizdown
+### Why were NLFSRs (Non Linear Feedback Shift Registers) introduced to replace classic LFSRs?
+
+> Think about the main weakness of LFSRs mentioned in the course, related to their algebraic nature.
+
+1. [ ] To reduce the required key length
+1. [x] To increase the (linear) complexity, and thus resistance to cryptanalysis, by replacing the linear combination with a non-linear function f
+    > Correct: the course explicitly presents NLFSRs as a solution to increase complexity in response to the weakness of purely linear combinations.
+1. [ ] To allow the use of variable-length keys, which LFSRs do not allow
+1. [ ] Because LFSRs cannot be implemented in hardware
+    > Incorrect: it is the opposite; LFSRs are known to be well suited to hardware.
+```
+
+```quizdown
+### RC4: which of these statements correctly describes the algorithm, according to the course?
+
+> Think back to how RC4 operates and its history.
+
+1. [ ] RC4 is an asynchronous stream cipher whose keystream depends on the previous ciphertexts
+    > Incorrect: RC4 operates in synchronous mode, independent of the ciphertext and the plaintext.
+1. [x] RC4 relies on a 256-value S-box, built from a variable-length key
+    > Correct: the 8x8 S-box (a permutation of 0 to 255) is the key element of RC4, initialized based on the key.
+1. [ ] RC4 has remained entirely confidential and has never been the subject of public analysis
+    > Incorrect: after it leaked in 1994, it was widely studied by the cryptographic community.
+1. [ ] RC4 is slower than DES in a software implementation
+    > Incorrect: the course states that RC4 is about 10 times faster than DES.
+```
+
+```quizdown
+### What is the difference in role between the KSA and the PRGA in RC4?
+
+> Think about what result each of these two algorithms produces.
+
+1. [ ] The KSA generates the final keystream, the PRGA initializes the S-box
+1. [x] The KSA initializes and scrambles the S-box based on the key; the PRGA then generates the keystream from this S-box
+    > Correct: this is exactly the division of roles described in the course (Key Scheduling, then Pseudo Random Generation).
+1. [ ] The KSA and the PRGA perform exactly the same operation, one after the other
+1. [ ] The PRGA is executed before the KSA in the algorithm's flow
+    > Incorrect: the S-box must first be built by the KSA before the PRGA can generate the keystream.
+```
+
+```quizdown
+### Put the steps of how RC4 works in chronological order.
+
+> Think about what must exist before a keystream can be generated.
+
+1. Initialization of S as the identity permutation (0, 1, ..., N-1)
+2. Scrambling of S based on the key K (KSA loop)
+3. Iterative generation of the keystream via the PRGA loop
+4. Final encryption of the plaintext by xor with the generated keystream
+```
+
+```quizdown
+### The use of RC4 in the WiFi WEP protocol was considered secure for many years and was never compromised in practice.
+
+> Think back to what the course says about RC4 applied to WEP.
+
+1. [ ] True
+1. [x] False
+    > False: the course explicitly states that the application of RC4 to WEP was "broken" following a flaw in the way the protocol was used.
+```
+
+```quizdown
+### What property MUST the function associated with a block cipher have, to allow unique decryption?
+
+> Think about what guarantees that a given ciphertext corresponds to only one possible plaintext.
+
+1. [ ] It must be linear
+1. [ ] It must commute with the key-generation function
+1. [x] It must be bijective
+    > Correct: each key defines a different bijection, a necessary condition for unique decryption to be possible.
+1. [ ] It must produce an output block larger than the input block
+    > Incorrect: a block cipher maps an n-bit block to another block of the same size n.
+```
+
+```quizdown
+### Which criteria can be used to evaluate the quality of a modern block cipher, according to the course?
+
+> Think back to the four criteria presented (key, performance, block size, resistance).
+
+- [x] High key entropy, with keys of at least 128 bits
+    > Correct: this is an explicit criterion for resisting brute-force attacks.
+- [x] A sufficiently large block size (typically at least 128 bits)
+    > Correct: a block that is too small would allow plaintext/ciphertext dictionary attacks.
+- [ ] The mandatory use of a Feistel-type structure
+    > Incorrect: AES, for example, is a modern block cipher that is not a Feistel cipher.
+- [ ] The total absence of any non-linear operation
+    > Incorrect: non-linear operations (S-boxes) are, on the contrary, essential to cryptographic resistance.
+```
+
+```quizdown
+### An attacker observes that two identical plaintext blocks systematically produce two identical ciphertext blocks in a system encrypted with a block cipher. Which mode of operation is most likely being used?
+
+> Think about the mode that involves no chaining between blocks.
+
+1. [ ] CBC
+    > Incorrect: in CBC, identical plaintexts produce different ciphertexts thanks to chaining (if the IV changes).
+1. [x] ECB
+    > Correct: the lack of chaining in ECB means that identical plaintexts always produce the same ciphertexts, which is precisely its well-known weakness.
+1. [ ] CTR
+    > Incorrect: in CTR, the counter changes for each block, so identical plaintexts produce different ciphertexts.
+1. [ ] OFB
+    > Incorrect: in OFB, if the IV changes, identical plaintexts also produce different ciphertexts.
+```
+
+```quizdown
+### An application needs to encrypt and transmit very large volumes of data at high speed, with a need for random access to individual blocks and heavy parallelization of computations. Which mode of operation is the best fit?
+
+> Think about the mode for which the course explicitly highlights the absence of dependency between blocks and SIMD compatibility.
+
+1. [ ] CBC, because it provides the best chaining between blocks
+1. [ ] CFB, because it behaves like a stream cipher
+1. [x] CTR, because it allows random access to the blocks and full parallelization, with no dependency between them
+    > Correct: the course explicitly states that counter mode fully takes advantage of SIMD architectures and allows random access to each block.
+1. [ ] ECB, because each block is processed independently of the others
+    > Incorrect: although ECB is parallelizable, it provides no protection against identifying identical blocks, unlike CTR, which remains secure on this point.
+```
+
+```quizdown
+### What is the fundamental difference in operation between the CFB and OFB modes, both derived from a block cipher?
+
+> Think back to the synchronous or asynchronous nature of each of these two modes.
+
+1. [ ] CFB is synchronous (keystream depends only on the key and the IV), whereas OFB is asynchronous (keystream depends on the previous ciphertexts)
+    > Incorrect: it is the opposite: CFB depends on the previous ciphertexts (asynchronous), OFB depends only on the key and the IV (synchronous).
+1. [x] CFB is asynchronous (the keystream depends on the previous ciphertexts), whereas OFB is synchronous (the keystream depends only on the key and the IV)
+    > Correct: this is exactly the distinction given in the course between these two modes.
+1. [ ] Both modes are strictly synchronous and work identically
+1. [ ] Both modes are strictly asynchronous and work identically
+    > Incorrect: the two modes behave differently with respect to their dependency on the ciphertext.
+```
+
+```quizdown
+### In a Feistel-type cipher, we have a plaintext (L0, R0) and a stage function f with subkeys K_i. After a stage i, how is R_i computed?
+
+> Apply directly the formula for a Feistel stage presented in the course.
+
+1. [ ] R_i = R_{i-1} XOR f(L_{i-1}, K_i)
+1. [x] R_i = L_{i-1} XOR f(R_{i-1}, K_i)
+    > Correct: this is exactly the course's formula, with L_i = R_{i-1} and R_i = L_{i-1} XOR f(R_{i-1}, K_i).
+1. [ ] R_i = L_{i-1} AND f(R_{i-1}, K_i)
+1. [ ] R_i = f(L_{i-1}, R_{i-1})
+    > Incorrect: the subkey K_i explicitly appears in the formula, and the combining operation is an xor, not a simple application of f without combination.
+```
+
+```quizdown
+### Which statements about DES are correct, according to the course?
+
+> Think back to the structure, block size, key size, and number of stages of DES.
+
+- [x] DES is a Feistel cipher with 16 stages
+    > Correct: this is exactly the structure described in the course.
+- [x] The effective size of the DES key is 56 usable bits (out of 64 transmitted bits, with parity bits)
+    > Correct: this is explicitly stated in the course.
+- [ ] DES uses 128-bit blocks, like AES
+    > Incorrect: DES uses 64-bit blocks, unlike AES, which uses 128 bits.
+- [ ] DES forms an algebraic group under the composition operation
+    > Incorrect: the course explicitly states that DES is not a group under composition.
+```
+
+```quizdown
+### Why is the fact that "DES is not a group" (under composition) a cryptographically important property?
+
+> Think about what this property guarantees regarding Triple DES.
+
+1. [ ] Because it makes DES completely unbreakable by brute force
+1. [x] Because it guarantees that successively applying DES with different keys (as in Triple DES) actually increases security, instead of being equivalent to a single DES with another key
+    > Correct: if DES were a group, one could always find a key K3 equivalent to two successive applications, which would make Triple DES useless against an exhaustive 56-bit search.
+1. [ ] Because it makes it possible to reduce the required block size
+1. [ ] Because it prevents the existence of weak keys
+    > Incorrect: DES nevertheless has weak and semi-weak keys, a property independent of the group question.
+```
+
+```quizdown
+### What characterizes a so-called "weak" key K for DES?
+
+> Think back to the mathematical condition given in the course for a weak key.
+
+1. [ ] E_K(x) always produces the same ciphertext regardless of x
+1. [x] Applying the encryption twice with K gives back the original plaintext: E_K(E_K(x)) = x
+    > Correct: this is exactly the definition given in the course, linked to the generation of subkeys that are identical in pairs.
+1. [ ] K contains only bits set to 1
+1. [ ] K can only be used in ECB mode
+    > Incorrect: nothing in the course restricts weak keys to a particular mode of operation.
+```
+
+```quizdown
+### A system uses Triple DES with an effective key space of 112 bits. What is the main practical drawback of this solution compared to plain DES, according to the course?
+
+> Think about the performance cost of repeatedly executing the algorithm.
+
+1. [ ] Triple DES requires a 256-bit block, incompatible with existing hardware
+1. [x] Running three successive passes of DES hurts performance, which remains a drawback for certain applications
+    > Correct: the course explicitly identifies this performance impact as a drawback of the solution.
+1. [ ] Triple DES cannot be used with existing DES hardware or software
+    > Incorrect: on the contrary, the course points out that this solution makes it possible to keep using existing DES "boxes".
+1. [ ] Triple DES is actually less secure than plain DES
+    > Incorrect: the course states, on the contrary, that the level of security obtained is very satisfactory.
+```
+
+```quizdown
+### What structural differences distinguish AES from DES, according to the course?
+
+> Think back to the overall structure (Feistel or not), the block size, and the algebraic field used.
+
+- [x] AES is not a Feistel cipher, unlike DES
+    > Correct: the course explicitly specifies that AES is an iterative block cipher, but not a Feistel cipher.
+- [x] AES operates on 128-bit blocks, whereas DES operates on 64-bit blocks
+    > Correct: this is an explicit difference in nominal size between the two algorithms.
+- [ ] AES was designed secretly, without public consultation, unlike DES
+    > Incorrect: it is the opposite: AES resulted from a consultation process open to experts worldwide, unlike the more closed development of DES.
+- [ ] AES systematically uses 16 stages, like DES
+    > Incorrect: the number of AES stages varies depending on the key size (10, 12, or 14 stages); it is not fixed at 16.
+```
+
+```quizdown
+### A system uses AES with a 256-bit key. How many stages (rounds) does this cipher perform, given that a 128-bit key requires 10 stages and each 32-bit increase adds one stage?
+
+> Compute the number of 32-bit increments between 128 and 256 bits, then add this number to 10.
+
+1. [ ] 10 stages
+1. [ ] 12 stages
+1. [x] 14 stages
+    > Correct: (256-128)/32 = 4 additional stages, i.e. 10 + 4 = 14 stages, which matches exactly the value given in the course for a 256-bit key.
+1. [ ] 16 stages
+    > Incorrect: this number corresponds to the number of DES stages, not the number of AES stages for a 256-bit key.
+```
+
+```quizdown
+### Put the four operations performed at each AES stage (round) in order.
+
+> Think about the order in which substitution, shifting, column mixing, and subkey addition typically occur within a stage.
+
+1. ByteSub (non-linear substitution via S-box)
+2. ShiftRow (row shifting)
+3. MixColumn (linear combination of the columns)
+4. AddRoundKey (xor with the stage's subkey)
+```
+
+```quizdown
+### What is the specific role of the MixColumn operation in an AES stage?
+
+> Think back to what this operation does to the columns of the state matrix.
+
+1. [ ] It applies a non-linear substitution to each byte independently
+    > Incorrect: this description corresponds to ByteSub, not MixColumn.
+1. [x] It replaces each column with a linear combination of the other columns, via a matrix multiplication
+    > Correct: this is exactly the description given in the course for MixColumn.
+1. [ ] It performs an xor between the current state matrix and the stage's subkey
+    > Incorrect: this operation is AddRoundKey, not MixColumn.
+1. [ ] It shifts the rows of the matrix by a variable number of positions
+    > Incorrect: this operation is ShiftRow, not MixColumn.
+```
+
+```quizdown
+### What fundamental difference distinguishes differential cryptanalysis from linear cryptanalysis?
+
+> Think about the type of plaintexts each attack requires (imposed by the attacker or merely observed).
+
+1. [ ] Differential cryptanalysis is a known plaintext attack, linear cryptanalysis is a chosen plaintext attack
+    > Incorrect: it is the opposite according to the course.
+1. [x] Differential cryptanalysis is a chosen plaintext attack that studies the propagation of differences, whereas linear cryptanalysis is a known plaintext attack based on linear approximations
+    > Correct: this is exactly the distinction given in the course.
+1. [ ] Both techniques require physical access to the hardware executing the encryption
+    > Incorrect: this description corresponds more to side-channel attacks, not to differential or linear cryptanalysis.
+1. [ ] Both techniques are purely theoretical and have never been used to attack DES
+    > Incorrect: the course gives concrete estimates of the number of plaintext pairs needed to attack DES with these two techniques.
+```
+
+```quizdown
+### A meet-in-the-middle attack targets a scheme of the form y = E_{K2}(E_{K1}(x)), with a combined key space of 112 bits. Why is this attack markedly more efficient than a naive exhaustive search over the 2^112 possible combinations?
+
+> Think about how two intermediate lists make it possible to recover the keys without exploring every combination.
+
+1. [ ] Because it directly guesses the final key without any intermediate computation
+1. [x] Because it builds two lists of 2^56 elements each (one per partial encryption) and looks for collisions between them, bringing the effort down to about 2^57 operations rather than 2^112
+    > Correct: this is exactly the principle described in the course, with an effort and storage requirement far lower than the intuitive estimate of 2^112.
+1. [ ] Because it requires no known plaintext, unlike other attacks
+    > Incorrect: the attack does require known plaintexts to verify the hypothesis about candidate keys.
+1. [ ] Because it exploits a weakness specific to DES's weak keys
+    > Incorrect: the meet-in-the-middle principle applies generally to double-encryption-type constructions, independently of weak keys.
+```
+
+```quizdown
+### How does the effectiveness of differential and linear attacks change as the number of stages (rounds) of a block cipher decreases?
+
+> Think back to the relationship described between the number of stages and the chances of success of these attacks.
+
+1. [ ] It decreases, because fewer stages leave less time to accumulate statistical data
+1. [x] It increases exponentially, which explains why a sufficient number of stages is essential to a block cipher's security
+    > Correct: the course explicitly states that the chances of success of these attacks increase exponentially as the number of stages decreases.
+1. [ ] It remains strictly constant, regardless of the number of stages
+1. [ ] It drops to zero below a certain number of stages
+    > Incorrect: the course does not mention a cutoff threshold, but a continuous exponential trend.
+```

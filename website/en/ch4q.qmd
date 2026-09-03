@@ -1,0 +1,385 @@
+---
+execute:
+  enabled: false
+---
+
+```quizdown
+### What does Euler's Φ function applied to n represent?
+
+> Think back to the condition on the gcd with n.
+
+1. [ ] The number of divisors of n
+    > Incorrect: it is not the number of divisors, but the number of integers coprime with n.
+1. [x] The number of positive integers smaller than n that are coprime with n
+    > Correct: this is the definition of Φ(n).
+1. [ ] The largest prime factor of n
+    > Incorrect: Φ(n) is a count, not a factor.
+1. [ ] The number of distinct prime factors of n
+    > Incorrect: this corresponds to the number m in the decomposition, not to Φ(n).
+```
+
+```quizdown
+### What is the value of Φ(21)?
+
+> 21 = 3 × 7, two distinct primes. Use Φ(pq) = (p-1)(q-1).
+
+1. [ ] 20
+    > Incorrect: this would correspond to Φ(21) if 21 were prime, which it is not.
+1. [x] 12
+    > Correct: Φ(21) = (3-1)(7-1) = 2 × 6 = 12.
+1. [ ] 14
+    > Incorrect: check the formula (p-1)(q-1), not p×(q-1).
+1. [ ] 8
+    > Incorrect: this result does not match the formula Φ(pq) = (p-1)(q-1).
+```
+
+```quizdown
+### Which elements characterize a generator α of Z_n^*?
+
+> Think back to the definition of the order of an element and that of the group.
+
+- [x] Its order equals Φ(n)
+    > Correct: this is precisely the definition of a generator.
+- [ ] Its order equals n
+    > Incorrect: Φ(n) is the order of the group Z_n^*, not n itself.
+- [x] Its successive powers generate all of Z_n^*
+    > Correct: Z_n^* = {α^i mod n, 0 ≤ i ≤ Φ(n)-1}.
+- [ ] It exists regardless of n
+    > Incorrect: Z_n^* only has a generator if n = 2, 4, p^k or 2p^k.
+```
+
+```quizdown
+### The order of an element a of Z_n^* is always equal to Φ(n).
+
+> Distinguish the order of a particular element from the order of the whole group.
+
+1. [ ] True
+    > False: only a generator has an order equal to Φ(n); other elements have a smaller order that divides Φ(n).
+1. [x] False
+    > Correct: the order of any element is the smallest t such that a^t ≡ 1 mod n, which only equals Φ(n) if a is a generator.
+```
+
+```quizdown
+### Using Euler's theorem, what is the inverse of 3 modulo 11?
+
+> p = 11 is prime, so the inverse of a is a^(p-2) mod p.
+
+1. [ ] 8
+    > Incorrect: check that 3 × 8 mod 11 is not 1.
+1. [x] 4
+    > Correct: 3 × 4 = 12 ≡ 1 mod 11.
+1. [ ] 7
+    > Incorrect: 3 × 7 = 21 ≡ 10 mod 11, not 1.
+1. [ ] 9
+    > Incorrect: 3 × 9 = 27 ≡ 5 mod 11, not 1.
+```
+
+```quizdown
+### What is the complexity of the fast exponentiation algorithm?
+
+> It depends on the number of bits of the exponent, hence on log(n).
+
+1. [ ] O(n)
+    > Incorrect: this would be the complexity of naive exponentiation by repeated multiplication.
+1. [ ] O(exp(log n))
+    > Incorrect: this complexity corresponds to factorization methods, not fast exponentiation.
+1. [x] O(log³ n)
+    > Correct: the binary representation of the exponent enables this complexity gain.
+1. [ ] O(log n)
+    > Incorrect: this is the number of steps, but each step involves a costly modular multiplication, hence the cube.
+```
+
+```quizdown
+### A teacher needs to simultaneously solve several congruences x ≡ a_i mod n_i with pairwise coprime n_i. Which tool from the course allows finding x efficiently?
+
+> This theorem dates back to the 3rd century and relies on Gauss's algorithm.
+
+1. [ ] Fermat's little theorem
+    > Incorrect: this theorem concerns powers modulo a prime number, not systems of congruences.
+1. [x] The Chinese Remainder Theorem
+    > Correct: it guarantees a unique solution mod N = product of the n_i, computable in O(log³ n).
+1. [ ] Shor's algorithm
+    > Incorrect: this algorithm is used for factoring on a quantum computer.
+1. [ ] Euler's Φ function
+    > Incorrect: Φ counts the elements coprime with n, it does not solve systems of congruences.
+```
+
+```quizdown
+### Put the steps of RSA key generation in the correct order.
+
+> Think about what must be computed before e can be chosen, and then before d can be computed.
+
+1. Compute d such that ed ≡ 1 mod Φ(n)
+2. Choose the size of the modulus n
+3. Generate primes p and q, then compute n = pq and Φ(n) = (p-1)(q-1)
+4. Choose e such that 1 < e < Φ(n) and gcd(e, Φ(n)) = 1
+```
+
+```quizdown
+### With n = 33 (p = 3, q = 11) and e = 7, what is the ciphertext c of the message m = 5?
+
+> Compute 5^7 mod 33 by breaking down the exponent, for example 5^4 then 5^2 then 5^1.
+
+1. [ ] 19
+    > Incorrect: recompute 5^7 mod 33 step by step.
+1. [x] 14
+    > Correct: 5^7 mod 33 = 14 (and we verify that 14^3 mod 33 = 5 with d = 3).
+1. [ ] 26
+    > Incorrect: this result does not match 5^7 mod 33.
+1. [ ] 8
+    > Incorrect: this result does not match 5^7 mod 33.
+```
+
+```quizdown
+### Why is RSA encryption in practice faster than decryption?
+
+> Compare the typical size of e and that of d.
+
+1. [ ] Because n is smaller during encryption
+    > Incorrect: n is the same for encryption and decryption.
+1. [x] Because the exponent e is chosen small while d must be large for security
+    > Correct: fast exponentiation is more costly with a large exponent.
+1. [ ] Because decryption requires refactoring n
+    > Incorrect: factorization is not involved in decryption, only in an attack.
+1. [ ] Because encryption does not use modular exponentiation
+    > Incorrect: both encryption and decryption use fast exponentiation.
+```
+
+```quizdown
+### Among the following statements about attacks against RSA, which are correct?
+
+> Think back to the common-message attack via the Chinese remainder theorem and to the multiplicative property.
+
+- [x] Encrypting the same message to several recipients with a small exponent e, without randomization, is risky
+    > Correct: the Chinese remainder theorem allows reconstructing m^e and then extracting the e-th root.
+- [ ] A small exponent e automatically makes d too small
+    > Incorrect: e and d are chosen independently; only d needs to remain large.
+- [x] The multiplicative property (m1 m2)^e ≡ c1 c2 mod n can be exploited in attacks such as blind signatures
+    > Correct: this property is explicitly cited as a source of weaknesses.
+- [ ] Finding d is easier than factoring n
+    > Incorrect: the course states that these two problems require an equivalent effort.
+```
+
+```quizdown
+### The RSAP problem has been proven strictly equivalent to FACTP in the general case.
+
+> Distinguish the 2008 result on the generic resolution of the RSA problem from the unproven general case.
+
+1. [ ] True
+    > False: only the equivalence for the generic case has been demonstrated (2008); the strict general equivalence remains open.
+1. [x] False
+    > Correct: unlike SQROOTP ≅ FACTP (Rabin), the RSAP-FACTP equivalence is only proven for the generic attack.
+```
+
+```quizdown
+### A developer encrypts the same message m to three recipients with the same exponent e = 3 and different moduli n1, n2, n3, without randomizing m. Which consequence does the course best describe?
+
+> Think about the Chinese remainder theorem applied to the three ciphertexts.
+
+1. [ ] No particular risk as long as n1, n2, n3 are large
+    > Incorrect: the size of the moduli does not prevent this specific attack.
+1. [x] An attacker can reconstruct m^3 using the Chinese remainder theorem and then extract the integer cube root
+    > Correct: this is exactly the attack described in the course for this scenario.
+1. [ ] Decryption becomes impossible for the three recipients
+    > Incorrect: the legitimate recipients decrypt normally; it is confidentiality that is compromised.
+1. [ ] This only works if e is very large
+    > Incorrect: it is precisely because e = 3 is small that m^e < n1 n2 n3, making the attack possible.
+```
+
+```quizdown
+### In the ElGamal scheme, a developer accidentally reuses the same random number k to encrypt two different messages m1 and m2 intended for the same public key. What consequence results from this?
+
+> Compare the two ciphertexts δ1 and δ2 obtained with the same k.
+
+1. [ ] No consequence, since a remains secret
+    > Incorrect: the course explicitly shows that one plaintext can be recovered from the other.
+1. [x] The ratio δ1/δ2 equals m1/m2, which allows recovering one message from the other
+    > Correct: this is the direct consequence of reusing k demonstrated in the course.
+1. [ ] Decryption becomes impossible
+    > Incorrect: decryption still works normally; it is confidentiality that is broken.
+1. [ ] The ciphertext size doubles a second time
+    > Incorrect: this doubling in size exists systematically in ElGamal, regardless of the reuse of k.
+```
+
+```quizdown
+### Compared to the plaintext, what is the size of the ciphertext produced by ElGamal?
+
+> The ciphertext consists of a pair (λ, δ).
+
+1. [ ] The same size
+    > Incorrect: the ciphertext contains two values, λ and δ.
+1. [x] Double
+    > Correct: this is explicitly cited as a drawback of ElGamal.
+1. [ ] Half
+    > Incorrect: the ciphertext is larger, not smaller, than the plaintext.
+1. [ ] It depends solely on the size of p
+    > Incorrect: regardless of p, the ciphertext always contains two components.
+```
+
+```quizdown
+### What does the public key contain in the classical ElGamal scheme?
+
+> Three elements allow the correspondent to encrypt a message.
+
+- [x] The prime number p
+    > Correct: p defines the multiplicative group used.
+- [x] A generator α of Z_p^*
+    > Correct: α is used to generate the values λ and δ.
+- [x] The value α^a mod p
+    > Correct: this is the public image of the secret a.
+- [ ] The secret exponent a
+    > Incorrect: a constitutes the private key and must never be published.
+```
+
+```quizdown
+### During Rabin decryption, A obtains 4 possible square roots for the same ciphertext. How does the course resolve this ambiguity?
+
+> Two methods are mentioned, one relying on B, the other on the data itself.
+
+1. [ ] By systematically recomputing (p,q) from n
+    > Incorrect: (p,q) is already the private key known to A, it is not the source of the problem.
+1. [x] Through additional information from B, or through redundancy analysis of the plaintext
+    > Correct: these are the two mechanisms cited by the course to resolve the ambiguity.
+1. [ ] By choosing the largest of the four numbers
+    > Incorrect: nothing in the scheme justifies this arbitrary criterion.
+1. [ ] It is never possible, since Rabin is unusable in practice
+    > Incorrect: the course explicitly proposes solutions to this problem.
+```
+
+```quizdown
+### The Rabin scheme is proven secure against all attacks, including active chosen ciphertext attacks.
+
+> Reread carefully the distinction between proven security against passive attacks and vulnerability to active attacks.
+
+1. [ ] True
+    > False: Rabin is provably secure only against passive attacks; the chosen ciphertext attack can compromise it.
+1. [x] False
+    > Correct: the course explicitly describes an active attack that recovers a factor of n.
+```
+
+```quizdown
+### In the chosen ciphertext attack against Rabin, an attacker M sends c = m² mod n and receives a root m_x from A. What can M do if m is not equal to ±m_x mod n?
+
+> Think about what the gcd of two distinct square roots of the same square modulo n = pq reveals.
+
+1. [ ] Nothing, they must retry indefinitely
+    > Incorrect: in this specific case (probability 0.5), usable information is obtained.
+1. [x] Compute gcd(m - m_x, n) to obtain a factor of n
+    > Correct: this is exactly the mechanism described in the course for breaking Rabin via an active attack.
+1. [ ] Directly deduce the private key (p,q) without further computation
+    > Incorrect: a gcd computation is still needed to extract a factor.
+1. [ ] Solve the DLP associated with n
+    > Incorrect: Rabin is based on SQROOTP, not on the discrete logarithm.
+```
+
+```quizdown
+### Why does elliptic curve cryptography allow the use of smaller keys than RSA for a comparable level of security?
+
+> Compare the complexity of the best known attacks against ECDLP and against factorization.
+
+- [x] The best known attacks against ECDLP (Pollard-rho) are fully exponential
+    > Correct: unlike the Number Field Sieve, which is sub-exponential and used against RSA and the classical DLP.
+- [ ] Elliptic curves replace asymmetric encryption with symmetric encryption
+    > Incorrect: EC-ElGamal remains an asymmetric system, structurally close to classical ElGamal.
+- [x] Computations on E_p are structurally more complex to invert than in Z_p or GF(2^m)
+    > Correct: this increased complexity justifies the use of shorter keys.
+- [ ] The ECDLP problem has been mathematically proven to be unsolvable
+    > Incorrect: it is only considered hard in practice, never proven unsolvable.
+```
+
+```quizdown
+### On an elliptic curve E_p defined over Z_p, knowing two points P and Q such that Q = kP, what does the ECDLP problem represent?
+
+> Think of the equivalent of the classical discrete logarithm, transposed to addition on a curve.
+
+1. [ ] Finding the coordinates (x,y) of the point P
+    > Incorrect: P is already known; the problem concerns the scalar k.
+1. [x] Recovering the scalar k from P and Q
+    > Correct: this is the definition of the Elliptic Curve Discrete Logarithm Problem.
+1. [ ] Finding the equation of the curve E
+    > Incorrect: the equation of E is public and known to everyone.
+1. [ ] Computing the point at infinity of E
+    > Incorrect: the point at infinity is a fixed neutral element, not an unknown to be solved for.
+```
+
+```quizdown
+### Put the steps of encryption in the ElGamal scheme on elliptic curves in the correct order.
+
+> The random number k must be generated before λ and δ can be computed.
+
+1. B computes λ := kP0 and δ := kPa + mi, then sends c := (λ,δ)
+2. B transforms its plaintext into a series of points mi belonging to Ep
+3. B obtains the authentic public key (Ep, P0, Pa) of A
+4. B generates a unique random number k
+```
+
+```quizdown
+### What fundamental difference distinguishes the security basis of Rabin from that of RSA?
+
+> One of the two problems has been proven strictly equivalent to factorization, the other has not.
+
+1. [ ] Rabin relies on the discrete logarithm, RSA on factorization
+    > Incorrect: both systems rely on the difficulty of factorization.
+1. [x] SQROOTP (Rabin) is proven equivalent to FACTP, whereas RSAP (RSA) is only proven so for the generic case
+    > Correct: this is the precise distinction established in the course.
+1. [ ] Rabin has no connection to factorization
+    > Incorrect: Rabin is precisely based on the impossibility of computing square roots modulo a composite of unknown factorization.
+1. [ ] RSA is proven more secure than Rabin in all cases
+    > Incorrect: Rabin, on the contrary, benefits from a stronger security proof against passive attacks.
+```
+
+```quizdown
+### Among the following factorization algorithms, which ones run in sub-exponential time?
+
+> Distinguish the historical methods (exponential time) from the modern sieve-based methods.
+
+- [ ] Pollard's Rho method
+    > Incorrect: this algorithm runs in exponential time.
+- [x] Quadratic sieve
+    > Correct: it belongs to the class of sub-exponential methods.
+- [x] General number field sieve (GNFS)
+    > Correct: it is currently the most efficient known sub-exponential method.
+- [ ] Trial division
+    > Incorrect: this elementary method runs in exponential time.
+```
+
+```quizdown
+### Shor's algorithm runs in polynomial time on a classical computer.
+
+> Recall what type of machine this algorithm must be run on.
+
+1. [ ] True
+    > False: Shor's algorithm requires a quantum computer to achieve this complexity.
+1. [x] False
+    > Correct: on a classical computer, no known polynomial-time factorization algorithm exists; Shor specifically exploits quantum computation.
+```
+
+```quizdown
+### The course states that the RSA decryption exponent d must imperatively be large. What is the risk if d is chosen too small?
+
+> Think about what makes a cryptographic system vulnerable when a secret becomes quickly computable.
+
+1. [ ] Encryption becomes impossible
+    > Incorrect: encryption uses e, not d, and is not affected by the size of d.
+1. [x] The system becomes vulnerable, since a small d makes it easier for an attacker to find
+    > Correct: the course explicitly states that d must be large (at least half the size of n) to guarantee security.
+1. [ ] The encrypted message doubles in size
+    > Incorrect: this doubling in size is a characteristic of ElGamal, not a consequence of a too-small d in RSA.
+1. [ ] n becomes directly easier to factor
+    > Incorrect: it is the discovery of d that is made easier, not the factorization of n as such.
+```
+
+```quizdown
+### An application needs to encrypt data on mobile devices with very limited resources, while maintaining a high level of security and keys as short as possible. Which system from the course is best suited?
+
+> Compare the key sizes needed for an equivalent level of security among the systems covered in the course.
+
+1. [ ] RSA with a 2048-bit modulus
+    > Incorrect: RSA requires much larger keys for an equivalent level of security.
+1. [ ] Rabin, because it is proven equivalent to factorization
+    > Incorrect: Rabin shares the same key-size constraint as RSA, based on factorization.
+1. [x] ElGamal on elliptic curves
+    > Correct: the course explicitly states that keys are smaller there thanks to the increased complexity of ECDLP.
+1. [ ] Classical ElGamal on Z_p^*
+    > Incorrect: classical ElGamal requires large p (≥1024 bits), comparable to RSA.
+```

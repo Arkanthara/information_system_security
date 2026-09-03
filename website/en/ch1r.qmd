@@ -1,0 +1,226 @@
+## Overview
+
+| Block | Content |
+|---|---|
+| Security services | Confidentiality, Integrity, Availability, Authentication, Non-repudiation, Non-duplication, Anonymity |
+| Internet risks | e-mail/web malware, phishing, spam, ransomware, IoT, defacement, DDoS |
+| Cryptographic tools | hashing, random generators, symmetric crypto, asymmetric crypto, digital signature |
+| Case study | Ransomware (Cryptolocker) |
+
+**Common thread:** protecting digital information in a distributed, global environment without physical boundaries → **Cryptography** (symmetric / asymmetric) + one-way functions + random generators.
+
+## Security Services 🔴
+
+| Service | Short definition |
+|---|---|
+| Confidentiality | protects against unauthorized disclosure |
+| Integrity | protects against unauthorized modification |
+| Availability | resources accessible to legitimate users |
+| Entity authentication | proving the identity of an entity (≈ identification) |
+| Data authentication | proving the source of a set of data → also implies integrity |
+| Non-repudiation | an entity cannot deny having participated in a transaction |
+| Non-duplication | protection against illicit copies |
+| Anonymity | preserving the identity of an entity/source |
+
+::: {.callout-warning title="Pitfall"}
+Data authentication ⊃ Integrity (origin authentication *also* guarantees integrity, not the other way around).
+:::
+
+### Dangers / Attacks / Mechanisms (summary)
+
+| Service | Danger type | Attack type | Digital mechanism |
+|---|---|---|---|
+| Confidentiality | info leak | eavesdropping, traffic analysis | encryption |
+| Integrity | modification | alteration/destruction | one-way function + encryption |
+| Availability | denial of service | viruses, repeated access | access control, audit, anti-virus |
+| Entity auth. | unauthorized access | password theft, protocol flaw | secret + protocol, smart card + PIN |
+| Data auth. | falsification of info | forged signature | one-way function + encryption |
+| Non-repudiation | denying transaction | claiming key theft | + digital signature |
+| Non-duplication | duplication | falsification/imitation | digital watermarking, cryptographic locking |
+| Anonymity | identification | transaction analysis | mixers, remailers, deep web |
+
+## Internet-Related Risks 🟠
+
+- **E-mail malware**: booby-trapped attachment/link → theft, encryption (ransomware), illicit mining, distribution.
+- **Web malware (*drive-by download*)**: infection upon simple visit (malicious site or legitimate site infected via *cross-site scripting*).
+- **Phishing**: password + harvesting + fishing → gathering private information, forged address. **Spear phishing** = targeted at a person/organization.
+- **Spam**: unwanted e-mails/pop-ups (~60% of mail traffic); can carry malware.
+- **Ransomware**: encrypts data, demands ransom (bitcoins); can be *dormant*.
+- **IoT attacks**: known flaws, default passwords, negligence → network entry point + attack relay.
+- **Website/information defacement**: harms integrity + reputation → harden the host, strong authentication.
+- **DDoS**: multiple devices (botnets) overwhelm a target; firewalls/IDS not very effective; reputational, financial, physical risks (critical infrastructures).
+
+::: {.callout-tip title="Intuition"}
+Almost all these risks come down to: **social engineering or technical flaw → code execution / secret theft → exploitation (theft, encryption, attack relay)**.
+:::
+
+## Cryptographic Hash Functions 🔴
+
+**Definition:** function easy to compute in one direction, virtually impossible in the other.
+
+![](qmd_images/diagram_hash_function.png)
+
+Properties:
+
+- **One-way**: impossible to retrieve the message from the digest.
+- **Collision-free**: impossible to find a 2nd message giving the same digest.
+- Any modification (even minor) → completely different digest.
+- Digest: 160–512 bits. Examples: `SHA-1`, `SHA-256`, `SHA-3`.
+
+## (Pseudo-)Random Generators 🟡
+
+| Type | Principle | Example |
+|---|---|---|
+| Random | non-deterministic physical phenomenon | radioactive/quantum source |
+| Pseudo-random | deterministic from a seed | keystrokes, disk access, network packets |
+
+::: {.callout-warning title="Pitfall"}
+*"The use of pseudo-random processes to generate secret quantities can result in pseudo-security"* — a poor seed compromises all security (session keys, IVs, signature secrets).
+:::
+
+## Symmetric vs Asymmetric Cryptography 🔴
+
+![](qmd_images/diagram_crypto_types.png)
+
+### Symmetric
+
+- **A single secret key**, shared, for both encrypting AND decrypting.
+- History: Caesar (1st century BC).
+
+![](qmd_images/diagram_crypto_symetrique.png)
+
+- Services: Confidentiality, Authentication, Integrity — **no** digital signature (key known to both parties).
+- Key exchange: requires an alternative confidential channel (mail, phone...).
+- Examples: AES, DES, IDEA, RC4, RC5.
+- ✅ fast (up to 100× faster), short key (128 bits, memorable), easy in hardware.
+- ❌ poor scalability (n keys for n correspondents) → better for personal documents / small groups.
+
+### Asymmetric
+
+- **Two keys**: public (shared) / private (secret). *Keyring* = key ring.
+- 1976, Diffie & Hellman.
+
+![](qmd_images/diagram_crypto_asymetrique.png)
+
+**Confidentiality** → encrypt with the **recipient's public key**, decrypt with **their private key**.
+
+![](qmd_images/diagram_crypto_asym_confidentialite.png)
+
+**Digital signature** → sign with **one's own private key**, verify with **one's public key**.
+
+![](qmd_images/diagram_signature_digitale.png)
+
+- Services: Confidentiality, Authentication, Integrity, **Digital signature & Non-repudiation**.
+- Examples: RSA (the most widely used), Rabin, ElGamal.
+- ✅ no confidential channel needed (just authenticated), simplified key management (1 pair for n correspondents).
+- ❌ up to 50× slower than symmetric; requires **certifying** that the public key really belongs to the recipient.
+
+::: {.callout-important title="Key takeaway"}
+**Asymmetric confidentiality → keys of the RECIPIENT.**
+**Asymmetric signature → keys of the SENDER.**
+:::
+
+### Comparison table
+
+| | Symmetric | Asymmetric |
+|---|---|---|
+| Key | 1 shared secret key | public/private pair |
+| Speed | fast (×100) | slow (×50 slower) |
+| Key size | 128 bits | 1024+ bits |
+| Digital signature | no | yes |
+| Key exchange | confidential channel required | authenticated channel sufficient |
+| Use case | personal doc, small group, networks | channels between strangers, key transport, signature |
+
+| Activity | Recommendation |
+|---|---|
+| Personal documents / small group | Symmetric |
+| Confidential channel between strangers | Asymmetric |
+| Transaction / software distribution | Asymmetric (key) + Symmetric (data) |
+| Network segments (stable environment) | Symmetric |
+
+## Digital Signature 🔴
+
+**Problem:** signing an entire document is costly.
+**Solution:** sign only the **digest** (hash) of the document.
+
+![](qmd_images/diagram_signature_digitale_2.png)
+
+Steps: `document → F (hash) → digest → signature (private key)` then verification: `document → F → digest' ; compare with decrypted digest (public key) → if == then OK`.
+
+Properties:
+
+- Signature changes if the document changes (integrity guaranteed).
+- Impossible to forge a 2nd document → same signature (collision-free).
+- Only the holder of the private key can produce a valid signature.
+
+$$
+\text{Authentication} + \text{Non-repudiation}
+$$
+
+## RSA — Operation 🟠
+
+- $n = pq$, $p,q$ large primes (>1024 bits)
+- $\phi(n) = (p-1)(q-1)$
+- $e, d$ such that $ed \equiv 1 \mod \phi(n)$
+- **Encryption:** $C = P^e \mod n$ — public key $(n,e)$
+- **Decryption:** $P = C^d \mod n$ — private key $(d)$
+- Security: inverting $C = P^e \mod n$ is virtually impossible for large numbers (factoring $n$).
+- Proof: via Euler's theorem, $a^{\phi(n)} \equiv 1 \mod n$.
+
+## Combining Symmetric + Asymmetric 🔴
+
+**Idea:** use asymmetric cryptography only to exchange a symmetric session key $K_s$ (faster afterward).
+
+![](qmd_images/diagram_crypto_asym_sym.png)
+
+1. A generates random $K_s$, encrypts it with **B's public key** → $E_{B'K_{publique}}[K_s]$ → B decrypts with their private key.
+2. A and B communicate with $K_s$ (symmetric) for the rest of the exchanges.
+
+::: {.callout-tip title="Intuition"}
+Asymmetric = **safe for transporting the key**. Symmetric = **speed for the data**.
+:::
+
+## Case Study: Ransomware 🟠
+
+- **Definition (Wikipedia, incomplete)**: malicious software that encrypts personal data and demands a ransom for the decryption key.
+- Category: **Trojan Horse**.
+- Explosive growth since Cryptolocker (2013) → billions of attacks/year.
+- Real example: Colonial Pipeline (May 2021) → fuel cutoff, US East Coast.
+
+### Life cycle
+
+1. **Infection and propagation**
+2. **Execution** (data encryption)
+3. **Payment** (crypto-currencies / bitcoin)
+4. **Concealment** (obfuscation, TOR networks / deep web)
+
+### Cryptolocker Scheme
+
+![](qmd_images/cryptolocker_schema.png)
+
+- IV generated from file size + name.
+- Key generated from a random string S + attacker's RSA public key → **RSA encryption** of S.
+- Data encrypted in **AES** with this key; **HMAC** computed on the original file.
+- **Private** decryption **key** stays **on the attacker's side**, sent only after payment.
+- Trace obscured via **TOR** networks.
+
+### Prevention / Reaction
+
+| Axis | Measures |
+|---|---|
+| Prevention | *patching*, active/passive detection (firewalls, WAF, IDS/IPS, e-mail scan), training |
+| Reaction | *offline backups*, security policy, pay/not pay decision |
+
+::: {.callout-warning title="Pitfall"}
+A ransomware targets a **very broad spectrum of files** (office documents, images, databases, backups, keys...) — not just "important documents".
+:::
+
+## Key Takeaways
+
+- Seven security services: **C-I-A + 2×Authentication + Non-repudiation + Non-duplication + Anonymity**.
+- Cryptography = central building block: **symmetric** (1 key, fast, no signature) vs **asymmetric** (2 keys, slow, signature + non-repudiation).
+- Asymmetric confidentiality → keys of the **recipient**; Signature → keys of the **sender**.
+- In practice: **asymmetric to exchange the key, symmetric for the data**.
+- Hashing = building block for integrity and signature: **one-way + collision-free**.
+- Security of pseudo-random keys = frequent weak link.
+- Ransomware = concrete example combining hashing/IV, RSA (key), AES (data), HMAC (integrity) and TOR (anonymity) — illustrates the entire course in one attack.

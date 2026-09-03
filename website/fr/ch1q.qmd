@@ -1,0 +1,427 @@
+---
+execute:
+  enabled: false
+---
+
+## Services de sécurité
+
+```quizdown
+### Un serveur reste joignable mais répond systématiquement avec des données falsifiées, sans qu'aucune trace de modification ne soit détectable par les utilisateurs. Quel service de sécurité est le plus directement compromis ?
+
+> Le service concerné protège contre la modification non autorisée de l'information, indépendamment de la question de savoir qui en est l'auteur.
+
+1. [ ] Disponibilité
+1. [ ] Non-répudiation
+1. [x] Intégrité
+    > Correct : l'intégrité protège contre la modification non autorisée de l'information, ce qui correspond exactement à la falsification décrite.
+1. [ ] Anonymat
+    > Incorrect : l'anonymat concerne la protection de l'identité d'une entité ou d'une source, pas la falsification de contenu.
+```
+
+```quizdown
+### Quelle différence distingue l'authentification d'entités de l'authentification de l'origine de données ?
+
+> Une des deux notions porte sur la personne/le système, l'autre porte sur un ensemble de données précis.
+
+- [x] L'authentification d'entités prouve l'identité d'une entité, tandis que l'authentification de données prouve la source d'un ensemble de données précis.
+    > Correct : ce sont deux procédés distincts définis dans le cours, le premier portant sur une entité, le second sur des données.
+- [ ] L'authentification de données remplace complètement l'authentification d'entités.
+    > Incorrect : ce sont deux services complémentaires, pas des substituts l'un de l'autre.
+- [x] L'authentification de l'origine de données garantit également l'intégrité de ces données.
+    > Correct : le cours précise que ce service assure par définition aussi l'intégrité des données concernées.
+- [ ] Seule l'authentification d'entités peut s'appuyer sur une preuve cryptographique.
+    > Incorrect : les deux procédés peuvent s'appuyer sur des mécanismes cryptographiques.
+```
+
+```quizdown
+### Une entreprise découvre qu'un ancien partenaire commercial nie avoir jamais signé un contrat électronique, alors que la transaction a bien eu lieu. Quel service de sécurité aurait dû empêcher cette situation ?
+
+> Ce service garantit qu'une entité ne peut pas nier avoir participé à une transaction.
+
+1. [ ] Confidentialité
+1. [ ] Non-duplication
+1. [x] Non-répudiation
+    > Correct : la non-répudiation offre justement la garantie qu'une entité ne pourra pas nier être impliquée dans une transaction.
+1. [ ] Disponibilité
+    > Incorrect : la disponibilité concerne l'accessibilité des ressources, pas la contestation d'une participation.
+```
+
+```quizdown
+### La non-duplication et la non-répudiation protègent exactement contre le même type de menace.
+
+> Relis la définition de chacun de ces deux services : l'un porte sur la copie illicite, l'autre sur le reniement d'une transaction.
+
+1. [ ] Vrai
+1. [x] Faux
+    > Faux : la non-duplication protège contre les copies illicites, tandis que la non-répudiation empêche qu'une entité nie avoir participé à une transaction. Ce sont deux menaces différentes.
+```
+
+## Risques liés à Internet
+
+```quizdown
+### Un employé reçoit un e-mail personnalisé, mentionnant son projet en cours et signé par le nom de son responsable, lui demandant de confirmer ses identifiants sur un lien externe. De quelle technique s'agit-il précisément ?
+
+> Le ciblage précis d'une personne ou d'une organisation spécifique porte un nom particulier, dérivé de « pêche au harpon ».
+
+1. [ ] Spam
+1. [ ] Drive-by download
+1. [x] Spear phishing
+    > Correct : lorsque l'hameçonnage cible spécifiquement une personne ou une organisation en s'appuyant sur des informations la concernant, on parle de spear phishing.
+1. [ ] Ransomware
+    > Incorrect : rien dans la situation ne décrit un chiffrement de données contre rançon.
+```
+
+```quizdown
+### Un utilisateur est infecté par un malware simplement en consultant un site web légitime, sans télécharger ni ouvrir aucun fichier. Quel mécanisme explique le mieux cette infection ?
+
+> Le cours décrit une technique où un site légitime peut être infecté au préalable, par exemple via une technique de script malveillant injecté dans les pages.
+
+- [ ] Le site a envoyé un e-mail contenant une pièce jointe piégée.
+    > Incorrect : la situation ne mentionne aucun e-mail, seulement une visite de site.
+- [x] Le site légitime a été infecté au préalable, par exemple via cross-site scripting.
+    > Correct : c'est l'un des deux cas décrits pour le drive-by download, l'infection pouvant même n'affecter que certaines pages.
+- [x] Il s'agit d'un drive-by download.
+    > Correct : cette technique permet d'infecter un système sur lequel s'exécute un client web lors de la simple visite d'un site.
+- [ ] Il s'agit nécessairement d'un rançongiciel.
+    > Incorrect : la technique d'infection décrite (drive-by download) ne préjuge pas du type de malware finalement installé.
+```
+
+```quizdown
+### Pourquoi un ransomware peut-il rester totalement invisible pendant plusieurs semaines après l'infection initiale ?
+
+> Le cours mentionne un état particulier dans lequel un malware peut rester avant de s'activer.
+
+1. [ ] Parce qu'il ne chiffre jamais réellement les données avant le paiement.
+    > Incorrect : le chiffrement des données est justement le comportement habituel du ransomware, avant toute demande de paiement.
+1. [x] Parce qu'il peut rester en état dormant et se déclencher à un événement ou une date précise.
+    > Correct : le cours indique que les ransomwares peuvent rester dormants dans le système infecté et être déclenchés par un événement spécifique, notamment pour des attaques synchronisées.
+1. [ ] Parce que les antivirus ne détectent jamais les rançongiciels.
+    > Incorrect : cette affirmation est excessive et n'est pas soutenue par le cours.
+1. [ ] Parce que le ransomware attend toujours une connexion au réseau TOR pour démarrer.
+    > Incorrect : TOR sert à occulter la trace de l'attaquant, pas à retarder l'exécution du chiffrement.
+```
+
+```quizdown
+### Quelle affirmation décrit correctement une différence entre les attaques DDoS et les attaques de spam ?
+
+> Compare l'objectif visé par chacune de ces deux menaces : rendre indisponible versus polluer/collecter.
+
+1. [ ] Le spam vise toujours à rendre un service indisponible, comme le DDoS.
+    > Incorrect : le spam consomme des ressources et du temps mais son objectif principal n'est pas de rendre un service inaccessible.
+1. [x] Le DDoS vise à rendre un système inaccessible en le submergeant de trafic, alors que le spam consiste en l'envoi d'e-mails ou de contenus indésirables non sollicités.
+    > Correct : ce sont deux menaces aux objectifs différents, l'une ciblant la disponibilité via un volume de trafic massif, l'autre étant une nuisance liée au volume de messages indésirables.
+1. [ ] Un DDoS implique nécessairement un seul attaquant isolé.
+    > Incorrect : le terme « distributed » indique justement que de multiples dispositifs, souvent des dizaines de milliers, ciblent simultanément la victime.
+```
+
+## Fonctions de hachage et génération aléatoire
+
+```quizdown
+### Une fonction de hachage cryptographique modifie complètement son résultat même si un seul caractère du document source est changé. Quelle propriété illustre ce comportement ?
+
+> Il s'agit d'une des deux propriétés fondamentales attendues d'une fonction de hachage cryptographique.
+
+1. [ ] Réversibilité
+1. [x] Sensibilité totale à la moindre modification, liée aux propriétés one-way et collision-free
+    > Correct : le cours précise que toute modification, même insignifiante, du document source se traduit par un digest fondamentalement différent.
+1. [ ] Compression sans perte
+1. [ ] Symétrie de la fonction
+    > Incorrect : les fonctions de hachage cryptographique ne sont pas définies par une propriété de symétrie.
+```
+
+```quizdown
+### Quelles affirmations sont vraies concernant les fonctions de hachage cryptographiques présentées dans le cours ?
+
+> Distingue bien ce qui est « facile à calculer » de ce qui est « virtuellement impossible à calculer ».
+
+- [x] Il est virtuellement impossible de retrouver le document source à partir du seul digest.
+    > Correct : c'est la propriété one-way décrite dans le cours.
+- [ ] Deux documents différents produisent nécessairement le même digest s'ils ont la même longueur.
+    > Incorrect : c'est l'inverse qui est recherché : il doit être virtuellement impossible de trouver deux documents produisant le même digest (collision-free).
+- [x] La longueur habituelle des digests se situe entre 160 et 512 bits.
+    > Correct : c'est la valeur indiquée dans le cours.
+- [ ] SHA-1, SHA-256 et SHA-3 sont des algorithmes de chiffrement asymétrique.
+    > Incorrect : ce sont des exemples de fonctions de hachage cryptographiques, pas des algorithmes de chiffrement asymétrique.
+```
+
+```quizdown
+### Un développeur génère les clés de session de son application uniquement à partir de l'heure système, arrondie à la seconde près. Pourquoi cette approche est-elle risquée du point de vue du cours ?
+
+> Pense à la citation du cours sur les processus pseudo-aléatoires et la notion de « seed » prévisible.
+
+1. [ ] Parce que l'heure système change trop souvent pour être utilisée.
+    > Incorrect : le problème n'est pas la fréquence de changement mais la prévisibilité de la source utilisée comme graine.
+1. [x] Parce qu'une graine trop prévisible peut permettre à un attaquant de reconstituer les nombres générés, illustrant que des processus pseudo-aléatoires mal construits peuvent produire une pseudo-sécurité.
+    > Correct : le cours cite justement l'idée que l'usage de processus pseudo-aléatoires prévisibles peut aboutir à une pseudo-sécurité plutôt qu'à une sécurité réelle.
+1. [ ] Parce que les générateurs pseudo-aléatoires ne doivent jamais être utilisés en cryptographie.
+    > Incorrect : le cours présente au contraire les générateurs pseudo-aléatoires comme des outils utilisés couramment, à condition que leur graine soit bien choisie.
+```
+
+## Cryptographie symétrique et asymétrique
+
+```quizdown
+### Quelle est la principale raison pour laquelle la cryptographie symétrique n'offre pas de support direct pour la signature digitale ?
+
+> Réfléchis à qui connaît la clé utilisée pour chiffrer et déchiffrer un message dans un schéma symétrique.
+
+1. [ ] Parce que les algorithmes symétriques sont trop lents pour signer un document.
+    > Incorrect : la cryptographie symétrique est au contraire nettement plus rapide que l'asymétrique.
+1. [x] Parce que la clé secrète est connue des deux intervenants, donc rien ne prouve que seul l'expéditeur ait pu produire le message.
+    > Correct : le cours indique explicitement que la clé étant connue des deux intervenants, cette technologie n'offre pas de support direct pour des signatures digitales.
+1. [ ] Parce que les fonctions de hachage sont incompatibles avec les algorithmes symétriques.
+    > Incorrect : les fonctions de hachage sont utilisées indépendamment du type de cryptographie choisi.
+```
+
+```quizdown
+### Dans un échange confidentiel utilisant la cryptographie asymétrique, quelles clés sont effectivement impliquées ?
+
+> Rappelle-toi qui doit être seul capable de déchiffrer le message final.
+
+1. [ ] La clé privée de l'expéditeur uniquement
+1. [ ] La clé publique de l'expéditeur uniquement
+1. [x] La clé publique et la clé privée du destinataire
+    > Correct : l'expéditeur chiffre avec la clé publique du destinataire, et seul le destinataire peut déchiffrer avec sa clé privée. Seules ses clés sont impliquées.
+1. [ ] Les clés publiques des deux parties uniquement
+    > Incorrect : une clé privée doit nécessairement intervenir pour permettre le déchiffrement, sinon le message resterait illisible.
+```
+
+```quizdown
+### Lors de la vérification d'une signature digitale, quelle clé le destinataire utilise-t-il ?
+
+> Il s'agit de la clé permettant de vérifier, et non de produire, la signature.
+
+1. [ ] La clé privée du destinataire
+1. [ ] La clé privée de l'expéditeur
+1. [x] La clé publique de l'expéditeur
+    > Correct : seul l'expéditeur signe avec sa clé privée ; la vérification se fait avec sa clé publique, disponible globalement.
+1. [ ] La clé publique du destinataire
+    > Incorrect : les clés du destinataire n'interviennent pas dans le processus de signature et de vérification, seules celles de l'expéditeur sont impliquées.
+```
+
+```quizdown
+### Pourquoi signe-t-on en pratique le digest d'un document plutôt que le document entier ?
+
+> Pense au coût de calcul d'une opération de signature basée sur la cryptographie asymétrique.
+
+1. [x] Parce que signer tout un document est très coûteux en temps, alors que le digest est de taille fixe et rapide à traiter.
+    > Correct : le cours présente explicitement ce problème et cette solution : la signature de tout un document est très coûteuse en temps, d'où l'application de la signature uniquement au digest.
+1. [ ] Parce que les documents complets ne peuvent pas être chiffrés avec des clés asymétriques.
+    > Incorrect : rien n'empêche techniquement de chiffrer un document complet, le problème est uniquement une question de performance.
+1. [ ] Parce que le digest garantit la confidentialité du document, ce que ne ferait pas une signature du document entier.
+    > Incorrect : la signature ne garantit pas la confidentialité, mais l'authentification et la non-répudiation.
+```
+
+```quizdown
+### Un système signe un document, puis quelqu'un modifie une seule virgule dans ce document après signature. Que se passe-t-il lors de la vérification ?
+
+> Repense à la propriété collision-free des fonctions de hachage utilisées pour produire le digest signé.
+
+1. [ ] La signature reste valide car une virgule est un détail insignifiant.
+    > Incorrect : le cours précise que toute modification, même insignifiante, change fondamentalement le digest.
+1. [x] La vérification échoue, car le nouveau digest calculé ne correspondra plus au digest déchiffré à partir de la signature.
+    > Correct : la signature change si le document change ; toute modification du document ou de la signature entraîne un échec de vérification, ce qui garantit l'intégrité.
+1. [ ] La signature s'adapte automatiquement à la nouvelle version du document.
+    > Incorrect : une signature digitale ne se met jamais à jour automatiquement ; elle correspond figée au document original signé.
+```
+
+```quizdown
+### Une entreprise doit choisir un mécanisme de chiffrement pour protéger des sauvegardes personnelles stockées localement par un seul employé, sans besoin d'échange avec des tiers. Quelle solution est la plus appropriée d'après le cours ?
+
+> Compare la vitesse, la facilité d'échange de clé et le nombre de personnes impliquées dans chaque solution.
+
+1. [x] Cryptographie symétrique, car elle est rapide et adaptée à la protection de documents personnels.
+    > Correct : le cours indique explicitement que la cryptographie symétrique se prête mieux à la protection de documents personnels qu'à des transactions impliquant de grandes populations.
+1. [ ] Cryptographie asymétrique, car elle évite tout besoin de gestion de clé.
+    > Incorrect : la cryptographie asymétrique nécessite au contraire de gérer une paire de clés et de certifier l'appartenance de la clé publique, ce qui est superflu ici.
+1. [ ] Aucune cryptographie n'est nécessaire pour des données strictement locales.
+    > Incorrect : la confidentialité de données sensibles reste pertinente même en local, notamment en cas de vol physique du support.
+```
+
+```quizdown
+### Quel avantage principal la cryptographie asymétrique apporte-t-elle par rapport à la cryptographie symétrique lors de l'établissement d'un canal confidentiel entre deux utilisateurs qui ne se connaissent pas ?
+
+> Pense à la nature du canal requis pour échanger la clé dans chaque cas.
+
+1. [ ] Elle est plus rapide à l'exécution.
+    > Incorrect : c'est l'inverse, la cryptographie asymétrique est nettement plus lente, jusqu'à 50 fois selon le cours.
+1. [x] Elle ne nécessite pas de canal confidentiel préalable pour échanger la clé, un canal simplement authentifié suffit.
+    > Correct : contrairement au symétrique qui exige un canal confidentiel alternatif pour transmettre la clé secrète, l'asymétrique permet d'échanger uniquement des clés publiques via un canal authentifié.
+1. [ ] Elle élimine totalement le besoin de vérifier l'identité du destinataire.
+    > Incorrect : il reste nécessaire de vérifier que la clé publique appartient réellement au destinataire, par exemple via un canal authentifié ou une certification par un tiers.
+```
+
+```quizdown
+### Classe ces affirmations selon qu'elles décrivent la cryptographie symétrique ou asymétrique.
+
+> Une seule des deux technologies permet nativement la signature digitale et la non-répudiation.
+
+- [x] Utilise une seule clé secrète partagée entre les deux parties.
+    > Correct : c'est la définition même de la cryptographie symétrique présentée dans le cours.
+- [ ] Nécessite un canal confidentiel alternatif pour l'échange de la clé.
+    > Cette affirmation est vraie pour le symétrique, pas pour l'asymétrique, donc elle ne doit pas être cochée comme caractéristique de l'asymétrique dans ce contexte.
+- [x] Permet nativement la signature digitale et la non-répudiation.
+    > Correct : c'est une propriété propre à la cryptographie asymétrique grâce à la possession exclusive de la clé privée par le signataire.
+- [x] Peut être jusqu'à 50 fois plus lente que l'autre technologie.
+    > Correct : le cours indique que les opérations liées à la cryptographie asymétrique sont jusqu'à 50 fois plus lentes que celles de la cryptographie symétrique.
+```
+
+## RSA et chiffrement hybride
+
+```quizdown
+### Dans le schéma RSA présenté dans le cours, à quoi correspond la paire (n, e) ?
+
+> Repère dans la formule de chiffrement quelles variables sont nécessaires pour chiffrer un message.
+
+1. [ ] La clé privée
+1. [x] La clé publique
+    > Correct : le cours indique explicitement que le chiffrement C = P^e mod n utilise la clé publique (n, e).
+1. [ ] Le digest du message
+1. [ ] La graine du générateur aléatoire
+    > Incorrect : (n, e) ne concerne pas la génération de nombres aléatoires mais la clé publique RSA.
+```
+
+```quizdown
+### Pourquoi est-il virtuellement impossible de retrouver P à partir de C = P^e mod n sans connaître d, dans le schéma RSA présenté ?
+
+> Le cours indique explicitement que cette opération inverse est considérée impossible à calculer dans certaines conditions.
+
+1. [ ] Parce que e est toujours un nombre premier extrêmement grand.
+    > Incorrect : le cours ne fonde pas la sécurité sur la taille de e, mais sur la difficulté du problème mathématique sous-jacent.
+1. [x] Parce que l'inverse de cette opération est considéré comme virtuellement impossible à calculer lorsque de grands nombres sont impliqués, en lien avec n = pq.
+    > Correct : c'est exactement l'affirmation faite dans le cours à propos de la fonction d'encryption RSA.
+1. [ ] Parce que P est toujours choisi de manière aléatoire et imprévisible.
+    > Incorrect : le caractère aléatoire de P n'est pas ce qui fonde la sécurité de RSA dans le cours, c'est la difficulté du calcul inverse.
+```
+
+```quizdown
+### Deux utilisateurs veulent échanger des données volumineuses de manière confidentielle en minimisant le coût de calcul, tout en profitant de la simplicité de gestion de clé de l'asymétrique. Quelle approche correspond à la pratique recommandée dans le cours ?
+
+> Combine les avantages respectifs des deux familles de cryptographie plutôt que d'en choisir une seule.
+
+1. [ ] Utiliser uniquement la cryptographie asymétrique pour chiffrer l'ensemble des données échangées.
+    > Incorrect : cela serait inutilement coûteux, la cryptographie asymétrique étant beaucoup plus lente pour de grands volumes de données.
+1. [ ] Utiliser uniquement la cryptographie symétrique et échanger la clé par téléphone.
+    > Incorrect : cela fonctionne mais ne profite pas de la simplicité de gestion offerte par l'asymétrique, en particulier pour des utilisateurs qui ne se connaissent pas au préalable.
+1. [x] Chiffrer une clé de session symétrique avec la clé publique du destinataire, puis chiffrer les données avec cette clé de session.
+    > Correct : c'est exactement le principe présenté dans le cours, où l'asymétrique sert uniquement à échanger une clé symétrique, ensuite utilisée pour protéger les données.
+```
+
+```quizdown
+### Remets dans l'ordre les étapes du schéma hybride combinant cryptographie asymétrique et symétrique présenté dans le cours.
+
+> Repense d'abord à la génération de la clé de session, avant tout chiffrement.
+
+1. A génère une clé de session aléatoire Ks.
+2. A chiffre Ks avec la clé publique de B.
+3. B déchiffre Ks avec sa propre clé privée.
+4. A et B communiquent en chiffrant leurs données avec Ks selon un algorithme symétrique.
+```
+
+## Ransomware — étude de cas
+
+```quizdown
+### À quelle catégorie de malware appartient un ransomware selon la classification présentée dans le cours ?
+
+> Cette catégorie est habituellement associée à un programme qui se présente comme légitime ou s'installe discrètement avant de révéler son comportement malveillant.
+
+1. [ ] Ver informatique
+1. [x] Cheval de Troie
+    > Correct : le cours indique explicitement que cette famille spécifique de malware appartient à la catégorie appelée Chevaux de Troie.
+1. [ ] Rootkit
+1. [ ] Spyware publicitaire
+    > Incorrect : le cours ne classe pas le ransomware dans cette catégorie.
+```
+
+```quizdown
+### Dans le schéma générique d'un ransomware de type Cryptolocker présenté dans le cours, pourquoi la victime ne peut-elle pas retrouver seule la clé permettant de déchiffrer ses fichiers ?
+
+> Observe où se trouve la clé privée correspondant à la clé publique RSA utilisée lors de l'infection.
+
+1. [ ] Parce que les fichiers sont détruits et non chiffrés.
+    > Incorrect : le comportement habituel décrit est un chiffrement des données, pas une destruction.
+1. [x] Parce que la clé privée nécessaire au déchiffrement est générée et conservée sur les serveurs de l'attaquant, et n'est transmise qu'après paiement.
+    > Correct : le cours précise que les clés privées de déchiffrement sont stockées dans les serveurs de l'attaquant et envoyées à la victime après paiement en bitcoins.
+1. [ ] Parce que l'algorithme AES ne peut jamais être inversé, même avec la bonne clé.
+    > Incorrect : AES est un algorithme symétrique réversible avec la bonne clé ; le problème est que la victime ne possède pas cette clé.
+```
+
+```quizdown
+### Dans le schéma Cryptolocker du cours, quel rôle joue le HMAC calculé à partir du fichier original ?
+
+> Le HMAC combine une fonction de hachage avec une clé, dans un objectif proche de celui vu pour les signatures digitales.
+
+- [x] Il permet de vérifier l'intégrité des données lors du processus de chiffrement.
+    > Correct : comme pour la signature digitale, un mécanisme basé sur le hachage sert ici à garantir que les données n'ont pas été altérées de manière incontrôlée pendant le processus.
+- [ ] Il sert à chiffrer directement les données de la victime à la place d'AES.
+    > Incorrect : le schéma utilise AES pour chiffrer les données ; le HMAC est un élément distinct du processus.
+- [ ] Il remplace la nécessité d'utiliser une clé publique RSA dans le schéma.
+    > Incorrect : la clé publique RSA sert à chiffrer la chaîne aléatoire S, un rôle distinct de celui du HMAC.
+```
+
+```quizdown
+### Remets dans l'ordre les quatre grandes étapes de l'attaque par ransomware présentées dans le cours.
+
+> La première étape correspond toujours à la manière dont le malware pénètre initialement dans le système.
+
+1. Infection et propagation
+2. Exécution (chiffrement des données)
+3. Paiement en crypto-monnaies
+4. Occultation de la trace via les réseaux TOR
+```
+
+```quizdown
+### Une organisation victime d'un ransomware dispose de sauvegardes régulières, mais celles-ci sont connectées en permanence au même réseau que les postes infectés. Quel principe du cours cette organisation n'a-t-elle pas respecté ?
+
+> Le cours insiste sur une caractéristique précise que doivent avoir les sauvegardes pour rester utiles face à un ransomware.
+
+1. [ ] Le chiffrement des sauvegardes avec RSA
+1. [x] Le maintien de sauvegardes hors ligne (backups offline)
+    > Correct : le cours recommande explicitement des backups offline parmi les mesures de prévision et remédiation, précisément parce qu'un ransomware actif sur le réseau peut atteindre des sauvegardes connectées.
+1. [ ] Le paiement systématique de la rançon
+    > Incorrect : le paiement n'est présenté que comme une question ouverte (« payer ou pas payer »), pas comme une mesure de prévention recommandée.
+1. [ ] L'utilisation exclusive de mots de passe biométriques
+    > Incorrect : ce point n'est pas lié aux mesures de prévention du ransomware présentées dans le cours.
+```
+
+## Synthèse et raisonnement transversal
+
+```quizdown
+### Une application chiffre chaque message avec une nouvelle clé symétrique, mais transmet cette clé en clair dans l'en-tête du message. Quel principe fondamental du cours cette conception viole-t-elle ?
+
+> Compare cette pratique à la manière dont une clé symétrique doit normalement être échangée entre deux parties.
+
+1. [ ] Elle viole la propriété collision-free des fonctions de hachage.
+    > Incorrect : aucune fonction de hachage n'est en cause dans cette situation, seule la transmission de la clé pose problème.
+1. [x] Elle viole le principe selon lequel une clé symétrique doit être transmise par un canal confidentiel, par exemple en la chiffrant avec la clé publique du destinataire.
+    > Correct : transmettre la clé en clair annule tout l'intérêt du chiffrement symétrique, puisque n'importe qui interceptant le message peut alors déchiffrer les données.
+1. [ ] Elle viole le principe de non-duplication.
+    > Incorrect : la non-duplication concerne la protection contre les copies illicites d'un contenu, pas la confidentialité de la transmission d'une clé.
+```
+
+```quizdown
+### Un attaquant parvient à intercepter et modifier un message chiffré avec un algorithme symétrique, sans connaître la clé, puis le renvoie tel quel au destinataire qui le déchiffre sans vérification supplémentaire. Quel service de sécurité manque le plus probablement à ce système ?
+
+> Le chiffrement seul garantit la confidentialité, mais pas nécessairement qu'un contenu n'a pas été altéré en transit.
+
+1. [ ] Confidentialité, car l'attaquant a pu lire le message.
+    > Incorrect : rien n'indique que l'attaquant a déchiffré le contenu, seulement qu'il l'a modifié sans le comprendre.
+1. [x] Intégrité, car aucun mécanisme ne permet de détecter que le message a été altéré avant son traitement par le destinataire.
+    > Correct : la confidentialité (via le chiffrement) ne garantit pas à elle seule l'intégrité ; un mécanisme distinct, comme une fonction à sens unique combinée à une signature ou un HMAC, est nécessaire pour la détecter.
+1. [ ] Anonymat, car l'attaquant reste non identifié.
+    > Incorrect : le problème décrit porte sur la détection d'une modification, pas sur l'identification de l'attaquant.
+```
+
+```quizdown
+### Quelles affirmations suivantes sont correctes concernant l'ensemble du cours ?
+
+> Repasse mentalement en revue les trois grands blocs du cours : services de sécurité, risques Internet, outils cryptographiques.
+
+- [x] La signature digitale asymétrique repose sur le hachage du document plutôt que sur le document entier, pour des raisons de performance.
+    > Correct : c'est le principe présenté dans la section sur la signature digitale.
+- [x] Le schéma d'un ransomware de type Cryptolocker combine à la fois un algorithme asymétrique (RSA), un algorithme symétrique (AES) et une fonction liée au hachage (HMAC).
+    > Correct : le cours détaille précisément cette combinaison dans le schéma générique du Cryptolocker.
+- [ ] La cryptographie symétrique est toujours préférable à l'asymétrique, quelle que soit la situation.
+    > Incorrect : le cours recommande l'une ou l'autre, voire une combinaison des deux, selon le contexte (documents personnels, canaux entre inconnus, transactions, etc.).
+- [ ] Le phishing et le DDoS visent tous deux principalement à rendre un service indisponible.
+    > Incorrect : le phishing vise la collecte d'informations privées, tandis que le DDoS vise la disponibilité d'un service.
+```

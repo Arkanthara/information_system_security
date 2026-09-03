@@ -1,0 +1,345 @@
+---
+execute:
+  enabled: false
+---
+
+```quizdown
+### Which TTP mode does a Key Distribution Center (KDC) operate under?
+
+> The KDC participates in real time, but do A and B communicate directly with each other?
+
+1. [ ] In-line
+1. [x] On-line
+    > Correct: the KDC intervenes in real time (session key generation, tickets) but A and B then communicate directly.
+1. [ ] Off-line
+    > Incorrect: off-line corresponds to CAs, which do not participate in the exchange in real time.
+```
+
+```quizdown
+### Which statements correctly describe the off-line mode?
+
+> Compare what a system gains and loses in off-line mode compared to the in-line/on-line modes.
+
+- [x] The TTP does not need to be available at all times.
+    > Correct: the information (the certificates) is made available a priori, without real-time intervention.
+- [ ] Exchanges between A and B require the TTP for every transaction.
+    > Incorrect: this is characteristic of in-line, not off-line.
+- [x] Revocation of privileges is more complex to manage.
+    > Correct: a key compromise is only detected asynchronously (via CRL), unlike in the real-time modes.
+- [ ] It is the mode used by Key Distribution Centers.
+    > Incorrect: KDCs operate in on-line mode (possibly in-line), not off-line.
+```
+
+```quizdown
+### Why do Certification Authorities publish CRLs even though they operate in off-line mode?
+
+> Think about what can invalidate a certificate after it has been signed and distributed.
+
+1. [ ] Because the CA must periodically confirm each certificate for it to remain valid.
+    > Incorrect: this rather describes the short-validity certificate strategy, an alternative solution.
+1. [x] Because the theft of a private key can invalidate an already distributed certificate, asynchronously.
+    > Correct: cached certificates can circulate freely; the CRL makes it possible to flag, after the fact, certificates that have become invalid.
+1. [ ] Because off-line mode forbids caching certificates.
+    > Incorrect: on the contrary, certificates can be cached anywhere since they are signed.
+```
+
+```quizdown
+### An organization wants to minimize the availability constraints on its trust infrastructure, even if it means accepting heavier revocation management. Which TTP mode is most consistent with this objective?
+
+> Which mode does not require the TTP to be constantly reachable?
+
+1. [ ] In-line
+1. [ ] On-line
+1. [x] Off-line
+    > Correct: this is exactly the trade-off of the off-line mode (typically CAs): low availability required, more complex revocation.
+```
+
+```quizdown
+### Without a KDC, a symmetric system of 100 entities requires approximately how many different keys for each pair to share a unique key?
+
+> Use the formula n(n-1)/2 with n = 100.
+
+1. [ ] 100
+1. [ ] 200
+1. [x] About 4950
+    > Correct: n(n-1)/2 = 100 x 99 / 2 = 4950, i.e. on the order of n².
+1. [ ] About 10000
+```
+
+```quizdown
+### With a KDC in place, how many new keys must be generated when a new entity joins a system of 100 entities?
+
+> Compare with the case without a KDC, where adding an entity generated n new keys.
+
+1. [x] Just 1 key (shared with the KDC)
+    > Correct: this is precisely the benefit of the KDC's scalability: a single key per new entity instead of n.
+1. [ ] 100 new keys
+1. [ ] 4950 new keys
+```
+
+```quizdown
+### Which problems are specifically associated with KDCs (and not directly with CAs)?
+
+> Think about the usual operating mode of a KDC and what this implies in terms of availability and performance.
+
+- [x] Single point of operational failure (the system is paralyzed if the KDC is unavailable).
+    > Correct: the KDC's on-line mode makes the system dependent on its real-time availability.
+- [x] Performance bottleneck linked to repeated cryptographic operations.
+    > Correct: every exchange calls on the KDC (encryption, random generation), which can create a bottleneck.
+- [ ] The need to publish revocation lists.
+    > Incorrect: CRLs are specific to CAs, not KDCs.
+- [ ] Impossibility of caching the distributed information.
+    > Incorrect: this constraint does not specifically apply to the KDC; moreover it is not an issue identified in the course for KDCs.
+```
+
+```quizdown
+### A CA has its private signing key compromised. Which statement best describes the severity of this situation compared to the compromise of a KDC?
+
+> The course describes this consequence as "less obvious but almost as harmful."
+
+1. [ ] The compromise of a CA is completely harmless, unlike that of a KDC.
+1. [x] It has consequences that are less immediately visible than the compromise of a KDC, but almost as serious.
+    > Correct: unlike the KDC (immediate and total impact), the impact of a compromised CA is mainly felt through fraudulent certificates issued, which are less visible at first glance.
+1. [ ] It is strictly more serious because it also affects the system's availability.
+    > Incorrect: availability is not the main issue here; it is the authenticity of the identity-key associations that is compromised.
+```
+
+```quizdown
+### Why is simply verifying A's identity not enough to create a certificate associating A with its public key?
+
+> What happens if someone else knows A's public key but not its private key?
+
+1. [ ] Because A's identity changes too often.
+1. [x] Because it is also necessary to prove that A truly possesses the corresponding private key (Proof of Possession).
+    > Correct: without PoP, an attacker can have a public key that is not their own certified, based on a document already signed by the true owner.
+1. [ ] Because the CA cannot generate a certificate without a digital passport.
+```
+
+```quizdown
+### Put the steps of the attack described in the course against a CA that does not verify Proof of Possession back in order.
+
+> Think about who sends what, and who intercepts the initial message.
+
+1. C, the attacker, obtains from its own CA a certificate linking its identity to the same public key used by A.
+2. A signs a document describing an invention and sends it to B along with its certificate signed by its CA.
+3. C intercepts the packet sent by A to B.
+4. C sends B the document signed by A, together with its own fraudulent certificate.
+```
+
+```quizdown
+### In the Proof of Possession verification protocol, what is the purpose of the random value r sent by the CA to A?
+
+> Think about what prevents an attacker from having a message of their choosing signed in advance.
+
+1. [ ] To encrypt A's public key.
+1. [x] To protect A against chosen message attacks, by ensuring that the signature covers an unpredictable value.
+    > Correct: r is a random number; A signs (A, r), which prevents an attacker from preparing a valid signature in advance.
+1. [ ] To indicate the validity period of the future certificate.
+```
+
+```quizdown
+### An adversary possesses the private key used both to sign certificates and CRLs for a CA. What can it do against a victim A under the authority of that CA?
+
+> It can both revoke and re-certify.
+
+- [x] Publish a CRL revoking A's genuine certificate.
+    > Correct: this is the first step described in the course for this attack.
+- [x] Create a new certificate associating A with a public key whose private key it controls.
+    > Correct: it can then impersonate A or intercept its communications (Man-in-the-Middle).
+- [ ] Directly modify the content of messages already signed by A in the past.
+    > Incorrect: compromising the CA's key does not make it possible to forge signatures already produced by A itself.
+- [ ] Automatically become A's Registration Authority.
+    > Incorrect: this is not a consequence mentioned in the course.
+```
+
+```quizdown
+### What is the main purpose of the "separation of duties" principle between certification and revocation?
+
+> Think about what makes the previous attack possible.
+
+1. [ ] Reduce the CA's operating costs.
+1. [x] Prevent a single compromised key from being able to both revoke a genuine certificate and issue a fake one.
+    > Correct: by using distinct keys and entities (CA and Revocation Authority), compromising one does not compromise the other function.
+1. [ ] Speed up the publication of certificates.
+```
+
+```quizdown
+### What difference fundamentally distinguishes a Registration Authority from a Certification Authority?
+
+> One requires direct contact with users, the other does not.
+
+1. [ ] The Registration Authority signs certificates, the CA merely verifies identities.
+1. [x] The Registration Authority performs the checks requiring direct contact with entities (identity, PoP), while the CA handles certificate creation/maintenance, often remotely.
+    > Correct: this separation is generally motivated by geographic considerations.
+1. [ ] They fulfill exactly the same role but in different jurisdictions.
+```
+
+```quizdown
+### What are the main advantage and disadvantage of delegating key pair generation to a Key Generator?
+
+> Who else then knows the user's private key?
+
+1. [ ] Advantage: security enhancement only. Disadvantage: very high cost.
+1. [x] Advantage: simplicity for the user and potentially enhanced security. Disadvantage: loss of non-repudiation, since the private key is known to a third party.
+    > Correct: this is exactly the trade-off identified in the course.
+1. [ ] Advantage: no private key is needed. Disadvantage: incompatibility with CAs.
+```
+
+```quizdown
+### Do a Timestamp Agent and a Notary Agent fulfill exactly the same role?
+
+> The TA certifies existence at a given moment; does the Notary Agent go further?
+
+1. [ ] True
+1. [x] False
+    > False: the Notary Agent additionally certifies the validity, origin, or ownership of the document, in support of non-repudiation, which the TA alone does not necessarily do.
+```
+
+```quizdown
+### What is the main difference between the Clipper chip and its successor, the Capstone chip?
+
+> Think about the type of cryptography used and the associated hardware medium.
+
+1. [ ] The Clipper chip is asymmetric, the Capstone chip is symmetric.
+1. [x] The Capstone chip brings asymmetric cryptography and can be integrated into a PCMCIA card (Fortezza) for military-level security use.
+    > Correct: the Clipper chip (1993) was symmetric; its flaws and the need for asymmetric cryptography led to the Capstone chip.
+1. [ ] The two systems are identical, only the commercial name changes.
+```
+
+```quizdown
+### In a generic X.509 certificate, which field guarantees the authenticity of all the other information it contains?
+
+> Which field covers all the preceding records?
+
+1. [ ] Subject Public Key
+1. [ ] Issuer
+1. [x] Signature
+    > Correct: the signature, computed with the CA's private key over all the preceding fields, guarantees the integrity and authenticity of the certificate.
+1. [ ] Serial Number
+```
+
+```quizdown
+### An application receives a certificate whose serial number appears in the latest CRL published by the issuing CA. What should it do?
+
+> The primary purpose of a CRL is precisely to flag this kind of case.
+
+1. [x] Consider the certificate invalid, even if it has not yet expired according to its Validity field.
+    > Correct: presence in the CRL signals a revocation (e.g. compromised key), regardless of the original expiration date.
+1. [ ] Trust the certificate as long as its Validity period has not elapsed.
+1. [ ] Contact the Subject directly to ask for confirmation.
+```
+
+```quizdown
+### Does using certificates with a very short validity period (requiring frequent re-confirmation) solve the revocation problem without introducing any new drawback?
+
+> What then happens to the CA's operating mode?
+
+1. [ ] True
+1. [x] False
+    > False: this solution brings the system back to on-line mode, requiring high availability from the CA — the very drawback one was trying to avoid with the off-line mode.
+```
+
+```quizdown
+### In an authentication tree, to verify the authenticity of leaf Y1 (with 4 leaves in total), which values must be provided in addition to Y1 itself?
+
+> Which branches are not on the direct path from Y1 to the root?
+
+- [x] h(Y2)
+    > Correct: needed to recompute h1 = h(h(Y1) concatenated with h(Y2)).
+- [ ] Y2 in plaintext
+    > Incorrect: only the hashed value h(Y2) is needed, not the plaintext value.
+- [x] h2 (the label of the internal node grouping Y3 and Y4)
+    > Correct: needed to recompute the root R = h(h1 concatenated with h2).
+- [ ] The CA's private key
+    > Incorrect: no CA is involved in an authentication tree; only the root R needs to be authenticated separately (e.g. via a signature).
+```
+
+```quizdown
+### What is the main advantage of an authentication tree compared to a classic certificate system?
+
+> How many elements require direct cryptographic protection (a signature) in each system?
+
+1. [ ] It completely eliminates the need for hash functions.
+1. [x] Only the root R requires cryptographic protection; the rest of the values are protected by the non-reversibility of the hash function.
+    > Correct: this is the main advantage identified in the course, unlike certificates where each record is directly signed.
+1. [ ] It never requires recomputation, even in case of modification.
+    > Incorrect: on the contrary, modifying a node requires recomputing the entire path to the root.
+```
+
+```quizdown
+### Put the steps for constructing an authentication tree for n public values Y1...Yn back in order.
+
+> Start with where the data is placed, then how the labels propagate up to the root.
+
+1. Each non-terminal node with underlying arcs labeled h1 and h2 is labeled h(h1 concatenated with h2).
+2. The values Y1, Y2, ..., Yn are placed in the leaves of the tree.
+3. Each arc leaving a leaf Yi is labeled h(Yi).
+```
+
+```quizdown
+### Why are balanced trees generally preferred for authentication trees?
+
+> Think about the number of intermediate values needed to verify a leaf.
+
+1. [ ] Because they make it possible to completely avoid recomputation upon modification.
+1. [x] Because they reduce the number of intermediate values needed for verification, to the order of log2(n) rather than n.
+    > Correct: a balanced tree minimizes the length of the path between a leaf and the root.
+1. [ ] Because they make it possible to do without a collision-resistant hash function.
+```
+
+```quizdown
+### Two different CAs, CA_A and CA_B, have established a cross-certificate CA_A{CA_B}. A wants to verify B's public key, certified by CA_B. What must B provide to A to complete the certification chain?
+
+> The complete chain must allow A to trace back to a key it already authentically knows.
+
+1. [ ] CA_B's private key.
+1. [x] Its certificate signed by CA_B, namely CA_B{B}.
+    > Correct: the chain CA_A{CA_B} · CA_B{B} allows A to verify B's key starting from its authentic copy of pub CA_A.
+1. [ ] A new cross-certificate signed by CA_A.
+```
+
+```quizdown
+### What structural difference sets the strict hierarchical model (PEM/X.509) apart from the trust graph model (PGP)?
+
+> In one, there is a single starting point recognized by everyone; in the other, there is not.
+
+1. [ ] The PGP model imposes a single root known worldwide, unlike PEM/X.509.
+1. [x] PEM/X.509 relies on a single root whose key is known to everyone, whereas PGP relies on a graph in which the users themselves act as CAs for their correspondents.
+    > Correct: this difference explains why PGP is well suited to closed groups but limited for unconnected populations, unlike the hierarchical model.
+1. [ ] The two models are structurally identical, only the terminology differs.
+```
+
+```quizdown
+### Is a certification chain always as secure as its strongest link?
+
+> Think about what happens if just one intermediate certificate in the chain is compromised.
+
+1. [ ] True
+1. [x] False
+    > False: the course states that a certification chain is as vulnerable as its weakest link, which is why chains should be kept as short as possible.
+```
+
+```quizdown
+### Does the "Key Backup and Recovery" functionality of a PKI apply equally to signing and decryption private keys?
+
+> The course specifies an important nuance on this point.
+
+1. [ ] True
+1. [x] False
+    > False: this procedure applies mainly to the decryption private key; backing up a signing private key would create a non-repudiation problem.
+```
+
+```quizdown
+### A company deploying a complete PKI hopes to avoid "case-by-case" security solutions. What advantages does this directly bring it, according to the course?
+
+> Think about the integration of several security services into a single environment.
+
+- [x] Integrated management of several services: strong authentication, signature/non-repudiation, single sign-on, VPN, secure B2B/B2C communications.
+    > Correct: this is the "all in one" advantage described in the course, a source of savings compared to separate solutions.
+- [x] Easier interoperability thanks to widely used standards (X.509, PKCS, OCSP).
+    > Correct: compliance with these standards fosters compatibility both within and between companies.
+- [ ] A guaranteed reduction in implementation cost compared to any other solution.
+    > Incorrect: the course instead identifies implementation cost as a major disadvantage of PKIs.
+- [ ] The complete elimination of the need for qualified personnel.
+    > Incorrect: the course instead mentions the scarcity of skills as a disadvantage.
+```

@@ -1,0 +1,221 @@
+## Vue d'ensemble
+
+| Système | Problème dur sous-jacent | Clé publique | Clé privée |
+|---|---|---|---|
+| **RSA** | Factorisation (FACTP) | $(n,e)$ | $d$ |
+| **ElGamal** | Logarithme discret (DLP) | $(p,\alpha,\alpha^a \bmod p)$ | $a$ |
+| **Rabin** | Racine carrée mod composite (SQROOTP) | $n$ | $(p,q)$ |
+| **EC-ElGamal** | Log. discret sur courbe (ECDLP) | $(E_p,P_0,P_a)$ | $a$ |
+
+::: {.callout-tip title="Fil conducteur"}
+
+Tous ces systèmes reposent sur une **fonction facile à calculer dans un sens, difficile à inverser sans un secret** (trappe). Le secret = la structure algébrique cachée (facteurs premiers, exposant discret...).
+
+:::
+
+## Fondements Mathématiques
+
+**🔴 Théorème fondamental de l'arithmétique** : tout $n>0$ s'écrit de façon unique $n = p_1^{e_1}\cdots p_m^{e_m}$.
+
+**🔴 Fonction $\Phi$ d'Euler** : $\Phi(n)$ = nombre d'entiers $<n$ premiers avec $n$.
+
+$$\Phi(n) = \prod_{i=1}^m \left(p_i^{e_i} - p_i^{e_i-1}\right) \qquad \Phi(pq) = (p-1)(q-1) \; \text{si } p,q \text{ premiers}$$
+
+**🔴 Théorème d'Euler** : si $\gcd(a,n)=1$, alors $a^{\Phi(n)} \equiv 1 \bmod n$.
+
+**🟠 Petit théorème de Fermat** (cas particulier, $n=p$ premier, $\Phi(p)=p-1$) :
+
+$$a^{p-1} \equiv 1 \bmod p$$
+
+**🟠 Conséquences pratiques** :
+
+- Réduction des exposants : si $r \equiv s \bmod \Phi(n)$ alors $a^r \equiv a^s \bmod n$.
+- Inverse modulaire : $a^{\Phi(n)-1}$ est l'inverse de $a$ mod $n$ (donc $a^{p-2}$ si $p$ premier).
+
+**Groupe multiplicatif $Z_n^*$** : $Z_n^* = \{a \in Z_n : \gcd(a,n)=1\}$, d'ordre $\Phi(n)$.
+
+- **Ordre d'un élément $a$** : plus petit $t>0$ tel que $a^t \equiv 1 \bmod n$.
+- **Générateur** : élément d'ordre $\Phi(n)$ → engendre tout $Z_n^*$ ; le groupe est alors dit **cyclique**.
+- $Z_n^*$ possède un générateur ssi $n = 2, 4, p^k$ ou $2p^k$ ($p$ premier $\ne 2$). En particulier toujours vrai si $n$ premier.
+- Nombre de générateurs de $Z_n^*$ : $\Phi(\Phi(n))$.
+
+::: {.callout-warning title="Piège"}
+
+Ne pas confondre **ordre du groupe** ($\Phi(n)$, taille de $Z_n^*$) et **ordre d'un élément** ($t$ tel que $a^t\equiv1$). Un élément est générateur seulement si son ordre égale l'ordre du groupe.
+
+:::
+
+**Exponentiation rapide** (*fast exponentiation*) : via la représentation binaire de l'exposant → complexité $O(\log^3 n)$. Permet aussi (via Euler) de calculer un inverse en temps polynomial.
+
+**Algorithme d'Euclide étendu** : trouve $x$ tel que $ax \equiv 1 \bmod n$ (résout $ax-kn=1=\gcd(a,n)$), complexité $O(\log^3 n)$.
+
+**🔴 Théorème des restes chinois (CRT)** : pour $n_1,\ldots,n_t$ premiers deux à deux, le système $x \equiv a_i \bmod n_i$ a une solution unique mod $N=\prod n_i$ (algorithme de Gauss, $O(\log^3 n)$). Permet de passer efficacement des congruences mod $n_i$ à une congruence mod $N$.
+
+## Problèmes de Référence
+
+| Problème | Énoncé | Utilisé par |
+|---|---|---|
+| **FACTP** | Factoriser $n$ en premiers | RSA, Rabin |
+| **DLP** | Trouver $x$ t.q. $\alpha^x \equiv \beta \bmod p$ | ElGamal, DH, DSA |
+| **SQROOTP** | Racine carrée de $a$ mod $n$ composite | Rabin |
+| **RSAP** | Trouver $m$ t.q. $m^e \equiv c \bmod n$ | RSA |
+| **DHP** | Trouver $\alpha^{ab}\bmod p$ à partir de $\alpha^a,\alpha^b$ | Diffie-Hellman |
+
+**Résultats prouvés (réductions)** :
+
+- $\text{DHP} \le_p \text{DLP}$ (équivalents sous certaines conditions)
+- $\text{RSAP} \le_p \text{FACTP}$ (équivalence prouvée pour le cas générique)
+- $\text{SQROOTP} \cong_p \text{FACTP}$ (équivalence complète)
+
+::: {.callout-warning title="Piège"}
+
+La sécurité de RSA n'est **pas prouvée strictement équivalente** à FACTP dans le cas général (seulement pour l'attaque « générique »), contrairement à Rabin où SQROOTP $\cong$ FACTP est un résultat complet.
+
+:::
+
+## Techniques de Factorisation
+
+| Classe | Complexité | Algorithmes |
+|---|---|---|
+| **Exponentielle** | $O(\exp(c\ln n))$ | Essais, crible d'Ératosthène, Fermat, Pollard $p{-}1$, Pollard $\rho$ |
+| **Sous-exponentielle** | $O(\exp(c(\ln n)^{1/3}))$ | Fractions continues, crible quadratique, NFS, GNFS |
+| **Polynomiale** | $O(\log^c n)$ | Shor (ordinateur **quantique** uniquement) |
+
+::: {.callout-important title="À retenir"}
+
+Aucun algorithme classique connu ne factorise en temps polynomial : c'est la base de la sécurité de RSA/Rabin. Seul un ordinateur **quantique** (Shor) le permettrait — d'où l'intérêt actuel de la cryptographie post-quantique.
+
+:::
+
+Record 2020 : RSA-829 (250 chiffres) factorisé via GNFS en ~2700 core-years.
+
+## RSA
+
+### Génération des clés
+
+1. Choisir taille de $n$ (1024, 2048 bits...).
+2. Générer $p,q$ premiers grands ($\sim n/2$), calculer $n=pq$, $\Phi(n)=(p-1)(q-1)$.
+3. Choisir $e$ t.q. $1<e<\Phi(n)$, $\gcd(e,\Phi(n))=1$.
+4. Calculer $d$ t.q. $ed \equiv 1 \bmod \Phi(n)$ (Euclide étendu).
+5. Clé publique $(n,e)$, clé privée $d$.
+
+### Chiffrement / Déchiffrement
+
+$$c = m^e \bmod n \qquad\qquad m = c^d \bmod n$$
+
+**Preuve (idée)** : $ed \equiv 1 \bmod \Phi(n) \Rightarrow ed = k\Phi(n)+1$. Si $\gcd(m,n)=1$, Euler donne $m^{\Phi(n)}\equiv1$, donc $c^d \equiv m^{k\Phi(n)}m \equiv m \bmod n$.
+
+**🔴 Sécurité** :
+
+- Trouver $d$ ⟺ factoriser $n$ (effort équivalent).
+- Sûr tant que factoriser $n$ reste sous-exponentiel ; $n \ge 2048$ bits recommandé.
+- Résoudre RSAP génériquement ⟺ FACTP (résultat 2008).
+- $d$ doit être **grand** (≥ moitié de la taille de $n$), sinon attaque de Wiener.
+- Conséquence : **chiffrement rapide** ($e$ petit), **déchiffrement lent** ($d$ grand).
+
+::: {.callout-warning title="Attaques RSA"}
+
+- **Message commun à petit $e$** : si le même $m$ est chiffré vers 3 destinataires avec $e=3$, le CRT permet de reconstruire $m^3$ et d'en extraire la racine cubique → **toujours randomiser $m$** avant chiffrement.
+- **Propriété multiplicative** : $(m_1m_2)^e \equiv c_1c_2 \bmod n$ → exploitable (signatures aveugles).
+
+:::
+
+## ElGamal
+
+### Génération des clés
+
+Choisir $p$ premier grand, générateur $\alpha$ de $Z_p^*$, secret $a$ ($1\le a\le p-2$), calculer $\alpha^a \bmod p$.
+Clé publique $(p,\alpha,\alpha^a\bmod p)$, clé privée $a$.
+
+### Chiffrement / Déchiffrement
+
+Pour chaque message, B choisit un **$k$ aléatoire unique** :
+
+$$\lambda := \alpha^k \bmod p \qquad \delta := m\,(\alpha^a)^k \bmod p \qquad c:=(\lambda,\delta)$$
+
+A calcule $\lambda^{p-1-a} \equiv \alpha^{-ak} \bmod p$, puis $m \equiv \delta \cdot \alpha^{-ak} \bmod p$.
+
+**Sécurité** : repose sur la difficulté du DLP (non prouvé strictement équivalent).
+
+::: {.callout-warning title="Piège majeur"}
+
+Si **$k$ est réutilisé** pour deux messages : $\delta_1/\delta_2 = m_1/m_2$ → un plaintext se retrouve trivialement à partir de l'autre. $k$ doit être **unique à chaque chiffrement**.
+
+:::
+
+**Limites** : exposants $(k,a)$ doivent être grands (sinon *baby-step giant-step*) ; le ciphertext fait **le double** de la taille du plaintext.
+
+## Rabin
+
+### Génération des clés
+
+$p,q$ premiers grands ($\text{taille}(pq)\ge1024$), $n:=pq$. Clé publique $n$, clé privée $(p,q)$.
+
+### Chiffrement / Déchiffrement
+
+$$c = m^2 \bmod n$$
+
+Déchiffrement : calculer les **4 racines carrées** de $c$ mod $n$ (via $p$ et $q$) ; identifier le bon $m$ par redondance ou indication de B.
+
+| | |
+|---|---|
+| **Avantage** | Équivalence **prouvée** SQROOTP $\cong$ FACTP → sécurité *provably secure* contre attaques **passives** |
+| **Limite** | Ambiguïté des 4 racines ; vulnérable à l'attaque *chosen ciphertext* (**active**) |
+
+::: {.callout-warning title="Attaque active sur Rabin"}
+
+L'attaquant envoie $c=m^2 \bmod n$ choisi, obtient une racine $m_x$ de A. Si $m \ne \pm m_x$ (proba $1/2$), $\gcd(m-m_x,n)$ révèle un facteur de $n$ → casse le système. Contre-mesure : exiger une **redondance** dans les plaintexts.
+
+:::
+
+## Courbes Elliptiques
+
+**Définition** : $E: y^2 = x^3+ax+b$ (+ point à l'infini $\infty$, élément neutre), avec discriminant $4a^3+27b^2 \ne 0$.
+
+![Courbe elliptique](qmd_images/courbe_elliptique_exemple.png)
+
+**Addition géométrique** : $-P=(x,-y)$ ; $P+Q=R$ où $-R$ est le 3ᵉ point d'intersection de la droite $(PQ)$ avec $E$. $(E,+)$ forme un **groupe commutatif**.
+
+![Addition sur une courbe elliptique](qmd_images/courbe_elliptique_addition.png)
+
+**Multiplication scalaire** : $2P=R$ où $-R$ est l'intersection de la tangente en $P$ avec $E$ (permet de calculer $kP$ efficacement).
+
+![Multiplication scalaire](qmd_images/courbe_elliptique_multiplication_scalaire.png)
+
+**🔴 ECDLP** : sur $E_p$ ($p$ premier grand), retrouver $k$ tel que $Q=kP$ est **exponentiellement difficile**.
+
+::: {.callout-tip title="Avantage des courbes elliptiques"}
+
+Sécurité équivalente à RSA avec des **clés bien plus petites**, car les meilleures attaques connues (Pollard-rho, $O(\sqrt{n})$) sont **pleinement exponentielles**, contrairement au NFS sous-exponentiel utilisé contre RSA/DLP classique.
+
+:::
+
+### EC-ElGamal
+
+- **Clés** : A choisit $E_p$ ($\text{len}(p)\sim200$ bits), $P_0\in E_p$, secret $a$, calcule $P_a=aP_0$. Publique $(E_p,P_0,P_a)$, privée $a$.
+- **Chiffrement** : B choisit $k$ aléatoire unique, envoie $c=(\lambda,\delta)$ avec $\lambda:=kP_0$, $\delta:=kP_a+m_i$.
+- **Déchiffrement** : A calcule $a\lambda = kP_a$, puis $m_i = \delta - kP_a$.
+- Sécurité : repose sur **ECDLP**.
+
+## Comparatif Final
+
+| Système | Problème mathématique | Exemples |
+|---|---|---|
+| Factorisation d'entiers | Trouver les facteurs premiers de $n$ | RSA, Rabin |
+| Logarithme discret | Trouver $x$ t.q. $h=g^x \bmod n$ | ElGamal, Diffie-Hellman, DSA |
+| Log. discret sur courbe elliptique | Trouver $x$ t.q. $Q=xP$ | EC-Diffie-Hellman, ECDSA |
+
+| Problème | Meilleure méthode connue | Complexité |
+|---|---|---|
+| Factorisation | Number Field Sieve | Sous-exponentielle |
+| Log. discret | Number Field Sieve | Sous-exponentielle |
+| Log. discret elliptique | Pollard-rho ($O(\sqrt n)$) | Pleinement exponentielle |
+
+## À Retenir
+
+- Tous ces systèmes s'appuient sur des problèmes **faciles dans un sens, durs dans l'autre** (facto­risation, log discret, racine carrée mod composite).
+- **RSA** : sécurité ≈ factorisation ; $e$ petit → chiffrement rapide ; $d$ grand → obligatoire.
+- **ElGamal** : sécurité ≈ DLP ; **jamais réutiliser $k$** ; ciphertext double.
+- **Rabin** : seul système **prouvé** équivalent à FACTP (passif), mais fragile aux attaques actives.
+- **Courbes elliptiques** : même sécurité que RSA avec des clés bien plus petites (attaques pleinement exponentielles vs sous-exponentielles).
+- Théorème d'Euler + CRT + exponentiation rapide = boîte à outils mathématique commune à tout le chapitre.

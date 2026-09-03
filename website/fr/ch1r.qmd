@@ -1,0 +1,226 @@
+## Vue d'ensemble
+
+| Bloc | Contenu |
+|---|---|
+| Services de sécurité | Confidentialité, Intégrité, Disponibilité, Authentification, Non-répudiation, Non-duplication, Anonymat |
+| Risques Internet | malware e-mail/web, phishing, spam, ransomware, IoT, defacement, DDoS |
+| Outils cryptographiques | hachage, générateurs aléatoires, crypto symétrique, crypto asymétrique, signature digitale |
+| Étude de cas | Ransomware (Cryptolocker) |
+
+**Fil conducteur :** protéger des informations digitales dans un environnement distribué, global, sans frontière matérielle → **Cryptographie** (symétrique / asymétrique) + fonctions à sens unique + générateurs aléatoires.
+
+## Services de Sécurité 🔴
+
+| Service | Définition courte |
+|---|---|
+| Confidentialité | protège contre divulgation non autorisée |
+| Intégrité | protège contre modification non autorisée |
+| Disponibilité | ressources accessibles aux utilisateurs légitimes |
+| Authentification d'entités | prouver l'identité d'une entité (≈ identification) |
+| Authentification de données | prouver la source d'un ensemble de données → implique aussi l'intégrité |
+| Non-répudiation | une entité ne peut nier avoir participé à une transaction |
+| Non-duplication | protection contre les copies illicites |
+| Anonymat | préserver l'identité d'une entité/source |
+
+::: {.callout-warning title="Piège"}
+Authentification de données ⊃ Intégrité (l'authentification d'origine garantit *aussi* l'intégrité, pas l'inverse).
+:::
+
+### Dangers / Attaques / Mécanismes (synthèse)
+
+| Service | Danger type | Attaque type | Mécanisme digital |
+|---|---|---|---|
+| Confidentialité | fuite d'info | écoute, analyse trafic | cryptage |
+| Intégrité | modification | altération/destruction | fonction à sens unique + cryptage |
+| Disponibilité | déni de service | virus, accès répétés | contrôle d'accès, audit, anti-virus |
+| Auth. entités | accès non autorisé | vol mdp, faille protocole | secret + protocole, carte à puce + PIN |
+| Auth. données | falsification info | faux signature | fonction à sens unique + cryptage |
+| Non-répudiation | nier transaction | prétendre vol de clé | + signature digitale |
+| Non-duplication | duplication | falsification/imitation | tatouage digital, verrouillage crypto |
+| Anonymat | identification | analyse transaction | mixers, remailers, deep web |
+
+## Risques Liés à Internet 🟠
+
+- **E-mail malware** : pièce jointe/lien piégé → vol, chiffrement (ransomware), minage illicite, diffusion.
+- **Web malware (*drive-by download*)** : infection à la simple visite (site malicieux ou site légitime infecté via *cross-site scripting*).
+- **Phishing** : password + harvesting + fishing → récolte d'infos privées, adresse falsifiée. **Spear phishing** = ciblé sur une personne/organisation.
+- **Spam** : e-mails/pop-up indésirables (~60% du trafic mail) ; peut véhiculer du malware.
+- **Ransomware** : chiffre les données, demande rançon (bitcoins) ; peut être *dormant*.
+- **IoT attacks** : failles connues, mdp par défaut, négligence → porte d'entrée réseau + relai d'attaques.
+- **Website/information defacement** : atteinte à l'intégrité + réputation → durcir l'hôte, authentification forte.
+- **DDoS** : multiples dispositifs (botnets) submergent une cible ; firewalls/IDS peu efficaces ; risques réputationnels, financiers, physiques (infrastructures critiques).
+
+::: {.callout-tip title="Intuition"}
+Presque tous ces risques se résument à : **ingénierie sociale ou faille technique → exécution de code / vol de secret → exploitation (vol, chiffrement, relai d'attaque)**.
+:::
+
+## Fonctions de Hachage Cryptographiques 🔴
+
+**Définition :** fonction facile à calculer dans un sens, virtuellement impossible dans l'autre.
+
+![](qmd_images/diagram_hash_function.png)
+
+Propriétés :
+
+- **One-way** : impossible de retrouver le message depuis le digest.
+- **Collision-free** : impossible de trouver un 2e message donnant le même digest.
+- Toute modification (même minime) → digest complètement différent.
+- Digest : 160–512 bits. Exemples : `SHA-1`, `SHA-256`, `SHA-3`.
+
+## Générateurs (Pseudo-)Aléatoires 🟡
+
+| Type | Principe | Exemple |
+|---|---|---|
+| Aléatoire | phénomène physique non-déterministe | source radioactive/quantique |
+| Pseudo-aléatoire | déterministe à partir d'une graine (*seed*) | frappe clavier, accès disque, paquets réseau |
+
+::: {.callout-warning title="Piège"}
+*"The use of pseudo-random processes to generate secret quantities can result in pseudo-security"* — une mauvaise graine compromet toute la sécurité (clés de session, IV, secrets de signature).
+:::
+
+## Cryptographie Symétrique vs Asymétrique 🔴
+
+![](qmd_images/diagram_crypto_types.png)
+
+### Symétrique
+
+- **Une seule clé secrète**, partagée, pour crypter ET décrypter.
+- Historique : César (Ier av. JC).
+
+![](qmd_images/diagram_crypto_symetrique.png)
+
+- Services : Confidentialité, Authentification, Intégrité — **pas** de signature digitale (clé connue des 2 parties).
+- Échange de clé : nécessite un canal confidentiel alternatif (courrier, téléphone...).
+- Exemples : AES, DES, IDEA, RC4, RC5.
+- ✅ rapide (jusqu'à 100× plus rapide), clé courte (128 bits, mémorisable), facile en hardware.
+- ❌ mauvaise scalabilité (n clés pour n interlocuteurs) → mieux pour documents personnels / petit groupe.
+
+### Asymétrique
+
+- **Deux clés** : publique (partagée) / privée (secrète). *Keyring* = porte-clés.
+- 1976, Diffie & Hellman.
+
+![](qmd_images/diagram_crypto_asymetrique.png)
+
+**Confidentialité** → crypter avec **clé publique du destinataire**, décrypter avec **sa clé privée**.
+
+![](qmd_images/diagram_crypto_asym_confidentialite.png)
+
+**Signature digitale** → signer avec **sa propre clé privée**, vérifier avec **sa clé publique**.
+
+![](qmd_images/diagram_signature_digitale.png)
+
+- Services : Confidentialité, Authentification, Intégrité, **Signature digitale & Non-répudiation**.
+- Exemples : RSA (le plus utilisé), Rabin, ElGamal.
+- ✅ pas de canal confidentiel nécessaire (juste authentifié), gestion de clés simplifiée (1 paire pour n correspondants).
+- ❌ jusqu'à 50× plus lent que symétrique ; nécessite de **certifier** que la clé publique appartient bien au destinataire.
+
+::: {.callout-important title="À retenir"}
+**Confidentialité asymétrique → clés du DESTINATAIRE.**
+**Signature asymétrique → clés de l'EXPÉDITEUR.**
+:::
+
+### Tableau comparatif
+
+| | Symétrique | Asymétrique |
+|---|---|---|
+| Clé | 1 clé secrète partagée | paire publique/privée |
+| Vitesse | rapide (×100) | lente (×50 plus lent) |
+| Taille de clé | 128 bits | 1024+ bits |
+| Signature digitale | non | oui |
+| Échange de clé | canal confidentiel requis | canal authentifié suffit |
+| Cas d'usage | doc perso, petit groupe, réseaux | canaux entre inconnus, transport de clé, signature |
+
+| Activité | Recommandation |
+|---|---|
+| Documents personnels / petit groupe | Symétrique |
+| Canal confidentiel entre inconnus | Asymétrique |
+| Transaction / distribution logicielle | Asymétrique (clé) + Symétrique (données) |
+| Segments réseau (environnement stable) | Symétrique |
+
+## Signature Digitale 🔴
+
+**Problème :** signer tout un document est coûteux.
+**Solution :** signer seulement le **digest** (hash) du document.
+
+![](qmd_images/diagram_signature_digitale_2.png)
+
+Étapes : `document → F (hash) → digest → signature (clé privée)` puis vérification : `document → F → digest' ; comparer avec digest déchiffré (clé publique) → if == then OK`.
+
+Propriétés :
+
+- Signature change si le document change (intégrité garantie).
+- Impossible de forger un 2e document → même signature (collision-free).
+- Seul le détenteur de la clé privée peut produire une signature valide.
+
+$$
+\text{Authentification} + \text{Non-répudiation}
+$$
+
+## RSA — Fonctionnement 🟠
+
+- $n = pq$, $p,q$ premiers grands (>1024 bits)
+- $\phi(n) = (p-1)(q-1)$
+- $e, d$ tels que $ed \equiv 1 \mod \phi(n)$
+- **Encryption :** $C = P^e \mod n$ — clé publique $(n,e)$
+- **Décryption :** $P = C^d \mod n$ — clé privée $(d)$
+- Sécurité : inverser $C = P^e \mod n$ est virtuellement impossible pour de grands nombres (factorisation de $n$).
+- Preuve : via théorème d'Euler, $a^{\phi(n)} \equiv 1 \mod n$.
+
+## Combiner Symétrique + Asymétrique 🔴
+
+**Idée :** utiliser l'asymétrique seulement pour échanger une clé symétrique de session $K_s$ (plus rapide ensuite).
+
+![](qmd_images/diagram_crypto_asym_sym.png)
+
+1. A génère $K_s$ aléatoire, la chiffre avec la **clé publique de B** → $E_{B'K_{publique}}[K_s]$ → B déchiffre avec sa clé privée.
+2. A et B communiquent avec $K_s$ (symétrique) pour la suite des échanges.
+
+::: {.callout-tip title="Intuition"}
+Asymétrique = **coffre-fort pour transporter la clé**. Symétrique = **rapidité pour les données**.
+:::
+
+## Étude de cas : Ransomware 🟠
+
+- **Définition (Wikipedia, incomplète)** : logiciel malveillant qui chiffre des données personnelles et exige une rançon pour la clé de déchiffrement.
+- Catégorie : **Cheval de Troie**.
+- Croissance explosive depuis Cryptolocker (2013) → des milliards d'attaques/an.
+- Exemple réel : Colonial Pipeline (mai 2021) → coupure de carburant, côte Est USA.
+
+### Cycle de vie
+
+1. **Infection et propagation**
+2. **Exécution** (chiffrement des données)
+3. **Paiement** (crypto-monnaies / bitcoin)
+4. **Occultation** (obfuscation, réseaux TOR / deep web)
+
+### Schéma Cryptolocker
+
+![](qmd_images/cryptolocker_schema.png)
+
+- IV généré depuis taille + nom du fichier.
+- Clé générée à partir d'une chaîne aléatoire S + clé publique RSA de l'attaquant → **RSA encryption** de S.
+- Données chiffrées en **AES** avec cette clé ; **HMAC** calculé sur le fichier original.
+- **Clé privée** de déchiffrement reste **côté attaquant**, envoyée seulement après paiement.
+- Trace brouillée via réseaux **TOR**.
+
+### Prévention / Réaction
+
+| Axe | Mesures |
+|---|---|
+| Prévention | *patching*, détection active/passive (firewalls, WAF, IDS/IPS, scan e-mail), formation |
+| Réaction | *backups offline*, politique de sécurité, décision payer/ne pas payer |
+
+::: {.callout-warning title="Piège"}
+Un ransomware cible un **très large spectre de fichiers** (bureautique, images, bases de données, sauvegardes, clés...) — pas seulement les "documents importants".
+:::
+
+## À Retenir
+
+- Sept services de sécurité : **C-I-D + 2×Authentification + Non-répudiation + Non-duplication + Anonymat**.
+- Cryptographie = brique centrale : **symétrique** (1 clé, rapide, pas de signature) vs **asymétrique** (2 clés, lent, signature + non-répudiation).
+- Confidentialité asymétrique → clés du **destinataire** ; Signature → clés de l'**expéditeur**.
+- En pratique : **asymétrique pour échanger la clé, symétrique pour les données**.
+- Hachage = brique de l'intégrité et de la signature : **one-way + collision-free**.
+- Sécurité des clés pseudo-aléatoires = maillon faible fréquent.
+- Ransomware = exemple concret combinant hachage/IV, RSA (clé), AES (données), HMAC (intégrité) et TOR (anonymat) — illustre tout le cours en une attaque.

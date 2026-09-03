@@ -1,0 +1,411 @@
+---
+execute:
+  enabled: false
+---
+
+```quizdown
+### Qu'est-ce qui définit fondamentalement un stream cipher par rapport à un block cipher ?
+
+> Compare la taille de l'unité qui est effectivement chiffrée dans chaque famille.
+
+1. [ ] Le stream cipher utilise toujours une clé plus courte que le block cipher
+1. [x] Le stream cipher chiffre bit par bit, alors que le block cipher chiffre des blocs de n bits
+    > Correct : la différence structurelle fondamentale est la taille de l'unité chiffrée (1 bit vs un bloc).
+1. [ ] Le stream cipher est toujours asymétrique
+    > Incorrect : les deux familles sont symétriques (même clé pour chiffrer/déchiffrer).
+1. [ ] Le stream cipher ne peut pas utiliser d'opération xor
+    > Incorrect : le xor est au contraire l'opération de substitution la plus courante dans les stream ciphers.
+```
+
+```quizdown
+### Quelles affirmations décrivent correctement les stream ciphers ?
+
+> Repense aux avantages ET aux inconvénients présentés dans le cours.
+
+- [x] Ils nécessitent peu ou pas de mémoire/buffering
+    > Correct : c'est une caractéristique centrale, liée au traitement bit par bit.
+- [x] La réutilisation du keystream compromet gravement la sécurité
+    > Correct : c'est la faiblesse classique illustrée par le one-time pad.
+- [ ] Ils sont plus lents qu'un block cipher car ils nécessitent plus de calculs par bit
+    > Incorrect : au contraire, ils sont réputés très rapides, adaptés au "on the fly".
+- [ ] Leur robustesse ne dépend pas de la qualité du générateur aléatoire utilisé
+    > Incorrect : la robustesse dépend justement fortement de la qualité (randomness) du keystream généré.
+```
+
+```quizdown
+### Un stream cipher a nécessairement besoin de davantage de ressources CPU qu'un block cipher pour chiffrer la même quantité de données.
+
+> Repense à l'un des arguments en faveur des stream ciphers dans le cours.
+
+1. [ ] Vrai
+1. [x] Faux
+    > Faux : un des avantages mis en avant est justement leur faible coût CPU, adapté aux systèmes à ressources limitées.
+```
+
+```quizdown
+### Une application de vidéo en streaming doit chiffrer un flux continu de données en temps réel, avec des paquets parfois perdus en cours de transmission. Pourquoi un stream cipher (plutôt qu'un block cipher classique en mode chaîné) est-il souvent adapté à ce contexte ?
+
+> Pense à la propagation des erreurs et à la gestion des pertes de paquets.
+
+1. [ ] Parce qu'un stream cipher ne peut jamais être cassé par cryptanalyse
+    > Incorrect : aucun système présenté n'est présenté comme incassable ; RC4 par exemple a été cassé.
+1. [x] Parce que la propagation d'erreur y est limitée ou absente, ce qui tolère bien les pertes de paquets
+    > Correct : le cours indique explicitement que cette propriété rend les stream ciphers adaptés aux transmissions avec pertes fréquentes (WiFi, streaming).
+1. [ ] Parce qu'un stream cipher ne nécessite jamais de clé secrète
+    > Incorrect : un stream cipher utilise bien une clé secrète k, comme tout système symétrique.
+1. [ ] Parce que le chiffrement par blocs est toujours plus lent en tout contexte
+    > Incorrect : le cours ne fait pas cette affirmation générale ; c'est la propagation d'erreur qui est l'argument clé ici.
+```
+
+```quizdown
+### Dans un stream cipher synchrone, de quoi dépend le keystream généré à l'étape i ?
+
+> Regarde attentivement les arguments des fonctions f et g dans les équations du cours.
+
+1. [ ] Du plaintext m_i uniquement
+1. [ ] Du ciphertext c_i uniquement
+1. [x] De l'état interne et de la clé k, mais pas du plaintext ni du ciphertext
+    > Correct : c'est justement ce qui distingue le mode synchrone du mode asynchrone.
+1. [ ] Des t ciphertexts précédents uniquement
+    > Incorrect : cette dépendance caractérise le mode asynchrone, pas le mode synchrone.
+```
+
+```quizdown
+### Un émetteur et un récepteur utilisant un stream cipher asynchrone (self-synchronizing) perdent temporairement leur synchronisation suite à la suppression d'un ciphertext en transit. Que se passe-t-il ensuite, selon le cours ?
+
+> Pense au rôle du buffer de ciphertexts précédents dans la génération du keystream asynchrone.
+
+1. [ ] Le récepteur reste définitivement désynchronisé, comme dans le cas synchrone
+    > Incorrect : c'est justement l'inverse, l'auto-synchronisation est la propriété distinctive du mode asynchrone.
+1. [x] Le récepteur retrouve automatiquement la synchronisation après un nombre de ciphertexts égal à la taille du buffer
+    > Correct : le keystream asynchrone dépend des t derniers ciphertexts ; une fois ce buffer renouvelé avec des ciphertexts corrects, la synchronisation est restaurée.
+1. [ ] Toute la communication doit être relancée depuis le début avec une nouvelle clé
+    > Incorrect : aucun redémarrage complet n'est nécessaire, l'auto-synchronisation se fait automatiquement.
+1. [ ] La perte de synchronisation n'a aucun effet observable sur le déchiffrement
+    > Incorrect : elle provoque une propagation d'erreur limitée à la taille du buffer, ce n'est pas sans effet.
+```
+
+```quizdown
+### Un ingénieur doit chiffrer des plaintexts très redondants (par exemple des en-têtes de protocole quasi identiques), avec un risque d'attaques statistiques ciblées. Quel type de stream cipher le cours recommande-t-il de privilégier dans ce cas, et pourquoi ?
+
+> Le cours relie explicitement un type de stream cipher à une meilleure diffusion des statistiques du plaintext.
+
+1. [ ] Synchrone, car il ne propage aucune erreur
+1. [x] Asynchrone, car chaque bit du plaintext influence tous les ciphertexts suivants, ce qui disperse mieux les statistiques
+    > Correct : le cours recommande explicitement les stream ciphers asynchrones lorsque l'entropie des plaintexts est limitée.
+1. [ ] Synchrone, car il nécessite moins de mémoire tampon
+    > Incorrect : la question porte sur la protection contre les statistiques redondantes, pas sur la mémoire.
+1. [ ] Aucun des deux, il faut obligatoirement utiliser un block cipher dans ce cas
+    > Incorrect : le cours indique une préférence entre les deux types de stream ciphers, pas un rejet des stream ciphers.
+```
+
+```quizdown
+### Quelles sont les caractéristiques correctes d'un LFSR (Linear Feedback Shift Register) selon le cours ?
+
+> Repense à la fois aux avantages pratiques et aux limites de sécurité des LFSR.
+
+- [x] Il s'adapte très bien aux implantations hardware
+    > Correct : c'est un des avantages mis en avant.
+- [x] Il produit des séquences de période longue avec une randomness notable
+    > Correct : c'est explicitement mentionné comme propriété du LFSR.
+- [ ] Il offre aujourd'hui un niveau de sécurité comparable à celui des block ciphers modernes
+    > Incorrect : le cours indique que la sécurité des systèmes basés sur LFSR est jugée insuffisante comparée aux block ciphers.
+- [ ] Sa complexité linéaire ne peut pas être calculée de manière algorithmique
+    > Incorrect : l'algorithme de Berlekamp-Massey permet précisément de calculer cette complexité linéaire.
+```
+
+```quizdown
+### Pourquoi a-t-on introduit les NLFSR (Non Linear Feedback Shift Registers) en remplacement des LFSR classiques ?
+
+> Pense à la faiblesse principale des LFSR évoquée par le cours, liée à leur nature algébrique.
+
+1. [ ] Pour réduire la longueur de la clé nécessaire
+1. [x] Pour augmenter la complexité (linéaire) et donc la résistance à la cryptanalyse, en remplaçant la combinaison linéaire par une fonction non linéaire f
+    > Correct : le cours présente explicitement les NLFSR comme une solution pour augmenter la complexité face à la faiblesse des combinaisons purement linéaires.
+1. [ ] Pour permettre l'utilisation de clés de longueur variable, ce que les LFSR ne permettent pas
+1. [ ] Parce que les LFSR ne peuvent pas être implémentés en hardware
+    > Incorrect : c'est l'inverse, les LFSR sont réputés bien adaptés au hardware.
+```
+
+```quizdown
+### RC4 : lequel de ces éléments décrit correctement l'algorithme selon le cours ?
+
+> Repense au mode de fonctionnement de RC4 et à son historique.
+
+1. [ ] RC4 est un stream cipher asynchrone dont le keystream dépend des ciphertexts précédents
+    > Incorrect : RC4 fonctionne en mode synchrone, indépendant du ciphertext et du plaintext.
+1. [x] RC4 repose sur une S-box de 256 valeurs, construite à partir d'une clé de longueur variable
+    > Correct : la S-box 8x8 (permutation de 0 à 255) est l'élément clé de RC4, initialisée en fonction de la clé.
+1. [ ] RC4 est resté totalement confidentiel et n'a jamais fait l'objet d'analyse publique
+    > Incorrect : après sa fuite en 1994, il a été largement étudié par la communauté cryptographique.
+1. [ ] RC4 est plus lent que DES en version logicielle
+    > Incorrect : le cours indique que RC4 est environ 10 fois plus rapide que DES.
+```
+
+```quizdown
+### Quelle est la différence de rôle entre le KSA et le PRGA dans RC4 ?
+
+> Pense à ce que chacun des deux algorithmes produit comme résultat.
+
+1. [ ] Le KSA génère le keystream final, le PRGA initialise la S-box
+1. [x] Le KSA initialise et mélange la S-box à partir de la clé, le PRGA génère ensuite le keystream à partir de cette S-box
+    > Correct : c'est exactement la répartition des rôles décrite dans le cours (Key Scheduling puis Pseudo Random Generation).
+1. [ ] Le KSA et le PRGA réalisent exactement la même opération, l'un après l'autre
+1. [ ] Le PRGA est exécuté avant le KSA dans le déroulement de l'algorithme
+    > Incorrect : la S-box doit d'abord être construite par le KSA avant que le PRGA puisse générer le keystream.
+```
+
+```quizdown
+### Remets dans l'ordre chronologique les étapes du fonctionnement de RC4.
+
+> Pense à ce qui doit exister avant qu'un keystream puisse être généré.
+
+1. Initialisation de S comme la permutation identité (0, 1, ..., N-1)
+2. Mélange (scrambling) de S en fonction de la clé K (boucle du KSA)
+3. Génération itérative du keystream via la boucle du PRGA
+4. Chiffrement final du plaintext par xor avec le keystream produit
+```
+
+```quizdown
+### L'application de RC4 dans le protocole WiFi WEP a été considérée comme sûre pendant de nombreuses années et n'a jamais été compromise en pratique.
+
+> Repense à ce que le cours indique sur RC4 appliqué à WEP.
+
+1. [ ] Vrai
+1. [x] Faux
+    > Faux : le cours indique explicitement que l'application de RC4 sur WEP a été "cassée" suite à une faille dans le mode d'utilisation du protocole.
+```
+
+```quizdown
+### Quelle propriété DOIT posséder la fonction associée à un block cipher pour permettre un déchiffrement unique ?
+
+> Pense à ce qui garantit qu'un ciphertext donné correspond à un seul plaintext possible.
+
+1. [ ] Elle doit être linéaire
+1. [ ] Elle doit être commutative avec la fonction de génération de clé
+1. [x] Elle doit être bijective
+    > Correct : chaque clé définit une bijection différente, condition nécessaire pour qu'un déchiffrement unique soit possible.
+1. [ ] Elle doit produire un bloc de sortie plus grand que le bloc d'entrée
+    > Incorrect : un block cipher fait correspondre un bloc de n bits à un autre bloc de la même taille n.
+```
+
+```quizdown
+### Quels critères permettent d'évaluer la qualité d'un block cipher moderne, selon le cours ?
+
+> Repense aux quatre critères présentés (clé, performance, taille de bloc, résistance).
+
+- [x] Une entropie de clé élevée, avec des clés d'au moins 128 bits
+    > Correct : c'est un critère explicite pour résister aux attaques brute-force.
+- [x] Une taille de bloc suffisamment grande (typiquement au moins 128 bits)
+    > Correct : un bloc trop petit permettrait des attaques par dictionnaire plaintext/ciphertext.
+- [ ] L'utilisation obligatoire d'une structure de type Feistel
+    > Incorrect : AES, par exemple, est un block cipher moderne qui n'est pas un Feistel cipher.
+- [ ] L'absence totale de toute opération non linéaire
+    > Incorrect : les opérations non linéaires (S-boxes) sont au contraire essentielles à la résistance cryptographique.
+```
+
+```quizdown
+### Un attaquant observe que deux blocs de plaintext identiques produisent systématiquement deux blocs de ciphertext identiques dans un système chiffré avec un block cipher. Quel mode d'opération est le plus probablement utilisé ?
+
+> Pense au mode qui ne fait intervenir aucun chaînage entre les blocs.
+
+1. [ ] CBC
+    > Incorrect : en CBC, des plaintexts identiques donnent des ciphertexts différents grâce au chaînage (si l'IV change).
+1. [x] ECB
+    > Correct : l'absence de chaînage en ECB fait que des plaintexts identiques produisent toujours les mêmes ciphertexts, ce qui est justement sa faiblesse connue.
+1. [ ] CTR
+    > Incorrect : en CTR, le compteur change à chaque bloc, donc des plaintexts identiques donnent des ciphertexts différents.
+1. [ ] OFB
+    > Incorrect : en OFB, si l'IV change, des plaintexts identiques donnent également des ciphertexts différents.
+```
+
+```quizdown
+### Une application doit chiffrer et transmettre de très grands volumes de données à haut débit, avec un besoin d'accès aléatoire à des blocs individuels et une forte parallélisation des calculs. Quel mode d'opération est le plus adapté ?
+
+> Pense au mode dont le cours souligne explicitement l'absence de dépendance entre blocs et la compatibilité SIMD.
+
+1. [ ] CBC, car il assure le meilleur chaînage entre les blocs
+1. [ ] CFB, car il se comporte comme un stream cipher
+1. [x] CTR, car il permet un accès aléatoire aux blocs et une parallélisation complète, sans dépendance entre eux
+    > Correct : le cours indique explicitement que le mode compteur profite pleinement des architectures SIMD et permet un accès aléatoire à chaque bloc.
+1. [ ] ECB, car chaque bloc est traité indépendamment des autres
+    > Incorrect : bien qu'ECB soit parallélisable, il ne fournit pas de protection contre l'identification de blocs identiques, contrairement à CTR qui reste sûr sur ce point.
+```
+
+```quizdown
+### Quelle est la différence fondamentale de fonctionnement entre les modes CFB et OFB, tous deux dérivés d'un block cipher ?
+
+> Repense à la nature synchrone ou asynchrone de chacun de ces deux modes.
+
+1. [ ] CFB est synchrone (keystream dépend uniquement de la clé et de l'IV) alors que OFB est asynchrone (keystream dépend des ciphertexts précédents)
+    > Incorrect : c'est l'inverse : CFB dépend des ciphertexts précédents (asynchrone), OFB dépend uniquement de la clé et de l'IV (synchrone).
+1. [x] CFB est asynchrone (le keystream dépend des ciphertexts précédents) alors que OFB est synchrone (le keystream dépend seulement de la clé et de l'IV)
+    > Correct : c'est exactement la distinction donnée dans le cours entre ces deux modes.
+1. [ ] Les deux modes sont strictement synchrones et fonctionnent de manière identique
+1. [ ] Les deux modes sont strictement asynchrones et fonctionnent de manière identique
+    > Incorrect : les deux modes ont des comportements différents vis-à-vis de la dépendance au ciphertext.
+```
+
+```quizdown
+### Dans un chiffrement de type Feistel, on a un plaintext (L0, R0) et une fonction d'étape f avec des sous-clés K_i. Après une étape i, comment R_i est-il calculé ?
+
+> Applique directement la formule d'une étape de Feistel présentée dans le cours.
+
+1. [ ] R_i = R_{i-1} XOR f(L_{i-1}, K_i)
+1. [x] R_i = L_{i-1} XOR f(R_{i-1}, K_i)
+    > Correct : c'est exactement la formule du cours, avec L_i = R_{i-1} et R_i = L_{i-1} XOR f(R_{i-1}, K_i).
+1. [ ] R_i = L_{i-1} AND f(R_{i-1}, K_i)
+1. [ ] R_i = f(L_{i-1}, R_{i-1})
+    > Incorrect : la sous-clé K_i intervient explicitement dans la formule, et l'opération de combinaison est un xor, pas une simple application de f sans combinaison.
+```
+
+```quizdown
+### Quelles affirmations sur DES sont correctes selon le cours ?
+
+> Repense à la structure, la taille de bloc, la taille de clé et le nombre d'étapes de DES.
+
+- [x] DES est un Feistel cipher à 16 étapes
+    > Correct : c'est la structure exacte décrite dans le cours.
+- [x] La taille effective de la clé de DES est de 56 bits utiles (sur 64 bits transmis, avec bits de parité)
+    > Correct : c'est explicitement précisé dans le cours.
+- [ ] DES utilise des blocs de 128 bits, comme AES
+    > Incorrect : DES utilise des blocs de 64 bits, contrairement à AES qui utilise 128 bits.
+- [ ] DES forme un groupe algébrique pour l'opération de composition
+    > Incorrect : le cours indique explicitement que DES n'est pas un groupe pour la composition.
+```
+
+```quizdown
+### Pourquoi le fait que "DES n'est pas un groupe" (pour la composition) est-il une propriété cryptographiquement importante ?
+
+> Pense à ce que cette propriété permet de garantir concernant le Triple DES.
+
+1. [ ] Parce que cela rend DES totalement incassable par force brute
+1. [x] Parce que cela garantit que l'application successive de DES avec des clés différentes (comme dans Triple DES) augmente réellement la sécurité, au lieu d'être équivalente à un seul DES avec une autre clé
+    > Correct : si DES était un groupe, on pourrait toujours trouver une clé K3 équivalente à deux applications successives, ce qui rendrait Triple DES inutile face à une recherche exhaustive sur les 56 bits.
+1. [ ] Parce que cela permet de réduire la taille de bloc nécessaire
+1. [ ] Parce que cela empêche l'existence de clés faibles
+    > Incorrect : DES possède malgré tout des clés faibles et mi-faibles, propriété indépendante de la question du groupe.
+```
+
+```quizdown
+### Qu'est-ce qui caractérise une clé K dite "faible" pour DES ?
+
+> Repense à la condition mathématique donnée dans le cours pour une clé faible.
+
+1. [ ] E_K(x) produit toujours le même ciphertext quel que soit x
+1. [x] Appliquer deux fois le chiffrement avec K redonne le plaintext d'origine : E_K(E_K(x)) = x
+    > Correct : c'est exactement la définition donnée dans le cours, liée à la génération de sous-clés identiques par paires.
+1. [ ] K contient uniquement des bits à 1
+1. [ ] K ne peut être utilisée qu'en mode ECB
+    > Incorrect : rien dans le cours ne restreint les clés faibles à un mode d'opération particulier.
+```
+
+```quizdown
+### Un système utilise Triple DES avec un espace de clés effectif de 112 bits. Quel est le principal inconvénient pratique de cette solution par rapport à un simple DES, selon le cours ?
+
+> Pense au coût en performance de l'exécution répétée de l'algorithme.
+
+1. [ ] Triple DES nécessite un bloc de 256 bits, incompatible avec le matériel existant
+1. [x] L'exécution de trois passes successives de DES pénalise les performances, ce qui reste un inconvénient pour certaines applications
+    > Correct : le cours identifie explicitement cet impact en performance comme inconvénient de la solution.
+1. [ ] Triple DES ne peut pas être utilisé avec le matériel ou logiciel DES existant
+    > Incorrect : au contraire, le cours souligne que cette solution permet de continuer à utiliser les "boîtes" DES existantes.
+1. [ ] Triple DES est en réalité moins sûr qu'un simple DES
+    > Incorrect : le cours indique au contraire que le niveau de sécurité obtenu est très satisfaisant.
+```
+
+```quizdown
+### Quelles différences structurelles distinguent AES de DES, selon le cours ?
+
+> Repense à la structure générale (Feistel ou non), la taille de bloc et le corps algébrique utilisé.
+
+- [x] AES n'est pas un Feistel cipher, contrairement à DES
+    > Correct : le cours précise explicitement qu'AES est un block cipher itératif mais pas un Feistel cipher.
+- [x] AES opère sur des blocs de 128 bits, alors que DES opère sur des blocs de 64 bits
+    > Correct : c'est une différence explicite de taille nominale entre les deux algorithmes.
+- [ ] AES a été conçu de manière secrète, sans consultation publique, contrairement à DES
+    > Incorrect : c'est l'inverse : AES est issu d'un processus de consultation ouvert à des experts mondiaux, contrairement au développement plus fermé de DES.
+- [ ] AES utilise systématiquement 16 étapes, comme DES
+    > Incorrect : le nombre d'étapes d'AES varie selon la taille de clé (10, 12 ou 14 étapes), il n'est pas fixé à 16.
+```
+
+```quizdown
+### Un système utilise AES avec une clé de 256 bits. Combien d'étapes (rounds) ce chiffrement effectue-t-il, sachant qu'une clé de 128 bits nécessite 10 étapes et que chaque augmentation de 32 bits ajoute une étape ?
+
+> Calcule le nombre d'incréments de 32 bits entre 128 et 256 bits, puis ajoute ce nombre à 10.
+
+1. [ ] 10 étapes
+1. [ ] 12 étapes
+1. [x] 14 étapes
+    > Correct : (256-128)/32 = 4 étapes supplémentaires, soit 10 + 4 = 14 étapes, ce qui correspond exactement à la valeur donnée dans le cours pour une clé de 256 bits.
+1. [ ] 16 étapes
+    > Incorrect : ce nombre correspond au nombre d'étapes de DES, pas à celui d'AES pour une clé de 256 bits.
+```
+
+```quizdown
+### Remets dans l'ordre les quatre opérations effectuées à chaque étape (round) d'AES.
+
+> Pense à l'ordre dans lequel la substitution, les décalages, le mélange de colonnes et l'ajout de la sous-clé interviennent typiquement dans une étape.
+
+1. ByteSub (substitution non linéaire via S-box)
+2. ShiftRow (décalage des lignes)
+3. MixColumn (combinaison linéaire des colonnes)
+4. AddRoundKey (xor avec la sous-clé de l'étape)
+```
+
+```quizdown
+### Quel est le rôle spécifique de l'opération MixColumn dans une étape AES ?
+
+> Repense à ce que cette opération fait subir aux colonnes de la matrice d'état.
+
+1. [ ] Elle applique une substitution non linéaire à chaque byte indépendamment
+    > Incorrect : cette description correspond à ByteSub, pas à MixColumn.
+1. [x] Elle remplace chaque colonne par une combinaison linéaire des autres colonnes, via une multiplication matricielle
+    > Correct : c'est exactement la description donnée dans le cours pour MixColumn.
+1. [ ] Elle effectue un xor entre la matrice d'état courante et la sous-clé de l'étape
+    > Incorrect : cette opération est AddRoundKey, pas MixColumn.
+1. [ ] Elle décale les lignes de la matrice d'un nombre variable de positions
+    > Incorrect : cette opération est ShiftRow, pas MixColumn.
+```
+
+```quizdown
+### Quelle différence fondamentale distingue la cryptanalyse différentielle de la cryptanalyse linéaire ?
+
+> Pense au type de plaintexts que chaque attaque nécessite (imposés par l'attaquant ou simplement observés).
+
+1. [ ] La cryptanalyse différentielle est une attaque known plaintext, la cryptanalyse linéaire est une attaque chosen plaintext
+    > Incorrect : c'est l'inverse selon le cours.
+1. [x] La cryptanalyse différentielle est une attaque chosen plaintext qui étudie la propagation de différences, alors que la cryptanalyse linéaire est une attaque known plaintext basée sur des approximations linéaires
+    > Correct : c'est exactement la distinction donnée dans le cours.
+1. [ ] Les deux techniques nécessitent un accès physique au matériel exécutant le chiffrement
+    > Incorrect : cette description correspond plutôt aux side-channel attacks, pas à la cryptanalyse différentielle ou linéaire.
+1. [ ] Les deux techniques sont uniquement théoriques et n'ont jamais permis d'attaquer DES
+    > Incorrect : le cours donne des estimations concrètes de couples de plaintexts nécessaires pour attaquer DES avec ces deux techniques.
+```
+
+```quizdown
+### Une attaque meet-in-the-middle cible un schéma de la forme y = E_{K2}(E_{K1}(x)), avec un espace de clés combiné de 112 bits. Pourquoi cette attaque est-elle nettement plus efficace qu'une recherche exhaustive naïve sur les 2^112 combinaisons possibles ?
+
+> Pense à la manière dont deux listes intermédiaires permettent de retrouver les clés sans explorer toutes les combinaisons.
+
+1. [ ] Parce qu'elle devine directement la clé finale sans aucun calcul intermédiaire
+1. [x] Parce qu'elle construit deux listes de 2^56 éléments chacune (une par chiffrement partiel) et cherche des collisions entre elles, ramenant l'effort à environ 2^57 opérations plutôt que 2^112
+    > Correct : c'est exactement le principe décrit dans le cours, avec un effort et un stockage nettement inférieurs à l'estimation intuitive de 2^112.
+1. [ ] Parce qu'elle ne nécessite aucun plaintext connu, contrairement aux autres attaques
+    > Incorrect : l'attaque nécessite bien des known plaintexts pour vérifier l'hypothèse sur les clés candidates.
+1. [ ] Parce qu'elle exploite une faiblesse spécifique aux clés faibles de DES
+    > Incorrect : le principe meet-in-the-middle s'applique de façon générale aux constructions de type double-chiffrement, indépendamment des clés faibles.
+```
+
+```quizdown
+### Comment évolue l'efficacité des attaques différentielle et linéaire lorsque le nombre d'étapes (rounds) d'un block cipher diminue ?
+
+> Repense à la relation décrite entre le nombre d'étapes et les chances de succès de ces attaques.
+
+1. [ ] Elle diminue, car moins d'étapes laissent moins de temps pour accumuler des données statistiques
+1. [x] Elle augmente exponentiellement, ce qui explique pourquoi un nombre suffisant d'étapes est essentiel à la sécurité d'un block cipher
+    > Correct : le cours indique explicitement que les chances de succès de ces attaques augmentent exponentiellement quand le nombre d'étapes diminue.
+1. [ ] Elle reste strictement constante, indépendamment du nombre d'étapes
+1. [ ] Elle devient nulle en dessous d'un certain nombre d'étapes
+    > Incorrect : le cours ne mentionne pas de seuil d'annulation, mais une évolution exponentielle continue.
+```

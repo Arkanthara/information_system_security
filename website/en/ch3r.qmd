@@ -1,0 +1,225 @@
+## Overview
+
+**Symmetric cryptography** = same key **K** to encrypt and decrypt.
+
+| | Stream Ciphers | Block Ciphers |
+|---|---|---|
+| Encrypted unit | 1 bit | block of n bits (≥128) |
+| Speed | very fast, "on the fly" | heavier, but very secure |
+| Examples | RC4, LFSR | DES, 3DES, AES |
+| Typical use | streaming, WiFi | storage, network protocols |
+
+---
+
+## Stream Ciphers
+
+### Principle
+
+**Stream cipher**: family of cryptosystems where the encrypted block = **1 bit**.
+
+Two phases:
+
+1. **Generation** of the *keystream* $z_i$ (depends on the key **k**).
+2. **Substitution**: combination of the plaintext $m_i$ with $z_i$ (often an **xor** $\oplus$).
+
+::: {.callout-tip title="Intuition"}
+
+Canonical example: the **one-time pad**. Generation = pure randomness, substitution = xor.
+
+:::
+
+### Characteristics
+
+🔴 **Advantages**: speed (registers), low CPU cost, no memory/buffering, limited/absent error propagation (retransmission is enough → suited to WiFi).
+
+🟠 **Drawbacks**: robustness = quality of the keystream's *randomness*; **reusing the keystream** breaks security (cf. one-time pad).
+
+### Synchronous vs Asynchronous
+
+| | Synchronous | Asynchronous (self-synchronizing) |
+|---|---|---|
+| Keystream depends on | key **k** alone | key **k** + **t** previous ciphertexts |
+| Formula | $\sigma_{i+1}=f(\sigma_i,k)$, $z_i=g(\sigma_i,k)$, $c_i=h(z_i,m_i)$ | $\sigma_i=(c_{i-t},\ldots,c_{i-1})$, $z_i=g(\sigma_i,k)$, $c_i=h(z_i,m_i)$ |
+| Synchronization | required (same state at sender/receiver) | self-synchronization via buffer |
+| Error propagation | none | limited to buffer size **t** |
+| Active attacks (insert./delete) | not directly detected | better detected (propagation) |
+| Statistical diffusion of the plaintext | weak | strong → useful if plaintext entropy is limited |
+
+::: {.callout-warning title="Pitfall"}
+
+Synchronous = no error propagation BUT deleting a ciphertext → loss of synchronization. Asynchronous = propagation limited to the buffer, but self-recovery is possible.
+
+:::
+
+**Additive stream cipher** (most frequent synchronous case): $c_i = m_i \oplus z_i$, keystream produced by a pseudo-random generator driven by **k**.
+
+### Keystream generators
+
+**LFSR** (*Linear Feedback Shift Register*): generates a long keystream (**m** bits) from a short key (**l** bits, $l \ll m$).
+
+- well suited to hardware;
+- long periods, good apparent randomness;
+- based on linear combinations.
+
+🟠 Insufficient security on its own (especially historical military use) → measured by **linear complexity**, computable via the **Berlekamp-Massey** algorithm.
+
+**Solution**: replace the linear combination with a non-linear function **f** → **NLFSR** (Non Linear Feedback Shift Register), more robust.
+
+### RC4
+
+- Created in 1987 (Ron Rivest, RSA Security), **variable key**, 10× faster than DES.
+- **Synchronous** mode: keystream independent of the plaintext/ciphertext.
+- Core: **S-box** 8×8 = permutation of values 0–255, a function of the key with $0 < len(k) \le 255$.
+- Final encryption: $c_i = m_i \oplus z_i$ (xor with keystream).
+- Two steps:
+
+| Step | Role |
+|---|---|
+| **KSA** (Key Scheduling Algorithm) | fills the S-box based on the key |
+| **PRGA** (Pseudo Random Generator Algorithm) | generates the keystream from the S-box |
+
+::: {.callout-warning title="Pitfall"}
+
+RC4 is **broken in practice**: major flaws in the *key scheduling* and the PRGA, exploited notably against the **WiFi WEP** protocol.
+
+:::
+
+---
+
+## Block Ciphers
+
+### Definition
+
+A **block cipher** = a **bijective** function $\{0,1\}^n \to \{0,1\}^n$ parameterized by a **k**-bit key (**n** = nominal size). Each key ↔ a different bijection.
+
+### Quality criteria
+
+| Criterion | Requirement |
+|---|---|
+| Key entropy | equiprobable, ≥ 128 bits (brute-force resistance) |
+| Performance | execution speed |
+| Block size | ≥ 128 bits (avoids dictionary attacks) |
+| Cryptanalytic resistance | robust against linear/differential/meet-in-the-middle attacks, effort ≈ brute force |
+
+### Modes of operation
+
+| Mode | Identical plaintexts → | Error propagation | Parallelizable | Distinctive feature |
+|---|---|---|---|---|
+| **ECB** | identical ciphertexts | none (independent blocks) | yes | weak (visible patterns) |
+| **CBC** | different ciphertexts (if IV changes) | error in $c_j$ affects $c_j$ and $c_{j+1}$ | no (chaining) | erases plaintext patterns |
+| **CFB** | different (if IV changes) | error in the next $n/r$ ciphertexts | no | behaves like an **asynchronous** stream cipher (keystream depends on previous ciphertexts) |
+| **OFB** | different (if IV changes) | none | no (sequential keystream) | behaves like a **synchronous** stream cipher (keystream = f(key, IV) alone) |
+| **CTR** | different (counter changes) | none | **yes** (random access) | keystream = encryption of an incremented counter; never reuse a counter |
+
+::: {.callout-warning title="Pitfall"}
+
+Do not confuse CFB (asynchronous, depends on the ciphertexts) with OFB (synchronous, depends only on the key + IV). For OFB and CTR: **change the IV/counter** if the key stays the same, or you risk reusing the keystream.
+
+:::
+
+### Product Ciphers & Feistel Ciphers
+
+**Product cipher**: successive combination of transpositions, substitutions, xors, etc.
+
+**Feistel cipher**: an iterative product cipher. A $2t$-bit plaintext $(L_0,R_0)$ → ciphertext $(R_r,L_r)$ after **r** stages.
+
+$$
+L_i = R_{i-1} \qquad R_i = L_{i-1} \oplus f(R_{i-1}, K_i)
+$$
+
+- each stage is a bijection (invertible);
+- subkeys $K_i$ derived from **K**, different at each stage;
+- **r** even, $\ge 3$ (DES: 16 stages);
+- **decryption** = the same process, subkeys in reverse order ($K_r \to K_1$).
+
+### DES (Data Encryption Standard)
+
+| Property | Value |
+|---|---|
+| Type | Feistel cipher |
+| Block size | 64 bits |
+| Effective key size | 56 bits (64 bits with parity) |
+| Stages | 16, 48-bit subkeys |
+| Compatible modes | ECB, CBC, CFB, OFB |
+
+**Internal function (per stage)**: Expansion **E** (32→48 bits) → xor with subkey → **8 S-boxes** (48→32 bits) → permutation **P**. Framed by the initial/final permutations **IP**/**IP⁻¹** over the 64 bits.
+
+![DES operating scheme](qmd_images/des_scheme.png)
+
+::: {.callout-warning title="Pitfall"}
+
+**DES is not a group** under composition: $E_{K_2}(E_{K_1}(x)) \ne E_{K_3}(x)$ in general. This is what justifies **Triple DES** actually increasing security (otherwise exhaustive search would suffice regardless of the number of executions).
+
+:::
+
+**Weak keys**: $K$ is weak if $E_K(E_K(x))=x$; a pair is **semi-weak** if $E_{K_1}(E_{K_2}(x))=x$. DES: 4 weak keys, 6 semi-weak pairs (subkeys repeated in pairs → cryptanalysis made easier).
+
+**Triple DES (3DES)**: Encryption-Decryption-Encryption with 2 or 3 keys → key space $\{0,1\}^{112}$. Breaks DES's brute-force limit (24h in 1999 with 100,000 PCs), but at a cost = 3× the computation time of DES.
+
+![Triple-DES: Encryption / Decryption / Encryption](qmd_images/triple_des.png)
+
+### AES (Advanced Encryption Standard)
+
+| Property | Value |
+|---|---|
+| Adopted | 2001 (Daemen & Rijmen, formerly *Rijndael*) |
+| Type | iterative block cipher, **not** a Feistel cipher |
+| Block size | 128 bits |
+| Key size | 128 / 192 / 256 bits |
+| Stages | 10 (128 bits) / +1 per +32 bits of key (14 for 256 bits) |
+| Algebraic field | $GF(2^8)$ (polynomials of degree ≤7 over $GF(2)$) |
+
+**4 operations per stage** (on a 4×4 matrix of bytes):
+
+| Operation | Role |
+|---|---|
+| **ByteSub** | non-linear substitution (S-box), resists linear/differential cryptanalysis |
+| **ShiftRow** | permutation, row shifting |
+| **MixColumn** | linear combination of the columns (matrix multiplication) |
+| **AddRoundKey** | xor with the stage's subkey |
+
+![Detail of an AES stage (round)](qmd_images/aes_round_3d.png)
+
+**Decryption**: inverse operations (*InvSubBytes*, *InvShiftRows*, *InvMixColumns*); *AddRoundKey* is its own inverse (xor).
+
+**Key Schedule**: expansion of the main key into a $4 \times 4(N_e+1)$ matrix, then split into subkeys (4 columns each).
+
+::: {.callout-tip title="Intuition"}
+
+AES ≈ 2× faster than DES in software and theoretically ~$10^{22}$ times more secure.
+
+:::
+
+**Known attacks (none practical)**:
+
+- **XSL** (Courtois-Pieprzyk): AES ↔ a system of 8000 quadratic equations, 1600 unknowns, estimated effort $2^{100}$.
+- **Related-key attacks**: results on reduced versions of AES.
+- **Biclique meet-in-the-middle** (2015): reduces the AES-128 effort to $2^{126}$ (factor of 4 vs. brute force) — still out of reach.
+- **Side-channel attacks** (cache-timing): key extraction via the implementation (6-7 plaintext/ciphertext pairs are enough in some cases).
+- Security always depends on a **maximum-entropy key** (weak passwords = a real practical weakness, e.g. WPA2).
+
+### Cryptanalysis of block ciphers
+
+| Technique | Attack type | Principle | Cost (on DES) |
+|---|---|---|---|
+| **Differential** | chosen plaintext | propagation of differences between 2 plaintexts through the stages | $2^{47}$ chosen plaintext pairs |
+| **Linear** | known plaintext | linear approximations of the block cipher, probabilistic analysis | $2^{38}$ (10% success) to $2^{43}$ (85%) known plaintexts |
+| **Meet-in-the-middle** | known plaintext | applies to $y=E_{K_2}(E_{K_1}(x))$: builds 2 lists ($2^{56}$ elements) and looks for collisions | $2^{57}$ operations + $2^{56}$ storage (≪ naive $2^{112}$) |
+
+::: {.callout-warning title="Pitfall"}
+
+The effectiveness of linear/differential attacks **increases exponentially** as the number of stages **decreases** — hence the cryptographic value of having a large number of rounds.
+
+:::
+
+---
+
+## Key takeaways
+
+- **Stream cipher** = 1 bit at a time, keystream generation + xor; **synchronous** (key alone) vs. **asynchronous** (+ previous ciphertexts, self-synchronization, propagation limited to the buffer).
+- **LFSR/NLFSR** generate the keystream from a short key; **RC4** = KSA (S-box init) + PRGA (generation), broken in practice (WEP).
+- **Block cipher** = a bijective function per block; quality = key entropy + block size + cryptanalytic resistance.
+- **Modes**: ECB (no chaining, weak), CBC (chaining, error limited to 2 blocks), CFB (asynchronous), OFB (synchronous), CTR (parallelizable, no error propagation).
+- **Feistel cipher**: $L_i=R_{i-1}$, $R_i=L_{i-1}\oplus f(R_{i-1},K_i)$ — DES is an example (16 stages, 56-bit key); **DES is not a group** → this justifies 3DES.
+- **AES**: not a Feistel cipher, 128-bit blocks, $GF(2^8)$, 4 operations per stage (ByteSub, ShiftRow, MixColumn, AddRoundKey), 10 to 14 stages depending on the key.
+- **Cryptanalysis**: differential (chosen plaintext), linear (known plaintext, the most powerful in practice), meet-in-the-middle (attacks compositions $E_{K_2}(E_{K_1}(x))$).

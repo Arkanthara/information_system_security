@@ -1,0 +1,434 @@
+---
+execute:
+  enabled: false
+---
+
+## Quiz — Hashes and MACs
+
+Ce quiz couvre l'ensemble du chapitre : fonctions à sens unique, définitions et propriétés des fonctions de hachage, MDCs et MACs, birthday paradox, constructions basées sur des systèmes de cryptage, fonctions personnalisées (MD5, SHA), CBC-MAC, NMAC/HMAC, et applications (intégrité, blockchain, mots de passe salés).
+
+### Question 1
+
+```quizdown
+### Quelle propriété caractérise nécessairement toute fonction de hachage, qu'elle soit à clé ou non ?
+
+> Repense aux deux propriétés listées dans la définition générale d'une hash function, avant même la question de la clé.
+
+1. [ ] La résistance aux collisions
+1. [x] La compression et la facilité de calcul
+    > Correct : ce sont les deux propriétés fondamentales exigées de toute fonction de hachage, quelle que soit sa catégorie.
+1. [ ] La resistance calculatoire (computation-resistance)
+1. [ ] L'utilisation obligatoire d'une clé secrète
+```
+
+### Question 2
+
+```quizdown
+### Une fonction à sens unique (OWF) est définie comme une fonction pour laquelle...
+
+> Pense à l'asymétrie entre le sens direct et le sens inverse du calcul.
+
+1. [ ] il est impossible de calculer f(x) pour tout x
+1. [x] f(x) se calcule facilement, mais retrouver x à partir de y = f(x) est calculatoirement infaisable pour la grande majorité des y
+    > Correct : c'est exactement l'asymétrie calculatoire qui définit une OWF.
+1. [ ] f est bijective et donc toujours inversible avec un calcul supplémentaire
+1. [ ] f nécessite obligatoirement une clé secrète pour être calculée
+```
+
+### Question 3
+
+```quizdown
+### Pourquoi la fonction f(x) = E_k(x) seule (sans XOR avec x) ne constitue-t-elle pas une one-way function valable ?
+
+> Demande-toi ce qui se passe si l'on connaît la clé k utilisée par le système de chiffrement E.
+
+1. [ ] Parce que E_k(x) est toujours trop lente à calculer
+1. [x] Parce que E, comme DES, est réversible dès que la clé k est connue
+    > Correct : contrairement à E_k(x) XOR x, un chiffrement par blocs classique reste réversible avec la clé, ce qui annule le caractère à sens unique.
+1. [ ] Parce que E_k(x) produit toujours une sortie de taille variable
+1. [ ] Parce que le XOR est indispensable à la compression
+```
+
+### Question 4
+
+```quizdown
+### Un MDC (manipulation detection code) se distingue d'un MAC principalement par le fait que...
+
+> Concentre-toi sur la présence ou l'absence d'un secret partagé dans le calcul.
+
+- [x] un MDC est une fonction sans clé (unkeyed)
+    > Correct : un MDC ne fait intervenir aucune clé secrète dans son calcul.
+- [ ] un MDC permet d'authentifier la source d'un message sans mécanisme additionnel
+    > Incorrect : c'est précisément ce que permet un MAC, pas un MDC seul.
+- [x] un MDC nécessite un mécanisme additionnel (signature, canal sûr, chiffrement) pour garantir l'authenticité de la source
+    > Correct : seul, un MDC ne fournit qu'un service d'intégrité, pas d'authentification de source.
+- [ ] un MDC utilise toujours une clé de 512 bits
+    > Incorrect : cette taille de clé concerne la construction HMAC, pas les MDCs en général.
+```
+
+### Question 5
+
+```quizdown
+### Parmi les affirmations suivantes sur les trois propriétés de base des hash functions, lesquelles sont correctes ?
+
+> Relis attentivement la différence entre « donné y, trouver x » et « donné x et son image, trouver x' différent ».
+
+- [x] La preimage resistance porte sur la difficulté de retrouver x à partir de y = h(x)
+    > Correct : c'est la définition exacte de la preimage resistance.
+- [ ] La 2nd-preimage resistance ne concerne que les fonctions à clé
+    > Incorrect : elle s'applique aux MDCs, qui sont des fonctions sans clé.
+- [x] La collision resistance implique la 2nd-preimage resistance
+    > Correct : le cours précise que la propriété 3 implique la propriété 2.
+- [ ] La preimage resistance est toujours plus faible à casser que la collision resistance
+    > Incorrect : c'est l'inverse : casser la collision resistance demande en général moins d'essais (2^(n/2)) que casser la preimage resistance (2^n).
+```
+
+### Question 6
+
+```quizdown
+### La fonction f(x) = x² mod n (avec n = pq inconnus) est une OWF mais pas une OWHF. Pourquoi ?
+
+> Cherche une collision triviale et évidente sur cette fonction, indépendante de la difficulté de factoriser n.
+
+1. [ ] Parce qu'elle n'est pas facile à calculer
+1. [ ] Parce qu'elle ne compresse pas l'entrée
+1. [x] Parce que pour tout x, -x constitue une collision triviale : h(x) = h(-x)
+    > Correct : cette collision évidente viole la 2nd-preimage resistance exigée d'une OWHF, même si l'inversion reste difficile.
+1. [ ] Parce qu'elle nécessite la connaissance de p et q pour être calculée
+```
+
+### Question 7
+
+```quizdown
+### Le fait qu'une clé k ne puisse pas être retrouvée à partir de paires (x_i, h_k(x_i)) connues (key non-recovery) implique-t-il automatiquement la computation-resistance d'un MAC ?
+
+> Pense aux attaques par choix de clair (chosen/known-plaintext) qui pourraient produire une paire falsifiée sans jamais révéler la clé.
+
+1. [ ] Vrai
+1. [x] Faux
+    > Faux : le cours précise explicitement que key non-recovery n'implique pas computation-resistance, car des attaques chosen/known-plaintext peuvent permettre de forger une paire (x, h_k(x)) sans jamais retrouver k.
+```
+
+### Question 8
+
+```quizdown
+### Un étudiant contrôle un texte original qu'il fait signer par une autorité, puis veut appliquer cette même signature à un texte falsifié de son choix. Quel type d'attaque doit-il réussir ?
+
+> Il choisit lui-même les deux textes : cela correspond à quelle propriété de résistance ?
+
+1. [ ] Preimage resistance
+1. [ ] 2nd-preimage resistance
+1. [x] Collision resistance
+    > Correct : puisque l'attaquant contrôle les deux messages, il cherche une paire de préimages distinctes ayant le même digest — c'est la recherche de collision.
+1. [ ] Key non-recovery
+```
+
+### Question 9
+
+```quizdown
+### Un attaquant dispose d'un texte original qu'il ne contrôle pas, avec sa signature associée. Il veut créer un faux texte portant la même signature. Quel type d'attaque doit-il réussir ?
+
+> Cette fois, un seul des deux textes est imposé : celui qu'il ne contrôle pas.
+
+1. [ ] Preimage resistance
+1. [x] 2nd-preimage resistance
+    > Correct : l'attaquant part d'un x fixé (le texte original imposé) et cherche un x' différent produisant le même digest — c'est exactement la définition de la 2nd-preimage resistance.
+1. [ ] Collision resistance
+1. [ ] Key non-recovery
+```
+
+### Question 10
+
+```quizdown
+### Pour un digest de m bits, quel est approximativement le nombre d'essais nécessaires pour trouver, avec une probabilité de 0.5, une valeur y telle que h(x) = h(y) pour un x fixé ?
+
+> Reviens au calcul k = n/2 obtenu dans le cours, avec n = 2^m sorties possibles.
+
+1. [ ] 2^m
+1. [x] 2^(m-1)
+    > Correct : le cours établit que k = n/2 = 2^m/2 = 2^(m-1) essais suffisent pour une probabilité de 0.5 de trouver un y tel que h(x) = h(y).
+1. [ ] 2^(m/2)
+1. [ ] m/2
+```
+
+### Question 11
+
+```quizdown
+### D'après le paradoxe des anniversaires appliqué aux fonctions de hachage à 2^m sorties possibles, combien d'entrées faut-il tester pour obtenir une collision avec une probabilité supérieure à 0.5 ?
+
+> Ce nombre est nettement plus petit que celui nécessaire pour trouver une préimage : c'est la racine carrée du nombre de sorties.
+
+1. [ ] 2^m
+1. [ ] 2^(m-1)
+1. [x] 2^(m/2)
+    > Correct : le birthday paradox montre que k = 2^(m/2) essais suffisent pour dépasser une probabilité de 0.5 d'obtenir une collision.
+1. [ ] m/2
+```
+
+### Question 12
+
+```quizdown
+### D'après le tableau de récapitulation du cours, quelle taille minimale de digest est recommandée pour qu'une fonction résistante aux collisions (CRHF) offre une sécurité effective d'au moins 80 bits ?
+
+> Le coût d'une attaque en collision est en 2^(n/2) : quelle taille de digest n donne alors une sécurité de 2^80 ?
+
+1. [ ] 80 bits
+1. [ ] 128 bits
+1. [x] 160 bits
+    > Correct : comme l'attaque en collision coûte 2^(n/2), il faut n ≥ 160 bits pour obtenir une sécurité effective de 2^80, conformément au tableau du cours.
+1. [ ] 256 bits
+```
+
+### Question 13
+
+```quizdown
+### Pourquoi la « largeur nominale » de 64 bits de systèmes de cryptage comme DES pose-t-elle problème pour construire directement un CRHF ?
+
+> Relie cette largeur à la taille de digest minimale recommandée pour la résistance aux collisions.
+
+1. [ ] Parce que 64 bits est une taille de bloc trop grande pour être traitée efficacement
+1. [x] Parce que 64 bits est insuffisant face à la taille de digest recommandée (au moins 160 bits) pour résister aux attaques par collision
+    > Correct : le cours indique explicitement que la largeur nominale de 64 bits de DES ne suffit pas à construire des CRHF, d'où la nécessité de combiner plusieurs boîtes de cryptage (MDC-2, MDC-4).
+1. [ ] Parce que DES ne peut traiter que des messages de 64 bits au total
+1. [ ] Parce que 64 bits rend le chiffrement réversible
+```
+
+### Question 14
+
+```quizdown
+### MDC-2 et MDC-4 permettent de contourner la limitation de largeur des boîtes DES en...
+
+> Pense au principe évoqué dans le cours pour obtenir des digests plus longs que la largeur nominale d'une seule boîte de cryptage.
+
+1. [ ] réduisant la taille de la clé DES
+1. [x] combinant respectivement 2 et 4 boîtes DES pour obtenir un digest de 128 bits
+    > Correct : le cours indique que MDC-2 et MDC-4 utilisent respectivement 2 et 4 boîtes DES pour produire un digest de 128 bits au total.
+1. [ ] supprimant les opérations de chaînage entre blocs
+1. [ ] appliquant une seule boîte DES à des blocs de texte de 128 bits directement
+```
+
+### Question 15
+
+```quizdown
+### Qu'est-ce qui rend le procédé de construction des MDCs basés sur des systèmes de cryptage irréversible, alors que le système de cryptage sous-jacent (par exemple DES) est réversible ?
+
+> Le cours mentionne deux mécanismes combinés autour des blocs successifs.
+
+1. [ ] Le simple fait d'utiliser des blocs de 64 bits
+1. [x] Les opérations de chaînage entre blocs successifs combinées à des fonctions logiques comme le XOR
+    > Correct : le cours précise que la compression repose sur des opérations de chaînage et des fonctions logiques (fondamentalement XOR), ce qui rend l'ensemble irréversible malgré la réversibilité de la boîte de cryptage seule.
+1. [ ] L'utilisation systématique d'une clé secrète de 512 bits
+1. [ ] La suppression complète des blocs de texte en entrée
+```
+
+### Question 16
+
+```quizdown
+### Un même schéma générique (chaînage d'une fonction de compression avec les blocs précédents) donne naissance à plusieurs constructions selon la manière dont l'entrée précédente, le message et la clé sont combinés. Quelles constructions correspondent à ce principe d'après le cours ?
+
+> Ce sont les trois modèles génériques présentés dans le cours pour les MDCs basés sur un système de cryptage.
+
+- [x] Matyas-Meyer-Oseas
+    > Correct : c'est l'un des trois modèles génériques cités dans le cours.
+- [x] Davies-Meyer
+    > Correct : c'est également l'un des trois modèles génériques cités dans le cours.
+- [x] Miyaguchi-Preneel
+    > Correct : c'est le troisième modèle générique cité dans le cours.
+- [ ] HMAC
+    > Incorrect : HMAC n'est pas un modèle générique de MDC basé sur un système de cryptage, mais un Nested MAC construit à partir d'une fonction de hachage sans clé comme SHA-1 ou SHA-256.
+```
+
+### Question 17
+
+```quizdown
+### En Décembre 2008, des chercheurs ont exploité des collisions contrôlées sur MD5 pour...
+
+> Repense à l'application concrète et alarmante mentionnée pour cette attaque.
+
+1. [ ] casser DES en un temps polynomial
+1. [x] créer une Certification Authority illicite permettant de forger des certificats acceptés par n'importe quel navigateur
+    > Correct : c'est exactement le résultat obtenu, illustrant qu'une collision contrôlée (et non plus seulement arbitraire) peut avoir des conséquences pratiques graves.
+1. [ ] retrouver la clé secrète utilisée par un HMAC
+1. [ ] démontrer que SHA-3 était vulnérable
+```
+
+### Question 18
+
+```quizdown
+### Pourquoi les attaques trouvées par X. Wang et al. contre MD5 et SHA-1 sont-elles considérées comme particulièrement significatives, au-delà du simple fait de trouver des collisions ?
+
+> Compare le nombre d'opérations qu'elles nécessitent à celui attendu théoriquement pour la résistance aux collisions de ces fonctions.
+
+1. [ ] Parce qu'elles nécessitent plus d'opérations que prévu par la théorie
+1. [x] Parce qu'elles réduisent le nombre d'opérations nécessaires très en dessous de la borne théorique en 2^(n/2), grâce à des approches analytiques plutôt que par force brute
+    > Correct : par exemple, les collisions sur SHA-1 ont été trouvées en 2^63 opérations au lieu des 2^80 attendus théoriquement, via une approche analytique et non un simple brute force.
+1. [ ] Parce qu'elles ne visent que la preimage resistance, jamais la collision resistance
+1. [ ] Parce qu'elles s'appliquent uniquement à des fonctions à clé comme les HMACs
+```
+
+### Question 19
+
+```quizdown
+### Un Nested MAC (NMAC), composé de deux familles de fonctions G et H, offre une sécurité qui dépend de deux conditions. Lesquelles ?
+
+> Relis la définition qui distingue le rôle de la fonction externe G de celui de la fonction interne H.
+
+- [x] G doit être résistante aux collisions
+    > Correct : c'est la première condition de sécurité énoncée dans le cours pour un NMAC.
+- [ ] G doit être une fonction sans clé
+    > Incorrect : dans un NMAC, G est une famille de fonctions paramétrée par une clé, tout comme H.
+- [x] H doit résister aux attaques spécifiques aux MACs (impossibilité de forger un couple (x,y) valide sans connaître la clé)
+    > Correct : c'est la seconde condition énoncée dans le cours.
+- [ ] H doit produire un digest d'au moins 512 bits
+    > Incorrect : cette taille correspond aux constantes ipad/opad et à la clé utilisées par HMAC, pas à une exigence générale sur H dans un NMAC.
+```
+
+### Question 20
+
+```quizdown
+### En quoi un HMAC diffère-t-il structurellement d'un MAC comme le CBC-MAC ?
+
+> Compare la nature de la fonction de base utilisée par chacun de ces deux mécanismes.
+
+1. [ ] Le CBC-MAC utilise SHA-256 tandis que HMAC utilise DES
+1. [x] Le HMAC est un Nested MAC construit à partir d'une fonction de hachage sans clé (comme SHA-1 ou SHA-256), alors que le CBC-MAC est construit directement à partir d'un système de chiffrement par blocs symétrique (DES)
+    > Correct : c'est précisément la distinction établie dans le cours entre ces deux approches de construction d'un MAC.
+1. [ ] Le CBC-MAC utilise deux clés distinctes k et l, alors que HMAC n'en utilise aucune
+1. [ ] HMAC ne peut produire qu'un digest de 64 bits, comme le CBC-MAC
+```
+
+### Question 21
+
+```quizdown
+### Pourquoi les attaques connues contre les fonctions de la famille SHA sont-elles plus difficiles à mettre en œuvre lorsque ces fonctions sont utilisées au sein d'un HMAC ?
+
+> Compare ce qu'un attaquant connaît dans une attaque directe sur SHA-1 versus une attaque sur HMAC-SHA1.
+
+1. [ ] Parce que HMAC produit un digest deux fois plus long que SHA seul
+1. [x] Parce que la présence de la clé secrète k dans le calcul du HMAC empêche l'attaquant de reproduire librement les conditions exploitées par les attaques analytiques sur la fonction de hachage nue
+    > Correct : le cours souligne que l'implication de la clé k dans HMAC rend les attaques connues sur la famille SHA plus difficiles à réaliser.
+1. [ ] Parce que HMAC n'utilise jamais réellement la fonction SHA en interne
+1. [ ] Parce que HMAC élimine complètement l'opération de compression
+```
+
+### Question 22
+
+```quizdown
+### Le système UNIX historique de stockage des mots de passe présentait une faiblesse exploitable par une attaque par dictionnaire hors-ligne (off-line). Quelle était la cause principale de cette faiblesse avant l'introduction du salt ?
+
+> Pense à ce qui se passe quand deux utilisateurs différents choisissent le même mot de passe, avec une fonction de hachage déterministe.
+
+1. [ ] La fonction de hachage utilisée n'était pas résistante aux collisions
+1. [x] La fonction de hachage étant déterministe, un même mot de passe produisait toujours le même résultat, permettant de précalculer un « cahier » associant mots de passe courants et digests
+    > Correct : c'est exactement le problème identifié dans le cours, résolu par l'ajout d'un élément aléatoire (le salt).
+1. [ ] Le fichier des mots de passe n'était accessible à personne
+1. [ ] La taille du digest utilisé était de 512 bits, ce qui la rendait trop prévisible
+```
+
+### Question 23
+
+```quizdown
+### L'ajout d'un salt de 12 bits à chaque mot de passe UNIX avant le calcul de la hash function permet d'introduire un facteur aléatoire de combien de possibilités par mot de passe ?
+
+> 12 bits correspondent à combien de combinaisons possibles ? Utilise 2 puissance 12.
+
+1. [ ] 12
+1. [ ] 144
+1. [x] 4096
+    > Correct : 2^12 = 4096, ce qui correspond exactement à la valeur donnée dans le cours pour le facteur aléatoire introduit par le salt.
+1. [ ] 65536
+```
+
+### Question 24
+
+```quizdown
+### Le salt UNIX empêche-t-il un attaquant de deviner le mot de passe d'un utilisateur particulier s'il connaît déjà le salt de cet utilisateur ?
+
+> Distingue bien l'objectif du salt (empêcher le précalcul global et la détection de duplications) de la protection individuelle d'un mot de passe donné.
+
+1. [ ] Vrai
+1. [x] Faux
+    > Faux : le salt empêche essentiellement la réutilisation d'un même « cahier » précalculé contre tous les utilisateurs et la détection de mots de passe identiques entre utilisateurs ; une attaque ciblée sur un utilisateur dont le salt est connu reste possible en recalculant le hash pour chaque candidat avec ce salt spécifique.
+```
+
+### Question 25
+
+```quizdown
+### Dans le mécanisme d'authentification par mot de passe unique (one-time password / S-Key), à partir d'un seed secret x0, on construit une chaîne x1 = h(x0), x2 = h(x1), ..., xn = h(x(n-1)). Pourquoi cette construction permet-elle une authentification sûre même si un attaquant intercepte la valeur transmise à chaque connexion ?
+
+> Pense au sens dans lequel l'utilisateur parcourt la chaîne au fil des connexions successives, et à la difficulté d'inverser une fonction de hachage.
+
+1. [ ] Parce que chaque valeur transmise est chiffrée avec une clé différente
+1. [x] Parce que l'utilisateur transmet la chaîne dans l'ordre inverse de sa construction (de xn vers x0), et retrouver x(n-1) à partir de xn intercepté nécessiterait d'inverser la fonction de hachage, ce qui est calculatoirement infaisable
+    > Correct : la sécurité du système S-Key repose sur la preimage resistance de h : connaître x_n ne permet pas de calculer x_(n-1), qui sera pourtant la valeur exigée à la connexion suivante.
+1. [ ] Parce que la chaîne de hachage change de fonction h à chaque étape
+1. [ ] Parce que le système ne mémorise jamais aucune valeur de la chaîne
+```
+
+### Question 26
+
+```quizdown
+### Dans le contexte du minage de blockchain (proof of work), la difficulté du puzzle cryptographique correspond concrètement à...
+
+> Relie cette difficulté à l'une des trois propriétés de résistance étudiées dans ce chapitre, appliquée à une portion des bits du digest.
+
+1. [ ] trouver la clé secrète utilisée par la fonction de hachage du bloc
+1. [x] trouver une pseudo-collision, c'est-à-dire un digest dont un certain nombre de bits de poids fort sont inférieurs à une cible donnée, en faisant varier le nonce
+    > Correct : le cours précise que le minage consiste à trouver des pseudo-collisions dans la fonction de hachage, la target définissant le nombre de bits de poids fort concernés.
+1. [ ] casser la 2nd-preimage resistance d'une transaction déjà publiée
+1. [ ] déchiffrer les transactions précédentes de la blockchain
+```
+
+### Question 27
+
+```quizdown
+### Pourquoi la falsification d'une donnée déjà enregistrée dans une blockchain est-elle considérée comme pratiquement impossible ?
+
+> Pense à ce qu'implique le chaînage des blocs par fonctions de hachage combiné à la puissance de calcul déjà investie par l'ensemble des mineurs honnêtes.
+
+1. [ ] Parce que la blockchain est chiffrée avec une clé secrète connue uniquement des mineurs
+1. [x] Parce que modifier un bloc nécessiterait de refaire le travail de minage (proof of work) de ce bloc et de tous les suivants, avec un effort calculatoire supérieur à celui de l'ensemble des mineurs honnêtes
+    > Correct : c'est exactement la garantie décrite dans le cours pour l'immuabilité du registre public que constitue la blockchain.
+1. [ ] Parce que chaque transaction est signée individuellement par une autorité centrale
+1. [ ] Parce que la taille du digest utilisé rend toute collision mathématiquement impossible
+```
+
+### Question 28
+
+```quizdown
+### Remets dans l'ordre chronologique le développement des principales fonctions de hachage personnalisées mentionnées dans le cours.
+
+> Pense à l'évolution historique face aux attaques découvertes successivement.
+
+1. MD5 (Rivest, 1992)
+2. SHA-0 (NIST, 1993)
+3. SHA-1 (NIST, 1995)
+4. SHA-2 (NIST, FIPS 190-3)
+5. SHA-3 / Keccak (choisi par le NIST en 2012)
+```
+
+### Question 29
+
+```quizdown
+### Remets dans l'ordre les étapes de fonctionnement génériques d'une fonction de hachage personnalisée (customized MDC) telle que décrite dans le cours.
+
+> Pense à ce qui doit être fait avant même de commencer à traiter les blocs de données, puis à l'ordre dans lequel les rounds et le chaînage interviennent.
+
+1. Initialisation des données par padding et ajout de la longueur du message
+2. Application séquentielle des rounds à chaque bloc, combinant opérations logiques et rotations avec des constantes prédéfinies
+3. Chaînage des sorties de chaque round avec les blocs suivants
+4. Obtention du digest final après traitement de l'ensemble des blocs
+```
+
+### Question 30
+
+```quizdown
+### Remets dans l'ordre les étapes de vérification d'un mot de passe dans le système UNIX salé décrit dans le cours.
+
+> Le salt doit être disponible avant de pouvoir recalculer quoi que ce soit.
+
+1. Le système récupère le salt associé à l'utilisateur, stocké avec le digest
+2. L'utilisateur entre son mot de passe en clair
+3. Le système concatène le salt et le mot de passe entré, puis applique la fonction de hachage
+4. Le système compare le résultat obtenu au digest stocké pour valider ou refuser l'accès
+```

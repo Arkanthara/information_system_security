@@ -1,0 +1,282 @@
+## Digital Signatures: Outline
+
+* Definitions
+* Digital Signatures with Appendix
+* Digital Signatures with Message Recovery
+* RSA Signature Process
+* Rabin Signature Process
+* ElGamal Signature Process
+* Digital Signatures and Cryptocurrencies
+* Attacks on Digital Signatures
+
+## Digital Signatures: Definitions
+
+* *Digital signature*: string of data allowing a message (in digital form) to be associated with an originating entity.
+* *Digital signature scheme*: generation algorithm + verification algorithm.
+* *Signature process*: message formatting + signature generation algorithm
+* *Verification process*: verification algorithm + (message reconstruction).
+* Classification of digital signatures:
+    * *Digital signatures with appendix* which require the presence of the original message to verify the validity of the signature. These are the most commonly used. Examples: *ElGamal*, *DSS*.
+    * *Digital signatures with message recovery* which additionally offer the possibility of reconstructing the message from the signature. Examples: *RSA*, *Rabin*.
+* Digital signatures are mostly based on asymmetric cryptography because the notion of a shared key is not suited to the need to explicitly identify an entity.
+* Commitments similar to those obtained with a public-key signature (such as non-repudiation of origin) can nevertheless be obtained with symmetric technology and trusted third parties (*Trusted Third Parties* or *TTP*). These methods are called: *arbitrated digital signatures*.
+
+## Digital Signatures with Appendix: Formal Framework
+
+* We assume that each entity has a private key to sign messages and an authentic copy of the public keys of its correspondents.
+
+**Notation:**
+
+* $M$: Message space
+* $M_h$: $m_h = H(m)$ with $m \in M$, $m_h \in M_h$ and $H$ a *hash function*
+* $S$: Space of values that can be obtained by a signature process
+
+**Description:**
+
+Each entity defines an injective map $S_A : M_h \to S$ ; (i.e. the *signature*)
+
+The map $S_A$ gives rise to a map $V_A$:
+
+$$V_A: M_h \times S \to \{\text{true}, \text{false}\}$$ ; (i.e. the *verification*)
+
+s.t. $\forall\ m_h \in M_h, s \in S$, we have:
+
+$$V_A(m_h, s) = \text{true if } S_A(m_h) = s \text{ and}$$
+$$V_A(m_h, s) = \text{false otherwise}$$
+
+The $S_A$ operations require A's *private* key while the $V_A$ operations use A's *public* key.
+
+* Some simple properties:
+    - The $S_A$ and $V_A$ operations must be easy to compute (given the corresponding keys)
+    - It is (computationally) infeasible for an entity not having A's private key to find an $m'$ and an $s'$ with $m' \in M$ and $s' \in S$ s.t. $V_A(m'_h, s') = \text{true}$ with $m'_h = H(m')$.
+
+## DS with message recovery: Formal Framework
+
+**Notation**: in addition to the previous definitions, we have:
+
+* $M_s$: The space of elements to which a signature can be applied.
+* $R$: An injective map: $M \to M_s$, called the *redundancy function*. It must be *invertible* and *public*.
+* $M_R$: $M_R = \text{Im}(R)$
+
+**Description**:
+
+Each entity defines an injective map $S_A : M_S \to S$ ; (i.e. the *signature*)
+
+The map $S_A$ gives rise to a map $V_A$: ; (i.e. the *verification*)
+
+$$V_A : S \to M_s \text{, s.t. } V_A \circ S_A = \text{Identity on } M_s$$
+
+Note that verification is performed without A's private key
+
+**Signature generation**:
+
+(1) Compute $m_R = R(m)$ and $s = S_A(m_R)$
+
+(2) Publish $s$ as A's signature on $m$. This allows other entities to verify the signature and reconstruct $m$.
+
+**Verification**:
+
+(1) Compute $m_R = V_A(s)$ (with A's public key)
+
+(2) Check that $m_R \in M_R$ (otherwise reject the signature)
+
+(3) Reconstruct $m$ by computing: $R^{-1}(m_R)$
+
+## Digital Signatures: Appendix and Recovery
+
+![Digital Signature with appendix](qmd_images/digital_signature_appendice.png)
+
+![Digital Signature with message recovery](qmd_images/digital_signature_message_reconstruction.png)
+
+## DS with message recovery: Properties
+
+* Properties:
+    - The $S_A$ and $V_A$ operations must be easy to compute (given the corresponding keys)
+    - It is (computationally) infeasible for an entity not having A's private key to find an $s' \in S$ s.t. $V_A(s') \notin M_R$
+* Remarks on the redundancy function:
+    * The choice of a redundancy function is essential for the security of the system.
+    * If $M_R = M_S$ and $R$ and $S_A$ are bijections from $M$ to $M_R$ and from $M_S$ to $S$ respectively, then $M$ and $S$ have the same size and, consequently, it is trivial to forge messages bearing A's signature.
+* Example of a redundancy function: let $M = \{m: m \in \{0,1\}^n\}$ (n being the message size) and $M_S = \{t: t \in \{0,1\}^{2n}\}$. Let $R : M \to M_S$ s.t. $R(m) = m \| m$ ( $\|$ being the concatenation of 2 messages). The probability of landing on such a message when trying to forge a message from a signature is: $|M_R| / |M_S| = (1/2)^n$, which is negligible for large messages.
+* Warning!: A redundancy function suited to one digital signature scheme may cause flaws in a different one!
+
+## RSA Signature Process[^rsa]
+
+[^rsa]: *A Method for Obtaining Digital Signatures and Public Key Cryptosystems*. R.Rivest, A.Shamir and L.M. Adleman. Communications of tha ACM 21 (1978), 120-126
+
+**Key Generation**
+
+* Each entity (**A**) creates a key pair (public and private) as follows:
+    * **A** chooses the size of the **modulus n** (e.g. size(n) = 1024 or size(n) = 2048).
+    * **A** generates two large prime numbers **p** and **q** ($\sim n/2$ in size).
+    * **A** computes $n := pq$ and $\Phi(n) = (p-1)(q-1)$.
+    * **A** generates the verification exponent **e**, with $1 < e < \Phi(n)$ s.t. $\text{gcd}(e, \Phi(n)) = 1$.
+    * **A** computes the signature exponent **d**, s.t.: $ed \equiv 1 \bmod \Phi(n)$ using the extended Euclidean algorithm or the *fast exponentiation* algorithm (page 94).
+    * The pair **(n,e)** is A's **public key**; **d** is A's **private key**.
+
+**Signature**
+
+* **A** computes the redundancy function of the message **m**: $m_R := R(m)$.
+* **A** computes the signature: $s := m_R^{\ d} \bmod n$ and sends **s** to **B**.
+
+**Verification**
+
+* Entity **B** obtains **(n,e)**, A's authentic public key.
+* B computes $m'_R = s^e \bmod n$, checks $m'_R \in M_R$ and rejects the signature if $m'_R \notin M_R$.
+* B recovers the message correctly signed by **A** by computing: $m = R^{-1}(m'_R)$.
+
+## RSA Signature: Remarks
+
+* The proof of correctness is identical to that of the encryption process (page 99). The order of exponentiation has no effect since:
+
+$$ed \equiv de \equiv 1 \bmod \Phi(n)$$
+
+* The process can also be used to produce signatures with appendix with the following modifications:
+
+**Signature**:
+
+* A uses a hash function **H** and computes $m_h := H(m)$.
+* A computes the signature of $m_h$: $s := m_h^{\ d} \bmod n$ and sends the pair **(m,s)** to B.
+
+**Verification**
+
+* B computes $m'_h = s^e \bmod n$ and $H(m)$ and checks the equality $m'_h = H(m)$.
+* If the equality holds, **B** accepts the signature **s** of **A** on the message **M.**
+
+* Signature computation is slower than verification because of the size difference between the exponent **d** ($\text{size}(d) \approx \text{size}(\Phi(n))$) and **e**.
+* The risks and attacks mentioned in the encryption process (page 102) also apply to the signature.
+* Encryption and signature key pairs should be kept distinct since they require separate storage, backup, and update policies.
+
+## "Blind" Signatures (*Blind Signatures*)
+
+* Scheme invented by Chaum ([Chau82][^chau82]).
+* Idea: **A** sends information to **B** for signature. **B** returns the signed information to **A**. From this signature, **A** can compute **B**'s signature on another message chosen beforehand by **A**. This allows **A** to obtain a signature from **B** on a message that **B** has never seen (hence the name blind signature...)
+* In fact, this is a flaw based on the multiplicative property of RSA (page 102) that was exploited to create a new signature process.
+* Algorithm: Let $S_B$ be **B**'s RSA signature with **(n,e)** and **d**, respectively **B**'s public and private keys. Let **k** be a fixed integer with $\text{gcd}(n,k) = 1$:
+
+$$f: \mathbb{Z}_n \to \mathbb{Z}_n \text{ with } f(m) = m \cdot k^e \bmod n$$ ; *blinding function*
+
+$$g: \mathbb{Z}_n \to \mathbb{Z}_n \text{ with } g(m) = k^{-1} \cdot m \bmod n$$ ; *unblinding function*
+
+which gives:
+
+$$g(S_B(f(m))) = g(S_B(mk^e \bmod n)) = g(m^d k \bmod n) = m^d \bmod n = S_B(m) \quad (*)$$
+
+* Protocol:
+
+$$A \to B: m' = f(m)$$
+$$A \leftarrow B: s' = S_B(m')$$
+
+A computes $g(s')$ and obtains the desired signature using **(\*)**.
+
+[^chau82]: [Chau82]: Chaum, D. *Blind Signatures for Untraceable Payments*. Crypto'82
+
+## Rabin Signature Process[^rabin]
+
+[^rabin]: *Digitalized Signatures and Public Key Functions as Intractable as Factorization.* M.O.Rabin. MIT/LCS/TR 212. MIT Laboratory for Computer Science 1979.
+
+**Key Generation**
+
+* Each entity (**A**) creates a key pair (public and private) as follows:
+    * **A** generates two large random prime numbers **p** and **q** ($len(pq) \geq 1024$).
+    * **A** computes $n := pq$.
+    * A's public key is **n**, A's private key is **(p,q)**.
+
+**Signature**
+
+* **A** computes the redundancy function of the message **m**: $m_R := R(m)$.
+* **A** uses its private key to compute the signature: $s := m_R^{1/2} \bmod n$ using efficient algorithms for computing square roots **mod p** and **mod q**.
+* **A** sends **s** to **B** (**s** is **one of 4** square roots obtained).
+
+**Verification**
+
+* Entity **B** obtains **n**, A's authentic public key.
+* B computes $m'_R = s^2 \bmod n$, checks $m'_R \in M_R$ and rejects the signature if $m'_R \notin M_R$.
+* B recovers the message correctly signed by **A** by computing: $m = R^{-1}(m'_R)$.
+
+## ElGamal Signature Process[^elgamal]
+
+[^elgamal]: *A Public Key Cryptosystem and a Signature Scheme Based on Discrete Logaithms*. T. ElGamal. Advances in Cryptology-Proceedings of CRYPTO 84 (LNCS 196), 10-18, 1985.
+
+**Key Generation**
+
+* Each entity (**A**) creates a key pair (public and private) as follows:
+    * **A** generates a prime number **p** ($len(p) \geq 1024$ **bits**) and a generator $\alpha$ of $\mathbb{Z}_p^{*}$.
+    * **A** generates a random number **a**, s.t. $1 \leq a \leq p-2$ and computes $y := \alpha^a \bmod p$.
+    * A's public key is $(p, \alpha, y)$, A's private key is **a**.
+
+**Signature**
+
+* **A** uses a hash function **H** and computes $m_h := H(m).$
+* **A** generates a random number **k** ($1 \leq k \leq p-2$ and $\text{gcd}(k,p-1) = 1$) and computes $k^{-1} \bmod (p-1)$
+* **A** computes $r := \alpha^k \bmod p$ and then $s := k^{-1} (m_h - ar) \bmod (p-1)$
+* A's signature on the message **m** is the pair **(r,s)**.
+
+**Verification**
+
+* Entity **B** obtains $(p, \alpha, \alpha^a \bmod p)$, A's authentic public key.
+* **B** checks that $1 \leq r \leq p-2$, otherwise rejects the signature.
+* **B** computes $v_1 := y^r r^s \bmod p$.
+* **B** computes $H(m)$ and $v_2 := \alpha^{H(m)} \bmod p$
+* **B** accepts the signature iff. $v_1 = v_2$.
+
+## ElGamal Signature: Remarks
+
+* Proof that the scheme works: If $s \equiv k^{-1} (m_h - ar) \bmod (p-1)$, we have that:
+
+$$m_h \equiv (ar + ks) \bmod (p-1) \text{ and}$$
+$$v_2 = \alpha^{H(m)} \bmod p$$
+
+if, as we wish to show $m_h = H(m)$, by reducing the exponents **mod (p-1)** (page 92), we can rewrite $v_2$:
+
+$$v_2 \equiv \alpha^{ar+ks} \bmod p$$
+
+On the other hand:
+
+$$v_1 = y^r r^s \equiv \alpha^{ar} \alpha^{ks} \equiv \alpha^{ar+ks} \bmod p \qquad \text{q.e.d.}$$
+
+* By construction, the ElGamal scheme works only with appendix (the result of applying a hash function). The Nyberg-Rueppel scheme[^nyberg] introduces a variation allowing message recovery.
+* The *Digital Signature Algorithm* (*DSA*), approved by the *US National Institute of Standards and Technology*, has become the most commonly used signature standard. It is built as a direct derivative of the ElGamal scheme with the *SHA-1* hash function (page 128).
+
+[^nyberg]: *Message Recovery for Signature Schemes Based on the Discrete Logarithm Problem*. K. Nyberg and R.Rueppel. Designs, Codes and Cryptography, 7 1996, 61-81.
+
+## Digital Signatures: *Cryptocurrencies*
+
+* Most cryptocurrencies are based on asymmetric cryptography. *Bitcoin*, for example, uses digital signatures to authenticate its transactions
+* Spending or transmitting bitcoins requires signing with the private key of the holder (who was in turn the recipient of the previous transaction):
+
+
+
+![*Source Image: Bitcoin: A Peer-to-Peer Electronic Cash System.* Satoshi Nakamoto](qmd_images/digital_signature_crypto_currencies.png)
+
+* *Bitcoin* and *Ethereum* use the **ECDSA** algorithm (*Elliptic Curve Digital Signature Algorithm*) derived from the ElGamal signature algorithm on elliptic curves, whose security relies on *ECDLP* (page 109).
+
+## Digital Signatures: Summary Table[^recap]
+
+[^recap]: The functioning of the *One-time*, *Undeniable*, and *Fail-Stop* signature processes can be found in [Men97].
+
+| Class | Scheme | Message Recovery | Underlying Problem |
+|---|---|---|---|
+| *Classic Signatures* | RSA | yes | RSAP |
+| | Rabin | yes | SQROOTP |
+| | ElGamal | no | DLP |
+| | DSS | no | DLP |
+| *One-time Signatures* | Lamport | no | depends on the OWF |
+| | Bos-Chaum | no | depends on the OWF |
+| *Undeniable Signatures* | Chaum-van Antwerpen | no | DLP |
+| *Fail-Stop Signatures* | van Heyst-Pedersen | no | DLP |
+| *Blind Signatures* | Chaum | yes | RSAP |
+
+## Types of attacks on DS
+
+* Criteria for "breaking" a digital signature scheme:
+    * *Total Break*: Computing the signer's private key or an efficient (polynomial) algorithm for generating signatures.
+    * *Selective forgery*. The adversary is able to generate a valid signature for a fixed message (or class of messages).
+    * *Existential forgery*. The adversary is able to forge a signature for (at least) one message (over which it has no control).
+* Basic attacks:
+    * *Key-only* attacks: The adversary has knowledge only of the signer's public key.
+    * Message-based attacks: The adversary has access to signatures corresponding to:
+        * *known-messages*
+        * *chosen-messages*
+        * *adaptive chosen-messages*
+
+    Equivalent to *x-ciphertext* attacks but with messages!

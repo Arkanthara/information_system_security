@@ -1,0 +1,242 @@
+## Vue d'ensemble
+
+- **Authentification de l'origine des données** : prouver que $X$ vient bien de $A$ (MAC, MDC, signature).
+- **Authentification d'entités** (= identification) : prouver l'identité de $A$ à $B$.
+  - **Faible** : password (userid, password) — secret révélé.
+  - **Forte** : preuve de possession du secret (challenge-response), secret non révélé.
+  - **Zero-Knowledge (ZKIP)** : forte + aucune information sur le secret n'est révélée.
+
+::: {.callout-tip title="Fil conducteur"}
+
+Toutes les attaques classiques (*replay*, *reflection*, *chosen/known-plaintext*) exploitent l'absence de fraîcheur (aléa/temps) ou la réutilisation d'informations. Les solutions robustes introduisent systématiquement : aléa non réutilisé, identité du destinataire dans le message, structure/redondance.
+
+:::
+
+## Authentification de l'origine des données
+
+But : prouver que $X$ provient de $A$ (clé symétrique $k$ partagée par $A,B$).
+
+| ## | Protocole | Formule | Propriété |
+|---|---|---|---|
+| 1 | MAC | $A\to B: X,\ \mathrm{MAC}_k(X)$ | intégrité + origine |
+| 2 | MDC + cryptage | $A\to B: X,\ E_k(\mathrm{MDC}(X))$ | idem, sans clé de MAC dédiée |
+| 3 | MDC + cryptage (confidentiel) | $A\to B: E_k(X,\mathrm{MDC}(X))$ | + confidentialité de $X$ |
+| 4 | MDC + signature | $A\to B: X,\ \mathrm{Sig}_{priv\text{-}A}(\mathrm{MDC}(X))$ | + **non-répudiation** |
+
+::: {.callout-warning title="Piège"}
+
+Ces 4 protocoles ne garantissent ni l'unicité ni l'actualité (*timeliness*) : ils sont vulnérables aux **replay attacks**. Il faut des mécanismes temporels/contextuels (→ authentification d'entités).
+
+:::
+
+## Authentification d'entités : concepts fondamentaux
+
+**Terminologie** : *utilisateur/A* = *claimant* (prouve son identité) ; *système/B* = *verifier* (vérifie).
+
+**Éléments de preuve possibles** :
+
+- *something known* : password, PIN, clé privée/secrète.
+- *something possessed* : passeport, carte à puce, générateur de passwords.
+- *something inherent* : biométrie (empreintes, rétine, ADN).
+
+**4 objectifs d'un protocole robuste** :
+
+1. Si $A,B$ honnêtes et $A$ authentifié → $B$ accepte.
+2. $B$ ne peut pas réutiliser l'info de $A$ pour se faire passer pour $A$ auprès de $C$.
+3. Probabilité qu'un tiers $C$ usurpe $A$ auprès de $B$ = négligeable.
+4. Le point 3 reste vrai même si $C$ a observé/participé à de nombreuses instances passées, y compris en parallèle.
+
+| | Satisfait | Secret révélé ? |
+|---|---|---|
+| **Authentification faible** | 1, 3 | oui (password transmis) |
+| **Authentification forte** | 1, 2, 3, 4 (au moins partiellement) | non (preuve de possession) |
+| **Zero-Knowledge** | forte + rien sur le secret | non, **aucune information** |
+
+## Attaques et propriétés transversales
+
+**Attaque dictionnaire** : base de mots (+ variantes) testée contre un système de hash/cryptage pour retrouver passwords/clés.
+
+- *Offline* : à partir de la BD de passwords hashés, ou d'un couple $(R, E_p(R))$ observé passivement (ex : $A\to B: A$ ; $B\to A: R$ ; $A\to B: E_p(R)$).
+- *Online* : moins efficace (systèmes limitent les essais infructueux).
+
+**Plaintext-equivalence** : une donnée est *plaintext-equivalent* à un password $p$ si elle donne le même accès que $p$.
+
+- Ex. : si $A\to B: H(p)$, alors $H(p)$ est plaintext-equivalent à $p$ → hasher au stockage seul n'ajoute rien si c'est $H(p)$ qui transite.
+- UNIX `/etc/passwd` : c'est $p$ (pas $H(p)$) qui est échangé → le hash stocké n'est **pas** plaintext-equivalent.
+- Idéal : ni plaintext-equivalent, ni exposé au dictionnaire offline.
+
+::: {.callout-warning title="Piège"}
+
+Hasher un mot de passe **au stockage** ne protège pas contre une attaque si c'est le hash lui-même qui est envoyé au serveur pour s'authentifier (il devient l'équivalent du mot de passe).
+
+:::
+
+## Authentification faible
+
+**Password fixe** (indépendant du temps/nb d'exécutions) :
+
+- Stockage en clair → risque : failles OS, super-user, backups.
+- Stockage haché (*one-way function*), éventuellement public (UNIX) → risque : attaques offline (guessing, brute-force, collisions).
+- Protections : règles de robustesse (entropie), ralentir/limiter les essais, **salting**, restreindre la diffusion du fichier.
+- **Problème majeur** : rejouable après écoute réseau (*replay*).
+
+**Password variable** : le password change avec le temps/le nb d'exécutions.
+
+*One-time password — schéma de Lamport (S/Key)* :
+
+- Init : $A$ choisit secret $w$, constante $t$ (~1000), OWF $H$ ; $A\to B: w_t = H^t(w)$ ; $B$ stocke $w_{stored}=w_t,\ n=t-1$.
+- Identification $(t-n)$ : $A\to B: A$ ; $B\to A: n$ ; $A\to B: w_n = H^n(w)$.
+- $B$ vérifie $H(w_n) == w_{stored}$ ; si OK, $n\mathrel{-}=1$, $w_{stored}:=w_n$.
+- Fin quand $n=0$ → nouveau secret $w$.
+
+::: {.callout-warning title="Piège"}
+
+L'authentification de $B$ est **nécessaire**, sinon $C$ se fait passer pour $B$ :
+
+- *pre-play attack* : $C$ obtient $w_n$ courant et le rejoue.
+- *small-n attack* : $C$ fournit un $n$ plus petit → peut recalculer tous les $H^{m>n}(w_n)$.
+
+:::
+
+*Générateurs hardware (SecurID/RSA)* : carte génère un nombre différent toutes les 30–60 s (clé secrète + horloge), combiné à un PIN. Exposé au *pre-play* mais fenêtre limitée à 30–60 s.
+
+**Conclusion** : password fixe = sécurité très réduite ; password variable = pas vers l'authentification forte mais précautions requises.
+
+## Authentification forte — solutions symétriques
+
+Clé $k_{AB}$ partagée. Principe général = **challenge and response**.
+
+**Unilatérale (challenge-response), v1** :
+$A\to B: A$ ; $B\to A: R$ ; $A\to B: E_{k_{AB}}(R)$ — $B$ décrypte et compare.
+
+- Amélioration vs password : aléa $R$ empêche le replay direct.
+- Risques résiduels : *known/chosen-plaintext offline* (peu efficace si le chiffrement est sûr) ; *active MitM* si $B$ non authentifié.
+- $E_{k_{AB}}(R)$ peut être remplacé par un MDC $H(k_{AB},R)$ ou MAC $H_{k_{AB}}(R)$ (plus rapide).
+
+**Unilatérale, v2 (timestamp)** : $A\to B: A, E_{k_{AB}}(\text{timestamp})$.
+
+- Avantage : un message de moins, *stateless*.
+- Limite : nécessite horloges synchronisées → "flottements" exploitables ; avancer l'horloge de $B$ peut revalider d'anciennes instances.
+
+**Bilatérale, solution naïve** : $A\to B: A,R_2$ ; $B\to A: R_1, E_{k_{AB}}(R_2)$ ; $A\to B: E_{k_{AB}}(R_1)$.
+
+::: {.callout-warning title="Piège — reflection attack"}
+
+$C$ ouvre **deux instances en parallèle** avec $B$ : il utilise le $R_1$ reçu dans l'instance 2 comme réponse chiffrée à fournir dans l'instance 1 (miroir du challenge). $C$ n'a jamais besoin de connaître $k_{AB}$.
+
+:::
+
+**Bilatérale, solution robuste** : $A\to B: A,R_2$ ; $B\to A: E_{k_{AB}}(R_1,R_2,A)$ ; $A\to B: E_{k_{AB}}(R_2,R_1)$.
+
+- Inclure l'**identité du destinataire** ($A$ ou $B$) dans le message chiffré empêche la réflexion (miroir vers une autre cible détecté).
+- Inclure $R_1$ dans la partie chiffrée protège aussi des *chosen-plaintext attacks*.
+
+## Authentification forte — solutions asymétriques
+
+**Unilatérale, naïve** : $A\to B: A$ ; $B\to A: E_{pub\text{-}A}(R)$ ; $A\to B: R$.
+
+::: {.callout-warning title="Piège"}
+
+$B$ peut monter un **chosen-ciphertext attack** : il fait décrypter n'importe quoi à $A$ en le faisant passer pour $R$.
+
+:::
+
+**Unilatérale, robuste** (structure + redondance) :
+$A\to B: A$ ; $B\to A: H(R), B, E_{pub\text{-}A}(B,R)$.
+
+- $A$ décrypte, vérifie $H(R')=H(R)$ et $B'=B$, sinon suspend ; puis $A\to B: R$.
+- Variante duale possible avec signature ($priv\text{-}A$) au lieu de chiffrement.
+
+**Bilatérale — Needham-Schroeder** :
+$(1)\ A\to B: E_{pub\text{-}B}(r_1,A)$ ; $(2)\ B\to A: E_{pub\text{-}A}(r_1,r_2)$ ; $(3)\ A\to B: r_2$.
+
+- Inclure $A$ dans $(1)$ contre les *chosen-ciphertext attacks*.
+- Renforcement possible : ajouter un témoin $H(r_1)$ dans $(1)$.
+
+## Zero-Knowledge Proofs (ZKIP)
+
+**Motivation** : dans les méthodes classiques, $B$ (ou un observateur) apprend quelque chose sur le secret (password entier, ou couples plaintext/ciphertext exploitables).
+
+**Preuve de connaissance** (*proof of knowledge*) — 2 propriétés :
+
+- **Consistance** (*completeness*) : $A,B$ honnêtes → $B$ accepte la preuve de $A$.
+- **Significativité** (*soundness*) : $C$ malhonnête qui trompe $B$ ⟹ $C$ possède le secret (ou info polynomialement équivalente).
+
+**ZKIP** = preuve de connaissance + **zero-knowledge** : $A$ convainc $B$ sans révéler aucune information sur le secret.
+
+- **ZKIP calculatoire** : indistinguable par un observateur probabiliste-polynomial.
+- **ZKIP parfait** : indistinguable au sens probabiliste strict (théorie de Shannon).
+
+**Structure générique** (répétée $n$ fois) :
+
+1. $A\to B$ : **témoin** (*witness*) — engagement sur une classe de questions.
+2. $B\to A$ : **défi** (*challenge*) — question aléatoire dans cette classe.
+3. $A\to B$ : **réponse** (*response*) — via le secret.
+
+::: {.callout-tip title="Intuition — la caverne"}
+
+$A$ connaît le passage secret entre $y$ et $z$. $B$ attend à l'entrée $x$, $A$ entre par $y$ ou $z$ (témoin), $B$ demande à $A$ de ressortir par un côté précis (défi). $A$ obéit grâce au secret (réponse). Répété $n$ fois : un imposteur a $2^{-n}$ de chance de tromper $B$ à chaque fois. Analogue au **cut-and-choose** (partage de tarte).
+
+:::
+
+### Isomorphisme de graphes
+
+- $G_1,G_2$ isomorphes s'il existe $\pi$ t.q. $\{u,v\}\in E_1 \iff \{\pi(u),\pi(v)\}\in E_2$.
+- Facile de calculer $\pi$ en connaissant les deux graphes ; **difficile** de déterminer si deux grands graphes (~1000 sommets) sont isomorphes sans le secret.
+- Protocole : $A$ publie $G_1,G_2$ (secret $\pi$). Witness $H=\delta(G_2)$ ; défi $i\in\{1,2\}$ ; réponse $\lambda$ t.q. $H=\lambda(G_i)$ ($\lambda=\delta$ si $i=2$, $\lambda=\delta\circ\pi$ si $i=1$). $B$ vérifie $H=\lambda(G_i)$.
+- Peu utilisé en pratique (inefficace à implémenter).
+
+### Algorithme de Fiat-Shamir
+
+But : prouver la connaissance de $s$ sans le révéler, base d'implémentations réelles.
+
+**Init** : tiers de confiance $T$ publie $n=pq$ (garde $p,q$ secrets). $A$ choisit $s$ (avec $\gcd(s,n)=1$), publie $v=s^2 \bmod n$ (certifié par $T$).
+
+$(1)\ A\to B: x=r^2\bmod n$ (témoin, $r$ aléatoire)
+$(2)\ B\to A: e\in\{0,1\}$ (défi)
+$(3)\ A\to B: y = r\cdot s^e \bmod n$ (réponse)
+
+$B$ rejette si $y=0$ ; accepte si $y^2 \equiv x\cdot v^e \pmod n$. Répété jusqu'à confiance suffisante.
+
+| Propriété | Justification |
+|---|---|
+| Consistance | $A$ connaît $s$ → preuve toujours acceptée |
+| Significativité | Sans $s$, un imposteur ne peut répondre qu'à un seul défi (0 ou 1) sans casser SQROOTP |
+| Zero-Knowledge | $s$ masqué par le *blinding factor* aléatoire $r$ quand $e=1$ |
+| ZK parfait | $B$ peut simuler seul des paires $(x,y)$ de même distribution |
+
+### Implémentations courantes
+
+| Protocole | Base | Particularité |
+|---|---|---|
+| Feige-Fiat-Shamir (FFS) | Fiat-Shamir | témoins/défis multiples ($k$ valeurs) → proba $2^{-nk}$ |
+| Guillou-Quisquater (GQ) | Fiat-Shamir | domaine de défis élargi, moins d'instances nécessaires |
+| Schnorr | logarithme discret (DLP) | 3 échanges seulement ; sacrifie parfois le ZK pour l'efficacité |
+
+Plus efficaces que RSA, adaptés aux *smart cards*. Satisfont consistance + significativité ; le ZK est parfois sacrifié pour la performance.
+
+::: {.callout-warning title="Piège — attaque Mafia"}
+
+Même un ZKIP parfait peut être détourné par un relais en temps réel : $A$ dialogue avec $C$ (complice) pendant que son complice $D$ relaie les messages à un vérificateur honnête $B$, se faisant passer pour $A$. Le ZKIP prouve la connaissance du secret **au moment du protocole**, pas l'identité physique du répondant. Parades : cage de Faraday, synchronisation forte.
+
+:::
+
+## Récapitulation — attaques et protections
+
+| Attaque | Description | Protection |
+|---|---|---|
+| *replay* | rejouer une instance précédente | zero-knowledge ; challenge-response ; one-time password (attn. *pre-play*) |
+| *known/chosen-plaintext* | obtenir des couples plaintext/ciphertext | zero-knowledge |
+| *chosen-ciphertext* | faire décrypter/signer des données choisies | zero-knowledge ; challenge-response + témoin + structure/redondance |
+| *reflection* | répondre le même nombre reçu | inclure l'entité cible dans les messages ; asymétrie des messages |
+| *interleaving* | mélanger des messages de plusieurs instances | inclure l'entité cible ; chaînage cryptographique entre messages d'une instance |
+| *collusion* | connivence entre intervenants (Mafia) | cage de Faraday ; synchronisation forte |
+
+## À retenir
+
+- **Origine des données** ≠ **identification d'entités** : la première authentifie un message ponctuel, la seconde un acteur dans le temps.
+- **Faible** = secret révélé (password) ; **forte** = preuve de possession (challenge-response) ; **ZK** = preuve sans aucune fuite d'information.
+- Toute solution robuste combine : **aléa non réutilisé** + **identité du destinataire dans le message chiffré** + **structure/redondance**.
+- Symétrique : risques = reflection, MitM si non mutuel. Asymétrique : risque = chosen-ciphertext si mal structuré.
+- ZKIP repose sur **consistance + significativité + zero-knowledge**, structurée en **témoin → défi → réponse**, répétée pour réduire la probabilité de tricherie.
+- Même un ZKIP parfait ne protège pas contre un relais en temps réel (attaque Mafia) : le protocole prouve un secret, pas une localisation.

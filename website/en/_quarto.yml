@@ -1,0 +1,114 @@
+project:
+  type: website
+  title: "Information System Security"
+  output-dir: ../_site
+
+website:
+  page-footer:
+    center: "Copyright © 2026 University of Geneva"
+
+  navbar:
+    # background: primary
+    search: true
+    # Right side for language selector
+    right:
+      - text: Language
+        icon: globe
+        menu:
+          - text: "English"
+            href: ../index.html
+          - text: "French"
+            href: index.html
+
+  sidebar:
+    style: docked
+    search: true
+    
+    contents:
+      - section: "Cours"
+        contents:
+          - section: "Introduction"
+            contents:
+              - text: "Details"
+                href: ch1.qmd
+              - text: "Synthesis"
+                href: ch1r.qmd
+              - text: "Quiz"
+                href: ch1q.qmd
+          - section: "Basic Concepts"
+            contents:
+              - text: "Details"
+                href: ch2.qmd
+              - text: "Synthesis"
+                href: ch2r.qmd
+              - text: "Quiz"
+                href: ch2q.qmd
+          - section: "Symmetric Cryptography"
+            contents:
+              - text: "Details "
+                href: ch3.qmd
+              - text: "Synthesis"
+                href: ch3r.qmd
+              - text: "Quiz"
+                href: ch3q.qmd
+          - section: "Asymmetric Cryptography"
+            contents:
+              - text: "Details"
+                href: ch4.qmd
+              - text: "Synthesis"
+                href: ch4r.qmd
+              - text: "Quiz"
+                href: ch4q.qmd
+          - section: "Hashes and MAC"
+            contents:
+              - text: "Details"
+                href: ch5.qmd
+              - text: "Synthesis"
+                href: ch5r.qmd
+              - text: "Quiz"
+                href: ch5q.qmd
+          - section: "Digital Signature"
+            contents:
+              - text: "Details"
+                href: ch6.qmd
+              - text: "Synthesis"
+                href: ch6r.qmd
+              - text: "Quiz"
+                href: ch6q.qmd
+          - section: "Authentication Protocols"
+            contents:
+              - text: "Details"
+                href: ch7.qmd
+              - text: "Synthesis"
+                href: ch7r.qmd
+              - text: "Quiz"
+                href: ch7q.qmd
+          - section: "Key Exchange Protocols"
+            contents:
+              - text: "Details"
+                href: ch8.qmd
+              - text: "Synthesis"
+                href: ch8r.qmd
+              - text: "Quiz"
+                href: ch8q.qmd
+          - section: "Certificates and PKI"
+            contents:
+              - text: "Details"
+                href: ch9.qmd
+              - text: "Synthesis"
+                href: ch9r.qmd
+              - text: "Quiz"
+                href: ch9q.qmd
+
+
+format:
+  html:
+    theme:
+      dark: ../macchiato.scss
+      light: flatly
+    toc: true
+    embed-resources: true
+
+filters:
+  - quizdown
+  - diagram

@@ -1,0 +1,349 @@
+---
+execute:
+  enabled: false
+---
+
+```quizdown
+### Selon le principe de Kerckhoffs, sur quoi doit reposer la sécurité d'un système de cryptage ?
+
+> Relis la formulation exacte du deuxième principe de Kerckhoffs concernant la divulgation du système.
+
+1. [ ] Sur le secret de l'algorithme utilisé
+1. [x] Sur le secret de la clé uniquement
+1. [ ] Sur le secret du canal de transmission
+1. [ ] Sur la complexité du code source
+    > Incorrect : la complexité du code n'est jamais mentionnée comme critère de sécurité par Kerckhoffs.
+```
+
+```quizdown
+### Un système conforme au principe de Kerckhoffs peut rester sûr même si son algorithme est rendu public.
+
+> Pense à la notion de « security through obscurity » évoquée dans le cours.
+
+1. [x] Vrai
+    > Vrai : Kerckhoffs affirme explicitement qu'il ne doit pas être un problème que le système tombe entre les mains de l'ennemi.
+1. [ ] Faux
+```
+
+```quizdown
+### Parmi les affirmations suivantes concernant la sécurité inconditionnelle (perfect secrecy), lesquelles sont correctes ?
+
+> Repense à la condition sur la taille et la réutilisation de la clé.
+
+- [x] Elle s'appuie sur la théorie de l'information de Shannon (1949).
+- [ ] Elle est compromise par une puissance de calcul suffisante.
+    > Incorrect : par définition, la sécurité inconditionnelle ne dépend pas de la puissance de calcul de l'adversaire.
+- [x] Elle nécessite une clé au moins aussi longue que le message.
+- [x] La clé ne doit jamais être réutilisée pour plusieurs messages.
+- [ ] Elle est largement utilisée dans les systèmes cryptographiques modernes.
+    > Incorrect : cette condition sur la clé la rend peu adaptée aux besoins cryptographiques habituels.
+```
+
+```quizdown
+### AES et DES sont considérés comme des systèmes offrant une sécurité...
+
+> Réfléchis à la nature de la garantie : est-elle mathématiquement absolue ou dépend-elle des ressources de calcul disponibles ?
+
+1. [ ] inconditionnelle
+1. [ ] prouvée par réduction à un problème mathématique difficile
+1. [x] calculatoire (practical security)
+    > Correct : leur sécurité repose sur le fait que casser l'algorithme dépasse les ressources de calcul d'un adversaire réaliste.
+1. [ ] basée sur la stéganographie
+```
+
+```quizdown
+### RSA et l'algorithme de Rabin sont dits « prouvés équivalents » à un problème mathématique difficile. Comment appelle-t-on ce type de preuve ?
+
+> Le cours utilise un terme spécifique pour ce type de démonstration.
+
+1. [ ] Preuve d'indiscernabilité
+1. [x] Preuve de réduction (reduction proof)
+    > Correct : on démontre que casser l'algorithme est aussi difficile que résoudre un problème comme la factorisation.
+1. [ ] Preuve d'entropie
+1. [ ] Preuve calculatoire
+```
+
+```quizdown
+### Parmi ces propriétés de l'entropie H(X), lesquelles sont correctes ?
+
+> Repense aux trois propriétés énoncées dans le cours, notamment les cas d'égalité.
+
+- [x] 0 ≤ H(X) ≤ log n
+- [x] H(X) = 0 si et seulement s'il n'y a aucune incertitude sur le résultat.
+- [ ] H(X) = log n uniquement si n est pair.
+    > Incorrect : la condition porte sur l'équiprobabilité des résultats, pas sur la parité de n.
+- [x] H(X) = log n si et seulement si toutes les issues sont équiprobables.
+- [ ] H(X) peut être négative si les probabilités sont faibles.
+    > Incorrect : H(X) est toujours comprise entre 0 et log n.
+```
+
+```quizdown
+### Quelle formule correspond correctement à l'entropie H(X) d'une variable aléatoire X ?
+
+> L'entropie se définit à partir d'une somme pondérée par les probabilités, avec un logarithme en base 2.
+
+1. [ ] $H(X) = \sum_{i=1}^{n} p_i$
+1. [x] $H(X) = -\sum_{i=1}^{n} p_i \log p_i$
+    > Correct : c'est la formalisation mathématique de Shannon (1948), avec logs en base 2.
+1. [ ] $H(X) = \prod_{i=1}^{n} p_i$
+1. [ ] $H(X) = \max_i p_i$
+```
+
+```quizdown
+### Une variable aléatoire X peut prendre 4 valeurs équiprobables. Quelle est son entropie H(X) ?
+
+> Utilise la propriété H(X) = log n valable en cas d'équiprobabilité, avec un log en base 2.
+
+1. [ ] 1
+1. [x] 2
+    > Correct : H(X) = log2(4) = 2 bits, conformément à la propriété d'équiprobabilité.
+1. [ ] 4
+1. [ ] 0,25
+```
+
+```quizdown
+### Une entropie H(X) = 0 signifie que l'incertitude sur X est maximale.
+
+> Relis la propriété (ii) du cours sur l'entropie.
+
+1. [ ] Vrai
+1. [x] Faux
+    > Faux : H(X) = 0 signifie au contraire qu'il n'y a aucune incertitude, un seul résultat ayant une probabilité de 1.
+```
+
+```quizdown
+### Classe ces types d'attaques du modèle le moins puissant (ce que possède le moins l'adversaire) au plus puissant.
+
+> Pense à ce que l'adversaire peut observer ou choisir dans chaque cas : rien, des couples connus, puis un contrôle actif sur le plaintext ou le ciphertext.
+
+1. Ciphertext-only
+2. Known-plaintext
+3. Chosen-plaintext
+4. Chosen-ciphertext
+```
+
+```quizdown
+### Un adversaire choisit librement des plaintexts et obtient les ciphertexts correspondants, dans le but de retrouver du plaintext à partir de ciphertexts observés. De quelle attaque s'agit-il ?
+
+> Identifie ce que l'adversaire choisit et ce qu'il obtient en retour.
+
+1. [ ] Ciphertext-only
+1. [ ] Known-plaintext
+1. [x] Chosen-plaintext
+    > Correct : l'adversaire a un accès actif à un oracle de cryptage lui permettant de choisir le plaintext.
+1. [ ] Chosen-ciphertext
+    > Incorrect : dans cette attaque, l'adversaire choisit le ciphertext, pas le plaintext.
+```
+
+```quizdown
+### Quelle est la différence essentielle entre une attaque chosen-plaintext et une attaque adaptive chosen-plaintext ?
+
+> Réfléchis à la dépendance entre les requêtes successives de l'adversaire.
+
+1. [ ] L'attaque adaptive ne concerne que les systèmes à clé publique.
+1. [x] Dans l'attaque adaptive, le choix des plaintexts peut dépendre des ciphertexts reçus lors des requêtes précédentes.
+    > Correct : c'est précisément ce qui distingue la version adaptive de la version simple.
+1. [ ] L'attaque adaptive ne nécessite pas d'oracle de cryptage.
+1. [ ] L'attaque adaptive porte uniquement sur le ciphertext.
+```
+
+```quizdown
+### Parmi les affirmations suivantes sur les random oracles, lesquelles sont correctes ?
+
+> Repense au comportement de l'oracle sur une entrée déjà traitée versus une entrée nouvelle.
+
+- [x] Il répond de manière parfaitement aléatoire à une entrée nouvelle.
+- [x] Il est déterministe pour une entrée déjà traitée : Orc(x1') = Orc(x1) si x1' = x1.
+- [ ] Il nécessite la connaissance de la clé secrète pour fonctionner.
+    > Incorrect : le random oracle est une entité abstraite disponible à toutes les parties, sans notion de clé secrète.
+- [x] Il modélise une fonction de hachage cryptographique idéale.
+- [ ] Il est identique dans son comportement au standard model.
+    > Incorrect : le standard model considère un adversaire borné en calcul et une fonction de hachage réelle, ce qui est différent.
+```
+
+```quizdown
+### Dans un cryptosystème à clé publique, un oracle de décryptage est nécessaire pour modéliser une attaque chosen-ciphertext, alors qu'un oracle de cryptage n'est pas nécessaire pour modéliser une attaque chosen-plaintext.
+
+> Pense à ce qui est public et à ce qui reste secret dans un système à clé publique.
+
+1. [x] Vrai
+    > Vrai : les opérations de cryptage utilisent la clé publique et sont donc réalisables directement par l'adversaire, contrairement au décryptage qui nécessite la clé privée.
+1. [ ] Faux
+```
+
+```quizdown
+### Dans le jeu IND-CPA, un cryptosystème est dit indiscernable sous attaque à plaintext choisi si l'adversaire...
+
+> Repense à la formule Prob = 1/2 + ε donnée dans le cours.
+
+1. [ ] ne peut jamais deviner correctement l'indice i.
+1. [x] a un avantage négligeable par rapport au hasard pour deviner l'indice i.
+    > Correct : Prob = 1/2 + ε avec ε petit et borné, ce qui signifie un avantage négligeable.
+1. [ ] devine correctement l'indice i avec une probabilité de 1.
+1. [ ] n'a jamais accès à un oracle de cryptage.
+```
+
+```quizdown
+### Pourquoi la présence d'un oracle de cryptage est-elle jugée inutile pour attaquer un cryptosystème à clé publique en IND-CPA ?
+
+> Réfléchis à qui a accès à la clé publique.
+
+1. [ ] Parce que les cryptosystèmes à clé publique ne sont jamais vulnérables à ce type d'attaque.
+1. [x] Parce que l'adversaire peut chiffrer lui-même n'importe quel plaintext avec la clé publique, sans avoir besoin d'un oracle.
+    > Correct : les opérations de cryptage sont ouvertement disponibles en clé publique.
+1. [ ] Parce que l'oracle de cryptage est réservé aux systèmes symétriques uniquement.
+1. [ ] Parce que le plaintext est toujours connu de l'adversaire.
+```
+
+```quizdown
+### Quelle est la principale différence entre le cryptage déterministe et le cryptage probabiliste ?
+
+> Pense à ce qui se passe si l'on chiffre plusieurs fois le même plaintext.
+
+1. [ ] Le cryptage probabiliste ne peut être utilisé qu'avec des clés symétriques.
+1. [x] Le cryptage probabiliste produit un ciphertext différent à chaque chiffrement du même plaintext, contrairement au déterministe.
+    > Correct : c'est l'ajout d'aléa avant le cryptage qui garantit cette propriété.
+1. [ ] Le cryptage déterministe est toujours plus rapide à calculer.
+1. [ ] Le cryptage probabiliste n'utilise jamais de clé publique.
+```
+
+```quizdown
+### Alice envoie à Bob un message chiffré valant soit « Yes » soit « Non », avec la clé publique de Bob, en cryptage déterministe et sans aléa ajouté. Quelle faille l'adversaire peut-il exploiter ?
+
+> Pense à ce que peut faire un adversaire disposant de la clé publique de Bob et d'un cryptage déterministe.
+
+1. [ ] Il peut casser la clé privée de Bob directement.
+1. [x] Il peut précalculer les deux ciphertexts possibles (codebook) et les comparer au ciphertext observé pour retrouver le message.
+    > Correct : c'est exactement l'attaque par codebook décrite dans le cours, ne nécessitant aucune cryptanalyse de l'algorithme.
+1. [ ] Il peut modifier le contenu du message sans être détecté.
+1. [ ] Il peut décrypter n'importe quel autre message envoyé par Alice.
+```
+
+```quizdown
+### Quel est l'objectif principal de l'OAEP (Optimal Asymmetric Encryption Padding) ?
+
+> Réfléchis au problème que le cryptage probabiliste cherche à résoudre.
+
+1. [ ] Réduire la taille des clés RSA.
+1. [x] Ajouter de l'aléa au plaintext avant cryptage afin d'obtenir l'indiscernabilité des ciphertexts.
+    > Correct : OAEP combine le plaintext avec un nombre aléatoire haché pour éviter le cryptage déterministe.
+1. [ ] Remplacer la fonction de hachage par un random oracle.
+1. [ ] Garantir une sécurité inconditionnelle pour RSA.
+```
+
+```quizdown
+### Remets dans l'ordre les étapes du chiffrement OAEP telles que décrites dans le cours.
+
+> Pense à ce qui doit être calculé avant de pouvoir chiffrer M1 et M2.
+
+1. Combiner le plaintext P avec un nombre aléatoire haché R pour obtenir M1 := P xor h(R)
+2. Calculer M2 := R xor h(M1)
+3. Chiffrer séparément M1 et M2 avec la clé publique : C1 = Epubk(M1) et C2 = Epubk(M2)
+4. Envoyer C1 et C2
+```
+
+```quizdown
+### Pourquoi le Caesar Cipher est-il considéré comme facile à cryptanalyser ?
+
+> Pense à la nature de la substitution utilisée par ce chiffrement.
+
+1. [ ] Parce que la clé est toujours publique.
+1. [x] Parce que c'est une substitution mono-alphabétique, vulnérable à l'analyse de fréquence des caractères.
+    > Correct : le cours indique explicitement que la cryptanalyse est facile et basée sur la fréquence des caractères.
+1. [ ] Parce qu'il ne peut chiffrer que des chiffres.
+1. [ ] Parce que la clé doit être aussi longue que le message.
+```
+
+```quizdown
+### Pour cryptanalyser un chiffrement de Vigenère, quelle est la première étape décrite dans le cours ?
+
+> Le cours mentionne une première étape avant d'analyser les blocs séparément comme pour Caesar.
+
+1. [ ] Calculer directement l'entropie du ciphertext.
+1. [x] Trouver la taille m de la clé en identifiant les portions de ciphertext répétées.
+    > Correct : une fois m connu, on peut analyser chaque bloc séparément comme un Caesar Cipher.
+1. [ ] Tester toutes les permutations possibles du plaintext.
+1. [ ] Utiliser un oracle de décryptage.
+```
+
+```quizdown
+### Un chiffrement par transposition modifie la valeur des caractères du plaintext, et non uniquement leur position.
+
+> Repense à la définition donnée dans le cours : « la clé définit une permutation sur le plaintext ».
+
+1. [ ] Vrai
+1. [x] Faux
+    > Faux : une transposition ne fait que réordonner (permuter) les caractères, sans en changer la valeur, contrairement à une substitution.
+```
+
+```quizdown
+### Quel est le niveau de sécurité du One-Time Pad, lorsque la clé est aléatoire, indépendante et jamais réutilisée ?
+
+> Repense à la classification des systèmes de cryptage vue en début de cours.
+
+1. [x] Sécurité inconditionnelle (perfect secrecy)
+    > Correct : c'est l'exemple classique cité dans le cours pour cette catégorie.
+1. [ ] Provable security
+1. [ ] Sécurité calculatoire
+1. [ ] Aucune sécurité démontrable
+```
+
+```quizdown
+### Une clé k du One-Time Pad est réutilisée pour chiffrer deux plaintexts xa et xb, produisant ya et yb. Que peut calculer un adversaire à partir de ya xor yb ?
+
+> Développe l'opération Ek(xa) xor Ek(xb) en utilisant la définition du One-Time Pad.
+
+1. [ ] La clé k directement, sans autre information.
+1. [x] xa xor xb, ce qui peut permettre de retrouver les deux plaintexts si leur entropie est faible.
+    > Correct : ya xor yb = xa xor k xor xb xor k = xa xor xb, la clé s'annulant.
+1. [ ] Rien, car le One-Time Pad reste inconditionnellement sûr même avec réutilisation de clé.
+1. [ ] Uniquement la longueur des plaintexts.
+```
+
+```quizdown
+### D'après la condition de Shannon (H(K) ≥ H(X)) pour qu'un système à clé symétrique soit inconditionnellement sûr, que peut-on conclure sur la longueur de la clé du One-Time Pad ?
+
+> Pense au cas où les bits de la clé sont aléatoires et équiprobables : que vaut alors H(K) ?
+
+1. [ ] Elle peut être plus courte que le message si la clé est bien choisie.
+1. [x] Elle doit être au moins aussi longue que le plaintext, indépendamment de l'entropie de X.
+    > Correct : avec des bits de clé équiprobables, H(K) = m (la longueur en bits), donc m doit être ≥ H(X).
+1. [ ] Elle doit toujours être exactement deux fois plus longue que le message.
+1. [ ] La longueur de la clé n'a aucune importance tant qu'elle est aléatoire.
+```
+
+```quizdown
+### Pourquoi le One-Time Pad, bien qu'inconditionnellement sûr, est-il très peu utilisé en pratique par rapport à un système comme AES ?
+
+> Compare les contraintes de gestion de clé des deux approches.
+
+1. [ ] Parce qu'il est cryptanalysable par analyse de fréquence comme le Caesar Cipher.
+1. [x] Parce que la contrainte d'une clé aussi longue que le message et jamais réutilisée pose un problème majeur de distribution et de gestion des clés.
+    > Correct : c'est précisément la limite pratique évoquée dans le cours, réduisant son usage à un cadre théorique.
+1. [ ] Parce qu'il ne peut être utilisé qu'avec des clés publiques.
+1. [ ] Parce que sa sécurité dépend de la puissance de calcul de l'adversaire.
+```
+
+```quizdown
+### Quelle est la différence fondamentale entre la cryptographie et la stéganographie ?
+
+> Pense à ce que chaque discipline cherche à cacher : le contenu du message ou son existence.
+
+1. [ ] La cryptographie cache l'existence du message, la stéganographie le rend illisible.
+1. [x] La cryptographie rend le message illisible sans en cacher l'existence, tandis que la stéganographie cache l'existence même du message.
+    > Correct : c'est la distinction énoncée en ouverture de la section sur la stéganographie.
+1. [ ] Les deux termes désignent exactement la même technique.
+1. [ ] La stéganographie nécessite toujours une clé secrète, contrairement à la cryptographie.
+```
+
+```quizdown
+### La technique décrite dans [Way93], consistant à cacher un message dans les least significant bits des pixels d'une image, relève de quel concept du cours ?
+
+> Réfléchis aux deux éléments constitutifs de toute solution stéganographique.
+
+1. [ ] Un oracle de cryptage appliqué à une image.
+1. [x] Un canal subliminal (les bits de poids faible de l'image) exploité par un mécanisme secret d'accès à l'information cachée.
+    > Correct : ce sont exactement les deux composants d'une solution stéganographique décrits dans le cours.
+1. [ ] Une attaque chosen-ciphertext sur un système de cryptage d'image.
+1. [ ] Une application du One-Time Pad sur les pixels de l'image.
+```

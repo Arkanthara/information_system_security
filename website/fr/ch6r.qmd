@@ -1,0 +1,147 @@
+## Vue d'ensemble
+
+```{mermaid}
+flowchart TD
+    A[Définitions]
+
+    B["Avec *appendice*<br/>(ElGamal, DSS)"]
+    C["Avec *reconstitution*<br/>(RSA, Rabin)"]
+
+    D["Algorithmes de chiffrement<br/>RSA / Rabin / ElGamal"]
+
+    E["Crypto-monnaies<br/>(ECDSA)"]
+    F["Attaques<br/>sur les SD"]
+
+    A --> B
+    A --> C
+
+    B --> D
+    C --> D
+
+    D --> E
+    D --> F
+```
+
+**Idée centrale** : une signature digitale lie un message à une entité via une clé **privée** (signature) et se vérifie avec la clé **publique** correspondante.
+
+## Concepts fondamentaux 🔴
+
+* **Signature digitale** : chaîne de données liant un message à une entité d'origine.
+* **Schéma de signature** = algorithme de génération + algorithme de vérification.
+* **Procédé de signature** = formatage du message + génération de signature.
+* **Procédé de vérification** = algorithme de vérification + (reconstruction du message).
+* Basée sur la **crypto asymétrique** (une clé partagée ne permet pas d'identifier explicitement une entité).
+* **Arbitrated digital signatures** : équivalent en symétrique, via une **TTP** (Trusted Third Party).
+
+### Deux familles
+
+| Famille | Principe | Exemples | Message Recovery |
+|---|---|---|---|
+| **Avec appendice** | Message original nécessaire pour vérifier | ElGamal, DSS | non |
+| **Avec reconstitution** | Le message se reconstruit à partir de la signature | RSA, Rabin | oui |
+
+::: {.callout-warning title="Piège"}
+Ne pas confondre : "avec appendice" = on *garde* le message à côté de la signature ; "avec reconstitution" = la signature *contient* le message (via une fonction de redondance inversible).
+:::
+
+## Cadre formel 🟠
+
+**Avec appendice** :
+
+* $S_A : M_h \to S$ (signature, clé **privée**)
+* $V_A : M_h \times S \to \{\text{vrai,faux}\}$ (vérification, clé **publique**)
+* $m_h = H(m)$
+
+**Avec reconstitution** :
+
+* $R : M \to M_S$ : **fonction de redondance**, injective, **inversible et publique**
+* $S_A : M_S \to S$, puis $V_A : S \to M_s$ t.q. $V_A \circ S_A = \text{Id}$
+* Vérification **sans** la clé privée de A
+* Étapes : (1) $m_R = R(m)$, $s = S_A(m_R)$ → (2) vérifier $V_A(s) \in M_R$ → (3) $m = R^{-1}(m_R)$
+
+::: {.callout-important title="À retenir"}
+Le choix de **R** est critique : si $M_R = M_S$ et $R$, $S_A$ sont des bijections, $M$ et $S$ ont la même taille → il devient **trivial de forger** des messages signés.
+:::
+
+## Algorithmes de signature 🔴
+
+| | RSA | Rabin | ElGamal |
+|---|---|---|---|
+| **Clé publique** | $(n,e)$ | $n$ | $(p,\alpha,y=\alpha^a \bmod p)$ |
+| **Clé privée** | $d$ (t.q. $ed \equiv 1 \bmod \Phi(n)$) | $(p,q)$ | $a$ |
+| **Signature** | $s = m_R^{\,d} \bmod n$ | $s = m_R^{1/2} \bmod n$ | $(r,s)$ avec $r=\alpha^k \bmod p$, $s=k^{-1}(m_h-ar)\bmod(p-1)$ |
+| **Vérification** | $m'_R = s^e \bmod n$ | $m'_R = s^2 \bmod n$ | $v_1=y^r r^s \bmod p \overset{?}{=} v_2=\alpha^{H(m)} \bmod p$ |
+| **Message Recovery** | oui | oui | non (appendice seul) |
+| **Problème de base** | RSAP | SQROOTP (factorisation) | DLP |
+| **Particularité** | $d$ plus lent à utiliser que $e$ (taille $d \approx$ taille $\Phi(n)$) | **4 racines carrées** possibles → 1 seule envoyée | Base de **DSA** (avec SHA-1) et **ECDSA** |
+
+::: {.callout-tip title="Intuition"}
+RSA et Rabin "inversent" une fonction à sens unique (exponentiation / racine carrée) → le message est **récupérable**. ElGamal signe un **hash** → seul un test d'égalité est possible, pas de reconstruction.
+:::
+
+### RSA — variante avec appendice
+
+* $m_h := H(m)$ ; signature $s := m_h^{\,d} \bmod n$ ; B vérifie $s^e \bmod n = H(m)$.
+* Permet de découpler la fonction de redondance du hachage.
+
+### Signatures aveugles (*Blind Signatures*, Chaum)
+
+* **But** : A obtient de B une signature sur un message que B **n'a jamais vu**.
+* Exploite la **propriété multiplicative de RSA**.
+* $f(m) = m \cdot k^e \bmod n$ (*blinding*), $g(m) = k^{-1} \cdot m \bmod n$ (*unblinding*)
+* Protocole : $A \to B: m'=f(m)$ ; $B \to A: s'=S_B(m')$ ; A calcule $g(s') = S_B(m)$.
+* Message Recovery : **oui** — Problème de base : **RSAP**.
+
+## Crypto-monnaies
+
+* La plupart utilisent la crypto asymétrique ; **Bitcoin** signe ses transactions.
+* Dépenser un bitcoin = signer avec sa clé **privée** (le détenteur était destinataire de la transaction précédente).
+
+![*Source Image: Bitcoin: A Peer-to-Peer Electronic Cash System.* Satoshi Nakamoto](qmd_images/digital_signature_crypto_currencies.png)
+
+* **ECDSA** (*Elliptic Curve Digital Signature Algorithm*) = ElGamal sur courbes elliptiques ; sécurité = **ECDLP**. Utilisé par **Bitcoin** et **Ethereum**.
+
+## Schéma récapitulatif complet
+
+| Classe | Schéma | Message Recovery | Problème de base |
+|---|---|---|---|
+| Signatures Classiques | RSA | oui | RSAP |
+| | Rabin | oui | SQROOTP |
+| | ElGamal | non | DLP |
+| | DSS | non | DLP |
+| One-time Signatures | Lamport | non | dépend de la OWF |
+| | Bos-Chaum | non | dépend de la OWF |
+| Undeniable Signatures | Chaum-van Antwerpen | non | DLP |
+| Fail-Stop Signatures | van Heyst-Pedersen | non | DLP |
+| Blind Signatures | Chaum | oui | RSAP |
+
+## Attaques sur les signatures digitales 🔴
+
+**Niveaux de "casse" (du plus au moins grave)** :
+
+1. **Total Break** : retrouver la clé privée ou un algo polynomial de génération.
+2. **Falsification sélective** : signer un message (ou classe) **fixé à l'avance**.
+3. **Falsification existentielle** : forger la signature d'**au moins un** message (sans le choisir).
+
+**Modèles d'accès de l'adversaire** :
+
+| Attaque | Accès de l'adversaire |
+|---|---|
+| *key-only* | clé publique du signataire uniquement |
+| *known-messages* | signatures de messages connus |
+| *chosen-messages* | signatures de messages choisis |
+| *adaptive chosen-messages* | signatures de messages choisis **de façon adaptative** |
+
+::: {.callout-warning title="Piège"}
+Ces attaques sont l'équivalent, côté signature, des attaques *x-ciphertext* côté chiffrement — mais avec des **messages** au lieu de textes chiffrés.
+:::
+
+## À retenir
+
+* Signature = **fonction à sens unique inversable seulement avec la clé privée** ; vérification = opération publique.
+* **Appendice** (ElGamal/DSS) vs **Reconstitution** (RSA/Rabin) : la différence clé est la présence/absence d'une fonction de redondance $R$ permettant de récupérer $m$.
+* RSA/Rabin : sécurité = factorisation (RSAP/SQROOTP) ; ElGamal/DSA/ECDSA : sécurité = logarithme discret (DLP/ECDLP).
+* Rabin produit **4 signatures candidates** par message.
+* Signature aveugle = détournement de la **propriété multiplicative de RSA**.
+* Bitcoin/Ethereum : signatures = **ECDSA**, chaînage des transactions par hash + signature/vérification successives.
+* Casser une signature : **Total Break > Falsification sélective > Falsification existentielle** ; accès adversaire : **key-only < known < chosen < adaptive chosen**.

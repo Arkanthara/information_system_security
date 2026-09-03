@@ -1,0 +1,427 @@
+---
+execute:
+  enabled: false
+---
+
+## Security services
+
+```quizdown
+### A server remains reachable but systematically responds with falsified data, with no trace of modification detectable by users. Which security service is most directly compromised?
+
+> The service in question protects against unauthorized modification of information, regardless of who is responsible for it.
+
+1. [ ] Availability
+1. [ ] Non-repudiation
+1. [x] Integrity
+    > Correct: integrity protects against unauthorized modification of information, which corresponds exactly to the falsification described.
+1. [ ] Anonymity
+    > Incorrect: anonymity concerns protecting the identity of an entity or a source, not the falsification of content.
+```
+
+```quizdown
+### What difference distinguishes entity authentication from data origin authentication?
+
+> One of the two notions concerns the person/system, the other concerns a specific set of data.
+
+- [x] Entity authentication proves the identity of an entity, while data authentication proves the source of a specific set of data.
+    > Correct: these are two distinct processes defined in the course, the first concerning an entity, the second concerning data.
+- [ ] Data origin authentication completely replaces entity authentication.
+    > Incorrect: these are two complementary services, not substitutes for one another.
+- [x] Data origin authentication also guarantees the integrity of that data.
+    > Correct: the course specifies that this service also ensures, by definition, the integrity of the data concerned.
+- [ ] Only entity authentication can rely on cryptographic evidence.
+    > Incorrect: both processes can rely on cryptographic mechanisms.
+```
+
+```quizdown
+### A company discovers that a former business partner denies ever having signed an electronic contract, even though the transaction did indeed take place. Which security service should have prevented this situation?
+
+> This service guarantees that an entity cannot deny having participated in a transaction.
+
+1. [ ] Confidentiality
+1. [ ] Non-duplication
+1. [x] Non-repudiation
+    > Correct: non-repudiation precisely offers the guarantee that an entity will not be able to deny being involved in a transaction.
+1. [ ] Availability
+    > Incorrect: availability concerns the accessibility of resources, not the disputing of participation.
+```
+
+```quizdown
+### Non-duplication and non-repudiation protect against exactly the same type of threat.
+
+> Reread the definition of each of these two services: one concerns illicit copying, the other concerns denying a transaction.
+
+1. [ ] True
+1. [x] False
+    > False: non-duplication protects against illicit copies, while non-repudiation prevents an entity from denying having participated in a transaction. These are two different threats.
+```
+
+## Internet-related risks
+
+```quizdown
+### An employee receives a personalized e-mail, mentioning their ongoing project and signed with their manager's name, asking them to confirm their credentials on an external link. What technique is this precisely?
+
+> The precise targeting of a specific person or organization has a particular name, derived from "spear fishing".
+
+1. [ ] Spam
+1. [ ] Drive-by download
+1. [x] Spear phishing
+    > Correct: when phishing specifically targets a person or organization based on information concerning them, it is called spear phishing.
+1. [ ] Ransomware
+    > Incorrect: nothing in the situation describes an encryption of data in exchange for ransom.
+```
+
+```quizdown
+### A user is infected by malware simply by visiting a legitimate website, without downloading or opening any file. Which mechanism best explains this infection?
+
+> The course describes a technique where a legitimate site can be infected beforehand, for example via a malicious script injection technique in the pages.
+
+- [ ] The site sent an e-mail containing a booby-trapped attachment.
+    > Incorrect: the situation does not mention any e-mail, only a site visit.
+- [x] The legitimate site was infected beforehand, for example via cross-site scripting.
+    > Correct: this is one of the two cases described for drive-by download, the infection possibly affecting only certain pages.
+- [x] It is a drive-by download.
+    > Correct: this technique makes it possible to infect a system on which a web client is running simply by visiting a site.
+- [ ] It is necessarily a ransomware.
+    > Incorrect: the infection technique described (drive-by download) does not prejudge the type of malware ultimately installed.
+```
+
+```quizdown
+### Why can a ransomware remain completely invisible for several weeks after the initial infection?
+
+> The course mentions a particular state in which malware can remain before activating.
+
+1. [ ] Because it never actually encrypts the data before payment.
+    > Incorrect: encrypting the data is precisely the usual behavior of ransomware, before any payment demand.
+1. [x] Because it can remain dormant and be triggered by an event or a specific date.
+    > Correct: the course states that ransomware can remain dormant in the infected system and be triggered by a specific event, particularly for synchronized attacks.
+1. [ ] Because antivirus software never detects ransomware.
+    > Incorrect: this statement is excessive and is not supported by the course.
+1. [ ] Because ransomware always waits for a connection to the TOR network to start.
+    > Incorrect: TOR is used to obscure the attacker's trace, not to delay the execution of encryption.
+```
+
+```quizdown
+### Which statement correctly describes a difference between DDoS attacks and spam attacks?
+
+> Compare the objective pursued by each of these two threats: making unavailable versus polluting/collecting.
+
+1. [ ] Spam always aims to make a service unavailable, like DDoS.
+    > Incorrect: spam consumes resources and time but its main objective is not to make a service inaccessible.
+1. [x] DDoS aims to make a system inaccessible by overwhelming it with traffic, whereas spam consists of sending unsolicited unwanted e-mails or content.
+    > Correct: these are two threats with different objectives, one targeting availability via a massive volume of traffic, the other being a nuisance related to the volume of unwanted messages.
+1. [ ] A DDoS necessarily involves a single isolated attacker.
+    > Incorrect: the term "distributed" precisely indicates that multiple devices, often tens of thousands, simultaneously target the victim.
+```
+
+## Hash functions and random generation
+
+```quizdown
+### A cryptographic hash function completely changes its output even if only a single character of the source document is changed. Which property illustrates this behavior?
+
+> This is one of the two fundamental properties expected of a cryptographic hash function.
+
+1. [ ] Reversibility
+1. [x] Total sensitivity to the slightest modification, related to the one-way and collision-free properties
+    > Correct: the course specifies that any modification, even insignificant, of the source document results in a fundamentally different digest.
+1. [ ] Lossless compression
+1. [ ] Symmetry of the function
+    > Incorrect: cryptographic hash functions are not defined by a symmetry property.
+```
+
+```quizdown
+### Which statements are true regarding the cryptographic hash functions presented in the course?
+
+> Clearly distinguish what is "easy to compute" from what is "virtually impossible to compute".
+
+- [x] It is virtually impossible to retrieve the source document from the digest alone.
+    > Correct: this is the one-way property described in the course.
+- [ ] Two different documents necessarily produce the same digest if they have the same length.
+    > Incorrect: the opposite is what is sought: it must be virtually impossible to find two documents producing the same digest (collision-free).
+- [x] The usual digest length is between 160 and 512 bits.
+    > Correct: this is the value indicated in the course.
+- [ ] SHA-1, SHA-256, and SHA-3 are asymmetric encryption algorithms.
+    > Incorrect: these are examples of cryptographic hash functions, not asymmetric encryption algorithms.
+```
+
+```quizdown
+### A developer generates their application's session keys solely from the system time, rounded to the nearest second. Why is this approach risky from the course's point of view?
+
+> Think about the course's quote on pseudo-random processes and the notion of a predictable "seed".
+
+1. [ ] Because the system time changes too often to be used.
+    > Incorrect: the problem is not the frequency of change but the predictability of the source used as the seed.
+1. [x] Because a seed that is too predictable can allow an attacker to reconstruct the generated numbers, illustrating that poorly constructed pseudo-random processes can produce pseudo-security.
+    > Correct: the course precisely cites the idea that the use of predictable pseudo-random processes can result in pseudo-security rather than actual security.
+1. [ ] Because pseudo-random generators should never be used in cryptography.
+    > Incorrect: the course, on the contrary, presents pseudo-random generators as commonly used tools, provided their seed is well chosen.
+```
+
+## Symmetric and asymmetric cryptography
+
+```quizdown
+### What is the main reason symmetric cryptography does not offer direct support for digital signatures?
+
+> Think about who knows the key used to encrypt and decrypt a message in a symmetric scheme.
+
+1. [ ] Because symmetric algorithms are too slow to sign a document.
+    > Incorrect: symmetric cryptography is, on the contrary, significantly faster than asymmetric cryptography.
+1. [x] Because the secret key is known to both parties, so nothing proves that only the sender could have produced the message.
+    > Correct: the course explicitly states that since the key is known to both parties, this technology does not offer direct support for digital signatures.
+1. [ ] Because hash functions are incompatible with symmetric algorithms.
+    > Incorrect: hash functions are used independently of the type of cryptography chosen.
+```
+
+```quizdown
+### In a confidential exchange using asymmetric cryptography, which keys are actually involved?
+
+> Recall who alone must be able to decrypt the final message.
+
+1. [ ] The sender's private key only
+1. [ ] The sender's public key only
+1. [x] The recipient's public and private keys
+    > Correct: the sender encrypts with the recipient's public key, and only the recipient can decrypt with their private key. Only their keys are involved.
+1. [ ] The public keys of both parties only
+    > Incorrect: a private key must necessarily be involved to enable decryption, otherwise the message would remain unreadable.
+```
+
+```quizdown
+### When verifying a digital signature, which key does the recipient use?
+
+> This is the key used to verify, not to produce, the signature.
+
+1. [ ] The recipient's private key
+1. [ ] The sender's private key
+1. [x] The sender's public key
+    > Correct: only the sender signs with their private key; verification is done with their public key, which is globally available.
+1. [ ] The recipient's public key
+    > Incorrect: the recipient's keys are not involved in the signing and verification process, only the sender's are involved.
+```
+
+```quizdown
+### Why is the digest of a document signed in practice rather than the entire document?
+
+> Think about the computational cost of a signing operation based on asymmetric cryptography.
+
+1. [x] Because signing an entire document is very time-consuming, whereas the digest is of fixed size and quick to process.
+    > Correct: the course explicitly presents this problem and this solution: signing an entire document is very time-consuming, hence applying the signature only to the digest.
+1. [ ] Because complete documents cannot be encrypted with asymmetric keys.
+    > Incorrect: nothing technically prevents encrypting a complete document, the problem is purely a matter of performance.
+1. [ ] Because the digest guarantees the confidentiality of the document, which a signature of the entire document would not do.
+    > Incorrect: the signature does not guarantee confidentiality, but rather authentication and non-repudiation.
+```
+
+```quizdown
+### A system signs a document, then someone modifies a single comma in that document after signing. What happens during verification?
+
+> Think back to the collision-free property of the hash functions used to produce the signed digest.
+
+1. [ ] The signature remains valid because a comma is an insignificant detail.
+    > Incorrect: the course specifies that any modification, even insignificant, fundamentally changes the digest.
+1. [x] Verification fails, because the newly computed digest no longer matches the digest decrypted from the signature.
+    > Correct: the signature changes if the document changes; any modification of the document or the signature results in a verification failure, which guarantees integrity.
+1. [ ] The signature automatically adapts to the new version of the document.
+    > Incorrect: a digital signature never updates automatically; it corresponds, fixed, to the original signed document.
+```
+
+```quizdown
+### A company must choose an encryption mechanism to protect personal backups stored locally by a single employee, with no need for exchange with third parties. Which solution is most appropriate according to the course?
+
+> Compare the speed, ease of key exchange, and number of people involved in each solution.
+
+1. [x] Symmetric cryptography, because it is fast and suited to protecting personal documents.
+    > Correct: the course explicitly states that symmetric cryptography is better suited to protecting personal documents than to transactions involving large populations.
+1. [ ] Asymmetric cryptography, because it avoids any need for key management.
+    > Incorrect: asymmetric cryptography, on the contrary, requires managing a key pair and certifying that the public key belongs to whom it claims, which is superfluous here.
+1. [ ] No cryptography is necessary for strictly local data.
+    > Incorrect: the confidentiality of sensitive data remains relevant even locally, particularly in case of physical theft of the storage medium.
+```
+
+```quizdown
+### What main advantage does asymmetric cryptography provide over symmetric cryptography when establishing a confidential channel between two users who do not know each other?
+
+> Think about the nature of the channel required to exchange the key in each case.
+
+1. [ ] It is faster to execute.
+    > Incorrect: it is the opposite, asymmetric cryptography is significantly slower, up to 50 times according to the course.
+1. [x] It does not require a prior confidential channel to exchange the key; a simply authenticated channel is sufficient.
+    > Correct: unlike symmetric cryptography, which requires an alternative confidential channel to transmit the secret key, asymmetric cryptography makes it possible to exchange only public keys via an authenticated channel.
+1. [ ] It completely eliminates the need to verify the recipient's identity.
+    > Incorrect: it remains necessary to verify that the public key really belongs to the recipient, for example via an authenticated channel or third-party certification.
+```
+
+```quizdown
+### Classify these statements according to whether they describe symmetric or asymmetric cryptography.
+
+> Only one of the two technologies natively allows digital signatures and non-repudiation.
+
+- [x] Uses a single secret key shared between both parties.
+    > Correct: this is precisely the definition of symmetric cryptography presented in the course.
+- [ ] Requires an alternative confidential channel for key exchange.
+    > This statement is true for symmetric cryptography, not for asymmetric cryptography, so it should not be checked as a characteristic of asymmetric cryptography in this context.
+- [x] Natively allows digital signatures and non-repudiation.
+    > Correct: this is a property specific to asymmetric cryptography thanks to the exclusive possession of the private key by the signer.
+- [x] Can be up to 50 times slower than the other technology.
+    > Correct: the course states that operations related to asymmetric cryptography are up to 50 times slower than those of symmetric cryptography.
+```
+
+## RSA and hybrid encryption
+
+```quizdown
+### In the RSA scheme presented in the course, what does the pair (n, e) correspond to?
+
+> Identify in the encryption formula which variables are needed to encrypt a message.
+
+1. [ ] The private key
+1. [x] The public key
+    > Correct: the course explicitly states that the encryption C = P^e mod n uses the public key (n, e).
+1. [ ] The digest of the message
+1. [ ] The seed of the random generator
+    > Incorrect: (n, e) does not concern the generation of random numbers but the RSA public key.
+```
+
+```quizdown
+### Why is it virtually impossible to retrieve P from C = P^e mod n without knowing d, in the RSA scheme presented?
+
+> The course explicitly states that this inverse operation is considered impossible to compute under certain conditions.
+
+1. [ ] Because e is always an extremely large prime number.
+    > Incorrect: the course does not base security on the size of e, but on the difficulty of the underlying mathematical problem.
+1. [x] Because the inverse of this operation is considered virtually impossible to compute when large numbers are involved, related to n = pq.
+    > Correct: this is exactly the statement made in the course regarding the RSA encryption function.
+1. [ ] Because P is always chosen randomly and unpredictably.
+    > Incorrect: the random nature of P is not what underlies the security of RSA in the course, it is the difficulty of the inverse computation.
+```
+
+```quizdown
+### Two users want to exchange large amounts of data confidentially while minimizing computational cost, while also taking advantage of the simplified key management of asymmetric cryptography. Which approach corresponds to the practice recommended in the course?
+
+> Combine the respective advantages of both families of cryptography rather than choosing only one.
+
+1. [ ] Use only asymmetric cryptography to encrypt all the exchanged data.
+    > Incorrect: this would be unnecessarily costly, as asymmetric cryptography is much slower for large volumes of data.
+1. [ ] Use only symmetric cryptography and exchange the key by phone.
+    > Incorrect: this works but does not benefit from the simplified management offered by asymmetric cryptography, particularly for users who do not know each other beforehand.
+1. [x] Encrypt a symmetric session key with the recipient's public key, then encrypt the data with this session key.
+    > Correct: this is exactly the principle presented in the course, where asymmetric cryptography is used only to exchange a symmetric key, which is then used to protect the data.
+```
+
+```quizdown
+### Put the steps of the hybrid scheme combining asymmetric and symmetric cryptography presented in the course in order.
+
+> First think back to the generation of the session key, before any encryption.
+
+1. A generates a random session key Ks.
+2. A encrypts Ks with B's public key.
+3. B decrypts Ks with their own private key.
+4. A and B communicate by encrypting their data with Ks using a symmetric algorithm.
+```
+
+## Ransomware — case study
+
+```quizdown
+### To which category of malware does a ransomware belong according to the classification presented in the course?
+
+> This category is usually associated with a program that presents itself as legitimate or installs discreetly before revealing its malicious behavior.
+
+1. [ ] Computer worm
+1. [x] Trojan Horse
+    > Correct: the course explicitly states that this specific family of malware belongs to the category called Trojan Horses.
+1. [ ] Rootkit
+1. [ ] Adware
+    > Incorrect: the course does not classify ransomware in this category.
+```
+
+```quizdown
+### In the generic diagram of a Cryptolocker-type ransomware presented in the course, why can't the victim alone find the key needed to decrypt their files?
+
+> Observe where the private key corresponding to the RSA public key used during the infection is located.
+
+1. [ ] Because the files are destroyed and not encrypted.
+    > Incorrect: the usual behavior described is data encryption, not destruction.
+1. [x] Because the private key needed for decryption is generated and kept on the attacker's servers, and is only transmitted after payment.
+    > Correct: the course specifies that the private decryption keys are stored on the attacker's servers and sent to the victim after payment in bitcoins.
+1. [ ] Because the AES algorithm can never be reversed, even with the correct key.
+    > Incorrect: AES is a symmetric algorithm that is reversible with the correct key; the problem is that the victim does not have this key.
+```
+
+```quizdown
+### In the Cryptolocker scheme from the course, what role does the HMAC computed from the original file play?
+
+> The HMAC combines a hash function with a key, for a purpose close to that seen for digital signatures.
+
+- [x] It allows the integrity of the data to be verified during the encryption process.
+    > Correct: as with digital signatures, a hash-based mechanism is used here to guarantee that the data has not been uncontrollably altered during the process.
+- [ ] It is used to directly encrypt the victim's data instead of AES.
+    > Incorrect: the scheme uses AES to encrypt the data; the HMAC is a separate element of the process.
+- [ ] It replaces the need to use an RSA public key in the scheme.
+    > Incorrect: the RSA public key is used to encrypt the random string S, a role distinct from that of the HMAC.
+```
+
+```quizdown
+### Put the four main stages of the ransomware attack presented in the course in order.
+
+> The first stage always corresponds to how the malware initially penetrates the system.
+
+1. Infection and propagation
+2. Execution (data encryption)
+3. Payment in crypto-currencies
+4. Concealment of the trace via TOR networks
+```
+
+```quizdown
+### An organization that is a victim of ransomware has regular backups, but these are permanently connected to the same network as the infected computers. Which principle from the course did this organization fail to follow?
+
+> The course emphasizes a specific characteristic that backups must have in order to remain useful against ransomware.
+
+1. [ ] Encrypting backups with RSA
+1. [x] Maintaining offline backups (backups offline)
+    > Correct: the course explicitly recommends offline backups among the anticipation and remediation measures, precisely because ransomware active on the network can reach connected backups.
+1. [ ] Systematically paying the ransom
+    > Incorrect: payment is only presented as an open question ("pay or not to pay"), not as a recommended prevention measure.
+1. [ ] Exclusive use of biometric passwords
+    > Incorrect: this point is not related to the ransomware prevention measures presented in the course.
+```
+
+## Synthesis and cross-cutting reasoning
+
+```quizdown
+### An application encrypts each message with a new symmetric key, but transmits this key in plaintext in the message header. Which fundamental principle from the course does this design violate?
+
+> Compare this practice to how a symmetric key should normally be exchanged between two parties.
+
+1. [ ] It violates the collision-free property of hash functions.
+    > Incorrect: no hash function is involved in this situation, only the transmission of the key is problematic.
+1. [x] It violates the principle that a symmetric key must be transmitted over a confidential channel, for example by encrypting it with the recipient's public key.
+    > Correct: transmitting the key in plaintext cancels out the entire point of symmetric encryption, since anyone intercepting the message can then decrypt the data.
+1. [ ] It violates the principle of non-duplication.
+    > Incorrect: non-duplication concerns protection against illicit copies of content, not the confidentiality of transmitting a key.
+```
+
+```quizdown
+### An attacker manages to intercept and modify a message encrypted with a symmetric algorithm, without knowing the key, then sends it back unchanged to the recipient, who decrypts it without further verification. Which security service is most likely missing from this system?
+
+> Encryption alone guarantees confidentiality, but not necessarily that content has not been altered in transit.
+
+1. [ ] Confidentiality, because the attacker was able to read the message.
+    > Incorrect: nothing indicates that the attacker decrypted the content, only that they modified it without understanding it.
+1. [x] Integrity, because no mechanism allows detection that the message was altered before being processed by the recipient.
+    > Correct: confidentiality (via encryption) does not by itself guarantee integrity; a separate mechanism, such as a one-way function combined with a signature or an HMAC, is needed to detect it.
+1. [ ] Anonymity, because the attacker remains unidentified.
+    > Incorrect: the problem described concerns detecting a modification, not identifying the attacker.
+```
+
+```quizdown
+### Which of the following statements are correct regarding the course as a whole?
+
+> Mentally review the three main blocks of the course: security services, Internet risks, cryptographic tools.
+
+- [x] Asymmetric digital signature relies on the hash of the document rather than the entire document, for performance reasons.
+    > Correct: this is the principle presented in the section on digital signatures.
+- [x] The scheme of a Cryptolocker-type ransomware combines an asymmetric algorithm (RSA), a symmetric algorithm (AES), and a hash-related function (HMAC).
+    > Correct: the course details precisely this combination in the generic Cryptolocker scheme.
+- [ ] Symmetric cryptography is always preferable to asymmetric cryptography, regardless of the situation.
+    > Incorrect: the course recommends one or the other, or even a combination of both, depending on the context (personal documents, channels between strangers, transactions, etc.).
+- [ ] Phishing and DDoS both primarily aim to make a service unavailable.
+    > Incorrect: phishing aims to collect private information, whereas DDoS targets the availability of a service.
+```

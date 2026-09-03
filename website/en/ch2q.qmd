@@ -1,0 +1,349 @@
+---
+execute:
+  enabled: false
+---
+
+```quizdown
+### According to Kerckhoffs' principle, what should the security of an encryption system rely on?
+
+> Reread the exact wording of Kerckhoffs' second principle concerning the disclosure of the system.
+
+1. [ ] The secrecy of the algorithm used
+1. [x] The secrecy of the key only
+1. [ ] The secrecy of the transmission channel
+1. [ ] The complexity of the source code
+    > Incorrect: code complexity is never mentioned as a security criterion by Kerckhoffs.
+```
+
+```quizdown
+### A system compliant with Kerckhoffs' principle can remain secure even if its algorithm is made public.
+
+> Think about the notion of "security through obscurity" mentioned in the course.
+
+1. [x] True
+    > True: Kerckhoffs explicitly states that it should not be a problem if the system falls into the hands of the enemy.
+1. [ ] False
+```
+
+```quizdown
+### Among the following statements regarding unconditional security (perfect secrecy), which are correct?
+
+> Think back to the condition on key size and reuse.
+
+- [x] It is based on Shannon's information theory (1949).
+- [ ] It is compromised by sufficient computational power.
+    > Incorrect: by definition, unconditional security does not depend on the adversary's computational power.
+- [x] It requires a key at least as long as the message.
+- [x] The key must never be reused for several messages.
+- [ ] It is widely used in modern cryptographic systems.
+    > Incorrect: this condition on the key makes it poorly suited to usual cryptographic needs.
+```
+
+```quizdown
+### AES and DES are considered to offer... security.
+
+> Think about the nature of the guarantee: is it mathematically absolute or does it depend on available computing resources?
+
+1. [ ] unconditional
+1. [ ] proven by reduction to a hard mathematical problem
+1. [x] computational (practical security)
+    > Correct: their security relies on the fact that breaking the algorithm exceeds the computing resources of a realistic adversary.
+1. [ ] based on steganography
+```
+
+```quizdown
+### RSA and the Rabin algorithm are said to be "proven equivalent" to a hard mathematical problem. What is this type of proof called?
+
+> The course uses a specific term for this type of demonstration.
+
+1. [ ] Indistinguishability proof
+1. [x] Reduction proof (reduction proof)
+    > Correct: it is shown that breaking the algorithm is as hard as solving a problem such as factoring.
+1. [ ] Entropy proof
+1. [ ] Computational proof
+```
+
+```quizdown
+### Among these properties of entropy H(X), which are correct?
+
+> Think back to the three properties stated in the course, particularly the equality cases.
+
+- [x] 0 ≤ H(X) ≤ log n
+- [x] H(X) = 0 if and only if there is no uncertainty about the outcome.
+- [ ] H(X) = log n only if n is even.
+    > Incorrect: the condition concerns the equiprobability of outcomes, not the parity of n.
+- [x] H(X) = log n if and only if all outcomes are equiprobable.
+- [ ] H(X) can be negative if the probabilities are low.
+    > Incorrect: H(X) is always between 0 and log n.
+```
+
+```quizdown
+### Which formula correctly corresponds to the entropy H(X) of a random variable X?
+
+> Entropy is defined from a probability-weighted sum, with a base-2 logarithm.
+
+1. [ ] $H(X) = \sum_{i=1}^{n} p_i$
+1. [x] $H(X) = -\sum_{i=1}^{n} p_i \log p_i$
+    > Correct: this is Shannon's mathematical formalization (1948), with logs base 2.
+1. [ ] $H(X) = \prod_{i=1}^{n} p_i$
+1. [ ] $H(X) = \max_i p_i$
+```
+
+```quizdown
+### A random variable X can take 4 equiprobable values. What is its entropy H(X)?
+
+> Use the property H(X) = log n, valid in the case of equiprobability, with a base-2 log.
+
+1. [ ] 1
+1. [x] 2
+    > Correct: H(X) = log2(4) = 2 bits, in accordance with the equiprobability property.
+1. [ ] 4
+1. [ ] 0.25
+```
+
+```quizdown
+### An entropy H(X) = 0 means the uncertainty about X is maximal.
+
+> Reread property (ii) of the course on entropy.
+
+1. [ ] True
+1. [x] False
+    > False: H(X) = 0 means, on the contrary, that there is no uncertainty at all, a single outcome having a probability of 1.
+```
+
+```quizdown
+### Rank these attack types from the least powerful model (what the adversary has the least of) to the most powerful.
+
+> Think about what the adversary can observe or choose in each case: nothing, known pairs, then active control over the plaintext or ciphertext.
+
+1. Ciphertext-only
+2. Known-plaintext
+3. Chosen-plaintext
+4. Chosen-ciphertext
+```
+
+```quizdown
+### An adversary freely chooses plaintexts and obtains the corresponding ciphertexts, with the goal of recovering plaintext from observed ciphertexts. What attack is this?
+
+> Identify what the adversary chooses and what they get in return.
+
+1. [ ] Ciphertext-only
+1. [ ] Known-plaintext
+1. [x] Chosen-plaintext
+    > Correct: the adversary has active access to an encryption oracle allowing them to choose the plaintext.
+1. [ ] Chosen-ciphertext
+    > Incorrect: in this attack, the adversary chooses the ciphertext, not the plaintext.
+```
+
+```quizdown
+### What is the essential difference between a chosen-plaintext attack and an adaptive chosen-plaintext attack?
+
+> Think about the dependency between the adversary's successive queries.
+
+1. [ ] The adaptive attack only applies to public-key systems.
+1. [x] In the adaptive attack, the choice of plaintexts can depend on the ciphertexts received in previous queries.
+    > Correct: this is precisely what distinguishes the adaptive version from the simple version.
+1. [ ] The adaptive attack does not require an encryption oracle.
+1. [ ] The adaptive attack only concerns the ciphertext.
+```
+
+```quizdown
+### Among the following statements about random oracles, which are correct?
+
+> Think back to the oracle's behavior on an already-processed input versus a new input.
+
+- [x] It responds in a perfectly random way to a new input.
+- [x] It is deterministic for an already-processed input: Orc(x1') = Orc(x1) if x1' = x1.
+- [ ] It requires knowledge of the secret key to function.
+    > Incorrect: the random oracle is an abstract entity available to all parties, with no notion of a secret key.
+- [x] It models an ideal cryptographic hash function.
+- [ ] Its behavior is identical to that of the standard model.
+    > Incorrect: the standard model considers a computationally bounded adversary and a real hash function, which is different.
+```
+
+```quizdown
+### In a public-key cryptosystem, a decryption oracle is needed to model a chosen-ciphertext attack, whereas an encryption oracle is not needed to model a chosen-plaintext attack.
+
+> Think about what is public and what remains secret in a public-key system.
+
+1. [x] True
+    > True: encryption operations use the public key and can therefore be performed directly by the adversary, unlike decryption which requires the private key.
+1. [ ] False
+```
+
+```quizdown
+### In the IND-CPA game, a cryptosystem is said to be indistinguishable under a chosen-plaintext attack if the adversary...
+
+> Think back to the formula Prob = 1/2 + ε given in the course.
+
+1. [ ] can never correctly guess the index i.
+1. [x] has a negligible advantage over chance in guessing the index i.
+    > Correct: Prob = 1/2 + ε with ε small and bounded, which means a negligible advantage.
+1. [ ] correctly guesses the index i with a probability of 1.
+1. [ ] never has access to an encryption oracle.
+```
+
+```quizdown
+### Why is the presence of an encryption oracle considered unnecessary for attacking a public-key cryptosystem under IND-CPA?
+
+> Think about who has access to the public key.
+
+1. [ ] Because public-key cryptosystems are never vulnerable to this type of attack.
+1. [x] Because the adversary can encrypt any plaintext themselves using the public key, without needing an oracle.
+    > Correct: encryption operations are openly available in public-key cryptography.
+1. [ ] Because the encryption oracle is reserved for symmetric systems only.
+1. [ ] Because the plaintext is always known to the adversary.
+```
+
+```quizdown
+### What is the main difference between deterministic encryption and probabilistic encryption?
+
+> Think about what happens if the same plaintext is encrypted several times.
+
+1. [ ] Probabilistic encryption can only be used with symmetric keys.
+1. [x] Probabilistic encryption produces a different ciphertext each time the same plaintext is encrypted, unlike deterministic encryption.
+    > Correct: it is the addition of randomness before encryption that guarantees this property.
+1. [ ] Deterministic encryption is always faster to compute.
+1. [ ] Probabilistic encryption never uses a public key.
+```
+
+```quizdown
+### Alice sends Bob a message encrypted with Bob's public key, worth either "Yes" or "No", using deterministic encryption with no added randomness. What flaw can the adversary exploit?
+
+> Think about what an adversary with Bob's public key and deterministic encryption can do.
+
+1. [ ] They can directly break Bob's private key.
+1. [x] They can precompute the two possible ciphertexts (codebook) and compare them to the observed ciphertext to recover the message.
+    > Correct: this is exactly the codebook attack described in the course, requiring no cryptanalysis of the algorithm at all.
+1. [ ] They can modify the content of the message without being detected.
+1. [ ] They can decrypt any other message sent by Alice.
+```
+
+```quizdown
+### What is the main objective of OAEP (Optimal Asymmetric Encryption Padding)?
+
+> Think about the problem that probabilistic encryption seeks to solve.
+
+1. [ ] Reduce the size of RSA keys.
+1. [x] Add randomness to the plaintext before encryption in order to achieve ciphertext indistinguishability.
+    > Correct: OAEP combines the plaintext with a hashed random number to avoid deterministic encryption.
+1. [ ] Replace the hash function with a random oracle.
+1. [ ] Guarantee unconditional security for RSA.
+```
+
+```quizdown
+### Put the steps of OAEP encryption, as described in the course, in order.
+
+> Think about what must be computed before M1 and M2 can be encrypted.
+
+1. Combine the plaintext P with a hashed random number R to obtain M1 := P xor h(R)
+2. Compute M2 := R xor h(M1)
+3. Separately encrypt M1 and M2 with the public key: C1 = Epubk(M1) and C2 = Epubk(M2)
+4. Send C1 and C2
+```
+
+```quizdown
+### Why is the Caesar Cipher considered easy to cryptanalyze?
+
+> Think about the nature of the substitution used by this cipher.
+
+1. [ ] Because the key is always public.
+1. [x] Because it is a mono-alphabetic substitution, vulnerable to character frequency analysis.
+    > Correct: the course explicitly states that cryptanalysis is easy and based on character frequency.
+1. [ ] Because it can only encrypt numbers.
+1. [ ] Because the key must be as long as the message.
+```
+
+```quizdown
+### To cryptanalyze a Vigenère cipher, what is the first step described in the course?
+
+> The course mentions a first step before analyzing the blocks separately as with Caesar.
+
+1. [ ] Directly compute the entropy of the ciphertext.
+1. [x] Find the key length m by identifying repeated portions of ciphertext.
+    > Correct: once m is known, each block can be analyzed separately as a Caesar Cipher.
+1. [ ] Test all possible permutations of the plaintext.
+1. [ ] Use a decryption oracle.
+```
+
+```quizdown
+### A transposition cipher changes the value of the plaintext's characters, not just their position.
+
+> Think back to the definition given in the course: "the key defines a permutation on the plaintext".
+
+1. [ ] True
+1. [x] False
+    > False: a transposition only reorders (permutes) the characters, without changing their value, unlike a substitution.
+```
+
+```quizdown
+### What is the security level of the One-Time Pad, when the key is random, independent, and never reused?
+
+> Think back to the classification of encryption systems seen at the start of the course.
+
+1. [x] Unconditional security (perfect secrecy)
+    > Correct: this is the classic example cited in the course for this category.
+1. [ ] Provable security
+1. [ ] Computational security
+1. [ ] No demonstrable security
+```
+
+```quizdown
+### A One-Time Pad key k is reused to encrypt two plaintexts xa and xb, producing ya and yb. What can an adversary compute from ya xor yb?
+
+> Expand the operation Ek(xa) xor Ek(xb) using the definition of the One-Time Pad.
+
+1. [ ] The key k directly, with no other information.
+1. [x] xa xor xb, which can make it possible to recover both plaintexts if their entropy is low.
+    > Correct: ya xor yb = xa xor k xor xb xor k = xa xor xb, the key canceling out.
+1. [ ] Nothing, because the One-Time Pad remains unconditionally secure even with key reuse.
+1. [ ] Only the length of the plaintexts.
+```
+
+```quizdown
+### According to Shannon's condition (H(K) ≥ H(X)) for a symmetric-key system to be unconditionally secure, what can be concluded about the length of the One-Time Pad key?
+
+> Think about the case where the key bits are random and equiprobable: what is H(K) then?
+
+1. [ ] It can be shorter than the message if the key is well chosen.
+1. [x] It must be at least as long as the plaintext, regardless of the entropy of X.
+    > Correct: with equiprobable key bits, H(K) = m (the length in bits), so m must be ≥ H(X).
+1. [ ] It must always be exactly twice as long as the message.
+1. [ ] The length of the key does not matter as long as it is random.
+```
+
+```quizdown
+### Why is the One-Time Pad, although unconditionally secure, very rarely used in practice compared to a system like AES?
+
+> Compare the key management constraints of the two approaches.
+
+1. [ ] Because it can be cryptanalyzed by frequency analysis like the Caesar Cipher.
+1. [x] Because the constraint of a key as long as the message and never reused poses a major key distribution and management problem.
+    > Correct: this is precisely the practical limitation mentioned in the course, reducing its use to a theoretical framework.
+1. [ ] Because it can only be used with public keys.
+1. [ ] Because its security depends on the adversary's computing power.
+```
+
+```quizdown
+### What is the fundamental difference between cryptography and steganography?
+
+> Think about what each discipline seeks to hide: the content of the message or its existence.
+
+1. [ ] Cryptography hides the existence of the message, steganography makes it unreadable.
+1. [x] Cryptography makes the message unreadable without hiding its existence, whereas steganography hides the very existence of the message.
+    > Correct: this is the distinction stated at the opening of the section on steganography.
+1. [ ] Both terms designate exactly the same technique.
+1. [ ] Steganography always requires a secret key, unlike cryptography.
+```
+
+```quizdown
+### The technique described in [Way93], consisting of hiding a message in the least significant bits of an image's pixels, relates to which concept from the course?
+
+> Think about the two constituent elements of any steganographic solution.
+
+1. [ ] An encryption oracle applied to an image.
+1. [x] A subliminal channel (the low-order bits of the image) exploited by a secret mechanism for accessing the hidden information.
+    > Correct: these are exactly the two components of a steganographic solution described in the course.
+1. [ ] A chosen-ciphertext attack on an image encryption system.
+1. [ ] An application of the One-Time Pad to the image's pixels.
+```
